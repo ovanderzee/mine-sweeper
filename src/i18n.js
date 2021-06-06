@@ -1,15 +1,18 @@
 const translations = ['en', 'nl']
 
-const configuredLanguages = (navigator.languages || [navigator.language]).map(
-  (lang) => lang.substr(0, 2)
-)
+const navigatorLanguages =
+  Array.isArray(navigator.languages) && navigator.languages.length
+    ? navigator.languages
+    : [navigator.language]
+
+const configuredLanguages = navigatorLanguages.map((lang) => lang.substr(0, 2))
 
 const commonLanguages = translations.map((trans) =>
-  configuredLanguages.find(trans)
+  configuredLanguages.find((lang) => lang === trans)
 )
 
 const optimalLanguage = commonLanguages.length
-  ? commonLanguages[commonLanguages.length]
+  ? commonLanguages[commonLanguages.length - 1]
   : translations[0]
 
 const texts = {}
@@ -19,6 +22,10 @@ texts['nl'] = {
     Minesweeper: 'Mijnenveger',
     'mine sweeper': 'mijnen veger',
     Mines: 'Mijnen',
+  },
+  anim: {
+    minesweeper_1: 'mijnen',
+    minesweeper_2: 'veger',
   },
   scores: {},
   help: {},
@@ -35,4 +42,6 @@ texts['nl'] = {
   },
 }
 
-export default text = texts[optimalLanguage]
+const text = texts[optimalLanguage]
+
+export default text

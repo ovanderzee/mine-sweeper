@@ -1,0 +1,407 @@
+#anim {
+  opacity: 1;
+  z-index: 1;
+  overflow: hidden;
+}
+#anim.ending {
+  opacity: 0;
+  transition: opacity 500ms ease;
+}
+#anim:before,
+#anim:after,
+#achter {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+}
+#anim:before {
+  background: linear-gradient(
+    to bottom,
+    #aaddff 0%,
+    #e3f4ff 66%,
+    #66aacc 66%,
+    #3377aa 100%
+  );
+}
+#achter {
+  opacity: 0;
+  background: linear-gradient(
+    to bottom,
+    #aaddff 0%,
+    #e3f4ff 66%,
+    #cc66aa 66%,
+    #3377aa 100%
+  );
+  animation-name: -anim-ramp;
+  animation-timing-function: linear;
+  animation-duration: 10s;
+}
+#anim:after {
+  opacity: 1;
+  background: linear-gradient(
+    to bottom,
+    #aaaaaa 0%,
+    #e3e3e3 66%,
+    #777777 66%,
+    #555555 100%
+  );
+  animation-name: -anim-dood;
+  animation-timing-function: linear;
+  animation-duration: 10s;
+}
+
+@keyframes -anim-ramp {
+  from,
+  36.66% {
+    opacity: 0;
+  }
+  36.67%,
+  49.99% {
+    opacity: 1;
+  }
+  50%,
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes -anim-dood {
+  from,
+  36.66% {
+    opacity: 0;
+  }
+  36.67%,
+  40% {
+    opacity: 0;
+  }
+  50%,
+  to {
+    opacity: 1;
+  }
+}
+
+/*
+fase:     0,    1,    2,    3,    4,    5,     6
+duur:  2000, 1667,  333, 1000, 1000, 1000,  3000
+-> fase:     1,    2,    3,    4,    5,    6,     7
+cumulus:  2000, 3667, 4000, 5000, 6000, 7000, 10000
+percent:   20%,  37%,  40%,  50%,  60%,  70%,  100%
+*/
+
+#anim div {
+  position: absolute;
+}
+
+#zeemijn,
+#schip,
+#knal,
+#rook {
+  left: 33%;
+  bottom: 33%;
+}
+
+/* ZEEMIJN */
+
+#zeemijn {
+  opacity: 0;
+  width: 2em;
+  height: 2em;
+  top: 67%;
+  animation-name: -zeemijn;
+  animation-timing-function: linear;
+  animation-duration: 10s;
+}
+
+@keyframes -zeemijn {
+  from,
+  10% {
+    opacity: 0.33;
+  }
+  30%,
+  to {
+    opacity: 0;
+  }
+}
+
+/* SCHIP */
+
+#schip {
+  transform: scale(0.01);
+  animation-name: -schip;
+  animation-timing-function: linear;
+  animation-duration: 10s;
+}
+
+@keyframes -schip {
+  from,
+  20% {
+    bottom: 33%;
+    transform: scale(0.01);
+  }
+  36.67%,
+  40% {
+    bottom: 33%;
+    transform: scale(1);
+  }
+  60% {
+    bottom: -37%;
+    transform: scale(0.6);
+  }
+  70%,
+  to {
+    bottom: -37%;
+    transform: scale(0.2);
+  }
+}
+
+#schip__brug {
+  left: -6em;
+  bottom: 5em;
+  height: 3em;
+  width: 6em;
+  animation-name: -scheepsbrug;
+  animation-timing-function: linear;
+  animation-duration: 10s;
+}
+
+@keyframes -scheepsbrug {
+  from,
+  36.66% {
+    background: rgba(191, 191, 191, 100);
+  }
+  36.67%,
+  40% {
+    background: rgba(255, 127, 0, 100);
+  }
+  50%,
+  to {
+    background: rgba(191, 191, 191, 100);
+  }
+}
+
+#schip__links {
+  left: -9em;
+  bottom: -6em;
+  height: 0;
+  width: 0;
+  border-color: transparent;
+  border-style: solid solid solid none;
+  border-width: 2em 6em 10em 0;
+  animation-name: -scheepsromp;
+  animation-timing-function: linear;
+  animation-duration: 10s;
+}
+#schip__rechts {
+  left: -3em;
+  bottom: -6em;
+  height: 0;
+  width: 0;
+  border-color: transparent;
+  border-style: solid none solid solid;
+  border-width: 2em 0 10em 6em;
+  animation-name: -scheepsromp;
+  animation-timing-function: linear;
+  animation-duration: 10s;
+}
+
+@keyframes -scheepsromp {
+  from,
+  36.66% {
+    border-right-color: rgba(207, 207, 207, 100);
+    border-left-color: rgba(175, 175, 175, 100);
+  }
+  36.67%,
+  40% {
+    border-right-color: rgba(255, 0, 0, 100);
+    border-left-color: rgba(255, 255, 0, 100);
+  }
+  50%,
+  to {
+    border-right-color: rgba(207, 207, 207, 100);
+    border-left-color: rgba(175, 175, 175, 100);
+  }
+}
+
+/* KNAL */
+
+#knal {
+  color: transparent;
+  animation-name: -knal;
+  animation-timing-function: linear;
+  animation-duration: 10s;
+}
+
+@keyframes -knal {
+  from,
+  36.66% {
+    color: transparent;
+    font-size: 100%;
+  }
+  36.67%,
+  40% {
+    color: orange;
+    font-size: 100%;
+  }
+  50% {
+    color: transparent;
+    font-size: 200%;
+  }
+  to {
+    font-size: 1%;
+  }
+}
+
+#knal div {
+  left: -1em;
+  bottom: 0;
+  width: 0;
+  height: 0;
+  border-top: 3.33em solid currentColor;
+  border-left: 1em solid transparent;
+  border-right: 1em solid transparent;
+  transform-origin: center bottom;
+}
+#scherf2 {
+  transform: rotate(60deg);
+}
+#scherf3 {
+  transform: rotate(120deg);
+}
+#scherf4 {
+  transform: rotate(180deg);
+}
+#scherf5 {
+  transform: rotate(240deg);
+}
+#scherf6 {
+  transform: rotate(300deg);
+}
+
+/* ROOK */
+
+#rook {
+  opacity: 0;
+  animation-name: -rook;
+  animation-timing-function: linear;
+  animation-duration: 10s;
+}
+
+@keyframes -rook {
+  from,
+  36.66% {
+    opacity: 0;
+  }
+  36.67%,
+  40% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: scale(4);
+  }
+}
+
+#rook div {
+  border-radius: 50%;
+}
+
+#rook .donkerst {
+  height: 5em;
+  width: 5em;
+  background: #333;
+}
+#rook .donkerder {
+  height: 6em;
+  width: 6em;
+  background: #555;
+}
+#rook .normaal {
+  height: 7em;
+  width: 7em;
+  background: #777;
+}
+#rook .lichter {
+  height: 6em;
+  width: 6em;
+  background: #999;
+}
+#rook .lichtst {
+  height: 5em;
+  width: 5em;
+  background: #bbb;
+}
+
+#rookwolk1 {
+  left: -2.5em;
+  bottom: -2.5em;
+}
+#rookwolk2 {
+  left: -4em;
+  bottom: -0.5em;
+}
+#rookwolk3 {
+  left: 0.5em;
+  bottom: -0.5em;
+  z-index: 1;
+}
+#rookwolk4 {
+  left: -3em;
+  bottom: 2em;
+  z-index: 1;
+}
+#rookwolk5 {
+  left: 0.5em;
+  bottom: 1.5em;
+  z-index: 1;
+}
+#rookwolk6 {
+  left: 2em;
+  bottom: 1em;
+}
+#rookwolk7 {
+  left: 1em;
+  bottom: 6em;
+  z-index: 1;
+}
+#rookwolk8 {
+  left: 4.5em;
+  bottom: 5.5em;
+}
+#rookwolk9 {
+  left: 4em;
+  bottom: 9em;
+  z-index: 1;
+}
+
+/* TITEL */
+
+#titel {
+  width: 120%;
+  text-align: center;
+  margin: 10% -10%;
+  line-height: 100%;
+  color: red;
+  text-shadow: 0.05em 0.05em orange;
+  font-family: 'American Typewriter', 'Courier New', Courier, monospace;
+  font-size: 4em;
+  font-weight: bold;
+  animation-name: -titel;
+  animation-timing-function: ease;
+  animation-duration: 10s;
+}
+
+@keyframes -titel {
+  from,
+  70% {
+    opacity: 0;
+  }
+  80%,
+  to {
+    opacity: 1;
+  }
+}
