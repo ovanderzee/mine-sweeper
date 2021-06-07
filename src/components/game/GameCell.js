@@ -9,7 +9,7 @@ const GameCell = (props) => {
     if (domProps.content) return
     if (props.fill === 0) {
       setDomProps({ content: ' ', className: 'touched' })
-    } else if (props.fill === 9) {
+    } else if (props.fill > 8) {
       setDomProps({ content: ' ', className: 'touched mijn' })
     } else {
       setDomProps({ content: props.fill, className: 'touched' })

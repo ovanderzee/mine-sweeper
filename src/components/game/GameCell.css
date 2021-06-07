@@ -24,6 +24,7 @@ button.touched {
 
 button.mijn {
   background: radial-gradient(ellipse at 25% 25%, #fff 0%, #000 33%) !important;
+  border-radius: 50%;
   box-shadow: none !important;
   color: #0c9 !important;
 }
