@@ -1,8 +1,9 @@
+@import './fonts/DejaVu-Sans-fontfacekit/fontface.css';
+
 body {
   margin: 0;
   height: 100vh;
-  font-family: 'Helvetica Neue', HelveticaNeue, Helvetica, 'Arial Unicode MS',
-    'Arial Unicode', ArialUnicode, Arial, sans-serif;
+  font-family: 'dejavu_sansbook', sans-serif;
   font-size: 15px;
   text-align: center;
   overflow: hidden;

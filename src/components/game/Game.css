@@ -1,17 +1,26 @@
 #playground {
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
+  text-align: center;
+  padding: 1em;
 }
 
 .board-size__3 button {
+  font-size: 2.667em;
 }
 .board-size__4 button {
+  font-size: 2em;
 }
 .board-size__5 button {
+  font-size: 1.6em;
 }
 .board-size__6 button {
+  font-size: 1.333em;
 }
 .board-size__7 button {
+  font-size: 1.142em;
 }
 .board-size__8 button {
+  font-size: 1em;
 }
