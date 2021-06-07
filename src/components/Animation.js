@@ -4,8 +4,6 @@ import text from '../i18n'
 import { OVERLAY_ELEMENT } from '../constants'
 import './Animation.css'
 
-console.log('text', text)
-
 const Animation = (props) => {
   const [endingClass, setEndingClass] = useState('')
   const cssOpacityTransitionTime = 500

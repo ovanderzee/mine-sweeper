@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import Game from './components/game/Game'
 import Animation from './components/Animation'
 import './App.css'
 
@@ -8,7 +9,7 @@ function App() {
     setPlay(true)
   }
 
-  return <>{!play && <Animation onEnd={goToGame} />}</>
+  return <>{play ? <Game /> : <Animation onEnd={goToGame} />}</>
 }
 
 export default App

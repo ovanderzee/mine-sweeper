@@ -23,8 +23,6 @@ body {
   bottom: 0;
 }
 
-section {
-  margin: 0 auto;
-  width: 21.333em;
-  overflow-x: auto;
+#overlay:empty {
+  z-index: -1;
 }

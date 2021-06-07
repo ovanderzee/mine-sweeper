@@ -1,0 +1,29 @@
+#playground button {
+  margin: 0.2em;
+  vertical-align: middle;
+  text-align: center;
+  height: 2em;
+  width: 2em;
+  line-height: 2em;
+  color: #333;
+  border: 0 none;
+  font-weight: bold;
+}
+
+button.pristine {
+  background: #8f8f8f;
+  box-shadow: inset #bfbfbf 0.25em 0.25em 0.25em,
+    inset #5f5f5f -0.25em -0.25em 0.25em;
+}
+
+button.touched {
+  background: #9f9f9f;
+  box-shadow: inset #6f6f6f 0.25em 0.25em 0.25em,
+    inset #cfcfcf -0.25em -0.25em 0.25em;
+}
+
+button.mijn {
+  background: radial-gradient(ellipse at 25% 25%, #fff 0%, #000 33%) !important;
+  box-shadow: none !important;
+  color: #0c9 !important;
+}
