@@ -1,5 +1,14 @@
 @import './fonts/DejaVu-Sans-fontfacekit/fontface.css';
 
+:root {
+  --light-blue: #adf;
+  --medium-blue: #6ac;
+  --dark-blue: #37a;
+  --light-to-white-blue: linear-gradient(to bottom, #adf 0%, #fff 100%);
+  --dark-to-light-blue: linear-gradient(to bottom, #37a 0%, #adf 100%);
+  --medium-to-dark-blue: linear-gradient(to bottom, #6ac 0%, #37a 100%);
+}
+
 body {
   margin: 0;
   height: 100vh;
@@ -12,7 +21,7 @@ body {
 }
 
 #root {
-  background: linear-gradient(to bottom, #37a 0%, #adf 100%);
+  background: var(--dark-to-light-blue);
   height: 100%;
 }
 
@@ -26,4 +35,9 @@ body {
 
 #overlay:empty {
   z-index: -1;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
 }

@@ -1,8 +1,76 @@
 .screen {
+  display: flex;
   margin: 0 auto;
-  width: 21.333em;
   height: 100%;
-  background: linear-gradient(to bottom, #aaddff 0%, #ffffff 100%);
-  overflow: auto;
+  background: var(--light-to-white-blue);
+  overflow: hidden;
   transition: opacity 0.5s linear;
+}
+
+.screen nav {
+  background: var(--medium-to-dark-blue);
+}
+
+.screen nav button {
+  font-size: 1.5em;
+  font-weight: bold;
+  background: transparent;
+  color: white;
+  border: 0 none;
+  text-shadow: -0.02em -0.05em #000, 0.008em 0.02em #adf;
+}
+
+@media only screen and (orientation: portrait) {
+  .screen {
+    width: 24em;
+    flex-wrap: wrap;
+    align-content: space-between;
+  }
+
+  .screen article,
+  .screen form {
+    flex: 0 1 100%;
+  }
+
+  .screen nav {
+    flex: 0 1 100%;
+    display: flex;
+    padding: 0.3em 0;
+  }
+
+  .screen nav button {
+    flex: 1 0 auto;
+    line-height: 144%;
+  }
+
+  .screen nav button + button {
+    border-left: 1px solid #37a;
+  }
+}
+
+@media only screen and (orientation: landscape) {
+  .screen {
+    width: 27em;
+    flex-wrap: nowrap;
+  }
+
+  .screen article,
+  .screen form {
+    flex: 1 1 auto;
+  }
+
+  .screen nav {
+    flex: 0 0 4em;
+    padding: 0 0.3em;
+  }
+
+  .screen nav button {
+    font-size: 1.5em;
+    line-height: 250%;
+    width: 100%;
+  }
+
+  .screen nav button + button {
+    border-top: 1px solid #37a;
+  }
 }

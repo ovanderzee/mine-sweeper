@@ -1,5 +1,11 @@
 import { BOARD_SIZE } from '../../constants'
 import GameCell from './GameCell'
+import HiScores from '../nav/HiScores'
+import NewGame from '../nav/NewGame'
+import Replay from '../nav/Replay'
+import Flagging from '../nav/Flagging'
+import Help from '../nav/Help'
+import Settings from '../nav/Settings'
 import './Game.css'
 
 const Game = () => {
@@ -35,9 +41,22 @@ const Game = () => {
     </article>
   )
 
+  const gameNavigation = (
+    <nav>
+      {/* <HiScores label={'&times;'} /> */}
+      <HiScores label={'\u00d7'} />
+      <NewGame />
+      <Replay />
+      <Flagging />
+      <Help />
+      <Settings />
+    </nav>
+  )
+
   return (
     <section id="game" className="screen">
       {gameBoard}
+      {gameNavigation}
     </section>
   )
 }

@@ -2,10 +2,12 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+  align-content: flex-start;
   text-align: center;
   padding: 1em;
 }
 
+/* cells / 8 */
 .board-size__3 button {
   font-size: 2.667em;
 }
