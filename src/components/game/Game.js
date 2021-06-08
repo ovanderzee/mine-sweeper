@@ -1,4 +1,5 @@
-import { BOARD_SIZE, GAME_LEVEL } from '../../constants'
+import { useRef } from 'react'
+import { BOARD_SIZE, MINE_COUNT } from '../../constants'
 import GameCell from './GameCell'
 import HiScores from '../nav/HiScores'
 import NewGame from '../nav/NewGame'
@@ -8,8 +9,41 @@ import Help from '../nav/Help'
 import Settings from '../nav/Settings'
 import './Game.css'
 
+/**
+ * Trigger onClick listener of a button
+ * @param {HTMLButtonElement} btn
+ */
+const dispatchButtonHandler = (btn) => {
+  const clickEvent = new Event('click', { bubbles: true })
+  btn.dispatchEvent(clickEvent)
+}
+
+/**
+ * Do something to neighbouring cells
+ * @param {Object} cell
+ * @param {Function} callback with (x, y) arguments
+ */
+const iterateNeighbours = (cell, callback) => {
+  for (let x = cell.row - 1; x < cell.row + 2; x++) {
+    if (x >= 0 && x < BOARD_SIZE) {
+      for (let y = cell.col - 1; y < cell.col + 2; y++) {
+        if (y >= 0 && y < BOARD_SIZE) {
+          callback(x, y)
+        }
+      }
+    }
+  }
+}
+
+const boardTemplate = Array(BOARD_SIZE).fill(Array(BOARD_SIZE).fill({}))
+
 const Game = () => {
-  const boardTemplate = Array(BOARD_SIZE).fill(Array(BOARD_SIZE).fill({}))
+  const gameStage = useRef('game-playing')
+  const changeGameStage = (stateLabel) => {
+    document.getElementById('game').classList.remove(gameStage.current)
+    gameStage.current = stateLabel
+    document.getElementById('game').classList.add(gameStage.current)
+  }
 
   const newBoard = boardTemplate.map((row, rowIndex) =>
     row.map((cell, colIndex) => {
@@ -21,11 +55,9 @@ const Game = () => {
     })
   )
 
-  const mineCount = Math.ceil(GAME_LEVEL * (1 / 30) * BOARD_SIZE * BOARD_SIZE)
-
   const minePick = new Set()
 
-  while (minePick.size < mineCount) {
+  while (minePick.size < MINE_COUNT) {
     const row = Math.floor(Math.random() * BOARD_SIZE)
     const col = Math.floor(Math.random() * BOARD_SIZE)
     minePick.add(newBoard[row][col])
@@ -33,19 +65,38 @@ const Game = () => {
 
   minePick.forEach((cell) => {
     cell.fill += 9
-    for (let x = cell.row - 1; x < cell.row + 2; x++) {
-      if (x >= 0 && x < BOARD_SIZE) {
-        for (let y = cell.col - 1; y < cell.col + 2; y++) {
-          if (y >= 0 && y < BOARD_SIZE) {
-            newBoard[x][y].fill += 1
-          }
-        }
-      }
+    const countNeighbouringMines = (x, y) => {
+      newBoard[x][y].fill += 1
     }
+    iterateNeighbours(cell, countNeighbouringMines)
   })
 
-  const evaluateGame = (row, col) => {
-    console.log(`touched at ${row}, ${col}`)
+  const touchBoardHandler = (row, col) => {
+    if (gameStage.current !== 'game-playing') return
+    if (newBoard[row][col].fill === 0) {
+      // emptiness touched, touch neighbouring empties
+      const virtualClickNeighbouringEmpties = (x, y) => {
+        const neighbouringButton = document.querySelector(
+          `#row${x}col${y}.pristine`
+        )
+        console.log('virtualClickNeighbouringEmpties', x, y, neighbouringButton)
+        neighbouringButton && dispatchButtonHandler(neighbouringButton)
+      }
+      iterateNeighbours(newBoard[row][col], virtualClickNeighbouringEmpties)
+    } else if (newBoard[row][col].fill > 8) {
+      // mine touched, touch all buttons, game lost
+      const allButtons = document.querySelectorAll(
+        '#playground button.pristine'
+      )
+      allButtons.forEach((btn) => dispatchButtonHandler(btn))
+      changeGameStage('game-lost')
+    }
+    const pristines = document.querySelectorAll('#playground .pristine')
+    if (pristines.length === MINE_COUNT) {
+      // only mines remain, touch remaining buttons, game won
+      pristines.forEach((btn) => dispatchButtonHandler(btn))
+      changeGameStage('game-won')
+    }
   }
 
   const gameBoard = (
@@ -57,7 +108,7 @@ const Game = () => {
             row={cell.row}
             col={cell.col}
             fill={cell.fill}
-            onTouch={evaluateGame}
+            onTouch={touchBoardHandler}
           />
         ))
       )}
@@ -67,7 +118,7 @@ const Game = () => {
   const gameNavigation = (
     <nav>
       {/* <HiScores label={'&times;'} /> */}
-      <HiScores label={`${mineCount}\u00d7`} />
+      <HiScores label={`${MINE_COUNT}\u00d7`} />
       <NewGame />
       <Replay />
       <Flagging />

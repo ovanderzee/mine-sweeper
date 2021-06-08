@@ -26,6 +26,8 @@ const gameVariables = { ...defaultVariables, ...storedVariables }
 
 const { BOARD_SIZE, GAME_LEVEL, PLAYER_NAME } = gameVariables
 
+const MINE_COUNT = Math.ceil(GAME_LEVEL * (1 / 30) * BOARD_SIZE * BOARD_SIZE)
+
 const OVERLAY_ELEMENT = document.getElementById('overlay')
 
-export { BOARD_SIZE, GAME_LEVEL, PLAYER_NAME, OVERLAY_ELEMENT }
+export { BOARD_SIZE, GAME_LEVEL, PLAYER_NAME, MINE_COUNT, OVERLAY_ELEMENT }

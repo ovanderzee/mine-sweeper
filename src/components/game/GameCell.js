@@ -5,7 +5,7 @@ const GameCell = (props) => {
   const initialDomProps = { content: '', className: 'pristine' }
   const [domProps, setDomProps] = useState(initialDomProps)
 
-  const evaluateCell = () => {
+  const touchCellHandler = () => {
     if (domProps.content) return
     if (props.fill === 0) {
       setDomProps({ content: ' ', className: 'touched' })
@@ -23,7 +23,12 @@ const GameCell = (props) => {
   }, [content, row, col, onTouch])
 
   return (
-    <button type="button" className={domProps.className} onClick={evaluateCell}>
+    <button
+      type="button"
+      className={domProps.className}
+      id={`row${props.row}col${props.col}`}
+      onClick={touchCellHandler}
+    >
       {domProps.content}
     </button>
   )
