@@ -1,4 +1,4 @@
-import { useRef } from 'react'
+import { useReducer } from 'react'
 import { BOARD_SIZE, MINE_COUNT } from '../../constants'
 import GameCell from './GameCell'
 import HiScores from '../nav/HiScores'
@@ -10,16 +10,7 @@ import Settings from '../nav/Settings'
 import './Game.css'
 
 /**
- * Trigger onClick listener of a button
- * @param {HTMLButtonElement} btn
- */
-const dispatchButtonHandler = (btn) => {
-  const clickEvent = new Event('click', { bubbles: true })
-  btn.dispatchEvent(clickEvent)
-}
-
-/**
- * Do something to neighbouring cells
+ * Do something to neighbour cells
  * @param {Object} cell
  * @param {Function} callback with (x, y) arguments
  */
@@ -27,7 +18,8 @@ const iterateNeighbours = (cell, callback) => {
   for (let x = cell.row - 1; x < cell.row + 2; x++) {
     if (x >= 0 && x < BOARD_SIZE) {
       for (let y = cell.col - 1; y < cell.col + 2; y++) {
-        if (y >= 0 && y < BOARD_SIZE) {
+        const isSelf = x === cell.row && y === cell.col
+        if (y >= 0 && y < BOARD_SIZE && !isSelf) {
           callback(x, y)
         }
       }
@@ -35,19 +27,33 @@ const iterateNeighbours = (cell, callback) => {
   }
 }
 
+/** INITIALS, TEMPLATES & DEFAULTS  */
+
+/** Initial cell data */
+const initialCellState = {
+  row: -1,
+  col: -1,
+  fill: 0,
+  stage: 'pristine',
+}
+
+/** The right board dimensions */
 const boardTemplate = Array(BOARD_SIZE).fill(Array(BOARD_SIZE).fill({}))
 
-const Game = () => {
-  const gameStage = useRef('game-playing')
-  const changeGameStage = (stateLabel) => {
-    document.getElementById('game').classList.remove(gameStage.current)
-    gameStage.current = stateLabel
-    document.getElementById('game').classList.add(gameStage.current)
-  }
+/** Complete data model */
+const defaultGameState = {
+  stage: 'game-new',
+  board: [],
+  start: 0,
+}
 
+/** REDUCE */
+
+const newGameReducer = (state) => {
   const newBoard = boardTemplate.map((row, rowIndex) =>
     row.map((cell, colIndex) => {
       return {
+        ...initialCellState,
         row: rowIndex,
         col: colIndex,
         fill: 0,
@@ -65,50 +71,114 @@ const Game = () => {
 
   minePick.forEach((cell) => {
     cell.fill += 9
-    const countNeighbouringMines = (x, y) => {
+    const countNeighbourMines = (x, y) => {
       newBoard[x][y].fill += 1
     }
-    iterateNeighbours(cell, countNeighbouringMines)
+    iterateNeighbours(cell, countNeighbourMines)
   })
 
-  const touchBoardHandler = (row, col) => {
-    if (gameStage.current !== 'game-playing') return
-    if (newBoard[row][col].fill === 0) {
-      // emptiness touched, touch neighbouring empties
-      const virtualClickNeighbouringEmpties = (x, y) => {
-        const neighbouringButton = document.querySelector(
-          `#row${x}col${y}.pristine`
-        )
-        console.log('virtualClickNeighbouringEmpties', x, y, neighbouringButton)
-        neighbouringButton && dispatchButtonHandler(neighbouringButton)
-      }
-      iterateNeighbours(newBoard[row][col], virtualClickNeighbouringEmpties)
-    } else if (newBoard[row][col].fill > 8) {
-      // mine touched, touch all buttons, game lost
-      const allButtons = document.querySelectorAll(
-        '#playground button.pristine'
-      )
-      allButtons.forEach((btn) => dispatchButtonHandler(btn))
-      changeGameStage('game-lost')
-    }
-    const pristines = document.querySelectorAll('#playground .pristine')
-    if (pristines.length === MINE_COUNT) {
-      // only mines remain, touch remaining buttons, game won
-      pristines.forEach((btn) => dispatchButtonHandler(btn))
-      changeGameStage('game-won')
+  return {
+    ...defaultGameState,
+    board: newBoard,
+  }
+}
+
+const touchButtonReducer = (state, action) => {
+  if (state.stage === 'game-new') {
+    state.stage = 'game-playing'
+    state.start = Date.now()
+  }
+
+  const updBoard = state.board
+  const cell = updBoard[action.row][action.col]
+
+  if (
+    state.stage !== 'game-playing' ||
+    state.end ||
+    cell.stage.includes('touched')
+  )
+    return state
+
+  /** All-purpose cell updater */
+  const touchCell = (source) => {
+    updBoard[source.row][source.col] = {
+      ...source,
+      content: source.fill > 0 && source.fill < 9 ? source.fill : ' ',
+      stage: source.fill < 9 ? 'touched' : 'touched mijn',
     }
   }
 
+  touchCell(cell)
+
+  const findPristineCells = () =>
+    updBoard
+      .map((row) => row.filter((cell) => cell.stage === 'pristine'))
+      .flat()
+
+  /** Followup touches */
+  if (cell.fill === 0) {
+    // blank cell touched, touch it's neighbours recursively
+    const touchBlankNeighbours = (x, y) => {
+      const neighbourCell = updBoard[x][y]
+      if (neighbourCell.stage.includes('touched')) return
+      touchCell(neighbourCell)
+      if (neighbourCell.fill === 0)
+        iterateNeighbours(updBoard[x][y], touchBlankNeighbours)
+    }
+    iterateNeighbours(cell, touchBlankNeighbours)
+  } else if (cell.fill > 8) {
+    // mine touched, touch all buttons, game lost
+    findPristineCells().forEach((cell) => touchCell(cell))
+    state.stage = 'game-lost'
+    state.end = Date.now()
+  } else {
+    // neighbour of mine touched, show contents
+  }
+
+  const pristineCells = findPristineCells()
+  if (pristineCells.length === MINE_COUNT) {
+    // only mines remain, touch remaining buttons, game won
+    pristineCells.forEach((cell) => touchCell(cell))
+    state.stage = 'game-won'
+    state.end = Date.now()
+  }
+
+  return {
+    ...state,
+    board: updBoard,
+  }
+}
+
+const gameReducer = (state, action) => {
+  if (action.type === 'NEW') {
+    return newGameReducer(state)
+  }
+
+  if (action.type === 'TOUCH') {
+    return touchButtonReducer(state, action)
+  }
+
+  return defaultGameState
+}
+
+const Game = () => {
+  const [gameState, dispatchGameAction] = useReducer(
+    gameReducer,
+    defaultGameState
+  )
+
   const gameBoard = (
     <article id="playground" className={`board-size__${BOARD_SIZE}`}>
-      {newBoard.map((row) =>
+      {gameState.board.map((row) =>
         row.map((cell) => (
           <GameCell
             key={`${cell.row}_${cell.col}`}
             row={cell.row}
             col={cell.col}
             fill={cell.fill}
-            onTouch={touchBoardHandler}
+            content={cell.content}
+            stage={cell.stage}
+            onTouch={dispatchGameAction}
           />
         ))
       )}
@@ -119,7 +189,7 @@ const Game = () => {
     <nav>
       {/* <HiScores label={'&times;'} /> */}
       <HiScores label={`${MINE_COUNT}\u00d7`} />
-      <NewGame />
+      <NewGame onNew={dispatchGameAction} />
       <Replay />
       <Flagging />
       <Help />
@@ -128,7 +198,7 @@ const Game = () => {
   )
 
   return (
-    <section id="game" className="screen">
+    <section id="game" className={`screen ${gameState.stage}`}>
       {gameBoard}
       {gameNavigation}
     </section>

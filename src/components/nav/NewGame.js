@@ -1,8 +1,12 @@
 import text from '../../i18n'
 
-const NewGame = () => {
+const NewGame = (props) => {
+  const newGameHandler = () => {
+    props.onNew({ type: 'NEW' })
+  }
+
   return (
-    <button type="button" title={text.nav['New Game']}>
+    <button type="button" title={text.nav['New Game']} onClick={newGameHandler}>
       &#x25b6;
     </button>
   )
