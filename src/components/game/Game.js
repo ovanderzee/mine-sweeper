@@ -83,6 +83,25 @@ const newGameReducer = (state) => {
   }
 }
 
+const replayReducer = (state) => {
+  const newBoard = state.board.map((row, rowIndex) =>
+    row.map((cell, colIndex) => {
+      return {
+        ...cell,
+        content: '',
+        stage: 'pristine',
+      }
+    })
+  )
+
+  return {
+    stage: 'game-new',
+    board: newBoard,
+    start: 0,
+    end: 0,
+  }
+}
+
 const touchButtonReducer = (state, action) => {
   if (state.stage === 'game-new') {
     state.stage = 'game-playing'
@@ -154,6 +173,10 @@ const gameReducer = (state, action) => {
     return newGameReducer(state)
   }
 
+  if (action.type === 'REPLAY') {
+    return replayReducer(state)
+  }
+
   if (action.type === 'TOUCH') {
     return touchButtonReducer(state, action)
   }
@@ -166,6 +189,10 @@ const Game = () => {
     gameReducer,
     defaultGameState
   )
+
+  if (gameState === defaultGameState) {
+    dispatchGameAction({ type: 'NEW' })
+  }
 
   const gameBoard = (
     <article id="playground" className={`board-size__${BOARD_SIZE}`}>
@@ -190,7 +217,7 @@ const Game = () => {
       {/* <HiScores label={'&times;'} /> */}
       <HiScores label={`${MINE_COUNT}\u00d7`} />
       <NewGame onNew={dispatchGameAction} />
-      <Replay />
+      <Replay onReplay={dispatchGameAction} />
       <Flagging />
       <Help />
       <Settings />
