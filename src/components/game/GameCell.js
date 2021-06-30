@@ -1,6 +1,11 @@
 import './GameCell.css'
 
 const GameCell = (props) => {
+  const doneClass = props.done ? 'touched' : 'pristine'
+  const cellContent = props.done && props.fill > 0 && props.fill < 9 ? props.fill : ' '
+  const hasDetonated = props.done && props.fill > 8
+  const detonatedClass = hasDetonated ? 'mijn' : ''
+
   const touchCellHandler = (event) => {
     props.onTouch({
       type: 'TOUCH',
@@ -14,12 +19,12 @@ const GameCell = (props) => {
   return (
     <button
       type="button"
-      className={props.stage}
+      className={`${doneClass} ${detonatedClass}`}
       id={`row${props.row}col${props.col}`}
       onClick={touchCellHandler}
     >
       {/* {props.fill} DEV HELPER */}
-      {props.content}
+      {cellContent}
     </button>
   )
 }

@@ -34,7 +34,7 @@ const initialCellState = {
   row: -1,
   col: -1,
   fill: 0,
-  stage: 'pristine',
+  done: false,
 }
 
 /** The right board dimensions */
@@ -56,7 +56,6 @@ const newGameReducer = (state) => {
         ...initialCellState,
         row: rowIndex,
         col: colIndex,
-        fill: 0,
       }
     })
   )
@@ -88,8 +87,7 @@ const replayReducer = (state) => {
     row.map((cell, colIndex) => {
       return {
         ...cell,
-        content: '',
-        stage: 'pristine',
+        done: false,
       }
     })
   )
@@ -114,7 +112,7 @@ const touchButtonReducer = (state, action) => {
   if (
     state.stage !== 'game-playing' ||
     state.end ||
-    cell.stage.includes('touched')
+    cell.done
   )
     return state
 
@@ -122,8 +120,7 @@ const touchButtonReducer = (state, action) => {
   const touchCell = (source) => {
     updBoard[source.row][source.col] = {
       ...source,
-      content: source.fill > 0 && source.fill < 9 ? source.fill : ' ',
-      stage: source.fill < 9 ? 'touched' : 'touched mijn',
+      done: true,
     }
   }
 
@@ -131,7 +128,7 @@ const touchButtonReducer = (state, action) => {
 
   const findPristineCells = () =>
     updBoard
-      .map((row) => row.filter((cell) => cell.stage === 'pristine'))
+      .map((row) => row.filter((cell) => !cell.done))
       .flat()
 
   /** Followup touches */
@@ -139,7 +136,7 @@ const touchButtonReducer = (state, action) => {
     // blank cell touched, touch it's neighbours recursively
     const touchBlankNeighbours = (x, y) => {
       const neighbourCell = updBoard[x][y]
-      if (neighbourCell.stage.includes('touched')) return
+      if (neighbourCell.done) return
       touchCell(neighbourCell)
       if (neighbourCell.fill === 0)
         iterateNeighbours(updBoard[x][y], touchBlankNeighbours)
@@ -203,8 +200,7 @@ const Game = () => {
             row={cell.row}
             col={cell.col}
             fill={cell.fill}
-            content={cell.content}
-            stage={cell.stage}
+            done={cell.done}
             onTouch={dispatchGameAction}
           />
         ))
