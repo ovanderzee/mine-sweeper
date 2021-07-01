@@ -20,20 +20,16 @@ const iterateNeighbours = (cell, callback) => {
 
 /** Initial cell data */
 const initialCellState = {
-  row: -1,
-  col: -1,
   fill: 0,
-  done: false,
 }
 
 /** The right board dimensions */
-const boardTemplate = Array(BOARD_SIZE).fill(Array(BOARD_SIZE).fill({}))
+const initialBoard = Array(BOARD_SIZE).fill(Array(BOARD_SIZE).fill(initialCellState))
 
 /** Complete data model */
-const defaultGameState = {
+const initialGameState = {
   stage: 'game-new',
   board: [],
-  start: 0,
 }
 
-export { iterateNeighbours, initialCellState, boardTemplate, defaultGameState }
+export { iterateNeighbours, initialBoard, initialGameState }

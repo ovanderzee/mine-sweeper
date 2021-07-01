@@ -7,7 +7,7 @@ import Replay from '../nav/Replay'
 import Flagging from '../nav/Flagging'
 import Help from '../nav/Help'
 import Settings from '../nav/Settings'
-import { defaultGameState } from './common'
+import { initialGameState } from './common'
 import newGameReducer from './reducers/newGame'
 import replayReducer from './reducers/replay'
 import touchButtonReducer from './reducers/touchButton'
@@ -26,16 +26,16 @@ const gameReducer = (state, action) => {
     return touchButtonReducer(state, action)
   }
 
-  return defaultGameState
+  return initialGameState
 }
 
 const Game = () => {
   const [gameState, dispatchGameAction] = useReducer(
     gameReducer,
-    defaultGameState
+    initialGameState
   )
 
-  if (gameState === defaultGameState) {
+  if (gameState === initialGameState) {
     dispatchGameAction({ type: 'NEW' })
   }
 

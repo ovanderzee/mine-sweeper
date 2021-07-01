@@ -1,9 +1,10 @@
 const replayReducer = (state) => {
-  const newBoard = state.board.map((row, rowIndex) =>
-    row.map((cell, colIndex) => {
+  const newBoard = state.board.map(row =>
+    row.map(cell => {
       return {
-        ...cell,
-        done: false,
+        row: cell.row,
+        col: cell.col,
+        fill: cell.fill,
       }
     })
   )
@@ -11,8 +12,6 @@ const replayReducer = (state) => {
   return {
     stage: 'game-new',
     board: newBoard,
-    start: 0,
-    end: 0,
   }
 }
 

@@ -2,38 +2,41 @@ import { MINE_COUNT } from '../../../constants'
 import { iterateNeighbours } from '../common'
 
 const touchButtonReducer = (state, action) => {
+  const updState = { ...state }
+  
   if (state.stage === 'game-new') {
-    state.stage = 'game-playing'
-    state.start = Date.now()
+    updState.stage = 'game-playing'
+    updState.begin = Date.now()
   }
-
-  const updBoard = state.board
-  const cell = updBoard[action.row][action.col]
 
   if (
     state.stage !== 'game-playing' ||
     state.end ||
-    cell.done
+    state.board[action.row][action.col].done
   )
     return state
 
+  const updBoard = state.board.map(row => row.map(cell => cell))
+  let updCell = updBoard[action.row][action.col]
+
   /** All-purpose cell updater */
   const touchCell = (source) => {
-    updBoard[source.row][source.col] = {
+    return updBoard[source.row][source.col] = {
       ...source,
       done: true,
     }
   }
 
-  touchCell(cell)
+  updCell = touchCell(updCell)
+
+  /** Followup touches */
 
   const findPristineCells = () =>
     updBoard
       .map((row) => row.filter((cell) => !cell.done))
       .flat()
 
-  /** Followup touches */
-  if (cell.fill === 0) {
+  if (updCell.fill === 0) {
     // blank cell touched, touch it's neighbours recursively
     const touchBlankNeighbours = (x, y) => {
       const neighbourCell = updBoard[x][y]
@@ -42,12 +45,12 @@ const touchButtonReducer = (state, action) => {
       if (neighbourCell.fill === 0)
         iterateNeighbours(updBoard[x][y], touchBlankNeighbours)
     }
-    iterateNeighbours(cell, touchBlankNeighbours)
-  } else if (cell.fill > 8) {
+    iterateNeighbours(updCell, touchBlankNeighbours)
+  } else if (updCell.fill > 8) {
     // mine touched, touch all buttons, game lost
     findPristineCells().forEach((cell) => touchCell(cell))
-    state.stage = 'game-lost'
-    state.end = Date.now()
+    updState.stage = 'game-lost'
+    updState.end = Date.now()
   } else {
     // neighbour of mine touched, show contents
   }
@@ -56,12 +59,12 @@ const touchButtonReducer = (state, action) => {
   if (pristineCells.length === MINE_COUNT) {
     // only mines remain, touch remaining buttons, game won
     pristineCells.forEach((cell) => touchCell(cell))
-    state.stage = 'game-won'
-    state.end = Date.now()
+    updState.stage = 'game-won'
+    updState.end = Date.now()
   }
 
   return {
-    ...state,
+    ...updState,
     board: updBoard,
   }
 }

@@ -1,11 +1,11 @@
 import { BOARD_SIZE, MINE_COUNT } from '../../../constants'
-import { iterateNeighbours, initialCellState, boardTemplate, defaultGameState } from '../common'
+import { iterateNeighbours, initialBoard, initialGameState } from '../common'
 
 const newGameReducer = (state) => {
-  const newBoard = boardTemplate.map((row, rowIndex) =>
+  const newBoard = initialBoard.map((row, rowIndex) =>
     row.map((cell, colIndex) => {
       return {
-        ...initialCellState,
+        ...cell,
         row: rowIndex,
         col: colIndex,
       }
@@ -29,7 +29,7 @@ const newGameReducer = (state) => {
   })
 
   return {
-    ...defaultGameState,
+    ...initialGameState,
     board: newBoard,
   }
 }
