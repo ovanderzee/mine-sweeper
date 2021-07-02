@@ -10,7 +10,7 @@ const touchButtonReducer = (state, action) => {
   }
 
   if (
-    state.stage !== 'game-playing' ||
+    updState.stage !== 'game-playing' ||
     state.end ||
     state.board[action.row][action.col].done
   )
@@ -20,14 +20,22 @@ const touchButtonReducer = (state, action) => {
   let updCell = updBoard[action.row][action.col]
 
   /** All-purpose cell updater */
-  const touchCell = (source) => {
+  const touchCell = (source, entry = { done: true }) => {
     return updBoard[source.row][source.col] = {
       ...source,
-      done: true,
+      ...entry,
     }
   }
 
-  updCell = touchCell(updCell)
+  updCell = touchCell(updCell, action.entry)
+
+  if (state.flagging) {
+    // then entry = {locked: <Boolean>}
+    return {
+      ...updState,
+      board: updBoard,
+    }
+  }
 
   /** Followup touches */
 
@@ -41,6 +49,7 @@ const touchButtonReducer = (state, action) => {
     const touchBlankNeighbours = (x, y) => {
       const neighbourCell = updBoard[x][y]
       if (neighbourCell.done) return
+      console.log('touchBlankNeighbours',x, y)
       touchCell(neighbourCell)
       if (neighbourCell.fill === 0)
         iterateNeighbours(updBoard[x][y], touchBlankNeighbours)

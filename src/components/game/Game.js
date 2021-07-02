@@ -11,6 +11,7 @@ import { initialGameState } from './common'
 import newGameReducer from './reducers/newGame'
 import replayReducer from './reducers/replay'
 import touchButtonReducer from './reducers/touchButton'
+import flaggingReducer from './reducers/flagging'
 import './Game.css'
 
 const gameReducer = (state, action) => {
@@ -24,6 +25,10 @@ const gameReducer = (state, action) => {
 
   if (action.type === 'TOUCH') {
     return touchButtonReducer(state, action)
+  }
+
+  if (action.type === 'FLAGGING') {
+    return flaggingReducer(state, action)
   }
 
   return initialGameState
@@ -49,6 +54,8 @@ const Game = () => {
             col={cell.col}
             fill={cell.fill}
             done={cell.done}
+            locked={cell.locked}
+            flagging={gameState.flagging}
             onTouch={dispatchGameAction}
           />
         ))
@@ -62,7 +69,10 @@ const Game = () => {
       <HiScores label={`${MINE_COUNT}\u00d7`} />
       <NewGame onNew={dispatchGameAction} />
       <Replay onReplay={dispatchGameAction} />
-      <Flagging />
+      <Flagging
+        onFlagging={dispatchGameAction}
+        flagging={gameState.flagging}
+      />
       <Help />
       <Settings />
     </nav>

@@ -1,0 +1,3 @@
+.screen nav button.active {
+  color: var(--active-mode);
+}
