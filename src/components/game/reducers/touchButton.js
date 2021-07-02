@@ -49,7 +49,6 @@ const touchButtonReducer = (state, action) => {
     const touchBlankNeighbours = (x, y) => {
       const neighbourCell = updBoard[x][y]
       if (neighbourCell.done) return
-      console.log('touchBlankNeighbours',x, y)
       touchCell(neighbourCell)
       if (neighbourCell.fill === 0)
         iterateNeighbours(updBoard[x][y], touchBlankNeighbours)
