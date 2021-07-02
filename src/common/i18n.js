@@ -1,3 +1,16 @@
+import { nederlands } from './translations/nederlands'
+import { english } from './translations/english'
+
+const tLen = (translation) => Object.keys(translation)
+  .map(group => Object.keys(group))
+  .flat()
+  .length
+const assertLength = tLen(nederlands) === tLen(english)
+console.assert(
+  assertLength,
+  'Translations have different number of entries',
+)
+
 const translations = ['en', 'nl']
 
 const navigatorLanguages =
@@ -15,31 +28,9 @@ const optimalLanguage = commonLanguages.length
   ? commonLanguages[commonLanguages.length - 1]
   : translations[0]
 
-const texts = {}
-
-texts['nl'] = {
-  common: {
-    Minesweeper: 'Mijnenveger',
-    'mine sweeper': 'mijnen veger',
-    Mines: 'Mijnen',
-  },
-  anim: {
-    minesweeper_1: 'mijnen',
-    minesweeper_2: 'veger',
-  },
-  scores: {},
-  help: {},
-  settings: {},
-  nav: {
-    'Hall of Fame': 'Beste Scores',
-    'Clear List': 'Wis lijst',
-    'New Game': 'Nieuw Spel',
-    Replay: 'Speel Opnieuw',
-    'Place Flag': 'Plaats Vlag',
-    Settings: 'Instellingen',
-    Help: 'Uitleg',
-    Return: 'Terug',
-  },
+const texts = {
+  nl: nederlands,
+  en: english,
 }
 
 const text = texts[optimalLanguage]
