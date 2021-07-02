@@ -1,4 +1,4 @@
-import { BOARD_SIZE, MINE_COUNT } from '../../../constants'
+import { BOARD_SIZE, MINE_COUNT } from '../../../common/constants'
 import { iterateNeighbours, initialBoard, initialGameState } from '../common'
 
 const newGameReducer = (state) => {

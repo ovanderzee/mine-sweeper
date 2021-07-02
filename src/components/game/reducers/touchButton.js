@@ -1,4 +1,4 @@
-import { MINE_COUNT } from '../../../constants'
+import { MINE_COUNT } from '../../../common/constants'
 import { iterateNeighbours } from '../common'
 
 const touchButtonReducer = (state, action) => {

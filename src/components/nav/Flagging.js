@@ -1,4 +1,4 @@
-import text from '../../i18n'
+import text from '../../common/i18n'
 import './Nav.css'
 
 const Flagging = (props) => {

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import { createPortal } from 'react-dom'
-import text from '../i18n'
-import { OVERLAY_ELEMENT } from '../constants'
+import text from '../common/i18n'
+import { OVERLAY_ELEMENT } from '../common/constants'
 import './Animation.css'
 
 const Animation = (props) => {

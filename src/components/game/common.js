@@ -1,4 +1,4 @@
-import { BOARD_SIZE } from '../../constants'
+import { BOARD_SIZE } from '../../common/constants'
 
 /**
  * Do something to neighbour cells

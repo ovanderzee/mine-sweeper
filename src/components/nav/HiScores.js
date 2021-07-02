@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import text from '../../i18n'
+import text from '../../common/i18n'
 
 const HiScores = (props) => {
   const championPodium = (

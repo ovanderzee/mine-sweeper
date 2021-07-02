@@ -1,5 +1,5 @@
 import { useReducer } from 'react'
-import { BOARD_SIZE, MINE_COUNT } from '../../constants'
+import { BOARD_SIZE, MINE_COUNT } from '../../common/constants'
 import GameCell from './GameCell'
 import HiScores from '../nav/HiScores'
 import NewGame from '../nav/NewGame'
