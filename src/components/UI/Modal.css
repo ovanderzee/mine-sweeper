@@ -1,0 +1,44 @@
+.backdrop {
+  background: var(--dark-to-light-blue);
+  opacity: 50%;
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 90;
+}
+
+.modal {
+  background: var(--light-to-medium-blue);
+  border-radius: .5em;
+  box-shadow: -0.02em -0.05em 0.25em #fff, 0.15em 0.1em 0.25em #000;
+  position: fixed;
+  left: 50%;
+  top: 25%;
+  width: 20em;
+  transform: translate(-50%, -25%);
+  z-index: 100;
+}
+
+.modal h3.content {
+  font-size: 1.167em;
+  margin: 1.43em 1em;
+}
+
+.modal .buttons {
+  margin: 0.5em;
+  text-align: right;
+}
+
+.modal button {
+  margin: 0.5em;
+  line-height: 2.3em;
+  padding: 0 1em;
+  border: 0 none;
+  border-radius: 0.5em;
+  color: #fff;
+  text-shadow: -0.02em -0.05em #000, 0.008em 0.02em #adf;
+  box-shadow: -0.02em -0.05em 0.1em #000, 0.05em 0.02em 0.5em #fff;
+  background: var(--medium-to-dark-blue);
+}

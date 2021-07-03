@@ -3,6 +3,8 @@ const nederlands = {
     'Minesweeper': 'Mijnenveger',
     'mine sweeper': 'mijnen veger',
     'Mines': 'Mijnen',
+    'confirm': 'Oké',
+    'cancel': 'Annuleer',
   },
   anim: {
     'minesweeper_1': 'mijnen',
@@ -16,6 +18,7 @@ const nederlands = {
     'Clear List': 'Wis lijst',
     'New Game': 'Nieuw Spel',
     'Replay': 'Speel Opnieuw',
+    'Quit Game?': 'Dit spel beëindigen?',
     'Place Flag': 'Vergrendel cel',
     'Settings': 'Instellingen',
     'Help': 'Uitleg',

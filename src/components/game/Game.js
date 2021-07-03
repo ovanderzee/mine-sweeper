@@ -67,8 +67,14 @@ const Game = () => {
     <nav>
       {/* <HiScores label={'&times;'} /> */}
       <HiScores label={`${MINE_COUNT}\u00d7`} />
-      <NewGame onNew={dispatchGameAction} />
-      <Replay onReplay={dispatchGameAction} />
+      <NewGame
+        onNew={dispatchGameAction}
+        stage={gameState.stage}
+      />
+      <Replay
+        onReplay={dispatchGameAction}
+        stage={gameState.stage}
+      />
       <Flagging
         onFlagging={dispatchGameAction}
         flagging={gameState.flagging}
