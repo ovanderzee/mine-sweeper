@@ -11,7 +11,21 @@
   --active-mode: #af5;
   --state-green: #0a5;
   --state-red: #c03;
+
+  --light-gold: #f3e7ae;
+  --medium-gold: #c59735;
+  --dark-gold: #c3922e;
+
+  --light-silver: #d7d2d0;
+  --medium-silver: #a29da1;
+  --dark-silver: #8b878d;
+
+  --light-bronze: #e2d1b2;
+  --medium-bronze: #917758;
+  --dark-bronze: #6b4c2e;
 }
+
+
 
 body {
   margin: 0;

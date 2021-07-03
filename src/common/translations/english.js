@@ -10,7 +10,9 @@ const english = {
     'minesweeper_1': 'mine',
     'minesweeper_2': 'sweeper',
   },
-  scores: {},
+  scores: {
+    'You Won!': 'Congrats, you WON !'
+  },
   help: {},
   settings: {},
   nav: {

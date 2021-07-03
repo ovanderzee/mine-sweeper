@@ -74,6 +74,7 @@ const touchButtonReducer = (state, action) => {
   return {
     ...updState,
     board: updBoard,
+    moves: ++state.moves,
   }
 }
 

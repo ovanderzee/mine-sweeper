@@ -30,6 +30,7 @@ const initialBoard = Array(BOARD_SIZE).fill(Array(BOARD_SIZE).fill(initialCellSt
 const initialGameState = {
   stage: 'game-new',
   board: [],
+  moves: 0,
 }
 
 export { iterateNeighbours, initialBoard, initialGameState }

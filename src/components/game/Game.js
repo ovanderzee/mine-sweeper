@@ -1,4 +1,4 @@
-import { useReducer } from 'react'
+import { useState, useEffect, useReducer } from 'react'
 import { BOARD_SIZE, MINE_COUNT } from '../../common/constants'
 import GameCell from './GameCell'
 import HiScores from '../nav/HiScores'
@@ -7,11 +7,14 @@ import Replay from '../nav/Replay'
 import Flagging from '../nav/Flagging'
 import Help from '../nav/Help'
 import Settings from '../nav/Settings'
+import Modal from '../UI/Modal'
 import { initialGameState } from './common'
 import newGameReducer from './reducers/newGame'
 import replayReducer from './reducers/replay'
 import touchButtonReducer from './reducers/touchButton'
 import flaggingReducer from './reducers/flagging'
+import victoryReducer from './reducers/victory'
+import text from '../../common/i18n'
 import './Game.css'
 
 const gameReducer = (state, action) => {
@@ -29,6 +32,10 @@ const gameReducer = (state, action) => {
 
   if (action.type === 'FLAGGING') {
     return flaggingReducer(state, action)
+  }
+
+  if (action.type === 'VICTORY') {
+    return victoryReducer(state, action)
   }
 
   return initialGameState
@@ -84,10 +91,33 @@ const Game = () => {
     </nav>
   )
 
+  const [showWonModal, setShowWonModal] = useState(false)
+  const gameWasWon = gameState.stage === 'game-won'
+
+  useEffect(() => {
+    if (gameWasWon) {
+      dispatchGameAction({
+        type: 'VICTORY'
+      })
+      setShowWonModal(true)
+    }
+  }, [gameWasWon])
+
+  const gameWonModal = <Modal
+    onConfirm={() => {}}
+    onClose={() => setShowWonModal(false)}
+    className={gameState.stage}
+    textBefore={gameState.rank}
+    textAfter={gameState.score}
+  >
+    {text.scores['You Won!']}
+  </Modal>
+
   return (
     <section id="game" className={`screen ${gameState.stage}`}>
       {gameBoard}
       {gameNavigation}
+      {showWonModal && gameWonModal}
     </section>
   )
 }

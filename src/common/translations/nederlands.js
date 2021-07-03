@@ -10,7 +10,9 @@ const nederlands = {
     'minesweeper_1': 'mijnen',
     'minesweeper_2': 'veger',
   },
-  scores: {},
+  scores: {
+    'You Won!': 'Gefeliciteerd, je hebt gewonnen!'
+  },
   help: {},
   settings: {},
   nav: {

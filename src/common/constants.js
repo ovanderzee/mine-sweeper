@@ -2,6 +2,7 @@ const defaultVariables = {
   BOARD_SIZE: 6,
   GAME_LEVEL: 3,
   PLAYER_NAME: '',
+  MAX_SCORES: 50,
 }
 
 /**
@@ -20,14 +21,18 @@ const defaultVariables = {
  * 7 = 1 mine / 4.3 cells
  */
 
+// configurable
+
 const storedVariables = JSON.parse(localStorage.getItem('mijnenveger')) || {}
 
 const gameVariables = { ...defaultVariables, ...storedVariables }
 
-const { BOARD_SIZE, GAME_LEVEL, PLAYER_NAME } = gameVariables
+export const { BOARD_SIZE, GAME_LEVEL, PLAYER_NAME, MAX_SCORES } = gameVariables
+
+// inferred, sensitive, internal
 
 const MINE_COUNT = Math.ceil(GAME_LEVEL * (1 / 30) * BOARD_SIZE * BOARD_SIZE)
-
+const MIN_DURATION = 750
 const OVERLAY_ELEMENT = document.getElementById('overlay')
 
-export { BOARD_SIZE, GAME_LEVEL, PLAYER_NAME, MINE_COUNT, OVERLAY_ELEMENT }
+export { MINE_COUNT, MIN_DURATION, OVERLAY_ELEMENT }

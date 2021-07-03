@@ -1,3 +1,5 @@
+import { initialGameState } from '../common'
+
 const replayReducer = (state) => {
   const newBoard = state.board.map(row =>
     row.map(cell => {
@@ -10,7 +12,7 @@ const replayReducer = (state) => {
   )
 
   return {
-    stage: 'game-new',
+    ...initialGameState,
     board: newBoard,
   }
 }

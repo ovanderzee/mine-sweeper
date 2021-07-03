@@ -21,7 +21,11 @@ const Modality = (props) => {
   const cancelButton = <button type="button" onClick={cancelHandler}>{text.common.cancel}</button>
 
   return (
-    <div className="modal">
+    <div
+      className={`modal ${props.className}`}
+      data-text-before={props.textBefore}
+      data-text-after={props.textAfter}
+    >
       <h3 className="content">{props.children}</h3>
       <div className="buttons">
         {props.onCancel && cancelButton}
