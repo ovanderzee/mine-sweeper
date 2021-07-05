@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import Modal from '../UI/Modal'
+import Play from '../symbols/Play'
 import text from '../../common/i18n'
 
 const NewGame = (props) => {
@@ -25,7 +26,7 @@ const NewGame = (props) => {
   return (
     <>
       <button type="button" title={text.nav['New Game']} onClick={newGameHandler}>
-        &#x25b6;
+        <Play />
       </button>
       {showModal && consentModal}
     </>

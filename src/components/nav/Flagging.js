@@ -1,3 +1,4 @@
+import Flag from '../symbols/Flag'
 import text from '../../common/i18n'
 import './Nav.css'
 
@@ -18,7 +19,7 @@ const Flagging = (props) => {
       className={activeClass}
       onClick={flaggingHandler}
     >
-      &#x2691;
+      <Flag />
     </button>
   )
 }

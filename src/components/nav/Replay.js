@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import Modal from '../UI/Modal'
+import Redo from '../symbols/Redo'
 import text from '../../common/i18n'
 
 const Replay = (props) => {
@@ -25,7 +26,7 @@ const Replay = (props) => {
   return (
     <>
       <button type="button" title={text.nav['Replay']} onClick={replayHandler}>
-        &#x21bb;
+        <Redo />
       </button>
       {showModal && consentModal}
     </>
