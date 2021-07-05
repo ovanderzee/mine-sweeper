@@ -10,8 +10,8 @@ const english = {
     'minesweeper_1': 'mine',
     'minesweeper_2': 'sweeper',
   },
-  scores: {
-    'You Won!': 'Congrats, you WON !'
+  game: {
+    'You Won!': 'Congrats, you WON !',
   },
   help: {
     'Intro Paragraph': 
@@ -30,6 +30,18 @@ const english = {
     'Go Back Comment': 'Return to game',
     'Remarks Paragraph': 'The animation at the beginning can be interrupted.',
   },
+  fame: {
+    'Nothing Yet': 'No scores yet',
+    'rank': 'psn',
+    'name': 'name',
+    'date': 'date',
+    'score': 'points',
+    'cells': 'fields',
+    'mines': 'mines',
+    'moves': 'turns',
+    'duration': 'duration',
+    'Erase Ok?': 'Erase the list?',
+  },
   settings: {},
   nav: {
     'Hall of Fame': 'Hall of Fame',
@@ -39,7 +51,7 @@ const english = {
     'Quit Game?': 'Quit this game?',
     'Place Flag': 'Lock cell',
     'Settings': 'Settings',
-    'Help': 'Help',
+    'Help': 'Explanation',
     'Go Back': 'Return',
   },
 }

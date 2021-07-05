@@ -30,6 +30,8 @@
   .screen article,
   .screen form {
     flex: 0 1 100%;
+    box-sizing: border-box;
+    height: calc(100% - 2.9em);
   }
 
   .screen nav {

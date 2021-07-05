@@ -130,7 +130,7 @@ const Game = () => {
     textBefore={gameState.rank}
     textAfter={gameState.score}
   >
-    {text.scores['You Won!']}
+    {text.game['You Won!']}
   </Modal>
 
   return (

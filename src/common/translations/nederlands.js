@@ -10,8 +10,8 @@ const nederlands = {
     'minesweeper_1': 'mijnen',
     'minesweeper_2': 'veger',
   },
-  scores: {
-    'You Won!': 'Gefeliciteerd, je hebt gewonnen!'
+  game: {
+    'You Won!': 'Gefeliciteerd, je hebt gewonnen!',
   },
   help: {
     'Intro Paragraph': 
@@ -29,6 +29,18 @@ const nederlands = {
     'Delete Comment': 'Wis scores',
     'Go Back Comment': 'Keer terug naar spel',
     'Remarks Paragraph': 'De animatie aan het begin kan worden onderbroken.',
+  },
+  fame: {
+    'Nothing Yet': 'Nog geen scores',
+    'rank': 'psn',
+    'name': 'naam',
+    'date': 'datum',
+    'score': 'punten',
+    'cells': 'velden',
+    'mines': 'mijnen',
+    'moves': 'zetten',
+    'duration': 'duur',
+    'Erase Ok?': 'Scorelijst wissen?',
   },
   settings: {},
   nav: {
