@@ -1,15 +1,13 @@
-import { useState } from 'react'
-import Game from './components/game/Game'
-import Animation from './components/Animation'
+import PageProvider from './store/PageProvider'
+import Paging from './Paging'
 import './App.css'
 
 function App() {
-  const [play, setPlay] = useState(false)
-  const goToGame = () => {
-    setPlay(true)
-  }
-
-  return <>{play ? <Game /> : <Animation onEnd={goToGame} />}</>
+  return (
+    <PageProvider>
+      <Paging />
+    </PageProvider>
+  )
 }
 
 export default App
