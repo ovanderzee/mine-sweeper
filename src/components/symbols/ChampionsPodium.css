@@ -1,0 +1,21 @@
+.championship-podium {
+  display: block;
+  margin-top: -0.1em;
+}
+
+.championship-podium span {
+  font-size: 0.67em;
+  position: relative;
+}
+
+.championship-podium .n1 {
+  top: -0.4em;
+}
+
+.championship-podium .n2 {
+  top: 0;
+}
+
+.championship-podium .n3 {
+  top: 0.4em;
+}

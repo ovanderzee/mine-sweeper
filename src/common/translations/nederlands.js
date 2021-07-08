@@ -13,7 +13,23 @@ const nederlands = {
   scores: {
     'You Won!': 'Gefeliciteerd, je hebt gewonnen!'
   },
-  help: {},
+  help: {
+    'Intro Paragraph': 
+      'Vind alle mijnen door naar aanwijzingen te zoeken. '
+      + 'Zet een vlag op waar een mijn zou kunnen liggen. ',
+    'Game Scores Comment': 'Aantal verborgen mijnen; toegang tot scorelijst',
+    'About Scores Comment': 'Bekijk de scorelijst',
+    'New Game Comment': 'Begin een nieuw spel, met de huidige instellingen',
+    'Replay Comment': 'Begin spel met dezelfde mijn-verdeling en afmetingen',
+    'Flag Comment':
+      'Schakel vlag modus om, '
+      + 'markeer een veld en bescherm het tegen onbedoeld aanklikken ',
+    'Help Comment': '(dit scherm)',
+    'Settings Comment': 'Pas nivo aan en andere opties',
+    'Delete Comment': 'Wis scores',
+    'Go Back Comment': 'Keer terug naar spel',
+    'Remarks Paragraph': 'De animatie aan het begin kan worden onderbroken.',
+  },
   settings: {},
   nav: {
     'Hall of Fame': 'Beste Scores',
@@ -24,7 +40,7 @@ const nederlands = {
     'Place Flag': 'Vergrendel cel',
     'Settings': 'Instellingen',
     'Help': 'Uitleg',
-    'Return': 'Terug',
+    'Go Back': 'Keer terug',
   },
 }
 

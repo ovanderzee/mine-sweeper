@@ -1,0 +1,23 @@
+p,
+dl {
+  text-align: left;
+}
+
+dl {
+  --term-width: 2.5em;
+}
+
+dt, dd {
+  display: inline-block;
+  vertical-align: top;
+  padding: 0.25em 0;
+}
+
+dt {
+  width: var(--term-width);
+}
+
+dd {
+  margin-left: 0;
+  width: calc(100% - var(--term-width));
+}
