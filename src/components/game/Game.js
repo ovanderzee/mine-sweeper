@@ -18,6 +18,16 @@ import text from '../../common/i18n'
 import './Game.css'
 
 const gameReducer = (state, action) => {
+  if (action.type === 'LOAD') {
+    return JSON.parse(action.stateString)
+  }
+
+  if (action.type === 'STORE') {
+    const currentState = JSON.stringify(state)
+    sessionStorage.setItem('mijnenvegerij', currentState)
+    return state;
+  }
+
   if (action.type === 'NEW') {
     return newGameReducer(state)
   }
@@ -47,9 +57,19 @@ const Game = () => {
     initialGameState
   )
 
-  if (gameState === initialGameState) {
-    dispatchGameAction({ type: 'NEW' })
-  }
+  useEffect(() => {
+    if (gameState === initialGameState) {
+      const storedState = sessionStorage.getItem('mijnenvegerij')
+      if (storedState) {
+        dispatchGameAction({ type: 'LOAD', stateString: storedState })
+      } else {
+        dispatchGameAction({ type: 'NEW' })
+      }
+    }
+    return () => {
+      dispatchGameAction({ type: 'STORE' })
+    }
+  });
 
   const gameBoard = (
     <article id="playground" className={`board-size__${BOARD_SIZE}`}>
