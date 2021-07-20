@@ -9,6 +9,7 @@ const GameCell = (props) => {
 
   const touchCellHandler = (event) => {
     if (props.done) return
+    if (!props.flagging && props.locked) return
     props.onTouch({
       type: 'TOUCH',
       row: Number(props.row),

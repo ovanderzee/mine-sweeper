@@ -134,7 +134,7 @@ const Game = () => {
   </Modal>
 
   return (
-    <section id="game" className={`screen ${gameState.stage}`}>
+    <section id="game" className={`screen ${gameState.stage} ${gameState.flagging ? 'flagging' : ''}`}>
       {gameBoard}
       {gameNavigation}
       {showWonModal && gameWonModal}

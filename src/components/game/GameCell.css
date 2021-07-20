@@ -25,6 +25,15 @@
   cursor: default;
 }
 
+.flagging #playground button.pristine,
+.flagging #playground button.pristine.flag {
+  cursor: crosshair;
+}
+
+#playground button.pristine.flag {
+  cursor: not-allowed;
+}
+
 #playground button.flag:after {
   content: '⚑';
   font-size: 1.333em;
