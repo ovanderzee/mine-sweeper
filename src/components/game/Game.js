@@ -60,7 +60,11 @@ const Game = () => {
   useEffect(() => {
     if (gameState === initialGameState) {
       const storedState = sessionStorage.getItem('mijnenvegerij')
-      if (storedState) {
+      const gameHasEnded = storedState && (
+        storedState.includes('"game-won"') ||
+        storedState.includes('"game-lost"')
+      )
+      if (storedState && !gameHasEnded) {
         dispatchGameAction({ type: 'LOAD', stateString: storedState })
       } else {
         dispatchGameAction({ type: 'NEW' })
