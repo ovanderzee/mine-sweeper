@@ -1,5 +1,5 @@
 import PageProvider from './store/PageProvider'
-import Paging from './Paging'
+import Paging from './components/Paging'
 import './App.css'
 
 function App() {
