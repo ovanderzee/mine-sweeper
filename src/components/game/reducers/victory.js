@@ -2,11 +2,17 @@ import { BOARD_SIZE, MINE_COUNT, GAME_LEVEL, MAX_SCORES, MIN_DURATION } from '..
 
 const victoryReducer = (state) => {
   const duration = Math.max(state.end - state.begin, MIN_DURATION)
+
+  const moves = state.board
+    .map((row) => row.filter((cell) => cell.done === 'clicked'))
+    .flat()
+    .length
+
   const score = Math.round(
     Math.pow(BOARD_SIZE, 2)
     * GAME_LEVEL
     * 10000
-    / state.moves
+    / moves
     / Math.pow(duration, 0.5)
   )
 
@@ -16,7 +22,7 @@ const victoryReducer = (state) => {
     // name: PLAYER_NAME,
     cells: Math.pow(BOARD_SIZE, 2),
     mines: MINE_COUNT,
-    moves: state.moves,
+    moves: moves,
     score: score,
   }
 
@@ -35,6 +41,7 @@ const victoryReducer = (state) => {
   return {
     ...state,
     score: score,
+    moves: moves,
     rank: rank > 0 ? rank : undefined,
   }
 }

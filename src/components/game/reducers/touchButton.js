@@ -20,7 +20,7 @@ const touchButtonReducer = (state, action) => {
   let updCell = updBoard[action.row][action.col]
 
   /** All-purpose cell updater */
-  const touchCell = (source, entry = { done: true }) => {
+  const touchCell = (source, entry = { done: 'opened' }) => {
     return updBoard[source.row][source.col] = {
       ...source,
       ...entry,
@@ -49,7 +49,8 @@ const touchButtonReducer = (state, action) => {
     const touchBlankNeighbours = (x, y) => {
       const neighbourCell = updBoard[x][y]
       if (neighbourCell.done) return
-      touchCell(neighbourCell, { done: !neighbourCell.locked })
+      const lockStateEntry = neighbourCell.locked ? {} : { done: 'opened' }
+      touchCell(neighbourCell, lockStateEntry)
       if (neighbourCell.fill === 0)
         iterateNeighbours(updBoard[x][y], touchBlankNeighbours)
     }
@@ -74,7 +75,6 @@ const touchButtonReducer = (state, action) => {
   return {
     ...updState,
     board: updBoard,
-    moves: ++state.moves,
   }
 }
 

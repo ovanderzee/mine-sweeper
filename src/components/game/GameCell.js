@@ -16,7 +16,7 @@ const GameCell = (props) => {
       col: Number(props.col),
       entry: props.flagging
         ? { locked: !props.locked }
-        : { done: true },
+        : { done: 'clicked' },
     })
   }
 
