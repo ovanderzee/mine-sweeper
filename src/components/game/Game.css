@@ -7,6 +7,11 @@
   padding: 1em;
 }
 
+#playground.board-size__7,
+#playground.board-size__8 {
+  padding: 1.3em;
+}
+
 /* cells / 8 */
 .board-size__3 button {
   font-size: 2.667em;
