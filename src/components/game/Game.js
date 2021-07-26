@@ -1,5 +1,6 @@
 import { useState, useEffect, useReducer } from 'react'
-import { BOARD_SIZE, MINE_COUNT } from '../../common/constants'
+import useLocalStorage from '../../common/useLocalStorage'
+import DEFAULTS from '../../common/defaults'
 import GameCell from './GameCell'
 import HiScores from '../nav/HiScores'
 import NewGame from '../nav/NewGame'
@@ -17,7 +18,9 @@ import victoryReducer from './reducers/victory'
 import text from '../../common/i18n'
 import './Game.css'
 
-const gameReducer = (state, action) => {
+const gameReducer = function (state, action) {
+  action.config = this
+
   if (action.type === 'LOAD') {
     return JSON.parse(action.stateString)
   }
@@ -29,7 +32,7 @@ const gameReducer = (state, action) => {
   }
 
   if (action.type === 'NEW') {
-    return newGameReducer(state)
+    return newGameReducer(action)
   }
 
   if (action.type === 'REPLAY') {
@@ -52,8 +55,12 @@ const gameReducer = (state, action) => {
 }
 
 const Game = () => {
+  // eslint-disable-next-line no-unused-vars
+  const [config, setConfig] = useLocalStorage('mijnenveger', DEFAULTS)
+  const { BOARD_SIZE, MINE_COUNT } = config
+
   const [gameState, dispatchGameAction] = useReducer(
-    gameReducer,
+    gameReducer.bind(config),
     initialGameState
   )
 

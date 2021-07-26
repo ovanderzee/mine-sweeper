@@ -1,6 +1,8 @@
-import { BOARD_SIZE, MINE_COUNT, GAME_LEVEL, MAX_SCORES, MIN_DURATION } from '../../../common/constants'
+import { MIN_DURATION } from '../../../common/constants'
 
-const victoryReducer = (state) => {
+const victoryReducer = (state, action) => {
+  const { BOARD_SIZE, MINE_COUNT, GAME_LEVEL, MAX_SCORES } = action.config
+
   const duration = Math.max(state.end - state.begin, MIN_DURATION)
 
   const moves = state.board

@@ -1,8 +1,9 @@
-import { BOARD_SIZE, MINE_COUNT } from '../../../common/constants'
 import { iterateNeighbours, initialBoard, initialGameState } from '../common'
 
-const newGameReducer = (state) => {
-  const newBoard = initialBoard.map((row, rowIndex) =>
+const newGameReducer = (action) => {
+  const { BOARD_SIZE, MINE_COUNT } = action.config
+
+  const newBoard = initialBoard(BOARD_SIZE).map((row, rowIndex) =>
     row.map((cell, colIndex) => {
       return {
         ...cell,
@@ -25,7 +26,7 @@ const newGameReducer = (state) => {
     const countNeighbourMines = (x, y) => {
       newBoard[x][y].fill += 1
     }
-    iterateNeighbours(cell, countNeighbourMines)
+    iterateNeighbours(cell, BOARD_SIZE, countNeighbourMines)
   })
 
   return {

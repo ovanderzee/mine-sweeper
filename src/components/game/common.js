@@ -1,11 +1,11 @@
-import { BOARD_SIZE } from '../../common/constants'
 
 /**
  * Do something to neighbour cells
  * @param {Object} cell
+ * @param {Number} BOARD_SIZE
  * @param {Function} callback with (x, y) arguments
  */
-const iterateNeighbours = (cell, callback) => {
+const iterateNeighbours = (cell, BOARD_SIZE, callback) => {
   for (let x = cell.row - 1; x < cell.row + 2; x++) {
     if (x >= 0 && x < BOARD_SIZE) {
       for (let y = cell.col - 1; y < cell.col + 2; y++) {
@@ -24,7 +24,10 @@ const initialCellState = {
 }
 
 /** The right board dimensions */
-const initialBoard = Array(BOARD_SIZE).fill(Array(BOARD_SIZE).fill(initialCellState))
+const initialBoard = (BOARD_SIZE) =>
+  Array(BOARD_SIZE).fill(
+    Array(BOARD_SIZE).fill(initialCellState)
+  )
 
 /** Complete data model */
 const initialGameState = {

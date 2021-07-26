@@ -1,7 +1,8 @@
-import { MINE_COUNT } from '../../../common/constants'
 import { iterateNeighbours } from '../common'
 
 const touchButtonReducer = (state, action) => {
+  const { BOARD_SIZE, MINE_COUNT } = action.config
+
   const updState = { ...state }
   
   if (state.stage === 'game-new') {
@@ -52,9 +53,9 @@ const touchButtonReducer = (state, action) => {
       const lockStateEntry = neighbourCell.locked ? {} : { done: 'opened' }
       touchCell(neighbourCell, lockStateEntry)
       if (neighbourCell.fill === 0)
-        iterateNeighbours(updBoard[x][y], touchBlankNeighbours)
+        iterateNeighbours(updBoard[x][y], BOARD_SIZE, touchBlankNeighbours)
     }
-    iterateNeighbours(updCell, touchBlankNeighbours)
+    iterateNeighbours(updCell, BOARD_SIZE, touchBlankNeighbours)
   } else if (updCell.fill > 8) {
     // mine touched, touch all buttons, game lost
     findPristineCells().forEach((cell) => touchCell(cell))
