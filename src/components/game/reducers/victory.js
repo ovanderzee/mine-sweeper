@@ -1,7 +1,7 @@
 import { MIN_DURATION } from '../../../common/constants'
 
 const victoryReducer = (state, action) => {
-  const { BOARD_SIZE, MINE_COUNT, GAME_LEVEL, MAX_SCORES } = action.config
+  const { BOARD_SIZE, GAME_LEVEL, MINE_COUNT, PLAYER_NAME, MAX_SCORES } = action.config
 
   const duration = Math.max(state.end - state.begin, MIN_DURATION)
 
@@ -21,7 +21,7 @@ const victoryReducer = (state, action) => {
   const victory = {
     begin: state.begin,
     duration: duration,
-    // name: PLAYER_NAME,
+    user: PLAYER_NAME,
     cells: Math.pow(BOARD_SIZE, 2),
     mines: MINE_COUNT,
     moves: moves,

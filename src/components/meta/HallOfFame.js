@@ -42,7 +42,7 @@ const HallOfFame = (props) => {
           <li key={`${index + 1}_${play.score}`}>
             <header>
               <h2 className="rank">{index + 1}</h2>
-              <h4 className="name">{play.name}</h4>
+              <h4 className="user">{play.user}</h4>
               <h4 className="date">{(new Date(play.begin)).toLocaleDateString()}</h4>
             </header>
             <footer>

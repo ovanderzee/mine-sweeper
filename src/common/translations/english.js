@@ -6,6 +6,9 @@ const english = {
     'confirm': 'OK',
     'cancel': 'Cancel',
   },
+  config: {
+    'default player': 'anonymous',
+  },
   anim: {
     'minesweeper_1': 'mine',
     'minesweeper_2': 'sweeper',

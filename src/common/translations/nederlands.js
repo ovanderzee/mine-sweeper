@@ -6,6 +6,9 @@ const nederlands = {
     'confirm': 'Oké',
     'cancel': 'Annuleer',
   },
+  config: {
+    'default player': 'anoniem',
+  },
   anim: {
     'minesweeper_1': 'mijnen',
     'minesweeper_2': 'veger',

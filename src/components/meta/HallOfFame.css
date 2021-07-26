@@ -41,7 +41,7 @@ li:first-child + li + li + li header .rank {
   text-shadow: 1px 1px var(--light-bronze);
 }
 
-li header .name {
+li header .user {
   flex: 1 1 90%;
   text-align: left;
   padding: 0 0.5em;

@@ -1,3 +1,5 @@
+import text from './i18n'
+
 /**
  * BOARD_SIZE
  * width and height of gameboard, hence BOARD_SIZE^2 cells on board
@@ -18,6 +20,7 @@ const DEFAULTS = {
   BOARD_SIZE: 6,
   GAME_LEVEL: 3,
   MINE_COUNT: Math.ceil(6 * 6 * 3 / 30),
+  PLAYER_NAME: text.config['default player'],
   MAX_SCORES: 500,
 }
 
