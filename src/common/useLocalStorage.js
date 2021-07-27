@@ -1,14 +1,22 @@
-import { useState } from "react"
-// based on https://usehooks.com/useLocalStorage/
+import { useState } from 'react'
+import { isEnumerable } from './functions'
 
-// Hook
+// Hook based on https://usehooks.com/useLocalStorage/
 function useLocalStorage(key, initialValue) {
   // State to store our value
   // Pass initial state function to useState so logic is only executed once
   const [storedValue, setStoredValue] = useState(() => {
     try {
-      const item = window.localStorage.getItem(key)
-      return item ? JSON.parse(item) : initialValue
+      const stored = window.localStorage.getItem(key)
+      if (stored) {
+        if (isEnumerable(initialValue)) {
+          return { ...initialValue, ...JSON.parse(stored) }
+        } else {
+          return JSON.parse(stored)
+        }
+      } else {
+        return initialValue
+      }
     } catch (error) {
       console.error(error)
       return initialValue
