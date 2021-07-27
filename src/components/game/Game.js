@@ -1,6 +1,5 @@
-import { useState, useEffect, useReducer } from 'react'
-import useLocalStorage from '../../common/useLocalStorage'
-import DEFAULTS from '../../common/defaults'
+import { useContext, useState, useEffect, useReducer } from 'react'
+import PageContext from '../../store/page-context'
 import GameCell from './GameCell'
 import HiScores from '../nav/HiScores'
 import NewGame from '../nav/NewGame'
@@ -15,7 +14,6 @@ import replayReducer from './reducers/replay'
 import touchButtonReducer from './reducers/touchButton'
 import flaggingReducer from './reducers/flagging'
 import victoryReducer from './reducers/victory'
-import text from '../../common/i18n'
 import './Game.css'
 
 const gameReducer = function (state, action) {
@@ -55,12 +53,12 @@ const gameReducer = function (state, action) {
 }
 
 const Game = () => {
-  // eslint-disable-next-line no-unused-vars
-  const [config, setConfig] = useLocalStorage('mijnenveger', DEFAULTS)
-  const { BOARD_SIZE, MINE_COUNT } = config
+  const pageCtx = useContext(PageContext)
+  const { BOARD_SIZE, MINE_COUNT } = pageCtx.config
+  const text = pageCtx.text
 
   const [gameState, dispatchGameAction] = useReducer(
-    gameReducer.bind(config),
+    gameReducer.bind(pageCtx.config),
     initialGameState
   )
 

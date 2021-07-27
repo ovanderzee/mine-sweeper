@@ -1,9 +1,12 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
+import PageContext from '../../store/page-context'
 import Modal from '../UI/Modal'
 import Redo from '../symbols/Redo'
-import text from '../../common/i18n'
 
 const Replay = (props) => {
+  const pageCtx = useContext(PageContext)
+  const text = pageCtx.text
+
   const [showModal, setShowModal] = useState(false)
 
   const confirmHandler = () => props.onReplay({ type: 'REPLAY' })

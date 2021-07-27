@@ -1,13 +1,16 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
+import PageContext from '../../store/page-context'
 import EraseScores from '../nav/EraseScores'
 import Help from '../nav/Help'
 import Settings from '../nav/Settings'
 import GoBack from '../nav/GoBack'
-import text from '../../common/i18n'
 import './Meta.css'
 import './HallOfFame.css'
 
 const HallOfFame = (props) => {
+  const pageCtx = useContext(PageContext)
+  const text = pageCtx.text
+
   const rawScores = localStorage.getItem('mijnengeveegd') || '[]'
   const [scores, setScores] = useState(JSON.parse(rawScores))
 

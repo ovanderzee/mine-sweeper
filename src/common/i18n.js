@@ -11,28 +11,37 @@ console.assert(
   'Translations have different number of entries',
 )
 
-const translations = ['en', 'nl']
+const translations = {
+  'en': 'English',
+  'nl': 'Nederlands',
+}
+const translationIds = Object.keys(translations)
 
-const navigatorLanguages =
-  Array.isArray(navigator.languages) && navigator.languages.length
-    ? navigator.languages
-    : [navigator.language]
+/** Try to match the preferred language */
+const inferLanguage = () => {
+  const navigatorLanguages =
+    Array.isArray(window.navigator.languages) && window.navigator.languages.length
+      ? window.navigator.languages
+      : [window.navigator.language]
 
-const configuredLanguages = navigatorLanguages.map((lang) => lang.substr(0, 2))
+  const availableLanguages = navigatorLanguages.map((lang) => lang.substr(0, 2))
 
-const commonLanguages = translations.map((trans) =>
-  configuredLanguages.find((lang) => lang === trans)
-)
+  const commonLanguages = translationIds.map((trans) =>
+    availableLanguages.find((lang) => lang === trans)
+  )
 
-const optimalLanguage = commonLanguages.length
-  ? commonLanguages[commonLanguages.length - 1]
-  : translations[0]
+  const languageMatch = commonLanguages.length
+    ? commonLanguages[commonLanguages.length - 1]
+    : translationIds[0]
+
+  return languageMatch
+}
+
+const defaultLanguage = inferLanguage()
 
 const texts = {
   nl: nederlands,
   en: english,
 }
 
-const text = texts[optimalLanguage]
-
-export default text
+export { translations, defaultLanguage, texts }

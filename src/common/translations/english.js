@@ -52,9 +52,14 @@ const english = {
     '%n cells': '%n fields',
     'Gamelevel': 'Gamelevel',
     'one mine to %n cells': 'one mine to %n fields',
+
+    'General Settings': 'General Settings',
+    'Translations': 'Translations',
+    'choose your language': 'choose your language',
+  
     'Record Scores': 'Record Scores',
     'Name in Scores': 'Name in scores',
-    'type your name': 'vul je naam in',
+    'type your name': 'enter your name',
     'Max records': 'Max records',
     'clip to %n': 'clip to %n',
   },

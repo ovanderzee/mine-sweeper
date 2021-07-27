@@ -1,4 +1,4 @@
-import text from './i18n'
+import { texts, defaultLanguage } from './i18n'
 
 /**
  * BOARD_SIZE
@@ -20,7 +20,8 @@ const DEFAULTS = {
   BOARD_SIZE: 6,
   GAME_LEVEL: 3,
   MINE_COUNT: Math.ceil(6 * 6 * 3 / 30),
-  PLAYER_NAME: text.config['default player'],
+  LANGUAGE: defaultLanguage,
+  PLAYER_NAME: texts[defaultLanguage].config['default player'],
   MAX_SCORES: 500,
 }
 

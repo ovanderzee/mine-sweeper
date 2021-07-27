@@ -1,10 +1,13 @@
-import { useState, useEffect } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import { createPortal } from 'react-dom'
-import text from '../common/i18n'
+import PageContext from '../store/page-context'
 import { OVERLAY_ELEMENT } from '../common/constants'
 import './Animation.css'
 
 const Animation = (props) => {
+  const pageCtx = useContext(PageContext)
+  const text = pageCtx.text
+
   const [endingClass, setEndingClass] = useState('')
   const cssOpacityTransitionTime = 500
   const { onEnd } = props

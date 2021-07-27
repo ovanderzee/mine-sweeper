@@ -1,3 +1,5 @@
+import { useContext } from 'react'
+import PageContext from '../../store/page-context'
 import ChampionsPodium from '../symbols/ChampionsPodium'
 import Play from '../symbols/Play'
 import Redo from '../symbols/Redo'
@@ -9,11 +11,13 @@ import CRLF from '../symbols/CRLF'
 import HiScores from '../nav/HiScores'
 import Settings from '../nav/Settings'
 import GoBack from '../nav/GoBack'
-import text from '../../common/i18n'
 import './Meta.css'
 import './About.css'
 
 const About = () => {
+  const pageCtx = useContext(PageContext)
+  const text = pageCtx.text
+
   const aboutContent = (
     <article>
       <h2>{text.common['Minesweeper']}</h2>

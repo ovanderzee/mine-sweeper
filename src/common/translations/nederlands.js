@@ -52,6 +52,11 @@ const nederlands = {
     '%n cells': '%n velden',
     'Gamelevel': 'Speelnivo',
     'one mine to %n cells': 'één mijn per %n velden',
+
+    'General Settings': 'Algemene Instellingen',
+    'Translations': 'Vertalingen',
+    'choose your language': 'kies een taal',
+  
     'Record Scores': 'Scores Opslaan',
     'Name in Scores': 'Naam in scorelijst',
     'type your name': 'vul je naam in',

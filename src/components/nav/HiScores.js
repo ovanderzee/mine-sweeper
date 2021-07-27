@@ -2,10 +2,10 @@ import { useContext } from 'react'
 import PageContext from '../../store/page-context'
 import HallOfFame from '../meta/HallOfFame'
 import ChampionsPodium from '../symbols/ChampionsPodium'
-import text from '../../common/i18n'
 
 const HiScores = (props) => {
   const pageCtx = useContext(PageContext)
+  const text = pageCtx.text
 
   const showHandler = () => pageCtx.navigate(<HallOfFame />)
 

@@ -1,8 +1,12 @@
+import { useContext } from 'react'
+import PageContext from '../../store/page-context'
 import Flag from '../symbols/Flag'
-import text from '../../common/i18n'
 import './Nav.css'
 
 const Flagging = (props) => {
+  const pageCtx = useContext(PageContext)
+  const text = pageCtx.text
+
   const activeClass = props.flagging ? 'active' : ''
 
   const flaggingHandler = () => {

@@ -29,3 +29,59 @@ legend + h5 {
 label {
   font-weight: 600;
 }
+
+input,
+select,
+textarea {
+  border: 1px var(--lighter-blue) solid;
+  border-radius: .6em;
+  box-sizing: border-box;
+  padding: .2em .4em;
+  width: 15em;
+  min-height: 1.667em; /* min-: not interfearance with line-height */
+/* Nice idea
+  appearance: none;
+  background: var(--extra-light-blue);
+  box-shadow: 
+    inset var(--darker-blue) 0.25em 0.25em 0.25em, 
+    inset var(--ultra-light-blue) -0.25em -0.25em 0.25em;
+  border: none;
+  */
+}
+
+/* Special styling for WebKit/Blink
+size and color problem in chrome,
+color problem in safari,
+input[type=range]::-webkit-slider-thumb {
+  border-radius: 50%;
+  transform: scale(1.2);
+  background: var(--extra-light-blue) !important;
+  box-shadow: 
+    inset var(--ultra-light-blue) 0.25em 0.25em 0.67em, 
+    inset var(--darker-blue) -0.25em -0.25em 0.67em;
+  border: none;
+} */
+
+/* All the same stuff for Firefox
+input[type=range]::-moz-range-thumb {
+  border-radius: 50%;
+  width: 1.333em;
+  height: 1.333em;
+  background: var(--extra-light-blue);
+  box-shadow: 
+    inset var(--ultra-light-blue) 0.25em 0.25em 0.25em, 
+    inset var(--darker-blue) -0.25em -0.25em 0.25em;
+  border: none;
+} */
+
+/* All the same stuff for IE
+input[type=range]::-ms-thumb {
+  border-radius: 50%;
+  width: 1.333em;
+  height: 1.333em;
+  background: var(--extra-light-blue);
+  box-shadow: 
+    inset var(--ultra-light-blue) 0.25em 0.25em 0.25em, 
+    inset var(--darker-blue) -0.25em -0.25em 0.25em;
+  border: none;
+} */

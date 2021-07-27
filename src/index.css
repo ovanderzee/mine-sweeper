@@ -1,8 +1,12 @@
 @import './fonts/DejaVu-Sans-fontfacekit/fontface.css';
 
 :root {
+  --ultra-light-blue: #eefaff;
+  --extra-light-blue: #cef;
   --light-blue: #adf;
+  --lighter-blue: #8bd;
   --medium-blue: #6ac;
+  --darker-blue: #58b;
   --dark-blue: #37a;
   --light-to-white-blue: linear-gradient(to bottom, #adf 0%, #fff 100%);
   --light-to-medium-blue: linear-gradient(to bottom, #adf 0%, #6ac 100%);
@@ -24,8 +28,6 @@
   --medium-bronze: #917758;
   --dark-bronze: #6b4c2e;
 }
-
-
 
 body {
   margin: 0;

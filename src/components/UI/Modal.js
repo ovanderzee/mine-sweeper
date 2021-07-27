@@ -1,5 +1,6 @@
+import { useContext } from 'react'
 import { createPortal } from 'react-dom'
-import text from '../../common/i18n'
+import PageContext from '../../store/page-context'
 import './Modal.css'
 
 const Backdrop = (props) => {
@@ -7,6 +8,9 @@ const Backdrop = (props) => {
 }
 
 const Modality = (props) => {
+  const pageCtx = useContext(PageContext)
+  const text = pageCtx.text
+
   const confirmHandler = () => {
     props.onConfirm()
     props.onClose()

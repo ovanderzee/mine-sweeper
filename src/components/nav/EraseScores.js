@@ -1,9 +1,12 @@
-import { useState } from 'react'
+import { useContext, useState } from 'react'
+import PageContext from '../../store/page-context'
 import Erase from '../symbols/Erase'
 import Modal from '../UI/Modal'
-import text from '../../common/i18n'
 
 const EraseScores = (props) => {
+  const pageCtx = useContext(PageContext)
+  const text = pageCtx.text
+
   const [showAskModalState, setAskModalState] = useState(false)
 
   const askModal = <Modal

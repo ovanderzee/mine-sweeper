@@ -1,8 +1,12 @@
 import { useState } from 'react'
 import PageContext from './page-context'
+import DEFAULTS from '../common/defaults'
+import { texts } from '../common/i18n'
 
 const defaultPageState = {
   render: null,
+  config: null,
+  text: null,
 }
 
 /**
@@ -11,24 +15,47 @@ const defaultPageState = {
  * @returns {Object} Page members and methods
  */
 const PageProvider = (props) => {
+  const stored = window.localStorage.getItem('mijnenveger')
+  const config = { ...DEFAULTS, ...JSON.parse(stored)}
+  const { LANGUAGE } = config
+  defaultPageState.config = config
+  defaultPageState.text = texts[LANGUAGE]
+
   const [pageState, setPageState] = useState(defaultPageState)
-    
+
   const navigationHandler = (toComponent) => {
-    if (pageState.render === toComponent) {
-      return
-    }
     setPageState(prev => {
       return {
-        former: prev.render,
+        ...prev,
         render: toComponent,
       }
     })
   }
 
+  const configurationHandler = (changes) => {
+    setPageState(prev => {
+      const update = {
+        ...prev,
+        config: {
+          ...prev.config,
+          ...changes,
+        }
+      }
+      if (changes.LANGUAGE) {
+        update.text = texts[changes.LANGUAGE]
+      }
+      const configString = JSON.stringify(update.config)
+      window.localStorage.setItem('mijnenveger', configString)
+      return update
+    })
+  }
+
   const pageCtx = {
-    former: pageState.former,
     render: pageState.render,
     navigate: navigationHandler,
+    config: pageState.config,
+    text: pageState.text,
+    configure: configurationHandler,
   }
 
   return (

@@ -2,10 +2,10 @@ import { useContext } from 'react'
 import PageContext from '../../store/page-context'
 import Configure from '../meta/Configure'
 import CogWheel from '../symbols/CogWheel'
-import text from '../../common/i18n'
 
 const Settings = () => {
   const pageCtx = useContext(PageContext)
+  const text = pageCtx.text
 
   const showHandler = () => pageCtx.navigate(<Configure />)
 

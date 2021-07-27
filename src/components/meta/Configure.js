@@ -1,14 +1,16 @@
-import useLocalStorage from '../../common/useLocalStorage'
-import DEFAULTS from '../../common/defaults'
+import { useContext } from 'react'
+import PageContext from '../../store/page-context'
 import HiScores from '../nav/HiScores'
 import Help from '../nav/Help'
 import GoBack from '../nav/GoBack'
-import text from '../../common/i18n'
+import { translations } from '../../common/i18n'
 import './Meta.css'
 import './Configure.css'
 
 function Configure() {
-  const [config, setConfig] = useLocalStorage('mijnenveger', DEFAULTS)
+  const pageCtx = useContext(PageContext)
+  const { BOARD_SIZE, GAME_LEVEL, LANGUAGE, PLAYER_NAME, MAX_SCORES } = pageCtx.config
+  const text = pageCtx.text
 
   const exitCurrentGame = () => {
     sessionStorage.removeItem('mijnenvegerij')
@@ -16,23 +18,19 @@ function Configure() {
 
   const changeBoardSizeHandler = event => {
     exitCurrentGame()
-    setConfig(prev => {
-      return {
-        ...prev,
-        BOARD_SIZE: +event.target.value,
-        MINE_COUNT: Math.ceil(Math.pow(+event.target.value, 2) * prev.GAME_LEVEL / 30)
-      }
+    const prev = pageCtx.config
+    pageCtx.configure({
+      BOARD_SIZE: +event.target.value,
+      MINE_COUNT: Math.ceil(Math.pow(+event.target.value, 2) * prev.GAME_LEVEL / 30)
     })
   }
 
   const changeGameLevelHandler = event => {
     exitCurrentGame()
-    setConfig(prev => {
-      return {
-        ...prev,
-        GAME_LEVEL: +event.target.value,
-        MINE_COUNT: Math.ceil(Math.pow(prev.BOARD_SIZE, 2) * +event.target.value / 30)
-      }
+    const prev = pageCtx.config
+    pageCtx.configure({
+      GAME_LEVEL: +event.target.value,
+      MINE_COUNT: Math.ceil(Math.pow(prev.BOARD_SIZE, 2) * +event.target.value / 30)
     })
   }
 
@@ -44,11 +42,11 @@ function Configure() {
       <div className="field">
         <label htmlFor="size">{text.settings['Size Gameboard']}</label>
         <div>
-          <em>{text.settings['%n cells'].replace('%n', Math.pow(config.BOARD_SIZE, 2))}</em>
+          <em>{text.settings['%n cells'].replace('%n', Math.pow(BOARD_SIZE, 2))}</em>
           <input
             id="size"
             type="range"
-            value={config.BOARD_SIZE}
+            value={BOARD_SIZE}
             min="3"
             max="8"
             onChange={changeBoardSizeHandler}
@@ -59,11 +57,11 @@ function Configure() {
       <div className="field">
         <label htmlFor="level">{text.settings['Gamelevel']}</label>
         <div>
-          <em>{text.settings['one mine to %n cells'].replace('%n', (30 / config.GAME_LEVEL))}</em>
+          <em>{text.settings['one mine to %n cells'].replace('%n', (30 / GAME_LEVEL))}</em>
           <input
             id="level"
             type="range"
-            value={config.GAME_LEVEL}
+            value={GAME_LEVEL}
             min="1"
             max="6"
             onChange={changeGameLevelHandler}
@@ -73,22 +71,45 @@ function Configure() {
     </fieldset>
   )
 
+  const translationIds = Object.keys(translations)
+  const translationNames = Object.values(translations)
+
+  const changeLanguageHandler = event => {
+    pageCtx.configure({ LANGUAGE: event.target.value })
+  }
+
+  const genericContent = (
+    <fieldset id="general-settings">
+      <legend>{text.settings['General Settings']}</legend>
+
+      <div className="field">
+        <label htmlFor="language">{text.settings['Translations']}</label>
+        <div>
+          <em>{text.settings['choose your language']}</em>
+          <select
+            id="language"
+            defaultValue={LANGUAGE}
+            onChange={changeLanguageHandler}
+          >
+            {translationIds.map((transId, index) => (
+              <option key={transId} value={transId}>
+                {translationNames[index]}
+              </option>
+            ))}
+          </select>
+        </div>
+      </div>
+
+      {/* enlarge font-size */}
+    </fieldset>
+  )
+
   const changePlayerNameHandler = event => {
-    setConfig(prev => {
-      return {
-        ...prev,
-        PLAYER_NAME: event.target.value,
-      }
-    })
+    pageCtx.configure({ PLAYER_NAME: event.target.value })
   }
 
   const changeMaxScoresHandler = event => {
-    setConfig(prev => {
-      return {
-        ...prev,
-        MAX_SCORES: +event.target.value,
-      }
-    })
+    pageCtx.configure({ MAX_SCORES: +event.target.value })
   }
 
   const recordContent = (
@@ -97,12 +118,12 @@ function Configure() {
 
       <div className="field">
         <label htmlFor="user">{text.settings['Name in Scores']}</label>
-        <em>{text.settings['type your name']}</em>
         <div>
+          <em>{text.settings['type your name']}</em>
           <input
             id="user"
             type="text"
-            value={config.PLAYER_NAME}
+            value={PLAYER_NAME}
             onChange={changePlayerNameHandler}
           />
         </div>
@@ -111,11 +132,11 @@ function Configure() {
       <div className="field">
         <label htmlFor="max">{text.settings['Max records']}</label>
         <div>
-          <em>{text.settings['clip to %n'].replace('%n', config.MAX_SCORES)}</em>
+          <em>{text.settings['clip to %n'].replace('%n', MAX_SCORES)}</em>
           <input
             id="max"
             type="range"
-            value={config.MAX_SCORES}
+            value={MAX_SCORES}
             min="8"
             max="1024"
             onChange={changeMaxScoresHandler}
@@ -138,6 +159,7 @@ function Configure() {
     <section className="screen">
       <form>
         {onbeginContent}
+        {genericContent}
         {recordContent}
       </form>
       {configNavigation}
