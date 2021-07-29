@@ -9,6 +9,7 @@ import './HallOfFame.css'
 
 const HallOfFame = (props) => {
   const pageCtx = useContext(PageContext)
+  const { FONT_SIZE } = pageCtx.config
   const text = pageCtx.text
 
   const rawScores = localStorage.getItem('mijnengeveegd') || '[]'
@@ -72,7 +73,10 @@ const HallOfFame = (props) => {
   )
 
   return (
-    <section className="screen">
+    <section
+      className="screen"
+      style={{fontSize: `${FONT_SIZE}px`}}
+    >
       {fameContent}
       {fameNavigation}
     </section>

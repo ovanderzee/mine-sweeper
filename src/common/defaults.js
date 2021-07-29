@@ -21,6 +21,7 @@ const DEFAULTS = {
   GAME_LEVEL: 3,
   MINE_COUNT: Math.ceil(6 * 6 * 3 / 30),
   LANGUAGE: defaultLanguage,
+  FONT_SIZE: 15,
   PLAYER_NAME: texts[defaultLanguage].config['default player'],
   MAX_SCORES: 500,
 }

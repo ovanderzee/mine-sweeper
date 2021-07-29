@@ -54,7 +54,7 @@ const gameReducer = function (state, action) {
 
 const Game = () => {
   const pageCtx = useContext(PageContext)
-  const { BOARD_SIZE, MINE_COUNT } = pageCtx.config
+  const { BOARD_SIZE, MINE_COUNT, FONT_SIZE } = pageCtx.config
   const text = pageCtx.text
 
   const [gameState, dispatchGameAction] = useReducer(
@@ -143,7 +143,11 @@ const Game = () => {
   </Modal>
 
   return (
-    <section id="game" className={`screen ${gameState.stage} ${gameState.flagging ? 'flagging' : ''}`}>
+    <section
+      id="game"
+      className={`screen ${gameState.stage} ${gameState.flagging ? 'flagging' : ''}`}
+      style={{fontSize: `${FONT_SIZE}px`}}
+    >
       {gameBoard}
       {gameNavigation}
       {showWonModal && gameWonModal}

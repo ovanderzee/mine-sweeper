@@ -56,7 +56,9 @@ const nederlands = {
     'General Settings': 'Algemene Instellingen',
     'Translations': 'Vertalingen',
     'choose your language': 'kies een taal',
-  
+    'Zoom Display': 'Vergroting Scherm',
+    'font-size to %n pixels': 'letter grootte op %n pixels',
+
     'Record Scores': 'Scores Opslaan',
     'Name in Scores': 'Naam in scorelijst',
     'type your name': 'vul je naam in',

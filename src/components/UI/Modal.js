@@ -9,6 +9,7 @@ const Backdrop = (props) => {
 
 const Modality = (props) => {
   const pageCtx = useContext(PageContext)
+  const { FONT_SIZE } = pageCtx.config
   const text = pageCtx.text
 
   const confirmHandler = () => {
@@ -29,6 +30,7 @@ const Modality = (props) => {
       className={`modal ${props.className}`}
       data-text-before={props.textBefore}
       data-text-after={props.textAfter}
+      style={{fontSize: `${FONT_SIZE}px`}}
     >
       <h3 className="content">{props.children}</h3>
       <div className="buttons">

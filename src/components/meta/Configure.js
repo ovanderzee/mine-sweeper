@@ -9,7 +9,7 @@ import './Configure.css'
 
 function Configure() {
   const pageCtx = useContext(PageContext)
-  const { BOARD_SIZE, GAME_LEVEL, LANGUAGE, PLAYER_NAME, MAX_SCORES } = pageCtx.config
+  const { BOARD_SIZE, GAME_LEVEL, LANGUAGE, FONT_SIZE, PLAYER_NAME, MAX_SCORES } = pageCtx.config
   const text = pageCtx.text
 
   const exitCurrentGame = () => {
@@ -78,6 +78,10 @@ function Configure() {
     pageCtx.configure({ LANGUAGE: event.target.value })
   }
 
+  const changeFontSizeHandler = event => {
+    pageCtx.configure({ FONT_SIZE: +event.target.value })
+  }
+
   const genericContent = (
     <fieldset id="general-settings">
       <legend>{text.settings['General Settings']}</legend>
@@ -100,7 +104,20 @@ function Configure() {
         </div>
       </div>
 
-      {/* enlarge font-size */}
+      <div className="field">
+        <label htmlFor="zoom">{text.settings['Zoom Display']}</label>
+        <div>
+          <em>{text.settings['font-size to %n pixels'].replace('%n', FONT_SIZE)}</em>
+          <input
+            id="zoom"
+            type="range"
+            value={FONT_SIZE}
+            min="12"
+            max="36"
+            onChange={changeFontSizeHandler}
+          />
+        </div>
+      </div>
     </fieldset>
   )
 
@@ -156,7 +173,10 @@ function Configure() {
   )
 
   return (
-    <section className="screen">
+    <section
+      className="screen"
+      style={{fontSize: `${FONT_SIZE}px`}}
+    >
       <form>
         {onbeginContent}
         {genericContent}

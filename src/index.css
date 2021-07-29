@@ -29,6 +29,13 @@
   --dark-bronze: #6b4c2e;
 }
 
+body,
+section.screen,
+.modal {
+  font-size: 15px;
+  line-height: 133%;
+}
+
 body {
   margin: 0;
   height: 100vh;
@@ -45,9 +52,7 @@ button {
   font-family: "Helvetica Neue", HelveticaNeue, Helvetica, "Arial Unicode MS",
     "Arial Unicode", ArialUnicode, Arial, sans-serif;
   font-kerning: normal;
-  font-size: 15px;
   letter-spacing: 0px;
-  line-height: 133%;
   text-align: center;
 }
 
@@ -55,6 +60,8 @@ input,
 select,
 textarea,
 button {
+  font-size: inherit;
+  line-height: inherit;
   font-weight: 500;
 }
 
@@ -63,7 +70,7 @@ nav,
 .adorn {
   font-family: "dejavu_sansbook", sans-serif;
   font-kerning: normal;
-  font-size: 15px;
+  font-size: inherit;
   line-height: 140%;
 }
 

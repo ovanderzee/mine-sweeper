@@ -56,7 +56,9 @@ const english = {
     'General Settings': 'General Settings',
     'Translations': 'Translations',
     'choose your language': 'choose your language',
-  
+    'Zoom Display': 'Zoom Display',
+    'font-size to %n pixels': 'font-size to %n pixels',
+
     'Record Scores': 'Record Scores',
     'Name in Scores': 'Name in scores',
     'type your name': 'enter your name',
