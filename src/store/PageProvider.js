@@ -32,7 +32,7 @@ const PageProvider = (props) => {
     })
   }
 
-  const configurationHandler = (changes) => {
+  const configurationHandler = (changes = DEFAULTS) => {
     setPageState(prev => {
       const update = {
         ...prev,

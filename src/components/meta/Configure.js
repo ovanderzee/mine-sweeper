@@ -1,5 +1,6 @@
 import { useContext } from 'react'
 import PageContext from '../../store/page-context'
+import DefaultSettings from '../nav/DefaultSettings'
 import HiScores from '../nav/HiScores'
 import Help from '../nav/Help'
 import GoBack from '../nav/GoBack'
@@ -18,19 +19,21 @@ function Configure() {
 
   const changeBoardSizeHandler = event => {
     exitCurrentGame()
+    const value = +event.target.value
     const prev = pageCtx.config
     pageCtx.configure({
-      BOARD_SIZE: +event.target.value,
-      MINE_COUNT: Math.ceil(Math.pow(+event.target.value, 2) * prev.GAME_LEVEL / 30)
+      BOARD_SIZE: value,
+      MINE_COUNT: Math.ceil(Math.pow(value, 2) * prev.GAME_LEVEL / 30)
     })
   }
 
   const changeGameLevelHandler = event => {
     exitCurrentGame()
+    const value = +event.target.value
     const prev = pageCtx.config
     pageCtx.configure({
-      GAME_LEVEL: +event.target.value,
-      MINE_COUNT: Math.ceil(Math.pow(prev.BOARD_SIZE, 2) * +event.target.value / 30)
+      GAME_LEVEL: value,
+      MINE_COUNT: Math.ceil(Math.pow(prev.BOARD_SIZE, 2) * value / 30)
     })
   }
 
@@ -92,11 +95,15 @@ function Configure() {
           <em>{text.settings['choose your language']}</em>
           <select
             id="language"
-            defaultValue={LANGUAGE}
+            value={LANGUAGE}
             onChange={changeLanguageHandler}
           >
             {translationIds.map((transId, index) => (
-              <option key={transId} value={transId}>
+              <option
+                key={transId}
+                // value selects proper option after resetting
+                value={transId}
+              >
                 {translationNames[index]}
               </option>
             ))}
@@ -165,6 +172,7 @@ function Configure() {
 
   const configNavigation = (
     <nav>
+      <DefaultSettings />
       <HiScores />
       <Help />
       {/* <Settings /> */}

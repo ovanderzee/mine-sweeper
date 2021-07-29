@@ -68,6 +68,7 @@ const nederlands = {
   nav: {
     'Hall of Fame': 'Beste Scores',
     'Clear List': 'Wis lijst',
+    'Reinstate Defaults': 'Terug naar Verstekwaarden',
     'New Game': 'Nieuw Spel',
     'Replay': 'Speel Opnieuw',
     'Quit Game?': 'Dit spel beëindigen?',

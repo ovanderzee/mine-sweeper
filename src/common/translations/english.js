@@ -68,6 +68,7 @@ const english = {
   nav: {
     'Hall of Fame': 'Hall of Fame',
     'Clear List': 'Clear List',
+    'Reinstate Defaults': 'Revert to Defaults',
     'New Game': 'New Game',
     'Replay': 'Replay',
     'Quit Game?': 'Quit this game?',
