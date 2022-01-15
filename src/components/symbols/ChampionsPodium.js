@@ -1,4 +1,4 @@
-import './ChampionsPodium.css'
+import './Symbols.css'
 
 const ChampionsPodium = () => {
   return (

@@ -20,6 +20,10 @@
   text-shadow: -0.02em -0.05em #000, 0.008em 0.02em #adf;
 }
 
+.screen nav button span {
+  display: inline-block;
+}
+
 @media only screen and (orientation: portrait) {
   .screen {
     width: 24em;
@@ -37,6 +41,7 @@
   .screen nav {
     flex: 0 1 100%;
     display: flex;
+    align-items: baseline;
     padding: 0.3em 0;
   }
 

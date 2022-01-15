@@ -1,8 +1,8 @@
 const QuestionMark = () => {
   return (
-    <>
+    <span className="question-mark">
       ?
-    </>
+    </span>
   )
 }
 
