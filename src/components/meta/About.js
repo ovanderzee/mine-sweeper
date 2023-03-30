@@ -35,7 +35,7 @@ const About = () => {
         <dt className="adorn"><CRLF /></dt><dd>{text.help['Go Back Comment']}</dd>
       </dl>
       <p>{text.help['Remarks Paragraph']}</p>
-      <h5>Onno van der Zee, 2013 - 2021</h5>
+      <h5>Onno van der Zee, 2013 - 2023</h5>
     </article>
   )
 
