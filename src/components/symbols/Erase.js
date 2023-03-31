@@ -1,7 +1,7 @@
 const Erase = () => {
   return (
     <span className="erase">
-      &#x2327;
+      &#x2298;
     </span>
   )
 }
