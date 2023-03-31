@@ -25,6 +25,7 @@ const GameCell = (props) => {
       type="button"
       className={`${doneClass} ${lockedClass} ${detonatedClass}`}
       id={`row${props.row}col${props.col}`}
+      style={{'--cell-row': props.row + 1, '--cell-col': props.col + 1}}
       onClick={touchCellHandler}
     >
       {/* {props.fill} DEV HELPER */}

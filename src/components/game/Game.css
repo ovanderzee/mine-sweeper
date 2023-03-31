@@ -1,33 +1,13 @@
 #playground {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
   justify-content: center;
-  align-content: flex-start;
-  text-align: center;
-  padding: 1em;
+  gap: 0;
+  height: fit-content;
+  padding: 1.333em 0;
 }
 
-#playground.board-size__7,
-#playground.board-size__8 {
-  padding: 1.3em;
-}
-
-/* cells / 8 */
-.board-size__3 button {
-  font-size: 2.667em;
-}
-.board-size__4 button {
-  font-size: 2em;
-}
-.board-size__5 button {
-  font-size: 1.6em;
-}
-.board-size__6 button {
-  font-size: 1.333em;
-}
-.board-size__7 button {
-  font-size: 1.142em;
-}
-.board-size__8 button {
-  font-size: 1em;
+#playground button {
+  font-size: calc(8em / var(--board-size));
+  grid-column: var(--cell-col);
+  grid-row: var(--cell-row);
 }

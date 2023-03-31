@@ -81,7 +81,11 @@ const Game = () => {
   });
 
   const gameBoard = (
-    <article id="playground" className={`board-size__${BOARD_SIZE}`}>
+    <article
+        id="playground"
+        className={`board-size__${BOARD_SIZE}`}
+        style={{'--board-size': BOARD_SIZE}}
+    >
       {gameState.board.map((row) =>
         row.map((cell) => (
           <GameCell
