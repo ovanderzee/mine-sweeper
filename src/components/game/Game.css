@@ -1,8 +1,7 @@
 #playground {
   display: grid;
   justify-content: center;
-  gap: 0;
-  height: fit-content;
+  align-content: start;
   padding: 1.333em 0;
 }
 
