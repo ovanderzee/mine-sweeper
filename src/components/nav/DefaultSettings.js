@@ -16,6 +16,7 @@ const DefaultSettings = () => {
   }
 
   const consentModal = <Modal
+    className="consent"
     onConfirm={confirmHandler}
     onCancel={() => {}}
     onClose={() => setShowModal(false)}

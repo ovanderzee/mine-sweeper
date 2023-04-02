@@ -10,6 +10,7 @@ const EraseScores = (props) => {
   const [showAskModalState, setAskModalState] = useState(false)
 
   const askModal = <Modal
+    className="consent"
     onConfirm={() => props.onErase()}
     onCancel={() => {}}
     onClose={() => setAskModalState(false)}

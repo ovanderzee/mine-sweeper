@@ -14,6 +14,7 @@ const NewGame = (props) => {
   const closeHandler = () => setShowModal(false)
 
   const consentModal = <Modal
+    className="consent"
     onConfirm={confirmHandler}
     onCancel={cancelHandler}
     onClose={closeHandler}

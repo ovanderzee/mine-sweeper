@@ -12,6 +12,7 @@ const Replay = (props) => {
   const confirmHandler = () => props.onReplay({ type: 'REPLAY' })
 
   const consentModal = <Modal
+    className="consent"
     onConfirm={confirmHandler}
     onCancel={() => {}}
     onClose={() => setShowModal(false)}
