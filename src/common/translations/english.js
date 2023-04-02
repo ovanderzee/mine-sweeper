@@ -71,7 +71,7 @@ const english = {
     'Reinstate Defaults': 'Revert to Defaults',
     'New Game': 'New Game',
     'Replay': 'Replay',
-    'Quit Game?': 'Quit this game?',
+    'Quit Game?': 'Do you want quit the game?',
     'Place Flag': 'Lock cell',
     'Settings': 'Settings',
     'Help': 'Explanation',

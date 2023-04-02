@@ -1,7 +1,7 @@
 import { iterateNeighbours, initialBoard, initialGameState } from '../common'
 
 const newGameReducer = (action) => {
-  const { BOARD_SIZE, MINE_COUNT } = action.config
+  const { BOARD_SIZE, MINE_COUNT, GAME_LEVEL } = action.config
 
   const newBoard = initialBoard(BOARD_SIZE).map((row, rowIndex) =>
     row.map((cell, colIndex) => {
@@ -32,6 +32,7 @@ const newGameReducer = (action) => {
   return {
     ...initialGameState,
     board: newBoard,
+    level: GAME_LEVEL,
   }
 }
 

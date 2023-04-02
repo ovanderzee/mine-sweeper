@@ -71,7 +71,7 @@ const nederlands = {
     'Reinstate Defaults': 'Terug naar Verstekwaarden',
     'New Game': 'Nieuw Spel',
     'Replay': 'Speel Opnieuw',
-    'Quit Game?': 'Dit spel beëindigen?',
+    'Quit Game?': 'Wil je stoppen met het spel?',
     'Place Flag': 'Vergrendel cel',
     'Settings': 'Instellingen',
     'Help': 'Uitleg',
