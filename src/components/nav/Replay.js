@@ -10,13 +10,11 @@ const Replay = (props) => {
   const [showModal, setShowModal] = useState(false)
 
   const confirmHandler = () => props.onReplay({ type: 'REPLAY' })
-  const cancelHandler = () => {}
-  const closeHandler = () => setShowModal(false)
 
   const consentModal = <Modal
     onConfirm={confirmHandler}
-    onCancel={cancelHandler}
-    onClose={closeHandler}
+    onCancel={() => {}}
+    onClose={() => setShowModal(false)}
   >
     {text.nav['Quit Game?']}
   </Modal>
