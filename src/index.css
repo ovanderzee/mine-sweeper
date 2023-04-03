@@ -36,9 +36,14 @@ section.screen,
   line-height: 133%;
 }
 
+html,
+body,
+section.screen {
+  height: 100%
+}
+
 body {
   margin: 0;
-  height: 100vh;
   overflow: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
