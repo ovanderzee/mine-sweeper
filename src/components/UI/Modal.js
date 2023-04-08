@@ -4,7 +4,7 @@ import PageContext from '../../store/page-context'
 import './Modal.css'
 
 const Backdrop = (props) => {
-  return <div className="backdrop" onClick={props.onClose} />
+  return <div className="backdrop" onClick={props.closeModal} />
 }
 
 const Dialog = (props) => {
@@ -14,16 +14,16 @@ const Dialog = (props) => {
 
   const confirmHandler = () => {
     props.onConfirm()
-    props.onClose()
+    props.closeModal()
   }
 
   const cancelHandler = () => {
     props.onCancel()
-    props.onClose()
+    props.closeModal()
   }
 
-  const confirmButton = <button type="button" onClick={confirmHandler}>{text.common.confirm}</button>
-  const cancelButton = <button type="button" onClick={cancelHandler}>{text.common.cancel}</button>
+  const confirmButton = <button type="button" className="confirm" onClick={confirmHandler}>{text.common.confirm}</button>
+  const cancelButton = <button type="button" className="cancel" onClick={cancelHandler}>{text.common.cancel}</button>
 
   return (
     <div
@@ -43,8 +43,8 @@ const Dialog = (props) => {
 
 const Modality = (props) => {
   return (
-    <div className={`${props.className}-modal`}>
-      <Backdrop onClose={props.onClose} />
+    <div className={`modal ${props.className}-modal`}>
+      <Backdrop {...props} />
       <Dialog {...props}>{props.children}</Dialog>
     </div>
   )

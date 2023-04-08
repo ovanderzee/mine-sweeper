@@ -15,7 +15,7 @@ const Replay = (props) => {
     className="consent"
     onConfirm={confirmHandler}
     onCancel={() => {}}
-    onClose={() => setShowModal(false)}
+    closeModal={() => setShowModal(false)}
   >
     {text.nav['Quit Game?']}
   </Modal>

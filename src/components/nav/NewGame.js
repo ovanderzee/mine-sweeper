@@ -10,14 +10,12 @@ const NewGame = (props) => {
   const [showModal, setShowModal] = useState(false)
 
   const confirmHandler = () => props.onNew({ type: 'NEW' })
-  const cancelHandler = () => {}
-  const closeHandler = () => setShowModal(false)
 
   const consentModal = <Modal
     className="consent"
     onConfirm={confirmHandler}
-    onCancel={cancelHandler}
-    onClose={closeHandler}
+    onCancel={() => {}}
+    closeModal={() => setShowModal(false)}
   >
     {text.nav['Quit Game?']}
   </Modal>

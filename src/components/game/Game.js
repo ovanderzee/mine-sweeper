@@ -138,7 +138,7 @@ const Game = () => {
 
   const gameWonModal = <Modal
     onConfirm={() => {}}
-    onClose={() => setShowWonModal(false)}
+    closeModal={() => setShowWonModal(false)}
     className={gameState.stage}
     textBefore={gameState.rank}
     textAfter={gameState.score}

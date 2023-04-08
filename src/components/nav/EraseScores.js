@@ -7,19 +7,19 @@ const EraseScores = (props) => {
   const pageCtx = useContext(PageContext)
   const text = pageCtx.text
 
-  const [showAskModalState, setAskModalState] = useState(false)
+  const [showModal, setShowModal] = useState(false)
 
-  const askModal = <Modal
+  const consentModal = <Modal
     className="consent"
     onConfirm={() => props.onErase()}
     onCancel={() => {}}
-    onClose={() => setAskModalState(false)}
+    closeModal={() => setShowModal(false)}
   >
     {text.fame['Erase Ok?']}
   </Modal>
 
   const eraseHandler = () => {
-    setAskModalState(true)
+    setShowModal(true)
   }
 
   return (
@@ -27,7 +27,7 @@ const EraseScores = (props) => {
       <button type="button" title={text.nav['Clear List']} onClick={eraseHandler}>
         <Erase />
       </button>
-      {showAskModalState && askModal}
+      {showModal && consentModal}
     </>
   )
 }

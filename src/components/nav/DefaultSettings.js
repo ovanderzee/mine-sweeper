@@ -19,7 +19,7 @@ const DefaultSettings = () => {
     className="consent"
     onConfirm={confirmHandler}
     onCancel={() => {}}
-    onClose={() => setShowModal(false)}
+    closeModal={() => setShowModal(false)}
   >
     {text.nav['Quit Game?']}
   </Modal>
@@ -27,7 +27,6 @@ const DefaultSettings = () => {
   const resetHandler = () => {
     // als spelend en speelbord of mijndichtheid niet geconfigureerd zijn
     const currentGame = sessionStorage.getItem('mijnenvegerij')
-    console.log('currentGame', currentGame)
     if (currentGame) {
       const CURRENT = JSON.parse(currentGame)
       const isPlaying = CURRENT.stage === 'game-playing'
