@@ -7,7 +7,7 @@ const Backdrop = (props) => {
   return <div className="backdrop" onClick={props.onClose} />
 }
 
-const Modality = (props) => {
+const Dialog = (props) => {
   const pageCtx = useContext(PageContext)
   const { FONT_SIZE } = pageCtx.config
   const text = pageCtx.text
@@ -27,7 +27,7 @@ const Modality = (props) => {
 
   return (
     <div
-      className={`modal ${props.className}`}
+      className="dialog"
       data-text-before={props.textBefore}
       data-text-after={props.textAfter}
       style={{fontSize: `${FONT_SIZE}px`}}
@@ -41,17 +41,22 @@ const Modality = (props) => {
   )
 }
 
+const Modality = (props) => {
+  return (
+    <div className={`${props.className}-modal`}>
+      <Backdrop onClose={props.onClose} />
+      <Dialog {...props}>{props.children}</Dialog>
+    </div>
+  )
+}
+
 const portalElement = document.getElementById('modal')
 
 const Modal = (props) => {
   return (
     <>
       {createPortal(
-        <Backdrop onClose={props.onClose} />,
-        portalElement
-      )}
-      {createPortal(
-          <Modality {...props}>{props.children}</Modality>,
+        <Modality {...props} />,
         portalElement
       )}
     </>

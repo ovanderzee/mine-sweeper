@@ -9,7 +9,7 @@
   z-index: 90;
 }
 
-.modal {
+.dialog {
   background: var(--light-to-medium-blue);
   border-radius: .5em;
   box-shadow: -0.02em -0.05em 0.25em #fff, 0.15em 0.1em 0.25em #000;
@@ -21,8 +21,8 @@
   z-index: 100;
 }
 
-.modal:before,
-.modal:after {
+.dialog:before,
+.dialog:after {
   position: absolute;
   z-index: -5;
   line-height: 71%;
@@ -30,7 +30,7 @@
 }
 
 /* rang */
-.modal:before {
+.dialog:before {
   content: attr(data-text-before);
   left: 0.1em;
   top: 0.1em;
@@ -40,7 +40,7 @@
 }
 
 /* score */
-.modal:after {
+.dialog:after {
   content: attr(data-text-after);
   right: 0.167em;
   top: 0.167em;
@@ -48,17 +48,17 @@
   font-size: 2.2em;
 }
 
-.modal h3.content {
+.dialog h3.content {
   font-size: 1.167em;
   margin: 1.43em 1em;
 }
 
-.modal .buttons {
+.dialog .buttons {
   margin: 0.5em;
   min-height: 1em;
 }
 
-.modal button {
+.dialog button {
   margin: 0.5em;
   line-height: 2.3em;
   padding: 0 1em;
@@ -70,37 +70,37 @@
   background: var(--medium-to-dark-blue);
 }
 
-.consent {
+.consent-modal .dialog {
   text-align: left;
 }
 
-.consent .buttons {
+.consent-modal .buttons {
   display: flex;
   justify-content: space-between;
 }
 
-.consent button:first-child {
+.consent-modal button:first-child {
   background: var(--light-to-medium-blue);
   color: #000;
   text-shadow: -0.02em -0.05em #fff, 0.008em 0.02em #adf;
 }
 
-.game-won[data-text-before="1"]:before {
+.game-won-modal [data-text-before="1"]:before {
   color: var(--medium-gold);
   text-shadow: 0.015em 0.02em var(--light-gold);
 }
 
-.game-won[data-text-before="2"]:before {
+.game-won-modal [data-text-before="2"]:before {
   color: var(--medium-silver);
   text-shadow: 0.015em 0.02em var(--light-silver);
 }
 
-.game-won[data-text-before="3"]:before {
+.game-won-modal [data-text-before="3"]:before {
   color: var(--medium-bronze);
   text-shadow: 0.015em 0.02em var(--light-bronze);
 }
 
-.game-won.modal:after {
+.game-won-modal .dialog:after {
   content: attr(data-text-after);
   right: auto;
   top: auto;
@@ -108,6 +108,6 @@
   bottom: 0.25em;
 }
 
-.game-won .buttons {
+.game-won-modal .buttons {
   text-align: right;
 }
