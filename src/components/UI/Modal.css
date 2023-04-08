@@ -42,23 +42,25 @@
 /* score */
 .dialog:after {
   content: attr(data-text-after);
-  right: 0.167em;
-  top: 0.167em;
+  left: 0.167em;
+  bottom: 0.25em;
   color: var(--light-blue);
   font-size: 2.2em;
 }
 
-.dialog h3.content {
+.modal h3.content {
   font-size: 1.167em;
   margin: 1.43em 1em;
 }
 
-.dialog .buttons {
+.modal .buttons {
+  display: flex;
+  justify-content: space-between;
   margin: 0.5em;
   min-height: 1em;
 }
 
-.dialog button {
+.modal button {
   margin: 0.5em;
   line-height: 2.3em;
   padding: 0 1em;
@@ -70,19 +72,24 @@
   background: var(--medium-to-dark-blue);
 }
 
-.consent-modal .dialog {
-  text-align: left;
+.modal button:first-child {
+  margin-left: inherit;
+  margin-right: auto;
 }
 
-.consent-modal .buttons {
-  display: flex;
-  justify-content: space-between;
+.modal button:last-child {
+  margin-left: auto;
+  margin-right: inherit;
 }
 
-.consent-modal button:first-child {
+.dialog button.cancel {
   background: var(--light-to-medium-blue);
   color: #000;
   text-shadow: -0.02em -0.05em #fff, 0.008em 0.02em #adf;
+}
+
+.consent-modal .dialog {
+  text-align: left;
 }
 
 .game-won-modal [data-text-before="1"]:before {
@@ -98,16 +105,4 @@
 .game-won-modal [data-text-before="3"]:before {
   color: var(--medium-bronze);
   text-shadow: 0.015em 0.02em var(--light-bronze);
-}
-
-.game-won-modal .dialog:after {
-  content: attr(data-text-after);
-  right: auto;
-  top: auto;
-  left: 0.167em;
-  bottom: 0.25em;
-}
-
-.game-won-modal .buttons {
-  text-align: right;
 }
