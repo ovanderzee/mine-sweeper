@@ -19,6 +19,7 @@
   z-index: -1;
 }
 #anim:before {
+  /* seascape */
   background: linear-gradient(
     to bottom,
     var(--light-blue) 0%,

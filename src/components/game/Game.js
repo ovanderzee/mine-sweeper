@@ -125,7 +125,9 @@ const Game = () => {
   )
 
   const [showWonModal, setShowWonModal] = useState(false)
+  const [showLostModal, setShowLostModal] = useState(false)
   const gameWasWon = gameState.stage === 'game-won'
+  const gameWasLost = gameState.stage === 'game-lost'
 
   useEffect(() => {
     if (gameWasWon) {
@@ -133,8 +135,10 @@ const Game = () => {
         type: 'VICTORY'
       })
       setShowWonModal(true)
+    } else if (gameWasLost) {
+      setShowLostModal(true)
     }
-  }, [gameWasWon])
+  }, [gameWasWon, gameWasLost])
 
   const gameWonModal = <Modal
     onConfirm={() => {}}
@@ -146,6 +150,14 @@ const Game = () => {
     {text.game['You Won!']}
   </Modal>
 
+  const gameLostModal = <Modal
+    onConfirm={() => {}}
+    closeModal={() => setShowLostModal(false)}
+    className={gameState.stage}
+  >
+    {text.game['You Lost!']}
+  </Modal>
+
   return (
     <section
       id="game"
@@ -155,6 +167,7 @@ const Game = () => {
       {gameBoard}
       {gameNavigation}
       {showWonModal && gameWonModal}
+      {showLostModal && gameLostModal}
     </section>
   )
 }

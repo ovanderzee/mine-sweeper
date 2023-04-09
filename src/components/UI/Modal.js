@@ -2,6 +2,7 @@ import { useContext } from 'react'
 import { createPortal } from 'react-dom'
 import PageContext from '../../store/page-context'
 import './Modal.css'
+import './Defeat.css'
 
 const Backdrop = (props) => {
   return <div className="backdrop" onClick={props.closeModal} />

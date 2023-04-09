@@ -1,0 +1,23 @@
+.game-lost-modal .backdrop {
+  background: transparent;
+
+  animation-name: -defeat;
+  animation-timing-function: ease;
+  animation-duration: 1s;
+}
+
+@keyframes -defeat {
+  from {
+    background: var(--bright-fire);
+    opacity: 1;
+  }
+  40% {
+    background: var(--light-fire);
+    opacity: 0.667;
+  }
+  70%,
+  to {
+    background: var(--dim-fire);
+    opacity: 0;
+  }
+}
