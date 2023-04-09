@@ -6,7 +6,7 @@
   height: 2em;
   width: 2em;
   line-height: 2em;
-  color: #333;
+  color: var(--dark-grey);
   border: 0 none;
   font-weight: bold;
   position: relative;
@@ -98,5 +98,5 @@
 }
 
 .game-lost #playground button.mijn:before {
-  background: radial-gradient(ellipse at 25% 25%, #fff 0%, #000 33%);
+  background: radial-gradient(ellipse at 25% 25%, white 0%, black 33%);
 }

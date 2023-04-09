@@ -21,20 +21,20 @@
 #anim:before {
   background: linear-gradient(
     to bottom,
-    #aaddff 0%,
-    #e3f4ff 66%,
-    #66aacc 66%,
-    #3377aa 100%
+    var(--light-blue) 0%,
+    var(--min-lightest-blue) 66%,
+    var(--darkened-blue) 66%,
+    var(--dark-blue) 100%
   );
 }
 #achter {
   opacity: 0;
   background: linear-gradient(
     to bottom,
-    #aaddff 0%,
-    #e3f4ff 66%,
-    #cc66aa 66%,
-    #3377aa 100%
+    var(--light-blue) 0%,
+    var(--min-lightest-blue) 66%,
+    var(--dark-purple) 66%,
+    var(--dark-blue) 100%
   );
   animation-name: -anim-ramp;
   animation-timing-function: linear;
@@ -44,10 +44,10 @@
   opacity: 1;
   background: linear-gradient(
     to bottom,
-    #aaaaaa 0%,
-    #e3e3e3 66%,
-    #777777 66%,
-    #555555 100%
+    var(--light-grey) 0%,
+    var(--lightest-grey) 66%,
+    var(--medium-grey) 66%,
+    var(--darkened-grey)555 100%
   );
   animation-name: -anim-dood;
   animation-timing-function: linear;
@@ -171,15 +171,15 @@ percent:   20%,  37%,  40%,  50%,  60%,  70%,  100%
 @keyframes -scheepsbrug {
   from,
   36.66% {
-    background: rgba(191, 191, 191, 100);
+    background: var(--lighter-grey);
   }
   36.67%,
   40% {
-    background: rgba(255, 127, 0, 100);
+    background: var(--light-fire);
   }
   50%,
   to {
-    background: rgba(191, 191, 191, 100);
+    background: var(--lighter-grey);
   }
 }
 
@@ -211,18 +211,18 @@ percent:   20%,  37%,  40%,  50%,  60%,  70%,  100%
 @keyframes -scheepsromp {
   from,
   36.66% {
-    border-right-color: rgba(207, 207, 207, 100);
-    border-left-color: rgba(175, 175, 175, 100);
+    border-right-color: var(--lighter-grey);
+    border-left-color: var(--light-grey);
   }
   36.67%,
   40% {
-    border-right-color: rgba(255, 0, 0, 100);
-    border-left-color: rgba(255, 255, 0, 100);
+    border-right-color: var(--fire);
+    border-left-color: var(--bright-fire);
   }
   50%,
   to {
-    border-right-color: rgba(207, 207, 207, 100);
-    border-left-color: rgba(175, 175, 175, 100);
+    border-right-color: var(--lighter-grey);
+    border-left-color: var(--light-grey);
   }
 }
 
@@ -313,27 +313,27 @@ percent:   20%,  37%,  40%,  50%,  60%,  70%,  100%
 #rook .donkerst {
   height: 5em;
   width: 5em;
-  background: #333;
+  background: var(--dark-grey);
 }
 #rook .donkerder {
   height: 6em;
   width: 6em;
-  background: #555;
+  background: var(--darkened-grey);
 }
 #rook .normaal {
   height: 7em;
   width: 7em;
-  background: #777;
+  background: var(--medium-grey);
 }
 #rook .lichter {
   height: 6em;
   width: 6em;
-  background: #999;
+  background: var(--lightened-grey);
 }
 #rook .lichtst {
   height: 5em;
   width: 5em;
-  background: #bbb;
+  background: var(--lighter-grey);
 }
 
 #rookwolk1 {
@@ -385,8 +385,8 @@ percent:   20%,  37%,  40%,  50%,  60%,  70%,  100%
   text-align: center;
   margin: 10% -10%;
   line-height: 100%;
-  color: red;
-  text-shadow: 0.05em 0.05em orange;
+  color: var(--fire);
+  text-shadow: 0.05em 0.05em var(--light-fire);
   font-family: 'American Typewriter', 'Courier New', Courier, monospace;
   font-size: 4em;
   font-weight: bold;

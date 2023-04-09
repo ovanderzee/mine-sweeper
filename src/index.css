@@ -1,17 +1,35 @@
 @import './fonts/DejaVu-Sans-fontfacekit/fontface.css';
 
 :root {
-  --ultra-light-blue: #eefaff;
-  --extra-light-blue: #cef;
+  --lightest-blue: #eefaff;
+  --lighter-blue: #cef;
   --light-blue: #adf;
-  --lighter-blue: #8bd;
+  --lightened-blue: #8bd;
   --medium-blue: #6ac;
-  --darker-blue: #58b;
+  --darkened-blue: #58b;
   --dark-blue: #37a;
-  --light-to-white-blue: linear-gradient(to bottom, #adf 0%, #fff 100%);
-  --light-to-medium-blue: linear-gradient(to bottom, #adf 0%, #6ac 100%);
-  --dark-to-light-blue: linear-gradient(to bottom, #37a 0%, #adf 100%);
-  --medium-to-dark-blue: linear-gradient(to bottom, #6ac 0%, #37a 100%);
+
+  --light-to-white-blue: linear-gradient(to bottom, var(--light-blue) 0%, white 100%);
+  --light-to-medium-blue: linear-gradient(to bottom, var(--light-blue) 0%, var(--medium-blue) 100%);
+  --dark-to-light-blue: linear-gradient(to bottom, var(--dark-blue) 0%, var(--light-blue) 100%);
+  --medium-to-dark-blue: linear-gradient(to bottom, var(--medium-blue) 0%, var(--dark-blue) 100%);
+
+  --min-lightest-blue: #e3f4ff;
+  --dark-purple: #c6a;
+
+  --lightest-grey: #e3e3e3;
+  --lighter-grey: #ccc;
+  --light-grey: #aaa;
+  --lightened-grey: #999;
+  --medium-grey: #777;
+  --darkened-grey: #555;
+  --dark-grey: #333;
+
+  --bright-fire: #ff0;
+  --light-fire: #fa0;
+  --fire: #f00;
+  --dim-fire: #a50;
+
   --active-mode: #af5;
   --state-green: #0a5;
   --state-red: #c03;

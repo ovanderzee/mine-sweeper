@@ -33,7 +33,7 @@ label {
 input,
 select,
 textarea {
-  border: 1px var(--lighter-blue) solid;
+  border: 1px var(--lightened-blue) solid;
   border-radius: .6em;
   box-sizing: border-box;
   padding: .2em .4em;
@@ -41,10 +41,10 @@ textarea {
   min-height: 1.667em; /* min-: not interfearance with line-height */
 /* Nice idea
   appearance: none;
-  background: var(--extra-light-blue);
+  background: var(--lighter-blue);
   box-shadow: 
-    inset var(--darker-blue) 0.25em 0.25em 0.25em, 
-    inset var(--ultra-light-blue) -0.25em -0.25em 0.25em;
+    inset var(--darkened-blue) 0.25em 0.25em 0.25em,
+    inset var(--lightest-blue) -0.25em -0.25em 0.25em;
   border: none;
   */
 }
@@ -55,10 +55,10 @@ color problem in safari,
 input[type=range]::-webkit-slider-thumb {
   border-radius: 50%;
   transform: scale(1.2);
-  background: var(--extra-light-blue) !important;
+  background: var(--lighter-blue) !important;
   box-shadow: 
-    inset var(--ultra-light-blue) 0.25em 0.25em 0.67em, 
-    inset var(--darker-blue) -0.25em -0.25em 0.67em;
+    inset var(--lightest-blue) 0.25em 0.25em 0.67em,
+    inset var(--darkened-blue) -0.25em -0.25em 0.67em;
   border: none;
 } */
 
@@ -67,10 +67,10 @@ input[type=range]::-moz-range-thumb {
   border-radius: 50%;
   width: 1.333em;
   height: 1.333em;
-  background: var(--extra-light-blue);
+  background: var(--lighter-blue);
   box-shadow: 
-    inset var(--ultra-light-blue) 0.25em 0.25em 0.25em, 
-    inset var(--darker-blue) -0.25em -0.25em 0.25em;
+    inset var(--lightest-blue) 0.25em 0.25em 0.25em,
+    inset var(--darkened-blue) -0.25em -0.25em 0.25em;
   border: none;
 } */
 
@@ -79,9 +79,9 @@ input[type=range]::-ms-thumb {
   border-radius: 50%;
   width: 1.333em;
   height: 1.333em;
-  background: var(--extra-light-blue);
+  background: var(--lighter-blue);
   box-shadow: 
-    inset var(--ultra-light-blue) 0.25em 0.25em 0.25em, 
-    inset var(--darker-blue) -0.25em -0.25em 0.25em;
+    inset var(--lightest-blue) 0.25em 0.25em 0.25em,
+    inset var(--darkened-blue) -0.25em -0.25em 0.25em;
   border: none;
 } */

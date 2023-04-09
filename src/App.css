@@ -17,7 +17,7 @@
   background: transparent;
   color: white;
   border: 0 none;
-  text-shadow: -0.02em -0.05em #000, 0.008em 0.02em #adf;
+  text-shadow: -0.02em -0.05em black, 0.008em 0.02em var(--light-blue);
 }
 
 .screen nav button span {
@@ -51,7 +51,7 @@
   }
 
   .screen nav button + button {
-    border-left: 1px solid #37a;
+    border-left: 1px solid var(--dark-blue);
   }
 }
 
@@ -78,6 +78,6 @@
   }
 
   .screen nav button + button {
-    border-top: 1px solid #37a;
+    border-top: 1px solid var(--dark-blue);
   }
 }
