@@ -28,7 +28,7 @@ const inferLanguage = () => {
 
   const commonLanguages = translationIds.map((trans) =>
     availableLanguages.find((lang) => lang === trans)
-  )
+  ).filter(l => l)
 
   const languageMatch = commonLanguages.length
     ? commonLanguages[commonLanguages.length - 1]
