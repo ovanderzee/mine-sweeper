@@ -88,9 +88,13 @@
   text-shadow: -0.02em -0.05em #fff, 0.008em 0.02em #adf;
 }
 
+/* ordinairy dialag */
+
 .consent-modal .dialog {
   text-align: left;
 }
+
+/* game won */
 
 .game-won-modal [data-text-before="1"]:before {
   color: var(--medium-gold);
@@ -105,4 +109,39 @@
 .game-won-modal [data-text-before="3"]:before {
   color: var(--medium-bronze);
   text-shadow: 0.015em 0.02em var(--light-bronze);
+}
+
+/* game lost */
+
+.game-lost-modal .backdrop {
+  animation-name: -defeat;
+  animation-timing-function: linear;
+  animation-duration: 200ms;
+}
+
+@keyframes -defeat {
+  from,
+  19% {
+    background: #ff0;
+    opacity: 1;
+  }
+  20%,
+  49% {
+    background: #fa0;
+    opacity: 1;
+  }
+  50%,
+  69% {
+    background: transparent;
+    opacity: 0;
+  }
+  70%,
+  99% {
+    background: #f00;
+    opacity: 1;
+  }
+  to {
+    background: transparent;
+    opacity: 0;
+  }
 }

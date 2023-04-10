@@ -43,9 +43,12 @@ const Dialog = (props) => {
 
 const Modality = (props) => {
   return (
-    <div className={`modal ${props.className}-modal`}>
+    <div
+      className={`modal ${props.className}-modal`}
+      onAnimationEnd={props.closeModal}
+    >
       <Backdrop {...props} />
-      <Dialog {...props}>{props.children}</Dialog>
+      {props.onConfirm && <Dialog {...props}>{props.children}</Dialog>}
     </div>
   )
 }
