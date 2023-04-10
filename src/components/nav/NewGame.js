@@ -17,7 +17,7 @@ const NewGame = (props) => {
     onCancel={() => {}}
     closeModal={() => setShowModal(false)}
   >
-    {text.nav['Quit Game?']}
+    {text.dialog['Quit and new game?']}
   </Modal>
 
   const newGameHandler = () => {

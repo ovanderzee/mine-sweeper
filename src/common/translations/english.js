@@ -43,7 +43,6 @@ const english = {
     'mines': 'mines',
     'moves': 'turns',
     'duration': 'duration',
-    'Erase Ok?': 'Erase the list?',
   },
   settings: {
     'On begin Play': 'At the start',
@@ -71,12 +70,17 @@ const english = {
     'Reinstate Defaults': 'Revert to Defaults',
     'New Game': 'New Game',
     'Replay': 'Replay',
-    'Quit Game?': 'Do you want quit the game?',
-    'Place Flag': 'Lock cell',
+    'Place Flag': 'Mark and lock cell',
     'Settings': 'Settings',
     'Help': 'Explanation',
     'Go Back': 'Return',
   },
+  dialog: {
+    'Erase Scores?': ' Do you want to clear the score list?',
+    'Quit and new game?': 'Do you want to start a new game?',
+    'Quit and restart game?': 'Do you want to restart the game?',
+    'Quit Game?': 'Change of a determining game variable. Do you want to end the game?',
+  }
 }
 
 export { english }

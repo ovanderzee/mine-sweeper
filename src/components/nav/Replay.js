@@ -17,7 +17,7 @@ const Replay = (props) => {
     onCancel={() => {}}
     closeModal={() => setShowModal(false)}
   >
-    {text.nav['Quit Game?']}
+    {text.dialog['Quit and restart game?']}
   </Modal>
 
   const replayHandler = () => {

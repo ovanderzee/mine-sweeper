@@ -20,8 +20,8 @@ const nederlands = {
     'Intro Paragraph': 
       'Vind alle mijnen door naar aanwijzingen te zoeken. '
       + 'Zet een vlag op waar een mijn zou kunnen liggen. ',
-    'Game Scores Comment': 'Aantal verborgen mijnen; toegang tot scorelijst',
-    'About Scores Comment': 'Bekijk de scorelijst',
+    'Game Scores Comment': 'Aantal verborgen mijnen; toegang tot de Eregalerij',
+    'About Scores Comment': 'Bekijk de Eregalerij',
     'New Game Comment': 'Begin een nieuw spel, met de huidige instellingen',
     'Replay Comment': 'Begin spel met dezelfde mijn-verdeling en afmetingen',
     'Flag Comment':
@@ -43,7 +43,6 @@ const nederlands = {
     'mines': 'mijnen',
     'moves': 'zetten',
     'duration': 'duur',
-    'Erase Ok?': 'Scorelijst wissen?',
   },
   settings: {
     'On begin Play': 'Bij Aanvang',
@@ -66,17 +65,22 @@ const nederlands = {
     'clip to %n': 'beperk tot %n',
   },
   nav: {
-    'Hall of Fame': 'Beste Scores',
+    'Hall of Fame': 'Eregalerij',
     'Clear List': 'Wis lijst',
     'Reinstate Defaults': 'Terug naar Verstekwaarden',
     'New Game': 'Nieuw Spel',
     'Replay': 'Speel Opnieuw',
-    'Quit Game?': 'Wil je stoppen met het spel?',
-    'Place Flag': 'Vergrendel cel',
+    'Place Flag': 'Markeer en vergrendel cel',
     'Settings': 'Instellingen',
     'Help': 'Uitleg',
     'Go Back': 'Keer terug',
   },
+  dialog: {
+    'Erase Scores?': 'Wil je de scorelijst wissen?',
+    'Quit and new game?': 'Wil je een nieuw spel beginnen?',
+    'Quit and restart game?': 'Wil je dit spel opnnieuw beginnen?',
+    'Quit Game?': 'Aanpassing van een bepalende spel variabele. Wil je het spel beëindigen?',
+  }
 }
 
 export { nederlands }

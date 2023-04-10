@@ -21,7 +21,7 @@ const DefaultSettings = () => {
     onCancel={() => {}}
     closeModal={() => setShowModal(false)}
   >
-    {text.nav['Quit Game?']}
+    {text.dialog['Quit Game?']}
   </Modal>
 
   const resetHandler = () => {

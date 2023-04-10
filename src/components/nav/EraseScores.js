@@ -15,7 +15,7 @@ const EraseScores = (props) => {
     onCancel={() => {}}
     closeModal={() => setShowModal(false)}
   >
-    {text.fame['Erase Ok?']}
+    {text.dialog['Erase Scores?']}
   </Modal>
 
   const eraseHandler = () => {
