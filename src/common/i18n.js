@@ -1,5 +1,5 @@
-import { nederlands } from './translations/nederlands'
-import { english } from './translations/english'
+import * as nederlands from './translations/nederlands'
+import * as english from './translations/english'
 
 const tLen = (translation) => Object.keys(translation)
   .map(group => Object.keys(group))
