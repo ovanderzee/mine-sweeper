@@ -4,7 +4,6 @@ import GameCell from './GameCell'
 import HiScores from '../nav/HiScores'
 import NewGame from '../nav/NewGame'
 import Replay from '../nav/Replay'
-import Flagging from '../nav/Flagging'
 import Help from '../nav/Help'
 import Settings from '../nav/Settings'
 import Modal from '../UI/Modal'
@@ -12,7 +11,6 @@ import { initialGameState } from './common'
 import newGameReducer from './reducers/newGame'
 import replayReducer from './reducers/replay'
 import touchButtonReducer from './reducers/touchButton'
-import flaggingReducer from './reducers/flagging'
 import victoryReducer from './reducers/victory'
 import './Game.css'
 
@@ -37,12 +35,8 @@ const gameReducer = function (state, action) {
     return replayReducer(state)
   }
 
-  if (action.type === 'TOUCH') {
+  if (action.type === 'MOVE' || action.type === 'FLAG') {
     return touchButtonReducer(state, action)
-  }
-
-  if (action.type === 'FLAGGING') {
-    return flaggingReducer(state, action)
   }
 
   if (action.type === 'VICTORY') {
@@ -95,7 +89,6 @@ const Game = () => {
             fill={cell.fill}
             done={cell.done}
             locked={cell.locked}
-            flagging={gameState.flagging}
             onTouch={dispatchGameAction}
           />
         ))
@@ -114,10 +107,6 @@ const Game = () => {
       <Replay
         onReplay={dispatchGameAction}
         stage={gameState.stage}
-      />
-      <Flagging
-        onFlagging={dispatchGameAction}
-        flagging={gameState.flagging}
       />
       <Help />
       <Settings />
@@ -149,7 +138,7 @@ const Game = () => {
   return (
     <section
       id="game"
-      className={`screen ${gameState.stage} ${gameState.flagging ? 'flagging' : ''}`}
+      className={`screen ${gameState.stage}`}
       style={{fontSize: `${FONT_SIZE}px`}}
     >
       {gameBoard}

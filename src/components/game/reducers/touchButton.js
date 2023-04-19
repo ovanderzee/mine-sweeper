@@ -30,7 +30,7 @@ const touchButtonReducer = (state, action) => {
 
   updCell = touchCell(updCell, action.entry)
 
-  if (state.flagging) {
+  if (action.type === 'FLAG') {
     // then entry = {locked: <Boolean>}
     return {
       ...updState,

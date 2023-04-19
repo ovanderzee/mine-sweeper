@@ -26,11 +26,6 @@
   cursor: default;
 }
 
-.flagging #playground button.pristine,
-.flagging #playground button.pristine.flag {
-  cursor: crosshair;
-}
-
 #playground button.pristine.flag {
   cursor: not-allowed;
 }
