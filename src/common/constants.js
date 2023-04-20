@@ -1,6 +1,9 @@
 
-// sensitive, internal
-const MIN_DURATION = 750
-const OVERLAY_ELEMENT = document.getElementById('overlay')
+// shortest game duration, to circumvent weird values, in milliseconds
+export const MIN_DURATION = 750
 
-export { MIN_DURATION, OVERLAY_ELEMENT }
+// where the non-games screens are shown
+export const OVERLAY_ELEMENT = document.getElementById('overlay')
+
+// threshold between a click and a deliberate long press, in milliseconds
+export const LONG_PRESS_THRESHOLD = 200

@@ -1,5 +1,5 @@
-const isEnumerable = (value) => {
-  return typeof value === 'object' && !Array.isArray(value)
+export const aspectualInside = (low, length, current) => {
+  // insideness 0 - 1 when inside
+  const insideness = (current - low) / length
+  return insideness >= 0 && insideness <= 1
 }
-
-export { isEnumerable }
