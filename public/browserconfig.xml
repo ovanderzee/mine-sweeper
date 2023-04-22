@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<browserconfig>
+    <msapplication>
+        <tile>
+            <square150x150logo src="spel/mijnenveger/mstile-150x150.png?v= 230422"/>
+            <TileColor>#aaddff</TileColor>
+        </tile>
+    </msapplication>
+</browserconfig>
