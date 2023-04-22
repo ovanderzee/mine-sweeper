@@ -17,17 +17,17 @@
     "You Won!": "Gefeliciteerd, je hebt gewonnen!"
   },
   "help": {
-    "Intro Paragraph": "Vind alle mijnen door naar aanwijzingen te zoeken. Zet een vlag op waar een mijn zou kunnen liggen.",
+    "Intro Paragraph": "Vind alle mijnen door naar aanwijzingen te zoeken.",
     "Game Scores Comment": "Aantal verborgen mijnen; toegang tot de Eregalerij",
     "About Scores Comment": "Bekijk de Eregalerij",
     "New Game Comment": "Begin een nieuw spel, met de huidige instellingen",
     "Replay Comment": "Begin spel met dezelfde mijn-verdeling en afmetingen",
-    "Flag Comment": "Schakel vlag modus om, markeer een veld en bescherm het tegen onbedoeld aanklikken",
     "Help Comment": "(dit scherm)",
     "Settings Comment": "Pas nivo aan en andere opties",
     "Delete Comment": "Wis scores",
     "Go Back Comment": "Keer terug naar spel",
-    "Remarks Paragraph": "De animatie aan het begin kan worden onderbroken."
+    "Flagging Paragraph": "Plaats met een lange klik een vlag waar een mijn zou kunnen liggen.",
+    "Animation Paragraph": "De animatie aan het begin kan worden onderbroken."
   },
   "fame": {
     "Nothing Yet": "Nog geen scores",
@@ -66,7 +66,6 @@
     "Reinstate Defaults": "Terug naar Verstekwaarden",
     "New Game": "Nieuw Spel",
     "Replay": "Speel Opnieuw",
-    "Place Flag": "Markeer en vergrendel cel",
     "Settings": "Instellingen",
     "Help": "Uitleg",
     "Go Back": "Keer terug"

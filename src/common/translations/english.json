@@ -17,17 +17,17 @@
     "You Won!": "Congrats, you WON !"
   },
   "help": {
-    "Intro Paragraph": "Find all mines by looking for clues. Put a flag where a mine could be hidden.",
+    "Intro Paragraph": "Find all mines by looking for clues.",
     "Game Scores Comment": "Number of hidden mines; access to Hall of Fame",
     "About Scores Comment": "View Hall of Fame",
     "New Game Comment": "Start a new game with current settings",
     "Replay Comment": "Restart game with the same mine distribution and dimensions",
-    "Flag Comment": "Toggle flag mode, to mark a field and avoid accidental clicking",
     "Help Comment": "(this screen)",
     "Settings Comment": "Adjust level and other options",
     "Delete Comment": "Clear scores",
     "Go Back Comment": "Return to game",
-    "Remarks Paragraph": "The animation at the beginning can be interrupted."
+    "Flagging Paragraph": "Put a flag where a mine could be hidden using a long press.",
+    "Animation Paragraph": "The animation at the beginning can be interrupted."
   },
   "fame": {
     "Nothing Yet": "No scores yet",
@@ -66,7 +66,6 @@
     "Reinstate Defaults": "Revert to Defaults",
     "New Game": "New Game",
     "Replay": "Replay",
-    "Place Flag": "Mark and lock cell",
     "Settings": "Settings",
     "Help": "Explanation",
     "Go Back": "Return"

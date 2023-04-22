@@ -3,6 +3,7 @@
   justify-content: center;
   align-content: start;
   padding: 1.333em 0;
+  user-select: none;
 }
 
 #playground button {

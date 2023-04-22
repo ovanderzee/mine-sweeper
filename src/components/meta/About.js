@@ -3,7 +3,6 @@ import PageContext from '../../store/page-context'
 import ChampionsPodium from '../symbols/ChampionsPodium'
 import Play from '../symbols/Play'
 import Redo from '../symbols/Redo'
-import Flag from '../symbols/Flag'
 import QuestionMark from '../symbols/QuestionMark'
 import CogWheel from '../symbols/CogWheel'
 import Erase from '../symbols/Erase'
@@ -28,13 +27,13 @@ const About = () => {
         <dt className="adorn"><ChampionsPodium /></dt><dd>{text.help['About Scores Comment']}</dd>
         <dt className="adorn"><Play /></dt><dd>{text.help['New Game Comment']}</dd>
         <dt className="adorn"><Redo /></dt><dd>{text.help['Replay Comment']}</dd>
-        <dt className="adorn"><Flag /></dt><dd>{text.help['Flag Comment']}</dd>
         <dt className="adorn"><QuestionMark /></dt><dd>{text.help['Help Comment']}</dd>
         <dt className="adorn"><CogWheel /></dt><dd>{text.help['Settings Comment']}</dd>
         <dt className="adorn"><Erase /></dt><dd>{text.help['Delete Comment']}</dd>
         <dt className="adorn"><CRLF /></dt><dd>{text.help['Go Back Comment']}</dd>
       </dl>
-      <p>{text.help['Remarks Paragraph']}</p>
+      <p>{text.help['Flagging Paragraph']}</p>
+      <p>{text.help['Animation Paragraph']}</p>
       <h5>Onno van der Zee, 2013 - 2023</h5>
     </article>
   )
