@@ -9,14 +9,16 @@
 
 .screen nav {
   background: var(--medium-to-dark-blue);
+  display: flex;
 }
 
 .screen nav button {
-  font-size: 1.5em;
   font-weight: bold;
+  line-height: 144%;
   background: transparent;
   color: white;
   border: 0 none;
+  padding: 0;
   text-shadow: -0.02em -0.05em #000, 0.008em 0.02em #adf;
 }
 
@@ -40,14 +42,13 @@
 
   .screen nav {
     flex: 0 0 auto;
-    display: flex;
     align-items: baseline;
-    padding: 0.3em 0 0.667em;
+    padding: 0.3em 0 0.7em;
   }
 
   .screen nav button {
+    font-size: 1.5em;
     flex: 1 0 auto;
-    line-height: 144%;
   }
 
   .screen nav button + button {
@@ -68,12 +69,18 @@
 
   .screen nav {
     flex: 0 0 4em;
+    flex-direction: column;
     padding: 0 0.3em;
+  }
+
+  .screen nav::after {
+    content: '';
+    flex: 0 1 calc(100% - 22em);
   }
 
   .screen nav button {
     font-size: 1.75em;
-    line-height: 200%;
+    flex: 1 1 auto;
     width: 100%;
   }
 
