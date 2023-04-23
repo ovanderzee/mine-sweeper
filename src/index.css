@@ -29,6 +29,18 @@
   --dark-bronze: #6b4c2e;
 }
 
+@media only screen and (orientation: portrait) {
+:root {
+    --app-width: 24em;
+  }
+}
+
+@media only screen and (orientation: landscape) {
+:root {
+    --app-width: 27em;
+  }
+}
+
 body,
 section.screen,
 .modal {
@@ -39,7 +51,7 @@ section.screen,
 html,
 body,
 section.screen {
-  height: 100%
+  height: 100%;
 }
 
 body {

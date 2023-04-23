@@ -1,6 +1,7 @@
 .screen {
   display: flex;
   margin: 0 auto;
+  width: var(--app-width);
   height: 100%;
   background: var(--light-to-white-blue);
   overflow: hidden;
@@ -28,7 +29,6 @@
 
 @media only screen and (orientation: portrait) {
   .screen {
-    width: 24em;
     flex-direction: column;
     align-content: space-between;
     justify-content: space-between;
@@ -38,6 +38,7 @@
   .screen form {
     flex: 0 1 auto;
     box-sizing: border-box;
+    max-width: 100%; /* center content when font-size is too big */
   }
 
   .screen nav {
@@ -56,9 +57,36 @@
   }
 }
 
+/* not on laptop or desktop */
+@media only screen and (hover: none) {
+  .screen {
+    border-top: 1px solid var(--medium-blue);
+  }
+}
+
+/* do not show the html background when it would be too slender */
+@media only screen and (max-width: 512px) and (orientation: portrait) {
+  .screen {
+    width: 100%;
+  }
+
+  .screen article,
+  .screen form {
+    width: var(--app-width);
+    margin: 0 auto;
+  }
+
+  .screen nav::before,
+  .screen nav::after {
+    --horizontal-padding: calc((100% - var(--app-width)) / 2);
+
+    content: '';
+    width: var(--horizontal-padding);
+  }
+}
+
 @media only screen and (orientation: landscape) {
   .screen {
-    width: 27em;
     flex-wrap: nowrap;
   }
 
