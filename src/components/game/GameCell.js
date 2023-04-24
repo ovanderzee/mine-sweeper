@@ -34,15 +34,15 @@ const GameCell = (props) => {
   }
 
   /*
-    Save the first event for data
+    Save the first part of long-press event for data
   */
   const beginHandler = (event) => {
     startEvent = event
   }
 
   /*
-    MouseLeave: Leaving the target is trying to cancel interaction
-    TouchCancel: A garbled gesture is trying to cancel interaction
+    CancelEvent: A garbled gesture is trying to cancel interaction
+    Do everything required to terminate combined event
   */
   const cancelHandler = (event) => {
     startEvent = null
@@ -51,22 +51,26 @@ const GameCell = (props) => {
   /*
     Moving inside the target is an allowed user quirk
   */
-  const touchMoveHandler = (event) => {
+  const moveHandler = (event) => {
     if (!startEvent) return
+
     const box = startEvent.target.getBoundingClientRect()
     const horizontalInside = aspectualInside(box.x, box.width, event.nativeEvent.pageX)
     const verticalInside = aspectualInside(box.y, box.height, event.nativeEvent.pageY)
+
     if (!horizontalInside || !verticalInside) {
       startEvent = null
     }
   }
 
+  /*
+    Finalise combined event
+  */
   const endHandler = (event) => {
     if (!startEvent) return
-    if (startEvent.type.substr(0,5) !== event.type.substr(0,5)) return
 
     const touchDuration = event.timeStamp - startEvent.timeStamp
-    startEvent = null
+    cancelHandler(event)
 
     if (touchDuration < LONG_PRESS_THRESHOLD) {
       actionHandler(event, 'MOVE')
@@ -81,13 +85,10 @@ const GameCell = (props) => {
       className={`${doneClass} ${lockedClass} ${detonatedClass}`}
       id={`row${props.row}col${props.col}`}
       style={{'--cell-row': props.row + 1, '--cell-col': props.col + 1}}
-      onMouseDown={beginHandler}
-      onMouseLeave={cancelHandler}
-      onMouseUp={endHandler}
-      onTouchStart={beginHandler}
-      onTouchCancel={cancelHandler}
-      onTouchMove={touchMoveHandler}
-      onTouchEnd={endHandler}
+      onPointerDown={beginHandler}
+      onPointerMove={moveHandler}
+      onPointerCancel={cancelHandler}
+      onPointerUp={endHandler}
     >
       {cellContent}
     </button>
