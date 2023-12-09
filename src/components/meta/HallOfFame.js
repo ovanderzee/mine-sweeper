@@ -6,6 +6,11 @@ import Settings from '../nav/Settings'
 import GoBack from '../nav/GoBack'
 import './Meta.css'
 import './HallOfFame.css'
+import {ReactComponent as GoldShield} from '../../icons/shield-gold.svg'
+import {ReactComponent as SilverShield} from '../../icons/shield-silver.svg'
+import {ReactComponent as BronzeShield} from '../../icons/shield-bronze.svg'
+import {ReactComponent as BlueShield} from '../../icons/shield-blue.svg'
+
 
 const HallOfFame = (props) => {
   const pageCtx = useContext(PageContext)
@@ -43,9 +48,17 @@ const HallOfFame = (props) => {
         )}
 
         {scores.map((play, index) => (
-          <li key={`${index + 1}_${play.score}`}>
+          <li key={`${index + 1}_${play.score}`}
+            className={index < 10 ? 'top-10 rank-' + (index + 1) : 'later'}
+          >
             <header>
-              <h2 className="rank">{index + 1}</h2>
+              <h2 className="rank">
+                {index === 0 && <GoldShield />}
+                {index === 1 && <SilverShield />}
+                {index === 2 && <BronzeShield />}
+                {index > 2 && index < 10 && <BlueShield />}
+                <span>{index + 1}</span>
+              </h2>
               <h4 className="user">{play.user}</h4>
               <h4 className="date">{(new Date(play.begin)).toLocaleDateString()}</h4>
             </header>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg class="shield gold" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 width="144px" height="144px" viewBox="0 0 144 144" xml:space="preserve">
+<filter id="blur" filterUnits="objectBoundingBox">
+	<feGaussianBlur in="SourceGraphic" stdDeviation="8"></feGaussianBlur>
+</filter>
+<linearGradient id="licht_donker_goud" gradientTransform="rotate(40)">
+	<stop offset="67%" stop-color="var(--light)" />
+	<stop offset="83%" stop-color="var(--dark)" />
+</linearGradient>
+<defs>
+	<path id="schild" d="M72,20.424c17.969,0,41.261-10.427,41.261-10.427L135,30.185c-17.303,19.965-3.863,45.784-5.545,61.891
+		C126.792,117.586,72,134.003,72,134.003s-54.792-16.417-57.455-41.928C12.864,75.969,26.303,50.149,9,30.185L30.74,9.997
+		C30.74,9.997,54.031,20.424,72,20.424z"/>
+	<style>
+		svg.shield.gold {
+			--light: #f3e7ae;
+			--medium: #c59735;
+			--dark: #c3922e;
+		}
+		svg.shield.gold path {
+			transform-origin: 50% 50%;
+		}
+	</style>
+</defs>
+<clipPath id="knipsel_goud">
+	<use xlink:href="#schild" overflow="visible" />
+</clipPath>
+<g clip-path="url(#knipsel_goud)">
+	<path id="waas" fill="url(#licht_donker_goud)" d="M72,20.424c17.969,0,41.261-10.427,41.261-10.427L135,30.185c-17.303,19.965-3.863,45.784-5.545,61.891
+			C126.792,117.586,72,134.003,72,134.003s-54.792-16.417-57.455-41.928C12.864,75.969,26.303,50.149,9,30.185L30.74,9.997
+			C30.74,9.997,54.031,20.424,72,20.424z"/>
+	<path id="vulling" fill="var(--medium)" filter="url(#blur)" d="M72,20.424c17.969,0,41.261-10.427,41.261-10.427L135,30.185c-17.303,19.965-3.863,45.784-5.545,61.891   C126.792,117.586,72,134.003,72,134.003s-54.792-16.417-57.455-41.928C12.864,75.969,26.303,50.149,9,30.185L30.74,9.997   C30.74,9.997,54.031,20.424,72,20.424z" transform="skewX(-8) skewY(-8)"/>
+</g>
+</svg>

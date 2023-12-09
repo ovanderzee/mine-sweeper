@@ -28,17 +28,28 @@ li header .rank {
   flex: 0 0 2.5em;
   text-align: center;
 }
-li:first-child + li header .rank {
-  color: var(--medium-gold);
-  text-shadow: 1px 1px var(--light-gold);
+
+li.top-10 header .rank {
+  flex: 0 0 2.5em;
+  text-align: center;
+  min-height: 2em;
+  position: relative;
 }
-li:first-child + li + li header .rank {
-  color: var(--medium-silver);
-  text-shadow: 1px 1px var(--light-silver);
+
+li.top-10 header .rank svg {
+  position: absolute;
+  margin: 0 10%;
+  left: 0;
+  top: 0;
+  width: 2em;
+  height: 2em;
 }
-li:first-child + li + li + li header .rank {
-  color: var(--medium-bronze);
-  text-shadow: 1px 1px var(--light-bronze);
+
+li.top-10 header .rank span {
+  position: relative;
+  z-index: 10;
+  top: .5em;
+  color: white;
 }
 
 li header .user {
