@@ -1,5 +1,5 @@
 import { useContext, useEffect } from 'react'
-import Animation from './Animation'
+import Introduction from './UI/Introduction'
 import Game from './game/Game'
 import PageContext from '../store/page-context'
 
@@ -11,7 +11,7 @@ function Paging() {
   }
 
   useEffect(() => {
-    pageCtx.navigate(<Animation onEnd={goToGame} />)
+    pageCtx.navigate(<Introduction onEnd={goToGame} />)
   // eslint-disable-next-line
   }, [])
 
