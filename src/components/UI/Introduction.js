@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from 'react'
+import { useContext, useState } from 'react'
 import { createPortal } from 'react-dom'
 import PageContext from '../../store/page-context'
 import { OVERLAY_ELEMENT, OVERLAY_FADE_OUT_TIME } from '../../common/constants'
@@ -10,13 +10,11 @@ const Introduction = (props) => {
 
   const [endingClass, setEndingClass] = useState('')
   const { onEnd } = props
+
   const goToGame = (event) => {
     setEndingClass('ending')
+    onEnd(OVERLAY_FADE_OUT_TIME)
   }
-
-  useEffect(() => {
-    endingClass && setTimeout(onEnd, OVERLAY_FADE_OUT_TIME)
-  }, [onEnd, endingClass])
 
   const animatedHtml = (
     <div
