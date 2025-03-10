@@ -34,7 +34,7 @@ const About = () => {
       </dl>
       <p>{text.help['Flagging Paragraph']}</p>
       <p>{text.help['Animation Paragraph']}</p>
-      <h5>Onno van der Zee, 2013 - 2023</h5>
+      <h5>Onno van der Zee, 2013 - 2025</h5>
     </article>
   )
 
