@@ -6,15 +6,14 @@ const GameCell = (props) => {
   const doneClass = props.done ? 'touched' : 'pristine'
   const lockedClass = props.locked ? 'flag' : ''
   const cellContent = props.done && props.fill > 0 && props.fill < 9 ? props.fill : ' '
-  const hasDetonated = props.done && props.fill > 8
-  const detonatedClass = hasDetonated ? 'mijn' : ''
+  const mineClass = props.done && props.fill > 8 ? 'mijn' : ''
+  const activatedClass = props.done === 'clicked' && props.fill > 8 ? 'explode' : ''
+  let startEvent = null
 
   /*
     A long press for toggling a flag
     A short press for opening the cell
   */
-
-  let startEvent = null
 
   const actionHandler = (event, type) => {
     if (props.done) return
@@ -82,7 +81,7 @@ const GameCell = (props) => {
   return (
     <button
       type="button"
-      className={`${doneClass} ${lockedClass} ${detonatedClass}`}
+      className={`${doneClass} ${lockedClass} ${mineClass} ${activatedClass}`}
       id={`row${props.row}col${props.col}`}
       style={{'--cell-row': props.row + 1, '--cell-col': props.col + 1}}
       onPointerDown={beginHandler}

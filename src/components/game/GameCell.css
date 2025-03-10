@@ -92,6 +92,17 @@
     );
 }
 
-.game-lost #playground button.mijn:before {
-  background: radial-gradient(ellipse at 25% 25%, #fff 0%, #000 33%);
+.game-lost #playground button.mijn {
+  --light-color: white;
+  --mine-color: black;
+
+  &:before {
+    opacity: 70%;
+    background: radial-gradient(ellipse at 25% 25%, var(--light-color) 0%, var(--mine-color) 33%);
+  }
+
+  &.explode:before {
+    opacity: 100%;
+    transform: scale(1.15);
+  }
 }
