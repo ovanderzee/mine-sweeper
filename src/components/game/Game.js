@@ -1,6 +1,7 @@
 import { useContext, useState, useEffect, useReducer } from 'react'
 import PageContext from '../../store/page-context'
 import GameCell from './GameCell'
+import GameCellDemoNav from './GameCellDemo'
 import HiScores from '../nav/HiScores'
 import NewGame from '../nav/NewGame'
 import Replay from '../nav/Replay'
@@ -50,6 +51,7 @@ const Game = () => {
   const pageCtx = useContext(PageContext)
   const { BOARD_SIZE, MINE_COUNT, FONT_SIZE } = pageCtx.config
   const text = pageCtx.text
+  const isDev = window.location.hostname === 'localhost'
 
   const [gameState, dispatchGameAction] = useReducer(
     gameReducer.bind(pageCtx.config),
@@ -110,6 +112,7 @@ const Game = () => {
       />
       <Help />
       <Settings />
+      {isDev && <GameCellDemoNav />}
     </nav>
   )
 
