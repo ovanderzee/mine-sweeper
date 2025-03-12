@@ -8,12 +8,12 @@
   transition: opacity 0.5s linear;
 }
 
-.screen nav {
+.screen > nav {
   background: var(--medium-to-dark-blue);
   display: flex;
 }
 
-.screen nav button {
+.screen > nav button {
   font-weight: bold;
   line-height: 144%;
   background: transparent;
@@ -23,7 +23,7 @@
   text-shadow: -0.02em -0.05em #000, 0.008em 0.02em #adf;
 }
 
-.screen nav button span {
+.screen > nav button span {
   display: inline-block;
 }
 
@@ -34,25 +34,25 @@
     justify-content: space-between;
   }
 
-  .screen article,
-  .screen form {
+  .screen > article,
+  .screen > form {
     flex: 0 1 auto;
     box-sizing: border-box;
     max-width: 100%; /* center content when font-size is too big */
   }
 
-  .screen nav {
+  .screen > nav {
     flex: 0 0 auto;
     align-items: baseline;
     padding: 0.3em 0 0.7em;
   }
 
-  .screen nav button {
+  .screen > nav button {
     font-size: 1.5em;
     flex: 1 0 auto;
   }
 
-  .screen nav button + button {
+  .screen > nav button + button {
     border-left: 1px solid #37a;
   }
 }
@@ -70,14 +70,14 @@
     width: 100%;
   }
 
-  .screen article,
-  .screen form {
+  .screen > article,
+  .screen > form {
     width: var(--app-width);
     margin: 0 auto;
   }
 
-  .screen nav::before,
-  .screen nav::after {
+  .screen > nav::before,
+  .screen > nav::after {
     --horizontal-padding: calc((100% - var(--app-width)) / 2);
 
     content: '';
@@ -90,29 +90,29 @@
     flex-wrap: nowrap;
   }
 
-  .screen article,
-  .screen form {
+  .screen > article,
+  .screen > form {
     flex: 1 1 auto;
   }
 
-  .screen nav {
+  .screen > nav {
     flex: 0 0 4em;
     flex-direction: column;
     padding: 0 0.3em;
   }
 
-  .screen nav::after {
+  .screen > nav::after {
     content: '';
     flex: 0 1 calc(100% - 22em);
   }
 
-  .screen nav button {
+  .screen > nav button {
     font-size: 1.75em;
     flex: 1 1 auto;
     width: 100%;
   }
 
-  .screen nav button + button {
+  .screen > nav button + button {
     border-top: 1px solid #37a;
   }
 }

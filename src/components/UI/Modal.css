@@ -21,8 +21,8 @@
   z-index: 100;
 }
 
-.dialog:before,
-.dialog:after {
+.dialog::before,
+.dialog::after {
   position: absolute;
   z-index: -5;
   line-height: 71%;
@@ -30,7 +30,7 @@
 }
 
 /* rang */
-.dialog:before {
+.dialog::before {
   content: attr(data-text-before);
   left: 0.1em;
   top: 0.1em;
@@ -40,7 +40,7 @@
 }
 
 /* score */
-.dialog:after {
+.dialog::after {
   content: attr(data-text-after);
   left: 0.167em;
   bottom: 0.25em;
@@ -92,17 +92,17 @@
   text-align: left;
 }
 
-.game-won-modal [data-text-before="1"]:before {
+.game-won-modal [data-text-before="1"]::before {
   color: var(--medium-gold);
   text-shadow: 0.015em 0.02em var(--light-gold);
 }
 
-.game-won-modal [data-text-before="2"]:before {
+.game-won-modal [data-text-before="2"]::before {
   color: var(--medium-silver);
   text-shadow: 0.015em 0.02em var(--light-silver);
 }
 
-.game-won-modal [data-text-before="3"]:before {
+.game-won-modal [data-text-before="3"]::before {
   color: var(--medium-bronze);
   text-shadow: 0.015em 0.02em var(--light-bronze);
 }

@@ -54,10 +54,10 @@ li footer .score {
   flex: 0 0 3.75em;
   text-align: center;
 }
-li footer .score:before {
+li footer .score::before {
   content: '(';
 }
-li footer .score:after {
+li footer .score::after {
   content: ')';
 }
 li footer .cells,

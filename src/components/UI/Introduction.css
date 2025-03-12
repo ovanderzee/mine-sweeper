@@ -7,8 +7,8 @@
   opacity: 0;
   transition: opacity 500ms ease;
 }
-#intro:before,
-#intro:after,
+#intro::before,
+#intro::after,
 #achter {
   content: '';
   position: absolute;
@@ -18,7 +18,7 @@
   bottom: 0;
   z-index: -1;
 }
-#intro:before {
+#intro::before {
   background: linear-gradient(
     to bottom,
     #aaddff 0%,
@@ -40,7 +40,7 @@
   animation-timing-function: linear;
   animation-duration: 10s;
 }
-#intro:after {
+#intro::after {
   opacity: 1;
   background: linear-gradient(
     to bottom,
