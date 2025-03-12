@@ -27,6 +27,10 @@
   --light-bronze: #e2d1b2;
   --medium-bronze: #917758;
   --dark-bronze: #6b4c2e;
+
+  --fire-yellow: hsl(48, 100%, 62%);
+  --fire-orange: hsl(32, 100%, 50%);
+  --fire-red: hsl(16, 100%, 38%);
 }
 
 @media only screen and (orientation: portrait) {

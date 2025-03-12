@@ -69,9 +69,9 @@ const GameCellDemo = () => {
         <button type="button" className="touched" id="row0col0" style={{'--cell-row': 1, '--cell-col': 1}}></button>
         <button type="button" className="touched" id="row0col1" style={{'--cell-row': 1, '--cell-col': 2}}>1</button>
         <button type="button" className="touched flag" id="row0col2" style={{'--cell-row': 1, '--cell-col': 3}}>1</button>
-        <button type="button" className="touched mijn" id="row0col3" style={{'--cell-row': 1, '--cell-col': 4}}></button>
-        <button type="button" className="touched mijn flag" id="row0col4" style={{'--cell-row': 1, '--cell-col': 5}}></button>
-        <button type="button" className={`touched mijn ${activatedClass}`} onClick={explodeHandler} id="row0col5" style={{'--cell-row': 1, '--cell-col': 6}}></button>
+        <button type="button" className={`touched mijn ${activatedClass}`} onClick={explodeHandler} id="row0col3" style={{'--cell-row': 1, '--cell-col': 4}}></button>
+        <button type="button" className="touched mijn" id="row0col4" style={{'--cell-row': 1, '--cell-col': 5}}></button>
+        <button type="button" className="touched mijn flag" id="row0col5" style={{'--cell-row': 1, '--cell-col': 6}}></button>
     </article>
   </div>
 
@@ -93,6 +93,14 @@ const GameCellDemo = () => {
     </article>
   </div>
 
+  const colors = <div style={{'display': 'flex'}}>
+    <div style={{'padding-block': '1ex', 'background': 'var(--state-green)'}}>state-green</div>
+    <div style={{'padding-block': '1ex', 'background': 'var(--state-red)'}}>state-red</div>
+    <div style={{'padding-block': '1ex', 'background': 'var(--fire-yellow)'}}>fire-yellow</div>
+    <div style={{'padding-block': '1ex', 'background': 'var(--fire-orange)'}}>fire-orange</div>
+    <div style={{'padding-block': '1ex', 'background': 'var(--fire-red)'}}>fire-red</div>
+  </div>
+
   return (
     <section
       className="screen"
@@ -102,6 +110,7 @@ const GameCellDemo = () => {
         {playing}
         {lost}
         {won}
+        {colors}
       </article>
       <nav>
         <GoBack />

@@ -1,3 +1,7 @@
+#playground {
+  overflow: visible;
+}
+
 #playground button {
   --pristine-background: #8f8f8f;
   --touched-background: #9f9f9f;
@@ -84,7 +88,7 @@
   --mine-color: black;
 }
 
-.game-lost #playground button.mijn:before {
+.game-lost #playground button.mijn::before {
   opacity: 70%;
   background: radial-gradient(ellipse at 25% 25%, var(--light-color) 0%, var(--mine-color) 33%);
 }
@@ -95,4 +99,57 @@
   left: 5%;
   right: 5%;
   bottom: 5%;
+}
+
+.game-lost #playground button.mijn.explode {
+  z-index: 10;
+}
+
+.game-lost #playground button.mijn.explode::after {
+  content: '';
+
+  display: inline-block;
+  width: 80%;
+  height: 80%;
+  transform: translate(-50%, -50%);
+  margin: 50%;
+/*--mine-color: hsl(16,100%,38%);*/
+  /* geel /oranje , vuur , rood */
+  background: radial-gradient(
+    var(--fire-yellow),
+    var(--fire-orange),
+    var(--fire-red)
+  );
+  border: 2px solid white;
+  border-radius: 50%;
+
+  position: relative;
+  z-index: -15;
+
+  animation-name: explode;
+  animation-timing-function: ease-out;
+  animation-duration: 300ms;
+  animation-fill-mode: backwards;
+  animation-iteration-count: 1;
+}
+
+@keyframes explode {
+  from {
+    width: 50%;
+    height: 50%;
+    opacity: 0.75;
+  }
+  90% {
+    opacity: 0.1;
+  }
+  to {
+    width: max(200vw, 200vh);
+    height: max(200vw, 200vh);
+
+    opacity: 0;
+/*
+    width: max(30vw, 30vh);
+    height: max(30vw, 30vh);*/
+  }
+
 }
