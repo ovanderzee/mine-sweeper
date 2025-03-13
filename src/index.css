@@ -30,7 +30,8 @@
 
   --fire-yellow: hsl(48, 100%, 62%);
   --fire-orange: hsl(32, 100%, 50%);
-  --fire-red: hsl(16, 100%, 38%);
+  --fire-red: hsl(16, 100%, 44%);
+  --fire-blue: hsl(224, 80%, 38%);
 }
 
 @media only screen and (orientation: portrait) {

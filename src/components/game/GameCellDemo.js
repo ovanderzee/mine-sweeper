@@ -1,7 +1,8 @@
-import { useContext, useState } from 'react'
+import { useContext, useState, useEffect } from 'react'
 import PageContext from '../../store/page-context'
 import GoBack from '../nav/GoBack'
-import '../meta//Meta.css'
+import './GameCellDemo.css'
+import '../meta/Meta.css'
 
 const inDevelopment = window.location.hostname === 'localhost'
 
@@ -45,7 +46,7 @@ const GameCellDemo = () => {
     Pristine cells do not show anything, no mine location hints, no mine classes
     Touched calls reveal numeric mine location hints
   */
-  const playing = <div class="game-playing">
+  const playing = <div className="game-playing">
     <label>Game Playing</label>
     <article id="playground" className="board-size__6" style={{'--board-size': 6}}>
         <button type="button" className="pristine" id="row0col0" style={{'--cell-row': 1, '--cell-col': 1}}></button>
@@ -93,12 +94,16 @@ const GameCellDemo = () => {
     </article>
   </div>
 
-  const colors = <div style={{'display': 'flex'}}>
-    <div style={{'padding-block': '1ex', 'background': 'var(--state-green)'}}>state-green</div>
-    <div style={{'padding-block': '1ex', 'background': 'var(--state-red)'}}>state-red</div>
-    <div style={{'padding-block': '1ex', 'background': 'var(--fire-yellow)'}}>fire-yellow</div>
-    <div style={{'padding-block': '1ex', 'background': 'var(--fire-orange)'}}>fire-orange</div>
-    <div style={{'padding-block': '1ex', 'background': 'var(--fire-red)'}}>fire-red</div>
+  const stateColors = <div className="css-colors">
+    <div style={{'background': 'var(--state-green)'}}>state-green</div>
+    <div style={{'background': 'var(--state-red)'}}>state-red</div>
+  </div>
+
+  const fireColors = <div className="css-colors" style={{'display': 'flex'}}>
+    <div style={{'background': 'var(--fire-yellow)'}}>fire-yellow</div>
+    <div style={{'background': 'var(--fire-orange)'}}>fire-orange</div>
+    <div style={{'background': 'var(--fire-red)'}}>fire-red</div>
+    <div style={{'background': 'var(--fire-blue)'}}>fire-blue</div>
   </div>
 
   return (
@@ -110,7 +115,8 @@ const GameCellDemo = () => {
         {playing}
         {lost}
         {won}
-        {colors}
+        {stateColors}
+        {fireColors}
       </article>
       <nav>
         <GoBack />

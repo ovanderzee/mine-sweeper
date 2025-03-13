@@ -80,7 +80,7 @@
 }
 
 .game-won #playground button.mijn:not(.flag)::before {
-  background: radial-gradient(ellipse at 25% 25%, transparent 16%, var(--state-green) 20%);
+  background: radial-gradient(ellipse at 25% 25%, transparent 0%, var(--state-green) 33%);
 }
 
 .game-lost #playground button.mijn {
@@ -113,12 +113,12 @@
   height: 80%;
   transform: translate(-50%, -50%);
   margin: 50%;
-/*--mine-color: hsl(16,100%,38%);*/
-  /* geel /oranje , vuur , rood */
+
   background: radial-gradient(
-    var(--fire-yellow),
-    var(--fire-orange),
-    var(--fire-red)
+    var(--fire-blue),
+    var(--fire-red) 25%,
+    var(--fire-orange) 50%,
+    var(--fire-yellow) 75%
   );
   border: 2px solid white;
   border-radius: 50%;
@@ -139,17 +139,9 @@
     height: 50%;
     opacity: 0.75;
   }
-  90% {
-    opacity: 0.1;
-  }
   to {
     width: max(200vw, 200vh);
     height: max(200vw, 200vh);
-
     opacity: 0;
-/*
-    width: max(30vw, 30vh);
-    height: max(30vw, 30vh);*/
   }
-
 }
