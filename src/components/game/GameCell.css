@@ -1,4 +1,7 @@
 #playground button {
+  --pristine-background: #8f8f8f;
+  --touched-background: #9f9f9f;
+
   margin: 0.2em;
   padding: 0;
   vertical-align: middle;
@@ -14,14 +17,14 @@
 }
 
 #playground button.pristine {
-  background: #8f8f8f;
+  background: var(--pristine-background);
   box-shadow:
     inset #bfbfbf 0.25em 0.25em 0.25em,
     inset #5f5f5f -0.25em -0.25em 0.25em;
 }
 
 #playground button.touched {
-  background: #9f9f9f;
+  background: var(--touched-background);
   box-shadow:
     inset #6f6f6f 0.25em 0.25em 0.25em,
     inset #cfcfcf -0.25em -0.25em 0.25em;
@@ -60,38 +63,20 @@
   z-index: -10;
 }
 
-.game-won #playground button.flag::after,
 .game-lost #playground button.flag::after {
   color: var(--state-red);
 }
 
-.game-won #playground button.mijn.flag::after{
-  color: var(--dark-blue);
-  text-shadow:
-  0 -1px 1px white,
-  1px 0 1px white,
-  0 1px 1px white,
-  -1px 0 1px white;
-}
-.game-lost #playground button.mijn.flag::after {
+#playground button.mijn.flag::after {
   color: var(--state-green);
 }
 
-.game-won #playground button.mijn::before {
-  background: linear-gradient(
-    45deg,
-    transparent 46%,
-    currentColor 46%,
-    currentColor 54%,
-    transparent 54%
-  ),
-  linear-gradient(
-    135deg,
-    transparent 46%,
-    currentColor 46%,
-    currentColor 54%,
-    transparent 54%
-  );
+.game-won #playground button.mijn.flag::after {
+  font-size: 1.5em
+}
+
+.game-won #playground button.mijn:not(.flag)::before {
+  background: radial-gradient(ellipse at 25% 25%, transparent 16%, var(--state-green) 20%);
 }
 
 .game-lost #playground button.mijn {
@@ -106,5 +91,8 @@
 
 .game-lost #playground button.mijn.explode::before {
   opacity: 100%;
-  transform: scale(1.15);
+  top: 5%;
+  left: 5%;
+  right: 5%;
+  bottom: 5%;
 }

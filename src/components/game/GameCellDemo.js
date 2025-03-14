@@ -46,6 +46,7 @@ const GameCellDemo = () => {
     Touched calls reveal numeric mine location hints
   */
   const playing = <div class="game-playing">
+    <label>Game Playing</label>
     <article id="playground" className="board-size__6" style={{'--board-size': 6}}>
         <button type="button" className="pristine" id="row0col0" style={{'--cell-row': 1, '--cell-col': 1}}></button>
         <button type="button" className="touched" id="row0col1" style={{'--cell-row': 1, '--cell-col': 2}}>1</button>
@@ -63,6 +64,7 @@ const GameCellDemo = () => {
         the clicked mine is also classified as explode
   */
   const lost = <div className="game-lost">
+    <label>Game Lost</label>
     <article id="playground" className="board-size__6" style={{'--board-size': 6}}>
         <button type="button" className="touched" id="row0col0" style={{'--cell-row': 1, '--cell-col': 1}}></button>
         <button type="button" className="touched" id="row0col1" style={{'--cell-row': 1, '--cell-col': 2}}>1</button>
@@ -82,6 +84,7 @@ const GameCellDemo = () => {
         mines become classified as 'mijn'
   */
   const won = <div className="game-won">
+    <label>Game Won</label>
     <article id="playground" className="board-size__6" style={{'--board-size': 6}}>
         <button type="button" className="touched" id="row0col0" style={{'--cell-row': 1, '--cell-col': 1}}></button>
         <button type="button" className="touched" id="row0col1" style={{'--cell-row': 1, '--cell-col': 2}}>1</button>
