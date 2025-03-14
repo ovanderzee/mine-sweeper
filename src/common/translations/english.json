@@ -9,7 +9,7 @@
   "config": {
     "default player": "anonymous"
   },
-  "anim": {
+  "intro": {
     "minesweeper_1": "mine",
     "minesweeper_2": "sweeper"
   },

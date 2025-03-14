@@ -25,9 +25,9 @@ const Introduction = (props) => {
     >
       <div id="achter" />
       <h1 id="titel">
-        {text.anim.minesweeper_1}
+        {text.intro.minesweeper_1}
         <br />
-        {text.anim.minesweeper_2}
+        {text.intro.minesweeper_2}
       </h1>
       <div id="schip">
         <div id="schip__brug"></div>
