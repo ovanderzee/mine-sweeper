@@ -9,7 +9,7 @@
   "config": {
     "default player": "anoniem"
   },
-  "anim": {
+  "intro": {
     "minesweeper_1": "mijnen",
     "minesweeper_2": "veger"
   },
@@ -27,7 +27,7 @@
     "Delete Comment": "Wis scores",
     "Go Back Comment": "Keer terug naar spel",
     "Flagging Paragraph": "Plaats met een lange klik een vlag waar een mijn zou kunnen liggen.",
-    "Animation Paragraph": "De animatie aan het begin kan worden onderbroken."
+    "Introduction Paragraph": "De animatie aan het begin kan worden onderbroken."
   },
   "fame": {
     "Nothing Yet": "Nog geen scores",

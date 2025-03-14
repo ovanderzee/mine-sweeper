@@ -41,26 +41,14 @@ const Dialog = (props) => {
   )
 }
 
-const Modality = (props) => {
-  return (
-    <div className={`modal ${props.className}-modal`}>
-      <Backdrop {...props} />
-      <Dialog {...props}>{props.children}</Dialog>
-    </div>
-  )
-}
-
 const portalElement = document.getElementById('modal')
 
-const Modal = (props) => {
-  return (
-    <>
-      {createPortal(
-        <Modality {...props} />,
-        portalElement
-      )}
-    </>
-  )
-}
+const Modal = (props) => createPortal(
+  <div className={`modal ${props.className}-modal`}>
+    <Backdrop {...props} />
+    <Dialog {...props}>{props.children}</Dialog>
+  </div>,
+  portalElement
+)
 
 export default Modal

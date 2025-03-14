@@ -1,14 +1,14 @@
-#anim {
+#intro {
   opacity: 1;
   z-index: 1;
   overflow: hidden;
 }
-#anim.ending {
+#intro.ending {
   opacity: 0;
   transition: opacity 500ms ease;
 }
-#anim:before,
-#anim:after,
+#intro:before,
+#intro:after,
 #achter {
   content: '';
   position: absolute;
@@ -18,7 +18,7 @@
   bottom: 0;
   z-index: -1;
 }
-#anim:before {
+#intro:before {
   background: linear-gradient(
     to bottom,
     #aaddff 0%,
@@ -40,7 +40,7 @@
   animation-timing-function: linear;
   animation-duration: 10s;
 }
-#anim:after {
+#intro:after {
   opacity: 1;
   background: linear-gradient(
     to bottom,
@@ -92,7 +92,7 @@ cumulus:  2000, 3667, 4000, 5000, 6000, 7000, 10000
 percent:   20%,  37%,  40%,  50%,  60%,  70%,  100%
 */
 
-#anim div {
+#intro div {
   position: absolute;
 }
 

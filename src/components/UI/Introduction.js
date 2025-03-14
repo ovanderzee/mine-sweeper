@@ -1,36 +1,33 @@
-import { useContext, useState, useEffect } from 'react'
+import { useContext, useState } from 'react'
 import { createPortal } from 'react-dom'
-import PageContext from '../store/page-context'
-import { OVERLAY_ELEMENT } from '../common/constants'
-import './Animation.css'
+import PageContext from '../../store/page-context'
+import { OVERLAY_ELEMENT, OVERLAY_FADE_OUT_TIME } from '../../common/constants'
+import './Introduction.css'
 
-const Animation = (props) => {
+const Introduction = (props) => {
   const pageCtx = useContext(PageContext)
   const text = pageCtx.text
 
   const [endingClass, setEndingClass] = useState('')
-  const cssOpacityTransitionTime = 500
   const { onEnd } = props
+
   const goToGame = (event) => {
     setEndingClass('ending')
+    onEnd(OVERLAY_FADE_OUT_TIME)
   }
-
-  useEffect(() => {
-    endingClass && setTimeout(onEnd, cssOpacityTransitionTime)
-  }, [onEnd, endingClass])
 
   const animatedHtml = (
     <div
-      id="anim"
+      id="intro"
       className={endingClass}
       onClick={goToGame}
       onAnimationEnd={goToGame}
     >
       <div id="achter" />
       <h1 id="titel">
-        {text.anim.minesweeper_1}
+        {text.intro.minesweeper_1}
         <br />
-        {text.anim.minesweeper_2}
+        {text.intro.minesweeper_2}
       </h1>
       <div id="schip">
         <div id="schip__brug"></div>
@@ -60,7 +57,7 @@ const Animation = (props) => {
     </div>
   )
 
-  return <>{createPortal(animatedHtml, OVERLAY_ELEMENT)}</>
+  return createPortal(animatedHtml, OVERLAY_ELEMENT)
 }
 
-export default Animation
+export default Introduction

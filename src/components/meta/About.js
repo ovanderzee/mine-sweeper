@@ -33,7 +33,7 @@ const About = () => {
         <dt className="adorn"><CRLF /></dt><dd>{text.help['Go Back Comment']}</dd>
       </dl>
       <p>{text.help['Flagging Paragraph']}</p>
-      <p>{text.help['Animation Paragraph']}</p>
+      <p>{text.help['Introduction Paragraph']}</p>
       <h5>Onno van der Zee, 2013 - 2025</h5>
     </article>
   )
