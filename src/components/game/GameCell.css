@@ -137,7 +137,7 @@
   from {
     width: 50%;
     height: 50%;
-    opacity: 0.75;
+    opacity: .8;
   }
   to {
     width: max(200vw, 200vh);
