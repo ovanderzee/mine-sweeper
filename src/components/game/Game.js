@@ -56,7 +56,6 @@ const Game = () => {
   const pageCtx = useContext(PageContext)
   const { BOARD_SIZE, MINE_COUNT, FONT_SIZE } = pageCtx.config
   const text = pageCtx.text
-  const isDev = window.location.hostname === 'localhost'
 
   const [gameState, dispatchGameAction] = useReducer(
     gameReducer.bind(pageCtx.config),
@@ -117,7 +116,7 @@ const Game = () => {
       />
       <Help />
       <Settings />
-      {isDev && <GameCellDemoNav />}
+      <GameCellDemoNav />
     </nav>
   )
 

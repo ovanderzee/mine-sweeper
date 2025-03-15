@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect } from 'react'
+import { useContext, useState } from 'react'
 import PageContext from '../../store/page-context'
 import GoBack from '../nav/GoBack'
 import './GameCellDemo.css'
