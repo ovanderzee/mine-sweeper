@@ -20,6 +20,19 @@
   z-index: 5;
 }
 
+#playground button::before,
+#playground button::after {
+  --pseudo-margin: 0;
+
+  content: '';
+  border-radius: 50%;
+  position: absolute;
+  top: var(--pseudo-margin);
+  left: var(--pseudo-margin);
+  right: var(--pseudo-margin);
+  bottom: var(--pseudo-margin);
+}
+
 #playground button.pristine {
   background: var(--pristine-background);
   box-shadow:
@@ -42,11 +55,6 @@
 #playground button.flag::after {
   content: '⚑';
   font-size: 1.333em;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
   z-index: -5;
 }
 
@@ -56,14 +64,8 @@
 }
 
 #playground button.mijn::before {
-  content: '';
+  --pseudo-margin: 10%;
   color: var(--state-green);
-  border-radius: 50%;
-  position: absolute;
-  top: 10%;
-  left: 10%;
-  right: 10%;
-  bottom: 10%;
   z-index: -10;
 }
 
@@ -95,10 +97,7 @@
 
 .game-lost #playground button.mijn.explode::before {
   opacity: 100%;
-  top: 5%;
-  left: 5%;
-  right: 5%;
-  bottom: 5%;
+  --pseudo-margin: 5%;
 }
 
 .game-lost #playground button.mijn.explode {
