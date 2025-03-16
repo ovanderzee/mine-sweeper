@@ -50,8 +50,9 @@ const GameCellDemo = () => {
     <label>Game Playing</label>
     <article id="playground" className="board-size__6" style={{'--board-size': 6}}>
         <button type="button" className="pristine" id="row0col0" style={{'--cell-row': 1, '--cell-col': 1}}></button>
-        <button type="button" className="touched" id="row0col1" style={{'--cell-row': 1, '--cell-col': 2}}>1</button>
+        <button type="button" className="touched" id="row0col1" style={{'--cell-row': 1, '--cell-col': 2}}></button>
         <button type="button" className="pristine flag" id="row0col2" style={{'--cell-row': 1, '--cell-col': 3}}></button>
+        <button type="button" className="touched" id="row0col3" style={{'--cell-row': 1, '--cell-col': 4}}>1</button>
     </article>
   </div>
 
@@ -67,14 +68,20 @@ const GameCellDemo = () => {
   const lost = <div className="game-lost">
     <label>Game Lost</label>
     <article id="playground" className="board-size__6" style={{'--board-size': 6}}>
-        <button type="button" className="touched" id="row0col0" style={{'--cell-row': 1, '--cell-col': 1}}></button>
-        <button type="button" className="touched" id="row0col1" style={{'--cell-row': 1, '--cell-col': 2}}>1</button>
-        <button type="button" className="touched flag" id="row0col2" style={{'--cell-row': 1, '--cell-col': 3}}>1</button>
-        <button type="button" className={`touched mijn flag ${activatedClass}`} onClick={explodeHandler} id="row0col3" style={{'--cell-row': 1, '--cell-col': 4}}>
+
+        <button type="button" className="touched mijn" id="row0col1" style={{'--cell-row': 1, '--cell-col': 1}}></button>
+        <button type="button" className="touched mijn flag" id="row0col2" style={{'--cell-row': 1, '--cell-col': 2}}></button>
+        <button type="button" className={`touched mijn ${activatedClass}`} onClick={explodeHandler}
+            id="row0col3" style={{'--cell-row': 1, '--cell-col': 3}}>
           <span class="burst"></span>
         </button>
-        <button type="button" className="touched mijn" id="row0col4" style={{'--cell-row': 1, '--cell-col': 5}}></button>
-        <button type="button" className="touched mijn flag" id="row0col5" style={{'--cell-row': 1, '--cell-col': 6}}></button>
+        <button type="button" className={`touched mijn flag ${activatedClass}`} onClick={explodeHandler}
+            id="row0col4" style={{'--cell-row': 1, '--cell-col': 4}}>
+          <span class="burst"></span>
+        </button>
+        <button type="button" className="touched" id="row1col0" style={{'--cell-row': 2, '--cell-col': 1}}></button>
+        <button type="button" className="touched" id="row1col1" style={{'--cell-row': 2, '--cell-col': 2}}>1</button>
+        <button type="button" className="touched flag" id="row1col2" style={{'--cell-row': 2, '--cell-col': 3}}>1</button>
     </article>
   </div>
 

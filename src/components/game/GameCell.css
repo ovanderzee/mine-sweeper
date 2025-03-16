@@ -85,23 +85,28 @@
   background: radial-gradient(ellipse at 25% 25%, transparent 0%, var(--state-green) 33%);
 }
 
+.game-lost #playground button.mijn.flag.explode::after {
+  color: #fffd;
+}
+
 .game-lost #playground button.mijn {
   --light-color: white;
   --mine-color: black;
 }
 
 .game-lost #playground button.mijn::before {
-  opacity: 70%;
   background: radial-gradient(ellipse at 25% 25%, var(--light-color) 0%, var(--mine-color) 33%);
 }
 
 .game-lost #playground button.mijn.explode {
+  --light-color: var(--lighter-blue);
+  --mine-color: var(--darker-blue);
+
   z-index: 10;
 }
 
 .game-lost #playground button.mijn.explode::before {
-  opacity: 100%;
-  --pseudo-margin: 5%;
+  --pseudo-margin: 10%;
 }
 
 .game-lost #playground button.mijn.explode .burst {
@@ -119,7 +124,6 @@
     var(--fire-orange) 50%,
     var(--fire-yellow) 75%
   );
-  border: 2px solid white;
   border-radius: 50%;
 
   position: relative;

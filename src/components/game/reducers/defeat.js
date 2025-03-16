@@ -6,7 +6,8 @@ const defeatReducer = (state, action) => {
 
   if (mines.length) {
     // trigger next mine in next effect
-    state.board[mines[0].row][mines[0].col] = { ...mines[0], done: 'clicked' }
+    const pickOne = Math.floor(mines.length * Math.random())
+    state.board[mines[pickOne].row][mines[pickOne].col] = { ...mines[pickOne], done: 'clicked' }
     state.board = [...state.board]
 
     return {
