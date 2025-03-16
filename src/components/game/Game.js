@@ -1,6 +1,7 @@
 import { useContext, useState, useEffect, useReducer } from 'react'
 import PageContext from '../../store/page-context'
 import GameCell from './GameCell'
+import GameCellDemoNav from './GameCellDemo'
 import HiScores from '../nav/HiScores'
 import NewGame from '../nav/NewGame'
 import Replay from '../nav/Replay'
@@ -12,6 +13,7 @@ import newGameReducer from './reducers/newGame'
 import replayReducer from './reducers/replay'
 import touchButtonReducer from './reducers/touchButton'
 import victoryReducer from './reducers/victory'
+import defeatReducer from './reducers/defeat'
 import './Game.css'
 
 const gameReducer = function (state, action) {
@@ -41,6 +43,10 @@ const gameReducer = function (state, action) {
 
   if (action.type === 'VICTORY') {
     return victoryReducer(state, action)
+  }
+
+  if (action.type === 'DEFEAT') {
+    return defeatReducer(state, action)
   }
 
   return initialGameState
@@ -110,11 +116,13 @@ const Game = () => {
       />
       <Help />
       <Settings />
+      <GameCellDemoNav />
     </nav>
   )
 
   const [showWonModal, setShowWonModal] = useState(false)
   const gameWasWon = gameState.stage === 'game-won'
+  const gameWasLost = gameState.stage === 'game-lost'
 
   useEffect(() => {
     if (gameWasWon) {
@@ -122,8 +130,14 @@ const Game = () => {
         type: 'VICTORY'
       })
       setShowWonModal(true)
+    } else if (gameWasLost) {
+      const waitTime = 100 + Math.ceil(200 * Math.random())
+      setTimeout(
+        () => dispatchGameAction({ type: 'DEFEAT' }),
+        waitTime
+      )
     }
-  }, [gameWasWon])
+  }, [gameWasWon, gameWasLost, gameState?.mines])
 
   const gameWonModal = <Modal
     onConfirm={() => {}}

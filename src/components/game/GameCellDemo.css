@@ -1,0 +1,6 @@
+
+.css-colors {display: flex}
+.css-colors > * {
+  flex: 1 1;
+  padding-block: 1ex;
+}
