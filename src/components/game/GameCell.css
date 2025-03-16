@@ -95,16 +95,16 @@
   background: radial-gradient(ellipse at 25% 25%, var(--light-color) 0%, var(--mine-color) 33%);
 }
 
+.game-lost #playground button.mijn.explode {
+  z-index: 10;
+}
+
 .game-lost #playground button.mijn.explode::before {
   opacity: 100%;
   --pseudo-margin: 5%;
 }
 
-.game-lost #playground button.mijn.explode {
-  z-index: 10;
-}
-
-.game-lost #playground button.mijn.explode::after {
+.game-lost #playground button.mijn.explode .burst {
   content: '';
 
   display: inline-block;

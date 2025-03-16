@@ -70,7 +70,9 @@ const GameCellDemo = () => {
         <button type="button" className="touched" id="row0col0" style={{'--cell-row': 1, '--cell-col': 1}}></button>
         <button type="button" className="touched" id="row0col1" style={{'--cell-row': 1, '--cell-col': 2}}>1</button>
         <button type="button" className="touched flag" id="row0col2" style={{'--cell-row': 1, '--cell-col': 3}}>1</button>
-        <button type="button" className={`touched mijn ${activatedClass}`} onClick={explodeHandler} id="row0col3" style={{'--cell-row': 1, '--cell-col': 4}}></button>
+        <button type="button" className={`touched mijn flag ${activatedClass}`} onClick={explodeHandler} id="row0col3" style={{'--cell-row': 1, '--cell-col': 4}}>
+          <span class="burst"></span>
+        </button>
         <button type="button" className="touched mijn" id="row0col4" style={{'--cell-row': 1, '--cell-col': 5}}></button>
         <button type="button" className="touched mijn flag" id="row0col5" style={{'--cell-row': 1, '--cell-col': 6}}></button>
     </article>

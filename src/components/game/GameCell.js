@@ -90,6 +90,7 @@ const GameCell = (props) => {
       onPointerUp={endHandler}
     >
       {cellContent}
+      {mineClass && <span className="burst"></span>}
     </button>
   )
 }
