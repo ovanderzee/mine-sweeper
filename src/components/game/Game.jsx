@@ -131,6 +131,7 @@ const Game = () => {
       })
       setShowWonModal(true)
     } else if (gameWasLost) {
+      // blow the untouched mines, odd number of mines will not blow in dev
       const waitTime = 100 + Math.ceil(200 * Math.random())
       setTimeout(
         () => dispatchGameAction({ type: 'DEFEAT' }),

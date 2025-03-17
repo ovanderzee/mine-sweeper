@@ -5,6 +5,7 @@ import HiScores from '../nav/HiScores'
 import Help from '../nav/Help'
 import GoBack from '../nav/GoBack'
 import { translations } from '../../common/i18n'
+import { preventReloadByEnter } from '../../common/functions'
 import './Meta.css'
 import './Configure.css'
 
@@ -185,7 +186,9 @@ function Configure() {
       className="screen"
       style={{fontSize: `${FONT_SIZE}px`}}
     >
-      <form>
+      <form
+          onKeyPress={(event) => preventReloadByEnter(event)}
+        >
         {onbeginContent}
         {genericContent}
         {recordContent}

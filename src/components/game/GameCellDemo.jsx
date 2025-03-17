@@ -1,5 +1,6 @@
 import { useContext, useState } from 'react'
 import PageContext from '../../store/page-context'
+import Settings from '../nav/Settings'
 import GoBack from '../nav/GoBack'
 import './GameCellDemo.css'
 import '../meta/Meta.css'
@@ -73,11 +74,11 @@ const GameCellDemo = () => {
         <button type="button" className="touched mijn flag" id="row0col2" style={{'--cell-row': 1, '--cell-col': 2}}></button>
         <button type="button" className={`touched mijn ${activatedClass}`} onClick={explodeHandler}
             id="row0col3" style={{'--cell-row': 1, '--cell-col': 3}}>
-          <span class="burst"></span>
+          <span className="burst"></span>
         </button>
         <button type="button" className={`touched mijn flag ${activatedClass}`} onClick={explodeHandler}
             id="row0col4" style={{'--cell-row': 1, '--cell-col': 4}}>
-          <span class="burst"></span>
+          <span className="burst"></span>
         </button>
         <button type="button" className="touched" id="row1col0" style={{'--cell-row': 2, '--cell-col': 1}}></button>
         <button type="button" className="touched" id="row1col1" style={{'--cell-row': 2, '--cell-col': 2}}>1</button>
@@ -128,6 +129,7 @@ const GameCellDemo = () => {
         {fireColors}
       </article>
       <nav>
+        <Settings />
         <GoBack />
       </nav>
     </section>
