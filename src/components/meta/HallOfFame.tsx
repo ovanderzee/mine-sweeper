@@ -7,7 +7,7 @@ import GoBack from '../nav/GoBack'
 import './Meta.css'
 import './HallOfFame.css'
 
-const HallOfFame = (props) => {
+const HallOfFame = () => {
   const pageCtx = useContext(PageContext)
   const { FONT_SIZE } = pageCtx.config
   const text = pageCtx.text

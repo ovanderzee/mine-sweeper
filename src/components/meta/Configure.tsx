@@ -20,7 +20,8 @@ function Configure() {
 
   const changeBoardSizeHandler = event => {
     exitCurrentGame()
-    const value = +event.target.value
+    const ctrl = event.target
+    const value = +ctrl.value
     const prev = pageCtx.config
     pageCtx.configure({
       BOARD_SIZE: value,
@@ -30,7 +31,8 @@ function Configure() {
 
   const changeGameLevelHandler = event => {
     exitCurrentGame()
-    const value = +event.target.value
+    const ctrl = event.target
+    const value = +ctrl.value
     const prev = pageCtx.config
     pageCtx.configure({
       GAME_LEVEL: value,
@@ -46,7 +48,7 @@ function Configure() {
       <div className="field">
         <label htmlFor="size">{text.settings['Size Gameboard']}</label>
         <div>
-          <em>{text.settings['%n cells'].replace('%n', Math.pow(BOARD_SIZE, 2))}</em>
+          <em>{text.settings['%n cells'].replace('%n', Math.pow(BOARD_SIZE, 2).toString())}</em>
           <input
             id="size"
             type="range"
@@ -61,7 +63,7 @@ function Configure() {
       <div className="field">
         <label htmlFor="level">{text.settings['Gamelevel']}</label>
         <div>
-          <em>{text.settings['one mine to %n cells'].replace('%n', (30 / GAME_LEVEL))}</em>
+          <em>{text.settings['one mine to %n cells'].replace('%n', (30 / GAME_LEVEL).toString())}</em>
           <input
             id="level"
             type="range"
@@ -79,11 +81,13 @@ function Configure() {
   const translationNames = Object.values(translations)
 
   const changeLanguageHandler = event => {
-    pageCtx.configure({ LANGUAGE: event.target.value })
+    const ctrl = event.target
+    pageCtx.configure({ LANGUAGE: ctrl.value })
   }
 
   const changeFontSizeHandler = event => {
-    pageCtx.configure({ FONT_SIZE: +event.target.value })
+    const ctrl = event.target
+    pageCtx.configure({ FONT_SIZE: +ctrl.value })
   }
 
   const genericContent = (
@@ -115,7 +119,7 @@ function Configure() {
       <div className="field">
         <label htmlFor="zoom">{text.settings['Zoom Display']}</label>
         <div>
-          <em>{text.settings['font-size to %n pixels'].replace('%n', FONT_SIZE)}</em>
+          <em>{text.settings['font-size to %n pixels'].replace('%n', FONT_SIZE.toString())}</em>
           <input
             id="zoom"
             type="range"
@@ -130,11 +134,13 @@ function Configure() {
   )
 
   const changePlayerNameHandler = event => {
-    pageCtx.configure({ PLAYER_NAME: event.target.value })
+    const ctrl = event.target
+    pageCtx.configure({ PLAYER_NAME: ctrl.value })
   }
 
   const changeMaxScoresHandler = event => {
-    pageCtx.configure({ MAX_SCORES: +event.target.value })
+    const ctrl = event.target
+    pageCtx.configure({ MAX_SCORES: +ctrl.value })
   }
 
   const recordContent = (
@@ -157,7 +163,7 @@ function Configure() {
       <div className="field">
         <label htmlFor="max">{text.settings['Max records']}</label>
         <div>
-          <em>{text.settings['clip to %n'].replace('%n', MAX_SCORES)}</em>
+          <em>{text.settings['clip to %n'].replace('%n', MAX_SCORES.toString())}</em>
           <input
             id="max"
             type="range"

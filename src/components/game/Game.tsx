@@ -7,7 +7,7 @@ import NewGame from '../nav/NewGame'
 import Replay from '../nav/Replay'
 import Help from '../nav/Help'
 import Settings from '../nav/Settings'
-import Modal from '../UI/Modal'
+import GameWonModal from './GameWonModal'
 import { initialGameState } from './common'
 import newGameReducer from './reducers/newGame'
 import replayReducer from './reducers/replay'
@@ -17,20 +17,22 @@ import defeatReducer from './reducers/defeat'
 import './Game.css'
 
 const gameReducer = function (state, action) {
-  action.config = this
+  // eslint-disable-next-line @typescript-eslint/no-this-alias
+  const config = this
 
   if (action.type === 'LOAD') {
-    return JSON.parse(action.stateString)
+    const parsedState = JSON.parse(action.payload)
+    return parsedState
   }
 
   if (action.type === 'STORE') {
     const currentState = JSON.stringify(state)
     sessionStorage.setItem('mijnenvegerij', currentState)
-    return state;
+    return state
   }
 
   if (action.type === 'NEW') {
-    return newGameReducer(action)
+    return newGameReducer(config)
   }
 
   if (action.type === 'REPLAY') {
@@ -38,15 +40,15 @@ const gameReducer = function (state, action) {
   }
 
   if (action.type === 'MOVE' || action.type === 'FLAG') {
-    return touchButtonReducer(state, action)
+    return touchButtonReducer(state, action, config)
   }
 
   if (action.type === 'VICTORY') {
-    return victoryReducer(state, action)
+    return victoryReducer(state, config)
   }
 
   if (action.type === 'DEFEAT') {
-    return defeatReducer(state, action)
+    return defeatReducer(state)
   }
 
   return initialGameState
@@ -55,7 +57,6 @@ const gameReducer = function (state, action) {
 const Game = () => {
   const pageCtx = useContext(PageContext)
   const { BOARD_SIZE, MINE_COUNT, FONT_SIZE } = pageCtx.config
-  const text = pageCtx.text
 
   const [gameState, dispatchGameAction] = useReducer(
     gameReducer.bind(pageCtx.config),
@@ -70,13 +71,16 @@ const Game = () => {
         storedState.includes('"game-lost"')
       )
       if (storedState && !gameHasEnded) {
-        dispatchGameAction({ type: 'LOAD', stateString: storedState })
+        const action = { type: 'LOAD', payload: storedState }
+        dispatchGameAction(action)
       } else {
-        dispatchGameAction({ type: 'NEW' })
+        const action = { type: 'NEW' }
+        dispatchGameAction(action)
       }
     }
     return () => {
-      dispatchGameAction({ type: 'STORE' })
+      const action = { type: 'STORE' }
+      dispatchGameAction(action)
     }
   });
 
@@ -90,11 +94,7 @@ const Game = () => {
         row.map((cell) => (
           <GameCell
             key={`${cell.row}_${cell.col}`}
-            row={cell.row}
-            col={cell.col}
-            fill={cell.fill}
-            done={cell.done}
-            locked={cell.locked}
+            cell={cell}
             onTouch={dispatchGameAction}
           />
         ))
@@ -126,29 +126,24 @@ const Game = () => {
 
   useEffect(() => {
     if (gameWasWon) {
-      dispatchGameAction({
-        type: 'VICTORY'
-      })
+      const action = { type: 'VICTORY' }
+      dispatchGameAction(action)
       setShowWonModal(true)
     } else if (gameWasLost) {
       // blow the untouched mines, odd number of mines will not blow in dev
       const waitTime = 100 + Math.ceil(200 * Math.random())
+      const action = { type: 'DEFEAT' }
       setTimeout(
-        () => dispatchGameAction({ type: 'DEFEAT' }),
+        () => dispatchGameAction(action),
         waitTime
       )
     }
-  }, [gameWasWon, gameWasLost, gameState?.mines])
+  }, [gameWasWon, gameWasLost])
 
-  const gameWonModal = <Modal
-    onConfirm={() => {}}
-    closeModal={() => setShowWonModal(false)}
-    className={gameState.stage}
-    textBefore={gameState.rank}
-    textAfter={gameState.score}
-  >
-    {text.game['You Won!']}
-  </Modal>
+  const gameWonModal = <GameWonModal
+    close={setShowWonModal}
+    state={gameState}
+  />
 
   return (
     <section

@@ -3,7 +3,7 @@ import PageContext from '../../store/page-context'
 import Game from '../game/Game'
 import CRLF from '../symbols/CRLF'
 
-const GoBack = (props) => {
+const GoBack = () => {
   const pageCtx = useContext(PageContext)
   const text = pageCtx.text
 

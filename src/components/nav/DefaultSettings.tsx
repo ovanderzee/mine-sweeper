@@ -52,10 +52,3 @@ const DefaultSettings = () => {
 }
 
 export default DefaultSettings
-
-
-
-
-//function Configure() {
-//  const pageCtx = useContext(PageContext)
-//  const { BOARD_SIZE, GAME_LEVEL, LANGUAGE, FONT_SIZE, PLAYER_NAME, MAX_SCORES } = pageCtx.config

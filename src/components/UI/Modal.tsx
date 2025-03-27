@@ -13,12 +13,12 @@ const Dialog = (props) => {
   const text = pageCtx.text
 
   const confirmHandler = () => {
-    props.onConfirm()
+    props.onConfirm && props.onConfirm()
     props.closeModal()
   }
 
   const cancelHandler = () => {
-    props.onCancel()
+    props.onCancel && props.onCancel()
     props.closeModal()
   }
 

@@ -1,23 +1,28 @@
-import * as nederlands from './translations/nederlands'
-import * as english from './translations/english'
+import nederlands from './translations/nederlands'
+import english from './translations/english'
 
-const tLen = (translation) => Object.keys(translation)
+const translationLength = (translation) => Object.keys(translation)
   .map(group => Object.keys(group))
   .flat()
   .length
-const assertLength = tLen(nederlands) === tLen(english)
+const assertEquality = translationLength(nederlands) === translationLength(english)
+
 console.assert(
-  assertLength,
+  assertEquality,
   'Translations have different number of entries',
 )
 
-const translations = {
+export const translations = {
   'en': 'English',
   'nl': 'Nederlands',
 }
+
 const translationIds = Object.keys(translations)
 
-/** Try to match the preferred language */
+/**
+  Try to match the preferred language
+  window.navigator.languages can be one item or an array of items
+*/
 const inferLanguage = () => {
   const navigatorLanguages =
     Array.isArray(window.navigator.languages) && window.navigator.languages.length
@@ -26,9 +31,8 @@ const inferLanguage = () => {
 
   const availableLanguages = navigatorLanguages.map((lang) => lang.substr(0, 2))
 
-  const commonLanguages = translationIds.map((trans) =>
-    availableLanguages.find((lang) => lang === trans)
-  ).filter(l => l)
+  const commonLanguages = translationIds
+    .filter(trans => availableLanguages.includes(trans))
 
   const languageMatch = commonLanguages.length
     ? commonLanguages[commonLanguages.length - 1]
@@ -37,11 +41,9 @@ const inferLanguage = () => {
   return languageMatch
 }
 
-const defaultLanguage = inferLanguage()
+export const defaultLanguage = inferLanguage()
 
-const texts = {
+export const texts = {
   nl: nederlands,
   en: english,
 }
-
-export { translations, defaultLanguage, texts }

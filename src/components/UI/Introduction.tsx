@@ -11,7 +11,7 @@ const Introduction = (props) => {
   const [endingClass, setEndingClass] = useState('')
   const { onEnd } = props
 
-  const goToGame = (event) => {
+  const goToGame = () => {
     setEndingClass('ending')
     onEnd(OVERLAY_FADE_OUT_TIME)
   }

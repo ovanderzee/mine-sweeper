@@ -6,7 +6,7 @@ import { texts } from '../common/i18n'
 const defaultPageState = {
   render: null,
   config: null,
-  text: null,
+  text: {},
 }
 
 /**
@@ -16,7 +16,7 @@ const defaultPageState = {
  */
 const PageProvider = (props) => {
   const stored = window.localStorage.getItem('mijnenveger')
-  const config = { ...DEFAULTS, ...JSON.parse(stored)}
+  const config = stored ? { ...DEFAULTS, ...JSON.parse(stored)} : DEFAULTS
   const { LANGUAGE } = config
   defaultPageState.config = config
   defaultPageState.text = texts[LANGUAGE]

@@ -9,7 +9,8 @@ const NewGame = (props) => {
 
   const [showModal, setShowModal] = useState(false)
 
-  const confirmHandler = () => props.onNew({ type: 'NEW' })
+  const action: SimpleAction = { type: 'NEW' }
+  const confirmHandler = () => props.onNew(action)
 
   const consentModal = <Modal
     className="consent"

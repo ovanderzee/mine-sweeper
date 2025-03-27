@@ -3,11 +3,13 @@ import { aspectualInside } from '../../common/functions';
 import './GameCell.css'
 
 const GameCell = (props) => {
-  const doneClass = props.done ? 'touched' : 'pristine'
-  const lockedClass = props.locked ? 'flag' : ''
-  const cellContent = props.done && props.fill > 0 && props.fill < 9 ? props.fill : ' '
-  const mineClass = props.done && props.fill > 8 ? 'mijn' : ''
-  const activatedClass = props.done === 'clicked' && props.fill > 8 ? 'explode' : ''
+  const { stage, fill, row, col, locked } = props.cell
+  const doneClass = stage ? 'touched' : 'pristine'
+  const lockedClass = locked ? 'flag' : ''
+  const cellContent = stage && fill > 0 && fill < 9 ? fill : ' '
+  const mineClass = stage && fill > 8 ? 'mijn' : ''
+  const activatedClass = stage === 'clicked' && fill > 8 ? 'explode' : ''
+
   let startEvent = null
 
   /*
@@ -16,20 +18,23 @@ const GameCell = (props) => {
   */
 
   const actionHandler = (event, type) => {
-    if (props.done) return
-    if (type === 'MOVE' && props.locked) return
+    if (stage) return
+    if (type === 'MOVE' && locked) return
 
-    let entry = { done: 'clicked' }
+    let entry = { stage: 'clicked' }
     if (type === 'FLAG') {
-      entry = { locked: !props.locked }
+      entry = { locked: !locked }
     }
 
-    props.onTouch({
-      type: type,
-      row: Number(props.row),
-      col: Number(props.col),
-      entry: entry
-    })
+    const cellAction = {
+      type,
+      payload: {
+        cell: props.cell,
+        entry
+      }
+    }
+
+    props.onTouch(cellAction)
   }
 
   /*
@@ -43,7 +48,7 @@ const GameCell = (props) => {
     CancelEvent: A garbled gesture is trying to cancel interaction
     Do everything required to terminate combined event
   */
-  const cancelHandler = (event) => {
+  const cancelHandler = () => {
     startEvent = null
   }
 
@@ -53,7 +58,8 @@ const GameCell = (props) => {
   const moveHandler = (event) => {
     if (!startEvent) return
 
-    const box = startEvent.target.getBoundingClientRect()
+    const target = startEvent.target
+    const box = target.getBoundingClientRect()
     const horizontalInside = aspectualInside(box.x, box.width, event.nativeEvent.pageX)
     const verticalInside = aspectualInside(box.y, box.height, event.nativeEvent.pageY)
 
@@ -69,7 +75,7 @@ const GameCell = (props) => {
     if (!startEvent) return
 
     const touchDuration = event.timeStamp - startEvent.timeStamp
-    cancelHandler(event)
+    cancelHandler()
 
     if (touchDuration < LONG_PRESS_THRESHOLD) {
       actionHandler(event, 'MOVE')
@@ -82,8 +88,8 @@ const GameCell = (props) => {
     <button
       type="button"
       className={`${doneClass} ${lockedClass} ${mineClass} ${activatedClass}`}
-      id={`row${props.row}col${props.col}`}
-      style={{'--cell-row': props.row + 1, '--cell-col': props.col + 1}}
+      id={`row${row}col${col}`}
+      style={{'--cell-row': row + 1, '--cell-col': col + 1}}
       onPointerDown={beginHandler}
       onPointerMove={moveHandler}
       onPointerCancel={cancelHandler}

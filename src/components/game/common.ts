@@ -5,7 +5,7 @@
  * @param {Number} BOARD_SIZE
  * @param {Function} callback with (x, y) arguments
  */
-const iterateNeighbours = (cell, BOARD_SIZE, callback) => {
+export const iterateNeighbours = (cell, BOARD_SIZE, callback) => {
   for (let x = cell.row - 1; x < cell.row + 2; x++) {
     if (x >= 0 && x < BOARD_SIZE) {
       for (let y = cell.col - 1; y < cell.col + 2; y++) {
@@ -19,20 +19,30 @@ const iterateNeighbours = (cell, BOARD_SIZE, callback) => {
 }
 
 /** Initial cell data */
-const initialCellState = {
+export const initialCellState = {
+  stage: '',
   fill: 0,
+  row: -1,
+  col: -1
 }
 
 /** The right board dimensions */
-const initialBoard = (BOARD_SIZE) =>
+export const initialBoard = (BOARD_SIZE) =>
   Array(BOARD_SIZE).fill(
     Array(BOARD_SIZE).fill(initialCellState)
   )
 
 /** Complete data model */
-const initialGameState = {
+export const initialGameState = {
+  // new
   stage: 'game-new',
-  board: [],
+  board: [[]],
+  // playing:
+  begin: 0,
+  level: 0,
+  // over:
+  end: 0,
+  rank: 0,
+  score: 0,
+  mines: []
 }
-
-export { iterateNeighbours, initialBoard, initialGameState }

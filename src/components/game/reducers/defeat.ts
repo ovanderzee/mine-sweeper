@@ -1,13 +1,16 @@
-const defeatReducer = (state, action) => {
+const defeatReducer = (state) => {
 
-  const mines = state.board.map(row => row.map(
-    cell => cell.done === 'opened' && cell.fill > 8 && cell)
-  ).flat().filter(c => c)
+  const mines: CellState[] = state.board
+    .flat()
+    .filter(cell => cell.stage === 'opened' && cell.fill > 8)
 
   if (mines.length) {
     // trigger next mine in next effect
     const pickOne = Math.floor(mines.length * Math.random())
-    state.board[mines[pickOne].row][mines[pickOne].col] = { ...mines[pickOne], done: 'clicked' }
+    state.board[mines[pickOne].row][mines[pickOne].col] = {
+      ...mines[pickOne],
+      stage: 'clicked'
+    }
     state.board = [...state.board]
 
     return {

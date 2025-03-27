@@ -17,7 +17,6 @@ const GameCellDemoWatch = () => {
 
 const GameCellDemoNav = () => {
   const pageCtx = useContext(PageContext)
-
   const watchHandler = () => pageCtx.navigate(<GameCellDemo />)
 
   const navButton = <button type="button" title="Cell State Demo" onClick={watchHandler}>
@@ -30,7 +29,6 @@ const GameCellDemoNav = () => {
 const GameCellDemo = () => {
   const pageCtx = useContext(PageContext)
   const { FONT_SIZE } = pageCtx.config
-
   const [activatedClass, setActivatedClass] = useState('explode')
 
   const explodeHandler = () => {

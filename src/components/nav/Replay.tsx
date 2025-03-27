@@ -9,7 +9,8 @@ const Replay = (props) => {
 
   const [showModal, setShowModal] = useState(false)
 
-  const confirmHandler = () => props.onReplay({ type: 'REPLAY' })
+  const action: SimpleAction = { type: 'REPLAY' }
+  const confirmHandler = () => props.onReplay(action)
 
   const consentModal = <Modal
     className="consent"
