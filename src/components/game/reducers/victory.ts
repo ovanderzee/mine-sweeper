@@ -1,6 +1,8 @@
 import { MIN_DURATION } from '../../../common/constants'
+import { AppConfig } from '../../../common/app-types'
+import { GameState, CellStateStage, ScoreItem } from '../../../common/game-types'
 
-const victoryReducer = (state, config) => {
+const victoryReducer = (state: GameState, config: AppConfig): GameState => {
   const { BOARD_SIZE, GAME_LEVEL, MINE_COUNT, PLAYER_NAME, MAX_SCORES } = config
 
   const duration = Math.max(state.end - state.begin, MIN_DURATION)
@@ -8,7 +10,7 @@ const victoryReducer = (state, config) => {
   const moves = state.board
     .map((row) =>
       row.filter((cell) =>
-        cell.stage === 'clicked'))
+        cell.stage === CellStateStage.TESTED))
     .flat()
     .length
 
@@ -20,7 +22,7 @@ const victoryReducer = (state, config) => {
     / Math.pow(duration, 0.5)
   )
 
-  const victory = {
+  const victory: ScoreItem = {
     begin: state.begin,
     duration: duration,
     user: PLAYER_NAME,
@@ -31,9 +33,9 @@ const victoryReducer = (state, config) => {
   }
 
   // add
-  const scoresString = localStorage.getItem('mijnengeveegd')
-  const scoreList = scoresString ? JSON.parse(scoresString) : []
-  const isThere = scoreList.find((scoreItem) => scoreItem.begin === victory.begin)
+  const scoresString: string | null = localStorage.getItem('mijnengeveegd')
+  const scoreList: ScoreItem[] = scoresString ? JSON.parse(scoresString) : []
+  const isThere = scoreList.find((scoreItem: ScoreItem) => scoreItem.begin === victory.begin)
   if (!isThere) scoreList.push(victory)
 
   // rearrange

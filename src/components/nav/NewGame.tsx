@@ -1,15 +1,22 @@
-import { useContext, useState } from 'react'
+import { ActionDispatch, useContext, useState } from 'react'
 import PageContext from '../../store/page-context'
 import Modal from '../UI/Modal'
 import Play from '../symbols/Play'
+import { GameStages, GameActionType, SimpleAction } from '../../common/game-types';
 
-const NewGame = (props) => {
+interface NewGameProps {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onNew: ActionDispatch<any>;
+  stage: GameStages;
+}
+
+const NewGame = (props: NewGameProps) => {
   const pageCtx = useContext(PageContext)
   const text = pageCtx.text
 
   const [showModal, setShowModal] = useState(false)
 
-  const action: SimpleAction = { type: 'NEW' }
+  const action: SimpleAction = { type: GameActionType.NEW }
   const confirmHandler = () => props.onNew(action)
 
   const consentModal = <Modal
@@ -22,7 +29,7 @@ const NewGame = (props) => {
   </Modal>
 
   const newGameHandler = () => {
-    const isPlaying = props.stage === 'game-playing'
+    const isPlaying = props.stage === GameStages.PLAYING
     isPlaying ? setShowModal(isPlaying) : confirmHandler()
   }
 

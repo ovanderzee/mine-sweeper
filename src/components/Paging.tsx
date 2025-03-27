@@ -7,7 +7,7 @@ function Paging() {
   const pageCtx = useContext(PageContext)
   const [showIntroduction, setShowIntroduction] = useState(false)
 
-  const goToGame = (timeout) => {
+  const goToGame = (timeout: number) => {
     pageCtx.navigate(<Game />)
     setTimeout(
       () => setShowIntroduction(false),

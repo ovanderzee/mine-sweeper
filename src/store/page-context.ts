@@ -1,11 +1,12 @@
 import React from 'react'
+import { AppConfig, PageContextProps } from '../common/app-types'
 
-const PageContext = React.createContext({
-  render: null,
+const PageContext = React.createContext<PageContextProps>({
+  render: null as unknown as React.ReactElement,
   navigate: () => {},
-  config: {},
+  config: {} as AppConfig,
   text: {},
-  configure: () => {},
+  configure: (): void => {}
 })
 
 export default PageContext

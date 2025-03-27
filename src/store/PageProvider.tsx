@@ -1,12 +1,13 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import PageContext from './page-context'
 import DEFAULTS from '../common/defaults'
 import { texts } from '../common/i18n'
+import { AppConfig, AppSubConfig, PageContextProps, Translation } from '../common/app-types'
 
 const defaultPageState = {
-  render: null,
-  config: null,
-  text: {},
+  render: null as unknown as React.ReactElement,
+  config: null as unknown as AppConfig,
+  text: {} as Translation
 }
 
 /**
@@ -14,7 +15,7 @@ const defaultPageState = {
  * @param {Object} props
  * @returns {Object} Page members and methods
  */
-const PageProvider = (props) => {
+const PageProvider = (props: { children: React.ReactNode }) => {
   const stored = window.localStorage.getItem('mijnenveger')
   const config = stored ? { ...DEFAULTS, ...JSON.parse(stored)} : DEFAULTS
   const { LANGUAGE } = config
@@ -23,7 +24,7 @@ const PageProvider = (props) => {
 
   const [pageState, setPageState] = useState(defaultPageState)
 
-  const navigationHandler = (toComponent) => {
+  const navigationHandler = (toComponent: React.ReactElement) => {
     setPageState(prev => {
       return {
         ...prev,
@@ -32,7 +33,7 @@ const PageProvider = (props) => {
     })
   }
 
-  const configurationHandler = (changes = DEFAULTS) => {
+  const configurationHandler = (changes: AppSubConfig = DEFAULTS) => {
     setPageState(prev => {
       const update = {
         ...prev,
@@ -50,7 +51,7 @@ const PageProvider = (props) => {
     })
   }
 
-  const pageCtx = {
+  const pageCtx: PageContextProps = {
     render: pageState.render,
     navigate: navigationHandler,
     config: pageState.config,

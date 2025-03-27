@@ -4,7 +4,7 @@ import PageContext from '../../store/page-context'
 import { OVERLAY_ELEMENT, OVERLAY_FADE_OUT_TIME } from '../../common/constants'
 import './Introduction.css'
 
-const Introduction = (props) => {
+const Introduction = (props: { onEnd: (timeout: number) => void }) => {
   const pageCtx = useContext(PageContext)
   const text = pageCtx.text
 
@@ -57,7 +57,7 @@ const Introduction = (props) => {
     </div>
   )
 
-  return createPortal(animatedHtml, OVERLAY_ELEMENT)
+  return createPortal(animatedHtml, OVERLAY_ELEMENT!)
 }
 
 export default Introduction

@@ -14,40 +14,42 @@ import replayReducer from './reducers/replay'
 import touchButtonReducer from './reducers/touchButton'
 import victoryReducer from './reducers/victory'
 import defeatReducer from './reducers/defeat'
+import { AppConfig } from '../../common/app-types'
+import { GameState, GameStages, GameAction, GameActionType, LoadAction, SimpleAction } from '../../common/game-types'
 import './Game.css'
 
-const gameReducer = function (state, action) {
+const gameReducer = function (this: AppConfig, state: GameState, action: GameAction) {
   // eslint-disable-next-line @typescript-eslint/no-this-alias
-  const config = this
+  const config: AppConfig = this
 
-  if (action.type === 'LOAD') {
-    const parsedState = JSON.parse(action.payload)
+  if (action.type === GameActionType.LOAD) {
+    const parsedState: GameState = JSON.parse(action.payload)
     return parsedState
   }
 
-  if (action.type === 'STORE') {
+  if (action.type === GameActionType.STORE) {
     const currentState = JSON.stringify(state)
     sessionStorage.setItem('mijnenvegerij', currentState)
     return state
   }
 
-  if (action.type === 'NEW') {
+  if (action.type === GameActionType.NEW) {
     return newGameReducer(config)
   }
 
-  if (action.type === 'REPLAY') {
+  if (action.type === GameActionType.REPLAY) {
     return replayReducer(state)
   }
 
-  if (action.type === 'MOVE' || action.type === 'FLAG') {
+  if (action.type === GameActionType.MOVE || action.type === GameActionType.FLAG) {
     return touchButtonReducer(state, action, config)
   }
 
-  if (action.type === 'VICTORY') {
+  if (action.type === GameActionType.VICTORY) {
     return victoryReducer(state, config)
   }
 
-  if (action.type === 'DEFEAT') {
+  if (action.type === GameActionType.DEFEAT) {
     return defeatReducer(state)
   }
 
@@ -58,7 +60,8 @@ const Game = () => {
   const pageCtx = useContext(PageContext)
   const { BOARD_SIZE, MINE_COUNT, FONT_SIZE } = pageCtx.config
 
-  const [gameState, dispatchGameAction] = useReducer(
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [gameState, dispatchGameAction] = useReducer<GameState, any>( // any GameAction
     gameReducer.bind(pageCtx.config),
     initialGameState
   )
@@ -71,15 +74,15 @@ const Game = () => {
         storedState.includes('"game-lost"')
       )
       if (storedState && !gameHasEnded) {
-        const action = { type: 'LOAD', payload: storedState }
+        const action: LoadAction = { type: GameActionType.LOAD, payload: storedState }
         dispatchGameAction(action)
       } else {
-        const action = { type: 'NEW' }
+        const action: SimpleAction = { type: GameActionType.NEW }
         dispatchGameAction(action)
       }
     }
     return () => {
-      const action = { type: 'STORE' }
+      const action: SimpleAction = { type: GameActionType.STORE }
       dispatchGameAction(action)
     }
   });
@@ -88,7 +91,7 @@ const Game = () => {
     <article
         id="playground"
         className={`board-size__${BOARD_SIZE}`}
-        style={{'--board-size': BOARD_SIZE}}
+        style={{'--board-size': BOARD_SIZE} as React.CSSProperties}
     >
       {gameState.board.map((row) =>
         row.map((cell) => (
@@ -121,18 +124,18 @@ const Game = () => {
   )
 
   const [showWonModal, setShowWonModal] = useState(false)
-  const gameWasWon = gameState.stage === 'game-won'
-  const gameWasLost = gameState.stage === 'game-lost'
+  const gameWasWon = gameState.stage === GameStages.WON
+  const gameWasLost = gameState.stage === GameStages.LOST
 
   useEffect(() => {
     if (gameWasWon) {
-      const action = { type: 'VICTORY' }
+      const action: SimpleAction = { type: GameActionType.VICTORY }
       dispatchGameAction(action)
       setShowWonModal(true)
     } else if (gameWasLost) {
       // blow the untouched mines, odd number of mines will not blow in dev
       const waitTime = 100 + Math.ceil(200 * Math.random())
-      const action = { type: 'DEFEAT' }
+      const action: SimpleAction = { type: GameActionType.DEFEAT }
       setTimeout(
         () => dispatchGameAction(action),
         waitTime

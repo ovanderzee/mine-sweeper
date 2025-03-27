@@ -1,8 +1,14 @@
 import { useContext } from 'react'
 import PageContext from '../../store/page-context'
 import Modal from '../UI/Modal'
+import { GameState } from '../../common/game-types'
 
-const GameWonModal = (props) => {
+interface GameWonModalProps {
+  close: (next: boolean) => void,
+  state: GameState
+}
+
+const GameWonModal = (props: GameWonModalProps) => {
   const pageCtx = useContext(PageContext)
   const text = pageCtx.text
 

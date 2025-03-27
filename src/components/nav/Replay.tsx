@@ -1,15 +1,22 @@
-import { useContext, useState } from 'react'
+import { ActionDispatch, useContext, useState } from 'react'
 import PageContext from '../../store/page-context'
 import Modal from '../UI/Modal'
 import Redo from '../symbols/Redo'
+import { GameStages, GameActionType, SimpleAction } from '../../common/game-types';
 
-const Replay = (props) => {
+interface ReplayProps {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onReplay: ActionDispatch<any>;
+  stage: GameStages;
+}
+
+const Replay = (props: ReplayProps) => {
   const pageCtx = useContext(PageContext)
   const text = pageCtx.text
 
   const [showModal, setShowModal] = useState(false)
 
-  const action: SimpleAction = { type: 'REPLAY' }
+  const action: SimpleAction = { type: GameActionType.REPLAY }
   const confirmHandler = () => props.onReplay(action)
 
   const consentModal = <Modal
@@ -22,7 +29,7 @@ const Replay = (props) => {
   </Modal>
 
   const replayHandler = () => {
-    const isPlaying = props.stage === 'game-playing'
+    const isPlaying = props.stage === GameStages.PLAYING
     isPlaying ? setShowModal(isPlaying) : confirmHandler()
   }
 

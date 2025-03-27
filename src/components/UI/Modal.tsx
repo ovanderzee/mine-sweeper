@@ -1,13 +1,24 @@
-import { useContext } from 'react'
+import React, { useContext } from 'react'
 import { createPortal } from 'react-dom'
 import PageContext from '../../store/page-context'
+import { Primitive } from '../../common/app-types'
 import './Modal.css'
 
-const Backdrop = (props) => {
+interface ModalProps {
+  children: React.ReactNode,
+  className: string,
+  onConfirm: () => void,
+  onCancel?: () => void,
+  closeModal: () => void,
+  textBefore?: Primitive,
+  textAfter?: Primitive,
+}
+
+const Backdrop = (props: ModalProps) => {
   return <div className="backdrop" onClick={props.closeModal} />
 }
 
-const Dialog = (props) => {
+const Dialog = (props: ModalProps) => {
   const pageCtx = useContext(PageContext)
   const { FONT_SIZE } = pageCtx.config
   const text = pageCtx.text
@@ -18,7 +29,7 @@ const Dialog = (props) => {
   }
 
   const cancelHandler = () => {
-    props.onCancel && props.onCancel()
+    props?.onCancel && props.onCancel()
     props.closeModal()
   }
 
@@ -34,8 +45,8 @@ const Dialog = (props) => {
     >
       <h3 className="content">{props.children}</h3>
       <div className="buttons">
-        {props.onCancel && cancelButton}
-        {props.onConfirm && confirmButton}
+        {props?.onCancel && cancelButton}
+        {confirmButton}
       </div>
     </div>
   )
@@ -43,12 +54,12 @@ const Dialog = (props) => {
 
 const portalElement = document.getElementById('modal')
 
-const Modal = (props) => createPortal(
+const Modal = (props: ModalProps) => createPortal(
   <div className={`modal ${props.className}-modal`}>
     <Backdrop {...props} />
     <Dialog {...props}>{props.children}</Dialog>
   </div>,
-  portalElement
+  portalElement!
 )
 
 export default Modal

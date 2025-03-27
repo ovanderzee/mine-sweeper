@@ -4,6 +4,7 @@ import EraseScores from '../nav/EraseScores'
 import Help from '../nav/Help'
 import Settings from '../nav/Settings'
 import GoBack from '../nav/GoBack'
+import { ScoreItem } from '../../common/game-types'
 import './Meta.css'
 import './HallOfFame.css'
 
@@ -42,7 +43,7 @@ const HallOfFame = () => {
           </li>
         )}
 
-        {scores.map((play, index) => (
+        {scores.map((play: ScoreItem, index: number) => (
           <li key={`${index + 1}_${play.score}`}>
             <header>
               <h2 className="rank">{index + 1}</h2>

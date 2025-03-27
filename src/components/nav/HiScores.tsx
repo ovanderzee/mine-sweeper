@@ -3,7 +3,7 @@ import PageContext from '../../store/page-context'
 import HallOfFame from '../meta/HallOfFame'
 import ChampionsPodium from '../symbols/ChampionsPodium'
 
-const HiScores = (props) => {
+const HiScores = (props: { label?: string; }) => {
   const pageCtx = useContext(PageContext)
   const text = pageCtx.text
 

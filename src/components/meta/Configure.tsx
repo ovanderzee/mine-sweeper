@@ -4,7 +4,7 @@ import DefaultSettings from '../nav/DefaultSettings'
 import HiScores from '../nav/HiScores'
 import Help from '../nav/Help'
 import GoBack from '../nav/GoBack'
-import { translations } from '../../common/i18n'
+import { Languages } from '../../common/app-types'
 import { preventReloadByEnter } from '../../common/functions'
 import './Meta.css'
 import './Configure.css'
@@ -18,9 +18,9 @@ function Configure() {
     sessionStorage.removeItem('mijnenvegerij')
   }
 
-  const changeBoardSizeHandler = event => {
+  const changeBoardSizeHandler = (event: React.ChangeEvent) => {
     exitCurrentGame()
-    const ctrl = event.target
+    const ctrl = event.target as HTMLInputElement
     const value = +ctrl.value
     const prev = pageCtx.config
     pageCtx.configure({
@@ -29,9 +29,9 @@ function Configure() {
     })
   }
 
-  const changeGameLevelHandler = event => {
+  const changeGameLevelHandler = (event: React.ChangeEvent) => {
     exitCurrentGame()
-    const ctrl = event.target
+    const ctrl = event.target as HTMLInputElement
     const value = +ctrl.value
     const prev = pageCtx.config
     pageCtx.configure({
@@ -77,16 +77,16 @@ function Configure() {
     </fieldset>
   )
 
-  const translationIds = Object.keys(translations)
-  const translationNames = Object.values(translations)
+  const translationIds = Object.keys(Languages)
+  const translationNames = Object.values(Languages)
 
-  const changeLanguageHandler = event => {
-    const ctrl = event.target
-    pageCtx.configure({ LANGUAGE: ctrl.value })
+  const changeLanguageHandler = (event: React.ChangeEvent) => {
+    const ctrl = event.target as HTMLSelectElement
+    pageCtx.configure({ LANGUAGE: ctrl.value as Languages })
   }
 
-  const changeFontSizeHandler = event => {
-    const ctrl = event.target
+  const changeFontSizeHandler = (event: React.ChangeEvent) => {
+    const ctrl = event.target as HTMLInputElement
     pageCtx.configure({ FONT_SIZE: +ctrl.value })
   }
 
@@ -133,13 +133,13 @@ function Configure() {
     </fieldset>
   )
 
-  const changePlayerNameHandler = event => {
-    const ctrl = event.target
+  const changePlayerNameHandler = (event: React.ChangeEvent) => {
+    const ctrl = event.target as HTMLInputElement
     pageCtx.configure({ PLAYER_NAME: ctrl.value })
   }
 
-  const changeMaxScoresHandler = event => {
-    const ctrl = event.target
+  const changeMaxScoresHandler = (event: React.ChangeEvent) => {
+    const ctrl = event.target as HTMLInputElement
     pageCtx.configure({ MAX_SCORES: +ctrl.value })
   }
 

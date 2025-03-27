@@ -1,29 +1,27 @@
 import { iterateNeighbours } from '../common'
+import { AppConfig } from '../../../common/app-types'
+import { GameState, GameStages, GameAction, GameActionType, CellStateStage, CellState, CellStateEntry } from '../../../common/game-types'
 
-const touchButtonReducer = (state, action, config) => {
+const touchButtonReducer = (state: GameState, action: GameAction, config: AppConfig): GameState => {
   const { BOARD_SIZE, MINE_COUNT } = config
   const { stage, fill, row, col } = action.payload.cell
   const updState = { ...state }
 
-  if (state.stage === 'game-new') {
-    updState.stage = 'game-playing'
+  if (state.stage === GameStages.NEW) {
+    updState.stage = GameStages.PLAYING
     updState.begin = Date.now()
   }
 
   if (
-    updState.stage !== 'game-playing' || state.end || stage
+    updState.stage !== GameStages.PLAYING || state.end || stage
   )
     return state
 
-  /*
-    Now we are dealing with a just clicked pristine cell in a running game
-  */
-
-  const updBoard = state.board.map(row => row.map(cell => cell))
+  const updBoard = state.board.map((row: CellState[]) => row.map(cell => cell))
   let updCell = updBoard[row][col]
 
   /** open cells with digits or pristine cells only */
-  const touchCell = (source, entry): CellState =>
+  const touchCell = (source: CellState, entry: CellStateEntry): CellState =>
     updBoard[source.row][source.col] = {
       ...source,
       ...entry,
@@ -31,7 +29,7 @@ const touchButtonReducer = (state, action, config) => {
 
   updCell = touchCell(updCell, action.payload.entry)
 
-  if (action.type === 'FLAG') {
+  if (action.type === GameActionType.FLAG) {
     // then entry = {locked: <Boolean>}
     return {
       ...updState,
@@ -41,19 +39,19 @@ const touchButtonReducer = (state, action, config) => {
 
   /** Followup touches */
 
-  const findPristineCells = () =>
+  const findPristineCells = (): CellState[] =>
     updBoard
       .map((row) => row.filter((cell) => !cell.stage))
       .flat()
 
   if (fill === 0) {
     // blank cell touched, touch it's neighbours recursively
-    const touchBlankNeighbours = (x, y) => {
+    const touchBlankNeighbours = (x: number, y: number) => {
       const neighbourCell = updBoard[x][y]
       // do not touch touched or locked cells
       if (neighbourCell.stage || neighbourCell.locked)
         return
-      touchCell(neighbourCell, { stage: 'opened' })
+      touchCell(neighbourCell, { stage: CellStateStage.RELEASED })
       // iterate while being a blank
       if (neighbourCell.fill === 0)
         iterateNeighbours(updBoard[x][y], BOARD_SIZE, touchBlankNeighbours)
@@ -61,8 +59,8 @@ const touchButtonReducer = (state, action, config) => {
     iterateNeighbours(updCell, BOARD_SIZE, touchBlankNeighbours)
   } else if (fill > 8) {
     // mine touched, touch all buttons, game lost
-    findPristineCells().forEach((cell) => touchCell(cell, { stage: 'opened' }))
-    updState.stage = 'game-lost'
+    findPristineCells().forEach((cell) => touchCell(cell, { stage: CellStateStage.RELEASED }))
+    updState.stage = GameStages.LOST
     updState.end = Date.now()
   } else {
     // neighbour of mine touched, show contents
@@ -71,8 +69,8 @@ const touchButtonReducer = (state, action, config) => {
   const pristineCells = findPristineCells()
   if (pristineCells.length === MINE_COUNT) {
     // only mines remain, touch remaining buttons, game won
-    pristineCells.forEach((cell) => touchCell(cell, { stage: 'opened' }))
-    updState.stage = 'game-won'
+    pristineCells.forEach((cell) => touchCell(cell, { stage: CellStateStage.RELEASED }))
+    updState.stage = GameStages.WON
     updState.end = Date.now()
   }
 

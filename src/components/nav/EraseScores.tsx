@@ -3,7 +3,7 @@ import PageContext from '../../store/page-context'
 import Erase from '../symbols/Erase'
 import Modal from '../UI/Modal'
 
-const EraseScores = (props) => {
+const EraseScores = (props: { onErase: () => void }) => {
   const pageCtx = useContext(PageContext)
   const text = pageCtx.text
 
