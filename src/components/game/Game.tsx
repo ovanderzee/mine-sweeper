@@ -9,13 +9,14 @@ import Help from '../nav/Help'
 import Settings from '../nav/Settings'
 import GameWonModal from './GameWonModal'
 import { initialGameState } from './common'
+import loadReducer from './reducers/load'
 import newGameReducer from './reducers/newGame'
 import replayReducer from './reducers/replay'
 import touchButtonReducer from './reducers/touchButton'
 import victoryReducer from './reducers/victory'
 import defeatReducer from './reducers/defeat'
 import { AppConfig } from '../../common/app-types'
-import { GameState, GameStages, GameAction, GameActionType, LoadAction, SimpleAction } from '../../common/game-types'
+import { GameState, GameStages, GameAction, GameActionType, PayloadAction } from '../../common/game-types'
 import './Game.css'
 
 const gameReducer = function (this: AppConfig, state: GameState, action: GameAction) {
@@ -23,8 +24,7 @@ const gameReducer = function (this: AppConfig, state: GameState, action: GameAct
   const config: AppConfig = this
 
   if (action.type === GameActionType.LOAD) {
-    const parsedState: GameState = JSON.parse(action.payload)
-    return parsedState
+    return loadReducer(action as PayloadAction)
   }
 
   if (action.type === GameActionType.STORE) {
@@ -42,7 +42,7 @@ const gameReducer = function (this: AppConfig, state: GameState, action: GameAct
   }
 
   if (action.type === GameActionType.MOVE || action.type === GameActionType.FLAG) {
-    return touchButtonReducer(state, action, config)
+    return touchButtonReducer(state, action as PayloadAction, config)
   }
 
   if (action.type === GameActionType.VICTORY) {
@@ -60,8 +60,7 @@ const Game = () => {
   const pageCtx = useContext(PageContext)
   const { BOARD_SIZE, MINE_COUNT, FONT_SIZE } = pageCtx.config
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const [gameState, dispatchGameAction] = useReducer<GameState, any>( // any GameAction
+  const [gameState, dispatchGameAction] = useReducer(
     gameReducer.bind(pageCtx.config),
     initialGameState
   )
@@ -74,15 +73,15 @@ const Game = () => {
         storedState.includes('"game-lost"')
       )
       if (storedState && !gameHasEnded) {
-        const action: LoadAction = { type: GameActionType.LOAD, payload: storedState }
+        const action: GameAction = { type: GameActionType.LOAD, payload: storedState }
         dispatchGameAction(action)
       } else {
-        const action: SimpleAction = { type: GameActionType.NEW }
+        const action: GameAction = { type: GameActionType.NEW}
         dispatchGameAction(action)
       }
     }
     return () => {
-      const action: SimpleAction = { type: GameActionType.STORE }
+      const action: GameAction = { type: GameActionType.STORE}
       dispatchGameAction(action)
     }
   });
@@ -129,13 +128,13 @@ const Game = () => {
 
   useEffect(() => {
     if (gameWasWon) {
-      const action: SimpleAction = { type: GameActionType.VICTORY }
+      const action: GameAction = { type: GameActionType.VICTORY}
       dispatchGameAction(action)
       setShowWonModal(true)
     } else if (gameWasLost) {
       // blow the untouched mines, odd number of mines will not blow in dev
       const waitTime = 100 + Math.ceil(200 * Math.random())
-      const action: SimpleAction = { type: GameActionType.DEFEAT }
+      const action: GameAction = { type: GameActionType.DEFEAT}
       setTimeout(
         () => dispatchGameAction(action),
         waitTime

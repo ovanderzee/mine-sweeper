@@ -1,12 +1,12 @@
 import React from 'react';
 import { LONG_PRESS_THRESHOLD } from '../../common/constants'
-import { CellState, CellStateStage, CellStateEntry, CellAction, GameActionType } from '../../common/game-types';
+import { CellState, CellStateStage, CellStateEntry, GameAction, GameActionType } from '../../common/game-types';
 import { aspectualInside } from '../../common/functions';
 import './GameCell.css'
 
 interface GameCellProps {
   cell: CellState,
-  onTouch: (action: CellAction) => void
+  onTouch: (action: GameAction) => void
 }
 
 const GameCell = (props: GameCellProps) => {
@@ -33,15 +33,16 @@ const GameCell = (props: GameCellProps) => {
       entry = { locked: !locked }
     }
 
-    const cellAction: CellAction = {
+    const payload = JSON.stringify({
+      cell: props.cell as CellState,
+      entry
+    })
+    const GameAction: GameAction = {
       type,
-      payload: {
-        cell: props.cell as CellState,
-        entry
-      }
+      payload
     }
 
-    props.onTouch(cellAction)
+    props.onTouch(GameAction)
   }
 
   /*

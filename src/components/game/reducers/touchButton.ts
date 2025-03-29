@@ -1,10 +1,11 @@
 import { iterateNeighbours } from '../common'
 import { AppConfig } from '../../../common/app-types'
-import { GameState, GameStages, GameAction, GameActionType, CellStateStage, CellState, CellStateEntry } from '../../../common/game-types'
+import { GameState, GameStages, GameActionType, PayloadAction, CellActionData, CellStateStage, CellState, CellStateEntry } from '../../../common/game-types'
 
-const touchButtonReducer = (state: GameState, action: GameAction, config: AppConfig): GameState => {
+const touchButtonReducer = (state: GameState, action: PayloadAction, config: AppConfig): GameState => {
   const { BOARD_SIZE, MINE_COUNT } = config
-  const { stage, fill, row, col } = action.payload.cell
+  const payload: CellActionData = JSON.parse(action.payload)
+  const { stage, fill, row, col } = payload.cell
   const updState = { ...state }
 
   if (state.stage === GameStages.NEW) {
@@ -27,7 +28,7 @@ const touchButtonReducer = (state: GameState, action: GameAction, config: AppCon
       ...entry,
     }
 
-  updCell = touchCell(updCell, action.payload.entry)
+  updCell = touchCell(updCell, payload.entry)
 
   if (action.type === GameActionType.FLAG) {
     // then entry = {locked: <Boolean>}

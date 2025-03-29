@@ -27,28 +27,18 @@ export enum GameActionType {
 }
 
 export interface CellActionData {
-  cell: CellState
-  entry: CellStateEntry
+  cell: CellState;
+  entry: CellStateEntry;
 }
 
-export interface CellAction {
-  type: GameActionType;
-  payload: CellActionData;
-}
-
-export interface LoadAction {
-  type: GameActionType;
-  payload: string;
-}
-
-export interface SimpleAction {
-  type: GameActionType;
+export interface PayloadAction {
+  type: GameActionType
+  payload: string // stringified, LOAD: GameState, MOVE | FLAG: CellActionData
 }
 
 export interface GameAction {
-  type: GameActionType;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  payload: any;
+  type: GameActionType
+  payload?: string
 }
 
 export enum GameStages {

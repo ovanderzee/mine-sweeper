@@ -1,12 +1,11 @@
-import { ActionDispatch, useContext, useState } from 'react'
+import { useContext, useState } from 'react'
 import PageContext from '../../store/page-context'
 import Modal from '../UI/Modal'
 import Play from '../symbols/Play'
-import { GameStages, GameActionType, SimpleAction } from '../../common/game-types';
+import { GameStages, GameActionType, GameAction } from '../../common/game-types';
 
 interface NewGameProps {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  onNew: ActionDispatch<any>;
+  onNew: (action: GameAction) => void;
   stage: GameStages;
 }
 
@@ -16,7 +15,7 @@ const NewGame = (props: NewGameProps) => {
 
   const [showModal, setShowModal] = useState(false)
 
-  const action: SimpleAction = { type: GameActionType.NEW }
+  const action: GameAction = { type: GameActionType.NEW}
   const confirmHandler = () => props.onNew(action)
 
   const consentModal = <Modal
