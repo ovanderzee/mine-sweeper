@@ -8,10 +8,8 @@ const victoryReducer = (state: GameState, config: AppConfig): GameState => {
   const duration = Math.max(state.end - state.begin, MIN_DURATION)
 
   const moves = state.board
-    .map((row) =>
-      row.filter((cell) =>
-        cell.stage === CellStateStage.TESTED))
     .flat()
+    .filter(cell => cell.stage === CellStateStage.TESTED)
     .length
 
   const score = Math.round(

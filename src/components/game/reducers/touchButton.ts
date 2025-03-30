@@ -42,8 +42,8 @@ const touchButtonReducer = (state: GameState, action: PayloadAction, config: App
 
   const findPristineCells = (): CellState[] =>
     updBoard
-      .map((row) => row.filter((cell) => !cell.stage))
       .flat()
+      .filter(cell => !cell.stage)
 
   if (fill === 0) {
     // blank cell touched, touch it's neighbours recursively
