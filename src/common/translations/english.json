@@ -16,6 +16,12 @@
   "game": {
     "You Won!": "Congrats, you WON !"
   },
+  "cell": {
+    "row": "row",
+    "col": "column",
+    "pristine": "hidden",
+    "touched": "open"
+  },
   "help": {
     "Intro Paragraph": "Find all mines by looking for clues.",
     "Game Scores Comment": "Number of hidden mines; access to Hall of Fame",

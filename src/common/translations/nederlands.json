@@ -16,6 +16,12 @@
   "game": {
     "You Won!": "Gefeliciteerd, je hebt gewonnen!"
   },
+  "cell": {
+    "row": "rij",
+    "col": "kolom",
+    "pristine": "verborgen",
+    "touched": "geopend"
+  },
   "help": {
     "Intro Paragraph": "Vind alle mijnen door naar aanwijzingen te zoeken.",
     "Game Scores Comment": "Aantal verborgen mijnen; toegang tot de Eregalerij",

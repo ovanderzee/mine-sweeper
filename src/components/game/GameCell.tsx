@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import PageContext from '../../store/page-context'
 import { LONG_PRESS_THRESHOLD } from '../../common/constants'
 import { CellState, CellStateStage, CellStateEntry, GameAction, GameActionType } from '../../common/game-types';
 import { aspectualInside } from '../../common/functions';
@@ -10,12 +11,16 @@ interface GameCellProps {
 }
 
 const GameCell = (props: GameCellProps) => {
+  const pageCtx = useContext(PageContext)
+  const text = pageCtx.text
+
   const { stage, fill, row, col, locked } = props.cell
   const doneClass = stage ? 'touched' : 'pristine'
   const lockedClass = locked ? 'flag' : ''
   const cellContent = stage && fill > 0 && fill < 9 ? fill : ' '
   const mineClass = stage && fill > 8 ? 'mijn' : ''
   const activatedClass = stage === CellStateStage.TESTED && fill > 8 ? 'explode' : ''
+  const stageLabel = text.cell[doneClass]
 
   let startEvent: React.UIEvent
 
@@ -95,6 +100,7 @@ const GameCell = (props: GameCellProps) => {
   return (
     <button
       type="button"
+      aria-label={`${text.cell.row} ${row+1} ${text.cell.col} ${col+1}, ${stageLabel}`}
       className={`${doneClass} ${lockedClass} ${mineClass} ${activatedClass}`}
       id={`row${row}col${col}`}
       style={{'--cell-row': row + 1, '--cell-col': col + 1} as React.CSSProperties}
