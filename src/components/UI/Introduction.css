@@ -1,7 +1,13 @@
 #intro {
   opacity: 1;
-  z-index: 1;
+  border: 0 none;
   overflow: hidden;
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  z-index: 1;
 }
 #intro.ending {
   opacity: 0;
@@ -381,6 +387,8 @@ percent:   20%,  37%,  40%,  50%,  60%,  70%,  100%
 /* TITEL */
 
 #titel {
+  position: absolute;
+  top: 0;
   width: 120%;
   text-align: center;
   margin: 10% -10%;
