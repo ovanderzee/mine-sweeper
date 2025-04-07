@@ -11,10 +11,17 @@
   },
   "intro": {
     "minesweeper_1": "mijnen",
-    "minesweeper_2": "veger"
+    "minesweeper_2": "veger",
+    "skip_this": "direct naar inhoud"
   },
   "game": {
     "You Won!": "Gefeliciteerd, je hebt gewonnen!"
+  },
+  "cell": {
+    "row": "rij",
+    "col": "kolom",
+    "pristine": "verborgen",
+    "touched": "geopend"
   },
   "help": {
     "Intro Paragraph": "Vind alle mijnen door naar aanwijzingen te zoeken.",

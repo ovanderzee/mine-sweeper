@@ -6,6 +6,8 @@
   --medium-blue: #6ac;
   --darker-blue: #58b;
   --dark-blue: #37a;
+  --extra-dark-blue: #047;
+  --ultra-dark-blue: #012;
   --light-to-white-blue: linear-gradient(to bottom, #adf 0%, #fff 100%);
   --light-to-medium-blue: linear-gradient(to bottom, #adf 0%, #6ac 100%);
   --dark-to-light-blue: linear-gradient(to bottom, #37a 0%, #adf 100%);

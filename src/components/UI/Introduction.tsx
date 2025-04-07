@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext, useState, useRef, useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import PageContext from '../../store/page-context'
 import { OVERLAY_ELEMENT, OVERLAY_FADE_OUT_TIME } from '../../common/constants'
@@ -16,15 +16,26 @@ const Introduction = (props: { onEnd: (timeout: number) => void }) => {
     onEnd(OVERLAY_FADE_OUT_TIME)
   }
 
+  const commonRef = useRef(null)
+
+  useEffect(() => {
+    const current = commonRef?.current ? commonRef.current as HTMLButtonElement : undefined
+    if (commonRef && current) current.focus()
+  })
+
   const animatedHtml = (
-    <div
+    <button
+      type="button"
       id="intro"
       className={endingClass}
       onClick={goToGame}
       onAnimationEnd={goToGame}
+      onKeyDown={goToGame}
+      ref={commonRef}
+      tabIndex={-1}
     >
       <div id="achter" />
-      <h1 id="titel">
+      <h1 id="titel" className="tekst">
         {text.intro.minesweeper_1}
         <br />
         {text.intro.minesweeper_2}
@@ -54,7 +65,8 @@ const Introduction = (props: { onEnd: (timeout: number) => void }) => {
         <div id="rookwolk8" className="lichter"></div>
         <div id="rookwolk9" className="lichtst"></div>
       </div>
-    </div>
+      <small className="tekst">{text.intro.skip_this}</small>
+    </button>
   )
 
   return createPortal(animatedHtml, OVERLAY_ELEMENT!)

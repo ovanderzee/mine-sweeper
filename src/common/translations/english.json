@@ -11,10 +11,17 @@
   },
   "intro": {
     "minesweeper_1": "mine",
-    "minesweeper_2": "sweeper"
+    "minesweeper_2": "sweeper",
+    "skip_this": "skip to content"
   },
   "game": {
     "You Won!": "Congrats, you WON !"
+  },
+  "cell": {
+    "row": "row",
+    "col": "column",
+    "pristine": "hidden",
+    "touched": "open"
   },
   "help": {
     "Intro Paragraph": "Find all mines by looking for clues.",
