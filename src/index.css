@@ -96,7 +96,7 @@ nav,
   line-height: 140%;
 }
 
-#app {
+#root {
   background: var(--dark-to-light-blue);
   height: 100%;
 }
