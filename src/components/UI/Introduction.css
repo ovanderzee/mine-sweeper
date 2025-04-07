@@ -2,6 +2,7 @@
   opacity: 1;
   border: 0 none;
   overflow: hidden;
+  padding: 0;
   position: fixed;
   left: 0;
   top: 0;
@@ -386,12 +387,16 @@ percent:   20%,  37%,  40%,  50%,  60%,  70%,  100%
 
 /* TITEL */
 
-#titel {
+.tekst {
   position: absolute;
-  top: 0;
-  width: 120%;
+  left: 0;
+  right: 0;
   text-align: center;
-  margin: 10% -10%;
+}
+
+#titel {
+  top: 0;
+  margin: 10% auto;
   line-height: 100%;
   color: var(--fire-red);
   text-shadow: 0.05em 0.05em var(--fire-orange);
@@ -409,6 +414,29 @@ percent:   20%,  37%,  40%,  50%,  60%,  70%,  100%
     opacity: 0;
   }
   80%,
+  to {
+    opacity: 1;
+  }
+}
+
+small {
+  bottom: 0;
+  margin: 1ex auto;
+  font-weight: normal;
+  color: var(--ultra-dark-blue);
+  animation-name: -hint;
+  animation-timing-function: linear;
+  animation-duration: 10s;
+  animation-fill-mode: forwards;
+}
+
+/* animatie volgt schip */
+@keyframes -hint {
+  from,
+  20% {
+    opacity: 0;
+  }
+  36.67%,
   to {
     opacity: 1;
   }

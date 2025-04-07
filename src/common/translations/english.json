@@ -11,7 +11,8 @@
   },
   "intro": {
     "minesweeper_1": "mine",
-    "minesweeper_2": "sweeper"
+    "minesweeper_2": "sweeper",
+    "skip_this": "skip to content"
   },
   "game": {
     "You Won!": "Congrats, you WON !"

@@ -35,7 +35,7 @@ const Introduction = (props: { onEnd: (timeout: number) => void }) => {
       tabIndex={-1}
     >
       <div id="achter" />
-      <h1 id="titel">
+      <h1 id="titel" className="tekst">
         {text.intro.minesweeper_1}
         <br />
         {text.intro.minesweeper_2}
@@ -65,6 +65,7 @@ const Introduction = (props: { onEnd: (timeout: number) => void }) => {
         <div id="rookwolk8" className="lichter"></div>
         <div id="rookwolk9" className="lichtst"></div>
       </div>
+      <small className="tekst">{text.intro.skip_this}</small>
     </button>
   )
 
