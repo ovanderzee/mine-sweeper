@@ -92,17 +92,29 @@
   text-align: left;
 }
 
-.game-won-modal [data-text-before="1"]::before {
-  color: var(--medium-gold);
-  text-shadow: 0.015em 0.02em var(--light-gold);
+.game-won-modal svg {
+  position: fixed;
+  left: 50%;
+  top: 25%;
+  width: 144px;
+  height: 144px;
+  z-index: 110;
+  transform: translate(-50%, -25%);
+  margin-left: -10em;
+  margin-top: -12px;
 }
 
-.game-won-modal [data-text-before="2"]::before {
-  color: var(--medium-silver);
-  text-shadow: 0.015em 0.02em var(--light-silver);
+.game-won-modal svg text {
+  font-size: 4em;
+  font-family: "Helvetica Neue", HelveticaNeue, Helvetica, "Arial Unicode MS", "Arial Unicode", ArialUnicode, Arial, sans-serif;
 }
 
-.game-won-modal [data-text-before="3"]::before {
-  color: var(--medium-bronze);
-  text-shadow: 0.015em 0.02em var(--light-bronze);
+.game-won-modal .buttons,
+.game-won-modal .dialog::before,
+.game-won-modal .dialog::after {
+  display: none;
+}
+
+.game-won-modal h3.content {
+  margin-left: 3em;
 }

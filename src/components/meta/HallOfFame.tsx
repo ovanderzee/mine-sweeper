@@ -4,7 +4,7 @@ import EraseScores from '../nav/EraseScores'
 import Help from '../nav/Help'
 import Settings from '../nav/Settings'
 import GoBack from '../nav/GoBack'
-import Shield from '../UI/Shield'
+import { ShieldByRank } from '../UI/Shield'
 import { ScoreItem } from '../../common/game-types'
 import './Meta.css'
 import './HallOfFame.css'
@@ -48,10 +48,7 @@ const HallOfFame = () => {
           <li className={index < 10 ? 'super' : ''} key={`${index + 1}_${play.score}`}>
             <header>
               <h2 className="rank">
-                {index === 0 && <Shield colorSet="gold" text={index + 1} />}
-                {index === 1 && <Shield colorSet="silver" text={index + 1} />}
-                {index === 2 && <Shield colorSet="bronze" text={index + 1} />}
-                {index > 2 && index < 10 && <Shield colorSet="blue" text={index + 1} />}
+                {index < 10 && <ShieldByRank rank={index + 1} />}
                 {index >= 10 && index + 1}
               </h2>
               <h4 className="user">{play.user}</h4>

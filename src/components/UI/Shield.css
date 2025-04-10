@@ -1,5 +1,6 @@
 svg.shield text {
   fill: white;
+  font-weight: bold;
   text-shadow: .1ex .1ex .1ex #000a;
   text-anchor: middle;
   dominant-baseline: middle;

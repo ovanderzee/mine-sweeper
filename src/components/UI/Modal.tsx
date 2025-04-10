@@ -1,6 +1,7 @@
 import React, { useContext } from 'react'
 import { createPortal } from 'react-dom'
 import PageContext from '../../store/page-context'
+import { ShieldByRank } from './Shield'
 import { Primitive } from '../../common/app-types'
 import './Modal.css'
 
@@ -58,6 +59,8 @@ const Modal = (props: ModalProps) => createPortal(
   <div className={`modal ${props.className}-modal`}>
     <Backdrop {...props} />
     <Dialog {...props}>{props.children}</Dialog>
+    {props.className === 'game-won' && props?.textBefore
+        && <ShieldByRank rank={Number(props.textBefore)} />}
   </div>,
   portalElement!
 )
