@@ -1,13 +1,12 @@
 :root {
-  --ultra-light-blue: #eefaff;
-  --extra-light-blue: #cef;
-  --light-blue: #adf;
-  --lighter-blue: #8bd;
-  --medium-blue: #6ac;
-  --darker-blue: #58b;
-  --dark-blue: #37a;
-  --extra-dark-blue: #047;
-  --ultra-dark-blue: #012;
+  --ultra-light-blue: #eefaff; /* hsl(198 100% 96.7%) */
+  --extra-light-blue: #cef; /* hsl(200 100% 90%) */
+  --light-blue: #adf; /* hsl(204 100% 83.3%) */
+  --lighter-blue: #8bd; /* hsl(204 55.6% 70%) */
+  --medium-blue: #6ac; /* hsl(200 50% 60%) */
+  --darker-blue: #58b; /* hsl(210 42.9% 53.3%) */
+  --extra-dark-blue: #169; /* hsl(203 80% 33.3%) */
+  --ultra-dark-blue: #012; /* hsl(210 100% 6.7%) */
 
   --light-to-white-blue: linear-gradient(to bottom, #adf 0%, #fff 100%);
   --light-to-medium-blue: linear-gradient(to bottom, #adf 0%, #6ac 100%);

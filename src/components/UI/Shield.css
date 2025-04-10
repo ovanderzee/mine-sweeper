@@ -1,0 +1,30 @@
+svg.shield text {
+  fill: white;
+  text-shadow: .1ex .1ex .1ex #000a;
+  text-anchor: middle;
+  dominant-baseline: middle;
+}
+
+svg.shield.blue {
+  --light: var(--extra-light-blue);
+  --medium: var(--medium-blue);
+  --dark: var(--extra-dark-blue);
+}
+
+svg.shield.gold {
+  --light: hsl(50 74% 88%);
+  --medium: hsl(41 58% 49%);
+  --dark: hsl(38 50% 31%);
+}
+
+svg.shield.silver {
+  --light: hsl(30 2% 92%);
+  --medium: hsl(330 4% 60%);
+  --dark: hsl(270 10% 30%);
+}
+
+svg.shield.bronze {
+  --light: hsl(39 86% 72%);
+  --medium: hsl(33 44% 36%);
+  --dark: hsl(30, 20%, 18%);
+}
