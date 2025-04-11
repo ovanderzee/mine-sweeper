@@ -20,7 +20,7 @@ const Introduction = (props: { onEnd: (timeout: number) => void }) => {
 
   useEffect(() => {
     const current = commonRef?.current ? commonRef.current as HTMLButtonElement : undefined
-    if (commonRef && current) current.focus()
+    if (current) current.focus()
   })
 
   const animatedHtml = (
