@@ -12,7 +12,7 @@ const GameWonModal = (props: GameWonModalProps) => {
   const pageCtx = useContext(PageContext)
   const text = pageCtx.text
 
-  return (
+  const modal =
     <Modal
       onConfirm={() => {}}
       closeModal={() => props.close(false)}
@@ -22,7 +22,8 @@ const GameWonModal = (props: GameWonModalProps) => {
     >
       {text.game['You Won!']}
     </Modal>
-  )
+
+  return (props.state.rank < 99 && modal)
 }
 
 export default GameWonModal

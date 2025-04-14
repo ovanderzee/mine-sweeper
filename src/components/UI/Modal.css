@@ -94,27 +94,26 @@
 
 .game-won-modal svg {
   position: fixed;
+  font-size: 6em;
   left: 50%;
-  top: 25%;
-  width: 144px;
-  height: 144px;
+  top: 15%;
+  width: 2.5em;
+  opacity: 1;
+  aspect-ratio: 1;
   z-index: 110;
-  transform: translate(-50%, -25%);
-  margin-left: -10em;
-  margin-top: -12px;
+  transform: translate(-50%, -15%);
 }
 
 .game-won-modal svg text {
-  font-size: 4em;
   font-family: "Helvetica Neue", HelveticaNeue, Helvetica, "Arial Unicode MS", "Arial Unicode", ArialUnicode, Arial, sans-serif;
 }
 
-.game-won-modal .buttons,
+.game-won-modal h3.content,
 .game-won-modal .dialog::before,
 .game-won-modal .dialog::after {
   display: none;
 }
 
-.game-won-modal h3.content {
-  margin-left: 3em;
+.game-won-modal .dialog {
+  display: none;
 }
