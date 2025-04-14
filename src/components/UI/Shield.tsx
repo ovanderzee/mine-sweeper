@@ -8,7 +8,7 @@ interface ShieldProps {
 const Shield = (props: ShieldProps) => {
   return (
     <svg className={`shield ${props.colorSet}`}>
-        <use href="#shield" />
+        <use href={`#shield_${props.colorSet}`} />
         {props?.text && <text x="50%" y="50%">{props.text}</text>}
     </svg>
   )

@@ -6,26 +6,16 @@ svg.shield text {
   dominant-baseline: middle;
 }
 
-svg.shield.blue {
-  --light: var(--extra-light-blue);
-  --medium: var(--medium-blue);
-  --dark: var(--extra-dark-blue);
-}
+svg {
+  --light-gold: hsl(50 74% 88%);
+  --medium-gold: hsl(41 58% 49%);
+  --dark-gold: hsl(38 50% 31%);
 
-svg.shield.gold {
-  --light: hsl(50 74% 88%);
-  --medium: hsl(41 58% 49%);
-  --dark: hsl(38 50% 31%);
-}
+  --light-silver: hsl(30 2% 92%);
+  --medium-silver: hsl(330 4% 60%);
+  --dark-silver: hsl(270 10% 30%);
 
-svg.shield.silver {
-  --light: hsl(30 2% 92%);
-  --medium: hsl(330 4% 60%);
-  --dark: hsl(270 10% 30%);
-}
-
-svg.shield.bronze {
-  --light: hsl(39 86% 72%);
-  --medium: hsl(33 44% 36%);
-  --dark: hsl(30, 20%, 18%);
+  --light-bronze: hsl(39 86% 72%);
+  --medium-bronze: hsl(33 44% 36%);
+  --dark-bronze: hsl(30, 20%, 18%);
 }
