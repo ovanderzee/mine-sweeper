@@ -140,7 +140,7 @@ const Game = () => {
         waitTime
       )
     }
-  }, [gameWasWon, gameWasLost])
+  }, [gameWasWon, gameWasLost, gameState.mines])
 
   const gameWonModal = <GameWonModal
     close={setShowWonModal}

@@ -1,6 +1,8 @@
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import { createPortal } from 'react-dom'
 import PageContext from '../../store/page-context'
+import { ShieldByRank } from './Shield'
+import { MODAL_ELEMENT, OVERLAY_FADE_OUT_TIME } from '../../common/constants'
 import { Primitive } from '../../common/app-types'
 import './Modal.css'
 
@@ -14,52 +16,63 @@ interface ModalProps {
   textAfter?: Primitive,
 }
 
-const Backdrop = (props: ModalProps) => {
-  return <div className="backdrop" onClick={props.closeModal} />
-}
-
-const Dialog = (props: ModalProps) => {
+const ModalComponent = (props: ModalProps) => {
   const pageCtx = useContext(PageContext)
   const { FONT_SIZE } = pageCtx.config
   const text = pageCtx.text
 
   const confirmHandler = () => {
     props.onConfirm && props.onConfirm()
-    props.closeModal()
+    timedCloseModal()
   }
 
   const cancelHandler = () => {
     props?.onCancel && props.onCancel()
-    props.closeModal()
+    timedCloseModal()
   }
 
   const confirmButton = <button type="button" className="confirm" onClick={confirmHandler}>{text.common.confirm}</button>
   const cancelButton = <button type="button" className="cancel" onClick={cancelHandler}>{text.common.cancel}</button>
 
+  const [endState, setEndState] = useState('')
+
+  const timedCloseModal = () => {
+    setEndState('ending')
+    setTimeout(
+      props.closeModal,
+      OVERLAY_FADE_OUT_TIME
+    )
+  }
+
   return (
-    <div
-      className="dialog"
-      data-text-before={props.textBefore}
-      data-text-after={props.textAfter}
-      style={{fontSize: `${FONT_SIZE}px`}}
+    <section
+      className={`modal ${props.className}-modal ${endState}`}
+      onClick={timedCloseModal}
     >
-      <h3 className="content">{props.children}</h3>
-      <div className="buttons">
-        {props?.onCancel && cancelButton}
-        {confirmButton}
+      <div className="backdrop" />
+
+      <div
+        className="dialog"
+        data-text-before={props.textBefore}
+        data-text-after={props.textAfter}
+        style={{fontSize: `${FONT_SIZE}px`}}
+      >
+        <h3 className="content">{props.children}</h3>
+        <div className="buttons">
+          {props?.onCancel && cancelButton}
+          {confirmButton}
+        </div>
       </div>
-    </div>
+
+      {props.className === 'game-won' && props?.textBefore
+          && <ShieldByRank rank={Number(props.textBefore)} />}
+    </section>
   )
 }
 
-const portalElement = document.getElementById('modal')
-
 const Modal = (props: ModalProps) => createPortal(
-  <div className={`modal ${props.className}-modal`}>
-    <Backdrop {...props} />
-    <Dialog {...props}>{props.children}</Dialog>
-  </div>,
-  portalElement!
+  <ModalComponent {...props} />,
+  MODAL_ELEMENT!
 )
 
 export default Modal

@@ -15,10 +15,9 @@ function Paging() {
     )
   }
 
-  // execute once
   useEffect(() => {
     setShowIntroduction(true)
-  }, [])
+  }, []) // execute once
 
   const introLayer = <Introduction onEnd={goToGame} />
 

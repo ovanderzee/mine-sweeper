@@ -4,6 +4,7 @@ import EraseScores from '../nav/EraseScores'
 import Help from '../nav/Help'
 import Settings from '../nav/Settings'
 import GoBack from '../nav/GoBack'
+import { ShieldByRank } from '../UI/Shield'
 import { ScoreItem } from '../../common/game-types'
 import './Meta.css'
 import './HallOfFame.css'
@@ -44,9 +45,12 @@ const HallOfFame = () => {
         )}
 
         {scores.map((play: ScoreItem, index: number) => (
-          <li key={`${index + 1}_${play.score}`}>
+          <li className={index < 10 ? 'super' : ''} key={`${index + 1}_${play.score}`}>
             <header>
-              <h2 className="rank">{index + 1}</h2>
+              <h2 className="rank">
+                {index < 10 && <ShieldByRank rank={index + 1} />}
+                {index >= 10 && index + 1}
+              </h2>
               <h4 className="user">{play.user}</h4>
               <h4 className="date">{(new Date(play.begin)).toLocaleDateString()}</h4>
             </header>

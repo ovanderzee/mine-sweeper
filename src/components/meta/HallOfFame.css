@@ -13,6 +13,10 @@ li footer {
   align-items: baseline;
 }
 
+li.super header {
+  align-items: center;
+}
+
 li {
   margin: 0.5em 0;
 }
@@ -25,20 +29,14 @@ li footer * {
 }
 
 li header .rank {
-  flex: 0 0 2.5em;
+  --rank-size: 2.5em;
+
+  flex: 0 0 var(--rank-size);
   text-align: center;
 }
-li:first-child + li header .rank {
-  color: var(--medium-gold);
-  text-shadow: 1px 1px var(--light-gold);
-}
-li:first-child + li + li header .rank {
-  color: var(--medium-silver);
-  text-shadow: 1px 1px var(--light-silver);
-}
-li:first-child + li + li + li header .rank {
-  color: var(--medium-bronze);
-  text-shadow: 1px 1px var(--light-bronze);
+li header .rank svg {
+  width: var(--rank-size);
+  height: var(--rank-size);
 }
 
 li header .user {

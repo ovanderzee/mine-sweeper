@@ -3,6 +3,7 @@
 export const MIN_DURATION = 750
 
 // where the graphics are shown
+export const MODAL_ELEMENT = document.getElementById('modal')
 export const OVERLAY_ELEMENT = document.getElementById('overlay')
 export const OVERLAY_FADE_OUT_TIME = 500
 

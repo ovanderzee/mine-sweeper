@@ -423,14 +423,13 @@ small {
   bottom: 0;
   margin: 1ex auto;
   font-weight: normal;
-  color: var(--ultra-dark-blue);
+  color: white;
   animation-name: -hint;
   animation-timing-function: linear;
   animation-duration: 10s;
   animation-fill-mode: forwards;
 }
 
-/* animatie volgt schip */
 @keyframes -hint {
   from,
   20% {

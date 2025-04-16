@@ -1,0 +1,21 @@
+svg.shield text {
+  fill: white;
+  font-weight: bold;
+  text-shadow: .1ex .1ex .1ex #000a;
+  text-anchor: middle;
+  dominant-baseline: middle;
+}
+
+svg {
+  --light-gold: hsl(50 74% 88%);
+  --medium-gold: hsl(41 58% 49%);
+  --dark-gold: hsl(38 50% 31%);
+
+  --light-silver: hsl(30 2% 92%);
+  --medium-silver: hsl(330 4% 60%);
+  --dark-silver: hsl(270 10% 30%);
+
+  --light-bronze: hsl(39 86% 72%);
+  --medium-bronze: hsl(33 44% 36%);
+  --dark-bronze: hsl(30, 20%, 18%);
+}
