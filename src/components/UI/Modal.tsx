@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useState, useRef, useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import PageContext from '../../store/page-context'
 import { ShieldByRank } from './Shield'
@@ -31,8 +31,38 @@ const ModalComponent = (props: ModalProps) => {
     timedCloseModal()
   }
 
-  const confirmButton = <button type="button" className="confirm" onClick={confirmHandler}>{text.common.confirm}</button>
-  const cancelButton = <button type="button" className="cancel" onClick={cancelHandler}>{text.common.cancel}</button>
+  const confirmRef = useRef(null)
+  const cancelRef = useRef(null)
+
+  const focusOtherButton = (event: React.KeyboardEvent<HTMLElement>) => {
+    if (event.key !== 'Tab') return
+    event.preventDefault()
+    event.stopPropagation()
+
+    if (document.activeElement === cancelRef.current) {
+      const current = confirmRef.current as unknown as HTMLButtonElement
+      current.focus()
+    } else if (document.activeElement === confirmRef.current) {
+      const current = cancelRef.current as unknown as HTMLButtonElement
+      current.focus()
+    }
+  }
+
+  const confirmButton = <button type="button" className="confirm"
+    onClick={confirmHandler}
+    onKeyDown={focusOtherButton}
+    ref={confirmRef}
+  >{text.common.confirm}</button>
+  const cancelButton = <button type="button" className="cancel"
+    onClick={cancelHandler}
+    onKeyDown={focusOtherButton}
+    ref={cancelRef}
+  >{text.common.cancel}</button>
+
+  useEffect(() => {
+    const current = confirmRef?.current ? confirmRef.current as HTMLButtonElement : undefined
+    if (current) current.focus()
+  })
 
   const [endState, setEndState] = useState('')
 
@@ -46,8 +76,12 @@ const ModalComponent = (props: ModalProps) => {
 
   return (
     <section
+      role="dialog"
+      aria-labelledby="dialog-label"
+      aria-modal="true"
       className={`modal ${props.className}-modal ${endState}`}
       onClick={timedCloseModal}
+      onKeyDown={(ev) => {if (ev.key === 'Escape') timedCloseModal()}}
     >
       <div className="backdrop" />
 
@@ -57,7 +91,7 @@ const ModalComponent = (props: ModalProps) => {
         data-text-after={props.textAfter}
         style={{fontSize: `${FONT_SIZE}px`}}
       >
-        <h3 className="content">{props.children}</h3>
+        <h3 id="dialog-label" className="content">{props.children}</h3>
         <div className="buttons">
           {props?.onCancel && cancelButton}
           {confirmButton}
