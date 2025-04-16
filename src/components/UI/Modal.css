@@ -1,3 +1,8 @@
+.modal.ending {
+  opacity: 0;
+  transition: opacity 500ms ease;
+}
+
 .backdrop {
   background: var(--dark-to-light-blue);
   opacity: 50%;
@@ -6,8 +11,9 @@
   top: 0;
   bottom: 0;
   right: 0;
-  z-index: 90;
 }
+
+/* DIALOG */
 
 .dialog {
   background: var(--light-to-medium-blue);
@@ -48,19 +54,19 @@
   font-size: 2.2em;
 }
 
-.modal h3.content {
+.dialog h3.content {
   font-size: 1.167em;
   margin: 1em;
 }
 
-.modal .buttons {
+.dialog .buttons {
   display: flex;
   justify-content: space-between;
   margin: 0.5em;
   min-height: 1em;
 }
 
-.modal button {
+.dialog button {
   margin: 0.5em;
   line-height: 2.3em;
   padding: 0 1em;
@@ -72,12 +78,12 @@
   background: var(--medium-to-dark-blue);
 }
 
-.modal button:first-child {
+.dialog button:first-child {
   margin-left: inherit;
   margin-right: auto;
 }
 
-.modal button:last-child {
+.dialog button:last-child {
   margin-left: auto;
   margin-right: inherit;
 }
@@ -88,32 +94,45 @@
   text-shadow: -0.02em -0.05em #fff, 0.008em 0.02em #adf;
 }
 
+/* CLASSES */
+
 .consent-modal .dialog {
   text-align: left;
 }
 
-.game-won-modal svg {
+.game-won-modal svg.shield {
+  --left: 50%;
+  --top: 15%;
+
   position: fixed;
   font-size: 6em;
-  left: 50%;
-  top: 15%;
+  left: var(--left);
+  top: var(--top);
   width: 2.5em;
-  opacity: 1;
   aspect-ratio: 1;
   z-index: 110;
   transform: translate(-50%, -15%);
+
+  animation: 500ms ease-out -shield
 }
 
-.game-won-modal svg text {
+.game-won-modal svg.shield text {
   font-family: "Helvetica Neue", HelveticaNeue, Helvetica, "Arial Unicode MS", "Arial Unicode", ArialUnicode, Arial, sans-serif;
-}
-
-.game-won-modal h3.content,
-.game-won-modal .dialog::before,
-.game-won-modal .dialog::after {
-  display: none;
 }
 
 .game-won-modal .dialog {
   display: none;
+}
+
+@keyframes -shield {
+  from {
+    left: 0%;
+    top: 100%;
+    opacity: 0;
+  }
+  to {
+    left: var(--left);
+    top: var(--top);
+    opacity: 1;
+  }
 }
