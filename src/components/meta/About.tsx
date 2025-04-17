@@ -21,7 +21,12 @@ const About = () => {
   const aboutContent = (
     <article>
       <h2>{text.common['Minesweeper']}</h2>
-      <p>{text.help['Intro Paragraph']}</p>
+      <h3>{text.help['Intro Heading']}</h3>
+      <p>{text.help['Playing Hint']}</p>
+      <p>{text.help['Flagging Paragraph']}</p>
+      <p>{text.help['Keyboard Notice']}</p>
+      <p>{text.help['Game Navigation']}</p>
+      <h3>{text.help['Nav Heading']}</h3>
       <dl>
         <dt className="adorn">9×</dt><dd>{text.help['Game Scores Comment']}</dd>
         <dt className="adorn"><ChampionsPodium /></dt><dd>{text.help['About Scores Comment']}</dd>
@@ -32,8 +37,6 @@ const About = () => {
         <dt className="adorn"><Erase /></dt><dd>{text.help['Delete Comment']}</dd>
         <dt className="adorn"><CRLF /></dt><dd>{text.help['Go Back Comment']}</dd>
       </dl>
-      <p>{text.help['Flagging Paragraph']}</p>
-      <p>{text.help['Introduction Paragraph']}</p>
       <h5>Onno van der Zee, 2013 - 2025</h5>
     </article>
   )

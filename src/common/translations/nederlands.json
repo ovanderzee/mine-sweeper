@@ -24,7 +24,8 @@
     "touched": "geopend"
   },
   "help": {
-    "Intro Paragraph": "Vind alle mijnen door naar aanwijzingen te zoeken.",
+    "Intro Heading": "Maak alle mijnen onschadelijk",
+    "Nav Heading": "Navigatie",
     "Game Scores Comment": "Aantal verborgen mijnen; toegang tot de Eregalerij",
     "About Scores Comment": "Bekijk de Eregalerij",
     "New Game Comment": "Begin een nieuw spel, met de huidige instellingen",
@@ -33,8 +34,10 @@
     "Settings Comment": "Pas nivo aan en andere opties",
     "Delete Comment": "Wis scores",
     "Go Back Comment": "Keer terug naar spel",
-    "Flagging Paragraph": "Plaats met een lange klik een vlag waar een mijn zou kunnen liggen.",
-    "Introduction Paragraph": "De animatie aan het begin kan worden onderbroken."
+    "Playing Hint": "Onderzoek het mijnenveld door enkele cellen aan te klikken.",
+    "Flagging Paragraph": "Vlag een vermoedde mijn af met een wat langere klik. De cel reageert dan niet meer op normaal aanklikken.",
+    "Keyboard Notice": "Het spel kan ook met het toetsenbord gespeeld worden, het voldoet aan de toegankelijkheids-richtlijnen van het WCAG.",
+    "Game Navigation": "Navigeer op het mijnenveld met de pijl-toetsen en vlag af met de spatiebalk. Bevestig een dialoog met enter en annuleer met escape."
   },
   "fame": {
     "Nothing Yet": "Nog geen scores",
