@@ -120,10 +120,6 @@
   font-family: "Helvetica Neue", HelveticaNeue, Helvetica, "Arial Unicode MS", "Arial Unicode", ArialUnicode, Arial, sans-serif;
 }
 
-.game-won-modal .dialog {
-  display: none;
-}
-
 @keyframes -shield {
   from {
     left: 0%;

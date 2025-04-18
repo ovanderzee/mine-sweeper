@@ -37,7 +37,7 @@
     "Playing Hint": "Explore the minefield by clicking a few cells.",
     "Flagging Paragraph": "Flag a suspected mine using a longer click. The cell will then not respond to normal clicking.",
     "Keyboard Notice": "The game could also be played with the keyboard, it meets the accessibility guidelines of the WCAG.",
-    "Game Navigation": "Navigate the minefield with the arrow keys and flag a mine with the spacebar. Confirm a dialog with enter and dismiss with escape."
+    "Game Navigation": "Navigate the minefield with the arrow keys and flag a mine with the spacebar. Confirm a dialog with enter on the right button."
   },
   "fame": {
     "Nothing Yet": "No scores yet",
