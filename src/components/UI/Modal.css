@@ -1,16 +1,22 @@
-.modal.ending {
+dialog {
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+
+  backdrop-filter: grayscale(68%);
+  background: transparent;
+  border: 0 none;
+}
+
+dialog.ending {
   opacity: 0;
   transition: opacity 500ms ease;
 }
 
-.backdrop {
-  background: var(--dark-to-light-blue);
-  opacity: 50%;
-  position: fixed;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  right: 0;
+dialog:not(:focus) {
+  border: 3px solid #6661;
 }
 
 /* DIALOG */

@@ -1,9 +1,8 @@
-import React, { useContext, useState, useEffect } from 'react'
+import React, { useContext, useState, useRef, useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import PageContext from '../../store/page-context'
 import { ShieldByRank } from './Shield'
 import { MODAL_ELEMENT, OVERLAY_FADE_OUT_TIME } from '../../common/constants'
-import { trapFocus } from '../../common/functions'
 import { Primitive } from '../../common/app-types'
 import './Modal.css'
 
@@ -21,6 +20,9 @@ const ModalComponent = (props: ModalProps): React.ReactNode => {
   const pageCtx = useContext(PageContext)
   const { FONT_SIZE } = pageCtx.config
   const text = pageCtx.text
+
+  const dialogRef = useRef(null)
+  let dialogElement!: HTMLDialogElement | null
 
   const keystrokeHandler = (event: React.KeyboardEvent, handler: ()=>void) => {
     event!.stopPropagation()
@@ -47,32 +49,49 @@ const ModalComponent = (props: ModalProps): React.ReactNode => {
   >{text.common.cancel}</button>
 
   useEffect(() => {
-    trapFocus(true)
-  }, [])
+    dialogElement = dialogRef?.current ? dialogRef.current as HTMLDialogElement : null
+    if (dialogElement) {
+      dialogElement.showModal()
+      dialogElement.setAttribute('open', 'true')
+    }
+  }, [dialogRef])
 
   const [endState, setEndState] = useState('')
 
   const timedCloseModal = () => {
     setEndState('ending')
     setTimeout(() => {
+        if (dialogElement) {
+          dialogElement.setAttribute('open', 'false')
+          dialogElement.removeAttribute('open')
+          dialogElement.close()
+        }
         props.closeModal()
-        trapFocus(false)
       },
       OVERLAY_FADE_OUT_TIME
     )
   }
 
-  return (
-    <section
-      role="dialog"
-      aria-labelledby="dialog-label"
-      aria-modal="true"
-      className={`modal ${props.className}-modal ${endState}`}
-      onClick={timedCloseModal}
-      onKeyDown={timedCloseModal}
-    >
-      <div className="backdrop" />
+  const keystrokeShortcut = (event: React.KeyboardEvent): void => {
+    event!.stopPropagation()
+    switch (event.key) {
+      case 'Escape':
+        cancelHandler()
+        break
+      case 'Enter':
+        confirmHandler()
+        break
+    }
+  }
 
+  return (
+    <dialog
+      aria-labelledby="dialog-label"
+      className={`modal ${props.className}-modal ${endState}`}
+      ref={dialogRef}
+      onClick={timedCloseModal}
+      onKeyDown={keystrokeShortcut}
+    >
       {props.className !== 'game-won' &&
         <div
           className="dialog"
@@ -90,7 +109,7 @@ const ModalComponent = (props: ModalProps): React.ReactNode => {
 
       {props.className === 'game-won' && props?.textBefore
           && <ShieldByRank rank={Number(props.textBefore)} />}
-    </section>
+    </dialog>
   )
 }
 

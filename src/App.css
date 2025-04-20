@@ -23,6 +23,11 @@
   text-shadow: -0.02em -0.05em #000, 0.008em 0.02em #adf;
 }
 
+.screen > nav button[disabled] {
+  cursor: not-allowed;
+  opacity: .5;
+}
+
 .screen > nav button span {
   display: inline-block;
 }
