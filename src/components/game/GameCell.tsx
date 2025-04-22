@@ -97,13 +97,47 @@ const GameCell = (props: GameCellProps) => {
     }
   }
 
+  const id = (x: number, y: number) => `row${row + y}col${col + x}`
+
+  /*
+    Keyboard input
+  */
+  const keystrokeHandler = (event: React.KeyboardEvent) => {
+    event.stopPropagation()
+    let goToCell!: HTMLButtonElement
+
+    switch(event.key) {
+      case 'Enter':
+        actionHandler(GameActionType.MOVE)
+        break
+      case ' ':
+        actionHandler(GameActionType.FLAG)
+        break
+      case 'ArrowUp':
+        goToCell = document.getElementById(id(0, -1)) as HTMLButtonElement
+        break
+      case 'ArrowRight':
+        goToCell = document.getElementById(id(1, 0)) as HTMLButtonElement
+        break
+      case 'ArrowDown':
+        goToCell = document.getElementById(id(0, 1)) as HTMLButtonElement
+        break
+      case 'ArrowLeft':
+        goToCell = document.getElementById(id(-1, 0)) as HTMLButtonElement
+        break
+    }
+
+    if (goToCell) goToCell.focus()
+  }
+
   return (
     <button
       type="button"
       aria-label={`${text.cell.row} ${row+1} ${text.cell.col} ${col+1}, ${stageLabel}`}
       className={`${doneClass} ${lockedClass} ${mineClass} ${activatedClass}`}
-      id={`row${row}col${col}`}
+      id={id(0, 0)}
       style={{'--cell-row': row + 1, '--cell-col': col + 1} as React.CSSProperties}
+      onKeyDown={keystrokeHandler}
       onPointerDown={beginHandler}
       onPointerMove={moveHandler}
       onPointerCancel={cancelHandler}

@@ -23,7 +23,7 @@ const GameWonModal = (props: GameWonModalProps) => {
       {text.game['You Won!']}
     </Modal>
 
-  return (props.state.rank < 99 && modal)
+  return modal
 }
 
 export default GameWonModal

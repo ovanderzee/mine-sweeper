@@ -24,7 +24,8 @@
     "touched": "open"
   },
   "help": {
-    "Intro Paragraph": "Find all mines by looking for clues.",
+    "Intro Heading": "Defuse all mines",
+    "Nav Heading": "Navigation",
     "Game Scores Comment": "Number of hidden mines; access to Hall of Fame",
     "About Scores Comment": "View Hall of Fame",
     "New Game Comment": "Start a new game with current settings",
@@ -33,8 +34,10 @@
     "Settings Comment": "Adjust level and other options",
     "Delete Comment": "Clear scores",
     "Go Back Comment": "Return to game",
-    "Flagging Paragraph": "Put a flag where a mine could be hidden using a long press.",
-    "Introduction Paragraph": "The animation at the beginning can be interrupted."
+    "Playing Hint": "Explore the minefield by clicking a few cells.",
+    "Flagging Paragraph": "Flag a suspected mine using a longer click. The cell will then not respond to normal clicking.",
+    "Keyboard Notice": "The game could also be played with the keyboard, it meets the accessibility guidelines of the WCAG.",
+    "Game Navigation": "Navigate the minefield with the arrow keys and flag a mine with the spacebar. Confirm a dialog with enter on the right button."
   },
   "fame": {
     "Nothing Yet": "No scores yet",
