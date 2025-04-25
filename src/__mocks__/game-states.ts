@@ -20,7 +20,6 @@ const newGameState: GameState = {
     ]
   ],
   "begin": 0,
-  "level": 4,
   "end": 0,
   "rank": 0,
   "score": 0,
@@ -47,7 +46,6 @@ const lostGameState: GameState = {
     ]
   ],
   "begin": 1745517111606,
-  "level": 4,
   "end": 1745517111606,
   "rank": 0,
   "score": 0,
@@ -74,7 +72,6 @@ const wonGameState: GameState = {
     ]
   ],
   "begin": 1745518136299,
-  "level": 0,
   "end": 1745518137216,
   "rank": 21,
   "score": 5944,

@@ -40,7 +40,6 @@ export const initialGameState: GameState = {
   board: [[]],
   // playing:
   begin: 0,
-  level: 0,
   // over:
   end: 0,
   rank: 0,

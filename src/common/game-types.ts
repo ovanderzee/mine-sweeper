@@ -54,7 +54,6 @@ export interface GameState {
   stage: GameStages;
   // playing:
   begin: number;
-  level: number;
   // over:
   mines: CellState[];
   end: number;
