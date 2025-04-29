@@ -1,5 +1,15 @@
 import { Languages } from '../common/app-types'
 
+const microConfig = {
+  "BOARD_SIZE":3,
+  "GAME_LEVEL":4,
+  "MINE_COUNT":2,
+  "LANGUAGE":Languages.nl,
+  "FONT_SIZE":15,
+  "PLAYER_NAME":"Midas",
+  "MAX_SCORES":500
+}
+
 const simpleEasyConfig = {
   "BOARD_SIZE":4,
   "GAME_LEVEL":3,
@@ -20,4 +30,4 @@ const simpleHardConfig = {
   "MAX_SCORES":500
 }
 
-export { simpleEasyConfig, simpleHardConfig }
+export { microConfig, simpleEasyConfig, simpleHardConfig }

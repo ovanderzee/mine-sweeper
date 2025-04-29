@@ -13,6 +13,7 @@ const touchButtonReducer = (state: GameState, action: PayloadAction, config: App
     updState.begin = Date.now()
   }
 
+  // condition seems never to be met
   if (
     updState.stage !== GameStages.PLAYING || state.end || stage
   )

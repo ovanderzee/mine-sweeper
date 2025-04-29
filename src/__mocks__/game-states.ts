@@ -26,6 +26,32 @@ const newGameState: GameState = {
   "mines": []
 }
 
+const playingGameState: GameState = {
+  "stage": GameStages.PLAYING,
+  "board": [
+    [
+      { "stage": CellStateStage.HIDDEN, "fill": 9, "row": 0, "col": 0 },
+      { "stage": CellStateStage.RELEASED, "fill": 1, "row": 0, "col": 1 },
+      { "stage": CellStateStage.TESTED, "fill": 0, "row": 0, "col": 2 }
+    ],
+    [
+      { "stage": CellStateStage.HIDDEN, "fill": 1, "row": 1, "col": 0 },
+      { "stage": CellStateStage.RELEASED, "fill": 2, "row": 1, "col": 1 },
+      { "stage": CellStateStage.RELEASED, "fill": 1, "row": 1, "col": 2 }
+    ],
+    [
+      { "stage": CellStateStage.HIDDEN, "fill": 0, "row": 2, "col": 0 },
+      { "stage": CellStateStage.HIDDEN, "fill": 1, "row": 2, "col": 1 },
+      { "stage": CellStateStage.HIDDEN, "fill": 9, "row": 2, "col": 2 }
+    ]
+  ],
+  "begin": 1745517111606,
+  "end": 0,
+  "rank": 0,
+  "score": 0,
+  "mines": []
+}
+
 const lostGameState: GameState = {
   "stage": GameStages.LOST,
   "board": [
@@ -46,7 +72,7 @@ const lostGameState: GameState = {
     ]
   ],
   "begin": 1745517111606,
-  "end": 1745517111606,
+  "end": 1745517111607,
   "rank": 0,
   "score": 0,
   "mines": []
@@ -78,4 +104,4 @@ const wonGameState: GameState = {
   "mines": []
 }
 
-export { newGameState, lostGameState, wonGameState }
+export { newGameState, playingGameState, lostGameState, wonGameState }
