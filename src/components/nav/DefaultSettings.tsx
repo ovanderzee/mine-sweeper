@@ -1,6 +1,7 @@
 import { useContext, useState } from 'react'
 import PageContext from '../../store/page-context'
 import DEFAULTS from '../../common/defaults'
+import { GameStages } from '../../common/game-types';
 import Modal from '../UI/Modal'
 import Reset from '../symbols/Reset'
 
@@ -26,11 +27,13 @@ const DefaultSettings = () => {
 
   const resetHandler = () => {
     // als spelend en speelbord of mijndichtheid niet geconfigureerd zijn
-    const currentGame = sessionStorage.getItem('mijnenvegerij')
-    if (currentGame) {
-      const CURRENT = JSON.parse(currentGame)
-      const isPlaying = CURRENT.stage === 'game-playing'
-      const isDefaultPlayConfig = DEFAULTS.BOARD_SIZE === CURRENT.board.length && DEFAULTS.GAME_LEVEL === CURRENT.level
+    const currGame = sessionStorage.getItem('mijnenvegerij')
+    const currConfig = localStorage.getItem('mijnenveger')
+    if (currGame && currConfig) {
+      const game = JSON.parse(currGame)
+      const cfg = JSON.parse(currConfig)
+      const isPlaying = game.stage === GameStages.PLAYING
+      const isDefaultPlayConfig = DEFAULTS.BOARD_SIZE === cfg.BOARD_SIZE && DEFAULTS.GAME_LEVEL === cfg.GAME_LEVEL
       isPlaying && !isDefaultPlayConfig ? setShowModal(true) : confirmHandler()
     } else {
       pageCtx.configure()
