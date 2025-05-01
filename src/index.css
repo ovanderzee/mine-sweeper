@@ -1,20 +1,23 @@
 :root {
-  --ultra-light-blue: #eefaff; /* hsl(198 100% 96.7%) */
+  --ultra-light-blue: #e3f4ff; /* hsl(204 100% 94.5%) */
   --extra-light-blue: #cef; /* hsl(200 100% 90%) */
   --light-blue: #adf; /* hsl(204 100% 83.3%) */
   --lighter-blue: #8bd; /* hsl(204 55.6% 70%) */
   --medium-blue: #6ac; /* hsl(200 50% 60%) */
   --darker-blue: #58b; /* hsl(210 42.9% 53.3%) */
+  --dark-blue: #37a; /* hsl(206 53.9% 43.3%) */
   --extra-dark-blue: #169; /* hsl(203 80% 33.3%) */
   --ultra-dark-blue: #012; /* hsl(210 100% 6.7%) */
 
-  --light-to-white-blue: linear-gradient(to bottom, #adf 0%, #fff 100%);
-  --light-to-medium-blue: linear-gradient(to bottom, #adf 0%, #6ac 100%);
-  --dark-to-light-blue: linear-gradient(to bottom, #37a 0%, #adf 100%);
-  --medium-to-dark-blue: linear-gradient(to bottom, #6ac 0%, #37a 100%);
+  --light-to-white-blue: linear-gradient(to bottom, var(--light-blue) 0%, white 100%);
+  --light-to-medium-blue: linear-gradient(to bottom, var(--light-blue) 0%, var(--medium-blue) 100%);
+  --dark-to-light-blue: linear-gradient(to bottom, var(--dark-blue) 0%, var(--light-blue) 100%);
+  --medium-to-dark-blue: linear-gradient(to bottom, var(--medium-blue) 0%, var(--dark-blue) 100%);
 
   --state-green: hsl(120,80%,33%);
   --state-red: hsl(345,50%,50%);
+
+  --pale-violet: #c6a;
 
   --fire-yellow: hsl(48, 100%, 62%);
   --fire-orange: hsl(32, 100%, 50%);

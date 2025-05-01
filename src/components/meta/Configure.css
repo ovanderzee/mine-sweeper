@@ -42,8 +42,8 @@ textarea {
 /* Nice idea
   appearance: none;
   background: var(--extra-light-blue);
-  box-shadow: 
-    inset var(--darker-blue) 0.25em 0.25em 0.25em, 
+  box-shadow:
+    inset var(--darker-blue) 0.25em 0.25em 0.25em,
     inset var(--ultra-light-blue) -0.25em -0.25em 0.25em;
   border: none;
   */
@@ -56,8 +56,8 @@ input[type=range]::-webkit-slider-thumb {
   border-radius: 50%;
   transform: scale(1.2);
   background: var(--extra-light-blue) !important;
-  box-shadow: 
-    inset var(--ultra-light-blue) 0.25em 0.25em 0.67em, 
+  box-shadow:
+    inset var(--ultra-light-blue) 0.25em 0.25em 0.67em,
     inset var(--darker-blue) -0.25em -0.25em 0.67em;
   border: none;
 } */
@@ -68,8 +68,8 @@ input[type=range]::-moz-range-thumb {
   width: 1.333em;
   height: 1.333em;
   background: var(--extra-light-blue);
-  box-shadow: 
-    inset var(--ultra-light-blue) 0.25em 0.25em 0.25em, 
+  box-shadow:
+    inset var(--ultra-light-blue) 0.25em 0.25em 0.25em,
     inset var(--darker-blue) -0.25em -0.25em 0.25em;
   border: none;
 } */
@@ -80,8 +80,8 @@ input[type=range]::-ms-thumb {
   width: 1.333em;
   height: 1.333em;
   background: var(--extra-light-blue);
-  box-shadow: 
-    inset var(--ultra-light-blue) 0.25em 0.25em 0.25em, 
+  box-shadow:
+    inset var(--ultra-light-blue) 0.25em 0.25em 0.25em,
     inset var(--darker-blue) -0.25em -0.25em 0.25em;
   border: none;
 } */
