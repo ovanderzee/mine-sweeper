@@ -66,7 +66,9 @@
 
 #playground button.mijn::before {
   --pseudo-margin: 10%;
-  color: var(--state-green);
+  --glow-color: white;
+  --glow-offset: -1px -1px 3px 0;
+
   z-index: -10;
 }
 
@@ -75,44 +77,50 @@
 }
 
 #playground button.mijn.flag::after {
-  color: var(--state-green);
-}
-
-.game-won #playground button.mijn.flag::after {
-  font-size: 1.5em
-}
-
-.game-won #playground button.mijn:not(.flag)::before {
-  background: radial-gradient(ellipse at 25% 25%, transparent 0%, var(--state-green) 33%);
-}
-
-.game-lost #playground button.mijn.flag.explode::after {
   color: #fffd;
 }
 
-.game-lost #playground button.mijn {
-  --light-color: white;
-  --mine-color: black;
+.game-won #playground button.mijn::before {
+  background: radial-gradient(
+    ellipse at 25% 25%,
+    var(--ultra-light-blue),
+    var(--extra-light-blue) 16%,
+    var(--light-blue) 28%,
+    var(--medium-blue) 48%,
+    var(--darker-blue) 86%
+  );
+  box-shadow: var(--glow-color) var(--glow-offset);
 }
 
 .game-lost #playground button.mijn::before {
-  background: radial-gradient(ellipse at 25% 25%, var(--light-color) 0%, var(--mine-color) 33%);
+  --glow-color: var(--fire-yellow);
+
+  background: radial-gradient(
+    ellipse at 25% 25%,
+    var(--fire-yellow) 8%,
+    var(--fire-orange) 24%,
+    var(--fire-red) 48%,
+    var(--fire-blue) 96%
+  );
+  box-shadow: var(--glow-color) var(--glow-offset);
 }
 
 .game-lost #playground button.mijn.explode {
-  --light-color: var(--lighter-blue);
-  --mine-color: var(--darker-blue);
-
   z-index: 10;
 }
 
 .game-lost #playground button.mijn.explode::before {
   --pseudo-margin: 10%;
+
+  background: radial-gradient(
+    ellipse at 25% 25%,
+    #666,
+    black 33%
+  );
+  box-shadow: none;
 }
 
 .game-lost #playground button.mijn.explode .burst {
-  content: '';
-
   display: inline-block;
   width: 80%;
   height: 80%;
