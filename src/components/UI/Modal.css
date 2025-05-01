@@ -15,7 +15,7 @@ dialog.ending {
   transition: opacity 500ms ease;
 }
 
-dialog:not(:focus) {
+dialog {
   border: 3px solid #6661;
 }
 
@@ -131,6 +131,7 @@ dialog:not(:focus) {
     left: 0%;
     top: 100%;
     opacity: 0;
+    width: .5em;
   }
   to {
     left: var(--left);
