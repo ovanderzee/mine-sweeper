@@ -28,20 +28,20 @@
 #intro::before {
   background: linear-gradient(
     to bottom,
-    #aaddff 0%,
-    #e3f4ff 66%,
-    #66aacc 66%,
-    #3377aa 100%
+    var(--light-blue) 0%,
+    var(--ultra-light-blue) 66%,
+    var(--medium-blue) 66%,
+    var(--dark-blue) 100%
   );
 }
 #achter {
   opacity: 0;
   background: linear-gradient(
     to bottom,
-    #aaddff 0%,
-    #e3f4ff 66%,
-    #cc66aa 66%,
-    #3377aa 100%
+    var(--light-blue) 0%,
+    var(--ultra-light-blue) 66%,
+    var(--pale-violet) 66%,
+    var(--dark-blue) 100%
   );
   animation-name: -anim-ramp;
   animation-timing-function: linear;

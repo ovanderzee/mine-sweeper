@@ -53,6 +53,7 @@ const ModalComponent = (props: ModalProps): React.ReactNode => {
     if (dialogElement) {
       dialogElement.showModal()
       dialogElement.setAttribute('open', 'true')
+      dialogElement.focus()
     }
   }, [dialogRef])
 
