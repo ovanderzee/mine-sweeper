@@ -92,6 +92,12 @@
   box-shadow: var(--glow-color) var(--glow-offset);
 }
 
+.game-lost #playground button.touched:not(.mijn) {
+  background: none;
+  --shadow-topleft: 1px 1px 1px;
+  --shadow-bottomright: -1px -1px 1px;
+}
+
 .game-lost #playground button.mijn::before {
   --glow-color: var(--fire-yellow);
 
