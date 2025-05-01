@@ -11,7 +11,7 @@ import './Configure.css'
 
 function Configure() {
   const pageCtx = useContext(PageContext)
-  const { BOARD_SIZE, GAME_LEVEL, LANGUAGE, FONT_SIZE, PLAYER_NAME, MAX_SCORES } = pageCtx.config
+  const { BOARD_SIZE, GAME_LEVEL, MINE_COUNT, LANGUAGE, FONT_SIZE, PLAYER_NAME, MAX_SCORES } = pageCtx.config
   const text = pageCtx.text
 
   const exitCurrentGame = () => {
@@ -72,6 +72,7 @@ function Configure() {
             max="6"
             onChange={changeGameLevelHandler}
           />
+          <em>{text.settings['total %n mines'].replace('%n', MINE_COUNT.toString())}</em>
         </div>
       </div>
     </fieldset>
