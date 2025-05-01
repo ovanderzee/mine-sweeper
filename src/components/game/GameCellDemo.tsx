@@ -114,6 +114,18 @@ const GameCellDemo = () => {
     <div style={{'background': 'var(--fire-blue)'}}>fire-blue</div>
   </div>
 
+  const pristineColors = <div className="css-colors" style={{'display': 'flex'}}>
+    <div style={{'background': 'var(--light-pristine)'}}>light-pristine</div>
+    <div style={{'background': 'var(--medium-pristine)'}}>medium-pristine</div>
+    <div style={{'background': 'var(--dark-pristine)'}}>dark-pristine</div>
+  </div>
+
+  const touchedColors = <div className="css-colors" style={{'display': 'flex'}}>
+    <div style={{'background': 'var(--light-touched)'}}>light-touched</div>
+    <div style={{'background': 'var(--medium-touched)'}}>medium-touched</div>
+    <div style={{'background': 'var(--dark-touched)'}}>dark-touched</div>
+  </div>
+
   return (
     <section
       className="screen"
@@ -125,6 +137,8 @@ const GameCellDemo = () => {
         {won}
         {stateColors}
         {fireColors}
+        {pristineColors}
+        {touchedColors}
       </article>
       <nav>
         <Settings />

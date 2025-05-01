@@ -3,8 +3,8 @@
 }
 
 #playground button {
-  --pristine-background: #8f8f8f;
-  --touched-background: #9f9f9f;
+  --shadow-topleft: 0.25em 0.25em 0.25em;
+  --shadow-bottomright: -0.25em -0.25em 0.25em;
 
   margin: 0.2em;
   padding: 0;
@@ -15,6 +15,7 @@
   line-height: 2em;
   color: #333;
   border: 0 none;
+  border-radius: 0.25em;
   font-weight: bold;
   position: relative;
   z-index: 5;
@@ -34,17 +35,17 @@
 }
 
 #playground button.pristine {
-  background: var(--pristine-background);
+  background: var(--medium-pristine);
   box-shadow:
-    inset #bfbfbf 0.25em 0.25em 0.25em,
-    inset #5f5f5f -0.25em -0.25em 0.25em;
+    inset var(--light-pristine) var(--shadow-topleft),
+    inset var(--dark-pristine) var(--shadow-bottomright);
 }
 
 #playground button.touched {
-  background: var(--touched-background);
+  background: var(--medium-touched);
   box-shadow:
-    inset #6f6f6f 0.25em 0.25em 0.25em,
-    inset #cfcfcf -0.25em -0.25em 0.25em;
+    inset var(--dark-touched) var(--shadow-topleft),
+    inset var(--light-touched) var(--shadow-bottomright);
   cursor: default;
 }
 

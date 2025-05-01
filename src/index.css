@@ -20,6 +20,13 @@
   --fire-orange: hsl(32, 100%, 50%);
   --fire-red: hsl(16, 100%, 44%);
   --fire-blue: hsl(224, 80%, 38%);
+
+  --light-pristine: hsl(60 6% 75%); /* #bfbfbf */
+  --medium-pristine: hsl(40 8% 56%); /* #8f8f8f */
+  --dark-pristine: hsl(20 6% 37%); /* #5f5f5f */
+  --light-touched: hsl(60 6% 81%); /* #cfcfcf */
+  --medium-touched: hsl(40 8% 62%); /* #9f9f9f */
+  --dark-touched: hsl(20 6% 44%); /* #6f6f6f */
 }
 
 @media only screen and (orientation: portrait) {
