@@ -77,7 +77,8 @@
 }
 
 #playground button.mijn.flag::after {
-  color: #fffd;
+  color: white;
+  text-shadow: -1px -1px 0px #6666;
 }
 
 .game-won #playground button.mijn::before {

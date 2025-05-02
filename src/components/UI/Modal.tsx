@@ -92,13 +92,13 @@ const ModalComponent = (props: ModalProps): React.ReactNode => {
       ref={dialogRef}
       onClick={timedCloseModal}
       onKeyDown={keystrokeShortcut}
+      style={{fontSize: `${FONT_SIZE}px`}}
     >
       {props.className !== 'game-won' &&
         <div
           className="dialog"
           data-text-before={props.textBefore}
           data-text-after={props.textAfter}
-          style={{fontSize: `${FONT_SIZE}px`}}
         >
           <h3 id="dialog-label" className="content">{props.children}</h3>
           <div className="buttons">
