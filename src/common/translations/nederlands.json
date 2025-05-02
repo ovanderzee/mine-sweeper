@@ -12,7 +12,7 @@
   "intro": {
     "minesweeper_1": "mijnen",
     "minesweeper_2": "veger",
-    "skip_this": "direct naar inhoud"
+    "skip_this": "direct naar spel"
   },
   "game": {
     "You Won!": "Gefeliciteerd, je hebt gewonnen!"
@@ -57,7 +57,7 @@
     "%n cells": "%n velden",
     "Gamelevel": "Speelnivo",
     "one mine to %n cells": "één mijn per %n velden",
-    "total %n mines": "totaal %n mijnen",
+    "total %n mines": "spel met %n mijnen",
 
     "General Settings": "Algemene Instellingen",
     "Translations": "Vertalingen",

@@ -12,7 +12,7 @@
   "intro": {
     "minesweeper_1": "mine",
     "minesweeper_2": "sweeper",
-    "skip_this": "skip to content"
+    "skip_this": "skip to game"
   },
   "game": {
     "You Won!": "Congrats, you WON !"
@@ -57,7 +57,7 @@
     "%n cells": "%n fields",
     "Gamelevel": "Gamelevel",
     "one mine to %n cells": "one mine to %n fields",
-    "total %n mines": "total %n mines",
+    "total %n mines": "game with %n mines",
 
     "General Settings": "General Settings",
     "Translations": "Translations",
