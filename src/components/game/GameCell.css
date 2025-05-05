@@ -99,15 +99,48 @@
   --shadow-bottomright: -1px -1px 1px;
 }
 
+@property --stop1 {
+  syntax: '<percentage>';
+  initial-value: 8%;
+  inherits: false;
+}
+@property --stop2 {
+  syntax: '<percentage>';
+  initial-value: 24%;
+  inherits: false;
+}
+@property --stop3 {
+  syntax: '<percentage>';
+  initial-value: 48%;
+  inherits: false;
+}
+@property --stop4 {
+  syntax: '<percentage>';
+  initial-value: 96%;
+  inherits: false;
+}
+@property --stop5 {
+  syntax: '<percentage>';
+  initial-value: 98%;
+  inherits: false;
+}
+@property --stop6 {
+  syntax: '<percentage>';
+  initial-value: 100%;
+  inherits: false;
+}
+
 .game-lost #playground button.mijn::before {
   --glow-color: var(--fire-yellow);
 
   background: radial-gradient(
     ellipse at 25% 25%,
-    var(--fire-yellow) 8%,
-    var(--fire-orange) 24%,
-    var(--fire-red) 48%,
-    var(--fire-blue) 96%
+    var(--fire-yellow) var(--stop1),
+    var(--fire-orange) var(--stop2),
+    var(--fire-red) var(--stop3),
+    var(--fire-blue) var(--stop4),
+    #333 var(--stop5),
+    black var(--stop6)
   );
   box-shadow: var(--glow-color) var(--glow-offset);
 }
@@ -119,12 +152,21 @@
 .game-lost #playground button.mijn.explode::before {
   --pseudo-margin: 10%;
 
-  background: radial-gradient(
-    ellipse at 25% 25%,
-    #666,
-    black 33%
-  );
+  --stop1:  0%;
+  --stop2:  0%;
+  --stop3:  0%;
+  --stop4:  0%;
+  --stop5:  0%;
+  --stop6: 33%;
+
   box-shadow: none;
+  transition:
+    --stop1 100ms ease-in,
+    --stop2 200ms ease-in,
+    --stop3 300ms ease-in,
+    --stop4 400ms ease-in 100ms,
+    --stop5 500ms ease-in 200ms,
+    --stop6 600ms ease-in 300ms;
 }
 
 .game-lost #playground button.mijn.explode .burst {
