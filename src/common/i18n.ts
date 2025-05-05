@@ -19,7 +19,7 @@ const translationIds = Object.keys(Languages)
   Try to match the preferred language
   window.navigator.languages can be one item or an array of items
 */
-const inferLanguage = (): Languages => {
+export const inferLanguage = (): Languages => {
   const navigatorLanguages: string[] =
     Array.isArray(window.navigator.languages) && window.navigator.languages.length
       ? window.navigator.languages
@@ -37,7 +37,7 @@ const inferLanguage = (): Languages => {
   return languageMatch as Languages
 }
 
-export const defaultLanguage: Languages = inferLanguage()
+export const currentLanguage: Languages = inferLanguage()
 
 export const texts: Record<string, Translation> = {
   nl: nederlands,
