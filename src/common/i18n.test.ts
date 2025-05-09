@@ -52,3 +52,22 @@ describe('infer language from navigator.language string', () => {
     expect(currLang).toBe('en')
   })
 })
+
+describe('check translations sanity', () => {
+
+  const keysNl = Object.keys(i18n.texts.nl)
+  const keysEn = Object.keys(i18n.texts.en)
+
+  it('all sections of translation have the same keys', () => {
+    expect(keysNl.join()).toBe(keysEn.join())
+  })
+
+  it('all translations have the same keys', () => {
+    keysNl.forEach((key) => {
+      const textKeysNl = Object.keys(i18n.texts.nl[key])
+      const textKeysEn = Object.keys(i18n.texts.en[key])
+
+      expect(textKeysNl.join()).toBe(textKeysEn.join())
+    })
+  })
+})
