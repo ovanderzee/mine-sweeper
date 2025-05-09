@@ -114,14 +114,14 @@
   initial-value: 48%;
   inherits: false;
 }
+@property --color4 {
+  syntax: '<color>';
+  initial-value: var(--fire-blue);
+  inherits: false;
+}
 @property --stop4 {
   syntax: '<percentage>';
   initial-value: 96%;
-  inherits: false;
-}
-@property --stop5 {
-  syntax: '<percentage>';
-  initial-value: 98%;
   inherits: false;
 }
 @property --stop6 {
@@ -131,6 +131,7 @@
 }
 
 .game-lost #playground button.mijn::before {
+  --color4: var(--fire-blue);
   --glow-color: var(--fire-yellow);
 
   background: radial-gradient(
@@ -138,8 +139,7 @@
     var(--fire-yellow) var(--stop1),
     var(--fire-orange) var(--stop2),
     var(--fire-red) var(--stop3),
-    var(--fire-blue) var(--stop4),
-    #333 var(--stop5),
+    var(--color4) var(--stop4),
     black var(--stop6)
   );
   box-shadow: var(--glow-color) var(--glow-offset);
@@ -156,7 +156,7 @@
   --stop2:  0%;
   --stop3:  0%;
   --stop4:  0%;
-  --stop5:  0%;
+  --color4: #666;
   --stop6: 33%;
 
   box-shadow: none;
@@ -164,9 +164,9 @@
     --stop1 100ms ease-in,
     --stop2 200ms ease-in,
     --stop3 300ms ease-in,
-    --stop4 400ms ease-in 100ms,
-    --stop5 500ms ease-in 200ms,
-    --stop6 600ms ease-in 300ms;
+    --color4 400ms ease-in,
+    --stop4 500ms ease-in,
+    --stop6 600ms ease-in;
 }
 
 .game-lost #playground button.mijn.explode .burst {
