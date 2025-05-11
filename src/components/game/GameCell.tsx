@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import PageContext from '../../store/page-context'
 import { LONG_PRESS_THRESHOLD } from '../../common/constants'
 import { CellState, CellStateStage, CellStateEntry, GameAction, GameActionType } from '../../common/game-types';
-import { aspectualInside } from '../../common/functions';
 import './GameCell.css'
 
 interface GameCellProps {
@@ -66,22 +65,6 @@ const GameCell = (props: GameCellProps) => {
   }
 
   /*
-    Moving inside the target is an allowed user quirk
-  */
-  const moveHandler = (event: React.PointerEvent) => {
-    if (!startEvent) return
-
-    const target = startEvent.target as Element
-    const box = target.getBoundingClientRect()
-    const horizontalInside = aspectualInside(box.x, box.width, event.nativeEvent.pageX)
-    const verticalInside = aspectualInside(box.y, box.height, event.nativeEvent.pageY)
-
-    if (!horizontalInside || !verticalInside) {
-      startEvent = null as unknown as React.UIEvent
-    }
-  }
-
-  /*
     Finalise combined event
   */
   const endHandler = (event: React.PointerEvent) => {
@@ -139,8 +122,9 @@ const GameCell = (props: GameCellProps) => {
       style={{'--cell-row': row + 1, '--cell-col': col + 1} as React.CSSProperties}
       onKeyDown={keystrokeHandler}
       onPointerDown={beginHandler}
-      onPointerMove={moveHandler}
       onPointerCancel={cancelHandler}
+      onPointerLeave={cancelHandler}
+      onPointerOut={cancelHandler}
       onPointerUp={endHandler}
     >
       {cellContent}
