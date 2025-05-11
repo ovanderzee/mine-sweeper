@@ -3,8 +3,8 @@
   margin: 0 auto;
   width: var(--app-width);
   height: 100%;
+  min-height: 100vh;
   background: var(--light-to-white-blue);
-  overflow: hidden;
   transition: opacity 0.5s linear;
 }
 
