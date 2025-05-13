@@ -31,7 +31,7 @@ const victoryReducer = (state: GameState, config: AppConfig): GameState => {
   }
 
   // add
-  const scoresString: string | null = localStorage.getItem('mijnengeveegd')
+  const scoresString: string | null = localStorage.getItem('mv-scores')
   const scoreList: ScoreItem[] = scoresString ? JSON.parse(scoresString) : []
   const isThere = scoreList.find((scoreItem: ScoreItem) => scoreItem.begin === victory.begin)
   if (!isThere) scoreList.push(victory)
@@ -39,7 +39,7 @@ const victoryReducer = (state: GameState, config: AppConfig): GameState => {
   // rearrange
   scoreList.sort((a: ScoreItem, b: ScoreItem) => b.score - a.score)
   const storableScores = JSON.stringify(scoreList.slice(0, MAX_SCORES))
-  localStorage.setItem('mijnengeveegd', storableScores)
+  localStorage.setItem('mv-scores', storableScores)
 
   const rank = 1 + scoreList.findIndex(scoreItem => scoreItem.begin === victory.begin)
 
