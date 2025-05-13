@@ -24,7 +24,6 @@
     "touched": "open"
   },
   "help": {
-    "Intro Heading": "Defuse all mines",
     "Nav Heading": "Navigation",
     "Game Scores Comment": "Number of hidden mines; access to Hall of Fame",
     "About Scores Comment": "View Hall of Fame",
@@ -34,9 +33,14 @@
     "Settings Comment": "Adjust level and other options",
     "Delete Comment": "Clear scores",
     "Go Back Comment": "Return to game",
+
+    "Intro Heading": "Defuse all mines",
     "Playing Hint": "Explore the minefield by clicking a few cells.",
     "Flagging Paragraph": "Flag a suspected mine using a longer click. The cell will then not respond to normal clicking.",
-    "Keyboard Notice": "On desktop or laptop the game could be played using the keyboard. It meets the accessibility guidelines of the WCAG.",
+    "Finalise Game": "You loose the game when you touch a mine. You win when the number of closed cells equal the number of mines.",
+
+    "Accessibility Heading": "Accessibility",
+    "Keyboard Notice": "On desktop or laptop the game could be played using the keyboard. You can reach all interactions using the Tab and Shift+Tab keystrokes.",
     "Game Navigation": "Navigate the minefield with the arrow keys and flag a mine with the spacebar. Confirm a dialog with enter on the right button."
   },
   "fame": {
