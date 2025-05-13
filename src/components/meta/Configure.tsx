@@ -15,7 +15,7 @@ function Configure() {
   const text = pageCtx.text
 
   const exitCurrentGame = () => {
-    sessionStorage.removeItem('mijnenvegerij')
+    sessionStorage.removeItem('mv-game')
   }
 
   const changeBoardSizeHandler = (event: React.ChangeEvent) => {

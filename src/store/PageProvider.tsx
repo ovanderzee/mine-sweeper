@@ -16,7 +16,7 @@ const defaultPageState = {
  * @returns {Object} Page members and methods
  */
 const PageProvider = (props: { children: React.ReactNode }) => {
-  const stored = window.localStorage.getItem('mijnenveger')
+  const stored = window.localStorage.getItem('mv-config')
   const config = stored ? { ...DEFAULTS, ...JSON.parse(stored)} : DEFAULTS
   const { LANGUAGE } = config
   defaultPageState.config = config
@@ -46,7 +46,7 @@ const PageProvider = (props: { children: React.ReactNode }) => {
         update.text = texts[changes.LANGUAGE]
       }
       const configString = JSON.stringify(update.config)
-      window.localStorage.setItem('mijnenveger', configString)
+      window.localStorage.setItem('mv-config', configString)
       return update
     })
   }

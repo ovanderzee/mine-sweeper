@@ -12,7 +12,7 @@ const DefaultSettings = () => {
   const [showModal, setShowModal] = useState(false)
 
   const confirmHandler = () => {
-    sessionStorage.removeItem('mijnenvegerij')
+    sessionStorage.removeItem('mv-game')
     pageCtx.configure()
   }
 
@@ -27,8 +27,8 @@ const DefaultSettings = () => {
 
   const resetHandler = () => {
     // als spelend en speelbord of mijndichtheid niet geconfigureerd zijn
-    const currGame = sessionStorage.getItem('mijnenvegerij')
-    const currConfig = localStorage.getItem('mijnenveger')
+    const currGame = sessionStorage.getItem('mv-game')
+    const currConfig = localStorage.getItem('mv-config')
     if (currGame && currConfig) {
       const game = JSON.parse(currGame)
       const cfg = JSON.parse(currConfig)
