@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react'
 import PageContext from '../../store/page-context'
 import DEFAULTS from '../../common/defaults'
-import { GameStages } from '../../common/game-types';
+import { GameStages } from '../../common/game-types'
 import Modal from '../UI/Modal'
 import Reset from '../symbols/Reset'
 
@@ -28,10 +28,9 @@ const DefaultSettings = () => {
   const resetHandler = () => {
     // als spelend en speelbord of mijndichtheid niet geconfigureerd zijn
     const currGame = sessionStorage.getItem('mv-game')
-    const currConfig = localStorage.getItem('mv-config')
-    if (currGame && currConfig) {
+    const cfg = pageCtx.config
+    if (currGame && cfg) {
       const game = JSON.parse(currGame)
-      const cfg = JSON.parse(currConfig)
       const isPlaying = game.stage === GameStages.PLAYING
       const isDefaultPlayConfig = DEFAULTS.BOARD_SIZE === cfg.BOARD_SIZE && DEFAULTS.GAME_LEVEL === cfg.GAME_LEVEL
       isPlaying && !isDefaultPlayConfig ? setShowModal(true) : confirmHandler()

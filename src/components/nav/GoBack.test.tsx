@@ -1,23 +1,20 @@
-import React from 'react'
-import { render, screen, fireEvent } from '@testing-library/react'
-import { PageContextProps } from './../../common/app-types'
+import { screen, fireEvent } from '@testing-library/react'
+import { renderInContext } from './../../__mocks__/helpers'
 import GoBack from './GoBack'
 
 describe('GoBack Component', () => {
-  render(<GoBack />)
-  const pageCtx = React.useContext({} as React.Context<PageContextProps>)
-  const navSpy = jest.spyOn(pageCtx, 'navigate')
-
   test('should display the "Enter" sign', () => {
+    renderInContext(<GoBack />)
     const button = screen.getByText(/⏎/i)
     expect(button).toBeInTheDocument()
   })
 
   test('should navigate when clicked', () => {
-    render(<GoBack />);
+    const navigate = jest.fn()
+    renderInContext(<GoBack />, { navigate })
     const button = screen.getByText(/⏎/i)
     fireEvent.click(button)
-    expect(navSpy).toHaveBeenCalledTimes(1)
+    expect(navigate).toHaveBeenCalledTimes(1)
   })
 
 })
