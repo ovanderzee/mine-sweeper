@@ -2,17 +2,19 @@ import React from 'react'
 import { render } from '@testing-library/react'
 import PageContext from './../store/page-context'
 import PageProvider from './../store/PageProvider'
+import DEFAULTS from './../common/defaults'
 import { texts } from './../common/i18n'
 
 /*
   renderInContext
-  Supplies translations
-  Allows spyingit's  methods
+  Supplies translations and config
+  Allows spying it's methods
 */
 export const renderInContext = (component: React.ReactNode, keyValue: any = {}) => {
 
   const fakeCtx = {
     navigate: () => {},
+    config: DEFAULTS,
     text: texts['en']
   }
 
