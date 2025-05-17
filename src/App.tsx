@@ -6,8 +6,8 @@ import './App.css'
 function App() {
   return (
     <PageProvider>
-      <Symbols />
       <Paging />
+      <Symbols />
     </PageProvider>
   )
 }
