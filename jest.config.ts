@@ -1,14 +1,14 @@
 export default {
   preset: 'ts-jest',
-  testEnvironment: 'jest-environment-jsdom',
-  setupFilesAfterEnv: ["<rootDir>/src/setupTests.ts"], // The file you created to extend jest config and "implement" the jest-dom environment in the jest globals
+  testEnvironment: 'jsdom',
+  setupFilesAfterEnv: ["<rootDir>/src/jest.setup.ts"], // The file you created to extend jest config and "implement" the jest-dom environment in the jest globals
   transform: {
     "^.+\\.(ts|tsx)?$": [
       "ts-jest",
       {
         tsconfig: "<rootDir>/tsconfig.app.json",
       }
-    ] // process `*.tsx` files with `ts-jest`
+    ]
   },
 //   rootDir: 'src',
   moduleNameMapper: {
