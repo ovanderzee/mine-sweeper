@@ -15,6 +15,7 @@ test('A new game contains MINE_COUNT bombs', () => {
 })
 
 test('equal produced new games have differing cell values', () => {
+  // flaky; to differ, it depends on Math.random()
   let findDifferingValues = 0
 
   newGame.board.forEach((row, r) =>
