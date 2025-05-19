@@ -41,4 +41,14 @@ const simpleHardConfig = {
   "MAX_SCORES":500
 }
 
-export { defaultChallengeConfig, microConfig, simpleEasyConfig, simpleHardConfig }
+const heavyConfig = {
+  "BOARD_SIZE":8,
+  "GAME_LEVEL":5,
+  "MINE_COUNT":11,
+  "LANGUAGE":Languages.en,
+  "FONT_SIZE":16,
+  "PLAYER_NAME":"Floor",
+  "MAX_SCORES":500
+}
+
+export { defaultChallengeConfig, microConfig, simpleEasyConfig, simpleHardConfig, heavyConfig }
