@@ -2,7 +2,7 @@ import React, { useContext, useState, useRef, useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import PageContext from '../../store/page-context'
 import { ShieldByRank } from './Shield'
-import { MODAL_ELEMENT, OVERLAY_FADE_OUT_TIME } from '../../common/constants'
+import { MODAL_ELEMENT, FADE_OUT_TIME } from '../../common/constants'
 import { Primitive } from '../../common/app-types'
 import './Modal.css'
 
@@ -69,7 +69,7 @@ const ModalComponent = (props: ModalProps): React.ReactNode => {
         }
         props.closeModal()
       },
-      OVERLAY_FADE_OUT_TIME
+      FADE_OUT_TIME
     )
   }
 
