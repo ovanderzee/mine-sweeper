@@ -82,14 +82,12 @@
 }
 
 .game-won #playground button.mijn::before {
-  background: radial-gradient(
-    ellipse at 25% 25%,
-    var(--ultra-light-blue),
-    var(--extra-light-blue) 16%,
-    var(--light-blue) 28%,
-    var(--medium-blue) 48%,
-    var(--darker-blue) 86%
-  );
+  background:
+    radial-gradient(ellipse 50% 80% at 10% 50%, var(--ultra-light-blue) 14%, 16%, transparent),
+    radial-gradient(ellipse 50% 50% at 52% 50%, transparent 90%, var(--extra-dark-blue) 110%),
+    radial-gradient(ellipse 60% 80% at 86% 50%, var(--light-blue) 4%, transparent 48%),
+    var(--darker-blue);
+	transform: rotate(45deg);
   box-shadow: var(--glow-color) var(--glow-offset);
 }
 
