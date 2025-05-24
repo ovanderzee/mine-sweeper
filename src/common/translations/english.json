@@ -55,9 +55,9 @@
     "duration": "duration"
   },
   "settings": {
-    "On begin Play": "At the start",
-    "Will destroy current game": "A change will close the current game",
-    "Size Gameboard": "Size Gameboard",
+    "On begin Play": "The Challenge...",
+    "Will destroy current game": "Setting changes will close the current game",
+    "Size Gameboard": "Gameboard dimensions",
     "%n cells": "%n fields",
     "Gamelevel": "Gamelevel",
     "one mine to %n cells": "one mine to %n fields",

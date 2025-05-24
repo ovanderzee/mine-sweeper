@@ -1,5 +1,7 @@
 import { GameState, GameStages, CellStateStage} from '../common/game-types'
 
+// states comply to microConfig
+
 const newGameState: GameState = {
   "stage": GameStages.NEW,
   "board": [
