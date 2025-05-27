@@ -14,11 +14,11 @@ const HallOfFame = () => {
   const { FONT_SIZE } = pageCtx.config
   const text = pageCtx.text
 
-  const rawScores = localStorage.getItem('mijnengeveegd') || '[]'
+  const rawScores = localStorage.getItem('mv-scores') || '[]'
   const [scores, setScores] = useState(JSON.parse(rawScores))
 
   const eraseScores = () => {
-    localStorage.setItem('mijnengeveegd', '[]')
+    localStorage.setItem('mv-scores', '[]')
     setScores([])
   }
 

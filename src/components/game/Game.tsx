@@ -29,7 +29,7 @@ const gameReducer = function (this: AppConfig, state: GameState, action: GameAct
 
   if (action.type === GameActionType.STORE) {
     const currentState = JSON.stringify(state)
-    sessionStorage.setItem('mijnenvegerij', currentState)
+    sessionStorage.setItem('mv-game', currentState)
     return state
   }
 
@@ -67,7 +67,7 @@ const Game = () => {
 
   useEffect(() => {
     if (gameState === initialGameState) {
-      const storedState = sessionStorage.getItem('mijnenvegerij')
+      const storedState = sessionStorage.getItem('mv-game')
       const gameHasEnded = storedState && (
         storedState.includes('"game-won"') ||
         storedState.includes('"game-lost"')
