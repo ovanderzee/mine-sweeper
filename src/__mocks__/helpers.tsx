@@ -46,7 +46,7 @@ export const startConfigurePageTesting = () => {
   referAndNavigateTo.config()
 }
 
-export const startHallOfFamePageTesting = () => {
+export const startHonourPageTesting = () => {
   startPageTesting()
   referAndNavigateTo.hallOfFame()
 }
