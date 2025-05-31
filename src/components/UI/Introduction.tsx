@@ -1,7 +1,7 @@
 import { useContext, useState, useRef, useEffect } from 'react'
 import { createPortal } from 'react-dom'
 import PageContext from '../../store/page-context'
-import { OVERLAY_ELEMENT, OVERLAY_FADE_OUT_TIME } from '../../common/constants'
+import { OVERLAY_ELEMENT, FADE_OUT_TIME } from '../../common/constants'
 import './Introduction.css'
 
 const Introduction = (props: { onEnd: (timeout: number) => void }) => {
@@ -13,7 +13,7 @@ const Introduction = (props: { onEnd: (timeout: number) => void }) => {
 
   const goToGame = () => {
     setEndingClass('ending')
-    onEnd(OVERLAY_FADE_OUT_TIME)
+    onEnd(FADE_OUT_TIME)
   }
 
   const commonRef = useRef(null)
