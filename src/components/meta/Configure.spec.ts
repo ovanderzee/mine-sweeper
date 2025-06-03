@@ -102,19 +102,19 @@ describe('The configure controls', () => {
 
   test("should change the zoom setting", () => {
     expect(getStoredConfig().FONT_SIZE).toBe(15)
-    const range = screen.getByLabelText('Zoom Display')
+    const range = screen.getByLabelText('Zoom display')
     fireEvent.change(range, {target: {value: 12}})
     expect(getStoredConfig().FONT_SIZE).toBe(12)
   })
 
   test("should enforce a minimum zoom setting", () => {
-    const range = screen.getByLabelText('Zoom Display')
+    const range = screen.getByLabelText('Zoom display')
     fireEvent.change(range, {target: {value: 9}})
     expect(getStoredConfig().FONT_SIZE).toBe(12)
   })
 
   test("should enforce a maximum zoom setting", () => {
-    const range = screen.getByLabelText('Zoom Display')
+    const range = screen.getByLabelText('Zoom display')
     fireEvent.change(range, {target: {value: 72}})
     expect(getStoredConfig().FONT_SIZE).toBe(36)
   })

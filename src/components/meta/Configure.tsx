@@ -194,7 +194,7 @@ function Configure() {
       style={{fontSize: `${FONT_SIZE}px`}}
     >
       <form
-          onKeyPress={(event) => preventReloadByEnter(event)}
+          onKeyDown={(event) => preventReloadByEnter(event)}
         >
         {onbeginContent}
         {genericContent}
