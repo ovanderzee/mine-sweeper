@@ -1,5 +1,5 @@
 import React, { useContext, useState, useRef, useEffect } from 'react'
-import { createPortal } from 'react-dom'
+import ReactDOM from 'react-dom'
 import PageContext from '../../store/page-context'
 import { ShieldByRank } from './Shield'
 import { MODAL_ELEMENT, FADE_OUT_TIME } from '../../common/constants'
@@ -114,7 +114,7 @@ const ModalComponent = (props: ModalProps): React.ReactNode => {
   )
 }
 
-const Modal = (props: ModalProps) => createPortal(
+const Modal = (props: ModalProps) => ReactDOM.createPortal(
   <ModalComponent {...props} />,
   MODAL_ELEMENT!
 )

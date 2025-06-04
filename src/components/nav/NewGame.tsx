@@ -15,7 +15,7 @@ const NewGame = (props: NewGameProps) => {
 
   const [showModal, setShowModal] = useState(false)
 
-  const action: GameAction = { type: GameActionType.NEW}
+  const action: GameAction = { type: GameActionType.NEW }
   const confirmHandler = () => props.onNew(action)
 
   const consentModal = <Modal

@@ -52,3 +52,4 @@ const heavyConfig = {
 }
 
 export { defaultChallengeConfig, microConfig, simpleEasyConfig, simpleHardConfig, heavyConfig }
+
