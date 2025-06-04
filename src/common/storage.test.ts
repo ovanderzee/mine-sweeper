@@ -1,5 +1,7 @@
 import storage from './storage'
 import DEFAULTS from './defaults'
+import { GameState } from './game-types'
+import { newGameState, wonGameState } from '../__mocks__/game-states'
 
 describe('Configuration storage', () => {
   beforeEach(() => {
@@ -70,6 +72,47 @@ describe('Configuration storage', () => {
 })
 
 describe('Game storage', () => {
+  beforeEach(() => {
+    sessionStorage.clear()
+  })
+
+  test('should set data', () => {
+    storage.game = newGameState
+
+    const read = JSON.parse(sessionStorage.getItem('mv-game') as string)
+    expect(read.board).toStrictEqual(newGameState.board)
+    expect(read.stage).toBe('game-new')
+  })
+
+  test('should get data', () => {
+    sessionStorage.setItem('mv-game', JSON.stringify(newGameState))
+
+    const gameState = storage.game as GameState
+    expect(gameState.board).toStrictEqual(newGameState.board)
+    expect(gameState.stage).toBe('game-new')
+  })
+
+  test('should set and overwrite', () => {
+    storage.game = { ...wonGameState, extra: 123 } as GameState
+
+    const read1 = JSON.parse(sessionStorage.getItem('mv-game') as string)
+    expect(read1.stage).toBe('game-won')
+    expect(read1.extra).toBeTruthy()
+
+    storage.game = newGameState
+
+    const read2 = JSON.parse(sessionStorage.getItem('mv-game') as string)
+    expect(read2.stage).toBe('game-new')
+    expect(read2.extra).toBeFalsy()
+  })
+
+  test('should be removable', () => {
+    storage.game = null
+
+    const read = JSON.parse(sessionStorage.getItem('mv-game') as string)
+    expect(read?.board).toBeFalsy()
+    expect(read).toBeFalsy()
+  })
 })
 
 describe('Scores storage', () => {
