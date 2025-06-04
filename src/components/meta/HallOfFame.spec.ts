@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom'
 import { fireEvent, screen } from '@testing-library/react'
-import { startHonourPageTesting, referAndNavigateTo, getStoredScores} from './../../__mocks__/helpers'
+import { startHonourPageTesting, referAndNavigateTo, getStoredScores} from './../../__mocks__/specification-helpers'
 import { liveScores } from './../../__mocks__/scores'
 
 describe('The hall-of-fame page sidebar', () => {
