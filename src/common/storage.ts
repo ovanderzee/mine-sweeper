@@ -1,19 +1,21 @@
+import DEFAULTS from './defaults'
+import { AppConfig, AppSubConfig } from './app-types'
 
 /*
   Interface for data storage.
-  Getting config should be storage.config as an object literal
-  Setting config should be storage.config = data as object literal
+  Store and retrieve object literals
 */
 
 const storage = {
-  get config() {
-      const stringified = localStorage.getItem('mv-config')
-      const data = JSON.parse(stringified)
-      return data
+  get config(): AppConfig {
+      const stored = localStorage.getItem('mv-config')
+      const data: AppSubConfig = stored ? JSON.parse(stored) : {}
+      return { ...DEFAULTS, ...data }
   },
-  set config(data) {
-      const stringified = JSON.stringify(data)
-      localStorage.setItem('mv-config', stringified)
+  set config(data: AppSubConfig) {
+      const complete = { ...this.config, ...data }
+      const storeable = JSON.stringify(complete)
+      localStorage.setItem('mv-config', storeable)
   }
 }
 
