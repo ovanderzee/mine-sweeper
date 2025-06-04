@@ -2,7 +2,7 @@ import '@testing-library/jest-dom'
 import { fireEvent, screen } from '@testing-library/react'
 import { startConfigurePageTesting, referAndNavigateTo,
   setDefaultConfig, getStoredConfig, getStoredScores
-} from './../../__mocks__/helpers'
+} from './../../__mocks__/specification-helpers'
 import { playingGameState } from './../../__mocks__/game-states'
 import { liveScores } from './../../__mocks__/scores'
 import { defaultChallengeConfig, microConfig } from './../../__mocks__/configs'

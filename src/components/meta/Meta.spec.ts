@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom'
 import { screen } from '@testing-library/react'
-import { startPageTesting, referAndNavigateTo } from './../../__mocks__/helpers'
+import { startPageTesting, referAndNavigateTo } from './../../__mocks__/specification-helpers'
 
 describe('The meta pages', () => {
   beforeEach(() => {
