@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import { screen, fireEvent } from '@testing-library/react'
 import NewGame from './NewGame'
 import { GameStages } from './../../common/game-types'
-import { renderInContext } from './../../__mocks__/helpers'
+import { renderInContext } from './../../__mocks__/render-helpers'
 
 describe('NewGame Component', () => {
   let dispatcher: () => {}, spyShowModal: jest.SpyInstance

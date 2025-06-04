@@ -5,7 +5,7 @@ import DEFAULTS from './../../common/defaults'
 import DefaultSettings from './DefaultSettings'
 import { microConfig, defaultChallengeConfig, simpleHardConfig } from './../../__mocks__/configs'
 import { newGameState, playingGameState, lostGameState, wonGameState } from './../../__mocks__/game-states'
-import { renderInContext, renderInProvider } from './../../__mocks__/helpers'
+import { renderInContext, renderInProvider } from './../../__mocks__/render-helpers'
 
 describe('DefaultSettings Component', () => {
   let configure: () => {}, spyShowModal: jest.SpyInstance

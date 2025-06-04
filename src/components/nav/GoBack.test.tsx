@@ -1,5 +1,5 @@
 import { screen, fireEvent } from '@testing-library/react'
-import { renderInContext } from './../../__mocks__/helpers'
+import { renderInContext } from './../../__mocks__/render-helpers'
 import GoBack from './GoBack'
 
 describe('GoBack Component', () => {
