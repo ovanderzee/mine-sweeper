@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import PageContext from './page-context'
 import DEFAULTS from '../common/defaults'
 import { texts } from '../common/i18n'
+import storage from '../common/storage'
 import { AppConfig, AppSubConfig, PageContextProps, Translation } from '../common/app-types'
 
 const defaultPageState = {
@@ -16,11 +17,9 @@ const defaultPageState = {
  * @returns {Object} Page members and methods
  */
 const PageProvider = (props: { children: React.ReactNode }) => {
-  const stored = window.localStorage.getItem('mv-config')
-  const config = stored ? { ...DEFAULTS, ...JSON.parse(stored)} : DEFAULTS
-  const { LANGUAGE } = config
+  const { config } = storage
   defaultPageState.config = config
-  defaultPageState.text = texts[LANGUAGE]
+  defaultPageState.text = texts[config.LANGUAGE]
 
   const [pageState, setPageState] = useState(defaultPageState)
 
@@ -45,8 +44,7 @@ const PageProvider = (props: { children: React.ReactNode }) => {
       if (changes.LANGUAGE) {
         update.text = texts[changes.LANGUAGE]
       }
-      const configString = JSON.stringify(update.config)
-      window.localStorage.setItem('mv-config', configString)
+      storage.config = update.config
       return update
     })
   }

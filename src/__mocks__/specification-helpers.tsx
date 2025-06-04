@@ -53,8 +53,6 @@ export const startHonourPageTesting = () => {
 
 export const setDefaultConfig = () => localStorage.setItem('mv-config', JSON.stringify(DEFAULTS))
 
-export const getStoredConfig = () => JSON.parse(localStorage.getItem('mv-config') as string)
-
 export const getStoredScores = () => JSON.parse(localStorage.getItem('mv-scores') as string)
 
 export const setMicroConfig = () => localStorage.setItem('mv-config', JSON.stringify(microConfig))

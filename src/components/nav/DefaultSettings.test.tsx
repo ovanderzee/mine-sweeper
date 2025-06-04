@@ -2,6 +2,7 @@
 import ReactDOM from 'react-dom'
 import { screen, fireEvent } from '@testing-library/react'
 import DEFAULTS from './../../common/defaults'
+import storage from './../../common/storage'
 import DefaultSettings from './DefaultSettings'
 import { microConfig, defaultChallengeConfig, simpleHardConfig } from './../../__mocks__/configs'
 import { newGameState, playingGameState, lostGameState, wonGameState } from './../../__mocks__/game-states'
@@ -12,7 +13,6 @@ describe('DefaultSettings Component', () => {
 
   beforeEach(() => {
     sessionStorage.removeItem('mv-game')
-    localStorage.removeItem('mv-config')
     configure = jest.fn()
     spyShowModal = jest.spyOn(ReactDOM, 'createPortal')
   })
@@ -35,7 +35,7 @@ describe('DefaultSettings Component', () => {
     renderInProvider(<DefaultSettings />)
     const button = screen.getByText(/↺/i)
     fireEvent.click(button)
-    expect(localStorage.getItem('mv-config')).toBe(JSON.stringify(DEFAULTS))
+    expect(storage.config).toStrictEqual(DEFAULTS)
   })
 
   test('should effect default config when clicked while game is not touched', () => {
