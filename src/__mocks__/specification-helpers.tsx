@@ -16,7 +16,7 @@ export const referAndNavigateTo = {
   hallOfFame: () => {
     let icon
     try {
-      icon = screen.getByText(/\d×/i)
+      icon = screen.getByText(/\d+×/i)
     }
     catch(error) {
       const button = screen.getByTitle(/Hall of Fame/i)
@@ -52,9 +52,5 @@ export const startHonourPageTesting = () => {
 }
 
 export const setDefaultConfig = () => localStorage.setItem('mv-config', JSON.stringify(DEFAULTS))
-
-export const getStoredConfig = () => JSON.parse(localStorage.getItem('mv-config') as string)
-
-export const getStoredScores = () => JSON.parse(localStorage.getItem('mv-scores') as string)
 
 export const setMicroConfig = () => localStorage.setItem('mv-config', JSON.stringify(microConfig))

@@ -17,6 +17,7 @@ import victoryReducer from './reducers/victory'
 import defeatReducer from './reducers/defeat'
 import { AppConfig } from '../../common/app-types'
 import { GameState, GameStages, GameAction, GameActionType, PayloadAction } from '../../common/game-types'
+import storage from '../../common/storage'
 import './Game.css'
 
 const gameReducer = function (this: AppConfig, state: GameState, action: GameAction) {
@@ -28,8 +29,7 @@ const gameReducer = function (this: AppConfig, state: GameState, action: GameAct
   }
 
   if (action.type === GameActionType.STORE) {
-    const currentState = JSON.stringify(state)
-    sessionStorage.setItem('mv-game', currentState)
+    storage.game = state
     return state
   }
 
@@ -67,16 +67,15 @@ const Game = () => {
 
   useEffect(() => {
     if (gameState === initialGameState) {
-      const storedState = sessionStorage.getItem('mv-game')
+      const storedState = storage.game
       const gameHasEnded = storedState && (
-        storedState.includes('"game-won"') ||
-        storedState.includes('"game-lost"')
+        storedState.stage === GameStages.WON || storedState.stage === GameStages.LOST
       )
       if (storedState && !gameHasEnded) {
-        const action: GameAction = { type: GameActionType.LOAD, payload: storedState }
+        const action: GameAction = { type: GameActionType.LOAD, payload: JSON.stringify(storedState) }
         dispatchGameAction(action)
       } else {
-        const action: GameAction = { type: GameActionType.NEW}
+        const action: GameAction = { type: GameActionType.NEW }
         dispatchGameAction(action)
       }
     }

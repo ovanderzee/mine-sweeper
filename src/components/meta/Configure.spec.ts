@@ -1,7 +1,8 @@
 import '@testing-library/jest-dom'
 import { fireEvent, screen } from '@testing-library/react'
+import storage from './../../common/storage'
 import { startConfigurePageTesting, referAndNavigateTo,
-  setDefaultConfig, getStoredConfig, getStoredScores
+  setDefaultConfig
 } from './../../__mocks__/specification-helpers'
 import { playingGameState } from './../../__mocks__/game-states'
 import { liveScores } from './../../__mocks__/scores'
@@ -38,108 +39,106 @@ describe('The configure controls', () => {
   })
 
   test("should change the board-size setting", () => {
-    expect(getStoredConfig().BOARD_SIZE).toBe(6)
+    expect(storage.config.BOARD_SIZE).toBe(6)
     const range = screen.getByLabelText('Gameboard dimensions')
     fireEvent.change(range, {target: {value: 8}})
-    expect(getStoredConfig().BOARD_SIZE).toBe(8)
+    expect(storage.config.BOARD_SIZE).toBe(8)
   })
 
   test("should enforce minimum board-size setting", () => {
     const range = screen.getByLabelText('Gameboard dimensions')
     fireEvent.change(range, {target: {value: 2}})
-    expect(getStoredConfig().BOARD_SIZE).toBe(3)
+    expect(storage.config.BOARD_SIZE).toBe(3)
   })
 
   test("should enforce maximum board-size setting", () => {
     const range = screen.getByLabelText('Gameboard dimensions')
     fireEvent.change(range, {target: {value: 10}})
-    expect(getStoredConfig().BOARD_SIZE).toBe(8)
+    expect(storage.config.BOARD_SIZE).toBe(8)
   })
 
   test("should trigger a new game on board-size change", () => {
-    const initialGameState = sessionStorage.getItem('mv-game')
+    const initialGameState = storage.game
     const range = screen.getByLabelText('Gameboard dimensions')
     fireEvent.change(range, {target: {value: 7}})
-    expect(getStoredConfig().BOARD_SIZE).toBe(7)
-    const currentGameState = sessionStorage.getItem('mv-game')
-    expect(currentGameState).not.toBe(initialGameState)
+    expect(storage.config.BOARD_SIZE).toBe(7)
+    const currentGameState = storage.game
+    expect(currentGameState).not.toStrictEqual(initialGameState)
   })
 
   test("should change the gamelevel setting", () => {
-    expect(getStoredConfig().GAME_LEVEL).toBe(3)
+    expect(storage.config.GAME_LEVEL).toBe(3)
     const range = screen.getByLabelText('Gamelevel')
     fireEvent.change(range, {target: {value: 6}})
-    expect(getStoredConfig().GAME_LEVEL).toBe(6)
+    expect(storage.config.GAME_LEVEL).toBe(6)
   })
 
   test("should enforce minimum gamelevel setting", () => {
     const range = screen.getByLabelText('Gamelevel')
     fireEvent.change(range, {target: {value: 0}})
-    expect(getStoredConfig().GAME_LEVEL).toBe(1)
+    expect(storage.config.GAME_LEVEL).toBe(1)
   })
 
   test("should enforce maximum gamelevel setting", () => {
     const range = screen.getByLabelText('Gamelevel')
     fireEvent.change(range, {target: {value: 10}})
-    expect(getStoredConfig().GAME_LEVEL).toBe(6)
+    expect(storage.config.GAME_LEVEL).toBe(6)
   })
 
   test("should trigger a new game on gamelevel change", () => {
-    const initialGameState = sessionStorage.getItem('mv-game')
+    const initialGameState = storage.game
     const range = screen.getByLabelText('Gamelevel')
     fireEvent.change(range, {target: {value: 5}})
-    expect(getStoredConfig().GAME_LEVEL).toBe(5)
-    const currentGameState = sessionStorage.getItem('mv-game')
-    expect(currentGameState).not.toBe(initialGameState)
+    expect(storage.config.GAME_LEVEL).toBe(5)
+    const currentGameState = storage.game
+    expect(currentGameState).not.toStrictEqual(initialGameState)
   })
 
   test("should change the language setting", () => {
-    expect(getStoredConfig().LANGUAGE).toBe('en')
+    expect(storage.config.LANGUAGE).toBe('en')
     const select = screen.getByLabelText('Translations')
     fireEvent.change(select, {target: {value: 'nl'}})
-    expect(getStoredConfig().LANGUAGE).toBe('nl')
+    expect(storage.config.LANGUAGE).toBe('nl')
   })
 
   test("should change the zoom setting", () => {
-    expect(getStoredConfig().FONT_SIZE).toBe(15)
+    expect(storage.config.FONT_SIZE).toBe(15)
     const range = screen.getByLabelText('Zoom display')
     fireEvent.change(range, {target: {value: 12}})
-    expect(getStoredConfig().FONT_SIZE).toBe(12)
+    expect(storage.config.FONT_SIZE).toBe(12)
   })
 
   test("should enforce a minimum zoom setting", () => {
     const range = screen.getByLabelText('Zoom display')
     fireEvent.change(range, {target: {value: 9}})
-    expect(getStoredConfig().FONT_SIZE).toBe(12)
+    expect(storage.config.FONT_SIZE).toBe(12)
   })
 
   test("should enforce a maximum zoom setting", () => {
     const range = screen.getByLabelText('Zoom display')
     fireEvent.change(range, {target: {value: 72}})
-    expect(getStoredConfig().FONT_SIZE).toBe(36)
+    expect(storage.config.FONT_SIZE).toBe(36)
   })
 
   test("should change the name setting", () => {
-    expect(getStoredConfig().PLAYER_NAME).toBe('anonymous')
+    expect(storage.config.PLAYER_NAME).toBe('anonymous')
     const input = screen.getByLabelText('Name in scores')
     fireEvent.change(input, {target: {value: 'Moorefly'}})
-    expect(getStoredConfig().PLAYER_NAME).toBe('Moorefly')
+    expect(storage.config.PLAYER_NAME).toBe('Moorefly')
   })
 
   test("should change the max-scores setting", () => {
-    expect(getStoredConfig().MAX_SCORES).toBe(500)
+    expect(storage.config.MAX_SCORES).toBe(500)
     const range = screen.getByLabelText('Max records')
     fireEvent.change(range, {target: {value: 642}})
-    expect(getStoredConfig().MAX_SCORES).toBe(642)
+    expect(storage.config.MAX_SCORES).toBe(642)
   })
 
   test("should not instantaneously remove scores", () => {
-    localStorage.setItem('mv-scores', JSON.stringify(liveScores))
-    expect(getStoredScores().length).toBe(62)
-
+    storage.scores = liveScores
     const range = screen.getByLabelText('Max records')
     fireEvent.change(range, {target: {value: 33}})
-    expect(getStoredScores().length).toBe(62)
+    expect(storage.scores.length).toBe(liveScores.length)
   })
 
 })
@@ -150,13 +149,13 @@ describe('The configure-page reset button', () => {
     beforeEach(() => {
 //         setMicroConfig() // test errors in html on test.intro.minesweeper_1
       const config_NO_LANGUAGE = { ...microConfig, LANGUAGE: undefined }
-      localStorage.setItem('mv-config', JSON.stringify(config_NO_LANGUAGE))
-      sessionStorage.setItem('mv-game', JSON.stringify(playingGameState))
+      storage.config = config_NO_LANGUAGE
+      storage.game = playingGameState
       startConfigurePageTesting()
     })
 
     test("should not change size and level and keep the current game on cancel", () => {
-      const initialGameState = sessionStorage.getItem('mv-game')
+      const initialGameState = storage.game
 
       const icon = screen.getByText(/↺/i)
       fireEvent.click(icon)
@@ -166,12 +165,12 @@ describe('The configure-page reset button', () => {
       const cancelBtn = document.querySelector('dialog button.cancel') as HTMLButtonElement
       fireEvent.click(cancelBtn)
 
-      const currentGameState = sessionStorage.getItem('mv-game')
-      expect(currentGameState).toBe(initialGameState)
+      const currentGameState = storage.game
+      expect(currentGameState).toStrictEqual(initialGameState)
     })
 
     test("should change size and level and force a new game on confirm", () => {
-      const initialGameState = sessionStorage.getItem('mv-game')
+      const initialGameState = storage.game
 
       const icon = screen.getByText(/↺/i)
       fireEvent.click(icon)
@@ -181,8 +180,8 @@ describe('The configure-page reset button', () => {
       const confirmBtn = document.querySelector('dialog button.confirm') as HTMLButtonElement
       fireEvent.click(confirmBtn)
 
-      const currentGameState = sessionStorage.getItem('mv-game')
-      expect(currentGameState).not.toBe(initialGameState)
+      const currentGameState = storage.game
+      expect(currentGameState).not.toStrictEqual(initialGameState)
     })
   })
 
@@ -191,13 +190,13 @@ describe('The configure-page reset button', () => {
     beforeEach(() => {defaultChallengeConfig
 //         setMicroConfig() // test errors in html on test.intro.minesweeper_1
       const config_NO_LANGUAGE = { ...defaultChallengeConfig, LANGUAGE: undefined }
-      localStorage.setItem('mv-config', JSON.stringify(config_NO_LANGUAGE))
-      sessionStorage.setItem('mv-game', JSON.stringify(playingGameState))
+      storage.config = config_NO_LANGUAGE
+      storage.game = playingGameState
       startConfigurePageTesting()
     })
 
     test("should just reset without a dialog", () => {
-      const initialGameState = sessionStorage.getItem('mv-game')
+      const initialGameState = storage.game
 
       const icon = screen.getByText(/↺/i)
       fireEvent.click(icon)
@@ -205,8 +204,8 @@ describe('The configure-page reset button', () => {
       const confirmBtn = document.querySelector('dialog button.confirm')
       expect(confirmBtn).not.toBeInTheDocument()
 
-      const currentGameState = sessionStorage.getItem('mv-game')
-      expect(currentGameState).not.toBe(initialGameState)
+      const currentGameState = storage.game
+      expect(currentGameState).not.toStrictEqual(initialGameState)
     })
   })
 })

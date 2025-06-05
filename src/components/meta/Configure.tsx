@@ -5,17 +5,17 @@ import HiScores from '../nav/HiScores'
 import Help from '../nav/Help'
 import GoBack from '../nav/GoBack'
 import { Languages } from '../../common/app-types'
+import storage from '../../common/storage'
 import { preventReloadByEnter } from '../../common/functions'
 import './Meta.css'
 import './Configure.css'
 
 function Configure() {
   const pageCtx = useContext(PageContext)
-  const { BOARD_SIZE, GAME_LEVEL, MINE_COUNT, LANGUAGE, FONT_SIZE, PLAYER_NAME, MAX_SCORES } = pageCtx.config
-  const text = pageCtx.text
+  const { config, text } = pageCtx
 
   const exitCurrentGame = () => {
-    sessionStorage.removeItem('mv-game')
+    storage.game = null
   }
 
   const changeBoardSizeHandler = (event: React.ChangeEvent) => {
@@ -48,11 +48,11 @@ function Configure() {
       <div className="field">
         <label htmlFor="size">{text.settings['Size Gameboard']}</label>
         <div>
-          <em>{text.settings['%n cells'].replace('%n', Math.pow(BOARD_SIZE, 2).toString())}</em>
+          <em>{text.settings['%n cells'].replace('%n', Math.pow(config.BOARD_SIZE, 2).toString())}</em>
           <input
             id="size"
             type="range"
-            value={BOARD_SIZE}
+            value={config.BOARD_SIZE}
             min="3"
             max="8"
             onChange={changeBoardSizeHandler}
@@ -63,16 +63,16 @@ function Configure() {
       <div className="field">
         <label htmlFor="level">{text.settings['Gamelevel']}</label>
         <div>
-          <em>{text.settings['one mine to %n cells'].replace('%n', (30 / GAME_LEVEL).toString())}</em>
+          <em>{text.settings['one mine to %n cells'].replace('%n', (30 / config.GAME_LEVEL).toString())}</em>
           <input
             id="level"
             type="range"
-            value={GAME_LEVEL}
+            value={config.GAME_LEVEL}
             min="1"
             max="6"
             onChange={changeGameLevelHandler}
           />
-          <em>{text.settings['total %n mines'].replace('%n', MINE_COUNT.toString())}</em>
+          <em>{text.settings['total %n mines'].replace('%n', config.MINE_COUNT.toString())}</em>
         </div>
       </div>
     </fieldset>
@@ -101,7 +101,7 @@ function Configure() {
           <em>{text.settings['choose your language']}</em>
           <select
             id="language"
-            value={LANGUAGE}
+            value={config.LANGUAGE}
             onChange={changeLanguageHandler}
           >
             {translationIds.map((transId, index) => (
@@ -120,11 +120,11 @@ function Configure() {
       <div className="field">
         <label htmlFor="zoom">{text.settings['Zoom Display']}</label>
         <div>
-          <em>{text.settings['font-size to %n pixels'].replace('%n', FONT_SIZE.toString())}</em>
+          <em>{text.settings['font-size to %n pixels'].replace('%n', config.FONT_SIZE.toString())}</em>
           <input
             id="zoom"
             type="range"
-            value={FONT_SIZE}
+            value={config.FONT_SIZE}
             min="12"
             max="36"
             onChange={changeFontSizeHandler}
@@ -155,7 +155,7 @@ function Configure() {
           <input
             id="user"
             type="text"
-            value={PLAYER_NAME}
+            value={config.PLAYER_NAME}
             onChange={changePlayerNameHandler}
           />
         </div>
@@ -164,11 +164,11 @@ function Configure() {
       <div className="field">
         <label htmlFor="max">{text.settings['Max records']}</label>
         <div>
-          <em>{text.settings['clip to %n'].replace('%n', MAX_SCORES.toString())}</em>
+          <em>{text.settings['clip to %n'].replace('%n', config.MAX_SCORES.toString())}</em>
           <input
             id="max"
             type="range"
-            value={MAX_SCORES}
+            value={config.MAX_SCORES}
             min="8"
             max="1024"
             onChange={changeMaxScoresHandler}
@@ -191,7 +191,7 @@ function Configure() {
   return (
     <section
       className="screen"
-      style={{fontSize: `${FONT_SIZE}px`}}
+      style={{fontSize: `${config.FONT_SIZE}px`}}
     >
       <form
           onKeyDown={(event) => preventReloadByEnter(event)}
