@@ -1,6 +1,6 @@
 import DEFAULTS from './defaults'
 import { AppConfig, AppSubConfig } from './app-types'
-import { GameState } from './game-types'
+import { GameState, ScoreItem } from './game-types'
 
 /*
   Interface for data storage.
@@ -31,6 +31,19 @@ const storage = {
         sessionStorage.setItem('mv-game', stored)
       } else {
         sessionStorage.removeItem('mv-game')
+      }
+  },
+  get scores(): ScoreItem[] {
+      const stored = localStorage.getItem('mv-scores')
+      const data: ScoreItem[] = stored ? JSON.parse(stored) : []
+      return data
+  },
+  set scores(data: ScoreItem[]) {
+      if (data.length) {
+        const stored = JSON.stringify(data)
+        localStorage.setItem('mv-scores', stored)
+      } else {
+        localStorage.removeItem('mv-scores')
       }
   }
 }

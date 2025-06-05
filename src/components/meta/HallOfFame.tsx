@@ -6,6 +6,7 @@ import Settings from '../nav/Settings'
 import GoBack from '../nav/GoBack'
 import { ShieldByRank } from '../UI/Shield'
 import { ScoreItem } from '../../common/game-types'
+import storage from '../../common/storage'
 import './Meta.css'
 import './HallOfFame.css'
 
@@ -14,11 +15,11 @@ const HallOfFame = () => {
   const { FONT_SIZE } = pageCtx.config
   const text = pageCtx.text
 
-  const rawScores = localStorage.getItem('mv-scores') || '[]'
-  const [scores, setScores] = useState(JSON.parse(rawScores))
+  const rawScores = storage.scores
+  const [scores, setScores] = useState(rawScores)
 
   const eraseScores = () => {
-    localStorage.setItem('mv-scores', '[]')
+    storage.scores = []
     setScores([])
   }
 

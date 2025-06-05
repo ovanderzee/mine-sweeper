@@ -2,7 +2,7 @@ import '@testing-library/jest-dom'
 import { fireEvent, screen } from '@testing-library/react'
 import storage from './../../common/storage'
 import { startConfigurePageTesting, referAndNavigateTo,
-  setDefaultConfig, getStoredScores
+  setDefaultConfig
 } from './../../__mocks__/specification-helpers'
 import { playingGameState } from './../../__mocks__/game-states'
 import { liveScores } from './../../__mocks__/scores'
@@ -135,12 +135,10 @@ describe('The configure controls', () => {
   })
 
   test("should not instantaneously remove scores", () => {
-    localStorage.setItem('mv-scores', JSON.stringify(liveScores))
-    expect(getStoredScores().length).toBe(62)
-
+    storage.scores = liveScores
     const range = screen.getByLabelText('Max records')
     fireEvent.change(range, {target: {value: 33}})
-    expect(getStoredScores().length).toBe(62)
+    expect(storage.scores.length).toBe(liveScores.length)
   })
 
 })

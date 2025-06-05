@@ -1,5 +1,6 @@
 import { MIN_DURATION } from '../../../common/constants'
 import { AppConfig } from '../../../common/app-types'
+import storage from '../../../common/storage'
 import { GameState, CellStateStage, ScoreItem } from '../../../common/game-types'
 
 const victoryReducer = (state: GameState, config: AppConfig): GameState => {
@@ -31,17 +32,15 @@ const victoryReducer = (state: GameState, config: AppConfig): GameState => {
   }
 
   // add
-  const scoresString: string | null = localStorage.getItem('mv-scores')
-  const scoreList: ScoreItem[] = scoresString ? JSON.parse(scoresString) : []
-  const isThere = scoreList.find((scoreItem: ScoreItem) => scoreItem.begin === victory.begin)
-  if (!isThere) scoreList.push(victory)
+  const { scores } = storage
+  const isThere = scores.find(score => score.begin === victory.begin)
+  if (!isThere) scores.push(victory)
 
   // rearrange
-  scoreList.sort((a: ScoreItem, b: ScoreItem) => b.score - a.score)
-  const storableScores = JSON.stringify(scoreList.slice(0, MAX_SCORES))
-  localStorage.setItem('mv-scores', storableScores)
+  scores.sort((a, b) => b.score - a.score)
+  storage.scores = scores.slice(0, MAX_SCORES)
 
-  const rank = 1 + scoreList.findIndex(scoreItem => scoreItem.begin === victory.begin)
+  const rank = 1 + scores.findIndex(score => score.begin === victory.begin)
 
   return {
     ...state,

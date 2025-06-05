@@ -2,6 +2,7 @@ import storage from './storage'
 import DEFAULTS from './defaults'
 import { GameState } from './game-types'
 import { newGameState, wonGameState } from '../__mocks__/game-states'
+import { liveScores } from '../__mocks__/scores'
 
 describe('Configuration storage', () => {
   beforeEach(() => {
@@ -110,10 +111,48 @@ describe('Game storage', () => {
     storage.game = null
 
     const read = JSON.parse(sessionStorage.getItem('mv-game') as string)
-    expect(read?.board).toBeFalsy()
-    expect(read).toBeFalsy()
+    expect(read?.board).toBe(undefined)
+    expect(read).toBe(null)
   })
 })
 
 describe('Scores storage', () => {
+  beforeEach(() => {
+    localStorage.clear()
+  })
+
+  test('should set data', () => {
+    storage.scores = liveScores
+
+    const read = JSON.parse(localStorage.getItem('mv-scores') as string)
+    expect(read[10]).toStrictEqual(liveScores[10])
+  })
+
+  test('should get data', () => {
+    localStorage.setItem('mv-scores', JSON.stringify(liveScores))
+
+    const scores = storage.scores
+    expect(scores[10]).toStrictEqual(liveScores[10])
+  })
+
+  test('should set and overwrite', () => {
+    storage.scores = liveScores
+
+    const read1 = JSON.parse(localStorage.getItem('mv-scores') as string)
+    expect(read1.length).toBe(liveScores.length)
+
+    const someScores = liveScores.slice(0,9)
+    storage.scores = someScores
+
+    const read2 = JSON.parse(localStorage.getItem('mv-scores') as string)
+    expect(read2.length).toBe(someScores.length)
+  })
+
+  test('should be removable', () => {
+    storage.scores = []
+
+    const read = JSON.parse(localStorage.getItem('mv-scores') as string)
+    expect(read?.length).toBe(undefined)
+    expect(read).toBe(null)
+  })
 })
