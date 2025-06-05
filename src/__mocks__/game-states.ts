@@ -2,7 +2,7 @@ import { GameState, GameStages, CellStateStage} from '../common/game-types'
 
 // states comply to microConfig
 
-const newGameState: GameState = {
+export const newGameState: GameState = {
   "stage": GameStages.NEW,
   "board": [
     [
@@ -28,7 +28,7 @@ const newGameState: GameState = {
   "mines": []
 }
 
-const playingGameState: GameState = {
+export const playingGameState: GameState = {
   "stage": GameStages.PLAYING,
   "board": [
     [
@@ -54,7 +54,7 @@ const playingGameState: GameState = {
   "mines": []
 }
 
-const lostGameState: GameState = {
+export const lostGameState: GameState = {
   "stage": GameStages.LOST,
   "board": [
     [
@@ -80,7 +80,7 @@ const lostGameState: GameState = {
   "mines": []
 }
 
-const wonGameState: GameState = {
+export const wonGameState: GameState = {
   "stage": GameStages.WON,
   "board": [
     [
@@ -105,5 +105,3 @@ const wonGameState: GameState = {
   "score": 5944,
   "mines": []
 }
-
-export { newGameState, playingGameState, lostGameState, wonGameState }
