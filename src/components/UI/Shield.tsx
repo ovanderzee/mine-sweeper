@@ -26,11 +26,10 @@ const Shield = (props: ShieldProps) => {
   )
 }
 
-const ShieldByRank = (props: {rank: number; }) => {
+export const ShieldByRank = (props: {rank: number; }) => {
   const colorSetMap: ColorSet[] = ['blue', 'gold', 'silver', 'bronze']
   const colorSet = colorSetMap[props.rank] || 'blue'
   return <Shield colorSet={colorSet} text={`${props.rank}`} />
 }
 
 export default Shield
-export { ShieldByRank }

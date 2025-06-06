@@ -3,14 +3,6 @@ import { newGameState, playingGameState } from '../../../__mocks__/game-states'
 import { microConfig } from '../../../__mocks__/configs'
 import { PayloadAction } from '../../../common/game-types'
 
-/*
-import { simpleEasyConfig, simpleHardConfig } from '../../../__mocks__/configs'
-
-import { iterateNeighbours } from '../common'
-import { AppConfig } from '../../../common/app-types'
-import { GameState, GameStages, GameActionType, PayloadAction, CellActionData, CellStateStage, CellState, CellStateEntry } from '../../../common/game-types'
-*/
-
 describe('touch new game', () => {
   const moveCell = '{"row":0,"col":0}'
   const moveEntry = '{"stage":"clicked"}'

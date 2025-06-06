@@ -2,7 +2,7 @@ import { Languages } from '../common/app-types'
 import DEFAULTS from '../common/defaults'
 
 //  BOARD_SIZE, GAME_LEVEL, MINE_COUNT as in DEFAULTS
-const defaultChallengeConfig = {
+export const defaultChallengeConfig = {
   ...DEFAULTS,
   "LANGUAGE": Languages.en,
   "FONT_SIZE":18,
@@ -11,7 +11,7 @@ const defaultChallengeConfig = {
 }
 
 // fits various gamestates
-const microConfig = {
+export const microConfig = {
   "BOARD_SIZE":3,
   "GAME_LEVEL":4,
   "MINE_COUNT":2,
@@ -21,7 +21,7 @@ const microConfig = {
   "MAX_SCORES":500
 }
 
-const simpleEasyConfig = {
+export const simpleEasyConfig = {
   "BOARD_SIZE":4,
   "GAME_LEVEL":3,
   "MINE_COUNT":2,
@@ -31,7 +31,7 @@ const simpleEasyConfig = {
   "MAX_SCORES":500
 }
 
-const simpleHardConfig = {
+export const simpleHardConfig = {
   "BOARD_SIZE":4,
   "GAME_LEVEL":6,
   "MINE_COUNT":4,
@@ -41,7 +41,7 @@ const simpleHardConfig = {
   "MAX_SCORES":500
 }
 
-const heavyConfig = {
+export const heavyConfig = {
   "BOARD_SIZE":8,
   "GAME_LEVEL":5,
   "MINE_COUNT":11,
@@ -50,6 +50,3 @@ const heavyConfig = {
   "PLAYER_NAME":"Floor",
   "MAX_SCORES":500
 }
-
-export { defaultChallengeConfig, microConfig, simpleEasyConfig, simpleHardConfig, heavyConfig }
-

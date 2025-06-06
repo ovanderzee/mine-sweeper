@@ -44,7 +44,7 @@ textarea {
   color: var(--ultra-dark-blue);
   padding: .2em .4em;
   width: 15em;
-  min-height: 1.667em; /* min-: not interfearance with line-height */
+  min-height: 1.667em; /* min-: not interference with line-height */
 }
 
 select {
