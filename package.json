@@ -9,6 +9,7 @@
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview",
+    "coverage": "jest --coverage",
     "test": "jest",
     "cov": "jest --coverage --collectCoverageFrom='src/**/*.{ts,tsx}'"
   },
