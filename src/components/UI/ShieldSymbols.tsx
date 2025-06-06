@@ -1,6 +1,6 @@
 import './Shield.css'
 
-const Symbols = () => {
+const ShieldSymbols = () => {
   return (
     <svg
     	aria-hidden="true"
@@ -100,4 +100,4 @@ const Symbols = () => {
   )
 }
 
-export default Symbols
+export default ShieldSymbols
