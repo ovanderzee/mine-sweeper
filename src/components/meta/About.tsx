@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 import PageContext from '../../store/page-context'
-import { ChampionsPodium, CogWheel, Enter, Erase, Play, QuestionMark, Redo } from '../UI/Symbols'
+import { ChampionsPodium, CogWheel, Enter, Erase, Play, QuestionMark, Redo, Reset } from '../UI/Symbols'
 import HiScores from '../nav/HiScores'
 import Settings from '../nav/Settings'
 import GoBack from '../nav/GoBack'
@@ -29,6 +29,7 @@ const About = () => {
         <dt className="adorn"><Redo /></dt><dd>{text.help['Replay Comment']}</dd>
         <dt className="adorn"><QuestionMark /></dt><dd>{text.help['Help Comment']}</dd>
         <dt className="adorn"><CogWheel /></dt><dd>{text.help['Settings Comment']}</dd>
+        <dt className="adorn"><Reset /></dt><dd>{text.help['Reset Comment']}</dd>
         <dt className="adorn"><Erase /></dt><dd>{text.help['Delete Comment']}</dd>
         <dt className="adorn"><Enter /></dt><dd>{text.help['Go Back Comment']}</dd>
       </dl>

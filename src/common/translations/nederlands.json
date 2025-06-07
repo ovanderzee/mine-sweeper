@@ -28,9 +28,10 @@
     "Game Scores Comment": "Aantal verborgen mijnen; toegang tot de Eregalerij",
     "About Scores Comment": "Bekijk de Eregalerij",
     "New Game Comment": "Begin een nieuw spel, met de huidige instellingen",
-    "Replay Comment": "Begin spel met dezelfde mijn-verdeling en afmetingen",
+    "Replay Comment": "Begin het spel opnieuw",
     "Help Comment": "(dit scherm)",
-    "Settings Comment": "Pas nivo aan en andere opties",
+    "Settings Comment": "Pas het nivo en andere instellingen aan",
+    "Reset Comment": "Standaardinstellingen herstellen",
     "Delete Comment": "Wis scores",
     "Go Back Comment": "Keer terug naar spel",
 

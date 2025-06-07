@@ -28,9 +28,10 @@
     "Game Scores Comment": "Number of hidden mines; access to Hall of Fame",
     "About Scores Comment": "View Hall of Fame",
     "New Game Comment": "Start a new game with current settings",
-    "Replay Comment": "Restart game with the same mine distribution and dimensions",
+    "Replay Comment": "Start the game again",
     "Help Comment": "(this screen)",
-    "Settings Comment": "Adjust level and other options",
+    "Settings Comment": "Adjust level and other settings",
+    "Reset Comment": "Restore default settings",
     "Delete Comment": "Clear scores",
     "Go Back Comment": "Return to game",
 
