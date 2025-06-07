@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import PageContext from '../../store/page-context'
 import About from '../meta/About'
-import { QuestionMark } from '../symbols/Symbols'
+import { QuestionMark } from '../UI/Symbols'
 
 const Help = () => {
   const pageCtx = useContext(PageContext)

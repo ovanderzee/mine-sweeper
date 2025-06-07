@@ -4,7 +4,7 @@ import DEFAULTS from '../../common/defaults'
 import storage from '../../common/storage'
 import { GameStages } from '../../common/game-types'
 import Modal from '../UI/Modal'
-import { Reset } from '../symbols/Symbols'
+import { Reset } from '../UI/Symbols'
 
 const DefaultSettings = () => {
   const pageCtx = useContext(PageContext)

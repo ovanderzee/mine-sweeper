@@ -18,9 +18,9 @@ export const CogWheel = () => {
   )
 }
 
-export const CRLF = () => {
+export const Enter = () => {
   return (
-    <span className="crlf">
+    <span className="enter">
       &#x23ce;
     </span>
   )
@@ -59,6 +59,7 @@ export const Redo = () => {
 }
 
 export const Reset = () => {
+  // is really the undo sign
   return (
     <span className="reset">
       &#x21ba;

@@ -1,11 +1,11 @@
 import { render, screen, within } from '@testing-library/react'
-import { ChampionsPodium, CogWheel, CRLF, Erase, Play, QuestionMark, Redo, Reset } from '../symbols/Symbols'
+import { ChampionsPodium, CogWheel, Enter, Erase, Play, QuestionMark, Redo, Reset } from '../UI/Symbols'
 
 describe('Symbols contain designated artwork', () => {
 
   it('ChampionsPodium should display the "213" sign', () => {
     render(<ChampionsPodium />)
-    const span = document.querySelector('.championship-podium')
+    const span = document.querySelector('.championship-podium') as HTMLElement
     const icon = within(span).getByText('2') && within(span).getByText('1') && within(span).getByText('3')
     expect(icon).toBeInTheDocument()
   })
@@ -16,8 +16,8 @@ describe('Symbols contain designated artwork', () => {
     expect(icon).toBeInTheDocument()
   })
 
-  it('CRLF should display the "Enter" sign', () => {
-    render(<CRLF />)
+  it('Enter should display the "Enter" sign', () => {
+    render(<Enter />)
     const icon = screen.getByText(/⏎/i)
     expect(icon).toBeInTheDocument()
   })
