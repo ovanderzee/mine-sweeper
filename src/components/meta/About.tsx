@@ -1,12 +1,6 @@
 import { useContext } from 'react'
 import PageContext from '../../store/page-context'
-import ChampionsPodium from '../symbols/ChampionsPodium'
-import Play from '../symbols/Play'
-import Redo from '../symbols/Redo'
-import QuestionMark from '../symbols/QuestionMark'
-import CogWheel from '../symbols/CogWheel'
-import Erase from '../symbols/Erase'
-import CRLF from '../symbols/CRLF'
+import { ChampionsPodium, CogWheel, Enter, Erase, Play, QuestionMark, Redo, Reset } from '../UI/Symbols'
 import HiScores from '../nav/HiScores'
 import Settings from '../nav/Settings'
 import GoBack from '../nav/GoBack'
@@ -35,8 +29,9 @@ const About = () => {
         <dt className="adorn"><Redo /></dt><dd>{text.help['Replay Comment']}</dd>
         <dt className="adorn"><QuestionMark /></dt><dd>{text.help['Help Comment']}</dd>
         <dt className="adorn"><CogWheel /></dt><dd>{text.help['Settings Comment']}</dd>
+        <dt className="adorn"><Reset /></dt><dd>{text.help['Reset Comment']}</dd>
         <dt className="adorn"><Erase /></dt><dd>{text.help['Delete Comment']}</dd>
-        <dt className="adorn"><CRLF /></dt><dd>{text.help['Go Back Comment']}</dd>
+        <dt className="adorn"><Enter /></dt><dd>{text.help['Go Back Comment']}</dd>
       </dl>
 
       <h3>{text.help['Accessibility Heading']}</h3>

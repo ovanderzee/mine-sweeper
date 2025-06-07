@@ -1,13 +1,13 @@
 import PageProvider from './store/PageProvider'
 import Paging from './components/Paging'
-import Symbols from './components/UI/Symbols'
+import ShieldSymbols from './components/UI/ShieldSymbols'
 import './App.css'
 
 function App() {
   return (
     <PageProvider>
       <Paging />
-      <Symbols />
+      <ShieldSymbols />
     </PageProvider>
   )
 }
