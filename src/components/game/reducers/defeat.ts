@@ -7,13 +7,14 @@ const defeatReducer = (state: GameState): GameState => {
     .filter(cell => cell.stage === CellStateStage.RELEASED && cell.fill > 8)
 
   if (mines.length) {
-    // trigger next mine in next effect
-    const pickOne = Math.floor(mines.length * Math.random())
-    state.board[mines[pickOne].row][mines[pickOne].col] = {
-      ...mines[pickOne],
+    const randomSeqNum = Math.floor(mines.length * Math.random())
+    const nextMineState = {
+      ...mines[randomSeqNum],
       stage: CellStateStage.TESTED
     }
-    state.board = [...state.board]
+    // trigger next mine in next effect
+    state.board[nextMineState.row][nextMineState.col] = nextMineState
+    mines.splice(randomSeqNum, 1);
 
     return {
       ...state,
