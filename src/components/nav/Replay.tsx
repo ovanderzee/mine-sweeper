@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react'
 import PageContext from '../../store/page-context'
 import Modal from '../UI/Modal'
-import Redo from '../symbols/Redo'
+import { Redo } from '../symbols/Symbols'
 import { GameStages, GameActionType, GameAction } from '../../common/game-types';
 
 interface ReplayProps {

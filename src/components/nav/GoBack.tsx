@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import PageContext from '../../store/page-context'
 import Game from '../game/Game'
-import CRLF from '../symbols/CRLF'
+import { CRLF } from '../symbols/Symbols'
 
 const GoBack = () => {
   const pageCtx = useContext(PageContext)

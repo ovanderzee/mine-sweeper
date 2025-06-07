@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react'
 import PageContext from '../../store/page-context'
-import Erase from '../symbols/Erase'
+import { Erase } from '../symbols/Symbols'
 import Modal from '../UI/Modal'
 
 const EraseScores = (props: { onErase: () => void }) => {

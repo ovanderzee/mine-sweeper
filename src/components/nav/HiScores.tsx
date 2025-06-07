@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import PageContext from '../../store/page-context'
 import HallOfFame from '../meta/HallOfFame'
-import ChampionsPodium from '../symbols/ChampionsPodium'
+import { ChampionsPodium } from '../symbols/Symbols'
 
 const HiScores = (props: { label?: string; }) => {
   const pageCtx = useContext(PageContext)

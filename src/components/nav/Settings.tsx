@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import PageContext from '../../store/page-context'
 import Configure from '../meta/Configure'
-import CogWheel from '../symbols/CogWheel'
+import { CogWheel } from '../symbols/Symbols'
 
 const Settings = () => {
   const pageCtx = useContext(PageContext)
