@@ -1,26 +1,17 @@
-import { screen } from '@testing-library/react'
+import { fireEvent, screen } from '@testing-library/react'
 import { ReactNode } from 'react'
 import { renderInProvider } from '../../__mocks__/render-helpers'
 import Modal from './Modal'
 
-/*
-interface ModalProps {
-  children: React.ReactNode,
-  className: string,
-  onConfirm: () => void,
-  onCancel?: () => void,
-  closeModal: () => void,
-  textBefore?: Primitive,
-  textAfter?: Primitive,
-}
-*/
-
 describe('Modal Dialog', () => {
-  let closeFunction: () => void
+  let cancelFn: () => void
+  let confirmFn: () => void
+  let closeFn: () => void
   const getSimpleModal = (): ReactNode => {
     return <Modal
-      onConfirm={() => {}}
-      closeModal={() => closeFunction()}
+      onCancel={cancelFn}
+      onConfirm={confirmFn}
+      closeModal={closeFn}
       className={'test-modal'}
       textBefore={'before'}
       textAfter={'after'}
@@ -30,15 +21,105 @@ describe('Modal Dialog', () => {
   }
 
   beforeEach(() => {
-    closeFunction = jest.fn()
+    cancelFn = jest.fn()
+    confirmFn = jest.fn()
+    closeFn = jest.fn()
+    renderInProvider(getSimpleModal())
+  })
+
+  beforeAll(() => {
+    jest.useFakeTimers()
+  })
+
+  afterAll(() => {
+    jest.useRealTimers()
   })
 
   it('should put op a dialog element', () => {
-    renderInProvider(getSimpleModal())
-
     const modalDialog = screen.getByRole('dialog')
     expect(modalDialog).toBeInTheDocument
   })
 
+  describe('should cancel and close the dialog', () => {
+    it('by clicking the cancel button', () => {
+      const cancelButton = screen.getByText(/Cancel/i)
+      fireEvent.click(cancelButton)
+      jest.runAllTimers()
+      expect(cancelFn).toHaveBeenCalledTimes(1)
+      expect(confirmFn).toHaveBeenCalledTimes(0)
+      expect(closeFn).toHaveBeenCalledTimes(1)
+    })
 
+    it('by pressing Enter while focussed cancel button', () => {
+      const cancelButton = screen.getByText(/Cancel/i)
+      fireEvent.focus(cancelButton)
+      fireEvent.keyDown(cancelButton, {key: 'Enter'})
+      jest.runAllTimers()
+      expect(cancelFn).toHaveBeenCalledTimes(1)
+      expect(confirmFn).toHaveBeenCalledTimes(0)
+      expect(closeFn).toHaveBeenCalledTimes(1)
+    })
+
+    it('by pressing Escape when dialog just opened', () => {
+      const modalDialog = screen.getByRole('dialog')
+      fireEvent.keyDown(modalDialog, {key: 'Escape'})
+      jest.runAllTimers()
+      expect(cancelFn).toHaveBeenCalledTimes(1)
+      expect(confirmFn).toHaveBeenCalledTimes(0)
+      expect(closeFn).toHaveBeenCalledTimes(1)
+    })
+  })
+
+  describe('should confirm and close the dialog', () => {
+    it('by clicking the confirm button', () => {
+      const confirmButton = screen.getByText(/OK/i)
+      fireEvent.click(confirmButton)
+      jest.runAllTimers()
+      expect(cancelFn).toHaveBeenCalledTimes(0)
+      expect(confirmFn).toHaveBeenCalledTimes(1)
+      expect(closeFn).toHaveBeenCalledTimes(1)
+    })
+
+    it('by pressing Enter while focussed confirm button', () => {
+      const confirmButton = screen.getByText(/OK/i)
+      fireEvent.focus(confirmButton)
+      fireEvent.keyDown(confirmButton, {key: 'Enter'})
+      jest.runAllTimers()
+      expect(cancelFn).toHaveBeenCalledTimes(0)
+      expect(confirmFn).toHaveBeenCalledTimes(1)
+      expect(closeFn).toHaveBeenCalledTimes(1)
+    })
+
+    it('by pressing Enter when dialog just opened', () => {
+      const modalDialog = screen.getByRole('dialog')
+      fireEvent.keyDown(modalDialog, {key: 'Enter'})
+      jest.runAllTimers()
+      expect(cancelFn).toHaveBeenCalledTimes(0)
+      expect(confirmFn).toHaveBeenCalledTimes(1)
+      expect(closeFn).toHaveBeenCalledTimes(1)
+    })
+  })
+
+  describe('should show a shield when winning the game', () => {
+    const getShieldModal = (): ReactNode => {
+      return <Modal
+        onCancel={()=>{}}
+        onConfirm={()=>{}}
+        closeModal={()=>{}}
+        className={'game-won'}
+        textBefore={'123'}
+        textAfter={''}
+      >
+        {'Je wint!'}
+      </Modal>
+    }
+
+    it('showing the rank', () => {
+      renderInProvider(getShieldModal())
+      const svgElement = document.querySelector('svg.shield.blue')
+      expect(svgElement).toBeInTheDocument()
+      const rankText = screen.getByText(/123/i)
+      expect(rankText).toBeInTheDocument()
+    })
+  })
 })
