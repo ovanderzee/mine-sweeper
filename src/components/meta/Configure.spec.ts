@@ -1,6 +1,7 @@
 import '@testing-library/jest-dom'
 import { fireEvent, screen } from '@testing-library/react'
 import storage from './../../common/storage'
+import * as fn from './../../common/functions'
 import { startConfigurePageTesting, referAndNavigateTo,
   setDefaultConfig
 } from './../../__mocks__/specification-helpers'
@@ -207,5 +208,22 @@ describe('The configure-page reset button', () => {
       const currentGameState = storage.game
       expect(currentGameState).not.toStrictEqual(initialGameState)
     })
+  })
+})
+
+describe('The semantic form', () => {
+  beforeEach(() => {
+    startConfigurePageTesting()
+  })
+
+  test('should call function to suppress submitting', () => {
+    const preventFn = jest.spyOn(fn, 'preventReloadByEnter')
+    const formField = screen.getByLabelText('Name in scores')
+
+    formField.focus()
+    fireEvent.keyDown(formField, {key: 'Enter'})
+
+    expect(formField).toBeInTheDocument()
+    expect(preventFn).toHaveBeenCalled()
   })
 })
