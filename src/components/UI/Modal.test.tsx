@@ -21,17 +21,14 @@ describe('Modal Dialog', () => {
   }
 
   beforeEach(() => {
+    jest.useFakeTimers()
     cancelFn = jest.fn()
     confirmFn = jest.fn()
     closeFn = jest.fn()
     renderInProvider(getSimpleModal())
   })
 
-  beforeAll(() => {
-    jest.useFakeTimers()
-  })
-
-  afterAll(() => {
+  afterEach(() => {
     jest.useRealTimers()
   })
 
@@ -109,9 +106,7 @@ describe('Modal Dialog', () => {
         className={'game-won'}
         textBefore={'123'}
         textAfter={''}
-      >
-        {'Je wint!'}
-      </Modal>
+      />
     }
 
     it('showing the rank', () => {

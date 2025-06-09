@@ -7,7 +7,7 @@ import { Primitive } from '../../common/app-types'
 import './Modal.css'
 
 interface ModalProps {
-  children: React.ReactNode,
+  children?: React.ReactNode,
   className: string,
   onConfirm: () => void,
   onCancel?: () => void,
