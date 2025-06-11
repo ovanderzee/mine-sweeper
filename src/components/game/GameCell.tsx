@@ -21,7 +21,7 @@ const GameCell = (props: GameCellProps) => {
   const activatedClass = stage === CellStateStage.TESTED && fill > 8 ? 'explode' : ''
   const stageLabel = text.cell[doneClass]
 
-  let startEvent: React.UIEvent
+  let startTime: number
 
   /*
     A long press for toggling a flag
@@ -41,36 +41,35 @@ const GameCell = (props: GameCellProps) => {
       cell: props.cell as CellState,
       entry
     })
-    const GameAction: GameAction = {
+    const gameAction: GameAction = {
       type,
       payload
     }
 
-    props.onTouch(GameAction)
+    props.onTouch(gameAction)
   }
 
   /*
-    Save the first part of long-press event for data
+    Save initial time
   */
-  const beginHandler = (event: React.UIEvent) => {
-    startEvent = event
+  const beginHandler = () => {
+    startTime = Date.now()
   }
 
   /*
-    CancelEvent: A garbled gesture is trying to cancel interaction
-    Do everything required to terminate combined event
+    CancelEvent: A garbled gesture is trying to cancel interaction, terminate combined events
   */
   const cancelHandler = () => {
-    startEvent = null as unknown as React.UIEvent
+    startTime = 0
   }
 
   /*
     Finalise combined event
   */
-  const endHandler = (event: React.PointerEvent) => {
-    if (!startEvent) return
+  const endHandler = () => {
+    if (!startTime) return
 
-    const touchDuration = event.timeStamp - startEvent.timeStamp
+    const touchDuration = Date.now() - startTime
     cancelHandler()
 
     if (touchDuration < LONG_PRESS_THRESHOLD) {
