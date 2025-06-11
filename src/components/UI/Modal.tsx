@@ -7,7 +7,7 @@ import { Primitive } from '../../common/app-types'
 import './Modal.css'
 
 interface ModalProps {
-  children: React.ReactNode,
+  children?: React.ReactNode,
   className: string,
   onConfirm: () => void,
   onCancel?: () => void,
@@ -24,19 +24,19 @@ const ModalComponent = (props: ModalProps): React.ReactNode => {
   const dialogRef = useRef(null)
   let dialogElement!: HTMLDialogElement | null
 
-  const keystrokeHandler = (event: React.KeyboardEvent, handler: ()=>void) => {
-    event!.stopPropagation()
-    if (event.key && event.key === 'Enter') handler()
+  const keystrokeHandler = (event: React.KeyboardEvent, handler: (event: React.KeyboardEvent)=>void) => {
+    event.stopPropagation()
+    if (event.key && event.key === 'Enter') handler(event)
   }
 
-  const confirmHandler = () => {
+  const confirmHandler = (event: React.UIEvent) => {
     props.onConfirm && props.onConfirm()
-    timedCloseModal()
+    timedCloseModal(event)
   }
 
-  const cancelHandler = () => {
+  const cancelHandler = (event: React.UIEvent) => {
     props?.onCancel && props.onCancel()
-    timedCloseModal()
+    timedCloseModal(event)
   }
 
   const confirmButton = <button type="button" className="confirm"
@@ -59,7 +59,8 @@ const ModalComponent = (props: ModalProps): React.ReactNode => {
 
   const [endState, setEndState] = useState('')
 
-  const timedCloseModal = () => {
+  const timedCloseModal = (event: React.UIEvent) => {
+    event.stopPropagation()
     setEndState('ending')
     setTimeout(() => {
         if (dialogElement) {
@@ -74,13 +75,13 @@ const ModalComponent = (props: ModalProps): React.ReactNode => {
   }
 
   const keystrokeShortcut = (event: React.KeyboardEvent): void => {
-    event!.stopPropagation()
+    event.stopPropagation()
     switch (event.key) {
       case 'Escape':
-        cancelHandler()
+        cancelHandler(event)
         break
       case 'Enter':
-        confirmHandler()
+        confirmHandler(event)
         break
     }
   }
