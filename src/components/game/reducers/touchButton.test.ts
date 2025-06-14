@@ -29,17 +29,6 @@ describe('touch new game', () => {
 
 describe('touch game in progress', () => {
 
-  /*
-  could be tested
-  could be released
-  could be flagged
-  could be unflagged
-
-  should explode when tested
-  should be released when tested
-  should release neighbours when tested
-  */
-
   it('should be flagged', () => {
     const flagCell = '{"row":0,"col":0}'
     const flagEntry = '{"locked":true}'

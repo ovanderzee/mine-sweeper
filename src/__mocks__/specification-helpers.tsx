@@ -32,6 +32,7 @@ export const referAndNavigateTo = {
 
 export const startPageTesting = () => {
   render(<App />)
+  // click 'skip intro' button to goto game screen
   const button = screen.getByRole('button')
   fireEvent.click(button)
 }
