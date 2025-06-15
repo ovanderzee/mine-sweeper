@@ -1,4 +1,4 @@
-import replayReducer from './replay'
+import { replayReducer } from './replay'
 import { newGameState, wonGameState } from '../../../__mocks__/game-states'
 import { GameState, CellState } from '../../../common/game-types'
 

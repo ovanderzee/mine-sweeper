@@ -1,4 +1,4 @@
-import victoryReducer from './victory'
+import { victoryReducer } from './victory'
 import storage from '../../../common/storage'
 import { microConfig } from '../../../__mocks__/configs'
 import { wonGameState } from '../../../__mocks__/game-states'

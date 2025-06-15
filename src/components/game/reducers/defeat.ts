@@ -1,6 +1,6 @@
 import { GameState, CellState, CellStateStage } from '../../../common/game-types'
 
-const defeatReducer = (state: GameState): GameState => {
+export const defeatReducer = (state: GameState): GameState => {
 
   const mines: CellState[] = state.board
     .flat()

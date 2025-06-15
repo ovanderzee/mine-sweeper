@@ -1,15 +1,15 @@
 import { initialGameState } from './common'
-import loadReducer from './reducers/load'
-import newGameReducer from './reducers/newGame'
-import replayReducer from './reducers/replay'
-import touchButtonReducer from './reducers/touchButton'
-import victoryReducer from './reducers/victory'
-import defeatReducer from './reducers/defeat'
+import { loadReducer } from './reducers/load'
+import { newGameReducer } from './reducers/newGame'
+import { replayReducer } from './reducers/replay'
+import { touchButtonReducer } from './reducers/touchButton'
+import { victoryReducer } from './reducers/victory'
+import { defeatReducer } from './reducers/defeat'
 import { AppConfig } from '../../common/app-types'
 import { GameState, GameAction, GameActionType, PayloadAction } from '../../common/game-types'
 import storage from '../../common/storage'
 
-const gameReducer = function (this: AppConfig, state: GameState, action: GameAction) {
+export const gameReducer = function (this: AppConfig, state: GameState, action: GameAction) {
   // eslint-disable-next-line @typescript-eslint/no-this-alias
   const config: AppConfig = this
 
@@ -44,5 +44,3 @@ const gameReducer = function (this: AppConfig, state: GameState, action: GameAct
 
   return initialGameState
 }
-
-export default gameReducer

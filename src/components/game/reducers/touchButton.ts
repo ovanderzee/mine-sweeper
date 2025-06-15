@@ -2,10 +2,10 @@ import { iterateNeighbours } from '../common'
 import { AppConfig } from '../../../common/app-types'
 import { GameState, GameStages, GameActionType, PayloadAction, CellActionData, CellStateStage, CellState, CellStateEntry } from '../../../common/game-types'
 
-const touchButtonReducer = (state: GameState, action: PayloadAction, config: AppConfig): GameState => {
+export const touchButtonReducer = (state: GameState, action: PayloadAction, config: AppConfig): GameState => {
   const { BOARD_SIZE, MINE_COUNT } = config
   const payload: CellActionData = JSON.parse(action.payload)
-  const { stage, fill, row, col } = payload.cell
+  const { fill, row, col } = payload.cell
   const updState = { ...state }
 
   if (state.stage === GameStages.NEW) {
@@ -77,5 +77,3 @@ const touchButtonReducer = (state: GameState, action: PayloadAction, config: App
     board: updBoard,
   }
 }
-
-export default touchButtonReducer

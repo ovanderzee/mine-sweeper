@@ -1,7 +1,7 @@
 import { initialGameState, initialCellState } from '../common'
 import { GameState, CellState } from '../../../common/game-types'
 
-const replayReducer = (state: GameState): GameState => {
+export const replayReducer = (state: GameState): GameState => {
   const newBoard: CellState[][] = state.board.map(row =>
     row.map(cell => {
       return {
@@ -18,5 +18,3 @@ const replayReducer = (state: GameState): GameState => {
     board: newBoard,
   }
 }
-
-export default replayReducer
