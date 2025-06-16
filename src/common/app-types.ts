@@ -4,8 +4,13 @@ import React from 'react'
 export type Translation = Record<string, Record<string, string>>
 
 export enum Languages {
-  'en' = 'English',
-  'nl' = 'Nederlands',
+  en = 'en',
+  nl = 'nl',
+}
+
+export enum LanguageTranslation {
+  en = 'English',
+  nl = 'Nederlands',
 }
 
 export type AppSubConfig = {
