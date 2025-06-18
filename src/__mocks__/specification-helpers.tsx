@@ -1,7 +1,9 @@
 import '@testing-library/jest-dom'
+import { act } from 'react'
 import { fireEvent, render, screen, within } from '@testing-library/react'
 import App from './../App'
 import DEFAULTS from './../common/defaults'
+import storage from './../common/storage'
 import { microConfig } from './configs'
 
 export const referAndNavigateTo = {
@@ -55,3 +57,34 @@ export const startHonourPageTesting = () => {
 export const setDefaultConfig = () => localStorage.setItem('mv-config', JSON.stringify(DEFAULTS))
 
 export const setMicroConfig = () => localStorage.setItem('mv-config', JSON.stringify(microConfig))
+
+export const clickGameButton = (gameButton: HTMLButtonElement) => {
+  fireEvent.pointerDown(gameButton)
+  jest.advanceTimersByTime(20)
+  fireEvent.pointerUp(gameButton)
+  jest.advanceTimersByTime(20)
+}
+
+export const clickToLoose = (): void => {
+  const mines = storage.game?.board.flat().filter(c => c.fill > 8) || []
+
+  const mineButton = document.querySelector(`#row${mines[0].row}col${mines[0].col}`) as HTMLButtonElement
+  clickGameButton(mineButton)
+
+  act(() => {
+    // bridge animation delay
+    jest.advanceTimersByTime(320 * mines.length)
+  })
+}
+
+export const clickToWin = (): void => {
+  const nonCells = storage.game?.board.flat().filter(c => c.fill < 9 && !c.stage) || []
+
+  act(() => {
+    nonCells.forEach(cell => {
+      const todoBtn = document.querySelector(`#row${cell.row}col${cell.col}`) as HTMLButtonElement
+      clickGameButton(todoBtn)
+    })
+  })
+}
+
