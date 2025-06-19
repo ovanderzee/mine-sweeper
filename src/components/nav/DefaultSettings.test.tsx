@@ -12,7 +12,7 @@ describe('DefaultSettings Component', () => {
   let configure: () => void
 
   beforeEach(() => {
-    sessionStorage.removeItem('mv-game')
+    storage.game = null
     configure = jest.fn()
   })
 
@@ -83,7 +83,7 @@ describe('DefaultSettings Component', () => {
     const cancelDialog = screen.getByText(/Cancel/i)
     fireEvent.click(cancelDialog)
     expect(configure).toHaveBeenCalledTimes(0)
-    const effectDialog = screen.getByText(/Ok/i)
+    const effectDialog = screen.getByText(/OK/i)
     fireEvent.click(effectDialog)
     expect(configure).toHaveBeenCalledTimes(1)
   })

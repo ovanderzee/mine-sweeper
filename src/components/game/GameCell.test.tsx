@@ -77,15 +77,12 @@ describe('Gamecell, a party of properties', () => {
     })
   })
 
-  describe('should determine click type', () => {
+  describe('should determine click action', () => {
     let cell: CellState, button: HTMLElement
 
     beforeEach(() => {
       jest.useFakeTimers()
       dispatchGameAction = jest.fn()
-      cell = cellStates.pristine.mijn
-      renderInProvider(getCellByState(cell))
-      button = screen.getByRole('button')
     })
 
     afterEach(() => {
@@ -94,6 +91,10 @@ describe('Gamecell, a party of properties', () => {
     })
 
     it('clicked mine cell', () => {
+      cell = cellStates.pristine.mijn
+      renderInProvider(getCellByState(cell))
+      button = screen.getByRole('button')
+
       fireEvent.pointerDown(button)
       jest.advanceTimersByTime(LONG_PRESS_THRESHOLD * .9) // ==> MOVE action
       fireEvent.pointerUp(button)
@@ -102,11 +103,93 @@ describe('Gamecell, a party of properties', () => {
     })
 
     it('flagged mine cell', () => {
+      cell = cellStates.pristine.mijn
+      renderInProvider(getCellByState(cell))
+      button = screen.getByRole('button')
+
       fireEvent.pointerDown(button)
       jest.advanceTimersByTime(LONG_PRESS_THRESHOLD * 1.1) // ==> FLAG action
       fireEvent.pointerUp(button)
       const payload = {payload: JSON.stringify({cell, entry: {locked: true}}), type: 'FLAG'}
       expect(dispatchGameAction).toHaveBeenCalledWith(payload)
     })
+
+    it('no action when mouse moved out of bounds', () => {
+      cell = cellStates.pristine.mijn
+      renderInProvider(getCellByState(cell))
+      button = screen.getByRole('button')
+
+      fireEvent.pointerDown(button)
+      jest.advanceTimersByTime(20)
+      fireEvent.pointerLeave(button)
+      jest.advanceTimersByTime(20)
+      fireEvent.pointerUp(button)
+
+      expect(dispatchGameAction).not.toHaveBeenCalled()
+    })
+
+    it('no click action when cell was already opened', () => {
+      cell = cellStates.opened.blank
+      renderInProvider(getCellByState(cell))
+      button = screen.getByRole('button')
+
+      fireEvent.pointerDown(button)
+      jest.advanceTimersByTime(LONG_PRESS_THRESHOLD * .9) // ==> MOVE action
+      fireEvent.pointerUp(button)
+      expect(dispatchGameAction).not.toHaveBeenCalled()
+    })
+
+    it('no click action when cell was flagged', () => {
+      cell = cellStates.flagged.blank
+      renderInProvider(getCellByState(cell))
+      button = screen.getByRole('button')
+
+      fireEvent.pointerDown(button)
+      jest.advanceTimersByTime(LONG_PRESS_THRESHOLD * 0.9) // ==> MOVE action
+      fireEvent.pointerUp(button)
+      expect(dispatchGameAction).not.toHaveBeenCalled()
+    })
+  })
+
+  describe('should respond to keystrokes', () => {
+    let cell: CellState, button: HTMLElement
+
+    beforeEach(() => {
+      dispatchGameAction = jest.fn()
+      cell = cellStates.pristine.mijn
+      renderInProvider(getCellByState(cell))
+      button = screen.getByRole('button')
+      button.focus()
+    })
+
+    it('and accept "Enter" to open a cell', () => {
+      const keyDownEvent = {
+        key: 'Enter',
+        stopPropagation: jest.fn(),
+        target: button
+      } as unknown as React.KeyboardEvent
+
+      fireEvent.keyDown(button, keyDownEvent)
+
+      const response = {payload: JSON.stringify({cell, entry: {stage: 'clicked'}}), type: 'MOVE'}
+      expect(dispatchGameAction).toHaveBeenCalledWith(response)
+    })
+
+    it('and accept Spacebar key to flag a cell', () => {
+      const keyDownEvent = {
+        key: ' ',
+        stopPropagation: jest.fn(),
+        target: button
+      } as unknown as React.KeyboardEvent
+
+      fireEvent.keyDown(button, keyDownEvent)
+
+      const response = {payload: JSON.stringify({cell, entry: {locked: true}}), type: 'FLAG'}
+      expect(dispatchGameAction).toHaveBeenCalledWith(response)
+    })
+
+//     it('and accept arrow keys to activate other cells', () => {
+//          see Game.test.tsx
+//     })
   })
 })

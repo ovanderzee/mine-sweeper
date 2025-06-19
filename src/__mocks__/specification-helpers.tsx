@@ -65,10 +65,12 @@ export const clickGameButton = (gameButton: HTMLButtonElement) => {
   jest.advanceTimersByTime(20)
 }
 
+export const getButtonFromState = (cell: CellState): HTMLButtonElement => document.querySelector(`#row${cell.row}col${cell.col}`)
+
 export const clickToLoose = (): void => {
   const mines = storage.game?.board.flat().filter(c => c.fill > 8) || []
 
-  const mineButton = document.querySelector(`#row${mines[0].row}col${mines[0].col}`) as HTMLButtonElement
+  const mineButton = getButtonFromState(mines[0])
   clickGameButton(mineButton)
 
   act(() => {
@@ -82,7 +84,7 @@ export const clickToWin = (): void => {
 
   act(() => {
     nonCells.forEach(cell => {
-      const todoBtn = document.querySelector(`#row${cell.row}col${cell.col}`) as HTMLButtonElement
+      const todoBtn = getButtonFromState(cell)
       clickGameButton(todoBtn)
     })
   })
