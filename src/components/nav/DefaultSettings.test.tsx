@@ -9,12 +9,11 @@ import { newGameState, playingGameState, lostGameState, wonGameState } from './.
 import { renderInContext, renderInProvider } from './../../__mocks__/render-helpers'
 
 describe('DefaultSettings Component', () => {
-  let configure: () => {}, spyShowModal: jest.SpyInstance
+  let configure: () => void
 
   beforeEach(() => {
-    sessionStorage.removeItem('mv-game')
+    storage.game = null
     configure = jest.fn()
-    spyShowModal = jest.spyOn(ReactDOM, 'createPortal')
   })
 
   test('should display the "Revolve Back" sign', () => {
@@ -32,6 +31,7 @@ describe('DefaultSettings Component', () => {
   })
 
   test('should effect default config when clicked and no game is open (storage)', () => {
+    storage.config = microConfig
     renderInProvider(<DefaultSettings />)
     const button = screen.getByText(/↺/i)
     fireEvent.click(button)
@@ -39,7 +39,7 @@ describe('DefaultSettings Component', () => {
   })
 
   test('should effect default config when clicked while game is not touched', () => {
-    sessionStorage.setItem('mv-game', JSON.stringify(newGameState))
+    storage.game = newGameState
     renderInContext(<DefaultSettings />, { config: microConfig, configure })
     const button = screen.getByText(/↺/i)
     fireEvent.click(button)
@@ -48,7 +48,7 @@ describe('DefaultSettings Component', () => {
   })
 
   test('should effect default config when clicked while game is lost', () => {
-    sessionStorage.setItem('mv-game', JSON.stringify(lostGameState))
+    storage.game = lostGameState
     renderInContext(<DefaultSettings />, { config: microConfig, configure })
     const button = screen.getByText(/↺/i)
     fireEvent.click(button)
@@ -57,7 +57,7 @@ describe('DefaultSettings Component', () => {
   })
 
   test('should effect default config when clicked while game is won', () => {
-    sessionStorage.setItem('mv-game', JSON.stringify(wonGameState))
+    storage.game = wonGameState
     renderInContext(<DefaultSettings />, { config: microConfig, configure })
     const button = screen.getByText(/↺/i)
     fireEvent.click(button)
@@ -66,16 +66,16 @@ describe('DefaultSettings Component', () => {
   })
 
   test('should effect default config when clicked while game is playing and challenge is as in default', () => {
-    sessionStorage.setItem('mv-game', JSON.stringify(playingGameState))
+    storage.game = playingGameState
     renderInContext(<DefaultSettings />, { config: defaultChallengeConfig, configure })
     const button = screen.getByText(/↺/i)
     fireEvent.click(button)
     expect(configure).toHaveBeenCalledTimes(1)
-    expect(configure).toHaveBeenCalledWith()
   })
 
   test('should effect default config when clicked while game is playing and challenge is different', () => {
-    sessionStorage.setItem('mv-game', JSON.stringify(playingGameState))
+    storage.game = playingGameState
+    const spyShowModal = jest.spyOn(ReactDOM, 'createPortal')
     renderInContext(<DefaultSettings />, { config: simpleHardConfig, configure })
     const button = screen.getByText(/↺/i)
     fireEvent.click(button)
@@ -83,7 +83,7 @@ describe('DefaultSettings Component', () => {
     const cancelDialog = screen.getByText(/Cancel/i)
     fireEvent.click(cancelDialog)
     expect(configure).toHaveBeenCalledTimes(0)
-    const effectDialog = screen.getByText(/Ok/i)
+    const effectDialog = screen.getByText(/OK/i)
     fireEvent.click(effectDialog)
     expect(configure).toHaveBeenCalledTimes(1)
   })

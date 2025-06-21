@@ -2,7 +2,7 @@ import { iterateNeighbours, initialBoard, initialGameState } from '../common'
 import { AppConfig } from '../../../common/app-types'
 import { GameState, CellState } from '../../../common/game-types'
 
-const newGameReducer = (config: AppConfig): GameState => {
+export const newGameReducer = (config: AppConfig): GameState => {
   const { BOARD_SIZE, MINE_COUNT } = config
 
   const newBoard = initialBoard(BOARD_SIZE).map((row, rowIndex) =>
@@ -37,5 +37,3 @@ const newGameReducer = (config: AppConfig): GameState => {
     board: newBoard,
   }
 }
-
-export default newGameReducer

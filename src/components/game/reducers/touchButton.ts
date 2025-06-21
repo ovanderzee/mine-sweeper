@@ -2,10 +2,10 @@ import { iterateNeighbours } from '../common'
 import { AppConfig } from '../../../common/app-types'
 import { GameState, GameStages, GameActionType, PayloadAction, CellActionData, CellStateStage, CellState, CellStateEntry } from '../../../common/game-types'
 
-const touchButtonReducer = (state: GameState, action: PayloadAction, config: AppConfig): GameState => {
+export const touchButtonReducer = (state: GameState, action: PayloadAction, config: AppConfig): GameState => {
   const { BOARD_SIZE, MINE_COUNT } = config
   const payload: CellActionData = JSON.parse(action.payload)
-  const { stage, fill, row, col } = payload.cell
+  const { fill, row, col } = payload.cell
   const updState = { ...state }
 
   if (state.stage === GameStages.NEW) {
@@ -13,16 +13,12 @@ const touchButtonReducer = (state: GameState, action: PayloadAction, config: App
     updState.begin = Date.now()
   }
 
-  // condition seems never to be met
-  if (
-    updState.stage !== GameStages.PLAYING || state.end || stage
-  )
-    return state
+  // At this point state.stage can only be GameStages.PLAYING
 
   const updBoard = state.board.map((row: CellState[]) => row.map(cell => cell))
   let updCell = updBoard[row][col]
 
-  /** open cells with digits or pristine cells only */
+  // opening (released) or flagging (locked) cells
   const touchCell = (source: CellState, entry: CellStateEntry): CellState =>
     updBoard[source.row][source.col] = {
       ...source,
@@ -81,5 +77,3 @@ const touchButtonReducer = (state: GameState, action: PayloadAction, config: App
     board: updBoard,
   }
 }
-
-export default touchButtonReducer

@@ -3,7 +3,7 @@ import { AppConfig } from '../../../common/app-types'
 import storage from '../../../common/storage'
 import { GameState, CellStateStage, ScoreItem } from '../../../common/game-types'
 
-const victoryReducer = (state: GameState, config: AppConfig): GameState => {
+export const victoryReducer = (state: GameState, config: AppConfig): GameState => {
   const { BOARD_SIZE, GAME_LEVEL, MINE_COUNT, PLAYER_NAME, MAX_SCORES } = config
 
   const duration = Math.max(state.end - state.begin, MIN_DURATION)
@@ -48,5 +48,3 @@ const victoryReducer = (state: GameState, config: AppConfig): GameState => {
     rank: rank
   }
 }
-
-export default victoryReducer

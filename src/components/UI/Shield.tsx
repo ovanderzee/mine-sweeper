@@ -6,12 +6,11 @@ interface ShieldProps {
 }
 
 const Shield = (props: ShieldProps) => {
-  let fontSizeAdjust
+  let fontSizeAdjust = '56%'
   switch(props.text.length) {
     case 1: fontSizeAdjust = '125%'; break
     case 2: fontSizeAdjust = '100%'; break
     case 3: fontSizeAdjust = '75%'; break
-    default: fontSizeAdjust = '0%'
   }
 
   return (

@@ -1,4 +1,4 @@
-import defeatReducer from './defeat'
+import { defeatReducer } from './defeat'
 import { CellStateStage, CellState } from '../../../common/game-types'
 import { playingGameState, lostGameState } from '../../../__mocks__/game-states'
 

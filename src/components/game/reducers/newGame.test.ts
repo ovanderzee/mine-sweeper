@@ -1,4 +1,4 @@
-import newGameReducer from './newGame'
+import { newGameReducer } from './newGame'
 import { simpleHardConfig, heavyConfig } from '../../../__mocks__/configs'
 import { GameState, CellState } from '../../../common/game-types'
 

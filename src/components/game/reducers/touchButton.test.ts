@@ -1,4 +1,4 @@
-import touchButtonReducer from './touchButton'
+import { touchButtonReducer } from './touchButton'
 import { newGameState, playingGameState } from '../../../__mocks__/game-states'
 import { microConfig } from '../../../__mocks__/configs'
 import { PayloadAction } from '../../../common/game-types'
@@ -28,17 +28,6 @@ describe('touch new game', () => {
 })
 
 describe('touch game in progress', () => {
-
-  /*
-  could be tested
-  could be released
-  could be flagged
-  could be unflagged
-
-  should explode when tested
-  should be released when tested
-  should release neighbours when tested
-  */
 
   it('should be flagged', () => {
     const flagCell = '{"row":0,"col":0}'

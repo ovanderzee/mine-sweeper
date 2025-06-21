@@ -37,9 +37,9 @@ export const inferLanguage = (): Languages => {
   return languageMatch as Languages
 }
 
-export const currentLanguage: Languages = inferLanguage()
-
 export const texts: Record<string, Translation> = {
   nl: nederlands,
   en: english,
 }
+
+export const currentLanguage: Languages = inferLanguage()

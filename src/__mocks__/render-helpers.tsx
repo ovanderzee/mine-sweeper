@@ -3,6 +3,7 @@ import { render } from '@testing-library/react'
 import PageContext from './../store/page-context'
 import PageProvider from './../store/PageProvider'
 import DEFAULTS from './../common/defaults'
+import storage from './../common/storage'
 import { texts } from './../common/i18n'
 
 /*
@@ -11,6 +12,11 @@ import { texts } from './../common/i18n'
   Allows spying it's methods
 */
 export const renderInContext = (component: React.ReactNode, keyValue: any = {}) => {
+
+  // for consistency
+  if (keyValue.config) {
+    storage.config = keyValue.config
+  }
 
   const fakeCtx = {
     navigate: () => {},

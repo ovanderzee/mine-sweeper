@@ -1,4 +1,4 @@
-import loadReducer from './load'
+import { loadReducer } from './load'
 import { PayloadAction } from '../../../common/game-types'
 
 test('loads persisted state', () => {

@@ -3,11 +3,10 @@ import { fireEvent, screen } from '@testing-library/react'
 import storage from './../../common/storage'
 import * as fn from './../../common/functions'
 import { startConfigurePageTesting, referAndNavigateTo,
-  setDefaultConfig
+  setDefaultConfig, setMicroConfig
 } from './../../__mocks__/specification-helpers'
 import { playingGameState } from './../../__mocks__/game-states'
 import { liveScores } from './../../__mocks__/scores'
-import { defaultChallengeConfig, microConfig } from './../../__mocks__/configs'
 
 describe('The configure page sidebar', () => {
   beforeEach(() => {
@@ -148,9 +147,7 @@ describe('The configure-page reset button', () => {
   describe('in playing game state with a non-default challenge', () => {
 
     beforeEach(() => {
-//         setMicroConfig() // test errors in html on test.intro.minesweeper_1
-      const config_NO_LANGUAGE = { ...microConfig, LANGUAGE: undefined }
-      storage.config = config_NO_LANGUAGE
+      setMicroConfig()
       storage.game = playingGameState
       startConfigurePageTesting()
     })
@@ -188,10 +185,8 @@ describe('The configure-page reset button', () => {
 
   describe('in playing game state with a default challenge', () => {
 
-    beforeEach(() => {defaultChallengeConfig
-//         setMicroConfig() // test errors in html on test.intro.minesweeper_1
-      const config_NO_LANGUAGE = { ...defaultChallengeConfig, LANGUAGE: undefined }
-      storage.config = config_NO_LANGUAGE
+    beforeEach(() => {
+      setDefaultConfig()
       storage.game = playingGameState
       startConfigurePageTesting()
     })

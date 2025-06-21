@@ -4,7 +4,7 @@ import DefaultSettings from '../nav/DefaultSettings'
 import HiScores from '../nav/HiScores'
 import Help from '../nav/Help'
 import GoBack from '../nav/GoBack'
-import { Languages } from '../../common/app-types'
+import { Languages, LanguageTranslation } from '../../common/app-types'
 import storage from '../../common/storage'
 import { preventReloadByEnter } from '../../common/functions'
 import './Meta.css'
@@ -78,9 +78,6 @@ function Configure() {
     </fieldset>
   )
 
-  const translationIds = Object.keys(Languages)
-  const translationNames = Object.values(Languages)
-
   const changeLanguageHandler = (event: React.ChangeEvent) => {
     const ctrl = event.target as HTMLSelectElement
     pageCtx.configure({ LANGUAGE: ctrl.value as Languages })
@@ -104,14 +101,11 @@ function Configure() {
             value={config.LANGUAGE}
             onChange={changeLanguageHandler}
           >
-            {translationIds.map((transId, index) => (
+            {Object.entries(LanguageTranslation).map(([key, value]) => (
               <option
-                key={transId}
-                // value selects proper option after resetting
-                value={transId}
-              >
-                {translationNames[index]}
-              </option>
+                key={key}
+                value={key}
+              >{value}</option>
             ))}
           </select>
         </div>

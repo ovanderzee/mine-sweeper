@@ -30,11 +30,11 @@ describe('The hall-of-fame page sidebar', () => {
 
 describe('The hall-of-fame-page clear list button', () => {
   beforeEach(() => {
+    storage.scores = liveScores
     startHonourPageTesting()
   })
 
   test("should instantaneously remove scores when confirmed", () => {
-    localStorage.setItem('mv-scores', JSON.stringify(liveScores))
     expect(storage.scores.length).toBe(liveScores.length)
 
     const button = screen.getByText(/⊘/i)
@@ -49,7 +49,6 @@ describe('The hall-of-fame-page clear list button', () => {
   })
 
   test("should not remove scores when cancelled", () => {
-    localStorage.setItem('mv-scores', JSON.stringify(liveScores))
     expect(storage.scores.length).toBe(liveScores.length)
 
     const button = screen.getByText(/⊘/i)
@@ -62,4 +61,12 @@ describe('The hall-of-fame-page clear list button', () => {
 
     expect(storage.scores.length).toBe(liveScores.length)
   })
+})
+
+test('Hall of Fame should show the best scores with a badge', () => {
+  storage.scores = liveScores
+  startHonourPageTesting()
+
+  const theBest = document.querySelectorAll('li svg')
+  expect(theBest.length).toBe(10)
 })
