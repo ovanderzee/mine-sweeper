@@ -332,7 +332,7 @@ describe('navigate gameboard by keyboard (gameCell)', () => {
     storage.config = microConfig
     storage.game = playingGameState
     startPageTesting()
-    initialButton = getButtonFromState({ row: 1, col: 1 })
+    initialButton = getButtonFromState({ row: 1, col: 1,  fill: 0 })
   })
 
   it('should accept arrowUp keys to activate upper cells', () => {
@@ -343,12 +343,12 @@ describe('navigate gameboard by keyboard (gameCell)', () => {
     } as unknown as React.KeyboardEvent
     fireEvent.keyDown(initialButton, ArrowUpEvent)
 
-    const upButton = getButtonFromState({ row: 0, col: 1 })
+    const upButton = getButtonFromState({ row: 0, col: 1,  fill: 0 })
     expect(document.activeElement).toBe(upButton)
 
     fireEvent.keyDown(initialButton, ArrowUpEvent)
 
-    const edgeButton = getButtonFromState({ row: 0, col: 1 })
+    const edgeButton = getButtonFromState({ row: 0, col: 1,  fill: 0 })
     expect(edgeButton).toBe(upButton)
     expect(document.activeElement).toBe(upButton)
   })
@@ -361,12 +361,12 @@ describe('navigate gameboard by keyboard (gameCell)', () => {
     } as unknown as React.KeyboardEvent
     fireEvent.keyDown(initialButton, ArrowRightEvent)
 
-    const rightButton = getButtonFromState({ row: 1, col: 2 })
+    const rightButton = getButtonFromState({ row: 1, col: 2,  fill: 0 })
     expect(document.activeElement).toBe(rightButton)
 
     fireEvent.keyDown(initialButton, ArrowRightEvent)
 
-    const edgeButton = getButtonFromState({ row: 1, col: 2 })
+    const edgeButton = getButtonFromState({ row: 1, col: 2,  fill: 0 })
     expect(edgeButton).toBe(rightButton)
     expect(document.activeElement).toBe(rightButton)
   })
@@ -379,12 +379,12 @@ describe('navigate gameboard by keyboard (gameCell)', () => {
     } as unknown as React.KeyboardEvent
     fireEvent.keyDown(initialButton, ArrowDownEvent)
 
-    const downButton = getButtonFromState({ row: 2, col: 1 })
+    const downButton = getButtonFromState({ row: 2, col: 1,  fill: 0 })
     expect(document.activeElement).toBe(downButton)
 
     fireEvent.keyDown(initialButton, ArrowDownEvent)
 
-    const edgeButton = getButtonFromState({ row: 2, col: 1 })
+    const edgeButton = getButtonFromState({ row: 2, col: 1,  fill: 0 })
     expect(edgeButton).toBe(downButton)
     expect(document.activeElement).toBe(downButton)
   })
@@ -397,12 +397,12 @@ describe('navigate gameboard by keyboard (gameCell)', () => {
     } as unknown as React.KeyboardEvent
     fireEvent.keyDown(initialButton, ArrowLeftEvent)
 
-    const leftButton = getButtonFromState({ row: 1, col: 0 })
+    const leftButton = getButtonFromState({ row: 1, col: 0,  fill: 0 })
     expect(document.activeElement).toBe(leftButton)
 
     fireEvent.keyDown(initialButton, ArrowLeftEvent)
 
-    const edgeButton = getButtonFromState({ row: 1, col: 0 })
+    const edgeButton = getButtonFromState({ row: 1, col: 0,  fill: 0 })
     expect(edgeButton).toBe(leftButton)
     expect(document.activeElement).toBe(leftButton)
   })

@@ -1,4 +1,3 @@
-import { initialGameState } from './common'
 import { loadReducer } from './reducers/load'
 import { newGameReducer } from './reducers/newGame'
 import { replayReducer } from './reducers/replay'
@@ -13,34 +12,24 @@ export const gameReducer = function (this: AppConfig, state: GameState, action: 
   // eslint-disable-next-line @typescript-eslint/no-this-alias
   const config: AppConfig = this
 
-  if (action.type === GameActionType.LOAD) {
-    return loadReducer(action as PayloadAction)
-  }
 
-  if (action.type === GameActionType.STORE) {
-    storage.game = state
-    return state
-  }
+  switch(action.type) {
+    case GameActionType.LOAD: return loadReducer(action as PayloadAction)
 
-  if (action.type === GameActionType.NEW) {
-    return newGameReducer(config)
-  }
+    case GameActionType.STORE:
+      storage.game = state
+      return state
 
-  if (action.type === GameActionType.REPLAY) {
-    return replayReducer(state)
-  }
+    case GameActionType.NEW: return newGameReducer(config)
 
-  if (action.type === GameActionType.MOVE || action.type === GameActionType.FLAG) {
-    return touchButtonReducer(state, action as PayloadAction, config)
-  }
+    case GameActionType.REPLAY: return replayReducer(state)
 
-  if (action.type === GameActionType.VICTORY) {
-    return victoryReducer(state, config)
-  }
+    case GameActionType.VICTORY: return victoryReducer(state, config)
 
-  if (action.type === GameActionType.DEFEAT) {
-    return defeatReducer(state)
-  }
+    case GameActionType.DEFEAT: return defeatReducer(state)
 
-  return initialGameState
+    default:
+      // GameActionType.MOVE || GameActionType.FLAG
+      return touchButtonReducer(state, action as PayloadAction, config)
+  }
 }

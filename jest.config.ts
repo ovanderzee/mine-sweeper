@@ -10,7 +10,11 @@ export default {
       }
     ]
   },
-//   rootDir: 'src',
+  coveragePathIgnorePatterns: [
+    "<rootDir>/src/common/(app|game)-types.ts",
+    "<rootDir>/src/components/game/GameCellDemo",
+    "<rootDir>/src/store/page-context.ts"
+  ],
   moduleNameMapper: {
     "\\.(gif|ttf|eot|svg|png)$": "<rootDir>/src/__mocks__/fileMock.js", // The global stub for weird files
     "\\.(css|less|sass|scss)$": "identity-obj-proxy", // The mock for style related files

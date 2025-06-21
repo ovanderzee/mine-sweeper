@@ -4,6 +4,7 @@ import { fireEvent, render, screen, within } from '@testing-library/react'
 import App from './../App'
 import DEFAULTS from './../common/defaults'
 import storage from './../common/storage'
+import { CellState } from './../common/game-types'
 import { microConfig } from './configs'
 
 export const referAndNavigateTo = {
@@ -65,7 +66,9 @@ export const clickGameButton = (gameButton: HTMLButtonElement) => {
   jest.advanceTimersByTime(20)
 }
 
-export const getButtonFromState = (cell: CellState): HTMLButtonElement => document.querySelector(`#row${cell.row}col${cell.col}`)
+export const getButtonFromState = (cell: CellState): HTMLButtonElement => {
+  return document.querySelector(`#row${cell.row}col${cell.col}`) as HTMLButtonElement
+}
 
 export const clickToLoose = (): void => {
   const mines = storage.game?.board.flat().filter(c => c.fill > 8) || []
