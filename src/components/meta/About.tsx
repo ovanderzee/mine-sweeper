@@ -38,6 +38,8 @@ const About = () => {
       <p>{text.help['Keyboard Notice']}</p>
       <p>{text.help['Game Navigation']}</p>
 
+      <hr />
+
       <h5>Onno van der Zee, 2013 - 2025</h5>
     </article>
   )
