@@ -1,5 +1,5 @@
 import React from 'react'
-import { preventReloadByEnter } from './functions'
+import { preventReloadByEnter, getAppVersion } from './functions'
 
 describe('preventReloadByEnter', () => {
   it('should call event.preventDefault when Enter was pressed', () => {
@@ -23,5 +23,13 @@ describe('preventReloadByEnter', () => {
     preventReloadByEnter(aEvent)
     expect(aEvent.preventDefault).not.toHaveBeenCalled()
   })
+})
 
+describe('getAppVersion', () => {
+  it('should return a version string', () => {
+    const output = getAppVersion()
+    const re = /^\d+\.\d+\.\d+$/
+
+    expect(output.match(re)).toBeTruthy()
+  })
 })

@@ -4,6 +4,7 @@ import { ChampionsPodium, CogWheel, Enter, Erase, Play, QuestionMark, Redo, Rese
 import HiScores from '../nav/HiScores'
 import Settings from '../nav/Settings'
 import GoBack from '../nav/GoBack'
+import { getAppVersion } from '../../common/functions'
 import './Meta.css'
 import './About.css'
 
@@ -41,6 +42,7 @@ const About = () => {
       <hr />
 
       <h5>Onno van der Zee, 2013 - 2025</h5>
+      <h6>{text.help['appVersion']}: {getAppVersion()}</h6>
     </article>
   )
 

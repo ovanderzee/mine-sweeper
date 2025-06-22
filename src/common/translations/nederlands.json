@@ -42,7 +42,9 @@
 
     "Accessibility Heading": "Toegankelijkheid",
     "Keyboard Notice": "Op desktop en laptop kan het spel met het toetsenbord gespeeld worden. Je kunt alle interactie bereiken met de Tab en de Shift+Tab toetsaanslag.",
-    "Game Navigation": "Navigeer op het mijnenveld met de pijl-toetsen en vlag af met de spatiebalk. Bevestig een dialoog met enter op de juiste knop."
+    "Game Navigation": "Navigeer op het mijnenveld met de pijl-toetsen en vlag af met de spatiebalk. Bevestig een dialoog met enter op de juiste knop.",
+
+    "appVersion": "app versie"
   },
   "fame": {
     "Nothing Yet": "Nog geen scores",
