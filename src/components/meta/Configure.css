@@ -1,7 +1,13 @@
+form {
+  --block-spacing: 0.2em;
+  --inline-spacing: 0.4em;
+  --item-spacing: 0.8em;
+}
+
 fieldset {
   border: 0;
   padding: 0;
-  margin: 1em 0;
+  margin-block: var(--item-spacing);
 }
 
 legend {
@@ -18,12 +24,12 @@ legend + h5 {
 }
 
 .field {
-  margin: 1em 0;
+  margin: var(--item-spacing) 0;
 }
 
 .field * {
   display: block;
-  margin: 0 auto;
+  margin-inline: auto;
 }
 
 label {
@@ -42,7 +48,8 @@ textarea {
       inset var(--ultra-light-blue) .5ex .5ex .5ex 0;
   caret-color: var(--dark-blue);
   color: var(--ultra-dark-blue);
-  padding: .2em .4em;
+  margin-block: var(--block-spacing);
+  padding: var(--block-spacing) var(--inline-spacing);
   width: 15em;
   min-height: 1.667em; /* min-: not interference with line-height */
 }
@@ -85,6 +92,7 @@ select:disabled, select[aria-disabled=true] {
 
 input[type="range"] {
   accent-color: var(--dark-blue);
+  margin-block: 0;
 }
 
 input[type="range"]::-webkit-slider-thumb,
