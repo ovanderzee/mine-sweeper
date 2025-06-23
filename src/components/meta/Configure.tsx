@@ -5,6 +5,7 @@ import HiScores from '../nav/HiScores'
 import Help from '../nav/Help'
 import GoBack from '../nav/GoBack'
 import { Languages, LanguageTranslation } from '../../common/app-types'
+import { RANGES } from '../../common/constants'
 import storage from '../../common/storage'
 import { preventReloadByEnter } from '../../common/functions'
 import './Meta.css'
@@ -21,7 +22,10 @@ function Configure() {
   const changeBoardSizeHandler = (event: React.ChangeEvent) => {
     exitCurrentGame()
     const ctrl = event.target as HTMLInputElement
-    const value = +ctrl.value
+    const value = Math.min(
+      RANGES.SIZE.max,
+      Math.max(RANGES.SIZE.min, +ctrl.value)
+    )
     const prev = pageCtx.config
     pageCtx.configure({
       BOARD_SIZE: value,
@@ -32,7 +36,10 @@ function Configure() {
   const changeGameLevelHandler = (event: React.ChangeEvent) => {
     exitCurrentGame()
     const ctrl = event.target as HTMLInputElement
-    const value = +ctrl.value
+    const value = Math.min(
+      RANGES.LEVEL.max,
+      Math.max(RANGES.LEVEL.min, +ctrl.value)
+    )
     const prev = pageCtx.config
     pageCtx.configure({
       GAME_LEVEL: value,
@@ -40,6 +47,8 @@ function Configure() {
     })
   }
 
+  const cellCount = Math.pow(config.BOARD_SIZE, 2)
+  const cellsPerMine = Math.round(30 * 10 / config.GAME_LEVEL) / 10
   const onbeginContent = (
     <fieldset id="on-begin-play">
       <legend>{text.settings['On begin Play']}</legend>
@@ -48,13 +57,13 @@ function Configure() {
       <div className="field">
         <label htmlFor="size">{text.settings['Size Gameboard']}</label>
         <div>
-          <em>{text.settings['%n cells'].replace('%n', Math.pow(config.BOARD_SIZE, 2).toString())}</em>
+          <em>{text.settings['%n cells'].replace('%n', cellCount.toString())}</em>
           <input
             id="size"
             type="range"
             value={config.BOARD_SIZE}
-            min="3"
-            max="8"
+            min={RANGES.SIZE.min}
+            max={RANGES.SIZE.max}
             onChange={changeBoardSizeHandler}
           />
         </div>
@@ -63,13 +72,13 @@ function Configure() {
       <div className="field">
         <label htmlFor="level">{text.settings['Gamelevel']}</label>
         <div>
-          <em>{text.settings['one mine to %n cells'].replace('%n', (30 / config.GAME_LEVEL).toString())}</em>
+          <em>{text.settings['one mine to %n cells'].replace('%n', cellsPerMine.toString())}</em>
           <input
             id="level"
             type="range"
             value={config.GAME_LEVEL}
-            min="1"
-            max="6"
+            min={RANGES.LEVEL.min}
+            max={RANGES.LEVEL.max}
             onChange={changeGameLevelHandler}
           />
           <em>{text.settings['total %n mines'].replace('%n', config.MINE_COUNT.toString())}</em>
@@ -85,7 +94,11 @@ function Configure() {
 
   const changeFontSizeHandler = (event: React.ChangeEvent) => {
     const ctrl = event.target as HTMLInputElement
-    pageCtx.configure({ FONT_SIZE: +ctrl.value })
+    const value = Math.min(
+      RANGES.FONT.max,
+      Math.max(RANGES.FONT.min, +ctrl.value)
+    )
+    pageCtx.configure({ FONT_SIZE: value })
   }
 
   const genericContent = (
@@ -119,8 +132,8 @@ function Configure() {
             id="zoom"
             type="range"
             value={config.FONT_SIZE}
-            min="12"
-            max="36"
+            min={RANGES.FONT.min}
+            max={RANGES.FONT.max}
             onChange={changeFontSizeHandler}
           />
         </div>
@@ -135,7 +148,11 @@ function Configure() {
 
   const changeMaxScoresHandler = (event: React.ChangeEvent) => {
     const ctrl = event.target as HTMLInputElement
-    pageCtx.configure({ MAX_SCORES: +ctrl.value })
+    const value = Math.min(
+      RANGES.SCORES.max,
+      Math.max(RANGES.SCORES.min, +ctrl.value)
+    )
+    pageCtx.configure({ MAX_SCORES: value })
   }
 
   const recordContent = (
@@ -163,8 +180,8 @@ function Configure() {
             id="max"
             type="range"
             value={config.MAX_SCORES}
-            min="8"
-            max="1024"
+            min={RANGES.SCORES.min}
+            max={RANGES.SCORES.max}
             onChange={changeMaxScoresHandler}
           />
         </div>

@@ -1,3 +1,4 @@
+import { InputRange } from './app-types'
 
 // shortest game duration, to circumvent weird values, in milliseconds
 export const MIN_DURATION = 750
@@ -12,3 +13,23 @@ export const FADE_OUT_TIME = 550
 
 // threshold between a click and a deliberate long press, in milliseconds
 export const LONG_PRESS_THRESHOLD = 200
+
+/* RANGES */
+
+const newReadOnly = (value: number | InputRange): PropertyDescriptor => {
+  return { enumerable: true, value }
+}
+
+const newRange = (min: number, max: number): InputRange => Object.defineProperties(
+  {} as InputRange, { min: newReadOnly(min), max: newReadOnly(max) }
+)
+
+const RANGES = {} as Record<string, InputRange>
+Object.defineProperties(RANGES, {
+  SIZE: newReadOnly(newRange(3, 10)),
+  LEVEL: newReadOnly(newRange(1, 7)),
+  FONT: newReadOnly(newRange(8, 36)),
+  SCORES: newReadOnly(newRange(8, 1024)),
+});
+
+export { RANGES }

@@ -7,6 +7,7 @@ import { startConfigurePageTesting, referAndNavigateTo,
 } from './../../__mocks__/specification-helpers'
 import { playingGameState } from './../../__mocks__/game-states'
 import { liveScores } from './../../__mocks__/scores'
+import { RANGES } from '../../common/constants'
 
 describe('The configure page sidebar', () => {
   beforeEach(() => {
@@ -48,13 +49,13 @@ describe('The configure controls', () => {
   test("should enforce minimum board-size setting", () => {
     const range = screen.getByLabelText('Gameboard dimensions')
     fireEvent.change(range, {target: {value: 2}})
-    expect(storage.config.BOARD_SIZE).toBe(3)
+    expect(storage.config.BOARD_SIZE).toBe(RANGES.SIZE.min)
   })
 
   test("should enforce maximum board-size setting", () => {
     const range = screen.getByLabelText('Gameboard dimensions')
     fireEvent.change(range, {target: {value: 10}})
-    expect(storage.config.BOARD_SIZE).toBe(8)
+    expect(storage.config.BOARD_SIZE).toBe(RANGES.SIZE.max)
   })
 
   test("should trigger a new game on board-size change", () => {
@@ -76,13 +77,13 @@ describe('The configure controls', () => {
   test("should enforce minimum gamelevel setting", () => {
     const range = screen.getByLabelText('Gamelevel')
     fireEvent.change(range, {target: {value: 0}})
-    expect(storage.config.GAME_LEVEL).toBe(1)
+    expect(storage.config.GAME_LEVEL).toBe(RANGES.LEVEL.min)
   })
 
   test("should enforce maximum gamelevel setting", () => {
     const range = screen.getByLabelText('Gamelevel')
     fireEvent.change(range, {target: {value: 10}})
-    expect(storage.config.GAME_LEVEL).toBe(6)
+    expect(storage.config.GAME_LEVEL).toBe(RANGES.LEVEL.max)
   })
 
   test("should trigger a new game on gamelevel change", () => {
@@ -110,14 +111,14 @@ describe('The configure controls', () => {
 
   test("should enforce a minimum zoom setting", () => {
     const range = screen.getByLabelText('Zoom display')
-    fireEvent.change(range, {target: {value: 9}})
-    expect(storage.config.FONT_SIZE).toBe(12)
+    fireEvent.change(range, {target: {value: 5}})
+    expect(storage.config.FONT_SIZE).toBe(RANGES.FONT.min)
   })
 
   test("should enforce a maximum zoom setting", () => {
     const range = screen.getByLabelText('Zoom display')
     fireEvent.change(range, {target: {value: 72}})
-    expect(storage.config.FONT_SIZE).toBe(36)
+    expect(storage.config.FONT_SIZE).toBe(RANGES.FONT.max)
   })
 
   test("should change the name setting", () => {
@@ -141,6 +142,17 @@ describe('The configure controls', () => {
     expect(storage.scores.length).toBe(liveScores.length)
   })
 
+  test("should enforce minimum max-scores setting", () => {
+    const range = screen.getByLabelText('Max records')
+    fireEvent.change(range, {target: {value: 0}})
+    expect(storage.config.MAX_SCORES).toBe(RANGES.SCORES.min)
+  })
+
+  test("should enforce maximum max-scores setting", () => {
+    const range = screen.getByLabelText('Max records')
+    fireEvent.change(range, {target: {value: 1940}})
+    expect(storage.config.MAX_SCORES).toBe(RANGES.SCORES.max)
+  })
 })
 
 describe('The configure-page reset button', () => {
