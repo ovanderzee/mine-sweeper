@@ -25,7 +25,7 @@
   },
   "help": {
     "Nav Heading": "Navigatie",
-    "Game Scores Comment": "Aantal verborgen mijnen; toegang tot de Eregalerij",
+    "Game Scores Comment": "Aantal mijnen minus het aantal vlaggen; toegang tot de Eregalerij",
     "About Scores Comment": "Bekijk de Eregalerij",
     "New Game Comment": "Begin een nieuw spel, met de huidige instellingen",
     "Replay Comment": "Begin het spel opnieuw",

@@ -25,7 +25,7 @@
   },
   "help": {
     "Nav Heading": "Navigation",
-    "Game Scores Comment": "Number of hidden mines; access to Hall of Fame",
+    "Game Scores Comment": "Number of mines minus the number of flags; access to Hall of Fame",
     "About Scores Comment": "View Hall of Fame",
     "New Game Comment": "Start a new game with current settings",
     "Replay Comment": "Start the game again",
