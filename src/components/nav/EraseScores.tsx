@@ -9,10 +9,13 @@ const EraseScores = (props: { onErase: () => void }) => {
   const text = pageCtx.text
 
   const [showModal, setShowModal] = useState(false)
+  const [showActive, setShowActive] = useState(false)
 
   const confirmHandler = () => {
+    setShowActive(true)
     storage.eraseScores()
     props.onErase()
+    setTimeout(()=>setShowActive(false), 300)
   }
 
   const consentModal = <Modal
@@ -28,14 +31,16 @@ const EraseScores = (props: { onErase: () => void }) => {
     setShowModal(true)
   }
 
-  return (
-    <>
-      <button type="button" title={text.nav['Clear List']} onClick={eraseHandler}>
-        <Erase />
-      </button>
-      {showModal && consentModal}
-    </>
-  )
+  return <>
+    <button type="button"
+      className={showActive ? 'active' : ''}
+      title={text.nav['Clear List']}
+      onClick={eraseHandler}
+    >
+      <Erase />
+    </button>
+    {showModal && consentModal}
+  </>
 }
 
 export default EraseScores

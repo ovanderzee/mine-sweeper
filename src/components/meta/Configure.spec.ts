@@ -1,10 +1,12 @@
 import '@testing-library/jest-dom'
 import { fireEvent, screen } from '@testing-library/react'
+import DEFAULTS from './../../common/defaults'
 import storage from './../../common/storage'
 import * as fn from './../../common/functions'
 import { startConfigurePageTesting, referAndNavigateTo,
   setDefaultConfig, setMicroConfig
 } from './../../__mocks__/specification-helpers'
+import { microConfig } from './../../__mocks__/configs'
 import { playingGameState } from './../../__mocks__/game-states'
 import { liveScores } from './../../__mocks__/scores'
 import { RANGES } from '../../common/constants'
@@ -12,6 +14,13 @@ import { RANGES } from '../../common/constants'
 describe('The configure page sidebar', () => {
   beforeEach(() => {
     startConfigurePageTesting()
+  })
+
+  test("should restore default config", () => {
+    storage.config = microConfig
+    const button = screen.getByText(/↺/i)
+    fireEvent.click(button)
+    expect(storage.config).toStrictEqual(DEFAULTS)
   })
 
   test("should navigate to About page", () => {

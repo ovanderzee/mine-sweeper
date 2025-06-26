@@ -9,7 +9,7 @@ import { texts } from './../common/i18n'
 /*
   renderInContext
   Supplies translations and config
-  Allows spying it's methods
+  Allows checking the context
 */
 export const renderInContext = (component: React.ReactNode, keyValue: any = {}) => {
 

@@ -14,9 +14,14 @@ const NewGame = (props: NewGameProps) => {
   const text = pageCtx.text
 
   const [showModal, setShowModal] = useState(false)
+  const [showActive, setShowActive] = useState(false)
 
   const action: GameAction = { type: GameActionType.NEW }
-  const confirmHandler = () => props.onNew(action)
+  const confirmHandler = () => {
+    setShowActive(true)
+    props.onNew(action)
+    setTimeout(()=>setShowActive(false), 300)
+  }
 
   const consentModal = <Modal
     className="consent"
@@ -32,14 +37,16 @@ const NewGame = (props: NewGameProps) => {
     isPlaying ? setShowModal(isPlaying) : confirmHandler()
   }
 
-  return (
-    <>
-      <button type="button" title={text.nav['New Game']} onClick={newGameHandler}>
-        <Play />
-      </button>
-      {showModal && consentModal}
-    </>
-  )
+  return <>
+    <button type="button"
+      className={showActive ? 'active' : ''}
+      title={text.nav['New Game']}
+      onClick={newGameHandler}
+    >
+      <Play />
+    </button>
+    {showModal && consentModal}
+  </>
 }
 
 export default NewGame

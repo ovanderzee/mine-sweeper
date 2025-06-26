@@ -27,22 +27,24 @@ describe('EraseScores Component', () => {
 
   test('should not erase scores when cancelling', () => {
     renderInContext(<EraseScores onErase={emitter} />)
-    const button = screen.getByText(/⊘/i)
+    const button = screen.getByRole('button')
     fireEvent.click(button)
     expect(spyShowModal).toHaveBeenCalledTimes(1)
     const cancelDialog = screen.getByText(/Cancel/i)
     fireEvent.click(cancelDialog)
+    expect(button.className).not.toContain('active')
     expect(emitter).toHaveBeenCalledTimes(0)
     expect(storage.scores).toStrictEqual(liveScores)
   })
 
   test('should erase scores when confirming', () => {
     renderInContext(<EraseScores onErase={emitter} />)
-    const button = screen.getByText(/⊘/i)
+    const button = screen.getByRole('button')
     fireEvent.click(button)
     expect(spyShowModal).toHaveBeenCalledTimes(1)
     const confirmDialog = screen.getByText(/Ok/i)
     fireEvent.click(confirmDialog)
+    expect(button.className).toContain('active')
     expect(emitter).toHaveBeenCalledTimes(1)
     expect(storage.scores).toStrictEqual([])
   })

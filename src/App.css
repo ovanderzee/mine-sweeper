@@ -21,6 +21,12 @@
   border: 0 none;
   padding: 0;
   text-shadow: -0.02em -0.05em black, 0.008em 0.02em var(--light-blue);
+  transition: color 2s
+}
+
+.screen > nav button.active {
+  color: var(--fire-yellow);
+  transition: color 0s
 }
 
 .screen > nav button[disabled] {

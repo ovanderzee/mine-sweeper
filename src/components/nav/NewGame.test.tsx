@@ -42,15 +42,17 @@ describe('NewGame Component', () => {
 
   test('should renew game when clicked while game is playing and a modal is shown', () => {
     renderInContext(<NewGame onNew={dispatcher} stage={GameStages.PLAYING} />)
-    const button = screen.getByText(/▶/i)
+    const button = screen.getByRole('button')
     fireEvent.click(button)
     expect(spyShowModal).toHaveBeenCalledTimes(1)
     const cancelDialog = screen.getByText(/Cancel/i)
     fireEvent.click(cancelDialog)
     expect(dispatcher).toHaveBeenCalledTimes(0)
-    const effectDialog = screen.getByText(/Ok/i)
-    fireEvent.click(effectDialog)
+    expect(button.className).not.toContain('active')
+    const confirmDialog = screen.getByText(/Ok/i)
+    fireEvent.click(confirmDialog)
     expect(dispatcher).toHaveBeenCalledTimes(1)
+    expect(button.className).toContain('active')
   })
 
 })
