@@ -2,6 +2,7 @@ import { useContext, useState } from 'react'
 import PageContext from '../../store/page-context'
 import { Erase } from '../UI/Symbols'
 import Modal from '../UI/Modal'
+import storage from '../../common/storage'
 
 const EraseScores = (props: { onErase: () => void }) => {
   const pageCtx = useContext(PageContext)
@@ -9,9 +10,14 @@ const EraseScores = (props: { onErase: () => void }) => {
 
   const [showModal, setShowModal] = useState(false)
 
+  const confirmHandler = () => {
+    storage.eraseScores()
+    props.onErase()
+  }
+
   const consentModal = <Modal
     className="consent"
-    onConfirm={() => props.onErase()}
+    onConfirm={confirmHandler}
     onCancel={() => {}}
     closeModal={() => setShowModal(false)}
   >

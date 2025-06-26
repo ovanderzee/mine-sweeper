@@ -16,9 +16,14 @@ const storage = {
       return { ...DEFAULTS, ...data }
   },
   set config(data: AppSubConfig) {
+    if (data) {
       const complete = { ...this.config, ...data }
       const storeable = JSON.stringify(complete)
       localStorage.setItem('mv-config', storeable)
+    }
+  },
+  eraseGame: () => {
+    sessionStorage.removeItem('mv-game')
   },
   get game(): GameState | null {
       const stored = sessionStorage.getItem('mv-game')
@@ -27,11 +32,14 @@ const storage = {
   },
   set game(data: GameState | null) {
       if (data) {
-        const stored = JSON.stringify(data)
-        sessionStorage.setItem('mv-game', stored)
+        const storeable = JSON.stringify(data)
+        sessionStorage.setItem('mv-game', storeable)
       } else {
-        sessionStorage.removeItem('mv-game')
+        this.eraseGame()
       }
+  },
+  eraseScores: () => {
+    localStorage.removeItem('mv-scores')
   },
   get scores(): ScoreItem[] {
       const stored = localStorage.getItem('mv-scores')
@@ -39,11 +47,11 @@ const storage = {
       return data
   },
   set scores(data: ScoreItem[]) {
-      if (data.length) {
-        const stored = JSON.stringify(data)
-        localStorage.setItem('mv-scores', stored)
+      if (data?.length) {
+        const storeable = JSON.stringify(data)
+        localStorage.setItem('mv-scores', storeable)
       } else {
-        localStorage.removeItem('mv-scores')
+        this.eraseScores()
       }
   }
 }

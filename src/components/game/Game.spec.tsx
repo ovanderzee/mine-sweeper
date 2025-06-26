@@ -276,7 +276,7 @@ describe('initialise game', () => {
   })
 
   it('should start a new game when finding no game', () => {
-    storage.game = null as unknown as GameState
+    storage.eraseGame()
     const newGameReducerSpy = jest.spyOn(newGame, 'newGameReducer')
     startPageTesting()
     expect(newGameReducerSpy).toHaveBeenCalledTimes(1)

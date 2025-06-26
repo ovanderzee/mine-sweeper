@@ -16,7 +16,7 @@ function Configure() {
   const { config, text } = pageCtx
 
   const exitCurrentGame = () => {
-    storage.game = null
+    storage.eraseGame()
   }
 
   const changeBoardSizeHandler = (event: React.ChangeEvent) => {

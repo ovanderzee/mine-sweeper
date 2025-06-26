@@ -19,8 +19,7 @@ const HallOfFame = () => {
   const [scores, setScores] = useState(rawScores)
 
   const eraseScores = () => {
-    storage.scores = []
-    setScores([])
+    setScores(storage.scores)
   }
 
   const fameContent = (

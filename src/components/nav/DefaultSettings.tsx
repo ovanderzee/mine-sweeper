@@ -13,7 +13,7 @@ const DefaultSettings = () => {
   const [showModal, setShowModal] = useState(false)
 
   const confirmHandler = () => {
-    storage.game = null
+    storage.eraseGame()
     pageCtx.configure()
   }
 

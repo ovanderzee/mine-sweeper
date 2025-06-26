@@ -3,6 +3,7 @@ import DEFAULTS from './defaults'
 import { GameState } from './game-types'
 import { newGameState, wonGameState } from '../__mocks__/game-states'
 import { liveScores } from '../__mocks__/scores'
+import { microConfig } from '../__mocks__/configs'
 
 describe('Configuration storage', () => {
   beforeEach(() => {
@@ -10,8 +11,7 @@ describe('Configuration storage', () => {
   })
 
   test('should set data', () => {
-    const data = {FONT_SIZE: 18, PLAYER_NAME: 'Breadbrood'}
-    storage.config = data
+    storage.config = {FONT_SIZE: 18, PLAYER_NAME: 'Breadbrood'}
 
     const readStorage = JSON.parse(localStorage.getItem('mv-config') as string)
     expect(readStorage.FONT_SIZE).toBe(18)
@@ -26,7 +26,20 @@ describe('Configuration storage', () => {
     expect(storage.config.PLAYER_NAME).toBe('Breadbrood')
   })
 
-  test('should get a complete config', () => {
+  test('should not set falsy data and thus not remove the config', () => {
+    localStorage.setItem('mv-config', JSON.stringify(microConfig))
+    storage.config = {}
+
+    const readStorage = JSON.parse(localStorage.getItem('mv-config') as string)
+
+    expect(readStorage).toStrictEqual(microConfig)
+  })
+
+  test('could not offer a eraseConfig function', () => {
+    expect('eraseConfig' in storage).toBe(false)
+  })
+
+  test('should get a complete config when getting', () => {
     const data = {FONT_SIZE: 18, PLAYER_NAME: 'Breadbrood'}
     localStorage.setItem('mv-config', JSON.stringify(data))
 
@@ -72,6 +85,10 @@ describe('Configuration storage', () => {
   })
 })
 
+
+
+
+
 describe('Game storage', () => {
   beforeEach(() => {
     sessionStorage.clear()
@@ -107,14 +124,32 @@ describe('Game storage', () => {
     expect(read2.extra).toBeFalsy()
   })
 
-  test('should be removable', () => {
+  test('should be removable by method', () => {
+    sessionStorage.setItem('mv-game', JSON.stringify(newGameState))
+
+    storage.eraseGame()
+
+    const read = localStorage.getItem('mv-scores') as string
+    expect(read).toBe(null)
+
+    const parse = JSON.parse(read)
+    expect(parse).toBe(null)
+  })
+
+  test('should be removable by garbage', () => {
+    sessionStorage.setItem('mv-game', JSON.stringify(newGameState))
+    const eraseGameSpy = jest.spyOn(storage, 'eraseGame')
+
     storage.game = null
 
-    const read = JSON.parse(sessionStorage.getItem('mv-game') as string)
-    expect(read?.board).toBe(undefined)
-    expect(read).toBe(null)
+    expect(eraseGameSpy).toHaveBeenCalled()
+    jest.clearAllMocks()
   })
 })
+
+
+
+
 
 describe('Scores storage', () => {
   beforeEach(() => {
@@ -148,11 +183,26 @@ describe('Scores storage', () => {
     expect(read2.length).toBe(someScores.length)
   })
 
-  test('should be removable', () => {
+  test('should be removable by method', () => {
+    localStorage.setItem('mv-scores', JSON.stringify(liveScores))
+
+    storage.eraseScores()
+
+    const read = localStorage.getItem('mv-scores') as string
+    expect(read).toBe(null)
+
+    const parse = JSON.parse(read)
+    expect(parse?.length).toBe(undefined)
+    expect(parse).toBe(null)
+  })
+
+  test('should be removable by garbage', () => {
+    localStorage.setItem('mv-scores', JSON.stringify(liveScores))
+    const eraseScoresSpy = jest.spyOn(storage, 'eraseScores')
+
     storage.scores = []
 
-    const read = JSON.parse(localStorage.getItem('mv-scores') as string)
-    expect(read?.length).toBe(undefined)
-    expect(read).toBe(null)
+    expect(eraseScoresSpy).toHaveBeenCalled()
+    jest.clearAllMocks()
   })
 })

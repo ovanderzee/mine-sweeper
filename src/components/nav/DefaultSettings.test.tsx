@@ -12,7 +12,7 @@ describe('DefaultSettings Component', () => {
   let configure: () => void
 
   beforeEach(() => {
-    storage.game = null
+    storage.eraseGame()
     configure = jest.fn()
   })
 
