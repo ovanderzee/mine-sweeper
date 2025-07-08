@@ -1,13 +1,3 @@
-/*
-  scaling does not work in safari and chrome
-  drop-shadow filter does not work in safari
-*/
-symbol[id^="nav-"] {
-  transform: scale(.333);
-  transform-origin: center;
-  -webkit-filter: drop-shadow(black -0.06em -0.15em);
-  filter: drop-shadow(black -0.06em -0.15em);
-}
 
 #nav-play {
   path {
