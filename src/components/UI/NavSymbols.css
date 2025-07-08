@@ -1,0 +1,78 @@
+
+#start {
+  path:first-child {
+    fill: white;
+    stroke: none;
+  }
+  path:last-child {
+    fill: none;
+    stroke: white;
+    stroke-width: 6;
+    stroke-linecap:butt;
+  }
+}
+
+#restart,
+#reset {
+  path {
+    fill: none;
+    stroke: white;
+    stroke-width: 6;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+  }
+}
+
+#question-mark {
+  path {
+    /*
+    font-size: 72px;
+    line-height: 125%;
+    font-family: 'PT Sans Caption';
+    */
+    fill: white;
+    stroke: none;
+  }
+}
+
+#sliders {
+  path {
+    fill: none;
+    stroke: white;
+    stroke-width: 3;
+  }
+  ellipse {
+    fill: white;
+    stroke: none;
+  }
+}
+
+#return {
+  #pijlpunt {
+    fill: white;
+    stroke: none;
+  }
+  #haak {
+    fill: none;
+    stroke: white;
+    stroke-width: 6;
+    stroke-linecap: butt;
+  }
+}
+
+#empty {
+  ellipse {
+    fill: none;
+    stroke: white;
+    stroke-width: 6;
+  }
+  path {
+    fill: white;
+    stroke: none;
+  }
+}
+
+#podium path {
+  fill: white;
+  stroke:none;
+}
