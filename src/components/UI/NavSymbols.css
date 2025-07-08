@@ -1,19 +1,17 @@
+symbol[id^="nav-"] {
+  transform: scale(.333);
+  transform-origin: center;
+}
 
-#start {
-  path:first-child {
+#nav-play {
+  path {
     fill: white;
     stroke: none;
   }
-  path:last-child {
-    fill: none;
-    stroke: white;
-    stroke-width: 6;
-    stroke-linecap: butt;
-  }
 }
 
-#restart,
-#reset {
+#nav-restart,
+#nav-reset {
   path {
     fill: none;
     stroke: white;
@@ -23,14 +21,14 @@
   }
 }
 
-#question-mark {
+#nav-question-mark {
   path {
     fill: white;
     stroke: none;
   }
 }
 
-#sliders {
+#nav-sliders {
   path {
     fill: none;
     stroke: white;
@@ -42,7 +40,7 @@
   }
 }
 
-#return {
+#nav-return {
   #pijlpunt {
     fill: white;
     stroke: none;
@@ -55,7 +53,7 @@
   }
 }
 
-#empty {
+#nav-empty {
   ellipse {
     fill: none;
     stroke: white;
@@ -67,7 +65,21 @@
   }
 }
 
-#podium path {
+#nav-podium path {
   fill: white;
   stroke: none;
+}
+
+#nav-eye {
+  path {
+    fill: none;
+    stroke: white;
+    stroke-width: 3;
+    stroke-linejoin:round;
+  }
+  circle {
+    fill: none;
+    stroke: white;
+    stroke-width: 7.5;
+  }
 }

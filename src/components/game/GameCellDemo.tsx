@@ -126,6 +126,21 @@ const GameCellDemo = () => {
     <div style={{'background': 'var(--dark-touched)'}}>dark-touched</div>
   </div>
 
+  const fnSymbols = <div className="svg-symbols" style={{'display': 'flex'}}>
+    <svg><use href={`#nav-play`} /></svg>
+    <svg><use href={`#nav-restart`} /></svg>
+    <svg><use href={`#nav-reset`} /></svg>
+    <svg><use href={`#nav-empty`} /></svg>
+  </div>
+
+  const navSymbols = <div className="svg-symbols" style={{'display': 'flex'}}>
+    <svg><use href={`#nav-return`} /></svg>
+    <svg><use href={`#nav-sliders`} /></svg>
+    <svg><use href={`#nav-question-mark`} /></svg>
+    <svg><use href={`#nav-podium`} /></svg>
+    <svg><use href={`#nav-eye`} /></svg>
+  </div>
+
   return (
     <section
       className="screen"
@@ -139,6 +154,8 @@ const GameCellDemo = () => {
         {fireColors}
         {pristineColors}
         {touchedColors}
+        {fnSymbols}
+        {navSymbols}
       </article>
       <nav>
         <Settings />
