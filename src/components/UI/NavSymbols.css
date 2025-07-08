@@ -8,7 +8,7 @@
     fill: none;
     stroke: white;
     stroke-width: 6;
-    stroke-linecap:butt;
+    stroke-linecap: butt;
   }
 }
 
@@ -18,18 +18,13 @@
     fill: none;
     stroke: white;
     stroke-width: 6;
-    stroke-linecap:round;
-    stroke-linejoin:round;
+    stroke-linecap: round;
+    stroke-linejoin: round;
   }
 }
 
 #question-mark {
   path {
-    /*
-    font-size: 72px;
-    line-height: 125%;
-    font-family: 'PT Sans Caption';
-    */
     fill: white;
     stroke: none;
   }
@@ -74,5 +69,5 @@
 
 #podium path {
   fill: white;
-  stroke:none;
+  stroke: none;
 }
