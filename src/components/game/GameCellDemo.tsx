@@ -136,7 +136,7 @@ const GameCellDemo = () => {
   const navSymbols = <div className="svg-symbols" style={{'display': 'flex'}}>
     <svg><use href={`#nav-return`} /></svg>
     <svg><use href={`#nav-sliders`} /></svg>
-    <svg><use href={`#nav-question-mark`} /></svg>
+    <svg><use href={`#nav-question`} /></svg>
     <svg><use href={`#nav-podium`} /></svg>
     <svg><use href={`#nav-eye`} /></svg>
   </div>

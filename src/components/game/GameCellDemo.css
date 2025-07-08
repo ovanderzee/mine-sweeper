@@ -10,7 +10,7 @@
   flex-wrap: wrap;
   background: var(--medium-to-dark-blue);
   svg {
-    display: inline-bock;
+    display: inline-block;
     flex: 0 0 60px;
     height: 60px;
     outline: #fffa 1px solid;

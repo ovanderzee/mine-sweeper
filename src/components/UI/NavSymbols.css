@@ -21,8 +21,9 @@ symbol[id^="nav-"] {
   }
 }
 
-#nav-question-mark {
+#nav-question {
   path {
+    /* font: normal 69px 'PT Sans Caption' */
     fill: white;
     stroke: none;
   }
