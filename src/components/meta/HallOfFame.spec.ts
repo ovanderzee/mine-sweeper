@@ -37,7 +37,7 @@ describe('The hall-of-fame-page clear list button', () => {
   test("should instantaneously remove scores when confirmed", () => {
     expect(storage.scores.length).toBe(liveScores.length)
 
-    const button = screen.getByText(/⊘/i)
+    const button = screen.getByTitle('Clear List')
     fireEvent.click(button)
 
     const dialog = screen.getByText(/Do you want to clear the score list\?/i)
@@ -51,7 +51,7 @@ describe('The hall-of-fame-page clear list button', () => {
   test("should not remove scores when cancelled", () => {
     expect(storage.scores.length).toBe(liveScores.length)
 
-    const button = screen.getByText(/⊘/i)
+    const button = screen.getByTitle('Clear List')
     fireEvent.click(button)
 
     const dialog = screen.getByText(/Do you want to clear the score list\?/i)

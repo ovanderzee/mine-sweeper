@@ -33,7 +33,7 @@
     "Settings Comment": "Adjust level and other settings",
     "Reset Comment": "Restore default settings",
     "Delete Comment": "Clear scores",
-    "Go Back Comment": "Return to game",
+    "Go Back Comment": "Return to the game",
 
     "Intro Heading": "Defuse all mines",
     "Playing Hint": "Explore the minefield by clicking a few cells.",
@@ -84,7 +84,7 @@
     "Replay": "Replay",
     "Settings": "Settings",
     "Help": "Explanation",
-    "Go Back": "Return"
+    "Go Back": "Return to Game"
   },
   "dialog": {
     "Erase Scores?": "Do you want to clear the score list?",

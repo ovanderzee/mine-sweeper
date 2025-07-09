@@ -1,6 +1,5 @@
 import { useContext, useState } from 'react'
 import PageContext from '../../store/page-context'
-import { Erase } from '../UI/Symbols'
 import Modal from '../UI/Modal'
 
 const EraseScores = (props: { onErase: () => void }) => {
@@ -25,7 +24,7 @@ const EraseScores = (props: { onErase: () => void }) => {
   return (
     <>
       <button type="button" title={text.nav['Clear List']} onClick={eraseHandler}>
-        <Erase />
+        <svg><use href={`#nav-empty`} /></svg>
       </button>
       {showModal && consentModal}
     </>

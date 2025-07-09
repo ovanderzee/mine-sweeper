@@ -155,8 +155,8 @@ describe('The configure-page reset button', () => {
     test("should not change size and level and keep the current game on cancel", () => {
       const initialGameState = storage.game
 
-      const icon = screen.getByText(/↺/i)
-      fireEvent.click(icon)
+      const button = screen.getByTitle('Revert to Defaults')
+      fireEvent.click(button)
 
       const dialog = screen.getByText(/Do you want to end the game\?/i)
       expect(dialog).toBeInTheDocument()
@@ -170,8 +170,8 @@ describe('The configure-page reset button', () => {
     test("should change size and level and force a new game on confirm", () => {
       const initialGameState = storage.game
 
-      const icon = screen.getByText(/↺/i)
-      fireEvent.click(icon)
+      const button = screen.getByTitle('Revert to Defaults')
+      fireEvent.click(button)
 
       const dialog = screen.getByText(/Do you want to end the game\?/i)
       expect(dialog).toBeInTheDocument()
@@ -194,8 +194,8 @@ describe('The configure-page reset button', () => {
     test("should just reset without a dialog", () => {
       const initialGameState = storage.game
 
-      const icon = screen.getByText(/↺/i)
-      fireEvent.click(icon)
+      const button = screen.getByTitle('Revert to Defaults')
+      fireEvent.click(button)
 
       const confirmBtn = document.querySelector('dialog button.confirm')
       expect(confirmBtn).not.toBeInTheDocument()

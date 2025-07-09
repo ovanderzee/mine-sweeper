@@ -21,6 +21,11 @@
   border: 0 none;
   padding: 0;
   text-shadow: -0.02em -0.05em black, 0.008em 0.02em var(--light-blue);
+  aspect-ratio: 1;
+}
+
+.screen > nav button svg {
+  aspect-ratio: 1;
 }
 
 .screen > nav button[disabled] {
@@ -55,12 +60,16 @@
     bottom: 0;
     flex: 0 0 auto;
     align-items: baseline;
-    padding: 0.3em 0 0.7em;
+    height: var(--nav-height);
   }
 
   .screen > nav button {
-    font-size: 1.5em;
     flex: 1 0 auto;
+    height: 100%;
+  }
+
+  .screen > nav button svg {
+    height: 100%;
   }
 
   .screen > nav button + button {
@@ -111,9 +120,8 @@
   }
 
   .screen > nav {
-    flex: 0 0 4em;
+    flex: 0 0 4.6em;
     flex-direction: column;
-    padding: 0 0.3em;
   }
 
   .screen > nav::after {
@@ -122,9 +130,9 @@
   }
 
   .screen > nav button {
-    font-size: 1.75em;
     flex: 1 1 auto;
     width: 100%;
+    display: flex; // safari
   }
 
   .screen > nav button + button {

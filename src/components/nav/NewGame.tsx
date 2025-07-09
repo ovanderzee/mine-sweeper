@@ -1,7 +1,6 @@
 import { useContext, useState } from 'react'
 import PageContext from '../../store/page-context'
 import Modal from '../UI/Modal'
-import { Play } from '../UI/Symbols'
 import { GameStages, GameActionType, GameAction } from '../../common/game-types';
 
 interface NewGameProps {
@@ -35,7 +34,7 @@ const NewGame = (props: NewGameProps) => {
   return (
     <>
       <button type="button" title={text.nav['New Game']} onClick={newGameHandler}>
-        <Play />
+        <svg><use href={`#nav-play`} /></svg>
       </button>
       {showModal && consentModal}
     </>

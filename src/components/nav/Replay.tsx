@@ -1,7 +1,6 @@
 import { useContext, useState } from 'react'
 import PageContext from '../../store/page-context'
 import Modal from '../UI/Modal'
-import { Redo } from '../UI/Symbols'
 import { GameStages, GameActionType, GameAction } from '../../common/game-types';
 
 interface ReplayProps {
@@ -35,7 +34,7 @@ const Replay = (props: ReplayProps) => {
   return (
     <>
       <button type="button" title={text.nav['Replay']} onClick={replayHandler}>
-        <Redo />
+        <svg><use href={`#nav-replay`} /></svg>
       </button>
       {showModal && consentModal}
     </>

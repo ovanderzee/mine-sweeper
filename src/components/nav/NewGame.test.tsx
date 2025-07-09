@@ -15,34 +15,36 @@ describe('NewGame Component', () => {
 
   test('should display the "Start Playing" sign', () => {
     renderInContext(<NewGame onNew={dispatcher} stage={GameStages.PLAYING} />)
-    const button = screen.getByText(/▶/i)
+    const button = screen.getByTitle('New Game')
     expect(button).toBeInTheDocument()
+    const svg = button.querySelector('use[href="#nav-play"]')
+    expect(svg).toBeInTheDocument()
   })
 
   test('should renew game when clicked while game is not touched', () => {
     renderInContext(<NewGame onNew={dispatcher} stage={GameStages.NEW} />)
-    const button = screen.getByText(/▶/i)
+    const button = screen.getByTitle('New Game')
     fireEvent.click(button)
     expect(dispatcher).toHaveBeenCalledTimes(1)
   })
 
   test('should renew game when clicked while game is lost', () => {
     renderInContext(<NewGame onNew={dispatcher} stage={GameStages.LOST} />)
-    const button = screen.getByText(/▶/i)
+    const button = screen.getByTitle('New Game')
     fireEvent.click(button)
     expect(dispatcher).toHaveBeenCalledTimes(1)
   })
 
   test('should renew game when clicked while game is won', () => {
     renderInContext(<NewGame onNew={dispatcher} stage={GameStages.WON} />)
-    const button = screen.getByText(/▶/i)
+    const button = screen.getByTitle('New Game')
     fireEvent.click(button)
     expect(dispatcher).toHaveBeenCalledTimes(1)
   })
 
   test('should renew game when clicked while game is playing and a modal is shown', () => {
     renderInContext(<NewGame onNew={dispatcher} stage={GameStages.PLAYING} />)
-    const button = screen.getByText(/▶/i)
+    const button = screen.getByTitle('New Game')
     fireEvent.click(button)
     expect(spyShowModal).toHaveBeenCalledTimes(1)
     const cancelDialog = screen.getByText(/Cancel/i)
