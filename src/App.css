@@ -14,6 +14,9 @@
 }
 
 .screen > nav button {
+  --divider-spacing: 10%;
+  --divider-size: calc(100% - (2 * var(--divider-spacing)));
+
   font-weight: bold;
   line-height: 144%;
   background: transparent;
@@ -72,7 +75,11 @@
     height: 100%;
   }
 
-  .screen > nav button + button {
+  .screen > nav button + button::before {
+    content: '';
+    display: inline-block;
+    margin-block: var(--divider-spacing);
+    height: var(--divider-size);
     border-left: 1px solid var(--dark-blue);
   }
 }
@@ -132,10 +139,19 @@
   .screen > nav button {
     flex: 1 1 auto;
     width: 100%;
-    display: flex; // safari
+    display: flex; /* safari */
+    flex-wrap: wrap;
   }
 
-  .screen > nav button + button {
+  .screen > nav button svg {
+    width: 100%;
+  }
+
+  .screen > nav button + button::before {
+    content: '';
+    display: block;
+    margin-inline: var(--divider-spacing);
+    width: var(--divider-size);
     border-top: 1px solid var(--dark-blue);
   }
 }
