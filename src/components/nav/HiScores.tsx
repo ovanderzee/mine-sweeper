@@ -11,12 +11,10 @@ export const MinesMinusFlags = (props: HiScoresProps) => {
   const flatBoard = props.board!.flat()
   const mineCount = flatBoard.filter(c => c.fill > 8).length
   const flagCount = flatBoard.filter(c => c.locked).length
-  let count = mineCount - flagCount
-  return (
-    <text id="text-content" x="50%" y="55%">
-      {count ? `${count}&times;` : `&mdash;`}
-    </text>
-  )
+  const count = mineCount - flagCount
+  const label = count ? `${count}×` : '!'
+
+  return <text id="text-content" x="50%" y="55%">{label}</text>
 }
 
 const HiScores = (props: HiScoresProps) => {
