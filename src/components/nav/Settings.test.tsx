@@ -6,14 +6,16 @@ import Configure from '../meta/Configure'
 describe('Settings Component', () => {
   test('should display the "Cogwheel" sign', () => {
     renderInContext(<Settings />)
-    const button = screen.getByText(/⚙/i)
+    const button = screen.getByTitle('Settings')
     expect(button).toBeInTheDocument()
+    const svg = button.querySelector('use[href="#nav-sliders"]')
+    expect(svg).toBeInTheDocument()
   })
 
   test('should navigate when clicked', () => {
     const navigate = jest.fn()
     renderInContext(<Settings />, { navigate })
-    const button = screen.getByText(/⚙/i)
+    const button = screen.getByTitle('Settings')
     fireEvent.click(button)
     expect(navigate).toHaveBeenCalledTimes(1)
     expect(navigate).toHaveBeenCalledWith(<Configure />)

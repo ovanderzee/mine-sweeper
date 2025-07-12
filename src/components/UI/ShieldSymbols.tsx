@@ -5,7 +5,6 @@ const ShieldSymbols = () => {
     <svg
     	aria-hidden="true"
     	xmlns="http://www.w3.org/2000/svg"
-    	style={{position: 'absolute', width: 0, height: 0, overflow: 'hidden'}}
     >
       <defs id="shield_common">
         <filter id="blur" filterUnits="objectBoundingBox">

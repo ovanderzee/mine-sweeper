@@ -8,6 +8,8 @@ describe('HiScores Component', () => {
     renderInContext(<HiScores />)
     const button = screen.getByTitle(/Hall of Fame/i)
     expect(button).toBeInTheDocument()
+    const svg = button.querySelector('use[href="#nav-podium"]')
+    expect(svg).toBeInTheDocument()
   })
 
   test('should navigate when clicked', () => {

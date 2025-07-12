@@ -1,0 +1,101 @@
+svg {
+  text#text-content {
+    fill: white;
+    text-anchor: middle;
+    dominant-baseline: middle;
+  }
+}
+
+@media only screen and (orientation: portrait) {
+  svg text#text-content {
+    font-size: 1.5em;
+  }
+}
+
+@media only screen and (orientation: landscape) {
+  svg text#text-content {
+    font-size: 1.75em;
+  }
+}
+
+#nav-play {
+  path {
+    fill: white;
+    stroke: none;
+  }
+}
+
+#nav-replay,
+#nav-reset {
+  path {
+    fill: none;
+    stroke: white;
+    stroke-width: 6;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+}
+
+#nav-question {
+  path {
+    /* font: normal 69px 'PT Sans Caption' */
+    fill: white;
+    stroke: none;
+  }
+}
+
+#nav-sliders {
+  path {
+    fill: none;
+    stroke: white;
+    stroke-width: 3;
+  }
+  circle {
+    fill: white;
+    stroke: none;
+  }
+}
+
+#nav-return {
+  #pijlpunt {
+    fill: white;
+    stroke: none;
+  }
+  #haak {
+    fill: none;
+    stroke: white;
+    stroke-width: 6;
+    stroke-linecap: butt;
+  }
+}
+
+#nav-empty {
+  circle {
+    fill: none;
+    stroke: white;
+    stroke-width: 6;
+  }
+  path {
+    fill: white;
+    stroke: none;
+  }
+}
+
+#nav-podium path {
+  fill: white;
+  stroke: none;
+}
+
+#nav-eye {
+  path {
+    fill: none;
+    stroke: white;
+    stroke-width: 3;
+    stroke-linejoin:round;
+  }
+  circle {
+    fill: none;
+    stroke: white;
+    stroke-width: 7.5;
+  }
+}

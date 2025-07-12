@@ -19,10 +19,12 @@ describe('EraseScores Component', () => {
     jest.clearAllMocks()
   })
 
-  test('should display the "Circled Division Slash" sign', () => {
+  test('should display the "Circled Division Slash" sign', () => {  // 1e
     renderInContext(<EraseScores onErase={emitter} />)
-    const button = screen.getByText(/⊘/i)
+    const button = screen.getByTitle('Clear List')
     expect(button).toBeInTheDocument()
+    const svg = button.querySelector('use[href="#nav-empty"]')
+    expect(svg).toBeInTheDocument()
   })
 
   test('should not erase scores when cancelling', () => {

@@ -4,7 +4,6 @@ import DEFAULTS from '../../common/defaults'
 import storage from '../../common/storage'
 import { GameStages } from '../../common/game-types'
 import Modal from '../UI/Modal'
-import { Reset } from '../UI/Symbols'
 
 const DefaultSettings = () => {
   const pageCtx = useContext(PageContext)
@@ -52,7 +51,7 @@ const DefaultSettings = () => {
       title={text.nav['Reinstate Defaults']}
       onClick={resetHandler}
     >
-      <Reset />
+      <svg><use href={`#nav-reset`} /></svg>
     </button>
     {showModal && consentModal}
   </>

@@ -97,8 +97,8 @@ describe('The game start button', () => {
     clickToLoose()
     expect(storage.game.stage).toBe('game-lost')
 
-    const icon = screen.getByText(/▶/i)
-    fireEvent.click(icon)
+    const button = screen.getByTitle('New Game')
+    fireEvent.click(button)
 
     expect(storage.game.stage).toBe('game-new')
   })
@@ -108,8 +108,8 @@ describe('The game start button', () => {
     startPageTesting()
     expect(storage.game.stage).toBe('game-playing')
 
-    const icon = screen.getByText(/▶/i)
-    fireEvent.click(icon)
+    const button = screen.getByTitle('New Game')
+    fireEvent.click(button)
 
     const dialog = screen.getByRole('dialog')
     expect(dialog).toBeInTheDocument()
@@ -125,8 +125,8 @@ describe('The game start button', () => {
     startPageTesting()
     expect(storage.game.stage).toBe('game-playing')
 
-    const icon = screen.getByText(/▶/i)
-    fireEvent.click(icon)
+    const button = screen.getByTitle('New Game')
+    fireEvent.click(button)
 
     const dialog = screen.getByRole('dialog')
     expect(dialog).toBeInTheDocument()
@@ -172,8 +172,8 @@ describe('The replay button', () => {
     clickToLoose()
     expect(storage.game.stage).toBe('game-lost')
 
-    const icon = screen.getByText(/↻/i)
-    fireEvent.click(icon)
+    const button = screen.getByTitle('Replay')
+    fireEvent.click(button)
 
     const isSame = hasSameMineDistribution(playingGameState, storage.game)
     expect(isSame).toBeTruthy()
@@ -186,8 +186,8 @@ describe('The replay button', () => {
     clickToWin()
     expect(storage.game.stage).toBe('game-won')
 
-    const icon = screen.getByText(/↻/i)
-    fireEvent.click(icon)
+    const button = screen.getByTitle('Replay')
+    fireEvent.click(button)
 
     const isSame = hasSameMineDistribution(playingGameState, storage.game)
     expect(isSame).toBeTruthy()
@@ -201,8 +201,8 @@ describe('The replay button', () => {
     startPageTesting()
     expect(storage.game.stage).toBe('game-playing')
 
-    const icon = screen.getByText(/↻/i)
-    fireEvent.click(icon)
+    const button = screen.getByTitle('Replay')
+    fireEvent.click(button)
 
     const dialog = screen.getByRole('dialog')
     expect(dialog).toBeInTheDocument()
@@ -219,8 +219,8 @@ describe('The replay button', () => {
     startPageTesting()
     expect(storage.game.stage).toBe('game-playing')
 
-    const icon = screen.getByText(/↻/i)
-    fireEvent.click(icon)
+    const button = screen.getByTitle('Replay')
+    fireEvent.click(button)
 
     const dialog = screen.getByRole('dialog')
     expect(dialog).toBeInTheDocument()
