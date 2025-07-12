@@ -20,7 +20,7 @@ svg {
 
 #nav-play {
   path {
-    fill: white;
+    fill: currentcolor;
     stroke: none;
   }
 }
@@ -29,7 +29,7 @@ svg {
 #nav-reset {
   path {
     fill: none;
-    stroke: white;
+    stroke: currentcolor;
     stroke-width: 6;
     stroke-linecap: round;
     stroke-linejoin: round;
@@ -72,11 +72,11 @@ svg {
 #nav-empty {
   circle {
     fill: none;
-    stroke: white;
+    stroke: currentcolor;
     stroke-width: 6;
   }
   path {
-    fill: white;
+    fill: currentcolor;
     stroke: none;
   }
 }
