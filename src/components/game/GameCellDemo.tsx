@@ -7,20 +7,12 @@ import '../meta/Meta.css'
 
 const inDevelopment = window.location.hostname === 'localhost'
 
-const GameCellDemoWatch = () => {
-  return (
-    <span className="watch" style={{'fontSize': '125%', 'position': 'relative', 'top': '.05em'}}>
-      &#x23ff;
-    </span>
-  )
-}
-
 const GameCellDemoNav = () => {
   const pageCtx = useContext(PageContext)
   const watchHandler = () => pageCtx.navigate(<GameCellDemo />)
 
   const navButton = <button type="button" title="Cell State Demo" onClick={watchHandler}>
-      <GameCellDemoWatch />
+      <svg><use href={`#nav-eye`} /></svg>
     </button>
 
   return inDevelopment && navButton
@@ -126,6 +118,21 @@ const GameCellDemo = () => {
     <div style={{'background': 'var(--dark-touched)'}}>dark-touched</div>
   </div>
 
+  const fnSymbols = <div className="svg-symbols" style={{'display': 'flex'}}>
+    <svg><use href={`#nav-play`} /></svg>
+    <svg><use href={`#nav-replay`} /></svg>
+    <svg><use href={`#nav-reset`} /></svg>
+    <svg><use href={`#nav-empty`} /></svg>
+  </div>
+
+  const navSymbols = <div className="svg-symbols" style={{'display': 'flex'}}>
+    <svg><use href={`#nav-return`} /></svg>
+    <svg><use href={`#nav-sliders`} /></svg>
+    <svg><use href={`#nav-question`} /></svg>
+    <svg><use href={`#nav-podium`} /></svg>
+    <svg><use href={`#nav-eye`} /></svg>
+  </div>
+
   return (
     <section
       className="screen"
@@ -139,6 +146,8 @@ const GameCellDemo = () => {
         {fireColors}
         {pristineColors}
         {touchedColors}
+        {fnSymbols}
+        {navSymbols}
       </article>
       <nav>
         <Settings />

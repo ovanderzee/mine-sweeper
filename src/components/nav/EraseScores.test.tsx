@@ -14,13 +14,15 @@ describe('EraseScores Component', () => {
 
   test('should display the "Start Playing" sign', () => {
     renderInContext(<EraseScores onErase={dispatcher} />)
-    const button = screen.getByText(/⊘/i)
+    const button = screen.getByTitle('Clear List')
     expect(button).toBeInTheDocument()
+    const svg = button.querySelector('use[href="#nav-empty"]')
+    expect(svg).toBeInTheDocument()
   })
 
   test('should erase scores when clicked and a modal is shown', () => {
     renderInContext(<EraseScores onErase={dispatcher} />)
-    const button = screen.getByText(/⊘/i)
+    const button = screen.getByTitle('Clear List')
     fireEvent.click(button)
     expect(spyShowModal).toHaveBeenCalledTimes(1)
     const cancelDialog = screen.getByText(/Cancel/i)

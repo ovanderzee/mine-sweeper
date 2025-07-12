@@ -33,7 +33,7 @@
     "Settings Comment": "Pas het nivo en andere instellingen aan",
     "Reset Comment": "Standaardinstellingen herstellen",
     "Delete Comment": "Wis scores",
-    "Go Back Comment": "Keer terug naar spel",
+    "Go Back Comment": "Keer terug naar het spel",
 
     "Intro Heading": "Maak alle mijnen onschadelijk",
     "Playing Hint": "Onderzoek het mijnenveld door enkele cellen aan te klikken.",
@@ -84,7 +84,7 @@
     "Replay": "Speel Opnieuw",
     "Settings": "Instellingen",
     "Help": "Uitleg",
-    "Go Back": "Keer terug"
+    "Go Back": "Keer terug naar spel"
   },
   "dialog": {
     "Erase Scores?": "Wil je de scorelijst wissen?",

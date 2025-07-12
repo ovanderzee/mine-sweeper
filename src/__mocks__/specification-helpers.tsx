@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom'
 import { act } from 'react'
-import { fireEvent, render, screen, within } from '@testing-library/react'
+import { fireEvent, render, screen } from '@testing-library/react'
 import App from './../App'
 import DEFAULTS from './../common/defaults'
 import storage from './../common/storage'
@@ -9,27 +9,20 @@ import { microConfig } from './configs'
 
 export const referAndNavigateTo = {
   about: () => {
-    const icon = screen.getByText(/^\?$/i)
-    fireEvent.click(icon)
+    const button = screen.getByTitle('Explanation')
+    fireEvent.click(button)
   },
   config: () => {
-    const icon = screen.getByText(/⚙/i)
-    fireEvent.click(icon)
+    const button = screen.getByTitle('Settings')
+    fireEvent.click(button)
   },
   hallOfFame: () => {
-    let icon
-    try {
-      icon = screen.getByText(/\d+×/i)
-    }
-    catch(error) {
-      const button = screen.getByTitle(/Hall of Fame/i)
-      icon = within(button).getByText('2') && within(button).getByText('1') && within(button).getByText('3')
-    }
-    fireEvent.click(icon)
+    const button = screen.getByTitle('Hall of Fame')
+    fireEvent.click(button)
   },
   gameBoard: () => {
-    const icon = screen.getByText(/⏎/i)
-    fireEvent.click(icon)
+    const button = screen.getByTitle('Return to Game')
+    fireEvent.click(button)
   }
 }
 

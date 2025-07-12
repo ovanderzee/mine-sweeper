@@ -14,6 +14,9 @@
 }
 
 .screen > nav button {
+  --divider-spacing: 10%;
+  --divider-size: calc(100% - (2 * var(--divider-spacing)));
+
   font-weight: bold;
   line-height: 144%;
   background: transparent;
@@ -21,6 +24,11 @@
   border: 0 none;
   padding: 0;
   text-shadow: -0.02em -0.05em black, 0.008em 0.02em var(--light-blue);
+  aspect-ratio: 1;
+}
+
+.screen > nav button svg {
+  aspect-ratio: 1;
 }
 
 .screen > nav button[disabled] {
@@ -55,15 +63,23 @@
     bottom: 0;
     flex: 0 0 auto;
     align-items: baseline;
-    padding: 0.3em 0 0.7em;
+    height: var(--nav-height);
   }
 
   .screen > nav button {
-    font-size: 1.5em;
     flex: 1 0 auto;
+    height: 100%;
   }
 
-  .screen > nav button + button {
+  .screen > nav button svg {
+    height: 100%;
+  }
+
+  .screen > nav button + button::before {
+    content: '';
+    display: inline-block;
+    margin-block: var(--divider-spacing);
+    height: var(--divider-size);
     border-left: 1px solid var(--dark-blue);
   }
 }
@@ -111,9 +127,8 @@
   }
 
   .screen > nav {
-    flex: 0 0 4em;
+    flex: 0 0 4.6em;
     flex-direction: column;
-    padding: 0 0.3em;
   }
 
   .screen > nav::after {
@@ -122,12 +137,21 @@
   }
 
   .screen > nav button {
-    font-size: 1.75em;
     flex: 1 1 auto;
+    width: 100%;
+    display: flex; /* safari */
+    flex-wrap: wrap;
+  }
+
+  .screen > nav button svg {
     width: 100%;
   }
 
-  .screen > nav button + button {
+  .screen > nav button + button::before {
+    content: '';
+    display: block;
+    margin-inline: var(--divider-spacing);
+    width: var(--divider-size);
     border-top: 1px solid var(--dark-blue);
   }
 }

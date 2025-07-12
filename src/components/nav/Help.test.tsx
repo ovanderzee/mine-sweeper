@@ -6,14 +6,16 @@ import About from '../meta/About'
 describe('Help Component', () => {
   test('should display the "QuestionMark" sign', () => {
     renderInContext(<Help />)
-    const button = screen.getByText(/\?/i)
+    const button = screen.getByTitle('Explanation')
     expect(button).toBeInTheDocument()
+    const svg = button.querySelector('use[href="#nav-question"]')
+    expect(svg).toBeInTheDocument()
   })
 
   test('should navigate when clicked', () => {
     const navigate = jest.fn()
     renderInContext(<Help />, { navigate })
-    const button = screen.getByText(/\?/i)
+    const button = screen.getByTitle('Explanation')
     fireEvent.click(button)
     expect(navigate).toHaveBeenCalledTimes(1)
     expect(navigate).toHaveBeenCalledWith(<About />)

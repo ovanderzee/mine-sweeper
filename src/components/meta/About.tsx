@@ -1,6 +1,5 @@
 import { useContext } from 'react'
 import PageContext from '../../store/page-context'
-import { ChampionsPodium, CogWheel, Enter, Erase, Play, QuestionMark, Redo, Reset } from '../UI/Symbols'
 import HiScores from '../nav/HiScores'
 import Settings from '../nav/Settings'
 import GoBack from '../nav/GoBack'
@@ -23,15 +22,16 @@ const About = () => {
 
       <h3>{text.help['Nav Heading']}</h3>
       <dl>
-        <dt className="adorn">9×</dt><dd>{text.help['Game Scores Comment']}</dd>
-        <dt className="adorn"><ChampionsPodium /></dt><dd>{text.help['About Scores Comment']}</dd>
-        <dt className="adorn"><Play /></dt><dd>{text.help['New Game Comment']}</dd>
-        <dt className="adorn"><Redo /></dt><dd>{text.help['Replay Comment']}</dd>
-        <dt className="adorn"><QuestionMark /></dt><dd>{text.help['Help Comment']}</dd>
-        <dt className="adorn"><CogWheel /></dt><dd>{text.help['Settings Comment']}</dd>
-        <dt className="adorn"><Reset /></dt><dd>{text.help['Reset Comment']}</dd>
-        <dt className="adorn"><Erase /></dt><dd>{text.help['Delete Comment']}</dd>
-        <dt className="adorn"><Enter /></dt><dd>{text.help['Go Back Comment']}</dd>
+        <dt><svg><text id="text-content" x="50%" y="55%" style={{fontSize: '1em'}}>9×</text></svg></dt>
+          <dd>{text.help['Game Scores Comment']}</dd>
+        <dt><svg><use href="#nav-podium" /></svg></dt><dd>{text.help['About Scores Comment']}</dd>
+        <dt><svg><use href="#nav-play" /></svg></dt><dd>{text.help['New Game Comment']}</dd>
+        <dt><svg><use href="#nav-replay" /></svg></dt><dd>{text.help['Replay Comment']}</dd>
+        <dt><svg><use href="#nav-question" /></svg></dt><dd>{text.help['Help Comment']}</dd>
+        <dt><svg><use href="#nav-sliders" /></svg></dt><dd>{text.help['Settings Comment']}</dd>
+        <dt><svg><use href="#nav-reset" /></svg></dt><dd>{text.help['Reset Comment']}</dd>
+        <dt><svg><use href="#nav-empty" /></svg></dt><dd>{text.help['Delete Comment']}</dd>
+        <dt><svg><use href="#nav-return" /></svg></dt><dd>{text.help['Go Back Comment']}</dd>
       </dl>
 
       <h3>{text.help['Accessibility Heading']}</h3>

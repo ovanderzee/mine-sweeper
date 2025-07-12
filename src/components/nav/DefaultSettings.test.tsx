@@ -18,13 +18,15 @@ describe('DefaultSettings Component', () => {
 
   test('should display the "Revolve Back" sign', () => {
     renderInContext(<DefaultSettings />)
-    const button = screen.getByText(/↺/i)
+    const button = screen.getByTitle('Revert to Defaults')
     expect(button).toBeInTheDocument()
+    const svg = button.querySelector('use[href="#nav-reset"]')
+    expect(svg).toBeInTheDocument()
   })
 
   test('should effect default config when clicked and no game is open (spy)', () => {
     renderInContext(<DefaultSettings />, { config: microConfig, configure })
-    const button = screen.getByText(/↺/i)
+    const button = screen.getByTitle('Revert to Defaults')
     fireEvent.click(button)
     expect(configure).toHaveBeenCalledTimes(1)
     expect(configure).toHaveBeenCalledWith()
@@ -33,7 +35,7 @@ describe('DefaultSettings Component', () => {
   test('should effect default config when clicked and no game is open (storage)', () => {
     storage.config = microConfig
     renderInProvider(<DefaultSettings />)
-    const button = screen.getByText(/↺/i)
+    const button = screen.getByTitle('Revert to Defaults')
     fireEvent.click(button)
     expect(storage.config).toStrictEqual(DEFAULTS)
   })
@@ -41,7 +43,7 @@ describe('DefaultSettings Component', () => {
   test('should effect default config when clicked while game is not touched', () => {
     storage.game = newGameState
     renderInContext(<DefaultSettings />, { config: microConfig, configure })
-    const button = screen.getByText(/↺/i)
+    const button = screen.getByTitle('Revert to Defaults')
     fireEvent.click(button)
     expect(configure).toHaveBeenCalledTimes(1)
     expect(configure).toHaveBeenCalledWith()
@@ -50,7 +52,7 @@ describe('DefaultSettings Component', () => {
   test('should effect default config when clicked while game is lost', () => {
     storage.game = lostGameState
     renderInContext(<DefaultSettings />, { config: microConfig, configure })
-    const button = screen.getByText(/↺/i)
+    const button = screen.getByTitle('Revert to Defaults')
     fireEvent.click(button)
     expect(configure).toHaveBeenCalledTimes(1)
     expect(configure).toHaveBeenCalledWith()
@@ -59,7 +61,7 @@ describe('DefaultSettings Component', () => {
   test('should effect default config when clicked while game is won', () => {
     storage.game = wonGameState
     renderInContext(<DefaultSettings />, { config: microConfig, configure })
-    const button = screen.getByText(/↺/i)
+    const button = screen.getByTitle('Revert to Defaults')
     fireEvent.click(button)
     expect(configure).toHaveBeenCalledTimes(1)
     expect(configure).toHaveBeenCalledWith()
@@ -68,7 +70,7 @@ describe('DefaultSettings Component', () => {
   test('should effect default config when clicked while game is playing and challenge is as in default', () => {
     storage.game = playingGameState
     renderInContext(<DefaultSettings />, { config: defaultChallengeConfig, configure })
-    const button = screen.getByText(/↺/i)
+    const button = screen.getByTitle('Revert to Defaults')
     fireEvent.click(button)
     expect(configure).toHaveBeenCalledTimes(1)
   })
@@ -77,7 +79,7 @@ describe('DefaultSettings Component', () => {
     storage.game = playingGameState
     const spyShowModal = jest.spyOn(ReactDOM, 'createPortal')
     renderInContext(<DefaultSettings />, { config: simpleHardConfig, configure })
-    const button = screen.getByText(/↺/i)
+    const button = screen.getByTitle('Revert to Defaults')
     fireEvent.click(button)
     expect(spyShowModal).toHaveBeenCalledTimes(1)
     const cancelDialog = screen.getByText(/Cancel/i)

@@ -1,7 +1,6 @@
 import { useContext } from 'react'
 import PageContext from '../../store/page-context'
 import Configure from '../meta/Configure'
-import { CogWheel } from '../UI/Symbols'
 
 const Settings = () => {
   const pageCtx = useContext(PageContext)
@@ -11,7 +10,7 @@ const Settings = () => {
 
   return (
     <button type="button" title={text.nav['Settings']} onClick={showHandler}>
-      <CogWheel />
+      <svg><use href={`#nav-sliders`} /></svg>
     </button>
   )
 }
