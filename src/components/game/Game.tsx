@@ -58,6 +58,9 @@ const Game = () => {
           />
         ))
       )}
+      <aside>
+        <p>time lapsed: {Math.round((gameState.tShift - gameState.tZero) / 1000)}secs.</p>
+      </aside>
     </article>
   )
 

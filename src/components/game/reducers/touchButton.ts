@@ -10,8 +10,9 @@ export const touchButtonReducer = (state: GameState, action: PayloadAction, conf
 
   if (state.stage === GameStages.NEW) {
     updState.stage = GameStages.PLAYING
-    updState.begin = Date.now()
+    updState.tZero = Date.now()
   }
+  updState.tShift = Date.now()
 
   // At this point state.stage can only be GameStages.PLAYING
 
@@ -59,7 +60,6 @@ export const touchButtonReducer = (state: GameState, action: PayloadAction, conf
     // mine touched, touch all buttons, game lost
     findPristineCells().forEach((cell) => touchCell(cell, { stage: CellStateStage.RELEASED }))
     updState.stage = GameStages.LOST
-    updState.end = Date.now()
   } else {
     // neighbour of mine touched, show contents
   }
@@ -69,7 +69,6 @@ export const touchButtonReducer = (state: GameState, action: PayloadAction, conf
     // only mines remain, touch remaining buttons, game won
     pristineCells.forEach((cell) => touchCell(cell, { stage: CellStateStage.RELEASED }))
     updState.stage = GameStages.WON
-    updState.end = Date.now()
   }
 
   return {

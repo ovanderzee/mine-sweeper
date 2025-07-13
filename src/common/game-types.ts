@@ -53,16 +53,16 @@ export interface GameState {
   board: CellState[][];
   stage: GameStages;
   // playing:
-  begin: number;
+  tZero: number;
+  tShift: number;
   // over:
   mines: CellState[];
-  end: number;
   rank: number;
   score: number;
 }
 
 export interface ScoreItem {
-  begin: number,
+  time: number,
   duration: number,
   user: string,
   cells: number,

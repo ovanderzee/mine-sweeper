@@ -42,9 +42,9 @@ export const initialGameState: GameState = {
   stage: GameStages.NEW,
   board: [[]],
   // playing:
-  begin: 0,
+  tZero: 0,
+  tShift: 0,
   // over:
-  end: 0,
   rank: 0,
   score: 0,
   mines: []

@@ -6,7 +6,7 @@ import { GameState, CellStateStage, ScoreItem } from '../../../common/game-types
 export const victoryReducer = (state: GameState, config: AppConfig): GameState => {
   const { BOARD_SIZE, GAME_LEVEL, MINE_COUNT, PLAYER_NAME, MAX_SCORES } = config
 
-  const duration = Math.max(state.end - state.begin, MIN_DURATION)
+  const duration = Math.max(state.tShift - state.tZero, MIN_DURATION)
 
   const moves = state.board
     .flat()
@@ -22,7 +22,7 @@ export const victoryReducer = (state: GameState, config: AppConfig): GameState =
   )
 
   const victory: ScoreItem = {
-    begin: state.begin,
+    time: state.tShift,
     duration: duration,
     user: PLAYER_NAME,
     cells: Math.pow(BOARD_SIZE, 2),
@@ -31,16 +31,16 @@ export const victoryReducer = (state: GameState, config: AppConfig): GameState =
     score: score,
   }
 
-  // add
+  // add, beware of strict mode
   const { scores } = storage
-  const isThere = scores.find(score => score.begin === victory.begin)
-  if (!isThere) scores.push(victory)
+  const isNotThere = !scores.find(scoreItem => scoreItem.time === victory.time)
+  if (isNotThere) scores.push(victory)
 
   // rearrange
   scores.sort((a, b) => b.score - a.score)
   storage.scores = scores.slice(0, MAX_SCORES)
 
-  const rank = 1 + scores.findIndex(score => score.begin === victory.begin)
+  const rank = 1 + scores.findIndex(score => score.time === victory.time)
 
   return {
     ...state,
