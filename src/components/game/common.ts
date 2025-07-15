@@ -7,13 +7,16 @@ import { CellState, CellStateStage, GameState, GameStages } from '../../common/g
  * @param {Function} callback with (x, y) arguments
  */
 export const iterateNeighbours = (cell: CellState, BOARD_SIZE: number, callback: (x: number, y: number) => void) => {
-  for (let x = cell.row - 1; x < cell.row + 2; x++) {
-    if (x >= 0 && x < BOARD_SIZE) {
-      for (let y = cell.col - 1; y < cell.col + 2; y++) {
-        const isSelf = x === cell.row && y === cell.col
-        if (y >= 0 && y < BOARD_SIZE && !isSelf) {
-          callback(x, y)
-        }
+  const { row, col } = cell
+  const rowStart = row > 0 ? row - 1 : 0
+  const rowEnd   = row < BOARD_SIZE - 1 ? row + 1 : row
+  const colStart = col > 0 ? col - 1 : 0
+  const colEnd   = col < BOARD_SIZE - 1 ? col + 1 : col
+
+  for (let x = rowStart; x <= rowEnd; x++) {
+    for (let y = colStart; y <= colEnd; y++) {
+      if (x !== row || y !== col) {
+        callback(x, y)
       }
     }
   }

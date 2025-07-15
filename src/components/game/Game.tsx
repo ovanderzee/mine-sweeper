@@ -16,7 +16,7 @@ import './Game.css'
 
 const Game = () => {
   const pageCtx = useContext(PageContext)
-  const { BOARD_SIZE, MINE_COUNT, FONT_SIZE } = pageCtx.config
+  const { BOARD_SIZE, FONT_SIZE } = pageCtx.config
 
   const [gameState, dispatchGameAction] = useReducer(
     gameReducer.bind(pageCtx.config),
@@ -63,8 +63,7 @@ const Game = () => {
 
   const gameNavigation = (
     <nav>
-      {/* <HiScores label={'&times;'} /> */}
-      <HiScores label={`${MINE_COUNT}\u00d7`} />
+      <HiScores board={gameState.board} />
       <NewGame
         onNew={dispatchGameAction}
         stage={gameState.stage}

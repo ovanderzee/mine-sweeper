@@ -13,9 +13,14 @@ const Replay = (props: ReplayProps) => {
   const text = pageCtx.text
 
   const [showModal, setShowModal] = useState(false)
+  const [showActive, setShowActive] = useState(false)
 
   const action: GameAction = { type: GameActionType.REPLAY }
-  const confirmHandler = () => props.onReplay(action)
+  const confirmHandler = () => {
+    setShowActive(true)
+    props.onReplay(action)
+    setTimeout(()=>setShowActive(false), 300)
+}
 
   const consentModal = <Modal
     className="consent"
@@ -31,14 +36,16 @@ const Replay = (props: ReplayProps) => {
     isPlaying ? setShowModal(isPlaying) : confirmHandler()
   }
 
-  return (
-    <>
-      <button type="button" title={text.nav['Replay']} onClick={replayHandler}>
-        <svg><use href={`#nav-replay`} /></svg>
-      </button>
-      {showModal && consentModal}
-    </>
-  )
+  return <>
+    <button type="button"
+      className={showActive ? 'active' : ''}
+      title={text.nav['Replay']}
+      onClick={replayHandler}
+    >
+      <svg><use href={`#nav-replay`} /></svg>
+    </button>
+    {showModal && consentModal}
+  </>
 }
 
 export default Replay

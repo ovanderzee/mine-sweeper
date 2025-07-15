@@ -1,16 +1,25 @@
 import { useContext, useState } from 'react'
 import PageContext from '../../store/page-context'
 import Modal from '../UI/Modal'
+import storage from '../../common/storage'
 
 const EraseScores = (props: { onErase: () => void }) => {
   const pageCtx = useContext(PageContext)
   const text = pageCtx.text
 
   const [showModal, setShowModal] = useState(false)
+  const [showActive, setShowActive] = useState(false)
+
+  const confirmHandler = () => {
+    setShowActive(true)
+    storage.eraseScores()
+    props.onErase()
+    setTimeout(()=>setShowActive(false), 300)
+  }
 
   const consentModal = <Modal
     className="consent"
-    onConfirm={() => props.onErase()}
+    onConfirm={confirmHandler}
     onCancel={() => {}}
     closeModal={() => setShowModal(false)}
   >
@@ -21,14 +30,16 @@ const EraseScores = (props: { onErase: () => void }) => {
     setShowModal(true)
   }
 
-  return (
-    <>
-      <button type="button" title={text.nav['Clear List']} onClick={eraseHandler}>
-        <svg><use href={`#nav-empty`} /></svg>
-      </button>
-      {showModal && consentModal}
-    </>
-  )
+  return <>
+    <button type="button"
+      className={showActive ? 'active' : ''}
+      title={text.nav['Clear List']}
+      onClick={eraseHandler}
+    >
+      <svg><use href={`#nav-empty`} /></svg>
+    </button>
+    {showModal && consentModal}
+  </>
 }
 
 export default EraseScores

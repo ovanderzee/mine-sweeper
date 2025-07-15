@@ -48,3 +48,8 @@ export interface PageContextProps {
 }
 
 export type Primitive = string | number | boolean
+
+export interface InputRange {
+  min: number,
+  max: number,
+}

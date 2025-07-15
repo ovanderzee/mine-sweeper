@@ -10,15 +10,22 @@ const DefaultSettings = () => {
   const text = pageCtx.text
 
   const [showModal, setShowModal] = useState(false)
+  const [showActive, setShowActive] = useState(false)
 
   const confirmHandler = () => {
-    storage.game = null
+    setShowActive(true)
     pageCtx.configure()
+    setTimeout(()=>setShowActive(false), 300)
+  }
+
+  const quitAndConfirm = () => {
+    storage.eraseGame()
+    confirmHandler()
   }
 
   const consentModal = <Modal
     className="consent"
-    onConfirm={confirmHandler}
+    onConfirm={quitAndConfirm}
     onCancel={() => {}}
     closeModal={() => setShowModal(false)}
   >
@@ -32,24 +39,22 @@ const DefaultSettings = () => {
       const cfg = pageCtx.config
       const isPlaying = game.stage === GameStages.PLAYING
       const isDefaultPlayConfig = DEFAULTS.BOARD_SIZE === cfg.BOARD_SIZE && DEFAULTS.GAME_LEVEL === cfg.GAME_LEVEL
-      isPlaying && !isDefaultPlayConfig ? setShowModal(true) : confirmHandler()
+      isPlaying && !isDefaultPlayConfig ? setShowModal(true) : quitAndConfirm()
     } else {
-      pageCtx.configure()
+      confirmHandler()
     }
   }
 
-  return (
-    <>
-      <button
-        type="button"
-        title={text.nav['Reinstate Defaults']}
-        onClick={resetHandler}
-      >
-        <svg><use href={`#nav-reset`} /></svg>
-      </button>
-      {showModal && consentModal}
-    </>
-  )
+  return <>
+    <button type="button"
+      className={showActive ? 'active' : ''}
+      title={text.nav['Reinstate Defaults']}
+      onClick={resetHandler}
+    >
+      <svg><use href={`#nav-reset`} /></svg>
+    </button>
+    {showModal && consentModal}
+  </>
 }
 
 export default DefaultSettings

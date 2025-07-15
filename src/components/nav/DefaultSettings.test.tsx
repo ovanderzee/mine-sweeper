@@ -12,7 +12,7 @@ describe('DefaultSettings Component', () => {
   let configure: () => void
 
   beforeEach(() => {
-    storage.game = null
+    storage.eraseGame()
     configure = jest.fn()
   })
 
@@ -73,21 +73,63 @@ describe('DefaultSettings Component', () => {
     const button = screen.getByTitle('Revert to Defaults')
     fireEvent.click(button)
     expect(configure).toHaveBeenCalledTimes(1)
+    expect(configure).toHaveBeenCalledWith()
   })
 
-  test('should effect default config when clicked while game is playing and challenge is different', () => {
-    storage.game = playingGameState
-    const spyShowModal = jest.spyOn(ReactDOM, 'createPortal')
-    renderInContext(<DefaultSettings />, { config: simpleHardConfig, configure })
-    const button = screen.getByTitle('Revert to Defaults')
-    fireEvent.click(button)
-    expect(spyShowModal).toHaveBeenCalledTimes(1)
-    const cancelDialog = screen.getByText(/Cancel/i)
-    fireEvent.click(cancelDialog)
-    expect(configure).toHaveBeenCalledTimes(0)
-    const effectDialog = screen.getByText(/OK/i)
-    fireEvent.click(effectDialog)
-    expect(configure).toHaveBeenCalledTimes(1)
-  })
+  describe('Modal integration, check storage', () => {
+    let spyShowModal: jest.SpyInstance
 
+    beforeEach(() => {
+      spyShowModal = jest.spyOn(ReactDOM, 'createPortal')
+    })
+
+    afterEach(() => {
+      jest.clearAllMocks()
+    })
+
+    test(`should keep the same config and show no visual feedback
+      when dialog was cancelled
+      in playing game with non-standard challenge`, () => {
+      storage.game = playingGameState
+      storage.config = simpleHardConfig
+      renderInProvider(<DefaultSettings />)
+
+      const button = screen.getByRole('button')
+      fireEvent.click(button)
+      expect(spyShowModal).toHaveBeenCalledTimes(1)
+      const cancelDialog = screen.getByText(/Cancel/i)
+      fireEvent.click(cancelDialog)
+      expect(button.className).not.toContain('active')
+      expect(storage.config).toStrictEqual(simpleHardConfig)
+    })
+
+    test(`should revert to default config and show visual feedback
+      when dialog was confirmed
+      in playing game with non-standard challenge`, () => {
+      storage.game = playingGameState
+      storage.config = simpleHardConfig
+      renderInProvider(<DefaultSettings />)
+
+      const button = screen.getByRole('button')
+      fireEvent.click(button)
+      expect(spyShowModal).toHaveBeenCalledTimes(1)
+      const confirmDialog = screen.getByText(/OK/i)
+      fireEvent.click(confirmDialog)
+      expect(button.className).toContain('active')
+      expect(storage.config).toStrictEqual(DEFAULTS)
+    })
+
+    test(`should revert to default config and show visual feedback
+      in ended game with non-standard challenge`, () => {
+      storage.game = lostGameState
+      storage.config = simpleHardConfig
+      renderInProvider(<DefaultSettings />)
+
+      const button = screen.getByRole('button')
+      fireEvent.click(button)
+
+      expect(button.className).toContain('active')
+      expect(storage.config).toStrictEqual(DEFAULTS)
+    })
+  })
 })

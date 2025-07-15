@@ -25,7 +25,7 @@
   },
   "help": {
     "Nav Heading": "Navigation",
-    "Game Scores Comment": "Number of hidden mines; access to Hall of Fame",
+    "Game Scores Comment": "Number of mines minus the number of flags; access to Hall of Fame",
     "About Scores Comment": "View Hall of Fame",
     "New Game Comment": "Start a new game with current settings",
     "Replay Comment": "Start the game again",
@@ -42,7 +42,9 @@
 
     "Accessibility Heading": "Accessibility",
     "Keyboard Notice": "On desktop or laptop the game could be played using the keyboard. You can reach all interactions using the Tab and Shift+Tab keystrokes.",
-    "Game Navigation": "Navigate the minefield with the arrow keys and flag a mine with the spacebar. Confirm a dialog with enter on the right button."
+    "Game Navigation": "Navigate the minefield with the arrow keys and flag a mine with the spacebar. Confirm a dialog with enter on the right button.",
+
+    "appVersion": "app version"
   },
   "fame": {
     "Nothing Yet": "No scores yet",

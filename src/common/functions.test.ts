@@ -23,5 +23,4 @@ describe('preventReloadByEnter', () => {
     preventReloadByEnter(aEvent)
     expect(aEvent.preventDefault).not.toHaveBeenCalled()
   })
-
 })
