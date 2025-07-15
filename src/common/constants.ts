@@ -33,3 +33,23 @@ Object.defineProperties(RANGES, {
 });
 
 export { RANGES }
+
+/* RANGES */
+
+export const getAppVersion = () => {
+  // vite exposes env vars via import.meta.env.
+  try {
+    return __APP_VERSION__
+  }
+  catch(e) {
+    // ReferenceError: __APP_VERSION__ is not defined
+    return '0.0.0'
+  }
+}
+
+export const getCommitHash = () => {
+  try { return __COMMIT_HASH__ }
+  catch(e) { return 'abcdefg' }
+}
+
+export const VERSION_INFO = [getAppVersion(), getCommitHash()]

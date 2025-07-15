@@ -3,7 +3,7 @@ import PageContext from '../../store/page-context'
 import HiScores from '../nav/HiScores'
 import Settings from '../nav/Settings'
 import GoBack from '../nav/GoBack'
-import { getAppVersion } from '../../common/functions'
+import { VERSION_INFO } from '../../common/constants'
 import './Meta.css'
 import './About.css'
 
@@ -11,6 +11,7 @@ const About = () => {
   const pageCtx = useContext(PageContext)
   const { FONT_SIZE } = pageCtx.config
   const text = pageCtx.text
+  const [appVersion, commitHash] = VERSION_INFO
 
   const aboutContent = (
     <article>
@@ -42,7 +43,7 @@ const About = () => {
       <hr />
 
       <h5>Onno van der Zee, 2013 - 2025</h5>
-      <h6>{text.help['appVersion']}: {getAppVersion()}</h6>
+      <h6>{text.help['appVersion']}: {appVersion} ({commitHash})</h6>
     </article>
   )
 

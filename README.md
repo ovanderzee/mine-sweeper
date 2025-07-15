@@ -14,3 +14,6 @@ Just like real life!
 -  No data comes in or goes out
 -  Integration and Unit-testing
 -  A stylish interface
+-  Shows number of mines left to find as mine count minus flag count
+-  Visual feedback of action on functionality in navigation 
+-  Show version info
