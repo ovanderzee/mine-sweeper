@@ -34,7 +34,9 @@
 
 @media only screen and (orientation: portrait) {
   .screen {
-    --nav-height: 7ex;
+    --nav-height: 3.5em;
+    --nav-pad-top: .3em;
+    --nav-pad-bottom: .7em;
 
     flex-direction: column;
     align-content: space-between;
@@ -55,16 +57,22 @@
     bottom: 0;
     flex: 0 0 auto;
     align-items: baseline;
-    padding: 0.3em 0 0.7em;
+    padding-block: var(--nav-pad-top)  var(--nav-pad-bottom);
   }
 
   .screen > nav button {
-    font-size: 1.5em;
     flex: 1 0 auto;
   }
 
   .screen > nav button + button {
     border-left: 1px solid var(--dark-blue);
+  }
+
+  .screen > nav button svg {
+    display: inline-block;
+    height: var(--nav-height);
+    aspect-ratio: 1;
+    margin-block: calc(-1 * var(--nav-pad-top)) calc(-1 * var(--nav-pad-bottom));
   }
 }
 
@@ -84,7 +92,7 @@
   .screen > article,
   .screen > form {
     width: var(--app-width);
-    margin: 0 auto var(--nav-height);
+    margin-inline: auto;
   }
 
   .screen > nav {
@@ -102,6 +110,8 @@
 
 @media only screen and (orientation: landscape) {
   .screen {
+    --nav-width: 4em;
+    --nav-pad: .3em;
     flex-wrap: nowrap;
   }
 
@@ -111,9 +121,9 @@
   }
 
   .screen > nav {
-    flex: 0 0 4em;
+    flex: 0 0 var(--nav-width);
     flex-direction: column;
-    padding: 0 0.3em;
+    padding-inline: var(--nav-pad);
   }
 
   .screen > nav::after {
@@ -122,12 +132,17 @@
   }
 
   .screen > nav button {
-    font-size: 1.75em;
     flex: 1 1 auto;
     width: 100%;
   }
 
   .screen > nav button + button {
     border-top: 1px solid var(--dark-blue);
+  }
+
+  .screen > nav button svg {
+    display: block;
+    width: var(--nav-width);
+    aspect-ratio: 1;
   }
 }
