@@ -14,9 +14,6 @@
 }
 
 .screen > nav button {
-  --divider-spacing: 10%;
-  --divider-size: calc(100% - (2 * var(--divider-spacing)));
-
   font-weight: bold;
   line-height: 144%;
   background: transparent;
@@ -24,17 +21,12 @@
   border: 0 none;
   padding: 0;
   text-shadow: -0.02em -0.05em black, 0.008em 0.02em var(--light-blue);
-  transition: color 2s
-  aspect-ratio: 1;
+  transition: color 2s;
 
   &.active {
     color: var(--fire-yellow);
     transition: color 0s
   }
-}
-
-.screen > nav button svg {
-  aspect-ratio: 1;
 }
 
 .screen > nav button[disabled] {
@@ -48,7 +40,9 @@
 
 @media only screen and (orientation: portrait) {
   .screen {
-    --nav-height: 7ex;
+    --nav-height: 3.5em;
+    --nav-pad-top: .3em;
+    --nav-pad-bottom: .7em;
 
     flex-direction: column;
     align-content: space-between;
@@ -69,24 +63,22 @@
     bottom: 0;
     flex: 0 0 auto;
     align-items: baseline;
-    height: var(--nav-height);
+    padding-block: var(--nav-pad-top)  var(--nav-pad-bottom);
   }
 
   .screen > nav button {
     flex: 1 0 auto;
-    height: 100%;
+  }
+
+  .screen > nav button + button {
+    border-left: 1px solid var(--dark-blue);
   }
 
   .screen > nav button svg {
-    height: 100%;
-  }
-
-  .screen > nav button + button::before {
-    content: '';
     display: inline-block;
-    margin-block: var(--divider-spacing);
-    height: var(--divider-size);
-    border-left: 1px solid var(--dark-blue);
+    height: var(--nav-height);
+    aspect-ratio: 1;
+    margin-block: calc(-1 * var(--nav-pad-top)) calc(-1 * var(--nav-pad-bottom));
   }
 }
 
@@ -106,7 +98,7 @@
   .screen > article,
   .screen > form {
     width: var(--app-width);
-    margin: 0 auto var(--nav-height);
+    margin-inline: auto;
   }
 
   .screen > nav {
@@ -124,6 +116,8 @@
 
 @media only screen and (orientation: landscape) {
   .screen {
+    --nav-width: 4em;
+    --nav-pad: .3em;
     flex-wrap: nowrap;
   }
 
@@ -133,8 +127,9 @@
   }
 
   .screen > nav {
-    flex: 0 0 4.6em;
+    flex: 0 0 var(--nav-width);
     flex-direction: column;
+    padding-inline: var(--nav-pad);
   }
 
   .screen > nav::after {
@@ -145,19 +140,15 @@
   .screen > nav button {
     flex: 1 1 auto;
     width: 100%;
-    display: flex; /* safari */
-    flex-wrap: wrap;
+  }
+
+  .screen > nav button + button {
+    border-top: 1px solid var(--dark-blue);
   }
 
   .screen > nav button svg {
-    width: 100%;
-  }
-
-  .screen > nav button + button::before {
-    content: '';
     display: block;
-    margin-inline: var(--divider-spacing);
-    width: var(--divider-size);
-    border-top: 1px solid var(--dark-blue);
+    width: var(--nav-width);
+    aspect-ratio: 1;
   }
 }
