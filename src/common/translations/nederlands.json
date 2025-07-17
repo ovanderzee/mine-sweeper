@@ -15,7 +15,7 @@
     "skip_this": "direct naar spel"
   },
   "game": {
-    "You Won!": "Gefeliciteerd, je hebt gewonnen!"
+    "playtime": "speelduur"
   },
   "cell": {
     "row": "rij",
@@ -71,6 +71,11 @@
     "choose your language": "kies een taal",
     "Zoom Display": "Vergroting scherm",
     "font-size to %n pixels": "letter grootte op %n pixels",
+    "Clock": "Klok",
+    "display playtime": "toon speelduur",
+    "No clock": "Niet tonen",
+    "Analog clock": "Analoge klok",
+    "Digital clock": "Digitale klok",
 
     "Record Scores": "Scores Opslaan",
     "Name in Scores": "Naam in scorelijst",

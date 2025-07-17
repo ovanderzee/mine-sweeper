@@ -1,0 +1,43 @@
+
+.time-tracker {
+  --fill-color: var(--ultra-dark-blue);
+}
+
+.time-tracker.analogue {
+  --time-tracker-size: 3em;
+  --fill-color: var(--dark-blue);
+
+  position: relative;
+  border: 1px solid var(--fill-color);
+  border-radius: 50%;
+  width: var(--time-tracker-size);
+  height: var(--time-tracker-size);
+
+  #minute, #second {
+    position: absolute;
+    bottom: 50%;
+    transform-origin: center bottom;
+  }
+
+  #minute {
+    background: var(--fill-color);
+    left: calc(50% - 2px);
+    width: 4px;
+    height: calc(var(--time-tracker-size) / 3);
+  }
+
+  #second {
+    background: var(--fill-color);
+    left: calc(50% - 1px);
+    width: 2px;
+    height: calc(var(--time-tracker-size) / 2);
+  }
+}
+
+.time-tracker.digital {
+  font-size: 80%;
+  color: var(--fill-color);
+  span {
+    width: 2ex;
+  }
+}

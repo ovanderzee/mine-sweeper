@@ -1,0 +1,67 @@
+import { useContext, useEffect, useState } from 'react'
+import PageContext from '../../store/page-context'
+import { ClockTypes } from '../../common/app-types'
+import './TimeTracker.css'
+
+interface TimeTrackerProps {
+  zero: number;
+}
+
+const TimeTracker = (props: TimeTrackerProps) => {
+  const pageCtx = useContext(PageContext)
+  const { config, text } = pageCtx
+
+  const [now, setNow] = useState(Date.now())
+
+  useEffect(() => {
+    const interval = setInterval(() => setNow(Date.now()), 33)
+
+    return () => {
+      clearInterval(interval)
+    }
+  }, [])
+
+  const timeFormat = () => {
+    let tFrame = now - props.zero
+    const ms = tFrame % 1000
+
+    tFrame = (tFrame - ms) / 1000
+    const sec = tFrame % 60
+
+    tFrame = (tFrame - sec) / 60
+    const min = tFrame % 60
+
+    return {min, sec}
+  }
+
+  const {min, sec} = timeFormat()
+
+  const analogClock = (
+    <section className="time-tracker analogue">
+      <div id="minute" data-minute={min}
+        style={{transform: `rotate( ${(min % 12) * 360 / 12}deg )`}}
+      ></div>
+      <div id="second" data-second={sec}
+        style={{transform: `rotate( ${(sec % 60) * 360 / 60}deg )`}}
+      ></div>
+    </section>
+  )
+
+  const digitalClock = (
+    <section className="time-tracker digital">
+      {text.game['playtime']}<br />
+      <span>{min.toString().padStart(2, "0")}</span>:<span>{sec.toString().padStart(2, "0")}</span>
+    </section>
+  )
+
+  switch (config.CLOCK_TYPE) {
+    case ClockTypes.ANALOG:
+      return analogClock
+    case ClockTypes.DIGITAL:
+      return digitalClock
+    default:
+      return null
+  }
+}
+
+export default TimeTracker

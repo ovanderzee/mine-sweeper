@@ -1,4 +1,5 @@
 import { texts, currentLanguage } from './i18n'
+import { ClockTypes } from './app-types'
 
 /**
  * BOARD_SIZE
@@ -24,6 +25,7 @@ const DEFAULTS = {
   FONT_SIZE: 15,
   PLAYER_NAME: texts[currentLanguage].config['default player'],
   MAX_SCORES: 500,
+  CLOCK_TYPE: ClockTypes.NONE,
 }
 
 export default DEFAULTS

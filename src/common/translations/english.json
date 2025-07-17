@@ -15,7 +15,7 @@
     "skip_this": "skip to game"
   },
   "game": {
-    "You Won!": "Congrats, you WON !"
+    "playtime": "playtime"
   },
   "cell": {
     "row": "row",
@@ -71,6 +71,11 @@
     "choose your language": "choose your language",
     "Zoom Display": "Zoom display",
     "font-size to %n pixels": "font-size to %n pixels",
+    "Clock": "Clock",
+    "display playtime": "display playtime",
+    "No clock": "Do not show",
+    "Analog clock": "Analog clock",
+    "Digital clock": "Digital clock",
 
     "Record Scores": "Record Scores",
     "Name in Scores": "Name in scores",
