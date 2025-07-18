@@ -35,9 +35,11 @@
 }
 
 .time-tracker.digital {
-  font-size: 80%;
   color: var(--fill-color);
+  padding-inline: 1ex;
+
   span {
+    font-size: 80%;
     width: 2ex;
   }
 }

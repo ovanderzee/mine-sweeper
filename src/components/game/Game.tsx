@@ -12,6 +12,7 @@ import { initialGameState } from './common'
 import { gameReducer } from './game-reducer'
 import { GameStages, GameAction, GameActionType } from '../../common/game-types'
 import storage from '../../common/storage'
+import TimeTracker from './TimeTracker'
 import './Game.css'
 
 const Game = () => {
@@ -59,7 +60,7 @@ const Game = () => {
         ))
       )}
       <aside>
-        <p>time lapsed: {Math.round((gameState.tShift - gameState.tZero) / 1000)}secs.</p>
+        <TimeTracker game={gameState} />
       </aside>
     </article>
   )

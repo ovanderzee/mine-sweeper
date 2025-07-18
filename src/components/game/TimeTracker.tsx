@@ -1,37 +1,46 @@
 import { useContext, useEffect, useState } from 'react'
 import PageContext from '../../store/page-context'
 import { ClockTypes } from '../../common/app-types'
+import { GameState, GameStages } from '../../common/game-types'
 import './TimeTracker.css'
 
 interface TimeTrackerProps {
-  zero: number;
+  game: GameState;
 }
 
 const TimeTracker = (props: TimeTrackerProps) => {
   const pageCtx = useContext(PageContext)
   const { config, text } = pageCtx
+  const { stage, tZero, tShift } = props.game
 
   const [now, setNow] = useState(Date.now())
+  const [intv, setIntv] = useState(0)
 
   useEffect(() => {
-    const interval = setInterval(() => setNow(Date.now()), 33)
-
-    return () => {
-      clearInterval(interval)
+    if (stage === GameStages.PLAYING) {
+      setIntv(window.setInterval(() => setNow(Date.now()), 33))
+    } else {
+      clearInterval(intv)
     }
-  }, [])
+  }, [stage])
 
   const timeFormat = () => {
-    let tFrame = now - props.zero
-    const ms = tFrame % 1000
+    let tLast = now
+    if (stage !== GameStages.PLAYING) {
+      tLast = tShift
+    }
 
-    tFrame = (tFrame - ms) / 1000
-    const sec = tFrame % 60
-
-    tFrame = (tFrame - sec) / 60
-    const min = tFrame % 60
-
-    return {min, sec}
+    if (stage === GameStages.NEW) {
+      return { min: 0, sec: 0 }
+    } else {
+      let tFrame = tLast - tZero
+      const ms = tFrame % 1000
+      tFrame = (tFrame - ms) / 1000
+      const sec = tFrame % 60
+      tFrame = (tFrame - sec) / 60
+      const min = tFrame % 60
+      return { min, sec }
+    }
   }
 
   const {min, sec} = timeFormat()
@@ -47,9 +56,10 @@ const TimeTracker = (props: TimeTrackerProps) => {
     </section>
   )
 
+// analog als svg (en wijzers vloeiend laten draainen )
+
   const digitalClock = (
-    <section className="time-tracker digital">
-      {text.game['playtime']}<br />
+    <section className="time-tracker digital" title={text.game['playtime']}>
       <span>{min.toString().padStart(2, "0")}</span>:<span>{sec.toString().padStart(2, "0")}</span>
     </section>
   )
