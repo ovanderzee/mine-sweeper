@@ -14,8 +14,11 @@ import { startPageTesting, clickGameButton, getButtonFromState, clickToLoose, cl
 import { newGameState, playingGameState, lostGameState, wonGameState } from './../../__mocks__/game-states'
 import { microConfig } from './../../__mocks__/configs'
 
-// click just one index function
-// click mine function
+// prevent trouble with setInterval
+const MockTimeTracker = () => <br />
+jest.mock("./TimeTracker", () => () => {
+  return <MockTimeTracker data-testid="time-tracker" />;
+});
 
 describe('The game cells', () => {
   beforeEach(() => {

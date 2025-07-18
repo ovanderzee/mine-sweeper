@@ -44,6 +44,7 @@ const TimeTracker = (props: TimeTrackerProps) => {
   }
 
   const {min, sec} = timeFormat()
+  const padded = (nr: number) => nr.toString().padStart(2, "0")
 
   const analogClock = (
     <section className="time-tracker analogue">
@@ -60,7 +61,7 @@ const TimeTracker = (props: TimeTrackerProps) => {
 
   const digitalClock = (
     <section className="time-tracker digital" title={text.game['playtime']}>
-      <span>{min.toString().padStart(2, "0")}</span>:<span>{sec.toString().padStart(2, "0")}</span>
+      <span id="minute">{padded(min)}</span>:<span id="second">{padded(sec)}</span>
     </section>
   )
 

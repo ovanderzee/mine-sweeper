@@ -74,7 +74,7 @@ export const lostGameState: GameState = {
     ]
   ],
   "tZero": 1745517111606,
-  "tShift": 1745517342474,
+  "tShift": 1745517342474, // 230868ms later
   "rank": 0,
   "score": 0,
   "mines": []
@@ -100,7 +100,7 @@ export const decidedGameState: GameState = {
     ]
   ],
   "tZero": 1745517111606,
-  "tShift": 1745517342474,
+  "tShift": 1745517342474, // 3m 50s
   "rank": 0,
   "score": 0,
   "mines": []
@@ -126,7 +126,7 @@ export const wonGameState: GameState = {
     ]
   ],
   "tZero": 1745518136299,
-  "tShift": 1745518137216,
+  "tShift": 1745518137216, // 917ms later
   "rank": 21,
   "score": 5944,
   "mines": []

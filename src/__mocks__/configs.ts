@@ -20,7 +20,7 @@ export const microConfig = {
   "FONT_SIZE":15,
   "PLAYER_NAME":"Midas",
   "MAX_SCORES":500,
-  "CLOCK_TYPE": ClockTypes.NONE
+  "CLOCK_TYPE": ClockTypes.DIGITAL
 }
 
 export const simpleEasyConfig = {
