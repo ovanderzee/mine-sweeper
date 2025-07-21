@@ -7,30 +7,19 @@
   --time-tracker-size: 3em;
   --fill-color: var(--dark-blue);
 
-  position: relative;
-  border: 1px solid var(--fill-color);
-  border-radius: 50%;
+  fill: none;
+  stroke: var(--fill-color);
+  stroke-width: 2;
   width: var(--time-tracker-size);
   height: var(--time-tracker-size);
 
-  #minute, #second {
-    position: absolute;
-    bottom: 50%;
-    transform-origin: center bottom;
-  }
-
-  #minute {
-    background: var(--fill-color);
-    left: calc(50% - 2px);
-    width: 4px;
-    height: calc(var(--time-tracker-size) / 3);
-  }
-
-  #second {
-    background: var(--fill-color);
-    left: calc(50% - 1px);
-    width: 2px;
-    height: calc(var(--time-tracker-size) / 2);
+  path {
+    fill: var(--fill-color);
+    stroke: var(--fill-color);
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    transform-origin: 50px 50px;
   }
 }
 
