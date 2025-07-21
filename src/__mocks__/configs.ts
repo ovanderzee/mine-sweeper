@@ -1,4 +1,4 @@
-import { Languages } from '../common/app-types'
+import { ClockTypes, Languages } from '../common/app-types'
 import DEFAULTS from '../common/defaults'
 
 //  BOARD_SIZE, GAME_LEVEL, MINE_COUNT as in DEFAULTS
@@ -7,7 +7,8 @@ export const defaultChallengeConfig = {
   "LANGUAGE": Languages.en,
   "FONT_SIZE":18,
   "PLAYER_NAME":"Hyacinth",
-  "MAX_SCORES":10
+  "MAX_SCORES":10,
+  "CLOCK_TYPE": ClockTypes.NONE
 }
 
 // fits various gamestates
@@ -18,7 +19,8 @@ export const microConfig = {
   "LANGUAGE":Languages.en,
   "FONT_SIZE":15,
   "PLAYER_NAME":"Midas",
-  "MAX_SCORES":500
+  "MAX_SCORES":500,
+  "CLOCK_TYPE": ClockTypes.DIGITAL
 }
 
 export const simpleEasyConfig = {
@@ -28,7 +30,8 @@ export const simpleEasyConfig = {
   "LANGUAGE": Languages.en,
   "FONT_SIZE":18,
   "PLAYER_NAME":"Hans",
-  "MAX_SCORES":500
+  "MAX_SCORES":500,
+  "CLOCK_TYPE": ClockTypes.NONE
 }
 
 export const simpleHardConfig = {
@@ -38,7 +41,8 @@ export const simpleHardConfig = {
   "LANGUAGE": Languages.en,
   "FONT_SIZE":12,
   "PLAYER_NAME":"Jonathan",
-  "MAX_SCORES":500
+  "MAX_SCORES":500,
+  "CLOCK_TYPE": ClockTypes.NONE
 }
 
 export const heavyConfig = {
@@ -48,5 +52,6 @@ export const heavyConfig = {
   "LANGUAGE":Languages.en,
   "FONT_SIZE":16,
   "PLAYER_NAME":"Floor",
-  "MAX_SCORES":500
+  "MAX_SCORES":500,
+  "CLOCK_TYPE": ClockTypes.NONE
 }

@@ -52,7 +52,7 @@ const HallOfFame = () => {
                 {index >= 10 && index + 1}
               </h2>
               <h4 className="user">{play.user}</h4>
-              <h4 className="date">{(new Date(play.begin)).toLocaleDateString()}</h4>
+              <h4 className="date">{(new Date(play.time)).toLocaleDateString()}</h4>
             </header>
             <footer>
               <div className="score">{play.score}</div>

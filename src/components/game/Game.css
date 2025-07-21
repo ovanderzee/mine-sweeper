@@ -11,3 +11,10 @@
   grid-column: var(--cell-col);
   grid-row: var(--cell-row);
 }
+
+#playground aside {
+  grid-row: calc(var(--board-size) + 1);
+  grid-column: 1 / span var(--board-size);
+  display: flex;
+  padding-block: 1ex;
+}

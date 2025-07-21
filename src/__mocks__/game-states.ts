@@ -21,8 +21,8 @@ export const newGameState: GameState = {
       { "stage": CellStateStage.HIDDEN, "fill": 9, "row": 2, "col": 2 }
     ]
   ],
-  "begin": 0,
-  "end": 0,
+  "tZero": 0,
+  "tShift": 0,
   "rank": 0,
   "score": 0,
   "mines": []
@@ -47,8 +47,8 @@ export const playingGameState: GameState = {
       { "stage": CellStateStage.HIDDEN, "fill": 9, "row": 2, "col": 2 }
     ]
   ],
-  "begin": 1745517111606,
-  "end": 0,
+  "tZero": 1745517111606,
+  "tShift": 1745517156730, // 45124ms later
   "rank": 0,
   "score": 0,
   "mines": []
@@ -73,8 +73,8 @@ export const lostGameState: GameState = {
       { "stage": CellStateStage.TESTED, "fill": 9, "row": 2, "col": 2 }
     ]
   ],
-  "begin": 1745517111606,
-  "end": 1745517111607,
+  "tZero": 1745517111606,
+  "tShift": 1745517342474, // 230868ms later
   "rank": 0,
   "score": 0,
   "mines": []
@@ -99,8 +99,8 @@ export const decidedGameState: GameState = {
       { "stage": CellStateStage.HIDDEN, "fill": 9, "row": 2, "col": 2, locked: true }
     ]
   ],
-  "begin": 1745517111606,
-  "end": 0,
+  "tZero": 1745517111606,
+  "tShift": 1745517342474, // 3m 50s
   "rank": 0,
   "score": 0,
   "mines": []
@@ -125,8 +125,8 @@ export const wonGameState: GameState = {
       { "stage": CellStateStage.RELEASED, "fill": 9, "row": 2, "col": 2 }
     ]
   ],
-  "begin": 1745518136299,
-  "end": 1745518137216,
+  "tZero": 1745518136299,
+  "tShift": 1745518137216, // 917ms later
   "rank": 21,
   "score": 5944,
   "mines": []

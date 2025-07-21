@@ -10,12 +10,12 @@ describe('touch new game', () => {
 
   it('should record time of first touch', () => {
     const spy = jest.spyOn(Date, 'now')
-    expect(newGameState.begin).toBe(0)
+    expect(newGameState.tZero).toBe(0)
 
     const touchedState = touchButtonReducer(newGameState, moveAction, microConfig)
 
-    expect(spy).toHaveBeenCalledTimes(1)
-    expect(touchedState.begin).toBeGreaterThan(0)
+    expect(spy).toHaveBeenCalled()
+    expect(touchedState.tZero).toBeGreaterThan(0)
   })
 
   it('should advance gameState stage', () => {

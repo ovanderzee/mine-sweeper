@@ -130,6 +130,13 @@ describe('The configure controls', () => {
     expect(storage.config.FONT_SIZE).toBe(RANGES.FONT.max)
   })
 
+  test("should change the clock setting", () => {
+    expect(storage.config.CLOCK_TYPE).toBe('')
+    const input = screen.getByLabelText('Digital clock')
+    fireEvent.click(input)
+    expect(storage.config.CLOCK_TYPE).toBe('digital')
+  })
+
   test("should change the name setting", () => {
     expect(storage.config.PLAYER_NAME).toBe('anonymous')
     const input = screen.getByLabelText('Name in scores')

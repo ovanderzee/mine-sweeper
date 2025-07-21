@@ -34,7 +34,7 @@ describe('Modal Dialog', () => {
 
   it('should put op a dialog element', () => {
     const modalDialog = screen.getByRole('dialog')
-    expect(modalDialog).toBeInTheDocument
+    expect(modalDialog).toBeInTheDocument()
   })
 
   describe('should cancel and close the dialog', () => {
