@@ -1,56 +1,48 @@
-import { touchButtonReducer  } from './reducers/touchButton'
-import { GameState, GameActionType, PayloadAction } from '../../common/game-types'
-import { scoringConfig } from '../../__mocks__/configs'
+import { iterateNeighbours } from './common'
+import { CellState, GameState } from '../../common/game-types'
 
-export const clickBlankRegions = (game: GameState) => {
+const unmarkCells = (all: CellState[]) => all.forEach(cell => delete cell.mark)
+
+export const clickBlankAreas = (game: GameState) => {
   let allCells
   let allThese
   let clicks = 0
 
+  const recurseBlankNeighbours = (x: number, y: number) => {
+    const neighbourCell = game.board[x][y]
+    if (neighbourCell.mark) return
+    neighbourCell.mark = 2 // 'visited'
+    if (neighbourCell.fill === 0)
+      iterateNeighbours(neighbourCell, game.board.length, recurseBlankNeighbours)
+  }
+
   do {
     allCells = game.board.flat()
-    allThese = allCells.filter(cell => !cell.fill && !cell.stage)
+    allThese = allCells.filter(cell => !cell.fill && !cell.mark)
 
     if (!allThese.length) break
 
     const blank = allThese[0]
+    blank.mark = 1 // 'clicked'
 
-    const payload = JSON.stringify({ cell: blank, entry: { stage: "clicked" } })
-    const action: PayloadAction = { payload, type: GameActionType.MOVE }
+    iterateNeighbours(blank, game.board.length, recurseBlankNeighbours)
     clicks++
-
-    game = touchButtonReducer(game, action, scoringConfig)
 
   } while (true)
 
-  return {clicks, game}
+  return clicks
 }
 
 export const clickRemainingPointers = (game: GameState) => {
-  let allCells
-  let allThese
-  let clicks = 0
-
-  do {
-    allCells = game.board.flat()
-    allThese = allCells.filter(cell => cell.fill < 9 && !cell.stage)
-
-    if (!allThese.length) break
-
-    const pointer = allThese[0]
-
-    const payload = JSON.stringify({ cell: pointer, entry: { stage: "clicked" } })
-    const action: PayloadAction = { payload, type: GameActionType.MOVE }
-    clicks++
-
-    game = touchButtonReducer(game, action, scoringConfig)
-  } while (true)
-
-  return {clicks, game}
+  const allCells = game.board.flat()
+  const allThese = allCells.filter(cell => cell.fill < 9 && !cell.mark)
+  unmarkCells(allCells)
+  return allThese.length
 }
 
 export const leastClicksToWin = (game: GameState) => {
-  const regionResult = clickBlankRegions(game)
-  const pointerResult = clickRemainingPointers(regionResult.game)
-  return regionResult.clicks + pointerResult.clicks
+  const regionResult = clickBlankAreas(game)
+  const pointerResult = clickRemainingPointers(game)
+//   unmarkCells(game.board.flat())
+  return regionResult + pointerResult
 }

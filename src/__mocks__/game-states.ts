@@ -133,6 +133,7 @@ export const wonGameState: GameState = {
 }
 
 // more complicated 7x7/7 boards
+// combine with scoringConfig
 
 export const blank18pct = {
   "stage": GameStages.NEW,
