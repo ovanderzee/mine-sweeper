@@ -16,6 +16,8 @@ const HallOfFame = () => {
   const text = pageCtx.text
 
   const rawScores = storage.scores
+  const latest = [...rawScores].sort((a:ScoreItem, b:ScoreItem) => b.time - a.time)[0]
+
   const [scores, setScores] = useState(rawScores)
 
   const eraseScores = () => {
@@ -29,7 +31,7 @@ const HallOfFame = () => {
         <li>
           <footer>
             <div className="score">{text.fame['score']}</div>
-            <div className="mines/cells">{text.fame['mines']} / {text.fame['cells']}</div>
+            <div className="mines-cells">{text.fame['mines']} / {text.fame['cells']}</div>
             <div className="moves">{text.fame['moves']}</div>
             <div className="duration">{text.fame['duration']}</div>
           </footer>
@@ -44,18 +46,24 @@ const HallOfFame = () => {
         )}
 
         {scores.map((play: ScoreItem, index: number) => (
-          <li className={index < 10 ? 'super' : ''} key={`${index + 1}_${play.score}`}>
+          <li
+            className={`${index < 10 ? 'super' : ''} ${play.time === latest.time ? 'latest' : ''}`}
+            key={`${index + 1}_${play.score}`}
+          >
             <header>
               <h2 className="rank">
                 {index < 10 && <ShieldByRank rank={index + 1} />}
                 {index >= 10 && index + 1}
               </h2>
               <h4 className="user">{play.user}</h4>
-              <h4 className="date">{(new Date(play.time)).toLocaleDateString()}</h4>
+              <h4 className="date">
+                {(new Date(play.time)).toLocaleDateString()}<br/>
+                {(new Date(play.time)).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+              </h4>
             </header>
             <footer>
               <div className="score">{play.score}</div>
-              <div className="mines/cells">{play.mines}&thinsp;/&thinsp;{play.cells}</div>
+              <div className="mines-cells">{play.mines}&thinsp;/&thinsp;{play.cells}</div>
               <div className="moves">{play.least}&#8239;&lt;&#8239;<b>{play.moves}</b>&#8239;&lt;&#8239;{play.most} </div>
               <div className="duration">{Math.round(play.duration / 1000)}s</div>
             </footer>

@@ -28,6 +28,23 @@ describe('The hall-of-fame page sidebar', () => {
   })
 })
 
+describe('The hall-of-fame-page scores', () => {
+  beforeEach(() => {
+    storage.scores = liveScores
+    startHonourPageTesting()
+  })
+
+  test('should show the best scores with a badge', () => {
+    const theBest = document.querySelectorAll('li svg')
+    expect(theBest.length).toBe(10)
+  })
+
+  test('should classify the most recent score with "latest"', () => {
+    const theLatest = document.querySelectorAll('li.latest')
+    expect(theLatest.length).toBe(1)
+  })
+})
+
 describe('The hall-of-fame-page clear list button', () => {
   beforeEach(() => {
     storage.scores = liveScores
@@ -61,12 +78,4 @@ describe('The hall-of-fame-page clear list button', () => {
 
     expect(storage.scores.length).toBe(liveScores.length)
   })
-})
-
-test('Hall of Fame should show the best scores with a badge', () => {
-  storage.scores = liveScores
-  startHonourPageTesting()
-
-  const theBest = document.querySelectorAll('li svg')
-  expect(theBest.length).toBe(10)
 })
