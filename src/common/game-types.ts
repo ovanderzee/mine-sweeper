@@ -69,5 +69,7 @@ export interface ScoreItem {
   cells: number,
   mines: number,
   moves: number,
+  least: number,
+  most: number,
   score: number,
 }

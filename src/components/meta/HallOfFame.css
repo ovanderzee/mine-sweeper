@@ -12,6 +12,9 @@ li footer {
   display: flex;
   align-items: baseline;
 }
+li footer {
+  justify-content: space-between;
+}
 
 li.super header {
   align-items: center;
@@ -58,9 +61,9 @@ li footer .score::before {
 li footer .score::after {
   content: ')';
 }
-li footer .cells,
-li footer .mines,
+li footer .mines/cells,
+
 li footer .moves,
 li footer .duration {
-  flex: 1 0 20%;
+  flex: 1 1 auto;
 }

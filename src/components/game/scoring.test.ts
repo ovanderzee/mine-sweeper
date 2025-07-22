@@ -1,4 +1,8 @@
-import { clickBlankAreas, clickRemainingPointers, leastClicksToWin } from './scoring'
+import {
+  clickBlankAreas, clickRemainingPointers,
+  leastClicksToWin, mostClicksToWin,
+  unmarkCells
+} from './scoring'
 import { blank18pct, blank26pct, blank31pct, blank41pct } from './../../__mocks__/game-states'
 
 describe('some blanks need to be clicked and then all the pointercells have to be clicked', () => {
@@ -8,6 +12,8 @@ describe('some blanks need to be clicked and then all the pointercells have to b
 
     const pointers = clickRemainingPointers(blank18pct)
     expect(pointers).toBe(20)
+
+    unmarkCells(blank18pct)
   })
 
   test('sample game blank26pct has 2 blank areas and 7 pointers to click', () => {
@@ -16,6 +22,8 @@ describe('some blanks need to be clicked and then all the pointercells have to b
 
     const pointers = clickRemainingPointers(blank26pct)
     expect(pointers).toBe(7)
+
+    unmarkCells(blank26pct)
   })
 
   test('sample game blank31pct has 4 blank areas and 3 pointers to click', () => {
@@ -24,6 +32,8 @@ describe('some blanks need to be clicked and then all the pointercells have to b
 
     const pointers = clickRemainingPointers(blank31pct)
     expect(pointers).toBe(3)
+
+    unmarkCells(blank31pct)
   })
 
   test('sample game blank41pct has 2 blank areas and 3 pointers to click', () => {
@@ -32,27 +42,41 @@ describe('some blanks need to be clicked and then all the pointercells have to b
 
     const pointers = clickRemainingPointers(blank41pct)
     expect(pointers).toBe(3)
+
+    unmarkCells(blank41pct)
   })
 })
 
 describe('establish Bechtel\'s Board Benchmark Value', () => {
   test('sample game blank18pct stats', () => {
-    const bbbv = leastClicksToWin(blank18pct)
-    expect(bbbv).toBe(22)
+    const min3bv = leastClicksToWin(blank18pct)
+    expect(min3bv).toBe(22)
+
+    const max3bv = mostClicksToWin(blank18pct)
+    expect(max3bv).toBe(35)
   })
 
   test('sample game blank26pct stats', () => {
-    const bbbv = leastClicksToWin(blank26pct)
-    expect(bbbv).toBe(9)
+    const min3bv = leastClicksToWin(blank26pct)
+    expect(min3bv).toBe(9)
+
+    const max3bv = mostClicksToWin(blank26pct)
+    expect(max3bv).toBe(31)
   })
 
   test('sample game blank31pct stats', () => {
-    const bbbv = leastClicksToWin(blank31pct)
-    expect(bbbv).toBe(7)
+    const min3bv = leastClicksToWin(blank31pct)
+    expect(min3bv).toBe(7)
+
+    const max3bv = mostClicksToWin(blank31pct)
+    expect(max3bv).toBe(31)
   })
 
   test('sample game blank41pct stats', () => {
-    const bbbv = leastClicksToWin(blank41pct)
-    expect(bbbv).toBe(5)
+    const min3bv = leastClicksToWin(blank41pct)
+    expect(min3bv).toBe(5)
+
+    const max3bv = mostClicksToWin(blank41pct)
+    expect(max3bv).toBe(24)
   })
 })

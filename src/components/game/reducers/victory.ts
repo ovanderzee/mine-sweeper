@@ -2,9 +2,10 @@ import { MIN_DURATION } from '../../../common/constants'
 import { AppConfig } from '../../../common/app-types'
 import storage from '../../../common/storage'
 import { GameState, CellStateStage, ScoreItem } from '../../../common/game-types'
+import { leastClicksToWin, mostClicksToWin } from '../scoring'
 
 export const victoryReducer = (state: GameState, config: AppConfig): GameState => {
-  const { BOARD_SIZE, GAME_LEVEL, MINE_COUNT, PLAYER_NAME, MAX_SCORES } = config
+  const { BOARD_SIZE, MINE_COUNT, PLAYER_NAME, MAX_SCORES } = config
 
   const duration = Math.max(state.tShift - state.tZero, MIN_DURATION)
 
@@ -13,13 +14,14 @@ export const victoryReducer = (state: GameState, config: AppConfig): GameState =
     .filter(cell => cell.stage === CellStateStage.TESTED)
     .length
 
-  const score = Math.round(
-    Math.pow(BOARD_SIZE, 2)
-    * GAME_LEVEL
-    * 10000
-    / moves
-    / Math.pow(duration, 0.5)
-  )
+  const leastMoves = leastClicksToWin(state)
+  const mostMoves = mostClicksToWin(state)
+
+  const clickEfficiency = (mostMoves - moves) / (mostMoves - leastMoves)
+
+  const clickSpeed = moves / (duration / 1000)
+
+  const score = Math.round(clickEfficiency * clickSpeed * 1000)
 
   const victory: ScoreItem = {
     time: state.tShift,
@@ -28,6 +30,8 @@ export const victoryReducer = (state: GameState, config: AppConfig): GameState =
     cells: Math.pow(BOARD_SIZE, 2),
     mines: MINE_COUNT,
     moves: moves,
+    least: leastMoves,
+    most: mostMoves,
     score: score,
   }
 

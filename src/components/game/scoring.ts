@@ -1,7 +1,9 @@
 import { iterateNeighbours } from './common'
-import { CellState, GameState } from '../../common/game-types'
+import { GameState } from '../../common/game-types'
 
-const unmarkCells = (all: CellState[]) => all.forEach(cell => delete cell.mark)
+export const unmarkCells = (game: GameState) => {
+  game.board.forEach(r => {r.forEach(c => delete c.mark)})
+}
 
 export const clickBlankAreas = (game: GameState) => {
   let allCells
@@ -35,14 +37,21 @@ export const clickBlankAreas = (game: GameState) => {
 
 export const clickRemainingPointers = (game: GameState) => {
   const allCells = game.board.flat()
-  const allThese = allCells.filter(cell => cell.fill < 9 && !cell.mark)
-  unmarkCells(allCells)
+  const allThese = allCells.filter(cell => cell.fill > 0 && cell.fill < 9 && !cell.mark)
+  allThese.forEach(cell => cell.mark = 1)
   return allThese.length
 }
 
 export const leastClicksToWin = (game: GameState) => {
-  const regionResult = clickBlankAreas(game)
-  const pointerResult = clickRemainingPointers(game)
-//   unmarkCells(game.board.flat())
-  return regionResult + pointerResult
+  const areas = clickBlankAreas(game)
+  const pointers = clickRemainingPointers(game)
+  unmarkCells(game)
+  return areas + pointers
+}
+
+export const mostClicksToWin = (game: GameState) => {
+  const pointers = clickRemainingPointers(game)
+  const areas = clickBlankAreas(game)
+  unmarkCells(game)
+  return areas + pointers
 }

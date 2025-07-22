@@ -29,8 +29,7 @@ const HallOfFame = () => {
         <li>
           <footer>
             <div className="score">{text.fame['score']}</div>
-            <div className="cells">{text.fame['cells']}</div>
-            <div className="mines">{text.fame['mines']}</div>
+            <div className="mines/cells">{text.fame['mines']} / {text.fame['cells']}</div>
             <div className="moves">{text.fame['moves']}</div>
             <div className="duration">{text.fame['duration']}</div>
           </footer>
@@ -56,9 +55,8 @@ const HallOfFame = () => {
             </header>
             <footer>
               <div className="score">{play.score}</div>
-              <div className="cells">{play.cells}</div>
-              <div className="mines">{play.mines}</div>
-              <div className="moves">{play.moves}</div>
+              <div className="mines/cells">{play.mines}&thinsp;/&thinsp;{play.cells}</div>
+              <div className="moves">{play.least}&#8239;&lt;&#8239;<b>{play.moves}</b>&#8239;&lt;&#8239;{play.most} </div>
               <div className="duration">{Math.round(play.duration / 1000)}s</div>
             </footer>
           </li>
@@ -66,6 +64,11 @@ const HallOfFame = () => {
       </ol>
     </article>
   )
+
+/*
+&#8239; narrow non-breaking space
+&thinsp; half space
+*/
 
   const fameNavigation = (
     <nav>
