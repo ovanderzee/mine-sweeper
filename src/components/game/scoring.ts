@@ -1,5 +1,5 @@
 import { iterateNeighbours } from './common'
-import { GameState } from '../../common/game-types'
+import { GameState, CellState } from '../../common/game-types'
 
 export const unmarkCells = (game: GameState) => {
   game.board.forEach(r => {r.forEach(c => delete c.mark)})
@@ -54,4 +54,20 @@ export const mostClicksToWin = (game: GameState) => {
   const areas = clickBlankAreas(game)
   unmarkCells(game)
   return areas + pointers
+}
+
+export const makeBoardCode = (board: CellState[][]): string => {
+  const fill18 = board.map(row => row.map(cell => Number(cell.fill).toString(18)))
+  const pairs = fill18.map(row => parseInt(row.join(''), 18).toString(36))
+  return pairs.join('-')
+}
+
+export const sequenceFillData = (boardCode: string): number[][] => {
+  var flood18 = boardCode
+    .split('-')
+    .map(row => parseInt(row,36).toString(18).padStart(10, "0"))
+  var values = flood18
+    .map(row => row.split(''))
+    .map(row => row.map(i18 => parseInt(i18, 18)))
+  return values
 }
