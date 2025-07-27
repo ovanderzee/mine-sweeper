@@ -34,7 +34,8 @@ Object.defineProperties(RANGES, {
 
 export { RANGES }
 
-/* RANGES */
+
+/* ADMIN */
 
 export const getAppVersion = () => {
   // vite exposes env vars via import.meta.env.

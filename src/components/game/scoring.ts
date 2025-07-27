@@ -1,3 +1,4 @@
+import LzString from 'lz-string'
 import { iterateNeighbours } from './common'
 import { GameState, CellState } from '../../common/game-types'
 
@@ -57,17 +58,51 @@ export const mostClicksToWin = (game: GameState) => {
 }
 
 export const makeBoardCode = (board: CellState[][]): string => {
-  const fill18 = board.map(row => row.map(cell => Number(cell.fill).toString(18)))
-  const pairs = fill18.map(row => parseInt(row.join(''), 18).toString(36))
-  return pairs.join('-')
+  const allCells = board.flat()
+
+  // seven positions to check the integrity
+  const mines = allCells.filter(cell => cell.fill > 8)
+  const minePad = String(mines.length).padStart(3,'0')
+  const size = Math.pow(allCells.length, 0.5)
+  const sizePad = String(size).padStart(2,'0')
+
+  // eightteen-digit value for one position fill
+  const fill18 = allCells
+    .map(cell => Number(cell.fill).toString(18))
+    .join('');
+  const fillLz = LzString.compressToEncodedURIComponent(fill18)
+
+  return `${sizePad}${sizePad}${minePad}${fillLz}`
 }
 
 export const sequenceFillData = (boardCode: string): number[][] => {
-  var flood18 = boardCode
-    .split('-')
-    .map(row => parseInt(row,36).toString(18).padStart(10, "0"))
-  var values = flood18
-    .map(row => row.split(''))
-    .map(row => row.map(i18 => parseInt(i18, 18)))
-  return values
+  const checkData = boardCode.substring(0, 7)
+  const checkSize = Number(checkData.substring(0, 2))
+  const checkCount = Number(checkData.substring(4))
+  const content = LzString.decompressFromEncodedURIComponent(boardCode.substring(7))
+
+  // check expected size
+  const size = Math.pow(content.length, 0.5)
+  if (checkSize !== size) return [[]]
+
+  // check expected mine count
+  const flatContent = content.split('').map(fill => parseInt(fill, 18))
+  const count = flatContent.filter(fill => fill > 8).length
+  if (checkCount !== count) return [[]]
+
+  const content2d = []
+  for (let r = 0; r < flatContent.length; r = r + size) {
+    const sequence = flatContent.slice(r, r + size)
+    content2d.push(sequence)
+  }
+
+  const length = content2d.length
+  if (
+    content2d[0].length !== length ||
+    content2d[length - 1].length !== length
+  ) {
+    return [[]]
+  }
+
+  return content2d
 }
