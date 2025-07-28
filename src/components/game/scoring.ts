@@ -60,11 +60,12 @@ export const mostClicksToWin = (game: GameState) => {
 export const makeBoardCode = (board: CellState[][]): string => {
   const allCells = board.flat()
 
-  // seven positions to check the integrity
+  // four positions to check the integrity
   const mines = allCells.filter(cell => cell.fill > 8)
-  const minePad = String(mines.length).padStart(3,'0')
-  const size = Math.pow(allCells.length, 0.5)
-  const sizePad = String(size).padStart(2,'0')
+  const mines18 = mines.length.toString(18).padStart(2,'0')
+  const size18 = Math.pow(allCells.length, 0.5).toString(18)
+
+  console.log('size', size18, 'count', mines18 )
 
   // eightteen-digit value for one position fill
   const fill18 = allCells
@@ -72,23 +73,29 @@ export const makeBoardCode = (board: CellState[][]): string => {
     .join('');
   const fillLz = LzString.compressToEncodedURIComponent(fill18)
 
-  return `${sizePad}${sizePad}${minePad}${fillLz}`
+  return `${size18}${size18}${mines18}${fillLz}`
 }
 
 export const sequenceFillData = (boardCode: string): number[][] => {
-  const checkData = boardCode.substring(0, 7)
-  const checkSize = Number(checkData.substring(0, 2))
-  const checkCount = Number(checkData.substring(4))
-  const content = LzString.decompressFromEncodedURIComponent(boardCode.substring(7))
+  const checkData = boardCode.substring(0, 4)
+  const checkSize = parseInt(checkData.charAt(0), 18)
+  const checkCount = parseInt(checkData.substring(2,4), 18)
+  const content = LzString.decompressFromEncodedURIComponent(boardCode.substring(4))
 
   // check expected size
   const size = Math.pow(content.length, 0.5)
-  if (checkSize !== size) return [[]]
+  if (checkSize !== size) {
+    console.error('Wrong board size, check for', checkSize, 'found', size)
+    return [[]]
+  }
 
   // check expected mine count
   const flatContent = content.split('').map(fill => parseInt(fill, 18))
   const count = flatContent.filter(fill => fill > 8).length
-  if (checkCount !== count) return [[]]
+  if (checkCount !== count) {
+    console.error('Wrong mine count, check for', checkCount, 'found', count)
+    return [[]]
+  }
 
   const content2d = []
   for (let r = 0; r < flatContent.length; r = r + size) {
@@ -101,6 +108,7 @@ export const sequenceFillData = (boardCode: string): number[][] => {
     content2d[0].length !== length ||
     content2d[length - 1].length !== length
   ) {
+    console.error('Row with wrong length')
     return [[]]
   }
 
