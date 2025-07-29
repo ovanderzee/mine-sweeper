@@ -1,54 +1,55 @@
 import { MIN_DURATION } from '../../../common/constants'
 import { AppConfig } from '../../../common/app-types'
 import storage from '../../../common/storage'
-import { GameState, CellStateStage, ScoreItem } from '../../../common/game-types'
-import { leastClicksToWin, mostClicksToWin } from '../scoring'
+import { GameState,
+  GameScore, PlayScore, ScoreItem } from '../../../common/game-types'
+import { precise, leastClicksToWin, mostClicksToWin, makeBoardCode, getMoves, calculateScore } from '../scoring'
 
 export const victoryReducer = (state: GameState, config: AppConfig): GameState => {
   const { BOARD_SIZE, MINE_COUNT, PLAYER_NAME, MAX_SCORES } = config
 
-  const duration = Math.max(state.tShift - state.tZero, MIN_DURATION)
-
-  const moves = state.board
-    .flat()
-    .filter(cell => cell.stage === CellStateStage.TESTED)
-    .length
-
-  const leastMoves = leastClicksToWin(state)
-  const mostMoves = mostClicksToWin(state)
-
-  const clickEfficiency = (mostMoves - moves) / (mostMoves - leastMoves)
-
-  const clickSpeed = moves / (duration / 1000)
-
-  const score = Math.round(clickEfficiency * clickSpeed * 1000)
-
-  const victory: ScoreItem = {
-    time: state.tShift,
-    duration: duration,
+  const victoryVars = {
+    code: makeBoardCode(state.board),
+    date: state.tShift,
     user: PLAYER_NAME,
+  }
+
+  const gameVars: GameScore = {
     cells: Math.pow(BOARD_SIZE, 2),
     mines: MINE_COUNT,
-    moves: moves,
-    least: leastMoves,
-    most: mostMoves,
-    score: score,
+    effort: {
+      least: leastClicksToWin(state),
+      most: mostClicksToWin(state)
+    }
+  }
+
+  // time in seconds
+  const playVars: PlayScore = {
+    moves: getMoves(state),
+    duration: precise(Math.max(state.tShift - state.tZero, MIN_DURATION) / 1000, 5)
+  }
+
+  const victory: ScoreItem = {
+    ...victoryVars,
+    game: gameVars,
+    play: playVars,
+    score: calculateScore(gameVars, playVars),
   }
 
   // add, beware of strict mode
   const { scores } = storage
-  const isNotThere = !scores.find(scoreItem => scoreItem.time === victory.time)
+  const isNotThere = !scores.find(scoreItem => scoreItem.date === victory.date)
   if (isNotThere) scores.push(victory)
 
   // rearrange
-  scores.sort((a, b) => b.score - a.score)
+  scores.sort((a, b) => b.score.points - a.score.points)
   storage.scores = scores.slice(0, MAX_SCORES)
 
-  const rank = 1 + scores.findIndex(score => score.time === victory.time)
+  const rank = 1 + scores.findIndex(score => score.date === victory.date)
 
   return {
     ...state,
-    score: score,
+    score: victory.score.points,
     rank: rank
   }
 }

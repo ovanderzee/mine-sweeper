@@ -1,6 +1,9 @@
 import LzString from 'lz-string'
 import { iterateNeighbours } from './common'
-import { GameState, CellState } from '../../common/game-types'
+import { GameState, CellState, CellStateStage,
+  GameScore, PlayScore, ScoreCalc } from '../../common/game-types'
+
+export const precise = (figure: number, precision: number) => Number(figure.toPrecision(precision))
 
 export const unmarkCells = (game: GameState) => {
   game.board.forEach(r => {r.forEach(c => delete c.mark)})
@@ -65,8 +68,6 @@ export const makeBoardCode = (board: CellState[][]): string => {
   const mines18 = mines.length.toString(18).padStart(2,'0')
   const size18 = Math.pow(allCells.length, 0.5).toString(18)
 
-  console.log('size', size18, 'count', mines18 )
-
   // eightteen-digit value for one position fill
   const fill18 = allCells
     .map(cell => Number(cell.fill).toString(18))
@@ -114,3 +115,16 @@ export const sequenceFillData = (boardCode: string): number[][] => {
 
   return content2d
 }
+
+export const calculateScore = (game: GameScore, play: PlayScore): ScoreCalc => {
+  const efficiency = precise(game.effort.least / play.moves, 4)
+  const speed = precise(play.moves / play.duration, 4)
+  const points = Math.round(efficiency * speed * 1000)
+  return {efficiency, speed, points}
+}
+
+export const getMoves = (state: GameState): number =>
+  state.board
+    .flat()
+    .filter(cell => cell.stage === CellStateStage.TESTED)
+    .length

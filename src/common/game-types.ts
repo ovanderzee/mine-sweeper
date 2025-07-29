@@ -62,14 +62,31 @@ export interface GameState {
   score: number;
 }
 
-export interface ScoreItem {
-  time: number,
-  duration: number,
-  user: string,
+export interface GameScore {
   cells: number,
   mines: number,
+  effort: {
+    least: number,
+    most: number,
+  }
+}
+
+export interface PlayScore {
   moves: number,
-  least: number,
-  most: number,
-  score: number,
+  duration: number,
+}
+
+export interface ScoreCalc {
+  efficiency: number,
+  speed: number,
+  points: number
+}
+
+export interface ScoreItem {
+  code: string,
+  date: number,
+  user: string,
+  game: GameScore,
+  play: PlayScore,
+  score: ScoreCalc,
 }
