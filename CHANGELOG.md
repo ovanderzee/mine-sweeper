@@ -1,6 +1,5 @@
 
 ### Roadmap
-- No scrollbars when mines explode
 - Make navbar sticky in landscape screen
 - Make header of hiscores sticky
 - Playmode: Play without flags

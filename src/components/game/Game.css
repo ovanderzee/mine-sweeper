@@ -1,3 +1,8 @@
+
+.game-lost {
+  overflow: hidden;
+}
+
 #playground {
   display: grid;
   justify-content: center;
