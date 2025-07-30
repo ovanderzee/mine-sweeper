@@ -59,7 +59,7 @@
   },
   "settings": {
     "On begin Play": "De Uitdaging...",
-    "Will destroy current game": "Aanpassing zal het huidige spel afsluiten",
+    "Will destroy current game": "Bij aanpassing verandert het spel mee",
     "Size Gameboard": "Afmeting speelbord",
     "%n cells": "%n velden",
     "Gamelevel": "Speelnivo",

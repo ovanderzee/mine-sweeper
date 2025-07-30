@@ -23,6 +23,20 @@ legend + h5 {
   text-align: left;
 }
 
+.warning {
+  color: var(--state-red);
+}
+
+.warning::before {
+  content: ' ';
+  display: inline-block;
+  background: currentcolor;
+  width: 1ex;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  margin-inline-end: 1ex;
+}
+
 .field {
   margin: var(--item-spacing) 0;
 }
