@@ -145,6 +145,8 @@ nav,
 button {
   font-family: inherit;
   cursor: pointer;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
 svg[aria-hidden] {
