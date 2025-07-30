@@ -22,6 +22,11 @@ svg {
   color: white;
 }
 
+*:has(> svg use[href^="#plain-"]) {
+  color: currentcolor;
+}
+
+#plain-play,
 #nav-play {
   path {
     fill: currentcolor;
@@ -29,6 +34,8 @@ svg {
   }
 }
 
+#plain-replay,
+#plain-reset,
 #nav-replay,
 #nav-reset {
   path {
@@ -40,39 +47,43 @@ svg {
   }
 }
 
+#plain-question,
 #nav-question {
   path {
     /* font: normal 69px 'PT Sans Caption' */
-    fill: white;
+    fill: currentcolor;
     stroke: none;
   }
 }
 
+#plain-sliders,
 #nav-sliders {
   path {
     fill: none;
-    stroke: white;
+    stroke: currentcolor;
     stroke-width: 3;
   }
   circle {
-    fill: white;
+    fill: currentcolor;
     stroke: none;
   }
 }
 
+#plain-return,
 #nav-return {
   #pijlpunt {
-    fill: white;
+    fill: currentcolor;
     stroke: none;
   }
   #haak {
     fill: none;
-    stroke: white;
+    stroke: currentcolor;
     stroke-width: 6;
     stroke-linecap: butt;
   }
 }
 
+#plain-empty,
 #nav-empty {
   circle {
     fill: none;
@@ -85,21 +96,23 @@ svg {
   }
 }
 
+#plain-podium path,
 #nav-podium path {
-  fill: white;
+  fill: currentcolor;
   stroke: none;
 }
 
+#plain-eye,
 #nav-eye {
   path {
     fill: none;
-    stroke: white;
+    stroke: currentcolor;
     stroke-width: 3;
     stroke-linejoin:round;
   }
   circle {
     fill: none;
-    stroke: white;
+    stroke: currentcolor;
     stroke-width: 7.5;
   }
 }

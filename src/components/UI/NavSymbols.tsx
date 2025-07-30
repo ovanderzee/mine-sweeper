@@ -1,39 +1,28 @@
 import './NavSymbols.css'
 
-const NavSymbols = () => {
-  return (
-<svg
-  aria-hidden="true"
-  xmlns="http://www.w3.org/2000/svg"
->
-  <defs id="nav_common">
-    <filter id="shadow" x="-2" y="-2" width="330%" height="330%">
-      <feDropShadow dx="-2" dy="-3" stdDeviation="0" floodColor="black" result="topLeft" in="SourceAlpha" />
-      <feDropShadow dx="2" dy="1" stdDeviation="0" floodColor="var(--light-blue)" result="bottomRight" in="SourceAlpha" />
-      <feMerge>
-        <feMergeNode in="bottomRight"/>
-        <feMergeNode in="topLeft"/>
-        <feMergeNode in="SourceGraphic"/>
-      </feMerge>
-    </filter>
-  </defs>
-  <symbol id="nav-play" viewBox="-50 -50 150 150"><g filter="url(#shadow)">
+interface SymbolDiff {
+  prefix: string,
+  viewbox: string
+}
+
+const SymbolCollection = (p: SymbolDiff) => (<>
+  <symbol id={`${p.prefix}-play`} viewBox={p.viewbox}><g filter={`url(#${p.prefix}-shadow)`}>
     <path id="punt"
        d="m 50,25 v 0 m 0,0 L 0,0 V 50 L 50,25 m 0,0 v 0" />
   </g></symbol>
-  <symbol id="nav-reset" viewBox="-50 -50 150 150"><g filter="url(#shadow)">
+  <symbol id={`${p.prefix}-reset`} viewBox={p.viewbox}><g filter={`url(#${p.prefix}-shadow)`}>
     <path id="herstel"
        d="M 34.374731,21.10675 V 8.761869 H 46.720027 M 15.646972,8.798829 C 9.848617,12.136031 6.267664,18.309893 6.25,25 6.25,35.355339 14.64466,43.75 25,43.75 35.355339,43.75 43.75,35.355339 43.75,25 43.7477,18.302301 40.172981,12.114404 34.372,8.766602" />
   </g></symbol>
-  <symbol id="nav-replay" viewBox="-50 -50 150 150"><g filter="url(#shadow)">
+  <symbol id={`${p.prefix}-replay`} viewBox={p.viewbox}><g filter={`url(#${p.prefix}-shadow)`}>
     <path id="herstart"
        d="M 15.625269,21.10675 V 8.761869 H 3.279973 m 31.073055,0.03696 C 40.151383,12.136031 43.732336,18.309893 43.75,25 43.75,35.355339 35.35534,43.75 25,43.75 14.644661,43.75 6.25,35.355339 6.25,25 6.2523,18.302301 9.827019,12.114404 15.628,8.766602" />
   </g></symbol>
-  <symbol id="nav-question" viewBox="-50 -50 150 150"><g filter="url(#shadow)">
+  <symbol id={`${p.prefix}-question`} viewBox={p.viewbox}><g filter={`url(#${p.prefix}-shadow)`}>
     <path id="pt-sans-caption-normal-69"
        d="m 19.583499,36.488502 q -0.276,-3.45 0.483,-5.934 0.828,-2.484 2.208,-4.416 1.38,-1.932 3.036,-3.45 1.725,-1.518 3.174,-3.036 1.518,-1.518 2.484,-3.243 1.035,-1.725 1.035,-4.002 0,-3.036 -1.863,-4.968 -1.794,-1.932 -6.348,-1.932 -2.76,0 -5.658,1.035 -2.829,1.035 -4.83,2.208 l -2.208,-4.968 q 2.898,-1.794 6.141,-2.76 3.243,-1.035 8.004,-1.035 3.381,0 5.934,0.897 2.553,0.897 4.278,2.484 1.725,1.518 2.553,3.657 0.897,2.07 0.897,4.485 0,3.243 -1.035,5.589 -1.035,2.277 -2.553,4.071 -1.518,1.794 -3.312,3.312 -1.794,1.518 -3.312,3.243 -1.518,1.656 -2.553,3.726 -1.035,2.07 -1.035,5.037 z m -1.518,9.177 q 0,-2.001 1.242,-3.174 1.311,-1.173 3.381,-1.173 2.07,0 3.312,1.173 1.311,1.173 1.311,3.174 0,1.863 -1.311,3.105 -1.242,1.242 -3.312,1.242 -2.07,0 -3.381,-1.242 -1.242,-1.242 -1.242,-3.105 z" />
   </g></symbol>
-  <symbol id="nav-sliders" viewBox="-50 -50 150 150"><g filter="url(#shadow)">
+  <symbol id={`${p.prefix}-sliders`} viewBox={p.viewbox}><g filter={`url(#${p.prefix}-shadow)`}>
     <path id="pad1" d="M 6,6 H 50" />
     <path id="pad2" d="M 0,24 H 44" />
     <path id="pad3" d="M 0,42 H 50" />
@@ -41,18 +30,18 @@ const NavSymbols = () => {
     <circle id="knop2" cx="44" cy="24" r="6" />
     <circle id="knop3" cx="18.333" cy="42" r="6" />
   </g></symbol>
-  <symbol id="nav-return" viewBox="-50 -50 150 150"><g filter="url(#shadow)">
+  <symbol id={`${p.prefix}-return`} viewBox={p.viewbox}><g filter={`url(#${p.prefix}-shadow)`}>
     <path id="pijlpunt"
        d="M 20,15 0,25 v 0 0 l 20,10 z" />
     <path id="haak"
        d="m 47,0 v 19 c 0,3.324 -2.676,6 -6,6 H 15" />
   </g></symbol>
-  <symbol id="nav-empty" viewBox="-50 -50 150 150"><g filter="url(#shadow)">
+  <symbol id={`${p.prefix}-empty`} viewBox={p.viewbox}><g filter={`url(#${p.prefix}-shadow)`}>
     <circle id="verzameling" cx="25" cy="25" r="18.75" />
     <path id="doorhaal"
        d="M 37.701172,0 8.8339844,50 H 12.298828 L 41.166016,0 Z" />
   </g></symbol>
-  <symbol id="nav-podium" viewBox="-50 -50 150 150"><g filter="url(#shadow)">
+  <symbol id={`${p.prefix}-podium`} viewBox={p.viewbox}><g filter={`url(#${p.prefix}-shadow)`}>
     <path id="een"
        d="m 23.902999,23.478 v 0 V 8.073 L 23.914809,6.831931 22.616,7.722 19.145,10.101 17,7.176 25.892,0 h 2.847 v 23.478 0 4.29 h -4.836 z" />
     <path id="twee"
@@ -60,14 +49,45 @@ const NavSymbols = () => {
     <path id="drie"
        d="m 39.977,45.709957 c 1.612,0 2.834,-0.429 3.666,-1.287 0.858,-0.858 1.287,-1.898 1.287,-3.12 0,-1.482 -0.442,-2.574 -1.326,-3.276 -0.884,-0.701999 -2.275,-1.052999 -4.173,-1.052999 h -2.808 v -2.691001 l 4.719,-6.435 1.142756,-1.402267 -2.000756,-0.0017 h -6.552 v -4.29 H 48.83 v 2.769 l -5.499,7.371 -0.76803,1.008909 0.69003,0.0051 c 0.91,0.078 1.768,0.286 2.574,0.624001 0.832,0.338 1.547,0.832 2.145,1.481999 0.624,0.624001 1.118,1.404001 1.482,2.34 0.364,0.936 0.546,2.015 0.546,3.237 0,1.534 -0.26,2.86 -0.78,3.978 -0.494,1.118001 -1.196,2.054001 -2.106,2.808 -0.884,0.754 -1.924,1.313 -3.12,1.677 C 42.798,49.818 41.511,50 40.133,50 38.989,50 37.806,49.896 36.584,49.688 35.362,49.48 34.374,49.181 33.62,48.791 l 1.365,-4.212001 c 0.676,0.338001 1.417,0.611 2.223,0.819001 0.832,0.208 1.755,0.311999 2.769,0.311999 z" />
   </g></symbol>
-  <symbol id="nav-eye" viewBox="-40 -40 130 130"><g filter="url(#shadow)">
+  <symbol id={`${p.prefix}-eye`} viewBox="-40 -40 130 130"><g filter={`url(#${p.prefix}-shadow)`}>
     <path id="oogleden"
        d="M 25.000567,37.749995 C 33.735796,37.728334 41.989479,33.021904 47.434457,24.957703 41.975268,16.925195 33.723728,12.251097 25.000567,12.250001 16.265337,12.271662 8.0116549,16.978092 2.5666774,24.999998 8.0116549,33.021904 16.265337,37.728334 25.000567,37.749995 Z"
    />
     <circle id="iris" cx="25" cy="25" r="7.5" />
   </g></symbol>
-</svg>
-  )
-}
+</>)
 
-export default NavSymbols
+export const NavSymbols = () => (
+  <svg
+    aria-hidden="true"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <defs id="nav_common">
+      <filter id="nav-shadow" x="-1.5" y="-1.5" width="330%" height="330%">
+        <feDropShadow dx="-2" dy="-3" stdDeviation="0" floodColor="black" result="topLeft" in="SourceAlpha" />
+        <feDropShadow dx="2" dy="1" stdDeviation="0" floodColor="var(--light-blue)" result="bottomRight" in="SourceAlpha" />
+        <feMerge>
+          <feMergeNode in="bottomRight"/>
+          <feMergeNode in="topLeft"/>
+          <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+      </filter>
+    </defs>
+    <SymbolCollection prefix="nav" viewbox="-50 -50 150 150" />
+  </svg>
+)
+
+export const PlainSymbols = () => (
+  <svg
+    aria-hidden="true"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <defs id="plain_common">
+      <filter id="plain-shadow" x="-1.5" y="-1.5" width="330%" height="330%">
+        <feDropShadow dx="0" dy="0" stdDeviation="0" floodColor="transparent" in="SourceGraphic" />
+      </filter>
+    </defs>
+    <SymbolCollection prefix="plain" viewbox="0 0 50 50" />
+  </svg>
+)
+
