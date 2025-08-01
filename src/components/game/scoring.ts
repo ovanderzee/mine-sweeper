@@ -77,7 +77,7 @@ export const makeBoardCode = (board: CellState[][]): string => {
   return `${size18}${size18}${mines18}${fillLz}`
 }
 
-export const sequenceFillData = (boardCode: string): number[][] => {
+export const sequenceFillData = (boardCode: string): CellState[][] => {
   const checkData = boardCode.substring(0, 4)
   const checkSize = parseInt(checkData.charAt(0), 18)
   const checkCount = parseInt(checkData.substring(2,4), 18)
@@ -98,22 +98,28 @@ export const sequenceFillData = (boardCode: string): number[][] => {
     return [[]]
   }
 
-  const content2d = []
-  for (let r = 0; r < flatContent.length; r = r + size) {
-    const sequence = flatContent.slice(r, r + size)
-    content2d.push(sequence)
+  // do not check but re-establish fill values
+  const newBoard: CellState[][] = []
+  for (let start = 0; start < flatContent.length; start = start + size) {
+    const sequence = flatContent.slice(start, start + size)
+    const newCells = sequence.map((value, col): CellState => {
+      return {
+        fill: value > 8 ? 9 : 0,
+        row: start / size, col
+      }
+    })
+    newBoard.push(newCells)
   }
 
-  const length = content2d.length
-  if (
-    content2d[0].length !== length ||
-    content2d[length - 1].length !== length
-  ) {
-    console.error('Row with wrong length')
-    return [[]]
+  const countNeighbourMines = (x: number, y: number) => {
+    newBoard[x][y].fill += 1
   }
 
-  return content2d
+  newBoard.forEach(row =>
+    row.forEach(cell => cell.fill > 8 ? iterateNeighbours(cell, size, countNeighbourMines) : null)
+  )
+
+  return newBoard
 }
 
 export const calculateScore = (game: GameScore, play: PlayScore): ScoreCalc => {
@@ -123,7 +129,7 @@ export const calculateScore = (game: GameScore, play: PlayScore): ScoreCalc => {
   return {efficiency, speed, points}
 }
 
-export const getMoves = (state: GameState): number =>
+export const countMoves = (state: GameState): number =>
   state.board
     .flat()
     .filter(cell => cell.stage === CellStateStage.TESTED)
