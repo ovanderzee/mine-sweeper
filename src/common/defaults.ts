@@ -1,21 +1,12 @@
 import { texts, currentLanguage } from './i18n'
-import { ClockTypes } from './app-types'
+import { AppConfig, ClockTypes } from './app-types'
 
-/**
- * BOARD_SIZE
- * width and height of gameboard, hence BOARD_SIZE^2 cells on board
- */
+export const GAME_DIVISOR = 30
 
-/**
- * GAME_LEVEL
- * mines per 30 cells:
- * 2 = 1 mine in 15 cells; 6.7% coverage
- * 3 = 1 in 10; 10%
- * 4 = 1 in 7.5; 13.3%
- * 5 = 1 in 6; 16.7%
- * 6 = 1 in 5; 20%
- * 7 = 1 in 4.3; 23.3%
- */
+export const calculateMineCount = ((cfg: AppConfig): number => {
+  const approx = Math.pow(cfg.BOARD_SIZE, 2) * cfg.GAME_LEVEL / GAME_DIVISOR
+  return Math.ceil(approx)
+})
 
 const DEFAULTS = {
   BOARD_SIZE: 6,
