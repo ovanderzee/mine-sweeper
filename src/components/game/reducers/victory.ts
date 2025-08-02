@@ -6,10 +6,10 @@ import { GameState,
 import { precise, leastClicksToWin, mostClicksToWin, makeBoardCode, countMoves, calculateScore } from '../scoring'
 
 export const victoryReducer = (state: GameState, config: AppConfig): GameState => {
-  const { BOARD_SIZE, MINE_COUNT, PLAYER_NAME, MAX_SCORES } = config
+  const { BOARD_SIZE, GAME_LEVEL, MINE_COUNT, PLAYER_NAME, MAX_SCORES } = config
 
   const victoryVars = {
-    code: makeBoardCode(state.board),
+    code: makeBoardCode(state.board, GAME_LEVEL),
     date: state.tShift,
     user: PLAYER_NAME,
   }

@@ -1,7 +1,9 @@
 import LzString from 'lz-string'
 import { iterateNeighbours } from './common'
+import { AppCheckConfig } from '../../common/app-types'
 import { GameState, CellState, CellStateStage,
   GameScore, PlayScore, ScoreCalc } from '../../common/game-types'
+import { calculateMineCount } from '../../common/defaults'
 
 export const precise = (figure: number, precision: number) => Number(figure.toPrecision(precision))
 
@@ -60,42 +62,47 @@ export const mostClicksToWin = (game: GameState) => {
   return areas + pointers
 }
 
-export const makeBoardCode = (board: CellState[][]): string => {
+export const makeBoardCode = (board: CellState[][], gameLevel: number): string => {
   const allCells = board.flat()
 
-  // four positions to check the integrity
-  const mines = allCells.filter(cell => cell.fill > 8)
-  const mines18 = mines.length.toString(18).padStart(2,'0')
+  // three positions to check the integrity: size(18), size(18), level(10)
   const size18 = Math.pow(allCells.length, 0.5).toString(18)
 
-  // eightteen-digit value for one position fill
+  // eighteen-digit value for one position fill
   const fill18 = allCells
     .map(cell => Number(cell.fill).toString(18))
     .join('');
   const fillLz = LzString.compressToEncodedURIComponent(fill18)
 
-  return `${size18}${size18}${mines18}${fillLz}`
+  return `${size18}${size18}${gameLevel}${fillLz}`
 }
 
-export const sequenceFillData = (boardCode: string): CellState[][] => {
-  const checkData = boardCode.substring(0, 4)
+export const sequenceFillData = (boardCode: string): [CellState[][], AppCheckConfig] => {
+  const BREAK_BEFORE = 3
+
+  const checkData = boardCode.substring(0, BREAK_BEFORE)
   const checkSize = parseInt(checkData.charAt(0), 18)
-  const checkCount = parseInt(checkData.substring(2,4), 18)
-  const content = LzString.decompressFromEncodedURIComponent(boardCode.substring(4))
+  const checkLevel = Number(checkData.charAt(2))
+  const checkConfig: AppCheckConfig = { BOARD_SIZE: checkSize, GAME_LEVEL: checkLevel }
+
+  const boardData = boardCode.substring(BREAK_BEFORE)
+  const rawContent = LzString.decompressFromEncodedURIComponent(boardData)
+  const content = rawContent.replace(/NaN/g, '0')
 
   // check expected size
   const size = Math.pow(content.length, 0.5)
   if (checkSize !== size) {
-    console.error('Wrong board size, check for', checkSize, 'found', size)
-    return [[]]
+    console.error('Wrong board size with', checkData, '... check for', checkSize, 'found', size)
+    return [[[]], checkConfig]
   }
 
   // check expected mine count
   const flatContent = content.split('').map(fill => parseInt(fill, 18))
   const count = flatContent.filter(fill => fill > 8).length
+  const checkCount = calculateMineCount(checkConfig)
   if (checkCount !== count) {
-    console.error('Wrong mine count, check for', checkCount, 'found', count)
-    return [[]]
+    console.error('Wrong mine count with', checkData, '... check for', checkCount, 'found', count)
+    return [[[]], checkConfig]
   }
 
   // do not check but re-establish fill values
@@ -119,7 +126,7 @@ export const sequenceFillData = (boardCode: string): CellState[][] => {
     row.forEach(cell => cell.fill > 8 ? iterateNeighbours(cell, size, countNeighbourMines) : null)
   )
 
-  return newBoard
+  return [newBoard, checkConfig]
 }
 
 export const calculateScore = (game: GameScore, play: PlayScore): ScoreCalc => {

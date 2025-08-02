@@ -1,9 +1,9 @@
 import { texts, currentLanguage } from './i18n'
-import { AppConfig, ClockTypes } from './app-types'
+import { AppCheckConfig, ClockTypes } from './app-types'
 
 export const GAME_DIVISOR = 30
 
-export const calculateMineCount = ((cfg: AppConfig): number => {
+export const calculateMineCount = ((cfg: AppCheckConfig): number => {
   const approx = Math.pow(cfg.BOARD_SIZE, 2) * cfg.GAME_LEVEL / GAME_DIVISOR
   return Math.ceil(approx)
 })
