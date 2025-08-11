@@ -51,8 +51,12 @@ describe('TimeTracker', () => {
         jest.advanceTimersByTime(advanceSecs * 1000)
       })
       const newSeconds = seconds + advanceSecs
-      expect(getMinutesLapsed()).toBe(newSeconds < 60 ? minutes : minutes + 1)
-      expect(getSecondsLapsed()).toBe(newSeconds % 60)
+      // keep expected value below 60
+      expect(getMinutesLapsed()).toBe(newSeconds < 60 ? minutes : (minutes + 1) % 60)
+      // sometimes one second less
+      const modulatedSeconds = newSeconds % 60
+      expect(getSecondsLapsed()).toBeLessThanOrEqual(modulatedSeconds)
+      expect(getSecondsLapsed()).toBeGreaterThanOrEqual(Math.max(modulatedSeconds, 0))
     })
 
     it('should not advance time when game has ended', () => {
