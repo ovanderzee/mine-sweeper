@@ -45,7 +45,7 @@ function Configure() {
   const onbeginContent = (
     <fieldset id="on-begin-play">
       <legend>{text.settings['On begin Play']}</legend>
-      <h5>{text.settings['Will destroy current game']}</h5>
+      <h5 className="warning">{text.settings['Will destroy current game']}</h5>
 
       <div className="field">
         <label htmlFor="size">{text.settings['Size Gameboard']}</label>

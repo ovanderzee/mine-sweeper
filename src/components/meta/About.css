@@ -5,13 +5,6 @@ dl {
 
 dl {
   --term-width: 2.5em;
-  --spacing: 1ex;
-
-  background: linear-gradient(
-    90deg,
-    var(--darker-blue) var(--term-width),
-    transparent var(--term-width)
-  );
 }
 
 dt, dd {
@@ -21,14 +14,24 @@ dt, dd {
 
 dt {
   width: var(--term-width);
+}
 
-  svg {
-    aspect-ratio: 1;
-  }
+dt svg {
+  width: .89em;
+  aspect-ratio: 1;
+  margin-inline: 0.167em;
+  margin-block: -1px;
+}
+
+dt svg text#text-content {
+  fill: currentcolor;
 }
 
 dd {
-  margin-top: .62em;
-  margin-left: var(--spacing);
-  width: calc(100% - var(--term-width) - var(--spacing));
+  margin-inline-start: 0;
+  width: calc(100% - var(--term-width));
+}
+
+dl *:not(:first-of-type) {
+  margin-block-start: 1ex;
 }

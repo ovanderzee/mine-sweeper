@@ -59,7 +59,7 @@
   },
   "settings": {
     "On begin Play": "The Challenge...",
-    "Will destroy current game": "Setting changes will close the current game",
+    "Will destroy current game": "When adapting the game changes along",
     "Size Gameboard": "Gameboard dimensions",
     "%n cells": "%n fields",
     "Gamelevel": "Gamelevel",

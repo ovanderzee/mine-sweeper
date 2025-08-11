@@ -12,4 +12,7 @@ export default defineConfig({
     __APP_VERSION__: JSON.stringify(process.env.npm_package_version),
     __COMMIT_HASH__: JSON.stringify(commitHash),
   },
+  server: {
+    host: '0.0.0.0',
+  },
 })

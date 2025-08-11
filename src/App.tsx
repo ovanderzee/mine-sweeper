@@ -1,7 +1,7 @@
 import PageProvider from './store/PageProvider'
 import Paging from './components/Paging'
 import ShieldSymbols from './components/UI/ShieldSymbols'
-import NavSymbols from './components/UI/NavSymbols'
+import { NavSymbols, PlainSymbols } from './components/UI/NavSymbols'
 import './App.css'
 
 function App() {
@@ -10,6 +10,7 @@ function App() {
       <Paging />
       <ShieldSymbols />
       <NavSymbols />
+      <PlainSymbols />
     </PageProvider>
   )
 }

@@ -7,16 +7,18 @@
 - Gameboard could technically be 36 * 36 but board starts to jump when the game is operated by keyboard
 
 ### Features
-- Make navbar sticky in landscape screen
+- Make option-bar sticky in landscape screen
 - Make header of hiscores sticky
 - Playmode: Play without flags
 - Playmode: Win or loose when flag count equals mine count
+- Hotkeys for option-bar items - or - a keyboardway to switch between game and option-bar
 - Pause button, correct time on unpause
 - Replay game from High Scores
 - Sort High Scores on various properties
-- Routing on gamecode, about, config and hiscores 
+- Routing on gamecode, about, config and hiscores
 - Save a game on a new list page (with comment)
 - Zoom slider on gamepage
+- Toggle focus between game and option-bar
 
 
 ## [3.0.0] - 2025-08-11
@@ -46,7 +48,7 @@
 - Show version in about page
 
 ### Changed
-- Consistent SVG icons in navbar
+- Consistent SVG icons in option-bar
 - Text changes
 - Optimized cell iteration
 
@@ -54,7 +56,7 @@
 ## [2.1.0] - 2025-06-21
 
 ### Added
-- Interface for storing locally
+- Interface for storing data locally
 - Unit tests
 - Integration tests
 
