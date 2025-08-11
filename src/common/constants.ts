@@ -14,6 +14,7 @@ export const FADE_OUT_TIME = 550
 // threshold between a click and a deliberate long press, in milliseconds
 export const LONG_PRESS_THRESHOLD = 200
 
+
 /* RANGES */
 
 const newReadOnly = (value: number | InputRange): PropertyDescriptor => {
@@ -26,15 +27,16 @@ const newRange = (min: number, max: number): InputRange => Object.defineProperti
 
 const RANGES = {} as Record<string, InputRange>
 Object.defineProperties(RANGES, {
-  SIZE: newReadOnly(newRange(3, 10)),
-  LEVEL: newReadOnly(newRange(1, 7)),
+  SIZE: newReadOnly(newRange(3, 20)),
+  LEVEL: newReadOnly(newRange(1, 6)),
   FONT: newReadOnly(newRange(8, 36)),
   SCORES: newReadOnly(newRange(8, 1024)),
 });
 
 export { RANGES }
 
-/* RANGES */
+
+/* ADMIN */
 
 export const getAppVersion = () => {
   // vite exposes env vars via import.meta.env.

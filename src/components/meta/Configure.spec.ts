@@ -63,7 +63,7 @@ describe('The configure controls', () => {
 
   test("should enforce maximum board-size setting", () => {
     const range = screen.getByLabelText('Gameboard dimensions')
-    fireEvent.change(range, {target: {value: 10}})
+    fireEvent.change(range, {target: {value: 40}})
     expect(storage.config.BOARD_SIZE).toBe(RANGES.SIZE.max)
   })
 

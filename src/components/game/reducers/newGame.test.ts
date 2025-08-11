@@ -1,9 +1,9 @@
 import { newGameReducer } from './newGame'
-import { simpleHardConfig, heavyConfig } from '../../../__mocks__/configs'
+import { simpleHardConfig, scoringConfig } from '../../../__mocks__/configs'
 import { GameState, CellState } from '../../../common/game-types'
 
-const newGame: GameState = newGameReducer(heavyConfig)
-const nextGame: GameState = newGameReducer(heavyConfig)
+const newGame: GameState = newGameReducer(scoringConfig)
+const nextGame: GameState = newGameReducer(scoringConfig)
 
 test('A new game contains MINE_COUNT bombs', () => {
   const mineCount = newGame.board
@@ -11,7 +11,7 @@ test('A new game contains MINE_COUNT bombs', () => {
     .filter(cell => cell.fill > 8)
     .length
 
-  expect(mineCount).toBe(heavyConfig.MINE_COUNT)
+  expect(mineCount).toBe(scoringConfig.MINE_COUNT)
 })
 
 test('equal produced new games have differing cell values', () => {

@@ -39,17 +39,17 @@ const storage = {
       }
   },
   eraseScores: () => {
-    localStorage.removeItem('mv-scores')
+    localStorage.removeItem('mv-victory')
   },
   get scores(): ScoreItem[] {
-      const stored = localStorage.getItem('mv-scores')
+      const stored = localStorage.getItem('mv-victory')
       const data: ScoreItem[] = stored ? JSON.parse(stored) : []
       return data
   },
   set scores(data: ScoreItem[]) {
       if (data?.length) {
         const storeable = JSON.stringify(data)
-        localStorage.setItem('mv-scores', storeable)
+        localStorage.setItem('mv-victory', storeable)
       } else {
         this.eraseScores()
       }

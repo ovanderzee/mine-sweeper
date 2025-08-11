@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import PageContext from './page-context'
-import DEFAULTS from '../common/defaults'
+import DEFAULTS, { calculateMineCount } from '../common/defaults'
 import { texts } from '../common/i18n'
 import storage from '../common/storage'
 import { AppConfig, AppSubConfig, PageContextProps, Translation } from '../common/app-types'
@@ -41,7 +41,9 @@ const PageProvider = (props: { children: React.ReactNode }) => {
           ...changes,
         }
       }
-      if (changes.LANGUAGE) {
+      if (changes.BOARD_SIZE || changes.GAME_LEVEL) {
+        update.config.MINE_COUNT = calculateMineCount(update.config)
+      } else if (changes.LANGUAGE) {
         update.text = texts[changes.LANGUAGE]
       }
       storage.config = update.config

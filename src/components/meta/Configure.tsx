@@ -6,6 +6,7 @@ import Help from '../nav/Help'
 import GoBack from '../nav/GoBack'
 import { ClockTypes, Languages, LanguageTranslation } from '../../common/app-types'
 import { RANGES } from '../../common/constants'
+import { GAME_DIVISOR } from '../../common/defaults'
 import storage from '../../common/storage'
 import { preventReloadByEnter } from '../../common/functions'
 import './Meta.css'
@@ -26,11 +27,7 @@ function Configure() {
       RANGES.SIZE.max,
       Math.max(RANGES.SIZE.min, +ctrl.value)
     )
-    const prev = pageCtx.config
-    pageCtx.configure({
-      BOARD_SIZE: value,
-      MINE_COUNT: Math.ceil(Math.pow(value, 2) * prev.GAME_LEVEL / 30)
-    })
+    pageCtx.configure({ BOARD_SIZE: value })
   }
 
   const changeGameLevelHandler = (event: React.ChangeEvent) => {
@@ -40,15 +37,11 @@ function Configure() {
       RANGES.LEVEL.max,
       Math.max(RANGES.LEVEL.min, +ctrl.value)
     )
-    const prev = pageCtx.config
-    pageCtx.configure({
-      GAME_LEVEL: value,
-      MINE_COUNT: Math.ceil(Math.pow(prev.BOARD_SIZE, 2) * value / 30)
-    })
+    pageCtx.configure({ GAME_LEVEL: value })
   }
 
   const cellCount = Math.pow(config.BOARD_SIZE, 2)
-  const cellsPerMine = Math.round(30 * 10 / config.GAME_LEVEL) / 10
+  const cellsPerMine = Math.round(GAME_DIVISOR * 10 / config.GAME_LEVEL) / 10
   const onbeginContent = (
     <fieldset id="on-begin-play">
       <legend>{text.settings['On begin Play']}</legend>

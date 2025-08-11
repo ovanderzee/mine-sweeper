@@ -24,6 +24,11 @@ export type AppSubConfig = {
   CLOCK_TYPE?: ClockTypes;
 }
 
+export interface AppCheckConfig {
+  BOARD_SIZE: number;
+  GAME_LEVEL: number;
+}
+
 export interface AppConfig {
   BOARD_SIZE: number;
   FONT_SIZE: number;

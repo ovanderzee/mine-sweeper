@@ -45,10 +45,10 @@ export const simpleHardConfig = {
   "CLOCK_TYPE": ClockTypes.NONE
 }
 
-export const heavyConfig = {
-  "BOARD_SIZE":8,
-  "GAME_LEVEL":5,
-  "MINE_COUNT":11,
+export const scoringConfig = {
+  "BOARD_SIZE":7,
+  "GAME_LEVEL":4,
+  "MINE_COUNT":7,
   "LANGUAGE":Languages.en,
   "FONT_SIZE":16,
   "PLAYER_NAME":"Floor",

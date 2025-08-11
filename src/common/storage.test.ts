@@ -129,7 +129,7 @@ describe('Game storage', () => {
 
     storage.eraseGame()
 
-    const read = localStorage.getItem('mv-scores') as string
+    const read = localStorage.getItem('mv-victory') as string
     expect(read).toBe(null)
 
     const parse = JSON.parse(read)
@@ -159,12 +159,12 @@ describe('Scores storage', () => {
   test('should set data', () => {
     storage.scores = liveScores
 
-    const read = JSON.parse(localStorage.getItem('mv-scores') as string)
+    const read = JSON.parse(localStorage.getItem('mv-victory') as string)
     expect(read[10]).toStrictEqual(liveScores[10])
   })
 
   test('should get data', () => {
-    localStorage.setItem('mv-scores', JSON.stringify(liveScores))
+    localStorage.setItem('mv-victory', JSON.stringify(liveScores))
 
     const scores = storage.scores
     expect(scores[10]).toStrictEqual(liveScores[10])
@@ -173,22 +173,22 @@ describe('Scores storage', () => {
   test('should set and overwrite', () => {
     storage.scores = liveScores
 
-    const read1 = JSON.parse(localStorage.getItem('mv-scores') as string)
+    const read1 = JSON.parse(localStorage.getItem('mv-victory') as string)
     expect(read1.length).toBe(liveScores.length)
 
     const someScores = liveScores.slice(0,9)
     storage.scores = someScores
 
-    const read2 = JSON.parse(localStorage.getItem('mv-scores') as string)
+    const read2 = JSON.parse(localStorage.getItem('mv-victory') as string)
     expect(read2.length).toBe(someScores.length)
   })
 
   test('should be removable by method', () => {
-    localStorage.setItem('mv-scores', JSON.stringify(liveScores))
+    localStorage.setItem('mv-victory', JSON.stringify(liveScores))
 
     storage.eraseScores()
 
-    const read = localStorage.getItem('mv-scores') as string
+    const read = localStorage.getItem('mv-victory') as string
     expect(read).toBe(null)
 
     const parse = JSON.parse(read)
@@ -197,7 +197,7 @@ describe('Scores storage', () => {
   })
 
   test('should be removable by garbage', () => {
-    localStorage.setItem('mv-scores', JSON.stringify(liveScores))
+    localStorage.setItem('mv-victory', JSON.stringify(liveScores))
     const eraseScoresSpy = jest.spyOn(storage, 'eraseScores')
 
     storage.scores = []

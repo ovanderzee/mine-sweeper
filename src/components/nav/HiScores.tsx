@@ -13,8 +13,14 @@ export const MinesMinusFlags = (props: HiScoresProps) => {
   const flagCount = flatBoard.filter(c => c.locked).length
   const count = mineCount - flagCount
   const label = count ? `${count}×` : '!'
+  const fontSizeAdjust = label.length < 4 ? '100%' : '75%'
 
-  return <text id="text-content" x="50%" y="55%">{label}</text>
+  return (count ?
+    <g style={{'fontSize': fontSizeAdjust}}>
+      <text id="text-content" x="50%" y="55%">{label}</text>
+    </g> :
+    <use href="#nav-podium" />
+  )
 }
 
 const HiScores = (props: HiScoresProps) => {
@@ -28,7 +34,7 @@ const HiScores = (props: HiScoresProps) => {
       <svg>{
         props.board
           ? <MinesMinusFlags board={props.board} />
-          : <use href={`#nav-podium`} />
+          : <use href="#nav-podium" />
       }</svg>
     </button>
   )

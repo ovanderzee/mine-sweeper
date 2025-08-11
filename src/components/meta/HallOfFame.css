@@ -4,6 +4,7 @@ ol {
 }
 
 li {
+  margin-block: 1em;
   text-align: left;
 }
 
@@ -12,13 +13,27 @@ li footer {
   display: flex;
   align-items: baseline;
 }
+li footer {
+  justify-content: space-between;
+}
 
+li.super {
+  margin-block: 0.5em;
+}
 li.super header {
   align-items: center;
 }
 
-li {
-  margin: 0.5em 0;
+li.latest {
+  outline: 1.5px solid var(--dark-blue);
+  outline-offset: .5ex;
+  border-radius: 1ex;
+  background: var(--light-blue);
+  margin-block: 1em;
+  padding-right: .5ex;
+}
+li.latest .date {
+  align-self: start;
 }
 
 li header *,
@@ -50,17 +65,12 @@ li header .date {
 
 li footer .score {
   flex: 0 0 3.75em;
+  font-weight: bold;
   text-align: center;
 }
-li footer .score::before {
-  content: '(';
-}
-li footer .score::after {
-  content: ')';
-}
-li footer .cells,
-li footer .mines,
+
+li footer .mines-cells,
 li footer .moves,
 li footer .duration {
-  flex: 1 0 20%;
+  flex: 1 1 auto;
 }

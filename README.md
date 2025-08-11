@@ -17,3 +17,6 @@ Just like real life!
 -  Shows number of mines left to find as mine count minus flag count
 -  Visual feedback of action on functionality in navigation 
 -  Show version info
+-  On-screen playing time clock
+-  Playing time picked up after reload
+-  Score based on efficiency and speed
