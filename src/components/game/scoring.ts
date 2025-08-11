@@ -68,11 +68,11 @@ export const makeBoardCode = (board: CellState[][], gameLevel: number): string =
   // three positions to check the integrity: size(18), size(18), level(10)
   const size18 = Math.pow(allCells.length, 0.5).toString(18)
 
-  // eighteen-digit value for one position fill
-  const fill18 = allCells
-    .map(cell => Number(cell.fill).toString(18))
+  // booleanesque value for fill in one position
+  const fill02 = allCells
+    .map(cell => Number(cell.fill) < 9 ? 0 : 1)
     .join('');
-  const fillLz = LzString.compressToEncodedURIComponent(fill18)
+  const fillLz = LzString.compressToEncodedURIComponent(fill02)
 
   return `${size18}${size18}${gameLevel}${fillLz}`
 }
@@ -86,32 +86,31 @@ export const sequenceFillData = (boardCode: string): [CellState[][], AppCheckCon
   const checkConfig: AppCheckConfig = { BOARD_SIZE: checkSize, GAME_LEVEL: checkLevel }
 
   const boardData = boardCode.substring(BREAK_BEFORE)
-  const rawContent = LzString.decompressFromEncodedURIComponent(boardData)
-  const content = rawContent.replace(/NaN/g, '0')
+  const content = LzString.decompressFromEncodedURIComponent(boardData)
+  const flatContent = content.split('').map(fill => Number(fill))
+
+  // check integrity
+  const invalidCode = content.length !== content.match(/[0-1]/g)?.length
 
   // check expected size
   const size = Math.pow(content.length, 0.5)
-  if (checkSize !== size) {
-    console.error('Wrong board size with', checkData, '... check for', checkSize, 'found', size)
-    return [[[]], checkConfig]
-  }
+  const wrongSize = checkSize !== size
 
   // check expected mine count
-  const flatContent = content.split('').map(fill => parseInt(fill, 18))
-  const count = flatContent.filter(fill => fill > 8).length
-  const checkCount = calculateMineCount(checkConfig)
-  if (checkCount !== count) {
-    console.error('Wrong mine count with', checkData, '... check for', checkCount, 'found', count)
+  const wrongMineCount = calculateMineCount(checkConfig) !== flatContent.filter(fill => fill === 1).length
+
+  if (invalidCode || wrongSize || wrongMineCount) {
+    console.error(`Invalid ${invalidCode ? 'code' : wrongSize ? 'size' : wrongMineCount ? 'mine count' : 'error'}`)
     return [[[]], checkConfig]
   }
 
-  // do not check but re-establish fill values
+  // do not check but rebuild board
   const newBoard: CellState[][] = []
   for (let start = 0; start < flatContent.length; start = start + size) {
     const sequence = flatContent.slice(start, start + size)
     const newCells = sequence.map((value, col): CellState => {
       return {
-        fill: value > 8 ? 9 : 0,
+        fill: value === 1 ? 9 : 0,
         row: start / size, col
       }
     })

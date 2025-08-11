@@ -95,7 +95,7 @@ describe('Create compressed string containing fill data', () => {
     [{"fill":1,"row":8,"col":0},{"fill":10,"row":8,"col":1},{"fill":2,"row":8,"col":2},{"fill":1,"row":8,"col":3},{"fill":0,"row":8,"col":4},{"fill":2,"row":8,"col":5},{"fill":4,"row":8,"col":6},{"fill":13,"row":8,"col":7},{"fill":4,"row":8,"col":8},{"fill":2,"row":8,"col":9}],
     [{"fill":1,"row":9,"col":0},{"fill":1,"row":9,"col":1},{"fill":1,"row":9,"col":2},{"fill":0,"row":9,"col":3},{"fill":0,"row":9,"col":4},{"fill":1,"row":9,"col":5},{"fill":10,"row":9,"col":6},{"fill":3,"row":9,"col":7},{"fill":10,"row":9,"col":8},{"fill":1,"row":9,"col":9}]
   ]
-  const testBoardCode = "aa9IYZgjGAMbATFBjAbAI3rEwooCZtqBJLACxklqRXEICmtJs1kItAFgGY4jxUg5cArDgTgwIBI344SAThi9SM+EWigsQA"
+  const testBoardCode = "aa9IwBjdCUruSbnIi8nPiuo3I9ApLKUIA"
 
   it('should convert a board to a boardCode', () => {
     const boardCode = makeBoardCode(testBoard, 9)
@@ -104,14 +104,9 @@ describe('Create compressed string containing fill data', () => {
 
   it('should convert a boardCode to a board', () => {
     const [fillData, checkConfig] = sequenceFillData(testBoardCode)
-
+    expect(fillData).toStrictEqual(testBoard)
+    expect(checkConfig.BOARD_SIZE).toBe(10)
     expect(checkConfig.GAME_LEVEL).toBe(9)
-
-    // compare fill=17 with mine amidst 8 mines
-    expect(fillData[5][3].fill).toBe(testBoard[5][3].fill)
-
-    // compare fill=6 with pointer amidst 6 mines
-    expect(fillData[1][1].fill).toBe(testBoard[1][1].fill)
   })
 })
 
@@ -119,23 +114,27 @@ describe('Sanity checking on boardCode', () => {
   // suppress alarming messages in output
   beforeEach(() => console.error = jest.fn())
 
-  test('should find wrong board size', () => {
-    const wrongCode = '534JwRhrEAYrHyA'
-    const wrongData = wrongCode.substring(0,3)
+  test('should find invalid code', () => {
+    const wrongCode = '444IwBhrSv'
     sequenceFillData(wrongCode)
-    expect(console.error).toHaveBeenLastCalledWith('Wrong board size with', wrongData, '... check for', 5, 'found', 4)
+    expect(console.error).toHaveBeenLastCalledWith('Invalid code')
+  })
+
+  test('should find wrong board size', () => {
+    const wrongCode = '534IwBhrSvI'
+    sequenceFillData(wrongCode)
+    expect(console.error).toHaveBeenLastCalledWith('Invalid size')
   })
 
   test('should find wrong mine count', () => {
     // size 4 en lvl 3,4,5 geven 2,3,3 mijnen
-    const wrongCode = '443JwRhrEAYrHyA'
-    const wrongData = wrongCode.substring(0,3)
+    const wrongCode = '443IwBhrSvI'
     sequenceFillData(wrongCode)
-    expect(console.error).toHaveBeenLastCalledWith('Wrong mine count with', wrongData, '... check for', 2, 'found', 3)
+    expect(console.error).toHaveBeenLastCalledWith('Invalid mine count')
   })
 
   test('should not go wrong', () => {
-    const goodCode = '444JwRhrEAYrHyA'
+    const goodCode = '444IwBhrSvI'
     sequenceFillData(goodCode)
     expect(console.error).not.toHaveBeenCalled()
   })
