@@ -24,7 +24,7 @@ const About = () => {
 
       <h3>{text.help['Nav Heading']}</h3>
       <dl>
-        <dt><svg style={{width: '1.4em'}}><text id="text-content" x="50%" y="55%" style={{fontSize: '1em'}}>9×</text></svg></dt>
+        <dt><svg><text id="text-content" x="50%" y="55%" style={{fontSize: '1em'}}>9×</text></svg></dt>
           <dd>{text.help['Game Scores Comment']}</dd>
         <dt><svg><use href="#plain-podium" /></svg></dt><dd>{text.help['About Scores Comment']}</dd>
         <dt><svg><use href="#plain-play" /></svg></dt><dd>{text.help['New Game Comment']}</dd>
