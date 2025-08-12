@@ -59,6 +59,63 @@
 - Interface for storing data locally
 - Unit tests
 - Integration tests
+- Readme
 
 ### Changes
 - Refine appearance
+- Structure About page
+
+
+## [2.0.0] - 2025-05-11
+
+### Added
+- Waterball on win, exploding fireball on loose
+- Show a shield on win
+- Accessibility
+- Typescript
+- ESLint
+
+### Changes
+- Scroll the body
+- Use dialog element for modal
+- Develop with Vite
+- Update to React 19
+
+
+## [1.1.0] - 2023-04-24
+
+### Added
+- Cross browser styling
+- Infer Language
+
+### Changes
+- Building for Relative Paths
+- Use React 18
+- Finalise modal with buttons
+- Flagging with long-click
+- Use pointer events
+
+
+## [1.0.0] - 2021-07-31
+
+Fix font error
+
+
+## [0.2.0] - 2021-07-29
+
+### Added
+- Modals
+- Scores
+- About, Hall of Fame, Configuration pages
+
+## [0.1.0] - 2021-07-02
+
+Playable game app
+
+### Features
+- Leading Animation
+- Internationalisation
+- Flagging
+- Replay
+
+

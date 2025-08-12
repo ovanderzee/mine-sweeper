@@ -1,21 +1,8 @@
-svg {
-  text#text-content {
-    fill: white;
-    text-anchor: middle;
-    dominant-baseline: middle;
-  }
-}
-
-@media only screen and (orientation: portrait) {
-  svg text#text-content {
-    font-size: 1.5em;
-  }
-}
-
-@media only screen and (orientation: landscape) {
-  svg text#text-content {
-    font-size: 1.75em;
-  }
+svg text#text-content {
+  fill: white;
+  text-anchor: middle;
+  dominant-baseline: middle;
+  font-size: 1.5em;
 }
 
 *:has(> svg use[href^="#nav-"]) {
@@ -26,75 +13,69 @@ svg {
   color: currentcolor;
 }
 
-#plain-play,
-#nav-play {
-  path {
+  #plain-play path,
+  #nav-play path {
     fill: currentcolor;
     stroke: none;
   }
-}
 
-#plain-replay,
-#plain-reset,
-#nav-replay,
-#nav-reset {
-  path {
+  #plain-replay path,
+  #plain-reset path,
+  #nav-replay path,
+  #nav-reset path {
     fill: none;
     stroke: currentcolor;
     stroke-width: 6;
     stroke-linecap: round;
     stroke-linejoin: round;
   }
-}
 
-#plain-question,
-#nav-question {
-  path {
+  #plain-question path,
+  #nav-question path {
     /* font: normal 69px 'PT Sans Caption' */
     fill: currentcolor;
     stroke: none;
   }
-}
 
-#plain-sliders,
-#nav-sliders {
-  path {
+  #plain-sliders path,
+  #nav-sliders path {
     fill: none;
     stroke: currentcolor;
     stroke-width: 3;
   }
-  circle {
-    fill: currentcolor;
-    stroke: none;
-  }
-}
 
-#plain-return,
-#nav-return {
-  #pijlpunt {
+  #plain-sliders circle,
+  #nav-sliders circle {
     fill: currentcolor;
     stroke: none;
   }
-  #haak {
+
+  #plain-return #pijlpunt,
+  #nav-return #pijlpunt{
+    fill: currentcolor;
+    stroke: none;
+  }
+
+  #plain-return #haak,
+  #nav-return #haak {
     fill: none;
     stroke: currentcolor;
     stroke-width: 6;
     stroke-linecap: butt;
   }
-}
 
-#plain-empty,
-#nav-empty {
-  circle {
+  #plain-empty circle,
+  #nav-empty circle {
     fill: none;
     stroke: currentcolor;
     stroke-width: 6;
   }
-  path {
+
+  #plain-empty path,
+  #nav-empty path {
     fill: currentcolor;
     stroke: none;
   }
-}
 
 #plain-podium path,
 #nav-podium path {
@@ -102,17 +83,17 @@ svg {
   stroke: none;
 }
 
-#plain-eye,
-#nav-eye {
-  path {
+  #plain-eye path,
+  #nav-eye path {
     fill: none;
     stroke: currentcolor;
     stroke-width: 3;
     stroke-linejoin:round;
   }
-  circle {
+
+  #plain-eye circle,
+  #nav-eye circle {
     fill: none;
     stroke: currentcolor;
     stroke-width: 7.5;
   }
-}

@@ -17,10 +17,14 @@ dt {
 }
 
 dt svg {
-  width: .89em;
-  aspect-ratio: 1;
-  margin-inline: 0.167em;
+  width: 1.22em;
+  height: .89em;
   margin-block: -1px;
+}
+
+dt:has(text) svg {
+  width: 1.6em;
+  margin-top: .22em;
 }
 
 dt svg text#text-content {

@@ -12,8 +12,9 @@
   stroke-width: 2;
   width: var(--time-tracker-size);
   height: var(--time-tracker-size);
+}
 
-  path {
+  .time-tracker.analogue path {
     fill: var(--fill-color);
     stroke: var(--fill-color);
     stroke-width: 2;
@@ -21,14 +22,13 @@
     stroke-linejoin: round;
     transform-origin: 50px 50px;
   }
-}
 
 .time-tracker.digital {
   color: var(--fill-color);
   padding-inline: 1ex;
+}
 
-  span {
+  .time-tracker.digital span {
     font-size: 80%;
     width: 2ex;
   }
-}
