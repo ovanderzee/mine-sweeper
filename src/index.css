@@ -122,6 +122,8 @@ nav,
 #root {
   position: relative;
   z-index: 0;
+  /* prevent scrollbars when mines explode */
+  overflow: hidden;
 }
 
 #overlay {
