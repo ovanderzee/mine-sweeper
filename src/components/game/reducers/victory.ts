@@ -12,6 +12,7 @@ export const victoryReducer = (state: GameState, config: AppConfig): GameState =
     code: makeBoardCode(state.board, GAME_LEVEL),
     date: state.tShift,
     user: PLAYER_NAME,
+    rank: 0,
   }
 
   const gameVars: GameScore = {
@@ -38,18 +39,20 @@ export const victoryReducer = (state: GameState, config: AppConfig): GameState =
 
   // add, beware of strict mode
   const { scores } = storage
-  const isNotThere = !scores.find(scoreItem => scoreItem.date === victory.date)
-  if (isNotThere) scores.push(victory)
+  const foundIndex = scores.findIndex(scoreItem => scoreItem.date === victory.date)
+  if (foundIndex === -1) {
+    scores.push(victory)
+  } else { // strict mode
+    scores[foundIndex] = victory
+  }
 
   // rearrange
   scores.sort((a, b) => b.score.points - a.score.points)
+  scores.forEach((score, index) => score.rank = 1 + index)
   storage.scores = scores.slice(0, MAX_SCORES)
-
-  const rank = 1 + scores.findIndex(score => score.date === victory.date)
 
   return {
     ...state,
-    score: victory.score.points,
-    rank: rank
+    score: victory
   }
 }
