@@ -51,11 +51,11 @@
     "rank": "psn",
     "name": "name",
     "date": "date",
-    "score": "points",
+    "points": "points",
     "efficiency": "efficiency",
     "speed": "speed",
-    "cells": "fields",
     "mines": "mines",
+    "cells": "fields",
     "moves": "turns",
     "duration": "duration"
   },
