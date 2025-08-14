@@ -7,6 +7,7 @@ import GoBack from '../nav/GoBack'
 import { ShieldByRank } from '../UI/Shield'
 import { ScoreItem } from '../../common/game-types'
 import storage from '../../common/storage'
+import { precise } from '../game/scoring'
 import './Meta.css'
 import './HallOfFame.css'
 
@@ -19,21 +20,71 @@ const HallOfFame = () => {
   const latest = [...rawScores].sort((a:ScoreItem, b:ScoreItem) => b.date - a.date)[0]
 
   const [scores, setScores] = useState(rawScores)
+  const [sortLabel, setSortLabel] = useState('points')
 
   const eraseScores = () => {
     setScores(storage.scores)
+  }
+
+  const sortByPoints = () => {
+    setSortLabel('points')
+    const byPoints = (a:ScoreItem, b:ScoreItem) => b.score.points - a.score.points
+    setScores(rawScores.sort(byPoints))
+  }
+
+  const sortByEfficiency = () => {
+    setSortLabel('efficiency')
+    const byEfficiency = (a:ScoreItem, b:ScoreItem) => b.score.efficiency - a.score.efficiency
+    setScores(rawScores.sort(byEfficiency))
+  }
+
+  const sortBySpeed = () => {
+    setSortLabel('speed')
+    const bySpeed = (a:ScoreItem, b:ScoreItem) => b.score.speed - a.score.speed
+    setScores(rawScores.sort(bySpeed))
+  }
+
+  const sortByMines = () => {
+    setSortLabel('mines')
+    const byMines = (a:ScoreItem, b:ScoreItem) => a.game.mines - b.game.mines
+    setScores(rawScores.sort(byMines))
+  }
+
+  const sortByCells = () => {
+    setSortLabel('cells')
+    const byCells = (a:ScoreItem, b:ScoreItem) => a.game.cells - b.game.cells
+    setScores(rawScores.sort(byCells))
+  }
+
+  const sortByMoves = () => {
+    setSortLabel('moves')
+    const byMoves = (a:ScoreItem, b:ScoreItem) => a.play.moves - b.play.moves
+    setScores(rawScores.sort(byMoves))
+  }
+
+  const sortByDuration = () => {
+    setSortLabel('duration')
+    const byDuration = (a:ScoreItem, b:ScoreItem) => a.play.duration - b.play.duration
+    setScores(rawScores.sort(byDuration))
   }
 
   const fameContent = (
     <article>
       <h2>{text.nav['Hall of Fame']}</h2>
       <ol>
-        <li>
+        <li className={`legend ${sortLabel}`}>
           <footer>
-            <div className="score">{text.fame['score']}</div>
-            <div className="mines-cells">{text.fame['mines']} / {text.fame['cells']}</div>
-            <div className="moves">{text.fame['moves']}</div>
-            <div className="duration">{text.fame['duration']}</div>
+            <a className="points" onClick={sortByPoints}>{text.fame['points']}</a>
+            <div className="efficiency-speed">
+              <a className="efficiency" onClick={sortByEfficiency}>{text.fame['efficiency']}</a><br />
+              /<a className="speed" onClick={sortBySpeed}>{text.fame['speed']}</a>
+            </div>
+            <div className="mines-cells">
+              <a className="mines" onClick={sortByMines}>{text.fame['mines']}</a><br />
+              /<a className="cells" onClick={sortByCells}>{text.fame['cells']}</a>
+            </div>
+            <a className="moves" onClick={sortByMoves}>{text.fame['moves']}</a>
+            <a className="duration" onClick={sortByDuration}>{text.fame['duration']}</a>
           </footer>
         </li>
 
@@ -45,15 +96,15 @@ const HallOfFame = () => {
           </li>
         )}
 
-        {scores.map((log: ScoreItem, index: number) => (
+        {scores.map((log: ScoreItem, index) => (
           <li
-            className={`${index < 10 ? 'super' : ''} ${log.date === latest.date ? 'latest' : ''}`}
-            key={`${index + 1}_${log.score}`}
+            className={`${log.rank <= 10 ? 'super' : ''} ${log.date === latest.date ? 'latest' : ''}`}
+            key={`${log.rank}_${log.score.points}`}
           >
             <header>
-              <h2 className="rank">
-                {index < 10 && <ShieldByRank rank={index + 1} />}
-                {index >= 10 && index + 1}
+              <h2 className="rank" title={'#' + index}>
+                {log.rank <= 10 && <ShieldByRank rank={log.rank} />}
+                {log.rank > 10 && log.rank}
               </h2>
               <h4 className="user">{log.user}</h4>
               <h4 className="date">
@@ -62,7 +113,8 @@ const HallOfFame = () => {
               </h4>
             </header>
             <footer>
-              <div className="score">{log.score.points}</div>
+              <div className="points">{log.score.points}</div>
+              <div className="efficiency-speed">{precise(log.score.efficiency, 2)}&thinsp;/&thinsp;{precise(log.score.speed, 2)}</div>
               <div className="mines-cells">{log.game.mines}&thinsp;/&thinsp;{log.game.cells}</div>
               <div className="moves">{log.game.effort.least}&#8239;&lt;&#8239;<b>{log.play.moves}</b>&#8239;&lt;&#8239;{log.game.effort.most} </div>
               <div className="duration">{Math.round(log.play.duration)}s</div>

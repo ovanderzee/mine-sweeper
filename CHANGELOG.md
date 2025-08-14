@@ -13,12 +13,18 @@
 - Playmode: Win or loose when flag count equals mine count
 - Hotkeys for option-bar items - or - a keyboardway to switch between game and option-bar
 - Pause button, correct time on unpause
-- Replay game from High Scores
-- Sort High Scores on various properties
 - Routing on gamecode, about, config and hiscores
+- Replay game from High Scores (when routing)
 - Save a game on a new list page (with comment)
 - Zoom slider on gamepage
 - Toggle focus between game and option-bar
+- Property histogram when sorting
+
+
+## [3.1.0]
+
+### Added
+- Sort High Scores on various properties
 
 
 ## [3.0.0] - 2025-08-11
@@ -27,6 +33,7 @@
 - Configurable clock
 - Calculate score based on minimal and maximal clicks (see https://minesweeper.fandom.com/wiki/3bv)
 - Store unique boardcode in score
+- Mark last score in Hall of Fame
 
 ### Changed
 - Comment on configuration page now looks like a warning

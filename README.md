@@ -20,3 +20,4 @@ Just like real life!
 -  On-screen playing time clock
 -  Playing time picked up after reload
 -  Score based on efficiency and speed
+-  Sortable High Scores

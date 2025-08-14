@@ -1,4 +1,4 @@
-import { CellState, CellStateStage, GameState, GameStages } from '../../common/game-types'
+import { CellState, CellStateStage, GameState, GameStages, ScoreItem } from '../../common/game-types'
 
 /**
  * Do something to neighbour cells
@@ -36,6 +36,13 @@ export const initialBoard = (BOARD_SIZE: number) =>
     Array(BOARD_SIZE).fill(initialCellState)
   )
 
+export const initialScore: ScoreItem = {
+  code: '', date: 0, user: '', rank: 0,
+  game: {cells: 0, mines: 0, effort: {least: 0, most: 0}},
+  play: {moves: 0, duration: 0},
+  score: {efficiency: 0, speed: 0, points: 0}
+}
+
 /** Complete data model */
 export const initialGameState: GameState = {
   // new
@@ -45,7 +52,6 @@ export const initialGameState: GameState = {
   tZero: 0,
   tShift: 0,
   // over:
-  rank: 0,
-  score: 0,
+  score: initialScore,
   mines: []
 }
