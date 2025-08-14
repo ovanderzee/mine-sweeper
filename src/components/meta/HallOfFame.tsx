@@ -24,16 +24,45 @@ const HallOfFame = () => {
     setScores(storage.scores)
   }
 
+  const sortByPoints = () => {
+    const byPoints = (a:ScoreItem, b:ScoreItem) => b.score.points - a.score.points
+    setScores(rawScores.sort(byPoints))
+  }
+
+  const sortByMines = () => {
+    const byMines = (a:ScoreItem, b:ScoreItem) => a.game.mines - b.game.mines
+    setScores(rawScores.sort(byMines))
+  }
+
+  const sortByCells = () => {
+    const byCells = (a:ScoreItem, b:ScoreItem) => a.game.cells - b.game.cells
+    setScores(rawScores.sort(byCells))
+  }
+
+  const sortByMoves = () => {
+    const byMoves = (a:ScoreItem, b:ScoreItem) => a.play.moves - b.play.moves
+    setScores(rawScores.sort(byMoves))
+  }
+
+  const sortByDuration = () => {
+    const byDuration = (a:ScoreItem, b:ScoreItem) => a.play.duration - b.play.duration
+    setScores(rawScores.sort(byDuration))
+  }
+
   const fameContent = (
     <article>
       <h2>{text.nav['Hall of Fame']}</h2>
       <ol>
         <li>
           <footer>
-            <div className="score">{text.fame['score']}</div>
-            <div className="mines-cells">{text.fame['mines']} / {text.fame['cells']}</div>
-            <div className="moves">{text.fame['moves']}</div>
-            <div className="duration">{text.fame['duration']}</div>
+            <a className="score" onClick={sortByPoints}>{text.fame['score']}</a>
+            <div className="mines-cells">
+              <a className="mines" onClick={sortByMines}
+                >{text.fame['mines']}</a> / <a className="cells" onClick={sortByCells}
+                >{text.fame['cells']}</a>
+            </div>
+            <a className="moves" onClick={sortByMoves}>{text.fame['moves']}</a>
+            <a className="duration" onClick={sortByDuration}>{text.fame['duration']}</a>
           </footer>
         </li>
 
@@ -45,15 +74,15 @@ const HallOfFame = () => {
           </li>
         )}
 
-        {scores.map((log: ScoreItem, index: number) => (
+        {scores.map((log: ScoreItem, index) => (
           <li
-            className={`${index < 10 ? 'super' : ''} ${log.date === latest.date ? 'latest' : ''}`}
-            key={`${index + 1}_${log.score}`}
+            className={`${log.rank <= 10 ? 'super' : ''} ${log.date === latest.date ? 'latest' : ''}`}
+            key={`${log.rank}_${log.score.points}`}
           >
             <header>
-              <h2 className="rank">
-                {index < 10 && <ShieldByRank rank={index + 1} />}
-                {index >= 10 && index + 1}
+              <h2 className="rank" title={'#' + index}>
+                {log.rank <= 10 && <ShieldByRank rank={log.rank} />}
+                {log.rank > 10 && log.rank}
               </h2>
               <h4 className="user">{log.user}</h4>
               <h4 className="date">
