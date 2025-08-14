@@ -29,6 +29,16 @@ const HallOfFame = () => {
     setScores(rawScores.sort(byPoints))
   }
 
+  const sortByEfficiency = () => {
+    const byEfficiency = (a:ScoreItem, b:ScoreItem) => b.score.efficiency - a.score.efficiency
+    setScores(rawScores.sort(byEfficiency))
+  }
+
+  const sortBySpeed = () => {
+    const bySpeed = (a:ScoreItem, b:ScoreItem) => b.score.speed - a.score.speed
+    setScores(rawScores.sort(bySpeed))
+  }
+
   const sortByMines = () => {
     const byMines = (a:ScoreItem, b:ScoreItem) => a.game.mines - b.game.mines
     setScores(rawScores.sort(byMines))
@@ -56,10 +66,13 @@ const HallOfFame = () => {
         <li>
           <footer>
             <a className="score" onClick={sortByPoints}>{text.fame['score']}</a>
+            <div className="efficiency-speed">
+              <a className="efficiency" onClick={sortByEfficiency}>{text.fame['efficiency']}</a><br />
+              /<a className="speed" onClick={sortBySpeed}>{text.fame['speed']}</a>
+            </div>
             <div className="mines-cells">
-              <a className="mines" onClick={sortByMines}
-                >{text.fame['mines']}</a> / <a className="cells" onClick={sortByCells}
-                >{text.fame['cells']}</a>
+              <a className="mines" onClick={sortByMines}>{text.fame['mines']}</a><br />
+              /<a className="cells" onClick={sortByCells}>{text.fame['cells']}</a>
             </div>
             <a className="moves" onClick={sortByMoves}>{text.fame['moves']}</a>
             <a className="duration" onClick={sortByDuration}>{text.fame['duration']}</a>
@@ -92,6 +105,7 @@ const HallOfFame = () => {
             </header>
             <footer>
               <div className="score">{log.score.points}</div>
+              <div className="efficiency-speed">{log.score.efficiency}&thinsp;/&thinsp;{log.score.speed}</div>
               <div className="mines-cells">{log.game.mines}&thinsp;/&thinsp;{log.game.cells}</div>
               <div className="moves">{log.game.effort.least}&#8239;&lt;&#8239;<b>{log.play.moves}</b>&#8239;&lt;&#8239;{log.game.effort.most} </div>
               <div className="duration">{Math.round(log.play.duration)}s</div>

@@ -69,6 +69,7 @@ li footer .score {
   text-align: center;
 }
 
+li footer .efficiency-speed,
 li footer .mines-cells,
 li footer .moves,
 li footer .duration {
