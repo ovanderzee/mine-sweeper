@@ -124,6 +124,9 @@ nav,
 #root {
   position: relative;
   z-index: 0;
+}
+
+#root:has(#game) {
   /* prevent scrollbars when mines explode */
   overflow: hidden;
 }
