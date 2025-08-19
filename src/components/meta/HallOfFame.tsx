@@ -26,6 +26,24 @@ const HallOfFame = () => {
     setScores(storage.scores)
   }
 
+  const sortByUser = () => {
+    setSortLabel('user')
+    const byRank = (a: ScoreItem, b: ScoreItem) => a.rank - b.rank
+    rawScores.sort(byRank)
+    const rankedUsers = [...new Set(rawScores.map((rs) => rs.user))]
+    const userSort: ScoreItem[] = []
+    rankedUsers.forEach((user) => {
+      userSort.push(...rawScores.filter((rs) => rs.user === user))
+    })
+    setScores(userSort)
+  }
+
+  const sortByDate = () => {
+    setSortLabel('date')
+    const byDate = (a: ScoreItem, b: ScoreItem) => b.date - a.date
+    setScores(rawScores.sort(byDate))
+  }
+
   const sortByPoints = () => {
     setSortLabel('points')
     const byPoints = (a:ScoreItem, b:ScoreItem) => b.score.points - a.score.points
@@ -73,6 +91,11 @@ const HallOfFame = () => {
       <h2>{text.nav['Hall of Fame']}</h2>
       <ol>
         <li className={`legend ${sortLabel}`}>
+          <header>
+            <h2 className="rank">&nbsp;</h2>
+            <a className="user" onClick={sortByUser}>{text.fame['user']}</a>
+            <a className="date" onClick={sortByDate}>{text.fame['date']}</a>
+          </header>
           <footer>
             <a className="points" onClick={sortByPoints}>{text.fame['points']}</a>
             <div className="efficiency-speed">
@@ -103,11 +126,10 @@ const HallOfFame = () => {
           >
             <header>
               <h2 className="rank" title={'#' + index}>
-                {log.rank <= 10 && <ShieldByRank rank={log.rank} />}
-                {log.rank > 10 && log.rank}
+                {log.rank <= 10 ? <ShieldByRank rank={log.rank} /> : log.rank}
               </h2>
               <h4 className="user">{log.user}</h4>
-              <h4 className="date">
+              <h4 className="date" data-date={log.date}>
                 {(new Date(log.date)).toLocaleDateString()}<br/>
                 {(new Date(log.date)).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
               </h4>

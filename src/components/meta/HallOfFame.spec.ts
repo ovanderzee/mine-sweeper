@@ -81,18 +81,47 @@ describe('The hall-of-fame-page clear list button', () => {
 })
 
 describe('The hall-of-fame-page list sorting', () => {
+  const firstItem = (qs: string): HTMLElement | null => document.querySelector(`li.legend + li ${qs}`)
+  const lastItem = (qs: string): HTMLElement | null => document.querySelector(`li:last-of-type ${qs}`)
+
   const firstEntry = (qs: string): string => {
-    const elem = document.querySelector(`li.legend + li ${qs}`)
+    const elem = firstItem(qs)
     if (elem) return elem.textContent; else throw 'first element not found'
   }
   const lastEntry = (qs: string): string => {
-    const elem = document.querySelector(`li:last-of-type ${qs}`)
+    const elem = lastItem(qs)
     if (elem) return elem.textContent; else throw 'last element not found'
   }
 
   beforeEach(() => {
     storage.scores = liveScores
     startHonourPageTesting()
+  })
+
+  test('should sort on user-points descending', () => {
+    const scoreUsers = liveScores.map(ls => ls.user)
+    const uniqueUsers = [...new Set(scoreUsers)]
+    const worstUser = uniqueUsers[uniqueUsers.length - 1]
+
+    const button = screen.getByText('user')
+    fireEvent.click(button)
+
+    const bestUserBest = firstEntry('.points')
+    const worstUserItems: HTMLElement[] = screen.getAllByText(worstUser)
+    const worstUserBestItem: HTMLElement | null | undefined = worstUserItems[0]?.parentElement?.parentElement
+    const worstUserBest = worstUserBestItem?.querySelector('.points')?.textContent || NaN
+
+    expect(Number(bestUserBest)).toBeGreaterThan(Number(worstUserBest))
+  })
+
+  test('should sort on date descending', () => {
+    const button = screen.getByText('date')
+    fireEvent.click(button)
+
+    const best = firstItem('.date')?.dataset.date
+    const worst = lastItem('.date')?.dataset.date
+
+    expect(Number(best)).toBeGreaterThan(Number(worst))
   })
 
   test('should sort on points descending', () => {
