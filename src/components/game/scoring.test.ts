@@ -2,7 +2,8 @@ import {
   clickBlankAreas, clickRemainingPointers,
   leastClicksToWin, mostClicksToWin,
   unmarkCells,
-  makeBoardCode, sequenceFillData
+  makeBoardCode, sequenceFillData,
+  precise
 } from './scoring'
 import { blank18pct, blank26pct, blank31pct, blank41pct } from './../../__mocks__/game-states'
 
@@ -114,7 +115,13 @@ describe('Sanity checking on boardCode', () => {
   // suppress alarming messages in output
   beforeEach(() => console.error = jest.fn())
 
-  test('should find invalid code', () => {
+  test('should find undecodeable code', () => {
+    const wrongCode = '9786708089'
+    sequenceFillData(wrongCode)
+    expect(console.error).toHaveBeenLastCalledWith('Invalid code')
+  })
+
+  test('should find unexpected code', () => {
     const wrongCode = '444IwBhrSv'
     sequenceFillData(wrongCode)
     expect(console.error).toHaveBeenLastCalledWith('Invalid code')
@@ -137,5 +144,25 @@ describe('Sanity checking on boardCode', () => {
     const goodCode = '444IwBhrSvI'
     sequenceFillData(goodCode)
     expect(console.error).not.toHaveBeenCalled()
+  })
+})
+
+describe('Precision as long as we need it', () => {
+  test('should return a number', () => {
+    const figure = 23.456
+    const result = precise(figure, 3)
+    expect(typeof result).toBe('number')
+  })
+
+  test('should round to significance', () => {
+    const figure = 23.456
+    const result = precise(figure, 3)
+    expect(result).toBe(23.5)
+  })
+
+  test('should not add trailing zeroes after the decimal point', () => {
+    const figure = 8
+    const result = precise(figure, 3)
+    expect(result).toBe(8)
   })
 })

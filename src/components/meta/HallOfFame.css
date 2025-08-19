@@ -63,14 +63,33 @@ li header .date {
   flex: 0 0 auto;
 }
 
-li footer .score {
+li footer .points {
   flex: 0 0 3.75em;
   font-weight: bold;
   text-align: center;
 }
 
+li footer .efficiency-speed,
 li footer .mines-cells,
 li footer .moves,
 li footer .duration {
   flex: 1 1 auto;
+}
+
+li footer a {
+  cursor: pointer;
+}
+
+li.legend.points a.points,
+li.legend.efficiency a.efficiency,
+li.legend.speed a.speed,
+li.legend.mines a.mines,
+li.legend.cells a.cells,
+li.legend.moves a.moves,
+li.legend.duration a.duration {
+  color: var(--state-red);
+}
+
+li.legend a {
+  font-weight: bold;
 }

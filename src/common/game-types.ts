@@ -58,8 +58,7 @@ export interface GameState {
   tShift: number;
   // over:
   mines: CellState[];
-  rank: number;
-  score: number;
+  score: ScoreItem;
 }
 
 export interface GameScore {
@@ -86,6 +85,7 @@ export interface ScoreItem {
   code: string,
   date: number,
   user: string,
+  rank: number,
   game: GameScore,
   play: PlayScore,
   score: ScoreCalc,

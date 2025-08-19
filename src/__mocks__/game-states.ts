@@ -1,4 +1,5 @@
-import { GameState, GameStages, CellStateStage} from '../common/game-types'
+import { GameState, GameStages, CellStateStage } from '../common/game-types'
+import { initialScore } from '../components/game/common'
 
 // states comply to microConfig
 
@@ -23,8 +24,7 @@ export const newGameState: GameState = {
   ],
   "tZero": 0,
   "tShift": 0,
-  "rank": 0,
-  "score": 0,
+  "score": initialScore,
   "mines": []
 }
 
@@ -49,8 +49,7 @@ export const playingGameState: GameState = {
   ],
   "tZero": 1745517111606,
   "tShift": 1745517156730, // 45124ms later
-  "rank": 0,
-  "score": 0,
+  "score": initialScore,
   "mines": []
 }
 
@@ -75,8 +74,7 @@ export const lostGameState: GameState = {
   ],
   "tZero": 1745517111606,
   "tShift": 1745517342474, // 230868ms later
-  "rank": 0,
-  "score": 0,
+  "score": initialScore,
   "mines": []
 }
 
@@ -101,8 +99,7 @@ export const decidedGameState: GameState = {
   ],
   "tZero": 1745517111606,
   "tShift": 1745517342474, // 3m 50s
-  "rank": 0,
-  "score": 0,
+  "score": initialScore,
   "mines": []
 }
 
@@ -127,9 +124,13 @@ export const wonGameState: GameState = {
   ],
   "tZero": 1745518136299,
   "tShift": 1745518137216, // 917ms later
-  "rank": 21,
-  "score": 5944,
-  "mines": []
+  "mines": [],
+  "score": {
+    code: '334IwBj5Yg', date: 1745518137216, user: 'Midas', rank: 1,
+    game: {cells: 9, mines: 2, effort: {least: 2, most: 7}},
+    play: {moves: 4, duration: 45.244},
+    score: {efficiency: 0.5, speed: 0.08841, points: 44}
+  },
 }
 
 // more complicated 7x7/7 boards
@@ -204,8 +205,7 @@ export const blank18pct = {
   ],
   "tZero": 0,
   "tShift": 0,
-  "rank": 0,
-  "score": 0,
+  "score": initialScore,
   "mines": []
 }
 
@@ -278,8 +278,7 @@ export const blank26pct = {
   ],
   "tZero": 0,
   "tShift": 0,
-  "rank": 0,
-  "score": 0,
+  "score": initialScore,
   "mines": []
 }
 
@@ -353,8 +352,7 @@ export const blank31pct = {
   ],
   "tZero": 0,
   "tShift": 0,
-  "rank": 0,
-  "score": 0,
+  "score": initialScore,
   "mines": []
 }
 
@@ -427,7 +425,6 @@ export const blank41pct = {
   ],
   "tZero": 0,
   "tShift": 0,
-  "rank": 0,
-  "score": 0,
+  "score": initialScore,
   "mines": []
 }

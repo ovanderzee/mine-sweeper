@@ -87,17 +87,20 @@ export const sequenceFillData = (boardCode: string): [CellState[][], AppCheckCon
 
   const boardData = boardCode.substring(BREAK_BEFORE)
   const content = LzString.decompressFromEncodedURIComponent(boardData)
-  const flatContent = content.split('').map(fill => Number(fill))
+  const flatContent = content?.split('').map(fill => Number(fill))
 
   // check integrity
-  const invalidCode = content.length !== content.match(/[0-1]/g)?.length
+  const invalidCode = !content || content.length !== content.match(/[0-1]/g)?.length
 
-  // check expected size
-  const size = Math.pow(content.length, 0.5)
-  const wrongSize = checkSize !== size
+  let wrongSize, wrongMineCount
+  if (!invalidCode) {
+    // check expected size
+    const size = Math.pow(content.length, 0.5)
+    wrongSize = checkSize !== size
 
-  // check expected mine count
-  const wrongMineCount = calculateMineCount(checkConfig) !== flatContent.filter(fill => fill === 1).length
+    // check expected mine count
+    wrongMineCount = calculateMineCount(checkConfig) !== flatContent.filter(fill => fill === 1).length
+  }
 
   if (invalidCode || wrongSize || wrongMineCount) {
     console.error(`Invalid ${invalidCode ? 'code' : wrongSize ? 'size' : wrongMineCount ? 'mine count' : 'error'}`)
@@ -106,12 +109,12 @@ export const sequenceFillData = (boardCode: string): [CellState[][], AppCheckCon
 
   // do not check but rebuild board
   const newBoard: CellState[][] = []
-  for (let start = 0; start < flatContent.length; start = start + size) {
-    const sequence = flatContent.slice(start, start + size)
+  for (let start = 0; start < flatContent.length; start = start + checkSize) {
+    const sequence = flatContent.slice(start, start + checkSize)
     const newCells = sequence.map((value, col): CellState => {
       return {
         fill: value === 1 ? 9 : 0,
-        row: start / size, col
+        row: start / checkSize, col
       }
     })
     newBoard.push(newCells)
@@ -122,7 +125,7 @@ export const sequenceFillData = (boardCode: string): [CellState[][], AppCheckCon
   }
 
   newBoard.forEach(row =>
-    row.forEach(cell => cell.fill > 8 ? iterateNeighbours(cell, size, countNeighbourMines) : null)
+    row.forEach(cell => cell.fill > 8 ? iterateNeighbours(cell, checkSize, countNeighbourMines) : null)
   )
 
   return [newBoard, checkConfig]

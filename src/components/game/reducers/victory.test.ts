@@ -16,7 +16,7 @@ describe('victoryReducer makes up scores', () => {
   test('should add concise victory info to game state', () => {
     const victoryState = victoryReducer(wonGameState, microConfig)
 
-    expect(victoryState.rank).toBeTruthy()
-    expect(victoryState.score).toBeTruthy()
+    expect(victoryState.score.rank).toBeTruthy()
+    expect(victoryState.score.score.points).toBeTruthy()
   })
 });

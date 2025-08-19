@@ -51,9 +51,11 @@
     "rank": "psn",
     "name": "naam",
     "date": "datum",
-    "score": "punten",
-    "cells": "velden",
+    "points": "punten",
+    "efficiency": "efficiëntie",
+    "speed": "snelheid",
     "mines": "mijnen",
+    "cells": "velden",
     "moves": "zetten",
     "duration": "duur"
   },

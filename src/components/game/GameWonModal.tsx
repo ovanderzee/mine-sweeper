@@ -12,8 +12,8 @@ const GameWonModal = (props: GameWonModalProps) => {
       onConfirm={() => {}}
       closeModal={() => props.close(false)}
       className={props.state.stage}
-      textBefore={props.state.rank}
-      textAfter={props.state.score}
+      textBefore={props.state.score.rank}
+      textAfter={props.state.score.score.points}
     />
   )
 }
