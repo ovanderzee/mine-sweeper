@@ -115,7 +115,13 @@ describe('Sanity checking on boardCode', () => {
   // suppress alarming messages in output
   beforeEach(() => console.error = jest.fn())
 
-  test('should find invalid code', () => {
+  test('should find undecodeable code', () => {
+    const wrongCode = '9786708089'
+    sequenceFillData(wrongCode)
+    expect(console.error).toHaveBeenLastCalledWith('Invalid code')
+  })
+
+  test('should find unexpected code', () => {
     const wrongCode = '444IwBhrSv'
     sequenceFillData(wrongCode)
     expect(console.error).toHaveBeenLastCalledWith('Invalid code')

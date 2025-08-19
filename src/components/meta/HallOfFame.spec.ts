@@ -79,3 +79,90 @@ describe('The hall-of-fame-page clear list button', () => {
     expect(storage.scores.length).toBe(liveScores.length)
   })
 })
+
+describe('The hall-of-fame-page list sorting', () => {
+  const firstEntry = (qs: string): string => {
+    const elem = document.querySelector(`li.legend + li ${qs}`)
+    if (elem) return elem.textContent; else throw 'first element not found'
+  }
+  const lastEntry = (qs: string): string => {
+    const elem = document.querySelector(`li:last-of-type ${qs}`)
+    if (elem) return elem.textContent; else throw 'last element not found'
+  }
+
+  beforeEach(() => {
+    storage.scores = liveScores
+    startHonourPageTesting()
+  })
+
+  test('should sort on points descending', () => {
+    const button = screen.getByText('points')
+    fireEvent.click(button)
+
+    const best = firstEntry('.points')
+    const worst = lastEntry('.points')
+
+    expect(Number(best)).toBeGreaterThan(Number(worst))
+  })
+
+  test('should sort on efficiency descending', () => {
+    const button = screen.getByText('efficiency')
+    fireEvent.click(button)
+
+    const best = firstEntry('.efficiency-speed').match(/^.+?\u2009/)
+    const worst = lastEntry('.efficiency-speed').match(/^.+?\u2009/)
+
+    expect(Number(best)).toBeGreaterThan(Number(worst))
+  })
+
+  test('should sort on speed descending', () => {
+    const button = screen.getByText('speed')
+    fireEvent.click(button)
+
+    const best = firstEntry('.efficiency-speed').match(/\d+.\d+$/)
+    const worst = lastEntry('.efficiency-speed').match(/\d+.\d+$/)
+
+    expect(Number(best)).toBeGreaterThan(Number(worst))
+  })
+
+  test('should sort on mines descending', () => {
+    const button = screen.getByText('mines')
+    fireEvent.click(button)
+
+    const best = firstEntry('.mines-cells').match(/^\d+/)
+    const worst = lastEntry('.mines-cells').match(/^\d+/)
+
+    expect(Number(best)).toBeLessThan(Number(worst))
+  })
+
+  test('should sort on fields ascending', () => {
+    const button = screen.getByText('fields')
+    fireEvent.click(button)
+
+    const best = firstEntry('.mines-cells').match(/\d+$/)
+    const worst = lastEntry('.mines-cells').match(/\d+$/)
+
+    expect(Number(best)).toBeLessThan(Number(worst))
+  })
+
+  test('should sort on turns ascending', () => {
+    const button = screen.getByText('turns')
+    fireEvent.click(button)
+
+    const best = firstEntry('.moves b')
+    const worst = lastEntry('.moves b')
+
+    expect(Number(best)).toBeLessThan(Number(worst))
+  })
+
+  test('should sort on duration ascending', () => {
+    const button = screen.getByText('duration')
+    fireEvent.click(button)
+
+    const best = firstEntry('.duration')
+    const worst = lastEntry('.duration')
+
+    expect(parseInt(best)).toBeLessThan(parseInt(worst))
+  })
+
+})
