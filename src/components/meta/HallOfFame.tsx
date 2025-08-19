@@ -131,13 +131,13 @@ const HallOfFame = () => {
 */
 
   const fameNavigation = (
-    <nav>
+    <nav><div className="sticky-container">
       <EraseScores onErase={eraseScores} />
       {/*<HiScores />*/}
       <Help />
       <Settings />
       <GoBack />
-    </nav>
+    </div></nav>
   )
 
   return (
