@@ -56,7 +56,7 @@ describe('TimeTracker', () => {
       // sometimes one second less
       const modulatedSeconds = newSeconds % 60
       expect(getSecondsLapsed()).toBeLessThanOrEqual(modulatedSeconds)
-      expect(getSecondsLapsed()).toBeGreaterThanOrEqual(Math.max(modulatedSeconds, 0))
+      expect(getSecondsLapsed()).toBeGreaterThanOrEqual(Math.max(modulatedSeconds, 0)) // TODO: Flaky; can receive one to low
     })
 
     it('should not advance time when game has ended', () => {

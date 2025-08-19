@@ -18,6 +18,7 @@ li footer {
 }
 
 li.super {
+  position: relative;
   margin-block: 0.5em;
 }
 li.super header {
@@ -28,7 +29,7 @@ li.latest {
   outline: 1.5px solid var(--dark-blue);
   outline-offset: .5ex;
   border-radius: 1ex;
-  background: var(--light-blue);
+  background: var(--lighter-blue);
   margin-block: 1em;
   padding-right: .5ex;
 }
@@ -76,10 +77,31 @@ li footer .duration {
   flex: 1 1 auto;
 }
 
-li footer a {
+li:not(.legend) header .date,
+li:not(.legend) footer div:not(.points) {
+  font-size: 86%;
+}
+
+li.legend {
+  position: sticky;
+  z-index: 5;
+  top: var(--screen-gutter);
+  background: var(--light-blue);
+  outline: var(--screen-gutter) var(--light-blue) solid;
+  margin-block-end: 1.5em;
+}
+
+li.legend a {
+  font-weight: bold;
   cursor: pointer;
 }
 
+li.legend h2 {
+  line-height: 67%;
+}
+
+li.legend.user a.user,
+li.legend.date a.date,
 li.legend.points a.points,
 li.legend.efficiency a.efficiency,
 li.legend.speed a.speed,
@@ -88,8 +110,6 @@ li.legend.cells a.cells,
 li.legend.moves a.moves,
 li.legend.duration a.duration {
   color: var(--state-red);
-}
-
-li.legend a {
-  font-weight: bold;
+  text-decoration: underline 3px;
+  text-underline-offset: 3px;
 }

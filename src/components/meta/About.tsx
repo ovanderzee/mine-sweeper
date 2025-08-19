@@ -48,12 +48,12 @@ const About = () => {
   )
 
   const aboutNavigation = (
-    <nav>
+    <nav><div className="sticky-container">
       <HiScores />
       {/*<Help />*/}
       <Settings />
       <GoBack />
-    </nav>
+    </div></nav>
   )
 
   return (

@@ -66,7 +66,7 @@ const Game = () => {
   )
 
   const gameNavigation = (
-    <nav>
+    <nav><div className="sticky-container">
       <HiScores board={gameState.board} />
       <NewGame
         onNew={dispatchGameAction}
@@ -79,7 +79,7 @@ const Game = () => {
       <Help />
       <Settings />
       <GameCellDemoNav />
-    </nav>
+    </div></nav>
   )
 
   const [showWonModal, setShowWonModal] = useState(false)

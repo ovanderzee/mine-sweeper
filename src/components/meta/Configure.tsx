@@ -216,13 +216,13 @@ function Configure() {
   )
 
   const configNavigation = (
-    <nav>
+    <nav><div className="sticky-container">
       <DefaultSettings />
       <HiScores />
       <Help />
       {/* <Settings /> */}
       <GoBack />
-    </nav>
+    </div></nav>
   )
 
   return (

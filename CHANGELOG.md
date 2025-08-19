@@ -7,8 +7,6 @@
 - Gameboard could technically be 36 * 36 but board starts to jump when the game is operated by keyboard
 
 ### Features
-- Make option-bar sticky in landscape screen
-- Make header of hiscores sticky
 - Playmode: Play without flags
 - Playmode: Win or loose when flag count equals mine count
 - Hotkeys for option-bar items - or - a keyboardway to switch between game and option-bar
@@ -25,6 +23,8 @@
 
 ### Added
 - Sort High Scores on various properties
+- Sticky page options in landscape screen
+- Sticky High-Score property sorter
 
 
 ## [3.0.0] - 2025-08-11
