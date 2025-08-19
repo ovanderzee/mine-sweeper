@@ -17,9 +17,10 @@
 - Zoom slider on gamepage
 - Toggle focus between game and option-bar
 - Property histogram when sorting
+- Make options scrollable on mobile devices
 
 
-## [3.1.0]
+## [3.1.0] - 2025-08-19
 
 ### Added
 - Sort High Scores on various properties
