@@ -19,7 +19,13 @@
 - Property histogram when sorting
 
 
-## [3.1.0]
+## [3.1.1]
+
+### Fixed
+- Ignore or replace unparseable data from storage
+
+
+## [3.1.0] - 2025-08-19
 
 ### Added
 - Sort High Scores on various properties

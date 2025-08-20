@@ -56,13 +56,7 @@ describe('Configuration storage', () => {
   test('should get defaults when no localStorage item exists', () => {
     // localStorage cleared
     const config = storage.config
-    expect(config.BOARD_SIZE).toBe(DEFAULTS.BOARD_SIZE)
-    expect(config.GAME_LEVEL).toBe(DEFAULTS.GAME_LEVEL)
-    expect(config.MINE_COUNT).toBe(DEFAULTS.MINE_COUNT)
-    expect(config.LANGUAGE).toBe(DEFAULTS.LANGUAGE)
-    expect(config.FONT_SIZE).toBe(DEFAULTS.FONT_SIZE)
-    expect(config.PLAYER_NAME).toBe(DEFAULTS.PLAYER_NAME)
-    expect(config.MAX_SCORES).toBe(DEFAULTS.MAX_SCORES)
+    expect(config).toStrictEqual(DEFAULTS)
   })
 
   test('should stack values in order of appearance', () => {
@@ -83,10 +77,18 @@ describe('Configuration storage', () => {
     expect(config.PLAYER_NAME).toBe('Heidi')
     expect(config.MAX_SCORES).toBe(DEFAULTS.MAX_SCORES)
   })
+
+  test('should catch a JSON.parse error and return the default config', () => {
+    const stringified = '{"FONT_SIZE": 48, "PLAYER_NAME": "Flo'
+    localStorage.setItem('mv-config', stringified)
+    const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation()
+
+    const config = storage.config
+
+    expect(config).toStrictEqual(DEFAULTS)
+    expect(consoleErrorSpy).toHaveBeenLastCalledWith('Invalid configuration found, replace by defaults...')
+  })
 })
-
-
-
 
 
 describe('Game storage', () => {
@@ -145,11 +147,18 @@ describe('Game storage', () => {
     expect(eraseGameSpy).toHaveBeenCalled()
     jest.clearAllMocks()
   })
+
+  test('should catch a JSON.parse error and return null', () => {
+    const stringified = '{"stage":"game-new","board":[[{"stage":"touched'
+    sessionStorage.setItem('mv-game', stringified)
+    const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation()
+
+    const game = storage.game
+
+    expect(game).toBe(null)
+    expect(consoleErrorSpy).toHaveBeenLastCalledWith('Invalid game found, start new game...')
+  })
 })
-
-
-
-
 
 describe('Scores storage', () => {
   beforeEach(() => {
@@ -204,5 +213,16 @@ describe('Scores storage', () => {
 
     expect(eraseScoresSpy).toHaveBeenCalled()
     jest.clearAllMocks()
+  })
+
+  test('should catch a JSON.parse error and return an empty array', () => {
+    const stringified = '[{"code":"331Aw3CMxA","date":1755'
+    localStorage.setItem('mv-victory', stringified)
+    const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation()
+
+    const scores = storage.scores
+
+    expect(scores).toStrictEqual([])
+    expect(consoleErrorSpy).toHaveBeenLastCalledWith('Invalid scorelist found, start with new list...')
   })
 })
