@@ -93,19 +93,19 @@ describe('Configuration storage', () => {
 
 describe('Game storage', () => {
   beforeEach(() => {
-    sessionStorage.clear()
+    localStorage.clear()
   })
 
   test('should set data', () => {
     storage.game = newGameState
 
-    const read = JSON.parse(sessionStorage.getItem('mv-game') as string)
+    const read = JSON.parse(localStorage.getItem('mv-game') as string)
     expect(read.board).toStrictEqual(newGameState.board)
     expect(read.stage).toBe('game-new')
   })
 
   test('should get data', () => {
-    sessionStorage.setItem('mv-game', JSON.stringify(newGameState))
+    localStorage.setItem('mv-game', JSON.stringify(newGameState))
 
     const gameState = storage.game as GameState
     expect(gameState.board).toStrictEqual(newGameState.board)
@@ -115,19 +115,19 @@ describe('Game storage', () => {
   test('should set and overwrite', () => {
     storage.game = { ...wonGameState, extra: 123 } as GameState
 
-    const read1 = JSON.parse(sessionStorage.getItem('mv-game') as string)
+    const read1 = JSON.parse(localStorage.getItem('mv-game') as string)
     expect(read1.stage).toBe('game-won')
     expect(read1.extra).toBeTruthy()
 
     storage.game = newGameState
 
-    const read2 = JSON.parse(sessionStorage.getItem('mv-game') as string)
+    const read2 = JSON.parse(localStorage.getItem('mv-game') as string)
     expect(read2.stage).toBe('game-new')
     expect(read2.extra).toBeFalsy()
   })
 
   test('should be removable by method', () => {
-    sessionStorage.setItem('mv-game', JSON.stringify(newGameState))
+    localStorage.setItem('mv-game', JSON.stringify(newGameState))
 
     storage.eraseGame()
 
@@ -139,7 +139,7 @@ describe('Game storage', () => {
   })
 
   test('should be removable by garbage', () => {
-    sessionStorage.setItem('mv-game', JSON.stringify(newGameState))
+    localStorage.setItem('mv-game', JSON.stringify(newGameState))
     const eraseGameSpy = jest.spyOn(storage, 'eraseGame')
 
     storage.game = null
@@ -150,7 +150,7 @@ describe('Game storage', () => {
 
   test('should catch a JSON.parse error and return null', () => {
     const stringified = '{"stage":"game-new","board":[[{"stage":"touched'
-    sessionStorage.setItem('mv-game', stringified)
+    localStorage.setItem('mv-game', stringified)
     const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation()
 
     const game = storage.game

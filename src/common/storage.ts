@@ -31,10 +31,10 @@ const storage = {
   },
 
   eraseGame: () => {
-    sessionStorage.removeItem('mv-game')
+    localStorage.removeItem('mv-game')
   },
   get game(): GameState | null {
-    const stored = sessionStorage.getItem('mv-game')
+    const stored = localStorage.getItem('mv-game')
     let data: GameState | null
     try {
       data = stored ? JSON.parse(stored) : null
@@ -47,7 +47,7 @@ const storage = {
   set game(data: GameState | null) {
       if (data) {
         const storeable = JSON.stringify(data)
-        sessionStorage.setItem('mv-game', storeable)
+        localStorage.setItem('mv-game', storeable)
       } else {
         this.eraseGame()
       }

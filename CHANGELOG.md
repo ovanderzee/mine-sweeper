@@ -24,6 +24,9 @@
 ### Fixed
 - Ignore or replace unparseable data from storage
 
+### Changed
+- Stored game persists in browser
+
 
 ## [3.1.0] - 2025-08-19
 
