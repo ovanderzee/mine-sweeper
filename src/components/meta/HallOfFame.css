@@ -26,12 +26,16 @@ li.super header {
 }
 
 li.latest {
+  --radius: 1ex;
+
+  color: white;
   outline: 1.5px solid var(--dark-blue);
   outline-offset: .5ex;
-  border-radius: 1ex;
-  background: var(--lighter-blue);
+  border-radius: var(--radius);
+  background: linear-gradient(105deg, var(--light-blue), var(--medium-blue), var(--dark-blue));
   margin-block: 1em;
-  padding-right: .5ex;
+  padding: calc(var(--radius) / 2);
+  padding-inline-end: var(--radius);
 }
 li.latest .date {
   align-self: start;
