@@ -16,3 +16,7 @@ jest.mock('react-dom', () => {
 HTMLDialogElement.prototype.show = jest.fn();
 HTMLDialogElement.prototype.showModal = jest.fn();
 HTMLDialogElement.prototype.close = jest.fn();
+
+/* scrollIntoView is not implemented in jsdom */
+
+window.HTMLElement.prototype.scrollIntoView = function() {};
