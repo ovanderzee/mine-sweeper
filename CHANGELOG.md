@@ -23,6 +23,7 @@
 
 ### Fixed
 - Ignore or replace unparseable data from storage
+- Appearance sortpanel and sorted values
 
 ### Changed
 - Stored game persists in browser

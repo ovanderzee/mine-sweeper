@@ -28,7 +28,6 @@ li.super header {
 li.latest {
   --radius: 1ex;
 
-  color: white;
   outline: 1.5px solid var(--dark-blue);
   outline-offset: .5ex;
   border-radius: var(--radius);
@@ -39,6 +38,9 @@ li.latest {
 }
 li.latest .date {
   align-self: start;
+}
+li.latest * {
+  color: white !important;
 }
 
 li header *,
@@ -81,39 +83,55 @@ li footer .duration {
   flex: 1 1 auto;
 }
 
-li:not(.legend) header .date,
-li:not(.legend) footer div:not(.points) {
+li header .date,
+li footer div:not(.points) {
   font-size: 86%;
 }
 
-li.legend {
+.legend {
   position: sticky;
   z-index: 5;
-  top: var(--screen-gutter);
+  top: 0;
+  display: block;
   background: var(--light-blue);
-  outline: var(--screen-gutter) var(--light-blue) solid;
-  margin-block-end: 1.5em;
+  border-block-end: 1.5px solid var(--medium-blue);
+  margin-inline: calc(-1 * var(--screen-gutter));
+  padding: var(--screen-gutter);
 }
 
-li.legend a {
+.legend tbody {
+  display: table;
+  width: 100%;
+}
+
+.legend a {
   font-weight: bold;
   cursor: pointer;
 }
 
-li.legend h2 {
-  line-height: 67%;
-}
-
-li.legend.user a.user,
-li.legend.date a.date,
-li.legend.points a.points,
-li.legend.efficiency a.efficiency,
-li.legend.speed a.speed,
-li.legend.mines a.mines,
-li.legend.cells a.cells,
-li.legend.moves a.moves,
-li.legend.duration a.duration {
+.legend.user a.user,
+.legend.date a.date,
+.legend.points a.points,
+.legend.efficiency a.efficiency,
+.legend.speed a.speed,
+.legend.mines a.mines,
+.legend.cells a.cells,
+.legend.moves a.moves,
+.legend.duration a.duration {
   color: var(--state-red);
   text-decoration: underline 3px;
   text-underline-offset: 3px;
+}
+
+.legend.user ~ ol .user,
+.legend.date ~ ol .date,
+.legend.points ~ ol .points,
+.legend.efficiency ~ ol .efficiency,
+.legend.speed ~ ol .speed,
+.legend.mines ~ ol .mines,
+.legend.cells ~ ol .cells,
+.legend.moves ~ ol .moves,
+.legend.duration ~ ol .duration {
+  font-weight: bold;
+  color: var(--state-red);
 }
