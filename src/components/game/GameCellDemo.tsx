@@ -5,7 +5,8 @@ import GoBack from '../nav/GoBack'
 import './GameCellDemo.css'
 import '../meta/Meta.css'
 
-const inDevelopment = window.location.hostname === 'localhost'
+const devMatch = /^(localhost|192.168\.\d+\.\d+)$/
+const inDevelopment = window.location.hostname.match(devMatch)
 
 const GameCellDemoNav = () => {
   const pageCtx = useContext(PageContext)
