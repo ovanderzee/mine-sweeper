@@ -89,28 +89,26 @@ const HallOfFame = () => {
   const fameContent = (
     <article>
       <h2>{text.nav['Hall of Fame']}</h2>
+      <table className={`legend ${sortLabel}`}><tbody><tr>
+        <td></td>
+        <td><a className="user" onClick={sortByUser}>{text.fame['user']}</a></td>
+        <td></td>
+        <td></td>
+        <td><a className="date" onClick={sortByDate}>{text.fame['date']}</a></td>
+      </tr><tr>
+        <td><a className="points" onClick={sortByPoints}>{text.fame['points']}</a></td>
+        <td><a className="efficiency" onClick={sortByEfficiency}>{text.fame['efficiency']}</a></td>
+        <td><a className="mines" onClick={sortByMines}>{text.fame['mines']}</a></td>
+        <td><a className="moves" onClick={sortByMoves}>{text.fame['moves']}</a></td>
+        <td><a className="duration" onClick={sortByDuration}>{text.fame['duration']}</a></td>
+      </tr><tr>
+        <td></td>
+        <td><a className="speed" onClick={sortBySpeed}>{text.fame['speed']}</a></td>
+        <td><a className="cells" onClick={sortByCells}>{text.fame['cells']}</a></td>
+        <td></td>
+        <td></td>
+      </tr></tbody></table>
       <ol>
-        <li className={`legend ${sortLabel}`}>
-          <header>
-            <h2 className="rank">&nbsp;</h2>
-            <a className="user" onClick={sortByUser}>{text.fame['user']}</a>
-            <a className="date" onClick={sortByDate}>{text.fame['date']}</a>
-          </header>
-          <footer>
-            <a className="points" onClick={sortByPoints}>{text.fame['points']}</a>
-            <div className="efficiency-speed">
-              <a className="efficiency" onClick={sortByEfficiency}>{text.fame['efficiency']}</a><br />
-              /<a className="speed" onClick={sortBySpeed}>{text.fame['speed']}</a>
-            </div>
-            <div className="mines-cells">
-              <a className="mines" onClick={sortByMines}>{text.fame['mines']}</a><br />
-              /<a className="cells" onClick={sortByCells}>{text.fame['cells']}</a>
-            </div>
-            <a className="moves" onClick={sortByMoves}>{text.fame['moves']}</a>
-            <a className="duration" onClick={sortByDuration}>{text.fame['duration']}</a>
-          </footer>
-        </li>
-
         {!scores.length && (
           <li>
             <header>

@@ -11,9 +11,16 @@ import { GameState, ScoreItem } from './game-types'
 
 const storage = {
   get config(): AppConfig {
-      const stored = localStorage.getItem('mv-config')
-      const data: AppSubConfig = stored ? JSON.parse(stored) : {}
-      return { ...DEFAULTS, ...data }
+    const stored = localStorage.getItem('mv-config')
+    let data: AppConfig
+    try {
+      const updatable: AppSubConfig = stored ? JSON.parse(stored) : {}
+      data = { ...DEFAULTS, ...updatable }
+    } catch(error) {
+      console.error('Invalid configuration found, replace by defaults...')
+      data = DEFAULTS
+    }
+    return data
   },
   set config(data: AppSubConfig) {
     if (data) {
@@ -22,29 +29,43 @@ const storage = {
       localStorage.setItem('mv-config', storeable)
     }
   },
+
   eraseGame: () => {
-    sessionStorage.removeItem('mv-game')
+    localStorage.removeItem('mv-game')
   },
   get game(): GameState | null {
-      const stored = sessionStorage.getItem('mv-game')
-      const data: GameState = stored ? JSON.parse(stored) : null
-      return data
+    const stored = localStorage.getItem('mv-game')
+    let data: GameState | null
+    try {
+      data = stored ? JSON.parse(stored) : null
+    } catch(error) {
+      console.error('Invalid game found, start new game...')
+      data = null
+    }
+    return data
   },
   set game(data: GameState | null) {
       if (data) {
         const storeable = JSON.stringify(data)
-        sessionStorage.setItem('mv-game', storeable)
+        localStorage.setItem('mv-game', storeable)
       } else {
         this.eraseGame()
       }
   },
+
   eraseScores: () => {
     localStorage.removeItem('mv-victory')
   },
   get scores(): ScoreItem[] {
-      const stored = localStorage.getItem('mv-victory')
-      const data: ScoreItem[] = stored ? JSON.parse(stored) : []
-      return data
+    const stored = localStorage.getItem('mv-victory')
+    let data: ScoreItem[]
+    try {
+      data = stored ? JSON.parse(stored) : []
+    } catch(error) {
+      console.error('Invalid scorelist found, start with new list...')
+      data = []
+    }
+    return data
   },
   set scores(data: ScoreItem[]) {
       if (data?.length) {

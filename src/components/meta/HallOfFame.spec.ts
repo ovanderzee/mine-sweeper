@@ -81,7 +81,7 @@ describe('The hall-of-fame-page clear list button', () => {
 })
 
 describe('The hall-of-fame-page list sorting', () => {
-  const firstItem = (qs: string): HTMLElement | null => document.querySelector(`li.legend + li ${qs}`)
+  const firstItem = (qs: string): HTMLElement | null => document.querySelector(`li:first-of-type ${qs}`)
   const lastItem = (qs: string): HTMLElement | null => document.querySelector(`li:last-of-type ${qs}`)
 
   const firstEntry = (qs: string): string => {

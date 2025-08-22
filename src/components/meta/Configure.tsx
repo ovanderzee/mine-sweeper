@@ -8,7 +8,7 @@ import { ClockTypes, Languages, LanguageTranslation } from '../../common/app-typ
 import { RANGES } from '../../common/constants'
 import { GAME_DIVISOR } from '../../common/defaults'
 import storage from '../../common/storage'
-import { preventReloadByEnter } from '../../common/functions'
+import { preventReloadByEnter, scrollIntoViewTowardsCenter } from '../../common/functions'
 import './Meta.css'
 import './Configure.css'
 
@@ -87,6 +87,7 @@ function Configure() {
 
   const changeFontSizeHandler = (event: React.ChangeEvent) => {
     const ctrl = event.target as HTMLInputElement
+    scrollIntoViewTowardsCenter(ctrl)
     const value = Math.min(
       RANGES.FONT.max,
       Math.max(RANGES.FONT.min, +ctrl.value)
