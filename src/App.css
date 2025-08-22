@@ -12,7 +12,7 @@
   background: var(--medium-to-dark-blue);
 }
 
-.screen > nav .sticky-container {
+.screen > nav .sticky-slider {
   display: flex;
 }
 
@@ -68,7 +68,7 @@
     padding-block: var(--nav-pad-top)  var(--nav-pad-bottom);
   }
 
-  .screen > nav .sticky-container {
+  .screen > nav .sticky-slider {
     margin-inline: auto;
     width: var(--app-width);
   }
@@ -130,7 +130,7 @@
     padding-inline: var(--nav-pad);
   }
 
-  .screen > nav .sticky-container {
+  .screen > nav .sticky-slider {
     position: sticky;
     top: 0;
     height: calc(var(--app-width) - var(--nav-width));

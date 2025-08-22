@@ -1,5 +1,6 @@
 import { useContext } from 'react'
 import PageContext from '../../store/page-context'
+import NavOptionsBar from '../nav/NavOptionsBar'
 import DefaultSettings from '../nav/DefaultSettings'
 import HiScores from '../nav/HiScores'
 import Help from '../nav/Help'
@@ -217,13 +218,12 @@ function Configure() {
   )
 
   const configNavigation = (
-    <nav><div className="sticky-container">
+    <NavOptionsBar>
       <DefaultSettings />
       <HiScores />
       <Help />
-      {/* <Settings /> */}
       <GoBack />
-    </div></nav>
+    </NavOptionsBar>
   )
 
   return (

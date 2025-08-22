@@ -1,5 +1,6 @@
 import { useContext, useState } from 'react'
 import PageContext from '../../store/page-context'
+import NavOptionsBar from '../nav/NavOptionsBar'
 import EraseScores from '../nav/EraseScores'
 import Help from '../nav/Help'
 import Settings from '../nav/Settings'
@@ -151,13 +152,12 @@ const HallOfFame = () => {
 */
 
   const fameNavigation = (
-    <nav><div className="sticky-container">
+    <NavOptionsBar>
       <EraseScores onErase={eraseScores} />
-      {/*<HiScores />*/}
       <Help />
       <Settings />
       <GoBack />
-    </div></nav>
+    </NavOptionsBar>
   )
 
   return (
