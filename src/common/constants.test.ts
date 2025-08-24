@@ -1,4 +1,4 @@
-import { RANGES } from './constants'
+import { RANGES, SCORE_RADIX } from './constants'
 
 test('The RANGES members can not be changed', () => {
     const updateSizeMin = () => {RANGES.SIZE.min = 0}
@@ -11,4 +11,16 @@ test('The RANGES members can not be changed', () => {
     expect(deleteSizeMin).toThrow(/Cannot delete property 'min'/)
     expect(overwriteSize).toThrow(/Cannot assign to read only property 'SIZE'/)
     expect(deleteSize).toThrow(/Cannot delete property 'SIZE'/)
+})
+
+describe('SCORE_RADIX must be well chosen', () => {
+
+  test('SCORE_RADIX may not exceed 36', () => {
+    // max radix for parseInt and Number.toString is 36
+    expect(SCORE_RADIX).toBeLessThanOrEqual(36)
+  })
+
+  test('SCORE_RADIX may not be less than maximum BOARD_SIZE', () => {
+    expect(SCORE_RADIX).toBeGreaterThanOrEqual(RANGES.SIZE.max)
+  })
 })

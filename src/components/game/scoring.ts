@@ -4,6 +4,7 @@ import { AppCheckConfig } from '../../common/app-types'
 import { GameState, CellState, CellStateStage,
   GameScore, PlayScore, ScoreCalc } from '../../common/game-types'
 import { calculateMineCount } from '../../common/defaults'
+import { SCORE_RADIX } from '../../common/constants'
 
 export const precise = (figure: number, precision: number) => Number(figure.toPrecision(precision))
 
@@ -65,8 +66,8 @@ export const mostClicksToWin = (game: GameState) => {
 export const makeBoardCode = (board: CellState[][], gameLevel: number): string => {
   const allCells = board.flat()
 
-  // three positions to check the integrity: size(18), size(18), level(10)
-  const size18 = Math.pow(allCells.length, 0.5).toString(18)
+  // three positions to check the integrity: size(radix), size(radix), level(10)
+  const size18 = Math.pow(allCells.length, 0.5).toString(SCORE_RADIX)
 
   // booleanesque value for fill in one position
   const fill02 = allCells
@@ -81,7 +82,7 @@ export const sequenceFillData = (boardCode: string): [CellState[][], AppCheckCon
   const BREAK_BEFORE = 3
 
   const checkData = boardCode.substring(0, BREAK_BEFORE)
-  const checkSize = parseInt(checkData.charAt(0), 18)
+  const checkSize = parseInt(checkData.charAt(0), SCORE_RADIX)
   const checkLevel = Number(checkData.charAt(2))
   const checkConfig: AppCheckConfig = { BOARD_SIZE: checkSize, GAME_LEVEL: checkLevel }
 
