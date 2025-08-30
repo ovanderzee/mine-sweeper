@@ -6,6 +6,7 @@ import {
   precise
 } from './scoring'
 import { blank18pct, blank26pct, blank31pct, blank41pct } from './../../__mocks__/game-states'
+import { RANGES } from '../../common/constants'
 
 describe('some blanks need to be clicked and then all the pointercells have to be clicked', () => {
   test('sample game blank18pct has 2 blank areas and 20 pointers to click', () => {
@@ -108,6 +109,32 @@ describe('Create compressed string containing fill data', () => {
     expect(fillData).toStrictEqual(testBoard)
     expect(checkConfig.BOARD_SIZE).toBe(10)
     expect(checkConfig.GAME_LEVEL).toBe(9)
+  })
+})
+
+describe('Create compressed string based on highest BOARD_SIZE', () => {
+  const testGameLevel = 0
+
+  const testBoard = Array(RANGES.SIZE.max)
+  for (let x = 0; x < RANGES.SIZE.max; x++) {
+    testBoard[x] = Array(RANGES.SIZE.max)
+    for (let y = 0; y < RANGES.SIZE.max; y++) {
+      testBoard[x][y] = {"fill":0,"row":x,"col":y}
+    }
+  }
+
+  const testBoardCode = "kk0Aw18ZXTt-DFOS1b0c17PcaA"
+
+  it('should convert a board to a boardCode, otherwise update the string', () => {
+    const boardCode = makeBoardCode(testBoard, testGameLevel)
+    expect(boardCode).toBe(testBoardCode)
+  })
+
+  it('should convert a boardCode to a board', () => {
+    const [fillData, checkConfig] = sequenceFillData(testBoardCode)
+    expect(fillData).toStrictEqual(testBoard)
+    expect(checkConfig.BOARD_SIZE).toBe(RANGES.SIZE.max)
+    expect(checkConfig.GAME_LEVEL).toBe(testGameLevel)
   })
 })
 

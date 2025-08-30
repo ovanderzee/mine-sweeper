@@ -48,15 +48,14 @@
 
 /* MAIN ELEMENTS */
 
+html {
+  scroll-behavior: smooth;
+}
+
 body,
 section.screen,
 .modal {
   font-size: 15px;
-}
-
-html,
-body {
-  height: 100%;
 }
 
 body {
@@ -126,7 +125,7 @@ nav,
   z-index: 0;
 }
 
-#root:has(#game) {
+#root:has(#game.game-lost) {
   /* prevent scrollbars when mines explode */
   overflow: hidden;
 }

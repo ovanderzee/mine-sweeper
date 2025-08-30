@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import React, { useContext, useState } from 'react'
 import PageContext from '../../store/page-context'
 import NavOptionsBar from '../nav/NavOptionsBar'
 import EraseScores from '../nav/EraseScores'
@@ -27,64 +27,56 @@ const HallOfFame = () => {
     setScores(storage.scores)
   }
 
-  const sortByUser = () => {
-    setSortLabel('user')
-    const byRank = (a: ScoreItem, b: ScoreItem) => a.rank - b.rank
-    rawScores.sort(byRank)
-    const rankedUsers = [...new Set(rawScores.map((rs) => rs.user))]
-    const userSort: ScoreItem[] = []
-    rankedUsers.forEach((user) => {
-      userSort.push(...rawScores.filter((rs) => rs.user === user))
-    })
-    setScores(userSort)
+  const methodsByKind: Record<string, () => ScoreItem[]> = {
+    'user': () => {
+      const byRank = (a: ScoreItem, b: ScoreItem) => a.rank - b.rank
+      rawScores.sort(byRank)
+      const rankedUsers = [...new Set(rawScores.map((rs) => rs.user))]
+      const userSort: ScoreItem[] = []
+      rankedUsers.forEach((user) => {
+        userSort.push(...rawScores.filter((rs) => rs.user === user))
+      })
+      return userSort
+    },
+    'date': () => {
+      const byDate = (a: ScoreItem, b: ScoreItem) => b.date - a.date
+      return rawScores.sort(byDate)
+    },
+    'points': () => {
+      const byPoints = (a:ScoreItem, b:ScoreItem) => b.score.points - a.score.points
+      return rawScores.sort(byPoints)
+    },
+    'efficiency': () => {
+      const byEfficiency = (a:ScoreItem, b:ScoreItem) => b.score.efficiency - a.score.efficiency
+      return rawScores.sort(byEfficiency)
+    },
+    'speed': () => {
+      const bySpeed = (a:ScoreItem, b:ScoreItem) => b.score.speed - a.score.speed
+      return rawScores.sort(bySpeed)
+    },
+    'mines': () => {
+      const byMines = (a:ScoreItem, b:ScoreItem) => a.game.mines - b.game.mines
+      return rawScores.sort(byMines)
+    },
+    'cells': () => {
+      const byCells = (a:ScoreItem, b:ScoreItem) => a.game.cells - b.game.cells
+      return rawScores.sort(byCells)
+    },
+    'moves': () => {
+      const byMoves = (a:ScoreItem, b:ScoreItem) => a.play.moves - b.play.moves
+      return rawScores.sort(byMoves)
+    },
+    'duration': () => {
+      const byDuration = (a:ScoreItem, b:ScoreItem) => a.play.duration - b.play.duration
+      return rawScores.sort(byDuration)
+    }
   }
 
-  const sortByDate = () => {
-    setSortLabel('date')
-    const byDate = (a: ScoreItem, b: ScoreItem) => b.date - a.date
-    setScores(rawScores.sort(byDate))
-  }
-
-  const sortByPoints = () => {
-    setSortLabel('points')
-    const byPoints = (a:ScoreItem, b:ScoreItem) => b.score.points - a.score.points
-    setScores(rawScores.sort(byPoints))
-  }
-
-  const sortByEfficiency = () => {
-    setSortLabel('efficiency')
-    const byEfficiency = (a:ScoreItem, b:ScoreItem) => b.score.efficiency - a.score.efficiency
-    setScores(rawScores.sort(byEfficiency))
-  }
-
-  const sortBySpeed = () => {
-    setSortLabel('speed')
-    const bySpeed = (a:ScoreItem, b:ScoreItem) => b.score.speed - a.score.speed
-    setScores(rawScores.sort(bySpeed))
-  }
-
-  const sortByMines = () => {
-    setSortLabel('mines')
-    const byMines = (a:ScoreItem, b:ScoreItem) => a.game.mines - b.game.mines
-    setScores(rawScores.sort(byMines))
-  }
-
-  const sortByCells = () => {
-    setSortLabel('cells')
-    const byCells = (a:ScoreItem, b:ScoreItem) => a.game.cells - b.game.cells
-    setScores(rawScores.sort(byCells))
-  }
-
-  const sortByMoves = () => {
-    setSortLabel('moves')
-    const byMoves = (a:ScoreItem, b:ScoreItem) => a.play.moves - b.play.moves
-    setScores(rawScores.sort(byMoves))
-  }
-
-  const sortByDuration = () => {
-    setSortLabel('duration')
-    const byDuration = (a:ScoreItem, b:ScoreItem) => a.play.duration - b.play.duration
-    setScores(rawScores.sort(byDuration))
+  const sortByKind = function (event: React.UIEvent): void {
+    const label = (event.target as HTMLElement).className
+    setSortLabel(label)
+    setScores(methodsByKind[label]())
+    window.scrollTo({top: 0, left: 0})
   }
 
   const fameContent = (
@@ -92,20 +84,20 @@ const HallOfFame = () => {
       <h2>{text.nav['Hall of Fame']}</h2>
       <table className={`legend ${sortLabel}`}><tbody><tr>
         <td></td>
-        <td><a className="user" onClick={sortByUser}>{text.fame['user']}</a></td>
+        <td><a className="user" onClick={sortByKind}>{text.fame['user']}</a></td>
         <td></td>
         <td></td>
-        <td><a className="date" onClick={sortByDate}>{text.fame['date']}</a></td>
+        <td><a className="date" onClick={sortByKind}>{text.fame['date']}</a></td>
       </tr><tr>
-        <td><a className="points" onClick={sortByPoints}>{text.fame['points']}</a></td>
-        <td><a className="efficiency" onClick={sortByEfficiency}>{text.fame['efficiency']}</a></td>
-        <td><a className="mines" onClick={sortByMines}>{text.fame['mines']}</a></td>
-        <td><a className="moves" onClick={sortByMoves}>{text.fame['moves']}</a></td>
-        <td><a className="duration" onClick={sortByDuration}>{text.fame['duration']}</a></td>
+        <td><a className="points" onClick={sortByKind}>{text.fame['points']}</a></td>
+        <td><a className="efficiency" onClick={sortByKind}>{text.fame['efficiency']}</a></td>
+        <td><a className="mines" onClick={sortByKind}>{text.fame['mines']}</a></td>
+        <td><a className="moves" onClick={sortByKind}>{text.fame['moves']}</a></td>
+        <td><a className="duration" onClick={sortByKind}>{text.fame['duration']}</a></td>
       </tr><tr>
         <td></td>
-        <td><a className="speed" onClick={sortBySpeed}>{text.fame['speed']}</a></td>
-        <td><a className="cells" onClick={sortByCells}>{text.fame['cells']}</a></td>
+        <td><a className="speed" onClick={sortByKind}>{text.fame['speed']}</a></td>
+        <td><a className="cells" onClick={sortByKind}>{text.fame['cells']}</a></td>
         <td></td>
         <td></td>
       </tr></tbody></table>

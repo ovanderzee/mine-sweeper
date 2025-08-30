@@ -35,6 +35,7 @@ Object.defineProperties(RANGES, {
 
 export { RANGES }
 
+export const SCORE_RADIX = 24
 
 /* ADMIN */
 

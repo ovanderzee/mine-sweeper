@@ -1,4 +1,4 @@
-import { calculateMineCount } from './defaults'
+import DEFAULTS, { calculateMineCount } from './defaults'
 import { microConfig, scoringConfig } from '../__mocks__/configs'
 
 /**
@@ -18,4 +18,10 @@ test('Some boardSize and gameLevel to mineCount scenarios' , ()=>{
 
   const scoring = calculateMineCount(scoringConfig)
   expect(scoring).toBe(7)
+
+  const standard = calculateMineCount(DEFAULTS)
+  expect(standard).toBe(4)
+
+  const zero = calculateMineCount({BOARD_SIZE: 10, GAME_LEVEL: 0})
+  expect(zero).toBe(0)
 })
