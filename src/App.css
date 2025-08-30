@@ -1,4 +1,7 @@
 .screen {
+  --nav-width: 4em;
+  --nav-height: 3.5em;
+
   display: flex;
   margin: 0 auto;
   width: var(--app-width);
@@ -10,8 +13,6 @@
 
 @media only screen and (orientation: portrait) {
   .screen {
-    --nav-height: 3.5em;
-
     flex-direction: column;
     align-content: space-between;
     justify-content: space-between;
@@ -46,13 +47,12 @@
   }
 
   .screen > nav {
-    width: 100%;
+    width: 100% !important;
   }
 }
 
 @media only screen and (orientation: landscape) {
   .screen {
-    --nav-width: 4em;
     flex-wrap: nowrap;
   }
 
