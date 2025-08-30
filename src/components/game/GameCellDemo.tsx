@@ -103,6 +103,7 @@ const GameCellDemo = () => {
 
   const fireColors = <div className="css-colors" style={{'display': 'flex'}}>
     <div style={{'background': 'var(--fire-yellow)'}}>fire-yellow</div>
+    <div style={{'background': 'var(--fire-yellorange)'}}>fire-yellorange</div>
     <div style={{'background': 'var(--fire-orange)'}}>fire-orange</div>
     <div style={{'background': 'var(--fire-red)'}}>fire-red</div>
     <div style={{'background': 'var(--fire-blue)'}}>fire-blue</div>

@@ -19,7 +19,7 @@
 }
 
 .screen > nav button.active {
-  color: var(--fire-orange);
+  color: var(--fire-yellorange);
   transition: color 0s
 }
 
