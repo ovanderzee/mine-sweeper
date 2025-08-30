@@ -54,11 +54,6 @@ section.screen,
   font-size: 15px;
 }
 
-html,
-body {
-  height: 100%;
-}
-
 body {
   background: var(--dark-to-light-blue) fixed;
   margin: 0;
@@ -126,7 +121,7 @@ nav,
   z-index: 0;
 }
 
-#root:has(#game) {
+#root:has(#game.game-lost) {
   /* prevent scrollbars when mines explode */
   overflow: hidden;
 }
