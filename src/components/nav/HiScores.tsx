@@ -12,8 +12,8 @@ export const MinesMinusFlags = (props: HiScoresProps) => {
   const mineCount = flatBoard.filter(c => c.fill > 8).length
   const flagCount = flatBoard.filter(c => c.locked).length
   const count = mineCount - flagCount
-  const label = count ? `${count}×` : '!'
-  const fontSizeAdjust = label.length < 4 ? '100%' : '75%'
+  const label = `${count}×`
+  const fontSizeAdjust = label.length < 3 ? '100%' : '86%'
 
   return (count ?
     <g style={{'fontSize': fontSizeAdjust}}>
