@@ -3,8 +3,7 @@
 ## [Unreleased]
 
 ### Problems
-- Zoom slider becomes more jumpy when the font size increases
-- Gameboard could technically be 36 * 36 but board starts to jump when the game is operated by keyboard
+- Gameboard could technically be 36 * 36 but board starts to jump when the game is operated by keyboard: provide zoom buttons next to clock
 
 ### Features
 - Playmode: Play without flags
@@ -17,9 +16,21 @@
 - Zoom slider on gamepage
 - Toggle focus between game and option-bar
 - Property histogram when sorting
+- Make options scrollable on mobile devices
 
 
-## [3.1.0]
+## [3.1.1]
+
+### Fixed
+- Ignore or replace unparseable data from storage
+- Appearance sortpanel and sorted values
+- Zoom slider stays in viewport
+
+### Changed
+- Stored game persists in browser
+
+
+## [3.1.0] - 2025-08-19
 
 ### Added
 - Sort High Scores on various properties

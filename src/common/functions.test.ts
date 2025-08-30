@@ -1,5 +1,5 @@
 import React from 'react'
-import { preventReloadByEnter } from './functions'
+import { preventReloadByEnter, scrollIntoViewTowardsCenter } from './functions'
 
 describe('preventReloadByEnter', () => {
   it('should call event.preventDefault when Enter was pressed', () => {
@@ -22,5 +22,24 @@ describe('preventReloadByEnter', () => {
 
     preventReloadByEnter(aEvent)
     expect(aEvent.preventDefault).not.toHaveBeenCalled()
+  })
+})
+
+
+describe('scrollIntoViewTowardsCenter', () => {
+  it('should call HTMLElement.scrollIntoViewIfNeeded', () => {
+    window.HTMLElement.prototype.scrollIntoViewIfNeeded = function() {}
+    const sivin = jest.spyOn(document.body, 'scrollIntoViewIfNeeded')
+    scrollIntoViewTowardsCenter(document.body)
+
+    expect(sivin).toHaveBeenCalled()
+    delete window.HTMLElement.prototype.scrollIntoViewIfNeeded
+  })
+
+  it('should call HTMLElement.scrollIntoView', () => {
+    const siv = jest.spyOn(document.body, 'scrollIntoView')
+    scrollIntoViewTowardsCenter(document.body)
+
+    expect(siv).toHaveBeenCalled()
   })
 })

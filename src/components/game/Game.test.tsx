@@ -7,7 +7,7 @@ import { microConfig } from './../../__mocks__/configs'
 
 describe('new game properties', () => {
   beforeEach(() => {
-    sessionStorage.removeItem('mv-game')
+    localStorage.removeItem('mv-game')
   })
 
   it('should create a game with default properties', () => {
