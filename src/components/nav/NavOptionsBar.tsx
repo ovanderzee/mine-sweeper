@@ -1,3 +1,5 @@
+import './NavOptionsBar.css'
+
 interface NavOptionsBarProps {
   children: React.ReactNode,
 }
