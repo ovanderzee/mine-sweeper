@@ -48,6 +48,10 @@
 
 /* MAIN ELEMENTS */
 
+html {
+  scroll-behavior: smooth;
+}
+
 body,
 section.screen,
 .modal {
