@@ -46,7 +46,6 @@
   }
 
   .screen > nav .sticky-slider {
-    margin-inline: auto;
     padding-block: var(--nav-pad-top)  var(--nav-pad-bottom);
     width: var(--app-width);
     max-width: 100dvw;
