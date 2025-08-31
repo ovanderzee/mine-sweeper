@@ -132,10 +132,12 @@ label:not([for]) > * {
 
   label:not([for]) input[type="checkbox"],
   label:not([for]) input[type="radio"] {
+    --min-height: 1.333em;
+
     accent-color: var(--darker-blue);
     width: var(--min-height);
     height: var(--min-height);
-    vertical-align: -.333em;
+    vertical-align: -.25em;
   }
 
     label:not([for]) input[type="checkbox"] + span,

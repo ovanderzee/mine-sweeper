@@ -76,11 +76,8 @@
   .screen > nav .sticky-slider {
     position: sticky;
     top: 0;
-    /* height: calc(var(--max-icons) * var(--nav-width)); */
     flex-direction: column;
     padding-inline: var(--nav-pad);
-    /* max-height: 100dvh; */
-    /* overflow-y: auto; */
   }
 
   .screen > nav button {

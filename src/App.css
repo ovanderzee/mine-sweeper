@@ -12,6 +12,13 @@
   transition: opacity 0.5s linear;
 }
 
+/* not on laptop or desktop */
+@media only screen and (hover: none) {
+  .screen {
+    border-top: 1px solid var(--medium-blue);
+  }
+}
+
 @media only screen and (orientation: portrait) {
   .screen {
     flex-direction: column;
@@ -25,13 +32,6 @@
     box-sizing: border-box;
     max-width: 100%; /* center content when font-size is too big */
     margin-bottom: var(--nav-height);
-  }
-}
-
-/* not on laptop or desktop */
-@media only screen and (hover: none) {
-  .screen {
-    border-top: 1px solid var(--medium-blue);
   }
 }
 
