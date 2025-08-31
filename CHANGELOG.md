@@ -16,8 +16,21 @@
 - Zoom slider on gamepage
 - Toggle focus between game and option-bar
 - Property histogram when sorting
-- Make options scrollable on mobile devices
 
+
+## [3.2.0]
+
+### Added
+- New component to manage options
+- Horizontal options bar scrollable
+
+### Changed
+- Clearer color for signaling when function was executed
+- Some more margin on mine count 
+- Smaller radio-buttons and checkboxes
+
+### Removed
+- No more filling of slender areas of app background when viewport narrower than 512px.
 
 ## [3.1.1]
 

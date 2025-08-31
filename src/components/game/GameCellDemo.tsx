@@ -1,5 +1,6 @@
 import React, { useContext, useState } from 'react'
 import PageContext from '../../store/page-context'
+import NavOptionsBar from '../nav/NavOptionsBar'
 import Settings from '../nav/Settings'
 import GoBack from '../nav/GoBack'
 import './GameCellDemo.css'
@@ -102,6 +103,7 @@ const GameCellDemo = () => {
 
   const fireColors = <div className="css-colors" style={{'display': 'flex'}}>
     <div style={{'background': 'var(--fire-yellow)'}}>fire-yellow</div>
+    <div style={{'background': 'var(--fire-yellorange)'}}>fire-yellorange</div>
     <div style={{'background': 'var(--fire-orange)'}}>fire-orange</div>
     <div style={{'background': 'var(--fire-red)'}}>fire-red</div>
     <div style={{'background': 'var(--fire-blue)'}}>fire-blue</div>
@@ -150,10 +152,10 @@ const GameCellDemo = () => {
         {fnSymbols}
         {navSymbols}
       </article>
-      <nav>
+      <NavOptionsBar>
         <Settings />
         <GoBack />
-      </nav>
+      </NavOptionsBar>
     </section>
   )
 }

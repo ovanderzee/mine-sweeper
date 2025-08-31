@@ -2,6 +2,7 @@ import { useContext, useState, useEffect, useReducer } from 'react'
 import PageContext from '../../store/page-context'
 import GameCell from './GameCell'
 import GameCellDemoNav from './GameCellDemo'
+import NavOptionsBar from '../nav/NavOptionsBar'
 import HiScores from '../nav/HiScores'
 import NewGame from '../nav/NewGame'
 import Replay from '../nav/Replay'
@@ -66,7 +67,7 @@ const Game = () => {
   )
 
   const gameNavigation = (
-    <nav><div className="sticky-container">
+    <NavOptionsBar>
       <HiScores board={gameState.board} />
       <NewGame
         onNew={dispatchGameAction}
@@ -79,7 +80,7 @@ const Game = () => {
       <Help />
       <Settings />
       <GameCellDemoNav />
-    </div></nav>
+    </NavOptionsBar>
   )
 
   const [showWonModal, setShowWonModal] = useState(false)
