@@ -85,14 +85,15 @@ const GameCell = (props: GameCellProps) => {
     Keyboard input
   */
   const keystrokeHandler = (event: React.KeyboardEvent) => {
-    event.stopPropagation()
     let goToCell!: HTMLButtonElement
 
     switch(event.key) {
       case 'Enter':
+        event.stopPropagation()
         actionHandler(GameActionType.MOVE)
         break
       case ' ':
+        event.stopPropagation()
         actionHandler(GameActionType.FLAG)
         break
       case 'ArrowUp':
@@ -109,7 +110,10 @@ const GameCell = (props: GameCellProps) => {
         break
     }
 
-    if (goToCell) goToCell.focus()
+    if (goToCell) {
+      event.stopPropagation()
+      goToCell.focus()
+    }
   }
 
   return (
