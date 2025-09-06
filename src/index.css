@@ -126,7 +126,7 @@ nav,
   z-index: 0;
 }
 
-#root:has(#game.game-lost) {
+#root:has(#game .game-lost) {
   /* prevent scrollbars when mines explode */
   overflow: hidden;
 }

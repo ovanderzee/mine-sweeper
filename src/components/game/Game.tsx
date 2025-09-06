@@ -18,7 +18,7 @@ import './Game.css'
 
 const Game = () => {
   const pageCtx = useContext(PageContext)
-  const { BOARD_SIZE, FONT_SIZE } = pageCtx.config
+  const { BOARD_SIZE } = pageCtx.config
 
   const [gameState, dispatchGameAction] = useReducer(
     gameReducer.bind(pageCtx.config),
@@ -48,7 +48,7 @@ const Game = () => {
   const gameBoard = (
     <article
         id="playground"
-        className={`board-size__${BOARD_SIZE}`}
+        className={`board-size__${BOARD_SIZE} ${gameState.stage}`}
         style={{'--board-size': BOARD_SIZE} as React.CSSProperties}
     >
       {gameState.board.map((row) =>
@@ -109,15 +109,11 @@ const Game = () => {
   />
 
   return (
-    <section
-      id="game"
-      className={`screen ${gameState.stage}`}
-      style={{fontSize: `${FONT_SIZE}px`}}
-    >
+    <>
       {gameBoard}
       {gameNavigation}
       {showWonModal && gameWonModal}
-    </section>
+    </>
   )
 }
 

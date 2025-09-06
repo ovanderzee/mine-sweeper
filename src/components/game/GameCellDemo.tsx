@@ -6,7 +6,7 @@ import GoBack from '../nav/GoBack'
 import './GameCellDemo.css'
 import '../meta/Meta.css'
 
-const devMatch = /^(localhost|192.168\.\d+\.\d+)$/
+const devMatch = /^(localhost|\d+\.\d+\.\d+\.\d+)$/
 const inDevelopment = window.location.hostname.match(devMatch)
 
 const GameCellDemoNav = () => {
@@ -21,8 +21,6 @@ const GameCellDemoNav = () => {
 }
 
 const GameCellDemo = () => {
-  const pageCtx = useContext(PageContext)
-  const { FONT_SIZE } = pageCtx.config
   const [activatedClass, setActivatedClass] = useState('explode')
 
   const explodeHandler = () => {
@@ -58,9 +56,9 @@ const GameCellDemo = () => {
         mines are classifiesd as 'mijn'
         the clicked mine is also classified as explode
   */
-  const lost = <div className="game-lost">
+  const lost = <div>
     <label>Game Lost</label>
-    <article id="playground" className="board-size__6" style={{'--board-size': 6} as React.CSSProperties}>
+    <article id="playground" className="board-size__6 game-lost" style={{'--board-size': 6} as React.CSSProperties}>
 
         <button type="button" className="touched mijn" id="row0col1" style={{'--cell-row': 1, '--cell-col': 1} as React.CSSProperties}></button>
         <button type="button" className="touched mijn flag" id="row0col2" style={{'--cell-row': 1, '--cell-col': 2} as React.CSSProperties}></button>
@@ -86,22 +84,22 @@ const GameCellDemo = () => {
         pristine class cells are reclassified touched.
         mines become classified as 'mijn'
   */
-  const won = <div className="game-won">
+  const won = <>
     <label>Game Won</label>
-    <article id="playground" className="board-size__6" style={{'--board-size': 6} as React.CSSProperties}>
+    <article id="playground" className="board-size__6 game-won" style={{'--board-size': 6} as React.CSSProperties}>
         <button type="button" className="touched" id="row0col0" style={{'--cell-row': 1, '--cell-col': 1} as React.CSSProperties}></button>
         <button type="button" className="touched" id="row0col1" style={{'--cell-row': 1, '--cell-col': 2} as React.CSSProperties}>1</button>
         <button type="button" className="touched mijn" id="row0col2" style={{'--cell-row': 1, '--cell-col': 3} as React.CSSProperties}></button>
         <button type="button" className="touched mijn flag" id="row0col3" style={{'--cell-row': 1, '--cell-col': 4} as React.CSSProperties}></button>
     </article>
-  </div>
+  </>
 
   const stateColors = <div className="css-colors">
     <div style={{'background': 'var(--state-green)'} as React.CSSProperties}>state-green</div>
     <div style={{'background': 'var(--state-red)'} as React.CSSProperties}>state-red</div>
   </div>
 
-  const fireColors = <div className="css-colors" style={{'display': 'flex'}}>
+  const fireColors = <div className="css-colors">
     <div style={{'background': 'var(--fire-yellow)'}}>fire-yellow</div>
     <div style={{'background': 'var(--fire-yellorange)'}}>fire-yellorange</div>
     <div style={{'background': 'var(--fire-orange)'}}>fire-orange</div>
@@ -109,26 +107,26 @@ const GameCellDemo = () => {
     <div style={{'background': 'var(--fire-blue)'}}>fire-blue</div>
   </div>
 
-  const pristineColors = <div className="css-colors" style={{'display': 'flex'}}>
+  const pristineColors = <div className="css-colors">
     <div style={{'background': 'var(--light-pristine)'}}>light-pristine</div>
     <div style={{'background': 'var(--medium-pristine)'}}>medium-pristine</div>
     <div style={{'background': 'var(--dark-pristine)'}}>dark-pristine</div>
   </div>
 
-  const touchedColors = <div className="css-colors" style={{'display': 'flex'}}>
+  const touchedColors = <div className="css-colors">
     <div style={{'background': 'var(--light-touched)'}}>light-touched</div>
     <div style={{'background': 'var(--medium-touched)'}}>medium-touched</div>
     <div style={{'background': 'var(--dark-touched)'}}>dark-touched</div>
   </div>
 
-  const fnSymbols = <div className="svg-symbols" style={{'display': 'flex'}}>
+  const fnSymbols = <div className="svg-symbols">
     <svg><use href={`#nav-play`} /></svg>
     <svg><use href={`#nav-replay`} /></svg>
     <svg><use href={`#nav-reset`} /></svg>
     <svg><use href={`#nav-empty`} /></svg>
   </div>
 
-  const navSymbols = <div className="svg-symbols" style={{'display': 'flex'}}>
+  const navSymbols = <div className="svg-symbols">
     <svg><use href={`#nav-return`} /></svg>
     <svg><use href={`#nav-sliders`} /></svg>
     <svg><use href={`#nav-question`} /></svg>
@@ -137,10 +135,7 @@ const GameCellDemo = () => {
   </div>
 
   return (
-    <section
-      className="screen"
-      style={{ fontSize: `${FONT_SIZE}px`, lineHeight: 'initial' }}
-    >
+    <>
       <article id="playground">
         {playing}
         {lost}
@@ -156,7 +151,7 @@ const GameCellDemo = () => {
         <Settings />
         <GoBack />
       </NavOptionsBar>
-    </section>
+    </>
   )
 }
 

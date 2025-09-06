@@ -10,7 +10,6 @@ import './About.css'
 
 const About = () => {
   const pageCtx = useContext(PageContext)
-  const { FONT_SIZE } = pageCtx.config
   const text = pageCtx.text
   const [appVersion, commitHash] = VERSION_INFO
 
@@ -57,13 +56,10 @@ const About = () => {
   )
 
   return (
-    <section
-      className="screen"
-      style={{ fontSize: `${FONT_SIZE}px`, lineHeight: 'initial' }}
-    >
+    <>
       {aboutContent}
       {aboutNavigation}
-    </section>
+    </>
   )
 }
 

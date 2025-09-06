@@ -72,7 +72,7 @@
   z-index: -10;
 }
 
-.game-lost #playground button.flag::after {
+#playground.game-lost button.flag::after {
   color: var(--state-red);
 }
 
@@ -81,7 +81,7 @@
   text-shadow: -1px -1px 0px #6666;
 }
 
-.game-won #playground button.mijn::before {
+#playground.game-won button.mijn::before {
   background:
     radial-gradient(ellipse 50% 80% at 10% 50%, var(--ultra-light-blue) 14%, 16%, transparent),
     radial-gradient(ellipse 50% 50% at 52% 50%, transparent 90%, var(--extra-dark-blue) 110%),
@@ -91,13 +91,13 @@
   box-shadow: var(--glow-color) var(--glow-offset);
 }
 
-.game-lost #playground button.touched:not(.mijn) {
+#playground.game-lost button.touched:not(.mijn) {
   background: none;
   --shadow-topleft: 1px 1px 1px;
   --shadow-bottomright: -1px -1px 1px;
 }
 
-.game-lost #playground button.mijn::before {
+#playground.game-lost button.mijn::before {
   --glow-color: var(--fire-yellow);
 
   background: radial-gradient(
@@ -109,11 +109,11 @@
   box-shadow: var(--glow-color) var(--glow-offset);
 }
 
-.game-lost #playground button.mijn.explode {
+#playground.game-lost button.mijn.explode {
   z-index: 10;
 }
 
-.game-lost #playground button.mijn.explode::before {
+#playground.game-lost button.mijn.explode::before {
   --pseudo-margin: 10%;
 
   background: radial-gradient(
@@ -124,7 +124,7 @@
   box-shadow: none;
 }
 
-.game-lost #playground button.mijn.explode .burst {
+#playground.game-lost button.mijn.explode .burst {
   display: inline-block;
   width: 80%;
   height: 80%;

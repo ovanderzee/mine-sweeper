@@ -14,7 +14,6 @@ import './HallOfFame.css'
 
 const HallOfFame = () => {
   const pageCtx = useContext(PageContext)
-  const { FONT_SIZE } = pageCtx.config
   const text = pageCtx.text
 
   const rawScores = storage.scores
@@ -153,13 +152,10 @@ const HallOfFame = () => {
   )
 
   return (
-    <section
-      className="screen"
-      style={{fontSize: `${FONT_SIZE}px`}}
-    >
+    <>
       {fameContent}
       {fameNavigation}
-    </section>
+    </>
   )
 }
 
