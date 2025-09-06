@@ -4,12 +4,10 @@ export default {
   setupFilesAfterEnv: ["<rootDir>/src/jest.setup.ts"], // The file you created to extend jest config and "implement" the jest-dom environment in the jest globals
   transform: {
     "^.+\\.(ts|tsx)?$": [
-      "ts-jest",
-      {
-        tsconfig: "<rootDir>/tsconfig.app.json",
-      }
+      "ts-jest", {tsconfig: "<rootDir>/tsconfig.app.json"}
     ]
   },
+  fakeTimers: {"enableGlobally": true},
   coveragePathIgnorePatterns: [
     "<rootDir>/src/common/(app|game)-types.ts",
     "<rootDir>/src/components/game/GameCellDemo",

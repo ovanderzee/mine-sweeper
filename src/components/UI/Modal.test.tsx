@@ -21,7 +21,6 @@ describe('Modal Dialog', () => {
   }
 
   beforeEach(() => {
-    jest.useFakeTimers()
     cancelFn = jest.fn()
     confirmFn = jest.fn()
     closeFn = jest.fn()
@@ -29,7 +28,6 @@ describe('Modal Dialog', () => {
   })
 
   afterEach(() => {
-    jest.useRealTimers()
   })
 
   it('should put op a dialog element', () => {

@@ -22,14 +22,12 @@ jest.mock("./TimeTracker", () => () => {
 
 describe('The game cells', () => {
   beforeEach(() => {
-    jest.useFakeTimers()
     storage.config = microConfig
   })
 
   afterEach(() => {
     act(() => {
       jest.runAllTimers()
-      jest.useRealTimers()
     })
   })
 
@@ -81,14 +79,12 @@ describe('The game sidebar', () => {
 
 describe('The game start button', () => {
   beforeEach(() => {
-    jest.useFakeTimers()
     storage.config = microConfig
   })
 
   afterEach(() => {
     act(() => {
       jest.runAllTimers()
-      jest.useRealTimers()
     })
   })
 
@@ -158,14 +154,12 @@ describe('The replay button', () => {
   })
 
   beforeEach(() => {
-    jest.useFakeTimers()
     storage.config = microConfig
   })
 
   afterEach(() => {
     act(() => {
       jest.runAllTimers()
-      jest.useRealTimers()
     })
   })
 
@@ -289,14 +283,12 @@ describe('initialise game', () => {
 
 describe('handle loosing and winning', () => {
   beforeEach(() => {
-    jest.useFakeTimers()
     storage.config = microConfig
   })
 
   afterEach(() => {
     act(() => {
       jest.runAllTimers()
-      jest.useRealTimers()
     })
   })
 

@@ -81,13 +81,11 @@ describe('Gamecell, a party of properties', () => {
     let cell: CellState, button: HTMLElement
 
     beforeEach(() => {
-      jest.useFakeTimers()
       dispatchGameAction = jest.fn()
     })
 
     afterEach(() => {
       jest.runAllTimers()
-      jest.useRealTimers()
     })
 
     it('clicked mine cell', () => {

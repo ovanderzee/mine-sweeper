@@ -11,7 +11,6 @@ test('GameWonModal should return JSX.Element', () => {
 })
 
 test('GameWonModal should close using an external function', () => {
-  jest.useFakeTimers()
   const closeFn = jest.fn()
   renderInProvider(<GameWonModal close={closeFn} state={wonGameState} />)
   const dialog = screen.getByRole('dialog')
@@ -19,6 +18,4 @@ test('GameWonModal should close using an external function', () => {
   jest.runAllTimers()
 
   expect(closeFn).toHaveBeenCalled()
-
-  jest.useRealTimers()
 })
