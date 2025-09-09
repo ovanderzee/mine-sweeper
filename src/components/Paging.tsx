@@ -2,6 +2,7 @@ import Introduction from './UI/Introduction'
 import { useContext, useEffect, useState } from 'react'
 import Game from './game/Game'
 import PageContext from '../store/page-context'
+import { flipFocus } from '../common/functions'
 
 function Paging() {
   const pageCtx = useContext(PageContext)
@@ -33,6 +34,7 @@ function Paging() {
       id={pageId}
       className="screen"
       style={{fontSize: `${pageCtx.config.FONT_SIZE}px`}}
+      onKeyDown={flipFocus}
     >
       {pageCtx.render}
       {showIntroduction && introLayer}
