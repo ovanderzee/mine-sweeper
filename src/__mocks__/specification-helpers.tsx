@@ -30,7 +30,7 @@ export const referAndNavigateTo = {
 export const startPageTesting = () => {
   render(<App />)
   // click 'skip intro' button to goto game screen
-  const button = screen.getByRole('button')
+  const button = screen.getByLabelText('skip to play')
   act(() => {
     fireEvent.click(button)
     jest.advanceTimersByTime(FADE_OUT_TIME * 1.1)

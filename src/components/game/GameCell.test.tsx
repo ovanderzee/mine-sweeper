@@ -185,9 +185,5 @@ describe('Gamecell, a party of properties', () => {
       const response = {payload: JSON.stringify({cell, entry: {locked: true}}), type: 'FLAG'}
       expect(dispatchGameAction).toHaveBeenCalledWith(response)
     })
-
-//     it('and accept arrow keys to activate other cells', () => {
-//          see Game.test.tsx
-//     })
   })
 })
