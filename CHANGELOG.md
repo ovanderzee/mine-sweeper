@@ -16,8 +16,14 @@
 - Replay game from High Scores (when routing)
 - Save a game on a new list page (with comment)
 - Zoom slider on gamepage
-- Toggle focus between game and option-bar
 - Property histogram when sorting
+
+
+
+## [3.3.0]
+
+### Added
+- Toggle focus between game and option-bar with Alt+Tab
 
 
 ## [3.2.0]
@@ -33,6 +39,7 @@
 
 ### Removed
 - No more filling of slender areas of app background when viewport narrower than 512px.
+
 
 ## [3.1.1]
 
