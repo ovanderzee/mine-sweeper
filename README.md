@@ -21,3 +21,4 @@ Just like real life!
 -  Playing time picked up after reload
 -  Score based on efficiency and speed
 -  Sortable High Scores
+-  Toggle focus between game and option-bar with Alt+Tab

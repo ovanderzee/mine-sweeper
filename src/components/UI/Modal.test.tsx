@@ -1,4 +1,4 @@
-import { fireEvent, screen } from '@testing-library/react'
+import { fireEvent, screen, waitForElementToBeRemoved } from '@testing-library/react'
 import { ReactNode } from 'react'
 import { renderInProvider } from '../../__mocks__/render-helpers'
 import Modal from './Modal'
@@ -21,15 +21,10 @@ describe('Modal Dialog', () => {
   }
 
   beforeEach(() => {
-    jest.useFakeTimers()
     cancelFn = jest.fn()
     confirmFn = jest.fn()
     closeFn = jest.fn()
     renderInProvider(getSimpleModal())
-  })
-
-  afterEach(() => {
-    jest.useRealTimers()
   })
 
   it('should put op a dialog element', () => {
@@ -38,29 +33,29 @@ describe('Modal Dialog', () => {
   })
 
   describe('should cancel and close the dialog', () => {
-    it('by clicking the cancel button', () => {
+    it('by clicking the cancel button', async () => {
       const cancelButton = screen.getByText(/Cancel/i)
       fireEvent.click(cancelButton)
-      jest.runAllTimers()
+      await waitForElementToBeRemoved(() => screen.getByRole('dialog'))
       expect(cancelFn).toHaveBeenCalledTimes(1)
       expect(confirmFn).toHaveBeenCalledTimes(0)
       expect(closeFn).toHaveBeenCalledTimes(1)
     })
 
-    it('by pressing Enter while focussed cancel button', () => {
+    it('by pressing Enter while focussed cancel button', async () => {
       const cancelButton = screen.getByText(/Cancel/i)
       fireEvent.focus(cancelButton)
       fireEvent.keyDown(cancelButton, {key: 'Enter'})
-      jest.runAllTimers()
+      await waitForElementToBeRemoved(() => screen.getByRole('dialog'))
       expect(cancelFn).toHaveBeenCalledTimes(1)
       expect(confirmFn).toHaveBeenCalledTimes(0)
       expect(closeFn).toHaveBeenCalledTimes(1)
     })
 
-    it('by pressing Escape when dialog just opened', () => {
+    it('by pressing Escape when dialog just opened', async () => {
       const modalDialog = screen.getByRole('dialog')
       fireEvent.keyDown(modalDialog, {key: 'Escape'})
-      jest.runAllTimers()
+      await waitForElementToBeRemoved(() => screen.getByRole('dialog'))
       expect(cancelFn).toHaveBeenCalledTimes(1)
       expect(confirmFn).toHaveBeenCalledTimes(0)
       expect(closeFn).toHaveBeenCalledTimes(1)
@@ -68,29 +63,29 @@ describe('Modal Dialog', () => {
   })
 
   describe('should confirm and close the dialog', () => {
-    it('by clicking the confirm button', () => {
+    it('by clicking the confirm button', async () => {
       const confirmButton = screen.getByText(/OK/i)
       fireEvent.click(confirmButton)
-      jest.runAllTimers()
+      await waitForElementToBeRemoved(() => screen.getByRole('dialog'))
       expect(cancelFn).toHaveBeenCalledTimes(0)
       expect(confirmFn).toHaveBeenCalledTimes(1)
       expect(closeFn).toHaveBeenCalledTimes(1)
     })
 
-    it('by pressing Enter while focussed confirm button', () => {
+    it('by pressing Enter while focussed confirm button', async () => {
       const confirmButton = screen.getByText(/OK/i)
       fireEvent.focus(confirmButton)
       fireEvent.keyDown(confirmButton, {key: 'Enter'})
-      jest.runAllTimers()
+      await waitForElementToBeRemoved(() => screen.getByRole('dialog'))
       expect(cancelFn).toHaveBeenCalledTimes(0)
       expect(confirmFn).toHaveBeenCalledTimes(1)
       expect(closeFn).toHaveBeenCalledTimes(1)
     })
 
-    it('by pressing Enter when dialog just opened', () => {
+    it('by pressing Enter when dialog just opened', async () => {
       const modalDialog = screen.getByRole('dialog')
       fireEvent.keyDown(modalDialog, {key: 'Enter'})
-      jest.runAllTimers()
+      await waitForElementToBeRemoved(() => screen.getByRole('dialog'))
       expect(cancelFn).toHaveBeenCalledTimes(0)
       expect(confirmFn).toHaveBeenCalledTimes(1)
       expect(closeFn).toHaveBeenCalledTimes(1)

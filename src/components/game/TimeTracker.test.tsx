@@ -7,18 +7,6 @@ import { newGameState, playingGameState, lostGameState } from './../../__mocks__
 import { renderInProvider } from './../../__mocks__/render-helpers'
 
 describe('TimeTracker', () => {
-  beforeEach(() => {
-    act(() => {
-      jest.useFakeTimers({timerLimit: 5000})
-    })
-  })
-
-  afterEach(() => {
-    act(() => {
-      jest.useRealTimers()
-    })
-  })
-
   describe('digital clock', () => {
     const getMinutesLapsed = () => Number(document.querySelector('#minute')?.textContent)
     const getSecondsLapsed = () => Number(document.querySelector('#second')?.textContent)

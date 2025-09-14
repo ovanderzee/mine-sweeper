@@ -81,13 +81,11 @@ describe('Gamecell, a party of properties', () => {
     let cell: CellState, button: HTMLElement
 
     beforeEach(() => {
-      jest.useFakeTimers()
       dispatchGameAction = jest.fn()
     })
 
     afterEach(() => {
       jest.runAllTimers()
-      jest.useRealTimers()
     })
 
     it('clicked mine cell', () => {
@@ -187,9 +185,5 @@ describe('Gamecell, a party of properties', () => {
       const response = {payload: JSON.stringify({cell, entry: {locked: true}}), type: 'FLAG'}
       expect(dispatchGameAction).toHaveBeenCalledWith(response)
     })
-
-//     it('and accept arrow keys to activate other cells', () => {
-//          see Game.test.tsx
-//     })
   })
 })

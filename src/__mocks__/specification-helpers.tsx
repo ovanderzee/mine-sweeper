@@ -5,6 +5,7 @@ import App from './../App'
 import DEFAULTS from './../common/defaults'
 import storage from './../common/storage'
 import { CellState } from './../common/game-types'
+import { FADE_OUT_TIME } from './../common/constants'
 import { microConfig } from './configs'
 
 export const referAndNavigateTo = {
@@ -29,8 +30,11 @@ export const referAndNavigateTo = {
 export const startPageTesting = () => {
   render(<App />)
   // click 'skip intro' button to goto game screen
-  const button = screen.getByRole('button')
-  fireEvent.click(button)
+  const button = screen.getByLabelText('skip to play')
+  act(() => {
+    fireEvent.click(button)
+    jest.advanceTimersByTime(FADE_OUT_TIME * 1.1)
+  })
 }
 
 export const startAboutPageTesting = () => {

@@ -31,6 +31,7 @@ const Introduction = (props: { onEnd: (timeout: number) => void }) => {
       onClick={goToGame}
       onAnimationEnd={goToGame}
       onKeyDown={goToGame}
+      aria-label="skip to play"
       ref={commonRef}
       tabIndex={-1}
     >

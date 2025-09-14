@@ -25,18 +25,19 @@ const ModalComponent = (props: ModalProps): React.ReactNode => {
   let dialogElement!: HTMLDialogElement | null
 
   const keystrokeHandler = (event: React.KeyboardEvent, handler: (event: React.KeyboardEvent)=>void) => {
-    event.stopPropagation()
     if (event.key && event.key === 'Enter') handler(event)
   }
 
   const confirmHandler = (event: React.UIEvent) => {
+    event.stopPropagation()
     props.onConfirm && props.onConfirm()
-    timedCloseModal(event)
+    timedCloseModal()
   }
 
   const cancelHandler = (event: React.UIEvent) => {
+    event.stopPropagation()
     props?.onCancel && props.onCancel()
-    timedCloseModal(event)
+    timedCloseModal()
   }
 
   const confirmButton = <button type="button" className="confirm"
@@ -59,8 +60,7 @@ const ModalComponent = (props: ModalProps): React.ReactNode => {
 
   const [endState, setEndState] = useState('')
 
-  const timedCloseModal = (event: React.UIEvent) => {
-    event.stopPropagation()
+  const timedCloseModal = () => {
     setEndState('ending')
     setTimeout(() => {
         if (dialogElement) {
@@ -75,7 +75,6 @@ const ModalComponent = (props: ModalProps): React.ReactNode => {
   }
 
   const keystrokeShortcut = (event: React.KeyboardEvent): void => {
-    event.stopPropagation()
     switch (event.key) {
       case 'Escape':
         cancelHandler(event)

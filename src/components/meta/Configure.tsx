@@ -227,10 +227,7 @@ function Configure() {
   )
 
   return (
-    <section
-      className="screen"
-      style={{fontSize: `${config.FONT_SIZE}px`}}
-    >
+    <>
       <form
           onKeyDown={(event) => preventReloadByEnter(event)}
         >
@@ -239,7 +236,7 @@ function Configure() {
         {recordContent}
       </form>
       {configNavigation}
-    </section>
+    </>
   )
 }
 

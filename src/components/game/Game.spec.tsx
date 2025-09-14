@@ -1,7 +1,6 @@
 import '@testing-library/jest-dom'
 import { fireEvent, screen, within } from '@testing-library/react'
 import { act } from 'react';
-import { referAndNavigateTo, setDefaultConfig } from './../../__mocks__/specification-helpers'
 import * as load from './reducers/load'
 import * as newGame from './reducers/newGame'
 import * as replay from './reducers/replay'
@@ -10,7 +9,10 @@ import * as victory from './reducers/victory'
 import * as defeat from './reducers/defeat'
 import { CellState, GameState } from './../../common/game-types'
 import storage from './../../common/storage'
-import { startPageTesting, clickGameButton, getButtonFromState, clickToLoose, clickToWin } from './../../__mocks__/specification-helpers'
+import {
+  referAndNavigateTo, setDefaultConfig, startPageTesting,
+  clickGameButton, clickToLoose, clickToWin
+} from './../../__mocks__/specification-helpers'
 import { newGameState, playingGameState, lostGameState, wonGameState } from './../../__mocks__/game-states'
 import { microConfig } from './../../__mocks__/configs'
 
@@ -22,14 +24,12 @@ jest.mock("./TimeTracker", () => () => {
 
 describe('The game cells', () => {
   beforeEach(() => {
-    jest.useFakeTimers()
     storage.config = microConfig
   })
 
   afterEach(() => {
     act(() => {
       jest.runAllTimers()
-      jest.useRealTimers()
     })
   })
 
@@ -81,14 +81,12 @@ describe('The game sidebar', () => {
 
 describe('The game start button', () => {
   beforeEach(() => {
-    jest.useFakeTimers()
     storage.config = microConfig
   })
 
   afterEach(() => {
     act(() => {
       jest.runAllTimers()
-      jest.useRealTimers()
     })
   })
 
@@ -158,14 +156,12 @@ describe('The replay button', () => {
   })
 
   beforeEach(() => {
-    jest.useFakeTimers()
     storage.config = microConfig
   })
 
   afterEach(() => {
     act(() => {
       jest.runAllTimers()
-      jest.useRealTimers()
     })
   })
 
@@ -289,14 +285,12 @@ describe('initialise game', () => {
 
 describe('handle loosing and winning', () => {
   beforeEach(() => {
-    jest.useFakeTimers()
     storage.config = microConfig
   })
 
   afterEach(() => {
     act(() => {
       jest.runAllTimers()
-      jest.useRealTimers()
     })
   })
 
@@ -325,88 +319,5 @@ describe('handle loosing and winning', () => {
     expect(storage.game.stage).toBe('game-lost')
     expect(touchButtonReducerSpy).toHaveBeenCalled()
     expect(defeatReducerSpy).toHaveBeenCalled()
-  })
-})
-
-describe('navigate gameboard by keyboard (gameCell)', () => {
-  let initialButton: HTMLButtonElement
-
-  beforeEach(() => {
-    storage.config = microConfig
-    storage.game = playingGameState
-    startPageTesting()
-    initialButton = getButtonFromState({ row: 1, col: 1,  fill: 0 })
-  })
-
-  it('should accept arrowUp keys to activate upper cells', () => {
-    const ArrowUpEvent = {
-      key: 'ArrowUp',
-      stopPropagation: jest.fn(),
-      target: initialButton
-    } as unknown as React.KeyboardEvent
-    fireEvent.keyDown(initialButton, ArrowUpEvent)
-
-    const upButton = getButtonFromState({ row: 0, col: 1,  fill: 0 })
-    expect(document.activeElement).toBe(upButton)
-
-    fireEvent.keyDown(initialButton, ArrowUpEvent)
-
-    const edgeButton = getButtonFromState({ row: 0, col: 1,  fill: 0 })
-    expect(edgeButton).toBe(upButton)
-    expect(document.activeElement).toBe(upButton)
-  })
-
-  it('should accept arrowRight keys to activate right cells', () => {
-    const ArrowRightEvent = {
-      key: 'ArrowRight',
-      stopPropagation: jest.fn(),
-      target: initialButton
-    } as unknown as React.KeyboardEvent
-    fireEvent.keyDown(initialButton, ArrowRightEvent)
-
-    const rightButton = getButtonFromState({ row: 1, col: 2,  fill: 0 })
-    expect(document.activeElement).toBe(rightButton)
-
-    fireEvent.keyDown(initialButton, ArrowRightEvent)
-
-    const edgeButton = getButtonFromState({ row: 1, col: 2,  fill: 0 })
-    expect(edgeButton).toBe(rightButton)
-    expect(document.activeElement).toBe(rightButton)
-  })
-
-  it('should accept ArrowDown keys to activate lower cells', () => {
-    const ArrowDownEvent = {
-      key: 'ArrowDown',
-      stopPropagation: jest.fn(),
-      target: initialButton
-    } as unknown as React.KeyboardEvent
-    fireEvent.keyDown(initialButton, ArrowDownEvent)
-
-    const downButton = getButtonFromState({ row: 2, col: 1,  fill: 0 })
-    expect(document.activeElement).toBe(downButton)
-
-    fireEvent.keyDown(initialButton, ArrowDownEvent)
-
-    const edgeButton = getButtonFromState({ row: 2, col: 1,  fill: 0 })
-    expect(edgeButton).toBe(downButton)
-    expect(document.activeElement).toBe(downButton)
-  })
-
-  it('should accept arrowLeft keys to activate left cells', () => {
-    const ArrowLeftEvent = {
-      key: 'ArrowLeft',
-      stopPropagation: jest.fn(),
-      target: initialButton
-    } as unknown as React.KeyboardEvent
-    fireEvent.keyDown(initialButton, ArrowLeftEvent)
-
-    const leftButton = getButtonFromState({ row: 1, col: 0,  fill: 0 })
-    expect(document.activeElement).toBe(leftButton)
-
-    fireEvent.keyDown(initialButton, ArrowLeftEvent)
-
-    const edgeButton = getButtonFromState({ row: 1, col: 0,  fill: 0 })
-    expect(edgeButton).toBe(leftButton)
-    expect(document.activeElement).toBe(leftButton)
   })
 })

@@ -32,6 +32,7 @@
     box-sizing: border-box;
     max-width: 100%; /* center content when font-size is too big */
     margin-bottom: var(--nav-height);
+    line-height: initial !important;
   }
 }
 
