@@ -7,7 +7,7 @@ import Settings from '../nav/Settings'
 import GoBack from '../nav/GoBack'
 import { ShieldByRank } from '../UI/Shield'
 import Diagram from '../UI/Diagram'
-import { ScoreItem } from '../../common/game-types'
+import { ScoreItem, ScoreParam } from '../../common/game-types'
 import storage from '../../common/storage'
 import { precise } from '../game/scoring'
 import './Meta.css'
@@ -21,7 +21,7 @@ const HallOfFame = () => {
   const latest = [...rawScores].sort((a:ScoreItem, b:ScoreItem) => b.date - a.date)[0]
 
   const [scores, setScores] = useState(rawScores)
-  const [sortLabel, setSortLabel] = useState('points')
+  const [sortLabel, setSortLabel] = useState<ScoreParam>('points')
 
   const eraseScores = () => {
     setScores(storage.scores)
@@ -74,7 +74,7 @@ const HallOfFame = () => {
 
   const sortByKind = function (event: React.UIEvent): void {
     const label = (event.target as HTMLElement).className
-    setSortLabel(label)
+    setSortLabel(label as ScoreParam)
     setScores(methodsByKind[label]())
     window.scrollTo({top: 0, left: 0})
   }
@@ -101,6 +101,9 @@ const HallOfFame = () => {
         <td></td>
         <td></td>
       </tr></tbody></table>
+
+      <Diagram scores={scores} xParam={sortLabel} yParam="rank" />
+
       <ol>
         {!scores.length && (
           <li>
@@ -109,9 +112,6 @@ const HallOfFame = () => {
             </header>
           </li>
         )}
-
-        <Diagram scores={scores} xParam="points" yParam="rank" />
-
         {scores.map((log: ScoreItem, index) => (
           <li
             className={`${log.rank <= 10 ? 'super' : ''} ${log.date === latest.date ? 'latest' : ''}`}

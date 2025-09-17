@@ -1,16 +1,10 @@
-import {
-  Primitive
-} from '../../common/app-types'
-import { ScoreItem,
-} from '../../common/game-types'
-
-type ScoreParam = keyof ScoreItem | keyof ScoreItem["game"] | keyof ScoreItem["play"] | keyof ScoreItem["score"]
-type FlatScore = Record<ScoreParam, Primitive>
+import { ScoreItem, ScoreParam, FlatScore } from '../../common/game-types'
+import LineDiagram from './LineDiagram'
 
 interface DiagramProps {
   scores: ScoreItem[],
-  xParam: ScoreParam, //string, //
-  yParam: ScoreParam, //string //
+  xParam: ScoreParam,
+  yParam: ScoreParam,
 }
 
 const Diagram = (props: DiagramProps) => {
@@ -25,12 +19,13 @@ const Diagram = (props: DiagramProps) => {
   })
 
   const svgDiagram = () => {
+    if (!flatScores.length) return
+
     const xType = typeof flatScores[0][props.xParam]
     const yType = typeof flatScores[0][props.yParam]
 
     if (xType === 'number' && yType === 'number') {
-      console.log('lijndiagram')
-      return (<span>Lijndiagram</span>)
+      return (<LineDiagram data={flatScores} xParam={props.xParam} yParam={props.yParam} />)
     } else {
       return (<span>Niksjes</span>)
     }

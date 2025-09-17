@@ -90,3 +90,7 @@ export interface ScoreItem {
   play: PlayScore,
   score: ScoreCalc,
 }
+
+export type ScoreParam = keyof ScoreItem | keyof ScoreItem["game"] | keyof ScoreItem["play"] | keyof ScoreItem["score"]
+
+export type FlatScore = Record<ScoreParam, number>

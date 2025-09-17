@@ -1,0 +1,15 @@
+svg.line-diagram {
+  font-size: 15px;
+  width: 100%;
+}
+
+.line-diagram circle,
+.line-diagram rect {
+  fill: currentcolor;
+}
+
+.line-diagram line,
+.line-diagram path {
+  stroke: currentcolor;
+  stroke-width: 1;
+}
