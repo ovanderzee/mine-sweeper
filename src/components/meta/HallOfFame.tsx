@@ -6,6 +6,7 @@ import Help from '../nav/Help'
 import Settings from '../nav/Settings'
 import GoBack from '../nav/GoBack'
 import { ShieldByRank } from '../UI/Shield'
+import Diagram from '../UI/Diagram'
 import { ScoreItem } from '../../common/game-types'
 import storage from '../../common/storage'
 import { precise } from '../game/scoring'
@@ -108,6 +109,8 @@ const HallOfFame = () => {
             </header>
           </li>
         )}
+
+        <Diagram scores={scores} xParam="points" yParam="rank" />
 
         {scores.map((log: ScoreItem, index) => (
           <li
