@@ -26,8 +26,6 @@ const Diagram = (props: DiagramProps) => {
 
     if (xType === 'number' && yType === 'number') {
       return (<LineDiagram data={flatScores} xParam={props.xParam} yParam={props.yParam} />)
-    } else {
-      return (<span>Niksjes</span>)
     }
   }
   return svgDiagram()
