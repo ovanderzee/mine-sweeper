@@ -22,34 +22,44 @@ const LineDiagram = (props: LineDiagramProps) => {
     y: Math.max(...coordinates.map((s: Coordinate)  => s.y))
   }
 
-//   const titleHeight = 20
+  const calcBoundingAxis = (highest: number) => {
+    const exponent = Math.floor(Math.log10(highest)) - 1
+    const dataScale = Math.pow(10, exponent)
+    return Math.ceil(highest / dataScale) * dataScale
+  }
+
   const textSpace = { x: 100, y: 100 }
+  const graphSize = { x: 600, y: 400 }
+  const axisMax = { x: calcBoundingAxis(max.x), y: calcBoundingAxis(max.y) }
+  const dataScale = { x: graphSize.x / axisMax.x, y: graphSize.y / axisMax.y }
 
   return (
     <svg
       className="line-diagram"
-      width={max.x}
-      height={max.y}
-      viewBox={`${textSpace.x * -1} 0 ${max.x + textSpace.x} ${max.y + textSpace.y}`}
+      width={graphSize.x + textSpace.x}
+      height={graphSize.y + textSpace.y}
+      viewBox={`${textSpace.x * -1} 0 ${graphSize.x + textSpace.x} ${graphSize.y + textSpace.y}`}
       xmlns="http://www.w3.org/2000/svg"
     >
       <g>
         {coordinates.map((d, i) =>
-          <circle cx={d.x} cy={(max.y - d.y)} r="3" key={`lnd_circle_${i}`} />
+          <circle cx={d.x * dataScale.x} cy={(axisMax.y - d.y) * dataScale.y} r="3"
+            key={`lnd_circle_${i}`} aria-labelledby={`lnd_title_${i}`}
+          >
+            <title id={`lnd_title_${i}`} key={`lnd_title_${i}`}>{`title ${props.xParam}: ${d.x}, ${props.yParam}: ${d.y}`}</title>
+          </circle>
         )}
       </g>
 
-      <line x1="0" y1={max.y} x2={max.x} y2={max.y} strokeWidth="3" />
-      <text x="0" y={max.y} dy={textSpace.x * .9} style={{fontSize: '200%'}}>{props.xParam} &rarr;</text>
+      <line x1="0" y1={graphSize.y} x2={graphSize.x} y2={graphSize.y} strokeWidth="3" />
+      <text x="0" y={graphSize.y} dy={textSpace.x * .9}>{props.xParam} &rarr;</text>
 
-      <line x1="0" y1="0" x2="0" y2={max.y} strokeWidth="3" />
-      <text x="0" y="0" dy={textSpace.y * .9} width={max.y}
-        style={{fontSize: '200%'}}
+      <line x1="0" y1="0" x2="0" y2={graphSize.y} strokeWidth="3" />
+      <text x="0" y="0" dy={textSpace.y * .9} width={graphSize.y}
         transform="rotate(90)"
       >&larr; {props.yParam}</text>
     </svg>
   )
 }
-
 
 export default LineDiagram

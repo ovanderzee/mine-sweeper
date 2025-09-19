@@ -1,15 +1,22 @@
 svg.line-diagram {
-  font-size: 15px;
+  font-family: inherit;
+  fill: currentcolor;
+  stroke: currentcolor;
   width: 100%;
 }
 
 .line-diagram circle,
 .line-diagram rect {
-  fill: currentcolor;
+  fill: var(--state-red);
+  stroke: none;
 }
 
 .line-diagram line,
 .line-diagram path {
   stroke: currentcolor;
   stroke-width: 1;
+}
+
+.line-diagram text {
+  font-size: 75%;
 }
