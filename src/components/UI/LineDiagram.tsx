@@ -55,16 +55,18 @@ const LineDiagram = (props: LineDiagramProps) => {
   }
 
   const textSpace = { x: 100, y: 100 }
+  const pointsSpace = { x: 5, y: 5 }
   const graphSize = { x: 600, y: 400 }
   const axisMax = { x: calcBoundingAxis(max.x), y: calcBoundingAxis(max.y) }
   const dataScale = { x: graphSize.x / axisMax.x, y: graphSize.y / axisMax.y }
 
+  const diagramSize = { x: graphSize.x + textSpace.x + pointsSpace.x, y: graphSize.y + textSpace.y + pointsSpace.y }
+  const crossLegSize = 75
+
   return (
     <svg
       className="line-diagram"
-      width={graphSize.x + textSpace.x}
-      height={graphSize.y + textSpace.y}
-      viewBox={`${textSpace.x * -1} 0 ${graphSize.x + textSpace.x} ${graphSize.y + textSpace.y}`}
+      viewBox={`${textSpace.x * -1} ${pointsSpace.x * -1} ${diagramSize.x} ${diagramSize.y}`}
       xmlns="http://www.w3.org/2000/svg"
     >
       <g className="legenda">
@@ -79,14 +81,14 @@ const LineDiagram = (props: LineDiagramProps) => {
         <text x="0" y={graphSize.y} dy={textSpace.x * .5} textAnchor="start">0</text>
 
         // how normal
-        <line x1={avg.x * dataScale.x} y1={graphSize.y} x2={avg.x * dataScale.x} y2={graphSize.y + 20} strokeWidth="2" />
+        <line x1={avg.x * dataScale.x} y1={graphSize.y} x2={avg.x * dataScale.x} y2={graphSize.y + 20} />
         <text x={-graphSize.y} y={avg.x * dataScale.x} dx="-25" dy="5" textAnchor="end" aria-labelledby="average"
           transform="rotate(-90)"
         >
           <title id="average">average: {avg.x}</title>
           average
         </text>
-        <line x1={med.x * dataScale.x} y1={graphSize.y} x2={med.x * dataScale.x} y2={graphSize.y + 20} strokeWidth="2" />
+        <line x1={med.x * dataScale.x} y1={graphSize.y} x2={med.x * dataScale.x} y2={graphSize.y + 20} />
         <text x={-graphSize.y} y={med.x * dataScale.x} dx="-25" dy="5" textAnchor="end" aria-labelledby="median"
           transform="rotate(-90)"
         >
@@ -95,7 +97,7 @@ const LineDiagram = (props: LineDiagramProps) => {
         </text>
 
         // "beautiful" max
-        <line x1={graphSize.x} y1={graphSize.y} x2={graphSize.x} y2={graphSize.y + 20} strokeWidth="2" />
+        <line x1={graphSize.x} y1={graphSize.y} x2={graphSize.x} y2={graphSize.y + 20} />
         <line x1={graphSize.x} y1={graphSize.y} x2={graphSize.x} y2={graphSize.y + 20} />
         <text x={graphSize.x} y={graphSize.y} dy={textSpace.x * .5} textAnchor="end">{axisMax.x}</text>
       </g>
@@ -107,12 +109,14 @@ const LineDiagram = (props: LineDiagramProps) => {
       </g>
       <g className="data-points">
         {coordinates.map((d, i) =>
-          <circle cx={d.x * dataScale.x} cy={(axisMax.y - d.y) * dataScale.y} r="3"
-            key={`lnd_circle_${i}`} aria-labelledby={`lnd_title_${i}`}
+          <g className="data-point" key={`lnd_group_${i}`}
+            transform={`translate(${d.x * dataScale.x}, ${(axisMax.y - d.y) * dataScale.y})`}
           >
-            <title id={`lnd_title_${i}`} key={`lnd_title_${i}`}>{`title ${props.xParam}: ${d.x}, ${props.yParam}: ${d.y}`}</title>
-          </circle>
-        )}
+            <path d={`M ${-crossLegSize}, 0 ${crossLegSize}, 0 M 0,${-crossLegSize} 0, ${crossLegSize}`} key={`lnd_path_${i}`} />
+            <circle  cx="0" cy="0" r="3" key={`lnd_circle_${i}`} aria-labelledby={`lnd_title_${i}`}>
+              <title id={`lnd_title_${i}`} key={`lnd_title_${i}`}>{`${props.xParam}: ${d.x}, ${props.yParam}: ${d.y}`}</title>
+            </circle>
+          </g>)}
       </g>
 
     </svg>

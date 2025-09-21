@@ -135,3 +135,7 @@ li footer div:not(.points) {
   font-weight: bold;
   color: var(--state-red);
 }
+
+svg.line-diagram {
+  margin-block: 1.5em .5em;
+}
