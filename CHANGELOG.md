@@ -24,6 +24,7 @@
 
 ### Added
 - Toggle focus between game and option-bar with Alt+Tab
+- Notice about data storage
 
 
 ## [3.2.0]

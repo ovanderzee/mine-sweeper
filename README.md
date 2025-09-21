@@ -22,3 +22,4 @@ Just like real life!
 -  Score based on efficiency and speed
 -  Sortable High Scores
 -  Toggle focus between game and option-bar with Alt+Tab
+-  Keep configuration current-game and score data in localStorage
