@@ -26,6 +26,9 @@
 - Toggle focus between game and option-bar with Alt+Tab
 - Notice about data storage
 
+### Fixed
+- Keep Zoom Display from covering Language Selection
+
 
 ## [3.2.0]
 
