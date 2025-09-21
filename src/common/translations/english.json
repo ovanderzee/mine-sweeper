@@ -47,7 +47,9 @@
   },
   "fame": {
     "Nothing Yet": "No scores yet",
-    "rank": "psn",
+    "median": "median",
+    "average": "average",
+    "rank": "rank",
     "name": "name",
     "user": "user",
     "date": "date",
