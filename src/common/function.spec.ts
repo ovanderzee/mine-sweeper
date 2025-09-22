@@ -1,6 +1,7 @@
 import '@testing-library/jest-dom'
 import { fireEvent, screen, within } from '@testing-library/react'
 import { referAndNavigateTo, startPageTesting } from '../__mocks__/specification-helpers'
+import { interactionSelectors } from './functions'
 
 describe('Flip focus', () => {
   let keyTarget: Element | null
@@ -68,6 +69,23 @@ describe('Flip focus', () => {
       if (keyTarget) fireEvent.keyDown(keyTarget, {altKey: true, key: 'Tab'})
 
       expect(document?.activeElement?.id).toBe(lastButton?.id)
+    })
+
+    it('should let the browser set focus to the body', async () => {
+      document.body.blur()
+
+      // remove interaction
+      const sectionScreen =  document.querySelector('section.screen')
+      const interactors = sectionScreen?.querySelectorAll(interactionSelectors) || []
+      for (let interactor of interactors) {
+        interactor?.parentNode?.removeChild(interactor)
+      }
+
+      if (keyTarget) {
+        fireEvent.keyDown(keyTarget, {altKey: true, key: 'Tab'})
+      }
+
+      expect(document?.activeElement).toBe(document.body)
     })
   })
 })

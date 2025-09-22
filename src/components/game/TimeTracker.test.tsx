@@ -28,7 +28,7 @@ describe('TimeTracker', () => {
       expect(getSecondsLapsed()).toBe(0)
     })
 
-    it('should track advancing time when game is played', () => {
+    it('should track advancing time when game is played (flaky)', () => {
       const playing = {...playingGameState}
       renderInProvider(<TimeTracker game={playing} />)
       const minutes = getMinutesLapsed()
