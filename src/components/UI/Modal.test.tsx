@@ -1,12 +1,14 @@
 import { fireEvent, screen, waitForElementToBeRemoved } from '@testing-library/react'
-import { ReactNode } from 'react'
+import { ReactNode, act } from 'react'
 import { renderInProvider } from '../../__mocks__/render-helpers'
 import Modal from './Modal'
 
 describe('Modal Dialog', () => {
-  let cancelFn: () => void
-  let confirmFn: () => void
-  let closeFn: () => void
+  let modalDialog!: HTMLDialogElement,
+    cancelFn: () => void,
+    confirmFn: () => void,
+    closeFn: () => void
+
   const getSimpleModal = (): ReactNode => {
     return <Modal
       onCancel={cancelFn}
@@ -25,10 +27,10 @@ describe('Modal Dialog', () => {
     confirmFn = jest.fn()
     closeFn = jest.fn()
     renderInProvider(getSimpleModal())
+    modalDialog = screen.getByRole('dialog')
   })
 
   it('should put op a dialog element', () => {
-    const modalDialog = screen.getByRole('dialog')
     expect(modalDialog).toBeInTheDocument()
   })
 
@@ -53,7 +55,6 @@ describe('Modal Dialog', () => {
     })
 
     it('by pressing Escape when dialog just opened', async () => {
-      const modalDialog = screen.getByRole('dialog')
       fireEvent.keyDown(modalDialog, {key: 'Escape'})
       await waitForElementToBeRemoved(() => screen.getByRole('dialog'))
       expect(cancelFn).toHaveBeenCalledTimes(1)
@@ -83,12 +84,25 @@ describe('Modal Dialog', () => {
     })
 
     it('by pressing Enter when dialog just opened', async () => {
-      const modalDialog = screen.getByRole('dialog')
       fireEvent.keyDown(modalDialog, {key: 'Enter'})
       await waitForElementToBeRemoved(() => screen.getByRole('dialog'))
       expect(cancelFn).toHaveBeenCalledTimes(0)
       expect(confirmFn).toHaveBeenCalledTimes(1)
       expect(closeFn).toHaveBeenCalledTimes(1)
+    })
+  })
+
+  describe('should stay', () => {
+    it('when it\'s content is clicked', async () => {
+      const dialogContent = modalDialog.children[0]
+      fireEvent.click(dialogContent)
+      act(() => {
+        // to wait for element not to be removed
+        jest.advanceTimersByTime(1000)
+      })
+      expect(cancelFn).toHaveBeenCalledTimes(0)
+      expect(confirmFn).toHaveBeenCalledTimes(0)
+      expect(closeFn).toHaveBeenCalledTimes(0)
     })
   })
 
