@@ -126,14 +126,14 @@ describe('The hall-of-fame-page list sorting', () => {
     expect(Number(best)).toBeGreaterThan(Number(worst))
   })
 
-  test('should sort on points descending', () => {
-    const button = getByText(container, 'points')
+  test('should sort on rank ascending', () => {
+    const button = getByText(container, 'rank')
     fireEvent.click(button)
 
-    const best = firstEntry('.points')
-    const worst = lastEntry('.points')
+    const best = firstEntry('.rank')
+    const worst = lastEntry('.rank')
 
-    expect(Number(best)).toBeGreaterThan(Number(worst))
+    expect(Number(best)).toBeLessThan(Number(worst))
   })
 
   test('should sort on efficiency descending', () => {

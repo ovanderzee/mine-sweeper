@@ -15,6 +15,8 @@
 - Replay game from High Scores (when routing)
 - Save a game on a new list page (with comment)
 - Zoom slider on gamepage
+- Gamelevel on x-axis
+- Calculate coagulation
 
 
 ## [3.3.0] - 2025-09-25
@@ -23,6 +25,7 @@
 - Toggle focus between game and option-bar with Alt+Tab
 - Notice about data storage
 - Diagram of sorted property
+- Thresholds for sorting and showing a diagram
 
 ### Fixed
 - Keep Zoom Display from covering Language Selection

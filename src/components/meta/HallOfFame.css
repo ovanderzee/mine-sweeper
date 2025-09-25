@@ -119,6 +119,7 @@ li footer div:not(.points) {
   cursor: pointer;
 }
 
+.legend.rank a.rank,
 .legend.user a.user,
 .legend.date a.date,
 .legend.points a.points,
@@ -133,6 +134,7 @@ li footer div:not(.points) {
   text-underline-offset: 3px;
 }
 
+.legend.rank ~ ol .rank,
 .legend.user ~ ol .user,
 .legend.date ~ ol .date,
 .legend.points ~ ol .points,

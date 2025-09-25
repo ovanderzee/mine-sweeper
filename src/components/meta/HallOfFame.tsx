@@ -22,13 +22,17 @@ const HallOfFame = () => {
   const latest = [...rawScores].sort((a:ScoreItem, b:ScoreItem) => b.date - a.date)[0]
 
   const [scores, setScores] = useState(rawScores)
-  const [sortLabel, setSortLabel] = useState<ScoreParam>('points')
+  const [sortLabel, setSortLabel] = useState<ScoreParam>('rank')
 
   const eraseScores = () => {
     setScores(storage.scores)
   }
 
   const methodsByKind: Record<string, () => ScoreItem[]> = {
+    'rank': () => {
+      const byRank = (a:ScoreItem, b:ScoreItem) => a.rank - b.rank
+      return rawScores.sort(byRank)
+    },
     'user': () => {
       const byRank = (a: ScoreItem, b: ScoreItem) => a.rank - b.rank
       rawScores.sort(byRank)
@@ -43,10 +47,12 @@ const HallOfFame = () => {
       const byDate = (a: ScoreItem, b: ScoreItem) => b.date - a.date
       return rawScores.sort(byDate)
     },
+  /*
     'points': () => {
       const byPoints = (a:ScoreItem, b:ScoreItem) => b.score.points - a.score.points
       return rawScores.sort(byPoints)
     },
+  */
     'efficiency': () => {
       const byEfficiency = (a:ScoreItem, b:ScoreItem) => b.score.efficiency - a.score.efficiency
       return rawScores.sort(byEfficiency)
@@ -88,7 +94,7 @@ const HallOfFame = () => {
       <td></td>
       <td><a className="date" onClick={sortByKind}>{text.fame['date']}</a></td>
     </tr><tr>
-      <td><a className="points" onClick={sortByKind}>{text.fame['points']}</a></td>
+      <td><a className="rank" onClick={sortByKind}>{text.fame['rank']}</a></td>
       <td><a className="efficiency" onClick={sortByKind}>{text.fame['efficiency']}</a></td>
       <td><a className="mines" onClick={sortByKind}>{text.fame['mines']}</a></td>
       <td><a className="moves" onClick={sortByKind}>{text.fame['moves']}</a></td>
@@ -102,7 +108,7 @@ const HallOfFame = () => {
     </tr></tbody></table>
   )
 
-  const scoreDiagram = <Diagram scores={scores} xParam={sortLabel} yParam="rank" />
+  const scoreDiagram = <Diagram scores={scores} xParam={sortLabel} yParam="points" />
 
   const fameContent = (
     <article>
