@@ -10,6 +10,7 @@ import Diagram from '../UI/Diagram'
 import { ScoreItem, ScoreParam } from '../../common/game-types'
 import storage from '../../common/storage'
 import { precise } from '../game/scoring'
+import { SHOW_SORT_THRESHOLD, SHOW_DIAGRAM_THRESHOLD } from '../../common/constants'
 import './Meta.css'
 import './HallOfFame.css'
 
@@ -79,30 +80,36 @@ const HallOfFame = () => {
     window.scrollTo({top: 0, left: 0})
   }
 
+  const scoreSorting = (
+    <table className={`legend ${sortLabel}`}><tbody><tr>
+      <td></td>
+      <td><a className="user" onClick={sortByKind}>{text.fame['user']}</a></td>
+      <td></td>
+      <td></td>
+      <td><a className="date" onClick={sortByKind}>{text.fame['date']}</a></td>
+    </tr><tr>
+      <td><a className="points" onClick={sortByKind}>{text.fame['points']}</a></td>
+      <td><a className="efficiency" onClick={sortByKind}>{text.fame['efficiency']}</a></td>
+      <td><a className="mines" onClick={sortByKind}>{text.fame['mines']}</a></td>
+      <td><a className="moves" onClick={sortByKind}>{text.fame['moves']}</a></td>
+      <td><a className="duration" onClick={sortByKind}>{text.fame['duration']}</a></td>
+    </tr><tr>
+      <td></td>
+      <td><a className="speed" onClick={sortByKind}>{text.fame['speed']}</a></td>
+      <td><a className="cells" onClick={sortByKind}>{text.fame['cells']}</a></td>
+      <td></td>
+      <td></td>
+    </tr></tbody></table>
+  )
+
+  const scoreDiagram = <Diagram scores={scores} xParam={sortLabel} yParam="rank" />
+
   const fameContent = (
     <article>
       <h2>{text.nav['Hall of Fame']}</h2>
-      <table className={`legend ${sortLabel}`}><tbody><tr>
-        <td></td>
-        <td><a className="user" onClick={sortByKind}>{text.fame['user']}</a></td>
-        <td></td>
-        <td></td>
-        <td><a className="date" onClick={sortByKind}>{text.fame['date']}</a></td>
-      </tr><tr>
-        <td><a className="points" onClick={sortByKind}>{text.fame['points']}</a></td>
-        <td><a className="efficiency" onClick={sortByKind}>{text.fame['efficiency']}</a></td>
-        <td><a className="mines" onClick={sortByKind}>{text.fame['mines']}</a></td>
-        <td><a className="moves" onClick={sortByKind}>{text.fame['moves']}</a></td>
-        <td><a className="duration" onClick={sortByKind}>{text.fame['duration']}</a></td>
-      </tr><tr>
-        <td></td>
-        <td><a className="speed" onClick={sortByKind}>{text.fame['speed']}</a></td>
-        <td><a className="cells" onClick={sortByKind}>{text.fame['cells']}</a></td>
-        <td></td>
-        <td></td>
-      </tr></tbody></table>
 
-      <Diagram scores={scores} xParam={sortLabel} yParam="rank" />
+      {scores.length > SHOW_SORT_THRESHOLD && scoreSorting}
+      {scores.length > SHOW_DIAGRAM_THRESHOLD && scoreDiagram}
 
       <ol>
         {!scores.length && (

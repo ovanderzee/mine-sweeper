@@ -221,14 +221,8 @@ export const liveScores: ScoreItem[] = [
 ]
 
 /**
+// sort liveScores
 liveScores.sort((a, b) => b.score.points - a.score.points)
 liveScores.forEach((live, index) => live.rank = 1 + index)
 console.log('liveScores', JSON.stringify(liveScores))
- */
-
-/**
-var victories = localStorage.getItem('mv-victory')
-var vic = JSON.parse(victories)
-var sel = vic.filter(v=>v.game.cells === 324)
-JSON.stringify(sel)
  */
