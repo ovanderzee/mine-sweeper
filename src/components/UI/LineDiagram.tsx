@@ -91,22 +91,17 @@ const LineDiagram = (props: LineDiagramProps) => {
 
         // how normal
         <line x1={avg.x * dataScale.x} y1={graphSize.y} x2={avg.x * dataScale.x} y2={graphSize.y + 20} />
-        <text x={-graphSize.y} y={avg.x * dataScale.x} dx="-25" dy="5" textAnchor="end" aria-labelledby="average"
-          transform="rotate(-90)"
-        >
+        <text x={avg.x * dataScale.x} y={graphSize.y} dy="50" textAnchor="middle" aria-labelledby="average">
           <title id="average">{text.fame['average']}: {avg.x}</title>
-          {text.fame['average']}
+          <tspan>x</tspan><tspan dx="-.5%">&#772;</tspan>
         </text>
         <line x1={med.x * dataScale.x} y1={graphSize.y} x2={med.x * dataScale.x} y2={graphSize.y + 20} />
-        <text x={-graphSize.y} y={med.x * dataScale.x} dx="-25" dy="5" textAnchor="end" aria-labelledby="median"
-          transform="rotate(-90)"
-        >
+        <text x={med.x * dataScale.x} y={graphSize.y} dy="50" textAnchor="middle" aria-labelledby="median">
           <title id="median">{text.fame['median']}: {med.x}</title>
-          {text.fame['median']}
+          <tspan>x</tspan><tspan dx="-.5%">&#771;</tspan>
         </text>
 
         // "beautiful" max
-        <line x1={graphSize.x} y1={graphSize.y} x2={graphSize.x} y2={graphSize.y + 20} />
         <line x1={graphSize.x} y1={graphSize.y} x2={graphSize.x} y2={graphSize.y + 20} />
         <text x={graphSize.x} y={graphSize.y} dy={lgdSpace * .5} textAnchor="end">{axisMax.x}</text>
       </g>

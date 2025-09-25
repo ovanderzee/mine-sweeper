@@ -10,20 +10,24 @@
 ### Features
 - Playmode: Play without flags
 - Playmode: Win or loose when flag count equals mine count
-- Hotkeys for option-bar items - or - a keyboardway to switch between game and option-bar
 - Pause button, correct time on unpause
 - Routing on gamecode, about, config and hiscores
 - Replay game from High Scores (when routing)
 - Save a game on a new list page (with comment)
 - Zoom slider on gamepage
-- Property histogram when sorting
 
 
-
-## [3.3.0]
+## [3.3.0] - 2025-09-25
 
 ### Added
 - Toggle focus between game and option-bar with Alt+Tab
+- Notice about data storage
+- Diagram of sorted property
+
+### Fixed
+- Keep Zoom Display from covering Language Selection
+- Fix style bug with range input for Google Chrome
+- Let a dialog only respond to click on button or backdrop
 
 
 ## [3.2.0]
@@ -41,7 +45,7 @@
 - No more filling of slender areas of app background when viewport narrower than 512px.
 
 
-## [3.1.1]
+## [3.1.1]- 2025-08-22
 
 ### Fixed
 - Ignore or replace unparseable data from storage

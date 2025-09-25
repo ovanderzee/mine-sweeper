@@ -22,8 +22,7 @@ svg.line-diagram {
 }
 
 .line-diagram text {
-  font-size: 75%;
-  font-weight: bold;
+  font-size: 175%;
   stroke: none;
 }
 
