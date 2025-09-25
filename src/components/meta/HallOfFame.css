@@ -66,6 +66,7 @@ li header .user {
   text-align: left;
   padding: 0 0.5em;
 }
+
 li header .date {
   flex: 0 0 auto;
 }
@@ -76,11 +77,20 @@ li footer .points {
   text-align: center;
 }
 
-li footer .efficiency-speed,
-li footer .mines-cells,
-li footer .moves,
-li footer .duration {
+li footer div:not(.points) {
   flex: 1 1 auto;
+}
+
+li footer .combo * {
+  margin-inline: 1px;
+}
+
+li footer .combo span:first-of-type {
+  margin-inline: 0 1px;
+}
+
+li footer .combo span:last-of-type {
+  margin-inline: 1px 0;
 }
 
 li header .date,

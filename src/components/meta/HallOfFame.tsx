@@ -136,9 +136,15 @@ const HallOfFame = () => {
             </header>
             <footer>
               <div className="points">{log.score.points}</div>
-              <div className="efficiency-speed">{precise(log.score.efficiency, 2)}&thinsp;/&thinsp;{precise(log.score.speed, 2)}</div>
-              <div className="mines-cells">{log.game.mines}&thinsp;/&thinsp;{log.game.cells}</div>
-              <div className="moves">{log.game.effort.least}&#8239;&lt;&#8239;<b>{log.play.moves}</b>&#8239;&lt;&#8239;{log.game.effort.most} </div>
+              <div className="combo">
+                <span className="efficiency">{precise(log.score.efficiency, 2)}</span>/<span className="speed">{precise(log.score.speed, 2)}</span>
+              </div>
+              <div className="combo">
+                <span className="mines">{log.game.mines}</span>/<span className="cells">{log.game.cells}</span>
+              </div>
+              <div className="combo">
+                <span>{log.game.effort.least}</span>&lt;<b className="moves">{log.play.moves}</b>&lt;<span>{log.game.effort.most}</span>
+              </div>
               <div className="duration">{Math.round(log.play.duration)}s</div>
             </footer>
           </li>
@@ -146,11 +152,6 @@ const HallOfFame = () => {
       </ol>
     </article>
   )
-
-/*
-&#8239; narrow non-breaking space
-&thinsp; half space
-*/
 
   const fameNavigation = (
     <NavOptionsBar>
