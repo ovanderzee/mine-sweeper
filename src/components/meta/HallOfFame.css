@@ -114,24 +114,30 @@ li footer div:not(.points) {
   width: 100%;
 }
 
-.legend a {
+.legend button {
   font-weight: bold;
-  cursor: pointer;
+  background: transparent;
+  border-style: solid;
+  border-color: transparent;
+  border-inline-width: 3px;
+  border-block-width: 0;
+  border-radius: .5ex;
+  padding: 0 .333ex .333ex .333ex;
+  line-height: 1;
 }
 
-.legend.rank a.rank,
-.legend.user a.user,
-.legend.date a.date,
-.legend.points a.points,
-.legend.efficiency a.efficiency,
-.legend.speed a.speed,
-.legend.mines a.mines,
-.legend.cells a.cells,
-.legend.moves a.moves,
-.legend.duration a.duration {
+.legend.rank .rank,
+.legend.user .user,
+.legend.date .date,
+.legend.points .points,
+.legend.efficiency .efficiency,
+.legend.speed .speed,
+.legend.mines .mines,
+.legend.cells .cells,
+.legend.moves .moves,
+.legend.duration .duration {
   color: var(--state-red);
-  text-decoration: underline 3px;
-  text-underline-offset: 3px;
+  border-color: var(--state-red);
 }
 
 .legend.rank ~ ol .rank,

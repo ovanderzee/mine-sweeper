@@ -89,20 +89,20 @@ const HallOfFame = () => {
   const scoreSorting = (
     <table className={`legend ${sortLabel}`}><tbody><tr>
       <td></td>
-      <td><a className="user" onClick={sortByKind}>{text.fame['user']}</a></td>
+      <td><button type="button" className="user" onClick={sortByKind}>{text.fame['user']}</button></td>
       <td></td>
       <td></td>
-      <td><a className="date" onClick={sortByKind}>{text.fame['date']}</a></td>
+      <td><button type="button" className="date" onClick={sortByKind}>{text.fame['date']}</button></td>
     </tr><tr>
-      <td><a className="rank" onClick={sortByKind}>{text.fame['rank']}</a></td>
-      <td><a className="efficiency" onClick={sortByKind}>{text.fame['efficiency']}</a></td>
-      <td><a className="mines" onClick={sortByKind}>{text.fame['mines']}</a></td>
-      <td><a className="moves" onClick={sortByKind}>{text.fame['moves']}</a></td>
-      <td><a className="duration" onClick={sortByKind}>{text.fame['duration']}</a></td>
+      <td><button type="button" className="rank" onClick={sortByKind}>{text.fame['rank']}</button></td>
+      <td><button type="button" className="efficiency" onClick={sortByKind}>{text.fame['efficiency']}</button></td>
+      <td><button type="button" className="mines" onClick={sortByKind}>{text.fame['mines']}</button></td>
+      <td><button type="button" className="moves" onClick={sortByKind}>{text.fame['moves']}</button></td>
+      <td><button type="button" className="duration" onClick={sortByKind}>{text.fame['duration']}</button></td>
     </tr><tr>
       <td></td>
-      <td><a className="speed" onClick={sortByKind}>{text.fame['speed']}</a></td>
-      <td><a className="cells" onClick={sortByKind}>{text.fame['cells']}</a></td>
+      <td><button type="button" className="speed" onClick={sortByKind}>{text.fame['speed']}</button></td>
+      <td><button type="button" className="cells" onClick={sortByKind}>{text.fame['cells']}</button></td>
       <td></td>
       <td></td>
     </tr></tbody></table>
