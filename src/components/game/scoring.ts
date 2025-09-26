@@ -104,7 +104,7 @@ export const sequenceFillData = (boardCode: string): [CellState[][], AppCheckCon
   }
 
   if (invalidCode || wrongSize || wrongMineCount) {
-    console.error(`Invalid ${invalidCode ? 'code' : wrongSize ? 'size' : wrongMineCount ? 'mine count' : 'error'}`)
+    console.error(`Invalid ${wrongSize ? 'size' : wrongMineCount ? 'mine count' : 'code'}`)
     return [[[]], checkConfig]
   }
 

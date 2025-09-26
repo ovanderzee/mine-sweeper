@@ -61,10 +61,13 @@ const ModalComponent = (props: ModalProps): React.ReactNode => {
   const [endState, setEndState] = useState('')
 
   const timedCloseModal = () => {
+    const eventSubject = event?.target as Element
+    const targetedByPurpose = eventSubject?.tagName === 'DIALOG' || eventSubject?.tagName === 'BUTTON'
+    if (event?.type === 'click' && !targetedByPurpose) return;
+
     setEndState('ending')
     setTimeout(() => {
         if (dialogElement) {
-          dialogElement.setAttribute('open', 'false')
           dialogElement.removeAttribute('open')
           dialogElement.close()
         }

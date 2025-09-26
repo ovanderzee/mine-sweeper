@@ -39,6 +39,12 @@ legend + h5 {
 
 .field {
   margin: var(--item-spacing) 0;
+  position: relative;
+  z-index: 1;
+}
+
+.field:has(input#zoom) {
+  z-index: 0;
 }
 
 .field * {
@@ -110,6 +116,7 @@ select:disabled, select[aria-disabled=true] {
 input[type="range"] {
   accent-color: var(--darker-blue);
   margin-block: 0;
+  box-shadow: none; /* chrome */
 }
 
 input[type="range"]#zoom {

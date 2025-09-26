@@ -19,14 +19,19 @@
 - Property histogram when sorting
 
 
-
 ## [3.3.0]
 
 ### Added
 - Toggle focus between game and option-bar with Alt+Tab
+- Notice about data storage
+
+### Fixed
+- Keep Zoom Display from covering Language Selection
+- Fix style bug with range input for Google Chrome
+- Let a dialog only respond to click on button or backdrop
 
 
-## [3.2.0]
+## [3.2.0] - 2025-08-31
 
 ### Added
 - New component to manage options

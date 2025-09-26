@@ -42,6 +42,6 @@ export const flipFocus = function (event: React.KeyboardEvent) {
         }
       }
     }
-    focusable ? focusable.focus() : document.body.focus()
+    focusable?.focus()
   }
 }

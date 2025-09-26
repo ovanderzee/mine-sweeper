@@ -43,6 +43,10 @@
     "Accessibility Heading": "Accessibility",
     "Keyboard Notice": "On desktop or laptop the game could be played using the keyboard. You can reach all interactions using the Tab and Shift+Tab keystrokes.",
     "Game Navigation": "Navigate the minefield with the arrow keys and flag a mine with the spacebar. Confirm a dialog with enter on the right button. Press Alt+Tab to jump between content and option area.",
+
+    "Cookie Heading": "Cookies",
+    "Storage Notice": "Configuration, game and score data are saved to ensure the app works smoothly. Your data is not sent anywhere.",
+
     "appVersion": "app version"
   },
   "fame": {
