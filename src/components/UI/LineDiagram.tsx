@@ -85,7 +85,7 @@ const LineDiagram = (props: LineDiagramProps) => {
         <text x={-graphSize.y} y="0" dx="20" dy={lgdSpace * -.8} transform="rotate(-90)" textAnchor="middle">{text.fame[props.yParam]} &rarr;</text>
 
         <text x={graphSize.x} y={graphSize.y} dy={lgdSpace + lgdOver.y -10} textAnchor="end"
-          transform="scale(.67)" transform-origin="80% bottom">
+          style={{transform: 'scale(.67)', transformOrigin: '80% bottom'}}>
           {coordinates.length} {text.fame['won games']}, {text.fame['median']}: {med.x}, {text.fame['average']}: {avg.x}
         </text>
       </g>
