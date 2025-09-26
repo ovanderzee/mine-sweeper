@@ -6,9 +6,11 @@ import Help from '../nav/Help'
 import Settings from '../nav/Settings'
 import GoBack from '../nav/GoBack'
 import { ShieldByRank } from '../UI/Shield'
-import { ScoreItem } from '../../common/game-types'
+import Diagram from '../UI/Diagram'
+import { ScoreItem, ScoreParam } from '../../common/game-types'
 import storage from '../../common/storage'
 import { precise } from '../game/scoring'
+import { SHOW_SORT_THRESHOLD, SHOW_DIAGRAM_THRESHOLD } from '../../common/constants'
 import './Meta.css'
 import './HallOfFame.css'
 
@@ -20,13 +22,17 @@ const HallOfFame = () => {
   const latest = [...rawScores].sort((a:ScoreItem, b:ScoreItem) => b.date - a.date)[0]
 
   const [scores, setScores] = useState(rawScores)
-  const [sortLabel, setSortLabel] = useState('points')
+  const [sortLabel, setSortLabel] = useState<ScoreParam>('rank')
 
   const eraseScores = () => {
     setScores(storage.scores)
   }
 
   const methodsByKind: Record<string, () => ScoreItem[]> = {
+    'rank': () => {
+      const byRank = (a:ScoreItem, b:ScoreItem) => a.rank - b.rank
+      return rawScores.sort(byRank)
+    },
     'user': () => {
       const byRank = (a: ScoreItem, b: ScoreItem) => a.rank - b.rank
       rawScores.sort(byRank)
@@ -41,10 +47,12 @@ const HallOfFame = () => {
       const byDate = (a: ScoreItem, b: ScoreItem) => b.date - a.date
       return rawScores.sort(byDate)
     },
+  /*
     'points': () => {
       const byPoints = (a:ScoreItem, b:ScoreItem) => b.score.points - a.score.points
       return rawScores.sort(byPoints)
     },
+  */
     'efficiency': () => {
       const byEfficiency = (a:ScoreItem, b:ScoreItem) => b.score.efficiency - a.score.efficiency
       return rawScores.sort(byEfficiency)
@@ -73,33 +81,42 @@ const HallOfFame = () => {
 
   const sortByKind = function (event: React.UIEvent): void {
     const label = (event.target as HTMLElement).className
-    setSortLabel(label)
+    setSortLabel(label as ScoreParam)
     setScores(methodsByKind[label]())
     window.scrollTo({top: 0, left: 0})
   }
 
+  const scoreSorting = (
+    <table className={`legend ${sortLabel}`}><tbody><tr>
+      <td></td>
+      <td><button type="button" className="user" onClick={sortByKind}>{text.fame['user']}</button></td>
+      <td></td>
+      <td></td>
+      <td><button type="button" className="date" onClick={sortByKind}>{text.fame['date']}</button></td>
+    </tr><tr>
+      <td><button type="button" className="rank" onClick={sortByKind}>{text.fame['rank']}</button></td>
+      <td><button type="button" className="efficiency" onClick={sortByKind}>{text.fame['efficiency']}</button></td>
+      <td><button type="button" className="mines" onClick={sortByKind}>{text.fame['mines']}</button></td>
+      <td><button type="button" className="moves" onClick={sortByKind}>{text.fame['moves']}</button></td>
+      <td><button type="button" className="duration" onClick={sortByKind}>{text.fame['duration']}</button></td>
+    </tr><tr>
+      <td></td>
+      <td><button type="button" className="speed" onClick={sortByKind}>{text.fame['speed']}</button></td>
+      <td><button type="button" className="cells" onClick={sortByKind}>{text.fame['cells']}</button></td>
+      <td></td>
+      <td></td>
+    </tr></tbody></table>
+  )
+
+  const scoreDiagram = <Diagram scores={scores} xParam={sortLabel} yParam="points" />
+
   const fameContent = (
     <article>
       <h2>{text.nav['Hall of Fame']}</h2>
-      <table className={`legend ${sortLabel}`}><tbody><tr>
-        <td></td>
-        <td><a className="user" onClick={sortByKind}>{text.fame['user']}</a></td>
-        <td></td>
-        <td></td>
-        <td><a className="date" onClick={sortByKind}>{text.fame['date']}</a></td>
-      </tr><tr>
-        <td><a className="points" onClick={sortByKind}>{text.fame['points']}</a></td>
-        <td><a className="efficiency" onClick={sortByKind}>{text.fame['efficiency']}</a></td>
-        <td><a className="mines" onClick={sortByKind}>{text.fame['mines']}</a></td>
-        <td><a className="moves" onClick={sortByKind}>{text.fame['moves']}</a></td>
-        <td><a className="duration" onClick={sortByKind}>{text.fame['duration']}</a></td>
-      </tr><tr>
-        <td></td>
-        <td><a className="speed" onClick={sortByKind}>{text.fame['speed']}</a></td>
-        <td><a className="cells" onClick={sortByKind}>{text.fame['cells']}</a></td>
-        <td></td>
-        <td></td>
-      </tr></tbody></table>
+
+      {scores.length > SHOW_SORT_THRESHOLD && scoreSorting}
+      {scores.length > SHOW_DIAGRAM_THRESHOLD && scoreDiagram}
+
       <ol>
         {!scores.length && (
           <li>
@@ -108,7 +125,6 @@ const HallOfFame = () => {
             </header>
           </li>
         )}
-
         {scores.map((log: ScoreItem, index) => (
           <li
             className={`${log.rank <= 10 ? 'super' : ''} ${log.date === latest.date ? 'latest' : ''}`}
@@ -126,9 +142,15 @@ const HallOfFame = () => {
             </header>
             <footer>
               <div className="points">{log.score.points}</div>
-              <div className="efficiency-speed">{precise(log.score.efficiency, 2)}&thinsp;/&thinsp;{precise(log.score.speed, 2)}</div>
-              <div className="mines-cells">{log.game.mines}&thinsp;/&thinsp;{log.game.cells}</div>
-              <div className="moves">{log.game.effort.least}&#8239;&lt;&#8239;<b>{log.play.moves}</b>&#8239;&lt;&#8239;{log.game.effort.most} </div>
+              <div className="combo">
+                <span className="efficiency">{precise(log.score.efficiency, 2)}</span>/<span className="speed">{precise(log.score.speed, 2)}</span>
+              </div>
+              <div className="combo">
+                <span className="mines">{log.game.mines}</span>/<span className="cells">{log.game.cells}</span>
+              </div>
+              <div className="combo">
+                <span>{log.game.effort.least}</span>&lt;<b className="moves">{log.play.moves}</b>&lt;<span>{log.game.effort.most}</span>
+              </div>
               <div className="duration">{Math.round(log.play.duration)}s</div>
             </footer>
           </li>
@@ -136,11 +158,6 @@ const HallOfFame = () => {
       </ol>
     </article>
   )
-
-/*
-&#8239; narrow non-breaking space
-&thinsp; half space
-*/
 
   const fameNavigation = (
     <NavOptionsBar>

@@ -1,0 +1,36 @@
+svg.line-diagram {
+  font-family: inherit;
+  font-size: initial;
+  fill: currentcolor;
+  stroke: currentcolor;
+  width: 100%;
+}
+
+.line-diagram circle,
+.line-diagram rect {
+  fill: var(--state-red);
+  stroke: none;
+}
+
+.line-diagram line {
+  stroke: currentcolor;
+  stroke-width: 2;
+}
+
+.line-diagram path {
+  stroke: currentcolor;
+  stroke-width: 1;
+}
+
+.line-diagram text {
+  font-size: 175%;
+  stroke: none;
+}
+
+.line-diagram .data-point path {
+  visibility: hidden;
+}
+
+.line-diagram .data-point:hover path {
+  visibility: visible;
+}

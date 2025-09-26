@@ -14,6 +14,9 @@ export const FADE_OUT_TIME = 550
 // threshold between a click and a deliberate long press, in milliseconds
 export const LONG_PRESS_THRESHOLD = 200
 
+// hall of fame
+export const SHOW_SORT_THRESHOLD = 12
+export const SHOW_DIAGRAM_THRESHOLD = 36
 
 /* RANGES */
 

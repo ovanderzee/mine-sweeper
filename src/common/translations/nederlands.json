@@ -51,7 +51,10 @@
   },
   "fame": {
     "Nothing Yet": "Nog geen scores",
-    "rank": "psn",
+    "won games": "spellen",
+    "median": "mediaan",
+    "average": "gemiddeld",
+    "rank": "rang",
     "name": "naam",
     "user": "gebruiker",
     "date": "datum",

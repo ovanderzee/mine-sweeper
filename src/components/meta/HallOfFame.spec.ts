@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom'
-import { fireEvent, screen } from '@testing-library/react'
+import { fireEvent, screen, getByText } from '@testing-library/react'
 import storage from '../../common/storage'
 import { startHonourPageTesting, referAndNavigateTo } from './../../__mocks__/specification-helpers'
 import { liveScores } from './../../__mocks__/scores'
@@ -81,6 +81,7 @@ describe('The hall-of-fame-page clear list button', () => {
 })
 
 describe('The hall-of-fame-page list sorting', () => {
+  let container: HTMLElement
   const firstItem = (qs: string): HTMLElement | null => document.querySelector(`li:first-of-type ${qs}`)
   const lastItem = (qs: string): HTMLElement | null => document.querySelector(`li:last-of-type ${qs}`)
 
@@ -96,6 +97,7 @@ describe('The hall-of-fame-page list sorting', () => {
   beforeEach(() => {
     storage.scores = liveScores
     startHonourPageTesting()
+    container = document.querySelector('.legend')!
   })
 
   test('should sort on user-points descending', () => {
@@ -103,7 +105,7 @@ describe('The hall-of-fame-page list sorting', () => {
     const uniqueUsers = [...new Set(scoreUsers)]
     const worstUser = uniqueUsers[uniqueUsers.length - 1]
 
-    const button = screen.getByText('user')
+    const button = getByText(container, 'user')
     fireEvent.click(button)
 
     const bestUserBest = firstEntry('.points')
@@ -115,7 +117,7 @@ describe('The hall-of-fame-page list sorting', () => {
   })
 
   test('should sort on date descending', () => {
-    const button = screen.getByText('date')
+    const button = getByText(container, 'date')
     fireEvent.click(button)
 
     const best = firstItem('.date')?.dataset.date
@@ -124,68 +126,68 @@ describe('The hall-of-fame-page list sorting', () => {
     expect(Number(best)).toBeGreaterThan(Number(worst))
   })
 
-  test('should sort on points descending', () => {
-    const button = screen.getByText('points')
+  test('should sort on rank ascending', () => {
+    const button = getByText(container, 'rank')
     fireEvent.click(button)
 
-    const best = firstEntry('.points')
-    const worst = lastEntry('.points')
+    const best = firstEntry('.rank')
+    const worst = lastEntry('.rank')
 
-    expect(Number(best)).toBeGreaterThan(Number(worst))
+    expect(Number(best)).toBeLessThan(Number(worst))
   })
 
   test('should sort on efficiency descending', () => {
-    const button = screen.getByText('efficiency')
+    const button = getByText(container, 'efficiency')
     fireEvent.click(button)
 
-    const best = firstEntry('.efficiency-speed').match(/^.+?\u2009/)
-    const worst = lastEntry('.efficiency-speed').match(/^.+?\u2009/)
+    const best = firstEntry('.efficiency')
+    const worst = lastEntry('.efficiency')
 
     expect(Number(best)).toBeGreaterThan(Number(worst))
   })
 
   test('should sort on speed descending', () => {
-    const button = screen.getByText('speed')
+    const button = getByText(container, 'speed')
     fireEvent.click(button)
 
-    const best = firstEntry('.efficiency-speed').match(/\d+.\d+$/)
-    const worst = lastEntry('.efficiency-speed').match(/\d+.\d+$/)
+    const best = firstEntry('.speed')
+    const worst = lastEntry('.speed')
 
     expect(Number(best)).toBeGreaterThan(Number(worst))
   })
 
-  test('should sort on mines descending', () => {
-    const button = screen.getByText('mines')
+  test('should sort on mines ascending', () => {
+    const button = getByText(container, 'mines')
     fireEvent.click(button)
 
-    const best = firstEntry('.mines-cells').match(/^\d+/)
-    const worst = lastEntry('.mines-cells').match(/^\d+/)
+    const best = firstEntry('.mines')
+    const worst = lastEntry('.mines')
 
     expect(Number(best)).toBeLessThan(Number(worst))
   })
 
   test('should sort on fields ascending', () => {
-    const button = screen.getByText('fields')
+    const button = getByText(container, 'fields')
     fireEvent.click(button)
 
-    const best = firstEntry('.mines-cells').match(/\d+$/)
-    const worst = lastEntry('.mines-cells').match(/\d+$/)
+    const best = firstEntry('.cells')
+    const worst = lastEntry('.cells')
 
     expect(Number(best)).toBeLessThan(Number(worst))
   })
 
   test('should sort on turns ascending', () => {
-    const button = screen.getByText('turns')
+    const button = getByText(container, 'turns')
     fireEvent.click(button)
 
-    const best = firstEntry('.moves b')
-    const worst = lastEntry('.moves b')
+    const best = firstEntry('.moves')
+    const worst = lastEntry('.moves')
 
     expect(Number(best)).toBeLessThan(Number(worst))
   })
 
   test('should sort on duration ascending', () => {
-    const button = screen.getByText('duration')
+    const button = getByText(container, 'duration')
     fireEvent.click(button)
 
     const best = firstEntry('.duration')

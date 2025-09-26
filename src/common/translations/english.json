@@ -51,7 +51,10 @@
   },
   "fame": {
     "Nothing Yet": "No scores yet",
-    "rank": "psn",
+    "won games": "won games",
+    "median": "median",
+    "average": "average",
+    "rank": "rank",
     "name": "name",
     "user": "user",
     "date": "date",

@@ -54,7 +54,7 @@ export interface PageContextProps {
   configure: (changesObject?: AppSubConfig) => void
 }
 
-export type Primitive = string | number | boolean
+export type Primitive = string | number
 
 export interface InputRange {
   min: number,
