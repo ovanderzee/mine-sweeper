@@ -45,7 +45,7 @@
     "Game Navigation": "Navigate the minefield with the arrow keys and flag a mine with the spacebar. Confirm a dialog with enter on the right button. Press Alt+Tab to jump between content and option area.",
 
     "Cookie Heading": "Cookies",
-    "Storage Notice": "Configuration, game and score data are saved to ensure the app works smoothly. Your data is not sent anywhere.",
+    "Storage Notice": "Configuration, game and score data are saved on your device to ensure the app works smoothly. You are the only one using your data.",
 
     "appVersion": "app version"
   },
