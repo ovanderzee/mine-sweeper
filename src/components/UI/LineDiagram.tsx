@@ -60,7 +60,7 @@ const LineDiagram = (props: LineDiagramProps) => {
   }
 
   const lgdSpace = 100  // legenda left and bottom
-  const lgdOver = { x: 0, y: 20 }
+  const lgdOver = { x: 0, y: 30 }
   const pointsSpace = 5 // graph top and right
   const graphSize = { x: 600, y: 400 }
   const axisMax = { x: calcBoundingAxis(max.x), y: calcBoundingAxis(max.y) }
@@ -80,9 +80,14 @@ const LineDiagram = (props: LineDiagramProps) => {
     >
       <g className="legenda">
         <line x1="0" y1={graphSize.y} x2={graphSize.x} y2={graphSize.y} />
-        <text x="0" y={graphSize.y} dy={lgdSpace * .9} textAnchor="middle">{text.fame[props.xParam]} &rarr;</text>
+        <text x="0" y={graphSize.y} dx="20" dy={lgdSpace * .9} textAnchor="middle">{text.fame[props.xParam]} &rarr;</text>
         <line x1="0" y1="0" x2="0" y2={graphSize.y} />
-        <text x={-graphSize.y} y="0" dy={lgdSpace * -.8} transform="rotate(-90)" textAnchor="middle">{text.fame[props.yParam]} &rarr;</text>
+        <text x={-graphSize.y} y="0" dx="20" dy={lgdSpace * -.8} transform="rotate(-90)" textAnchor="middle">{text.fame[props.yParam]} &rarr;</text>
+
+        <text x={graphSize.x} y={graphSize.y} dy={lgdSpace + lgdOver.y -10} textAnchor="end"
+          transform="scale(.67)" transform-origin="80% bottom">
+          {coordinates.length} {text.fame['won games']}, {text.fame['median']}: {med.x}, {text.fame['average']}: {avg.x}
+        </text>
       </g>
       <g className="x-axis">
         // zero
@@ -101,7 +106,7 @@ const LineDiagram = (props: LineDiagramProps) => {
           <tspan>x</tspan><tspan dx="-.5%">&#771;</tspan>
         </text>
 
-        // "beautiful" max
+        // max
         <line x1={graphSize.x} y1={graphSize.y} x2={graphSize.x} y2={graphSize.y + 20} />
         <text x={graphSize.x} y={graphSize.y} dy={lgdSpace * .5} textAnchor="end">{axisMax.x}</text>
       </g>

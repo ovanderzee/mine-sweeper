@@ -20,6 +20,7 @@ const Diagram = (props: DiagramProps) => {
 
   const svgDiagram = () => {
     if (!flatScores.length) return
+    if (props.xParam === 'date') return // not yet
 
     const xType = typeof flatScores[0][props.xParam]
     const yType = typeof flatScores[0][props.yParam]

@@ -1,5 +1,6 @@
 svg.line-diagram {
   font-family: inherit;
+  font-size: initial;
   fill: currentcolor;
   stroke: currentcolor;
   width: 100%;
