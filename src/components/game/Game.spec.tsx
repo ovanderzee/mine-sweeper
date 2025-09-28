@@ -18,7 +18,7 @@ import { microConfig } from './../../__mocks__/configs'
 
 // prevent trouble with setInterval
 const MockTimeTracker = () => <br />
-jest.mock("./TimeTracker", () => () => {
+jest.mock("./../tips/TimeTracker", () => () => {
   return <MockTimeTracker data-testid="time-tracker" />;
 });
 

@@ -21,7 +21,6 @@ export type AppSubConfig = {
   MAX_SCORES?: number;
   MINE_COUNT?: number;
   PLAYER_NAME?: string;
-  CLOCK_TYPE?: ClockTypes;
 }
 
 export interface AppCheckConfig {
@@ -37,7 +36,6 @@ export interface AppConfig {
   MAX_SCORES: number;
   MINE_COUNT: number;
   PLAYER_NAME: string;
-  CLOCK_TYPE: ClockTypes;
 }
 
 export interface PageState {
@@ -59,10 +57,4 @@ export type Primitive = string | number
 export interface InputRange {
   min: number,
   max: number,
-}
-
-export enum ClockTypes {
-  NONE = '',
-  ANALOG = 'analog',
-  DIGITAL = 'digital',
 }

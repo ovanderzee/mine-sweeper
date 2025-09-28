@@ -14,9 +14,6 @@
     "minesweeper_2": "veger",
     "skip_this": "direct naar spel"
   },
-  "game": {
-    "playtime": "speelduur"
-  },
   "cell": {
     "row": "rij",
     "col": "kolom",
@@ -80,11 +77,6 @@
     "choose your language": "kies een taal",
     "Zoom Display": "Vergroting scherm",
     "font-size to %n pixels": "letter grootte op %n pixels",
-    "Clock": "Klok",
-    "display playtime": "toon speelduur",
-    "No clock": "Niet tonen",
-    "Analog clock": "Analoge klok",
-    "Digital clock": "Digitale klok",
 
     "Record Scores": "Scores Opslaan",
     "Name in Scores": "Naam in scorelijst",
@@ -109,6 +101,7 @@
     "Quit Game?": "Aanpassing van een bepalende spel variabele. Wil je het spel beëindigen?"
   },
   "tips": {
-    "Todo counter": "Aantal te vinden mijnen"
+    "Todo counter": "Aantal te vinden mijnen",
+    "Playtime": "Speelduur"
   }
 }

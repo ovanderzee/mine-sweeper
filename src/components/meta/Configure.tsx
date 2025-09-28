@@ -5,7 +5,7 @@ import DefaultSettings from '../nav/DefaultSettings'
 import HiScores from '../nav/HiScores'
 import Help from '../nav/Help'
 import GoBack from '../nav/GoBack'
-import { ClockTypes, Languages, LanguageTranslation } from '../../common/app-types'
+import { Languages, LanguageTranslation } from '../../common/app-types'
 import { RANGES } from '../../common/constants'
 import { GAME_DIVISOR } from '../../common/defaults'
 import storage from '../../common/storage'
@@ -96,11 +96,6 @@ function Configure() {
     pageCtx.configure({ FONT_SIZE: value })
   }
 
-  const changeClockTypeHandler = (event: React.ChangeEvent) => {
-    const ctrl = event.target as HTMLInputElement
-    pageCtx.configure({ CLOCK_TYPE: ctrl.value as ClockTypes })
-  }
-
   const genericContent = (
     <fieldset id="general-settings">
       <legend>{text.settings['General Settings']}</legend>
@@ -139,33 +134,6 @@ function Configure() {
         </div>
       </div>
 
-      <div className="field">
-        <div className="label">{text.settings['Clock']}</div>
-        <div>
-          <em>{text.settings['display playtime']}</em>
-          <label><input
-            type="radio"
-            name="clock"
-            value={ClockTypes.NONE}
-            checked={config.CLOCK_TYPE === ClockTypes.NONE}
-            onChange={changeClockTypeHandler}
-          /> <span>{text.settings['No clock']}</span></label>
-          <label><input
-            type="radio"
-            name="clock"
-            value={ClockTypes.ANALOG}
-            checked={config.CLOCK_TYPE === ClockTypes.ANALOG}
-            onChange={changeClockTypeHandler}
-          /> <span>{text.settings['Analog clock']}</span></label>
-          <label><input
-            type="radio"
-            name="clock"
-            value={ClockTypes.DIGITAL}
-            checked={config.CLOCK_TYPE === ClockTypes.DIGITAL}
-            onChange={changeClockTypeHandler}
-          /> <span>{text.settings['Digital clock']}</span></label>
-        </div>
-      </div>
     </fieldset>
   )
 

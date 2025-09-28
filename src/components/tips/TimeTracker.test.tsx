@@ -1,6 +1,5 @@
 import { act } from '@testing-library/react'
 import TimeTracker from './TimeTracker'
-import { ClockTypes } from './../../common/app-types'
 import storage from './../../common/storage'
 import { microConfig } from './../../__mocks__/configs'
 import { newGameState, playingGameState, lostGameState } from './../../__mocks__/game-states'
@@ -60,30 +59,6 @@ describe('TimeTracker', () => {
       })
       expect(getMinutesLapsed()).toBe(minutes)
       expect(getSecondsLapsed()).toBe(seconds)
-    })
-  })
-
-  describe('analog clock', () => {
-    beforeEach(() => {
-      storage.config = {...microConfig, CLOCK_TYPE: ClockTypes.ANALOG}
-    })
-
-    it('should rotate hands', () => {
-      renderInProvider(<TimeTracker game={lostGameState} />)
-      // stopped at 3 minutes and 50 seconds
-      const minuteHand = document.querySelector('#minutes') as SVGElement
-      const secondHand = document.querySelector('#seconds') as SVGElement
-      expect(minuteHand.style.transform).toBe('rotate(90deg)')
-      expect(secondHand.style.transform).toBe('rotate(300deg)')
-    })
-  })
-
-  describe('no clock', () => {
-    it('should not appear', () => {
-      storage.config = {...microConfig, CLOCK_TYPE: ClockTypes.NONE}
-      renderInProvider(<TimeTracker game={lostGameState} />)
-      const timeTracker = document.querySelector('.time-tracker')
-      expect(timeTracker).not.toBeInTheDocument()
     })
   })
 })

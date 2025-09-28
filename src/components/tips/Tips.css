@@ -7,6 +7,10 @@
   font-size: 80%;
 }
 
+#time-tracker span {
+  width: 2ex;
+}
+
 #mine-tracker span {
   display: inline-block;
 }

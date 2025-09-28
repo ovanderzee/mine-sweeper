@@ -13,7 +13,7 @@ import { initialGameState } from './common'
 import { gameReducer } from './game-reducer'
 import { GameStages, GameAction, GameActionType } from '../../common/game-types'
 import storage from '../../common/storage'
-import TimeTracker from './TimeTracker'
+import TimeTracker from './../tips/TimeTracker'
 import MineTracker from './../tips/MineTracker'
 import './Game.css'
 
