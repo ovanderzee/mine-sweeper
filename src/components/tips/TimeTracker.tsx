@@ -1,13 +1,10 @@
 import { useContext, useEffect, useState } from 'react'
 import PageContext from '../../store/page-context'
-import { GameState, GameStages } from '../../common/game-types'
+import { GameStages } from '../../common/game-types'
+import { TipProps } from './Tips'
 import './Tips.css'
 
-interface TimeTrackerProps {
-  game: GameState;
-}
-
-const TimeTracker = (props: TimeTrackerProps) => {
+const TimeTracker = (props: TipProps) => {
   const pageCtx = useContext(PageContext)
   const { text } = pageCtx
   const { stage, tZero, tShift } = props.game

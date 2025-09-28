@@ -13,8 +13,7 @@ import { initialGameState } from './common'
 import { gameReducer } from './game-reducer'
 import { GameStages, GameAction, GameActionType } from '../../common/game-types'
 import storage from '../../common/storage'
-import TimeTracker from './../tips/TimeTracker'
-import MineTracker from './../tips/MineTracker'
+import Tips from './../tips/Tips'
 import './Game.css'
 
 const Game = () => {
@@ -61,10 +60,7 @@ const Game = () => {
           />
         ))
       )}
-      <aside>
-        <TimeTracker game={gameState} />
-        <MineTracker game={gameState} />
-      </aside>
+      <Tips game={gameState} />
     </article>
   )
 

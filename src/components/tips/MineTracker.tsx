@@ -1,13 +1,9 @@
 import { useContext } from 'react'
 import PageContext from '../../store/page-context'
-import { GameState } from '../../common/game-types'
+import { TipProps } from './Tips'
 import './Tips.css'
 
-interface MineTrackerProps {
-  game: GameState;
-}
-
-const MineTracker = (props: MineTrackerProps) => {
+const MineTracker = (props: TipProps) => {
   const pageCtx = useContext(PageContext)
   const { text } = pageCtx
 
