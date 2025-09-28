@@ -8,8 +8,8 @@
 - The shield looks like plastic. Make a dent in the shield to add realism
 
 ### Features
-- Playmode: Play without flags
-- Playmode: Win or loose when flag count equals mine count
+- Playmode Tough: Play without flags or mine counters
+- Playmode Risky: Win or loose when flag count equals mine count
 - Pause button, correct time on unpause
 - Routing on gamecode, about, config and hiscores
 - Replay game from High Scores (when routing)
@@ -17,7 +17,7 @@
 - Zoom slider on gamepage
 - Gamelevel on x-axis
 - Calculate coagulation
-
+- Informational line under game with clock, mines-to-find count-moves and cover-or-contain-game-in-view
 
 ## [3.3.0] - 2025-09-25
 

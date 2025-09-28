@@ -1,0 +1,34 @@
+.tip {
+  color: var(--ultra-dark-blue);
+  padding-inline: 1ex;
+}
+
+.tip > * {
+  font-size: 80%;
+}
+
+#mine-tracker span {
+  display: inline-block;
+}
+
+#mine-tracker {
+  text-align: center;
+}
+
+#mine-tracker .icon {
+  width: .8em;
+  aspect-ratio: 1;
+}
+
+#mine-tracker #mine {
+  border-radius: 50%;
+  background: radial-gradient(ellipse at 25% 25%, transparent 8%, currentcolor 33% )
+}
+
+#mine-tracker #flag::before {
+  content: '⚑'
+}
+
+#mine-tracker #diff {
+  margin-inline: .333ex;
+}

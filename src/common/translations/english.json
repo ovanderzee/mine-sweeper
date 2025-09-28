@@ -107,5 +107,8 @@
     "Quit and new game?": "Do you want to start a new game?",
     "Quit and restart game?": "Do you want to restart the game?",
     "Quit Game?": "Change of a determining game variable. Do you want to end the game?"
+  },
+  "tips": {
+    "Todo counter": "Number of mines to find"
   }
 }

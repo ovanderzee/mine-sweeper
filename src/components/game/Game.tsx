@@ -14,6 +14,7 @@ import { gameReducer } from './game-reducer'
 import { GameStages, GameAction, GameActionType } from '../../common/game-types'
 import storage from '../../common/storage'
 import TimeTracker from './TimeTracker'
+import MineTracker from './../tips/MineTracker'
 import './Game.css'
 
 const Game = () => {
@@ -62,13 +63,14 @@ const Game = () => {
       )}
       <aside>
         <TimeTracker game={gameState} />
+        <MineTracker game={gameState} />
       </aside>
     </article>
   )
 
   const gameNavigation = (
     <NavOptionsBar>
-      <HiScores board={gameState.board} />
+      <HiScores />
       <NewGame
         onNew={dispatchGameAction}
         stage={gameState.stage}

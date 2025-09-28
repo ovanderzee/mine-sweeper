@@ -107,5 +107,8 @@
     "Quit and new game?": "Wil je een nieuw spel beginnen?",
     "Quit and restart game?": "Wil je dit spel opnieuw beginnen?",
     "Quit Game?": "Aanpassing van een bepalende spel variabele. Wil je het spel beëindigen?"
+  },
+  "tips": {
+    "Todo counter": "Aantal te vinden mijnen"
   }
 }

@@ -1,7 +1,5 @@
 import { screen, fireEvent } from '@testing-library/react'
-import { renderInContext, renderInProvider } from './../../__mocks__/render-helpers'
-import { decidedGameState } from './../../__mocks__/game-states'
-import storage from './../../common/storage'
+import { renderInContext } from './../../__mocks__/render-helpers'
 import HiScores from './HiScores'
 import HallOfFame from '../meta/HallOfFame'
 
@@ -14,13 +12,6 @@ describe('HiScores Component', () => {
     expect(svg).toBeInTheDocument()
   })
 
-  test('should display bombs minus flags count', () => {
-    storage.game = decidedGameState
-    renderInProvider(<HiScores board={decidedGameState.board} />)
-    const button = screen.getByText(/1×/i)
-    expect(button).toBeInTheDocument()
-  })
-
   test('should navigate when clicked', () => {
     const navigate = jest.fn()
     renderInContext(<HiScores />, { navigate })
@@ -29,5 +20,4 @@ describe('HiScores Component', () => {
     expect(navigate).toHaveBeenCalledTimes(1)
     expect(navigate).toHaveBeenCalledWith(<HallOfFame />)
   })
-
 })
