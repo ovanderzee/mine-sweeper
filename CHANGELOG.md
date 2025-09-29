@@ -26,6 +26,7 @@
 
 ### Fixed
 - Shield can be clicked to close game-won dialog
+- Fix screen content width
 
 
 ## [3.3.1] - 2025-10-06
