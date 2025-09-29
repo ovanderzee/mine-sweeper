@@ -102,6 +102,8 @@
   },
   "tips": {
     "Todo counter": "Aantal te vinden mijnen",
-    "Playtime": "Speelduur"
+    "Playtime": "Speelduur",
+    "Contain all cells": "Alle cellen op het scherm",
+    "Cover with cells": "Vul scherm met cellen"
   }
 }

@@ -2,7 +2,7 @@
   overflow: visible;
 }
 
-#playground button {
+#playground > button {
   --shadow-topleft: 0.25em 0.25em 0.25em;
   --shadow-bottomright: -0.25em -0.25em 0.25em;
 
@@ -21,8 +21,8 @@
   z-index: 5;
 }
 
-#playground button::before,
-#playground button::after {
+#playground > button::before,
+#playground > button::after {
   --pseudo-margin: 0;
 
   content: '';

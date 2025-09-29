@@ -7,7 +7,7 @@
   user-select: none;
 }
 
-#playground button {
+#playground > button {
   font-size: calc(8em / var(--board-size));
   grid-column: var(--cell-col);
   grid-row: var(--cell-row);

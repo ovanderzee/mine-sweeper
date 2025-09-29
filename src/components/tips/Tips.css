@@ -44,3 +44,24 @@
 #mine-tracker #diff {
   margin-inline: .333ex;
 }
+
+#board-fitter button::before,
+#board-fitter button::after {
+  content: none;
+}
+
+#board-fitter button {
+  border: none;
+  background: none;
+  padding: 0;
+}
+
+#board-fitter *:has(> svg use[href]) {
+  color: currentcolor;
+}
+
+#board-fitter button svg {
+  aspect-ratio: 1;
+  width: 1.414em;
+  vertical-align: -20%;
+}
