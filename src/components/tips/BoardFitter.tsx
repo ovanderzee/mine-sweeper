@@ -15,9 +15,12 @@ const BoardFitter = () => {
       <button id="cover" type="button" title={text.tips['Cover with cells']}>
         <svg><use href={`#cover-view`} /></svg>
       </button>
+      &nbsp;
+      <button id="reset-fit" type="button" title={text.tips['Revert screen']}>
+        <svg><use href={`#revert-view`} /></svg>
+      </button>
     </section>
   )
-
 }
 
 export default BoardFitter

@@ -103,7 +103,8 @@
   "tips": {
     "Todo counter": "Number of mines to find",
     "Playtime": "Playtime",
-    "Contain all cells": "Contain all cells on screen",
-    "Cover with cells": "Cover screen with cells"
+    "Contain all cells": "Have all cells on screen",
+    "Cover with cells": "Cover screen with cells",
+    "Revert screen": "Revert screen"
   }
 }
