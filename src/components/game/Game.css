@@ -7,6 +7,11 @@
   user-select: none;
 }
 
+#playground:fullscreen {
+  background: var(--medium-blue);
+  overflow: auto;
+}
+
 #playground > button {
   font-size: calc(8em / var(--board-size));
   grid-column: var(--cell-col);

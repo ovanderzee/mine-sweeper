@@ -15,9 +15,18 @@
   font-size: 80%;
 }
 
+.tip button::before,
+.tip button::after {
+  content: none;
+}
+
+/* TIME */
+
 #time-tracker span {
   width: 2ex;
 }
+
+/* MINE */
 
 #mine-tracker span {
   display: inline-block;
@@ -45,9 +54,11 @@
   margin-inline: .333ex;
 }
 
-#board-fitter button::before,
-#board-fitter button::after {
-  content: none;
+/* BOARD */
+
+#board-fitter {
+  display: flex;
+  gap: 0.5ex;
 }
 
 #board-fitter button {
@@ -66,3 +77,20 @@
   vertical-align: -20%;
 }
 
+#contain-fit,
+:fullscreen.contain #contain-fit,
+#cover-fit,
+:fullscreen.cover #cover-fit,
+#reset-fit,
+:fullscreen #fullscreen-mode,
+#window-mode {
+  display: none;
+}
+
+:fullscreen #contain-fit,
+:fullscreen.contain #reset-fit,
+:fullscreen #cover-fit,
+:fullscreen.cover #reset-fit,
+:fullscreen #window-mode {
+  display: block;
+}
