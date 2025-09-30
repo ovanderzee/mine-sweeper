@@ -21,8 +21,7 @@ const ModalComponent = (props: ModalProps): React.ReactNode => {
   const { FONT_SIZE } = pageCtx.config
   const text = pageCtx.text
 
-  const dialogRef = useRef(null)
-  let dialogElement!: HTMLDialogElement | null
+  const dialogRef = useRef<HTMLDialogElement | null>(null)
 
   const keystrokeHandler = (event: React.KeyboardEvent, handler: (event: React.KeyboardEvent)=>void) => {
     if (event.key && event.key === 'Enter') handler(event)
@@ -50,11 +49,10 @@ const ModalComponent = (props: ModalProps): React.ReactNode => {
   >{text.common.cancel}</button>
 
   useEffect(() => {
-    dialogElement = dialogRef?.current ? dialogRef.current as HTMLDialogElement : null
-    if (dialogElement) {
-      dialogElement.showModal()
-      dialogElement.setAttribute('open', 'true')
-      dialogElement.focus()
+    if (dialogRef.current) {
+      dialogRef.current.showModal()
+      dialogRef.current.setAttribute('open', 'true')
+      dialogRef.current.focus()
     }
   }, [dialogRef])
 
@@ -67,9 +65,9 @@ const ModalComponent = (props: ModalProps): React.ReactNode => {
 
     setEndState('ending')
     setTimeout(() => {
-        if (dialogElement) {
-          dialogElement.removeAttribute('open')
-          dialogElement.close()
+        if (dialogRef.current) {
+          dialogRef.current.removeAttribute('open')
+          dialogRef.current.close()
         }
         props.closeModal()
       },

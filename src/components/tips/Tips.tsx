@@ -1,18 +1,24 @@
+import { RefObject } from 'react'
 import TimeTracker from './TimeTracker'
 import MineTracker from './MineTracker'
 import BoardFitter from './BoardFitter'
 import { GameState } from '../../common/game-types'
 import './Tips.css'
 
+interface TipsProps {
+  game: GameState;
+  playgroundRef: RefObject<HTMLElement | null>;
+}
+
 export interface TipProps {
   game: GameState;
 }
 
-const Tips = (props: TipProps) => (
+const Tips = (props: TipsProps) => (
   <aside className="tips">
     <TimeTracker game={props.game} />
     <MineTracker game={props.game} />
-    <BoardFitter />
+    <BoardFitter playgroundRef={props.playgroundRef} />
   </aside>
 )
 

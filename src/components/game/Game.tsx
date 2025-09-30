@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect, useReducer } from 'react'
+import { useContext, useState, useEffect, useReducer, useRef } from 'react'
 import PageContext from '../../store/page-context'
 import GameCell from './GameCell'
 import GameCellDemoNav from './GameCellDemo'
@@ -45,8 +45,11 @@ const Game = () => {
     }
   });
 
+  const playgroundRef = useRef<HTMLElement | null>(null)
+
   const gameBoard = (
     <article
+        ref={playgroundRef}
         id="playground"
         className={`board-size__${BOARD_SIZE} ${gameState.stage}`}
         style={{'--board-size': BOARD_SIZE} as React.CSSProperties}
@@ -60,7 +63,7 @@ const Game = () => {
           />
         ))
       )}
-      <Tips game={gameState} />
+      <Tips game={gameState} playgroundRef={playgroundRef} />
     </article>
   )
 

@@ -94,3 +94,7 @@
 :fullscreen #window-mode {
   display: block;
 }
+
+#playground {
+  transition: opacity linear
+}
