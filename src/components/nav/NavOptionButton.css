@@ -1,0 +1,22 @@
+
+button.nav-option {
+  background: transparent;
+  border: 0 none;
+  padding: 0;
+  transition: color 2s;
+}
+
+button.nav-option.active {
+  color: var(--fire-yellorange);
+  transition: color 0s
+}
+
+button.nav-option[disabled] {
+  cursor: not-allowed;
+  opacity: .5;
+}
+
+button.nav-option span {
+  display: inline-block;
+}
+

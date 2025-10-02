@@ -9,7 +9,7 @@ const HiScores = () => {
   const showHandler = () => pageCtx.navigate(<HallOfFame />)
 
   return (
-    <button type="button" title={text.nav['Hall of Fame']} onClick={showHandler}>
+    <button type="button" className="nav-option" title={text.nav['Hall of Fame']} onClick={showHandler}>
       <svg><use href="#nav-podium" /></svg>
     </button>
   )

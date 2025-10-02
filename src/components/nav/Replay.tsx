@@ -38,7 +38,7 @@ const Replay = (props: ReplayProps) => {
 
   return <>
     <button type="button"
-      className={showActive ? 'active' : ''}
+      className={`nav-option ${showActive ? 'active' : ''}`}
       title={text.nav['Replay']}
       onClick={replayHandler}
     >

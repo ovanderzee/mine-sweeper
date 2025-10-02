@@ -47,7 +47,7 @@ const DefaultSettings = () => {
 
   return <>
     <button type="button"
-      className={showActive ? 'active' : ''}
+      className={`nav-option ${showActive ? 'active' : ''}`}
       title={text.nav['Reinstate Defaults']}
       onClick={resetHandler}
     >

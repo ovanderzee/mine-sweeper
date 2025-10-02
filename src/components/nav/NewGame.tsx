@@ -38,7 +38,7 @@ const NewGame = (props: NewGameProps) => {
 
   return <>
     <button type="button"
-      className={showActive ? 'active' : ''}
+      className={`nav-option ${showActive ? 'active' : ''}`}
       title={text.nav['New Game']}
       onClick={newGameHandler}
     >

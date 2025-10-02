@@ -5,8 +5,6 @@ interface NavOptionsBarProps {
 }
 
 const NavOptionsBar = (props: NavOptionsBarProps) => {
-
-
   return (
     <nav><div className="sticky-slider">
       {props.children}
