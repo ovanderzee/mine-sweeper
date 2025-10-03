@@ -15,9 +15,21 @@
   font-size: 80%;
 }
 
+.tip button {
+  border: none;
+  background: none;
+  padding: 0;
+}
+
 .tip button::before,
 .tip button::after {
   content: none;
+}
+
+.tip button svg {
+  aspect-ratio: 1;
+  width: 1.414em;
+  vertical-align: -20%;
 }
 
 /* TIME */
@@ -61,22 +73,11 @@
   gap: 0.5ex;
 }
 
-#board-fitter button {
-  border: none;
-  background: none;
-  padding: 0;
-}
-
 #board-fitter *:has(> svg use[href]) {
   color: currentcolor;
 }
 
-#board-fitter button svg {
-  aspect-ratio: 1;
-  width: 1.414em;
-  vertical-align: -20%;
-}
-
+#new-game-tip,
 #contain-fit,
 :fullscreen.contain #contain-fit,
 #cover-fit,
@@ -87,6 +88,7 @@
   display: none;
 }
 
+:fullscreen #new-game-tip,
 :fullscreen #contain-fit,
 :fullscreen.contain #reset-fit,
 :fullscreen #cover-fit,

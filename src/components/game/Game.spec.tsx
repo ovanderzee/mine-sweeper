@@ -80,6 +80,8 @@ describe('The game sidebar', () => {
 })
 
 describe('The game start button', () => {
+  let navOptions: HTMLElement | null
+
   beforeEach(() => {
     storage.config = microConfig
   })
@@ -93,12 +95,13 @@ describe('The game start button', () => {
   it('should start a new game when game ended', () => {
     storage.game = playingGameState
     startPageTesting()
+    navOptions = document.querySelector('.screen > nav') as HTMLElement
     expect(storage.game.stage).toBe('game-playing')
 
     clickToLoose()
     expect(storage.game.stage).toBe('game-lost')
 
-    const button = screen.getByTitle('New Game')
+    const button = within(navOptions).getByTitle('New Game')
     fireEvent.click(button)
 
     expect(storage.game.stage).toBe('game-new')
@@ -107,9 +110,10 @@ describe('The game start button', () => {
   it("should not start a new game on cancel when game is in progress", () => {
     storage.game = playingGameState
     startPageTesting()
+    navOptions = document.querySelector('.screen > nav') as HTMLElement
     expect(storage.game.stage).toBe('game-playing')
 
-    const button = screen.getByTitle('New Game')
+    const button = within(navOptions).getByTitle('New Game')
     fireEvent.click(button)
 
     const dialog = screen.getByRole('dialog')
@@ -124,9 +128,10 @@ describe('The game start button', () => {
     const newGameReducerSpy = jest.spyOn(newGame, 'newGameReducer')
     storage.game = playingGameState
     startPageTesting()
+    navOptions = document.querySelector('.screen > nav') as HTMLElement
     expect(storage.game.stage).toBe('game-playing')
 
-    const button = screen.getByTitle('New Game')
+    const button = within(navOptions).getByTitle('New Game')
     fireEvent.click(button)
 
     const dialog = screen.getByRole('dialog')
@@ -155,6 +160,8 @@ describe('The replay button', () => {
     return equals.length === board1.length
   })
 
+  let navOptions: HTMLElement | null
+
   beforeEach(() => {
     storage.config = microConfig
   })
@@ -168,10 +175,11 @@ describe('The replay button', () => {
   it("should restart a lost game", () => {
     storage.game = playingGameState
     startPageTesting()
+    navOptions = document.querySelector('.screen > nav') as HTMLElement
     clickToLoose()
     expect(storage.game.stage).toBe('game-lost')
 
-    const button = screen.getByTitle('Replay')
+    const button = within(navOptions).getByTitle('Replay')
     fireEvent.click(button)
 
     const isSame = hasSameMineDistribution(playingGameState, storage.game)
@@ -182,10 +190,11 @@ describe('The replay button', () => {
   it("should restart a won game", () => {
     storage.game = playingGameState
     startPageTesting()
+    navOptions = document.querySelector('.screen > nav') as HTMLElement
     clickToWin()
     expect(storage.game.stage).toBe('game-won')
 
-    const button = screen.getByTitle('Replay')
+    const button = within(navOptions).getByTitle('Replay')
     fireEvent.click(button)
 
     const isSame = hasSameMineDistribution(playingGameState, storage.game)
@@ -198,9 +207,10 @@ describe('The replay button', () => {
     const replayReducerSpy = jest.spyOn(replay, 'replayReducer')
     storage.game = playingGameState
     startPageTesting()
+    navOptions = document.querySelector('.screen > nav') as HTMLElement
     expect(storage.game.stage).toBe('game-playing')
 
-    const button = screen.getByTitle('Replay')
+    const button = within(navOptions).getByTitle('Replay')
     fireEvent.click(button)
 
     const dialog = screen.getByRole('dialog')
@@ -216,9 +226,10 @@ describe('The replay button', () => {
     const replayReducerSpy = jest.spyOn(replay, 'replayReducer')
     storage.game = playingGameState
     startPageTesting()
+    navOptions = document.querySelector('.screen > nav') as HTMLElement
     expect(storage.game.stage).toBe('game-playing')
 
-    const button = screen.getByTitle('Replay')
+    const button = within(navOptions).getByTitle('Replay')
     fireEvent.click(button)
 
     const dialog = screen.getByRole('dialog')

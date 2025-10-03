@@ -63,7 +63,11 @@ const Game = () => {
           />
         ))
       )}
-      <Tips game={gameState} playgroundRef={playgroundRef} />
+      <Tips
+        game={gameState}
+        onNew={dispatchGameAction}
+        playgroundRef={playgroundRef}
+      />
     </article>
   )
 

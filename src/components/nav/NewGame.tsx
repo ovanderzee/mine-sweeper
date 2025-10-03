@@ -6,6 +6,7 @@ import { GameStages, GameActionType, GameAction } from '../../common/game-types'
 interface NewGameProps {
   onNew: (action: GameAction) => void;
   stage: GameStages;
+  appearance?: string;
 }
 
 const NewGame = (props: NewGameProps) => {
@@ -36,7 +37,7 @@ const NewGame = (props: NewGameProps) => {
     isPlaying ? setShowModal(isPlaying) : confirmHandler()
   }
 
-  return <>
+  const navOptionButton = <>
     <button type="button"
       className={`nav-option ${showActive ? 'active' : ''}`}
       title={text.nav['New Game']}
@@ -46,6 +47,19 @@ const NewGame = (props: NewGameProps) => {
     </button>
     {showModal && consentModal}
   </>
+
+  const tipButton = <>
+    <button type="button"
+      className={`nav-option ${showActive ? 'active' : ''}`}
+      title={text.nav['New Game']}
+      onClick={newGameHandler}
+    >
+      <svg><use href={`#plain-play`} /></svg>
+    </button>
+    {showModal && consentModal}
+  </>
+
+  return props.appearance === 'tip' ? tipButton : navOptionButton
 }
 
 export default NewGame

@@ -13,7 +13,7 @@ const GameCellDemoNav = () => {
   const pageCtx = useContext(PageContext)
   const watchHandler = () => pageCtx.navigate(<GameCellDemo />)
 
-  const navButton = <button type="button" title="Cell State Demo" onClick={watchHandler}>
+  const navButton = <button type="button" className="nav-option" title="Cell State Demo" onClick={watchHandler}>
       <svg><use href={`#nav-eye`} /></svg>
     </button>
 
