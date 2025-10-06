@@ -103,10 +103,14 @@ li footer div:not(.points) {
   z-index: 5;
   top: 0;
   display: block;
+  width: 100%;
   background: var(--light-blue);
   border-block-end: 1.5px solid var(--medium-blue);
+  border-spacing: 0;
+  box-sizing: content-box;
   margin-inline: calc(-1 * var(--screen-gutter));
-  padding: var(--screen-gutter);
+  padding-block: calc(.5 * var(--screen-gutter));
+  padding-inline: var(--screen-gutter);
 }
 
 .legend tbody {

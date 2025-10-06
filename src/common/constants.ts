@@ -16,7 +16,7 @@ export const LONG_PRESS_THRESHOLD = 200
 
 // hall of fame
 export const SHOW_SORT_THRESHOLD = 12
-export const SHOW_DIAGRAM_THRESHOLD = 36
+export const SHOW_DIAGRAM_THRESHOLD = 24
 
 /* RANGES */
 
