@@ -17,6 +17,8 @@
 - Zoom slider on gamepage
 - Gamelevel on x-axis
 - Calculate coagulation
+- Enter key to start new game after game end
+- Click progation on dialog content only stops when there are buttons
 
 
 ## [3.3.0] - 2025-09-25
