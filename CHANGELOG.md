@@ -16,9 +16,19 @@
 - Save a game on a new list page (with comment)
 - Zoom slider on gamepage
 - Gamelevel on x-axis
-- Calculate coagulation
+- Calculate coagulation (min-mine borders | blank to mine ratio)
 - Enter key to start new game after game end
-- Click progation on dialog content only stops when there are buttons
+- Click propagation on dialog content only stops when there are buttons
+- Limit number or duration of explosions
+- Show gamelevel and number of neighbouring mines in graph
+
+
+## [3.3.1] - 2025-10-06
+
+### Changed
+- Show threshold for showing score diagram
+- Text and color changes in diagram
+- Get width of Hall of Fame in line with other screens
 
 
 ## [3.3.0] - 2025-09-25
