@@ -10,7 +10,7 @@ const GoBack = () => {
 
   return (
     <button type="button" title={text.nav['Go Back']} onClick={goBackHandler}>
-      <svg><use href={`#nav-return`} /></svg>
+      <svg role="img"><use href={`#nav-return`} /></svg>
     </button>
   )
 }

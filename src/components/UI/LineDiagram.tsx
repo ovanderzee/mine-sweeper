@@ -74,6 +74,7 @@ const LineDiagram = (props: LineDiagramProps) => {
 
   return (
     <svg
+      role="document"
       className="line-diagram"
       viewBox={`${lgdSpace * -1} ${pointsSpace * -1} ${diagramSize.x} ${diagramSize.y}`}
       xmlns="http://www.w3.org/2000/svg"

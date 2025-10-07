@@ -36,7 +36,7 @@ const EraseScores = (props: { onErase: () => void }) => {
       title={text.nav['Clear List']}
       onClick={eraseHandler}
     >
-      <svg><use href={`#nav-empty`} /></svg>
+      <svg role="img"><use href={`#nav-empty`} /></svg>
     </button>
     {showModal && consentModal}
   </>

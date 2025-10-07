@@ -18,9 +18,14 @@
 - Gamelevel on x-axis
 - Calculate coagulation (min-mine borders | blank to mine ratio)
 - Enter key to start new game after game end
-- Click propagation on dialog content only stops when there are buttons
 - Limit number or duration of explosions
 - Show gamelevel and number of neighbouring mines in graph
+
+
+## [next]
+
+### Fixed
+- Shield can be clicked to close game-won dialog
 
 
 ## [3.3.1] - 2025-10-06

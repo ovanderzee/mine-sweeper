@@ -104,26 +104,67 @@ describe('Modal Dialog', () => {
       expect(confirmFn).toHaveBeenCalledTimes(0)
       expect(closeFn).toHaveBeenCalledTimes(0)
     })
-  })
 
-  describe('should show a shield when winning the game', () => {
-    const getShieldModal = (): ReactNode => {
-      return <Modal
-        onCancel={()=>{}}
-        onConfirm={()=>{}}
-        closeModal={()=>{}}
-        className={'game-won'}
-        textBefore={'123'}
-        textAfter={''}
-      />
-    }
-
-    it('showing the rank', () => {
-      renderInProvider(getShieldModal())
-      const svgElement = document.querySelector('svg.shield.blue')
-      expect(svgElement).toBeInTheDocument()
-      const rankText = screen.getByText(/123/i)
-      expect(rankText).toBeInTheDocument()
+    it('not when the backdrop is clicked', async () => {
+      const clickTarget = screen.getByRole('dialog')
+      fireEvent.click(clickTarget)
+      await waitForElementToBeRemoved(() => screen.getByRole('dialog'))
+      expect(cancelFn).toHaveBeenCalledTimes(0)
+      expect(confirmFn).toHaveBeenCalledTimes(0)
+      expect(closeFn).toHaveBeenCalledTimes(1)
     })
   })
 })
+
+
+describe('Shield as Modal Dialog', () => {
+  let
+    // modalDialog!: HTMLDialogElement,
+    cancelFn: () => void,
+    confirmFn: () => void,
+    closeFn: () => void
+
+  const getShieldModal = (): ReactNode => {
+    return <Modal
+      onCancel={cancelFn}
+      onConfirm={confirmFn}
+      closeModal={closeFn}
+      className={'game-won'}
+      textBefore={'123'}
+      textAfter={''}
+    />
+  }
+
+  beforeEach(() => {
+    cancelFn = jest.fn()
+    confirmFn = jest.fn()
+    closeFn = jest.fn()
+    renderInProvider(getShieldModal())
+    // modalDialog = screen.getByRole('dialog')
+  })
+
+  it('should show the rank', () => {
+    const svgElement = document.querySelector('svg.shield.blue')
+
+    expect(svgElement).toBeInTheDocument()
+    const rankText = screen.getByText(/123/i)
+    expect(rankText).toBeInTheDocument()
+    expect(rankText.tagName.toUpperCase()).toBe('TEXT')
+  })
+
+  /* Does not seem to work with SVG
+  it('should vanish when the shield is clicked', async () => {
+    const clickTarget = screen.getByRole('img')
+    expect(clickTarget).toBeInTheDocument()
+    fireEvent.click(clickTarget)
+
+    await waitForElementToBeRemoved(() => screen.getByRole('dialog'))
+
+    expect(cancelFn).toHaveBeenCalledTimes(0)
+    expect(confirmFn).toHaveBeenCalledTimes(0)
+    expect(closeFn).toHaveBeenCalledTimes(1)
+    expect(clickTarget).not.toBeInTheDocument()
+  })
+  */
+})
+

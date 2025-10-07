@@ -14,7 +14,7 @@ const Shield = (props: ShieldProps) => {
   }
 
   return (
-    <svg className={`shield ${props.colorSet}`}>
+    <svg role="img" className={`shield ${props.colorSet}`}>
         <use href={`#shield_${props.colorSet}`} />
         {props?.text &&
           <text
