@@ -14,6 +14,7 @@ export class CellState extends CellStateEntry {
   row!: number;
   col!: number;
   mark?: number;
+  burst?: boolean;
 }
 
 export enum GameActionType {

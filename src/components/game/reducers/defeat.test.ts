@@ -16,7 +16,7 @@ describe('defeatReducer is called in repetition', () => {
     expect(gameState2.mines.length).toBe(1)
 
     const gameState3 = defeatReducer(gameState2)
-    expect(gameState3.mines.length).toBe(0)
+    expect(gameState3.mines.length).toBe(1)
 
     expect(gameState3.board).toStrictEqual(lostGameState.board)
   })
