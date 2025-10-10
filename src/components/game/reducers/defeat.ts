@@ -10,7 +10,7 @@ export const defeatReducer = (state: GameState): GameState => {
 
   const mineCount = calculateMineCount(storage.config) - 1 // one was blown onclick
   const floatingSize = Math.min(mineCount / MAX_DETONATIONS, minesToDo.length)
-  const batchSize = (Math.random() < floatingSize % 1) ? Math.ceil(floatingSize) : Math.floor(floatingSize);
+  const batchSize = (Math.random() < floatingSize % 1 || floatingSize < 1) ? Math.ceil(floatingSize) : Math.floor(floatingSize);
   const mineBatch = Array(batchSize)
 
   if (batchSize) {

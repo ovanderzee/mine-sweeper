@@ -3,7 +3,7 @@ import { CellStateStage, CellState } from '../../../common/game-types'
 import { playingGameState, lostGameState } from '../../../__mocks__/game-states'
 
 describe('defeatReducer is called in repetition', () => {
-  xtest('should return declining number of untouched mines', () => {
+  test('should end with all mines .clicked (CellStateStage.TESTED)', () => {
     // all cells at least opened like in a lost stage
     playingGameState.board
       .forEach(
@@ -13,12 +13,18 @@ describe('defeatReducer is called in repetition', () => {
       )
 
     const gameState2 = defeatReducer(playingGameState)
-    expect(gameState2.mines.length).toBe(1)
-
     const gameState3 = defeatReducer(gameState2)
-    expect(gameState3.mines.length).toBe(1)
 
-    expect(gameState3.board).toStrictEqual(lostGameState.board)
+    jest.runAllTimers()
+    const allMines: CellState[] = gameState3.board
+      .flat()
+      .filter(cell => cell.fill > 8)
+
+    const clickedMines: CellState[] = gameState3.board
+      .flat()
+      .filter(cell => cell.stage === CellStateStage.TESTED && cell.fill > 8)
+
+    expect(clickedMines.length).toBe(allMines.length)
   })
 
   test('should return unchanged state when no untouched mines were found', () => {
