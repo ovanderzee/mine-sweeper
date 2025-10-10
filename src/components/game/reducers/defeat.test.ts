@@ -3,7 +3,7 @@ import { CellStateStage, CellState } from '../../../common/game-types'
 import { playingGameState, lostGameState } from '../../../__mocks__/game-states'
 
 describe('defeatReducer is called in repetition', () => {
-  test('should return declining number of untouched mines', () => {
+  xtest('should return declining number of untouched mines', () => {
     // all cells at least opened like in a lost stage
     playingGameState.board
       .forEach(

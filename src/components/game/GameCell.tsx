@@ -34,9 +34,12 @@ const GameCell = (props: GameCellProps) => {
     if (stage) return
     if (type === GameActionType.MOVE && locked) return
 
-    let entry: CellStateEntry = { stage: CellStateStage.TESTED }
+    let entry: CellStateEntry = {}
     if (type === GameActionType.FLAG) {
-      entry = { locked: !locked }
+      entry.locked = !locked
+    } else { // GameActionType.MOVE
+      entry.stage = CellStateStage.TESTED
+      if (fill > 8) entry.burst = true
     }
 
     const payload = JSON.stringify({
