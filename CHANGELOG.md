@@ -18,7 +18,13 @@
 - Gamelevel on x-axis
 - Calculate coagulation
 - Enter key to start new game after game end
-- Click progation on dialog content only stops when there are buttons
+- Click propagation on dialog content only stops when there are buttons
+
+
+## [next]
+
+### Changed
+- Mine bursts limited to about 13 when game is lost
 
 
 ## [3.3.0] - 2025-09-25

@@ -18,6 +18,9 @@ export const LONG_PRESS_THRESHOLD = 200
 export const SHOW_SORT_THRESHOLD = 12
 export const SHOW_DIAGRAM_THRESHOLD = 24
 
+// game lost
+export const MAX_DETONATIONS = 13
+
 /* RANGES */
 
 const newReadOnly = (value: number | InputRange): PropertyDescriptor => {
