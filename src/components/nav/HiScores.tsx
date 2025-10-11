@@ -10,7 +10,7 @@ const HiScores = () => {
 
   return (
     <button type="button" className="nav-option" title={text.nav['Hall of Fame']} onClick={showHandler}>
-      <svg><use href="#nav-podium" /></svg>
+      <svg role="img"><use href="#nav-podium" /></svg>
     </button>
   )
 }

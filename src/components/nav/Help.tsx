@@ -10,7 +10,7 @@ const Help = () => {
 
   return (
     <button type="button" className="nav-option" title={text.nav['Help']} onClick={showHandler}>
-      <svg><use href={`#nav-question`} /></svg>
+      <svg role="img"><use href={`#nav-question`} /></svg>
     </button>
   )
 }

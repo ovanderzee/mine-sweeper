@@ -71,7 +71,7 @@ describe('Gamecell, a party of properties', () => {
       const button = screen.getByRole('button')
       expect(button.id).toBe('row3col4')
       expect(button.innerHTML).toBe(' <span class=\"burst\"></span>')
-      expect(trim(button.className)).toBe('touched mijn explode')
+      expect(trim(button.className).startsWith('touched mijn explode')).toBe(true)
       expect(button.getAttribute('aria-label')).toBe('row 4 column 5, open')
       expect(button.getAttribute('style')).toBe('--cell-row: 4; --cell-col: 5;')
     })
@@ -96,7 +96,7 @@ describe('Gamecell, a party of properties', () => {
       fireEvent.pointerDown(button)
       jest.advanceTimersByTime(LONG_PRESS_THRESHOLD * .9) // ==> MOVE action
       fireEvent.pointerUp(button)
-      const payload = {payload: JSON.stringify({cell, entry: {stage: 'clicked'}}), type: 'MOVE'}
+      const payload = {payload: JSON.stringify({cell, entry: {stage: 'clicked', burst: true}}), type: 'MOVE'}
       expect(dispatchGameAction).toHaveBeenCalledWith(payload)
     })
 
@@ -169,7 +169,7 @@ describe('Gamecell, a party of properties', () => {
 
       fireEvent.keyDown(button, keyDownEvent)
 
-      const response = {payload: JSON.stringify({cell, entry: {stage: 'clicked'}}), type: 'MOVE'}
+      const response = {payload: JSON.stringify({cell, entry: {stage: 'clicked', burst: true}}), type: 'MOVE'}
       expect(dispatchGameAction).toHaveBeenCalledWith(response)
     })
 

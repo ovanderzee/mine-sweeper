@@ -14,7 +14,7 @@ const GameCellDemoNav = () => {
   const watchHandler = () => pageCtx.navigate(<GameCellDemo />)
 
   const navButton = <button type="button" className="nav-option" title="Cell State Demo" onClick={watchHandler}>
-      <svg><use href={`#nav-eye`} /></svg>
+      <svg role="img"><use href={`#nav-eye`} /></svg>
     </button>
 
   return inDevelopment && navButton
@@ -120,18 +120,18 @@ const GameCellDemo = () => {
   </div>
 
   const fnSymbols = <div className="svg-symbols">
-    <svg><use href={`#nav-play`} /></svg>
-    <svg><use href={`#nav-replay`} /></svg>
-    <svg><use href={`#nav-reset`} /></svg>
-    <svg><use href={`#nav-empty`} /></svg>
+    <svg role="img"><use href={`#nav-play`} /></svg>
+    <svg role="img"><use href={`#nav-replay`} /></svg>
+    <svg role="img"><use href={`#nav-reset`} /></svg>
+    <svg role="img"><use href={`#nav-empty`} /></svg>
   </div>
 
   const navSymbols = <div className="svg-symbols">
-    <svg><use href={`#nav-return`} /></svg>
-    <svg><use href={`#nav-sliders`} /></svg>
-    <svg><use href={`#nav-question`} /></svg>
-    <svg><use href={`#nav-podium`} /></svg>
-    <svg><use href={`#nav-eye`} /></svg>
+    <svg role="img"><use href={`#nav-return`} /></svg>
+    <svg role="img"><use href={`#nav-sliders`} /></svg>
+    <svg role="img"><use href={`#nav-question`} /></svg>
+    <svg role="img"><use href={`#nav-podium`} /></svg>
+    <svg role="img"><use href={`#nav-eye`} /></svg>
   </div>
 
   return (

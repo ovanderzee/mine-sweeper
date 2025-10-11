@@ -13,12 +13,14 @@ const GameCell = (props: GameCellProps) => {
   const pageCtx = useContext(PageContext)
   const text = pageCtx.text
 
-  const { stage, fill, row, col, locked } = props.cell
+  const { stage, fill, row, col, locked, burst } = props.cell
   const doneClass = stage ? 'touched' : 'pristine'
   const lockedClass = locked ? 'flag' : ''
   const cellContent = stage && fill > 0 && fill < 9 ? fill : ' '
   const mineClass = stage && fill > 8 ? 'mijn' : ''
-  const activatedClass = stage === CellStateStage.TESTED && fill > 8 ? 'explode' : ''
+  const isProcessedMine = stage === CellStateStage.TESTED && fill > 8
+  let activatedClass = ''
+  if (isProcessedMine) activatedClass = burst ? 'explode' : 'exploded'
   const stageLabel = text.cell[doneClass]
 
   let startTime: number
@@ -32,9 +34,12 @@ const GameCell = (props: GameCellProps) => {
     if (stage) return
     if (type === GameActionType.MOVE && locked) return
 
-    let entry: CellStateEntry = { stage: CellStateStage.TESTED }
+    let entry: CellStateEntry = {}
     if (type === GameActionType.FLAG) {
-      entry = { locked: !locked }
+      entry.locked = !locked
+    } else { // GameActionType.MOVE
+      entry.stage = CellStateStage.TESTED
+      if (fill > 8) entry.burst = true
     }
 
     const payload = JSON.stringify({

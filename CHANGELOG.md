@@ -6,6 +6,7 @@
 - Gameboard could technically be 36 * 36 but board starts to jump when the game is operated by keyboard: provide zoom buttons next to clock
 - Fade out of dialog goes smooth but ends abrupt
 - The shield looks like plastic. Make a dent in the shield to add realism
+- Page id is obscured when not running in developemt mode
 
 ### Features
 - Playmode Tough: Play without flags or mine counters
@@ -16,8 +17,29 @@
 - Save a game on a new list page (with comment)
 - Zoom slider on gamepage
 - Gamelevel on x-axis
-- Calculate coagulation
+- Calculate coagulation (min-mine borders | blank to mine ratio)
 - Informational line under game with clock, mines-to-find count-moves and cover-or-contain-game-in-view
+- Enter key to start new game after game end
+- Show gamelevel and number of neighbouring mines in graph
+
+
+## [3.3.2] - 2025-10-11
+
+### Changed
+- Ease rendering mine bursts, now limited to about 13
+
+### Fixed
+- Shield can be clicked to close game-won dialog
+- Fix screen content width
+
+
+## [3.3.1] - 2025-10-06
+
+### Changed
+- Lower threshold for showing score diagram
+- Text and color changes in diagram
+- Get width of Hall of Fame in line with other screens
+
 
 ## [3.3.0] - 2025-09-25
 
