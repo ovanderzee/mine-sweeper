@@ -31,7 +31,7 @@ const HiScores = (props: HiScoresProps) => {
 
   return (
     <button type="button" title={text.nav['Hall of Fame']} onClick={showHandler}>
-      <svg>{
+      <svg role="img">{
         props.board
           ? <MinesMinusFlags board={props.board} />
           : <use href="#nav-podium" />

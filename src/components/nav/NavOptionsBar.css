@@ -92,7 +92,6 @@
 
   .screen > nav button svg {
     display: block;
-    width: var(--nav-width);
     aspect-ratio: 1;
   }
 }

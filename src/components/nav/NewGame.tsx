@@ -42,7 +42,7 @@ const NewGame = (props: NewGameProps) => {
       title={text.nav['New Game']}
       onClick={newGameHandler}
     >
-      <svg><use href={`#nav-play`} /></svg>
+      <svg role="img"><use href={`#nav-play`} /></svg>
     </button>
     {showModal && consentModal}
   </>

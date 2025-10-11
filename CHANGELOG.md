@@ -16,15 +16,27 @@
 - Save a game on a new list page (with comment)
 - Zoom slider on gamepage
 - Gamelevel on x-axis
-- Calculate coagulation
+- Calculate coagulation (min-mine borders | blank to mine ratio)
 - Enter key to start new game after game end
-- Click propagation on dialog content only stops when there are buttons
+- Show gamelevel and number of neighbouring mines in graph
 
 
-## [next]
+## [3.3.2] - 2025-10-11
 
 ### Changed
-- Mine bursts limited to about 13 when game is lost
+- Ease rendering mine bursts, now limited to about 13
+
+### Fixed
+- Shield can be clicked to close game-won dialog
+- Fix screen content width
+
+
+## [3.3.1] - 2025-10-06
+
+### Changed
+- Lower threshold for showing score diagram
+- Text and color changes in diagram
+- Get width of Hall of Fame in line with other screens
 
 
 ## [3.3.0] - 2025-09-25
