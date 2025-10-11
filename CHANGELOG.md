@@ -24,7 +24,7 @@
 ## [next]
 
 ### Changed
-- Tune down rendering intense and during game-lost effect
+- Mine bursts limited to about 13 when game is lost
 
 
 ## [3.3.0] - 2025-09-25

@@ -18,18 +18,17 @@ export const defeatReducer = (state: GameState): GameState => {
     do {
       const randomSeqNum = Math.floor(minesToDo.length * Math.random())
 
-      if (minesToDo[randomSeqNum]) {
-        const nextMine = minesToDo.splice(randomSeqNum, 1)[0]
-        mineBatch[pickIndex] = {
-          ...nextMine,
-          stage: CellStateStage.TESTED,
-          burst: !pickIndex
-        }
-
-        // trigger next mine in next effect
-        state.board[nextMine.row][nextMine.col] = mineBatch[pickIndex]
-        pickIndex++;
+      const nextMine = minesToDo.splice(randomSeqNum, 1)[0]
+      mineBatch[pickIndex] = {
+        ...nextMine,
+        stage: CellStateStage.TESTED,
+        burst: !pickIndex
       }
+
+      // trigger next mine in next effect
+      state.board[nextMine.row][nextMine.col] = mineBatch[pickIndex]
+      pickIndex++;
+
     } while (pickIndex < mineBatch.length)
 
     return {
