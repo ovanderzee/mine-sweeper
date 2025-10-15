@@ -1,3 +1,4 @@
+import { vi } from 'vitest'
 import { touchButtonReducer } from './touchButton'
 import { newGameState, playingGameState } from '../../../__mocks__/game-states'
 import { microConfig } from '../../../__mocks__/configs'
@@ -9,7 +10,7 @@ describe('touch new game', () => {
   const moveAction = { type: 'MOVE', payload: `{"cell":${moveCell},"entry":${moveEntry}}` } as PayloadAction
 
   it('should record time of first touch', () => {
-    const spy = jest.spyOn(Date, 'now')
+    const spy = vi.spyOn(Date, 'now')
     expect(newGameState.tZero).toBe(0)
 
     const touchedState = touchButtonReducer(newGameState, moveAction, microConfig)

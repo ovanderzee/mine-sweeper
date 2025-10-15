@@ -6,6 +6,7 @@
 - Gameboard could technically be 36 * 36 but board starts to jump when the game is operated by keyboard: provide zoom buttons next to clock
 - Fade out of dialog goes smooth but ends abrupt
 - The shield looks like plastic. Make a dent in the shield to add realism
+- Debt after porting tests to vitest, see TODOs and it.skip 
 
 ### Features
 - Playmode Tough: Play without flags or mine counters

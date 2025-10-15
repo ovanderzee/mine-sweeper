@@ -1,13 +1,20 @@
 import '@testing-library/jest-dom'
-import { fireEvent, screen, within } from '@testing-library/react'
+import { vi } from 'vitest'
+import { act, fireEvent, screen, within } from '@testing-library/react'
 import { referAndNavigateTo, startPageTesting } from '../__mocks__/specification-helpers'
 import { interactionSelectors } from './functions'
 
 describe('Flip focus', () => {
-  let keyTarget: Element | null
+  let keyTarget: HTMLElement | null
 
   beforeEach(() => {
     startPageTesting()
+    vi.advanceTimersByTimeAsync(50)
+    keyTarget = document.querySelector('section.screen')
+  })
+
+  afterEach(() => {
+    vi.runAllTimers()
   })
 
   describe('between controls in content and nav areas', () => {
@@ -15,27 +22,28 @@ describe('Flip focus', () => {
 
     beforeEach(() => {
       referAndNavigateTo.config()
-      keyTarget = document.querySelector('section.screen')
-      contentArea = document.querySelector('section.screen > article, section.screen > form')
-      navArea = document.querySelector('section.screen > nav')
+      contentArea = keyTarget?.querySelector('form')
+      navArea = keyTarget?.querySelector('nav')
     })
 
-    it('should move focus from control in nav to control in content', async () => {
-      const aButtonInNav = navArea ? await within(navArea).getByTitle('Explanation') : null
+    it('should move focus from control in nav to first control in content', async () => {
+      const aButtonInNav = navArea ? await screen.getByTitle('Explanation') : null
       aButtonInNav?.focus()
-      if (keyTarget) fireEvent.keyDown(keyTarget, {altKey: true, key: 'Tab'})
+      expect(aButtonInNav).toHaveFocus()
+      keyTarget && fireEvent.keyDown(keyTarget, {altKey: true, key: 'Tab'})
 
-      const firstButtonInCnt = contentArea ? await within(contentArea).getByLabelText('Gameboard dimensions', {selector: 'input'}) : null
-      expect(document?.activeElement?.id).toBe(firstButtonInCnt?.id)
+      const firstButtonInCnt = contentArea ? await screen.getByLabelText('Gameboard dimensions', {selector: 'input'}) : null
+      expect(firstButtonInCnt).toHaveFocus()
     })
 
-    it('should move focus from control in content to control in nav', async () => {
-      const anInputInCnt = contentArea ? await within(contentArea).getByLabelText('Translations', {selector: 'select'}) : null
+    it('should move focus from control in content to last control in nav', async () => {
+      const anInputInCnt = contentArea ? await screen.getByLabelText('Translations', {selector: 'select'}) : null
       anInputInCnt?.focus()
-      if (keyTarget) fireEvent.keyDown(keyTarget, {altKey: true, key: 'Tab'})
+      expect(anInputInCnt).toHaveFocus()
+      keyTarget && fireEvent.keyDown(keyTarget, {altKey: true, key: 'Tab'})
 
-      const firstButtonInNav = navArea ? await within(navArea).getByTitle('Revert to Defaults') : null
-      expect(document?.activeElement?.id).toBe(firstButtonInNav?.id)
+      const lastButtonInNav = navArea ? await screen.getByTitle('Return to Game') : null
+      expect(lastButtonInNav).toHaveFocus()
     })
   })
 
@@ -44,48 +52,52 @@ describe('Flip focus', () => {
 
     beforeEach(async () => {
       referAndNavigateTo.about()
-      keyTarget = document.querySelector('section.screen')
-      aButton = await screen.getByTitle('Settings')
-      firstButton = await screen.getByTitle('Hall of Fame')
-      lastButton = await screen.getByTitle('Return to Game')
+      aButton = await keyTarget && within(keyTarget).getByTitle('Settings')
+      firstButton = await keyTarget && within(keyTarget).getByTitle('Hall of Fame')
+      const allButtons = keyTarget?.querySelectorAll('button') || []
+      lastButton = allButtons[allButtons.length -1]
     })
 
     it('should move focus from a control to last control', async () => {
       aButton?.focus()
-      if (keyTarget) fireEvent.keyDown(keyTarget, {altKey: true, key: 'Tab'})
+      keyTarget && fireEvent.keyDown(keyTarget, {altKey: true, key: 'Tab'})
+      vi.advanceTimersByTimeAsync(50)
 
-      expect(document?.activeElement?.id).toBe(firstButton?.id)
+      expect(lastButton).toHaveFocus()
     })
 
     it('should move focus from last control to first control', async () => {
       lastButton?.focus()
-      if (keyTarget) fireEvent.keyDown(keyTarget, {altKey: true, key: 'Tab'})
+      keyTarget && fireEvent.keyDown(keyTarget, {altKey: true, key: 'Tab'})
+      vi.advanceTimersByTimeAsync(50)
 
-      expect(document?.activeElement?.id).toBe(firstButton?.id)
+      expect(firstButton).toHaveFocus()
     })
 
     it('should move focus from first control to last control', async () => {
       firstButton?.focus()
-      if (keyTarget) fireEvent.keyDown(keyTarget, {altKey: true, key: 'Tab'})
+      keyTarget && fireEvent.keyDown(keyTarget, {altKey: true, key: 'Tab'})
+      vi.advanceTimersByTimeAsync(50)
 
-      expect(document?.activeElement?.id).toBe(lastButton?.id)
+      expect(lastButton).toHaveFocus()
     })
 
     it('should let the browser set focus to the body', async () => {
       document.body.blur()
 
       // remove interaction
-      const sectionScreen =  document.querySelector('section.screen')
-      const interactors = sectionScreen?.querySelectorAll(interactionSelectors) || []
-      for (let interactor of interactors) {
-        interactor?.parentNode?.removeChild(interactor)
-      }
+      act(() => {
+        const sectionScreen =  document.querySelector('section.screen')
+        const interactors = sectionScreen?.querySelectorAll(interactionSelectors) || []
+        for (let interactor of interactors) {
+          interactor?.remove()
+        }
+      })
 
-      if (keyTarget) {
-        fireEvent.keyDown(keyTarget, {altKey: true, key: 'Tab'})
-      }
+      keyTarget && fireEvent.keyDown(keyTarget, {altKey: true, key: 'Tab'})
 
       expect(document?.activeElement).toBe(document.body)
+      expect(document.body).toHaveFocus()
     })
   })
 })

@@ -5,7 +5,7 @@ import storage from './../../common/storage'
 import MineTracker from './MineTracker'
 
 describe('MineTracker Component', () => {
-  test('should display bombs minus flags count', () => {
+  it('should display bombs minus flags count', () => {
     storage.game = decidedGameState
     renderInContext(<MineTracker game={decidedGameState} />)
     const text = document.getElementById('diff') as HTMLElement

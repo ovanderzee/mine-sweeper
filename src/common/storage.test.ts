@@ -1,3 +1,4 @@
+import { vi } from 'vitest'
 import storage from './storage'
 import DEFAULTS from './defaults'
 import { GameState } from './game-types'
@@ -10,7 +11,7 @@ describe('Configuration storage', () => {
     localStorage.clear()
   })
 
-  test('should set data', () => {
+  it('should set data', () => {
     storage.config = {FONT_SIZE: 18, PLAYER_NAME: 'Breadbrood'}
 
     const readStorage = JSON.parse(localStorage.getItem('mv-config') as string)
@@ -18,7 +19,7 @@ describe('Configuration storage', () => {
     expect(readStorage.PLAYER_NAME).toBe('Breadbrood')
   })
 
-  test('should get data', () => {
+  it('should get data', () => {
     const data = {FONT_SIZE: 18, PLAYER_NAME: 'Breadbrood'}
     localStorage.setItem('mv-config', JSON.stringify(data))
 
@@ -26,7 +27,7 @@ describe('Configuration storage', () => {
     expect(storage.config.PLAYER_NAME).toBe('Breadbrood')
   })
 
-  test('should not set falsy data and thus not remove the config', () => {
+  it('should not set falsy data and thus not remove the config', () => {
     localStorage.setItem('mv-config', JSON.stringify(microConfig))
     storage.config = {}
 
@@ -35,11 +36,11 @@ describe('Configuration storage', () => {
     expect(readStorage).toStrictEqual(microConfig)
   })
 
-  test('could not offer a eraseConfig function', () => {
+  it('could not offer a eraseConfig function', () => {
     expect('eraseConfig' in storage).toBe(false)
   })
 
-  test('should get a complete config when getting', () => {
+  it('should get a complete config when getting', () => {
     const data = {FONT_SIZE: 18, PLAYER_NAME: 'Breadbrood'}
     localStorage.setItem('mv-config', JSON.stringify(data))
 
@@ -53,13 +54,13 @@ describe('Configuration storage', () => {
     expect(config.MAX_SCORES).toBe(DEFAULTS.MAX_SCORES)
   })
 
-  test('should get defaults when no localStorage item exists', () => {
+  it('should get defaults when no localStorage item exists', () => {
     // localStorage cleared
     const config = storage.config
     expect(config).toStrictEqual(DEFAULTS)
   })
 
-  test('should stack values in order of appearance', () => {
+  it('should stack values in order of appearance', () => {
     // localStorage cleared
     const data = {FONT_SIZE: 18, PLAYER_NAME: 'Breadbrood'}
     storage.config = data
@@ -78,10 +79,10 @@ describe('Configuration storage', () => {
     expect(config.MAX_SCORES).toBe(DEFAULTS.MAX_SCORES)
   })
 
-  test('should catch a JSON.parse error and return the default config', () => {
+  it('should catch a JSON.parse error and return the default config', () => {
     const stringified = '{"FONT_SIZE": 48, "PLAYER_NAME": "Flo'
     localStorage.setItem('mv-config', stringified)
-    const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation()
+    const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {})
 
     const config = storage.config
 
@@ -96,7 +97,7 @@ describe('Game storage', () => {
     localStorage.clear()
   })
 
-  test('should set data', () => {
+  it('should set data', () => {
     storage.game = newGameState
 
     const read = JSON.parse(localStorage.getItem('mv-game') as string)
@@ -104,7 +105,7 @@ describe('Game storage', () => {
     expect(read.stage).toBe('game-new')
   })
 
-  test('should get data', () => {
+  it('should get data', () => {
     localStorage.setItem('mv-game', JSON.stringify(newGameState))
 
     const gameState = storage.game as GameState
@@ -112,7 +113,7 @@ describe('Game storage', () => {
     expect(gameState.stage).toBe('game-new')
   })
 
-  test('should set and overwrite', () => {
+  it('should set and overwrite', () => {
     storage.game = { ...wonGameState, extra: 123 } as GameState
 
     const read1 = JSON.parse(localStorage.getItem('mv-game') as string)
@@ -126,7 +127,7 @@ describe('Game storage', () => {
     expect(read2.extra).toBeFalsy()
   })
 
-  test('should be removable by method', () => {
+  it('should be removable by method', () => {
     localStorage.setItem('mv-game', JSON.stringify(newGameState))
 
     storage.eraseGame()
@@ -138,20 +139,20 @@ describe('Game storage', () => {
     expect(parse).toBe(null)
   })
 
-  test('should be removable by garbage', () => {
+  it('should be removable by garbage', () => {
     localStorage.setItem('mv-game', JSON.stringify(newGameState))
-    const eraseGameSpy = jest.spyOn(storage, 'eraseGame')
+    const eraseGameSpy = vi.spyOn(storage, 'eraseGame')
 
     storage.game = null
 
     expect(eraseGameSpy).toHaveBeenCalled()
-    jest.clearAllMocks()
+    vi.clearAllMocks()
   })
 
-  test('should catch a JSON.parse error and return null', () => {
+  it('should catch a JSON.parse error and return null', () => {
     const stringified = '{"stage":"game-new","board":[[{"stage":"touched'
     localStorage.setItem('mv-game', stringified)
-    const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation()
+    const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {})
 
     const game = storage.game
 
@@ -165,21 +166,21 @@ describe('Scores storage', () => {
     localStorage.clear()
   })
 
-  test('should set data', () => {
+  it('should set data', () => {
     storage.scores = liveScores
 
     const read = JSON.parse(localStorage.getItem('mv-victory') as string)
     expect(read[10]).toStrictEqual(liveScores[10])
   })
 
-  test('should get data', () => {
+  it('should get data', () => {
     localStorage.setItem('mv-victory', JSON.stringify(liveScores))
 
     const scores = storage.scores
     expect(scores[10]).toStrictEqual(liveScores[10])
   })
 
-  test('should set and overwrite', () => {
+  it('should set and overwrite', () => {
     storage.scores = liveScores
 
     const read1 = JSON.parse(localStorage.getItem('mv-victory') as string)
@@ -192,7 +193,7 @@ describe('Scores storage', () => {
     expect(read2.length).toBe(someScores.length)
   })
 
-  test('should be removable by method', () => {
+  it('should be removable by method', () => {
     localStorage.setItem('mv-victory', JSON.stringify(liveScores))
 
     storage.eraseScores()
@@ -205,20 +206,20 @@ describe('Scores storage', () => {
     expect(parse).toBe(null)
   })
 
-  test('should be removable by garbage', () => {
+  it('should be removable by garbage', () => {
     localStorage.setItem('mv-victory', JSON.stringify(liveScores))
-    const eraseScoresSpy = jest.spyOn(storage, 'eraseScores')
+    const eraseScoresSpy = vi.spyOn(storage, 'eraseScores')
 
     storage.scores = []
 
     expect(eraseScoresSpy).toHaveBeenCalled()
-    jest.clearAllMocks()
+    vi.clearAllMocks()
   })
 
-  test('should catch a JSON.parse error and return an empty array', () => {
+  it('should catch a JSON.parse error and return an empty array', () => {
     const stringified = '[{"code":"331Aw3CMxA","date":1755'
     localStorage.setItem('mv-victory', stringified)
-    const consoleErrorSpy = jest.spyOn(console, 'error').mockImplementation()
+    const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {})
 
     const scores = storage.scores
 

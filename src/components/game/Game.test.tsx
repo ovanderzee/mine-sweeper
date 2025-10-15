@@ -1,4 +1,4 @@
-import '@testing-library/jest-dom'
+import '@testing-library/jest-dom' //echt?
 import Game from './Game'
 import DEFAULTS from './../../common/defaults'
 import storage from './../../common/storage'

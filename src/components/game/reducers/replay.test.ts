@@ -2,7 +2,7 @@ import { replayReducer } from './replay'
 import { newGameState, wonGameState } from '../../../__mocks__/game-states'
 import { GameState, CellState } from '../../../common/game-types'
 
-test('Whether new or recreated, the cell-values are the same', () => {
+it('Whether new or recreated, the cell-values are the same', () => {
   let findEqualValues = true;
   const recreatedGameState: GameState = replayReducer(wonGameState)
 

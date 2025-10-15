@@ -1,6 +1,6 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import * as child from "child_process";
+import * as child from 'child_process';
 
 const commitHash = child.execSync('git rev-parse --short HEAD').toString().trim()
 
@@ -14,5 +14,13 @@ export default defineConfig({
   },
   server: {
     host: '0.0.0.0',
+  },
+  test: {
+    globals: true,
+    environment: 'jsdom', // use 'node' for backend
+    coverage: {
+      reporter: ['text', 'html'],
+    },
+    setupFiles: ['./src/vitest.setup.ts'],
   },
 })

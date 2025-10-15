@@ -2,26 +2,28 @@ import '@testing-library/jest-dom'
 import { fireEvent, screen, getByText } from '@testing-library/react'
 import storage from '../../common/storage'
 import { startHonourPageTesting, referAndNavigateTo } from './../../__mocks__/specification-helpers'
+import { newPortalLayer } from '../../__mocks__/render-helpers'
 import { liveScores } from './../../__mocks__/scores'
 
 describe('The hall-of-fame page sidebar', () => {
   beforeEach(() => {
+    newPortalLayer('modal')
     startHonourPageTesting()
   })
 
-  test("should navigate to About page", () => {
+  it('should navigate to About page', () => {
     referAndNavigateTo.about()
     const heading = screen.getByText(/Defuse all mines/i)
     expect(heading).toBeTruthy()
   })
 
-  test("should navigate to Configure page", () => {
+  it('should navigate to Configure page', () => {
     referAndNavigateTo.config()
     const heading = screen.getByText(/The Challenge.../i)
     expect(heading).toBeTruthy()
   })
 
-  test("should navigate to Game board", () => {
+  it('should navigate to Game board', () => {
     referAndNavigateTo.gameBoard()
     const cells = document.querySelectorAll('#playground > button')
     expect(cells.length).toBe(36)
@@ -34,12 +36,12 @@ describe('The hall-of-fame-page scores', () => {
     startHonourPageTesting()
   })
 
-  test('should show the best scores with a badge', () => {
+  it('should show the best scores with a badge', () => {
     const theBest = document.querySelectorAll('li svg')
     expect(theBest.length).toBe(10)
   })
 
-  test('should classify the most recent score with "latest"', () => {
+  it('should classify the most recent score with "latest"', () => {
     const theLatest = document.querySelectorAll('li.latest')
     expect(theLatest.length).toBe(1)
   })
@@ -51,7 +53,7 @@ describe('The hall-of-fame-page clear list button', () => {
     startHonourPageTesting()
   })
 
-  test("should instantaneously remove scores when confirmed", () => {
+  it('should instantaneously remove scores when confirmed', () => {
     expect(storage.scores.length).toBe(liveScores.length)
 
     const button = screen.getByTitle('Clear List')
@@ -65,7 +67,7 @@ describe('The hall-of-fame-page clear list button', () => {
     expect(storage.scores.length).toBe(0)
   })
 
-  test("should not remove scores when cancelled", () => {
+  it('should not remove scores when cancelled', () => {
     expect(storage.scores.length).toBe(liveScores.length)
 
     const button = screen.getByTitle('Clear List')
@@ -100,7 +102,7 @@ describe('The hall-of-fame-page list sorting', () => {
     container = document.querySelector('.legend')!
   })
 
-  test('should sort on user-points descending', () => {
+  it('should sort on user-points descending', () => {
     const scoreUsers = liveScores.map(ls => ls.user)
     const uniqueUsers = [...new Set(scoreUsers)]
     const worstUser = uniqueUsers[uniqueUsers.length - 1]
@@ -116,7 +118,7 @@ describe('The hall-of-fame-page list sorting', () => {
     expect(Number(bestUserBest)).toBeGreaterThan(Number(worstUserBest))
   })
 
-  test('should sort on date descending', () => {
+  it('should sort on date descending', () => {
     const button = getByText(container, 'date')
     fireEvent.click(button)
 
@@ -126,7 +128,7 @@ describe('The hall-of-fame-page list sorting', () => {
     expect(Number(best)).toBeGreaterThan(Number(worst))
   })
 
-  test('should sort on rank ascending', () => {
+  it('should sort on rank ascending', () => {
     const button = getByText(container, 'rank')
     fireEvent.click(button)
 
@@ -136,7 +138,7 @@ describe('The hall-of-fame-page list sorting', () => {
     expect(Number(best)).toBeLessThan(Number(worst))
   })
 
-  test('should sort on efficiency descending', () => {
+  it('should sort on efficiency descending', () => {
     const button = getByText(container, 'efficiency')
     fireEvent.click(button)
 
@@ -146,7 +148,7 @@ describe('The hall-of-fame-page list sorting', () => {
     expect(Number(best)).toBeGreaterThan(Number(worst))
   })
 
-  test('should sort on speed descending', () => {
+  it('should sort on speed descending', () => {
     const button = getByText(container, 'speed')
     fireEvent.click(button)
 
@@ -156,7 +158,7 @@ describe('The hall-of-fame-page list sorting', () => {
     expect(Number(best)).toBeGreaterThan(Number(worst))
   })
 
-  test('should sort on mines ascending', () => {
+  it('should sort on mines ascending', () => {
     const button = getByText(container, 'mines')
     fireEvent.click(button)
 
@@ -166,7 +168,7 @@ describe('The hall-of-fame-page list sorting', () => {
     expect(Number(best)).toBeLessThan(Number(worst))
   })
 
-  test('should sort on fields ascending', () => {
+  it('should sort on fields ascending', () => {
     const button = getByText(container, 'fields')
     fireEvent.click(button)
 
@@ -176,7 +178,7 @@ describe('The hall-of-fame-page list sorting', () => {
     expect(Number(best)).toBeLessThan(Number(worst))
   })
 
-  test('should sort on turns ascending', () => {
+  it('should sort on turns ascending', () => {
     const button = getByText(container, 'turns')
     fireEvent.click(button)
 
@@ -186,7 +188,7 @@ describe('The hall-of-fame-page list sorting', () => {
     expect(Number(best)).toBeLessThan(Number(worst))
   })
 
-  test('should sort on duration ascending', () => {
+  it('should sort on duration ascending', () => {
     const button = getByText(container, 'duration')
     fireEvent.click(button)
 

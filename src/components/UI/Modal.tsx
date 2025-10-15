@@ -117,7 +117,7 @@ const ModalComponent = (props: ModalProps): React.ReactNode => {
 
 const Modal = (props: ModalProps) => ReactDOM.createPortal(
   <ModalComponent {...props} />,
-  MODAL_ELEMENT!
+  document.getElementById(MODAL_ELEMENT)!
 )
 
 export default Modal

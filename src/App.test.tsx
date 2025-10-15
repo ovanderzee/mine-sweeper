@@ -7,14 +7,14 @@ describe('The app initially', () => {
     render(<App />)
   })
 
-  test("should show intro animation", () => {
+  it('should show intro animation', () => {
     const skip = screen.getByText(/skip to game/i)
     expect(skip).toBeTruthy()
     const heading = screen.getByText(/mine.{0,0}sweeper/i)
     expect(heading).toBeTruthy()
   })
 
-  test("should end intro animation by click and show game", () => {
+  it('should end intro animation by click and show game', () => {
     const button = screen.getByRole('button')
     fireEvent.click(button)
 
@@ -22,7 +22,7 @@ describe('The app initially', () => {
     expect(cells.length).toBe(36)
   })
 
-  test("should end intro animation by animationEnd and show game", () => {
+  it('should end intro animation by animationEnd and show game', () => {
     const button = screen.getByRole('button')
     fireEvent.animationEnd(button)
 

@@ -30,12 +30,10 @@ const BoardFitter = (props: BoardFitterProps) => {
   const pageCtx = useContext(PageContext)
   const { config, text } = pageCtx
 
-
 // functies in een module
 // verstoppen bord en infaden bij enter en exit
 // achtergrond met verloopje
 // resetFit en fitToCover in event handler
-
 
   const boardEmSize = 25 // 23 + padding
   const boardPxSize = boardEmSize * config.FONT_SIZE

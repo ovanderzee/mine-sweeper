@@ -7,19 +7,19 @@ describe('The meta pages', () => {
     startPageTesting()
   })
 
-  test("should navigate to About page", () => {
+  it('should navigate to About page', () => {
     referAndNavigateTo.about()
     const heading = screen.getByText(/Defuse all mines/i)
     expect(heading).toBeTruthy()
   })
 
-  test("should navigate to Configure page", () => {
+  it('should navigate to Configure page', () => {
     referAndNavigateTo.config()
     const heading = screen.getByText(/General Settings/i)
     expect(heading).toBeTruthy()
   })
 
-  test("should navigate to HallOfFame page", () => {
+  it('should navigate to HallOfFame page', () => {
     referAndNavigateTo.hallOfFame()
     const heading = screen.getByText(/Hall of Fame/i)
     expect(heading).toBeTruthy()

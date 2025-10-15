@@ -24,5 +24,3 @@ export const defeatReducer = (state: GameState): GameState => {
 
   return state
 }
-
-export default defeatReducer
