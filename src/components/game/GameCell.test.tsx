@@ -3,7 +3,7 @@ import { fireEvent, screen } from '@testing-library/react'
 import { vi } from 'vitest'
 import GameCell from './GameCell'
 import cellStates from './../../__mocks__/cell-states'
-import { CellState } from './../../common/game-types'
+import { CellState } from './../../common/game.d'
 import { LONG_PRESS_THRESHOLD } from '../../common/constants'
 import { renderInProvider } from './../../__mocks__/render-helpers'
 

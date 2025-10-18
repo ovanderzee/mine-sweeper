@@ -1,4 +1,4 @@
-import { defineConfig } from 'vite'
+import { defineConfig } from 'vitest/config'
 import react from '@vitejs/plugin-react'
 import * as child from 'child_process';
 
@@ -17,8 +17,16 @@ export default defineConfig({
   },
   test: {
     globals: true,
+    hideSkippedTests: true,
     environment: 'jsdom', // use 'node' for backend
     coverage: {
+      include: ['src'],
+      exclude: [
+        '**/*.d.ts',
+        'src/main.tsx',
+        'src/components/game/GameCellDemo.tsx',
+        'src/__mocks__/*'
+      ],
       reporter: ['text', 'html'],
     },
     setupFiles: ['./src/vitest.setup.ts'],

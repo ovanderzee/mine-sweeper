@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import PageContext from '../../store/page-context'
 import { LONG_PRESS_THRESHOLD } from '../../common/constants'
-import { CellState, CellStateStage, CellStateEntry, GameAction, GameActionType } from '../../common/game-types';
+import { CellState, CellStateStage, CellStateEntry, GameAction, GameActionType } from '../../common/game.d';
 import './GameCell.css'
 
 interface GameCellProps {

@@ -22,8 +22,8 @@ describe('Flip focus', () => {
 
     beforeEach(() => {
       referAndNavigateTo.config()
-      contentArea = keyTarget?.querySelector('form')
-      navArea = keyTarget?.querySelector('nav')
+      contentArea = keyTarget?.querySelector('form') || null
+      navArea = keyTarget?.querySelector('nav') || null
     })
 
     it('should move focus from control in nav to first control in content', async () => {
@@ -52,8 +52,8 @@ describe('Flip focus', () => {
 
     beforeEach(async () => {
       referAndNavigateTo.about()
-      aButton = await keyTarget && within(keyTarget).getByTitle('Settings')
-      firstButton = await keyTarget && within(keyTarget).getByTitle('Hall of Fame')
+      aButton = await keyTarget && within(keyTarget!).getByTitle('Settings')
+      firstButton = await keyTarget && within(keyTarget!).getByTitle('Hall of Fame')
       const allButtons = keyTarget?.querySelectorAll('button') || []
       lastButton = allButtons[allButtons.length -1]
     })

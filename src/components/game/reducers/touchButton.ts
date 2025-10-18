@@ -1,6 +1,6 @@
 import { iterateNeighbours } from '../common'
-import { AppConfig } from '../../../common/app-types'
-import { GameState, GameStages, GameActionType, PayloadAction, CellActionData, CellStateStage, CellState, CellStateEntry } from '../../../common/game-types'
+import { AppConfig } from '../../../common/app.d'
+import { GameState, GameStages, GameActionType, PayloadAction, CellActionData, CellStateStage, CellState, CellStateEntry } from '../../../common/game.d'
 
 export const touchButtonReducer = (state: GameState, action: PayloadAction, config: AppConfig): GameState => {
   const { BOARD_SIZE, MINE_COUNT } = config

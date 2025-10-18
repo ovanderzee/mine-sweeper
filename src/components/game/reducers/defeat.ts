@@ -1,4 +1,4 @@
-import { GameState, CellState, CellStateStage } from '../../../common/game-types'
+import { GameState, CellState, CellStateStage } from '../../../common/game.d'
 
 export const defeatReducer = (state: GameState): GameState => {
 

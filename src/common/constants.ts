@@ -1,4 +1,4 @@
-import { InputRange } from './app-types'
+import { InputRange } from './app.d'
 
 // shortest game duration, to circumvent weird values, in milliseconds
 export const MIN_DURATION = 750

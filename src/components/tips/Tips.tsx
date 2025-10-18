@@ -2,7 +2,7 @@ import { RefObject } from 'react'
 import TimeTracker from './TimeTracker'
 import MineTracker from './MineTracker'
 import BoardFitter from './BoardFitter'
-import { GameState } from '../../common/game-types'
+import { GameState } from '../../common/game.d'
 import './Tips.css'
 
 interface TipsProps {

@@ -1,4 +1,4 @@
-import { ScoreItem } from '../common/game-types'
+import { ScoreItem } from '../common/game.d'
 
 // not so live scores, these have te persisted form
 export const liveScores: ScoreItem[] = [

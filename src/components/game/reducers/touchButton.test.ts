@@ -2,7 +2,7 @@ import { vi } from 'vitest'
 import { touchButtonReducer } from './touchButton'
 import { newGameState, playingGameState } from '../../../__mocks__/game-states'
 import { microConfig } from '../../../__mocks__/configs'
-import { PayloadAction } from '../../../common/game-types'
+import { PayloadAction } from '../../../common/game.d'
 
 describe('touch new game', () => {
   const moveCell = '{"row":0,"col":0}'

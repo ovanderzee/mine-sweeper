@@ -1,7 +1,7 @@
 import { vi } from 'vitest'
 import storage from './storage'
 import DEFAULTS from './defaults'
-import { GameState } from './game-types'
+import { GameState } from './game.d'
 import { newGameState, wonGameState } from '../__mocks__/game-states'
 import { liveScores } from '../__mocks__/scores'
 import { microConfig } from '../__mocks__/configs'

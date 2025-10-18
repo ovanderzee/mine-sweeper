@@ -1,6 +1,6 @@
 import { vi } from 'vitest'
 import { loadReducer } from './load'
-import { PayloadAction } from '../../../common/game-types'
+import { PayloadAction } from '../../../common/game.d'
 import storage from '../../../common/storage'
 import { playingGameState } from '../../../__mocks__/game-states'
 

@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 import PageContext from '../../store/page-context'
-import { ScoreParam, FlatScore } from '../../common/game-types'
+import { ScoreParam, FlatScore } from '../../common/game.d'
 import { precise } from './../game/scoring'
 import './LineDiagram.css'
 

@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import PageContext from '../../store/page-context'
 import { ShieldByRank } from './Shield'
 import { MODAL_ELEMENT, FADE_OUT_TIME } from '../../common/constants'
-import { Primitive } from '../../common/app-types'
+import { Primitive } from '../../common/app.d'
 import './Modal.css'
 
 interface ModalProps {

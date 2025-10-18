@@ -1,6 +1,6 @@
 import { newGameReducer } from './newGame'
 import { simpleHardConfig, scoringConfig } from '../../../__mocks__/configs'
-import { GameState, CellState } from '../../../common/game-types'
+import { GameState, CellState } from '../../../common/game.d'
 
 const newGame: GameState = newGameReducer(scoringConfig)
 const nextGame: GameState = newGameReducer(scoringConfig)

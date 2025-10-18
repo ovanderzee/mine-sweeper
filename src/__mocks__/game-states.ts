@@ -1,4 +1,4 @@
-import { GameState, GameStages, CellStateStage } from '../common/game-types'
+import { GameState, GameStages, CellStateStage } from '../common/game.d'
 import { initialScore } from '../components/game/common'
 
 // states comply to microConfig

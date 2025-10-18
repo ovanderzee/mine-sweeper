@@ -1,8 +1,8 @@
 import { MIN_DURATION } from '../../../common/constants'
-import { AppConfig } from '../../../common/app-types'
+import { AppConfig } from '../../../common/app.d'
 import storage from '../../../common/storage'
 import { GameState,
-  GameScore, PlayScore, ScoreItem } from '../../../common/game-types'
+  GameScore, PlayScore, ScoreItem } from '../../../common/game.d'
 import { precise, leastClicksToWin, mostClicksToWin, makeBoardCode, countMoves, calculateScore } from '../scoring'
 
 export const victoryReducer = (state: GameState, config: AppConfig): GameState => {

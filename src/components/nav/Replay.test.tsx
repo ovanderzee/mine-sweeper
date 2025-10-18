@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import { screen, fireEvent } from '@testing-library/react'
 import { vi, MockInstance } from 'vitest'
 import Replay from './Replay'
-import { GameStages } from './../../common/game-types'
+import { GameStages } from './../../common/game.d'
 import { renderInContext, newPortalLayer } from './../../__mocks__/render-helpers'
 
 describe('Replay Component', () => {

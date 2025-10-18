@@ -1,5 +1,5 @@
 import { defeatReducer } from './defeat'
-import { CellStateStage, CellState } from '../../../common/game-types'
+import { CellStateStage, CellState } from '../../../common/game.d'
 import { playingGameState, lostGameState } from '../../../__mocks__/game-states'
 
 describe('defeatReducer is called in repetition', () => {

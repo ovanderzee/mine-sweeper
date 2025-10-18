@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from 'react'
 import PageContext from '../../store/page-context'
-import { GameStages } from '../../common/game-types'
+import { GameStages } from '../../common/game.d'
 import { TipProps } from './Tips'
 import './Tips.css'
 

@@ -7,7 +7,7 @@ import * as replay from './reducers/replay'
 import * as touchButton from './reducers/touchButton'
 import * as victory from './reducers/victory'
 // TODO import * as defeat from './reducers/defeat'
-import { CellState, GameState } from './../../common/game-types'
+import { CellState, GameState } from './../../common/game.d'
 import storage from './../../common/storage'
 import {
   referAndNavigateTo, setDefaultConfig, startPageTesting,
