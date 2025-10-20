@@ -42,3 +42,12 @@ export const renderInProvider = (component: React.ReactNode) => {
     </PageProvider>
   )
 }
+
+export const newPortalLayer = (id: string): HTMLElement => {
+  document.getElementById(id)?.remove()
+  const newPortalElement = document.createElement('div')
+  newPortalElement.id = id
+  document.body.appendChild(newPortalElement);
+  //  renderInProvider or Context hold their content virtually!
+  return newPortalElement
+}

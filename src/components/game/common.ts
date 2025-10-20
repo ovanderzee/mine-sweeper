@@ -1,4 +1,4 @@
-import { CellState, CellStateStage, GameState, GameStages, ScoreItem } from '../../common/game-types'
+import { CellState, CellStateStage, GameState, GameStages, ScoreItem } from '../../common/game.d'
 
 /**
  * Do something to neighbour cells

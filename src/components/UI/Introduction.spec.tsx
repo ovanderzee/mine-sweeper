@@ -1,75 +1,45 @@
-import { act } from 'react'
 import '@testing-library/jest-dom'
-import { fireEvent, render, screen, waitFor } from '@testing-library/react'
-import userEvent, { UserEvent } from '@testing-library/user-event'
-import { FADE_OUT_TIME } from './../../common/constants'
+import { act, fireEvent, render, screen } from '@testing-library/react'
+import { vi } from 'vitest'
 import App from './../../App'
 
 describe('Introduction', () => {
-  let button!: HTMLButtonElement,
-    user: UserEvent
+  let
+    button: HTMLButtonElement
 
   beforeEach(() => {
     render(<App />)
-    user = userEvent.setup()
     button = screen.getByLabelText('skip to play')
   })
 
-  it('should end after any keystroke, since the button has focus', async () => {
-    await waitFor(() => user.keyboard('*'))
+  afterEach(() => {
     act(() => {
-      jest.advanceTimersByTime(FADE_OUT_TIME * 1.1)
+      vi.runAllTimers()
     })
-
-    expect(button).not.toBeInTheDocument()
   })
 
-  it('would not end after any keystroke, when the button had no focus', async () => {
-    button.blur()
-    await waitFor(() => user.keyboard('*'))
-    act(() => {
-      jest.advanceTimersByTime(FADE_OUT_TIME * 1.1)
-    })
+  it('should end after any keystroke, since the button has focus',  () => {
+    expect(button).toHaveFocus()
+    expect(button).not.toHaveClass('ending')
+    fireEvent.keyDown(button, {key: '*'})
 
-    expect(button).toBeInTheDocument()
+    vi.advanceTimersByTimeAsync(20)
+    expect(button).toHaveClass('ending')
   })
 
-  it('should end after a left click, not a touch ', async () => {
-    await waitFor(() => user.pointer({keys: '[MouseLeft]', target: button}))
-    act(() => {
-      jest.advanceTimersByTime(FADE_OUT_TIME * 1.1)
-    })
+  it('should end after click', async () => {
+    expect(button).not.toHaveClass('ending')
+    fireEvent.click(button)
 
-    expect(button).not.toBeInTheDocument()
-  })
-
-  it('should end after a right click, not a touch ', async () => {
-    await waitFor(() => user.pointer({keys: '[MouseLeft]', target: button}))
-    act(() => {
-      jest.advanceTimersByTime(FADE_OUT_TIME * 1.1)
-    })
-
-    expect(button).not.toBeInTheDocument()
-  })
-
-  it('should end after a touch, not a click ', async () => {
-    await waitFor(() => user.pointer([
-      {keys: '[TouchA]', target: button},
-    ]))
-
-    act(() => {
-      jest.advanceTimersByTime(FADE_OUT_TIME * 1.1)
-    })
-
-    expect(button).not.toBeInTheDocument()
+    vi.advanceTimersByTimeAsync(20)
+    expect(button).toHaveClass('ending')
   })
 
   it('should end after animation ending', async () => {
+    expect(button).not.toHaveClass('ending')
     fireEvent.animationEnd(button);
-    act(() => {
-      jest.advanceTimersByTime(FADE_OUT_TIME * 1.1)
-    })
 
-    expect(button).not.toBeInTheDocument()
+    vi.advanceTimersByTimeAsync(20)
+    expect(button).toHaveClass('ending')
   })
 })

@@ -1,11 +1,12 @@
+import { vi, MockInstance } from 'vitest'
 import * as i18n from './i18n'
 
 describe('infer language from navigator.languages array', () => {
-  let languageGetter: jest.SpyInstance;
+  let languageGetter: MockInstance;
 
   beforeEach(() => {
-    languageGetter = jest.spyOn(window.navigator, 'languages', 'get')
-    jest.spyOn(window.navigator, 'language', 'get').mockReturnValue('')
+    languageGetter = vi.spyOn(window.navigator, 'languages', 'get')
+    vi.spyOn(window.navigator, 'language', 'get').mockReturnValue('')
   })
 
   it('infer a minority language if possible', () => {
@@ -31,11 +32,11 @@ describe('infer language from navigator.languages array', () => {
 })
 
 describe('infer language from navigator.language string', () => {
-  let languageGetter: jest.SpyInstance;
+  let languageGetter: MockInstance;
 
   beforeEach(() => {
-    jest.spyOn(window.navigator, 'languages', 'get').mockReturnValue([])
-    languageGetter = jest.spyOn(window.navigator, 'language', 'get')
+    vi.spyOn(window.navigator, 'languages', 'get').mockReturnValue([])
+    languageGetter = vi.spyOn(window.navigator, 'language', 'get')
   })
 
   it('use supplied language if possible', () => {

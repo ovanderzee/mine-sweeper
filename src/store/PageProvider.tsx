@@ -3,7 +3,7 @@ import PageContext from './page-context'
 import DEFAULTS, { calculateMineCount } from '../common/defaults'
 import { texts } from '../common/i18n'
 import storage from '../common/storage'
-import { AppConfig, AppSubConfig, PageContextProps, Translation } from '../common/app-types'
+import { AppConfig, AppSubConfig, PageContextProps, Translation } from '../common/app.d'
 
 const defaultPageState = {
   render: null as unknown as React.ReactElement,

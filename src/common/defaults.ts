@@ -1,5 +1,5 @@
 import { texts, currentLanguage } from './i18n'
-import { AppCheckConfig } from './app-types'
+import { AppCheckConfig } from './app.d'
 
 export const GAME_DIVISOR = 30
 

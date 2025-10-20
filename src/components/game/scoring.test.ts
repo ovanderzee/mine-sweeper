@@ -1,3 +1,4 @@
+import { vi } from 'vitest'
 import {
   clickBlankAreas, clickRemainingPointers,
   leastClicksToWin, mostClicksToWin,
@@ -9,7 +10,7 @@ import { blank18pct, blank26pct, blank31pct, blank41pct } from './../../__mocks_
 import { RANGES } from '../../common/constants'
 
 describe('some blanks need to be clicked and then all the pointercells have to be clicked', () => {
-  test('sample game blank18pct has 2 blank areas and 20 pointers to click', () => {
+  it('sample game blank18pct has 2 blank areas and 20 pointers to click', () => {
     const blankAreas = clickBlankAreas(blank18pct)
     expect(blankAreas).toBe(2)
 
@@ -19,7 +20,7 @@ describe('some blanks need to be clicked and then all the pointercells have to b
     unmarkCells(blank18pct)
   })
 
-  test('sample game blank26pct has 2 blank areas and 7 pointers to click', () => {
+  it('sample game blank26pct has 2 blank areas and 7 pointers to click', () => {
     const blankAreas = clickBlankAreas(blank26pct)
     expect(blankAreas).toBe(2)
 
@@ -29,7 +30,7 @@ describe('some blanks need to be clicked and then all the pointercells have to b
     unmarkCells(blank26pct)
   })
 
-  test('sample game blank31pct has 4 blank areas and 3 pointers to click', () => {
+  it('sample game blank31pct has 4 blank areas and 3 pointers to click', () => {
     const blankAreas = clickBlankAreas(blank31pct)
     expect(blankAreas).toBe(4)
 
@@ -39,7 +40,7 @@ describe('some blanks need to be clicked and then all the pointercells have to b
     unmarkCells(blank31pct)
   })
 
-  test('sample game blank41pct has 2 blank areas and 3 pointers to click', () => {
+  it('sample game blank41pct has 2 blank areas and 3 pointers to click', () => {
     const blankAreas = clickBlankAreas(blank41pct)
     expect(blankAreas).toBe(2)
 
@@ -51,7 +52,7 @@ describe('some blanks need to be clicked and then all the pointercells have to b
 })
 
 describe('establish Bechtel\'s Board Benchmark Value', () => {
-  test('sample game blank18pct stats', () => {
+  it('sample game blank18pct stats', () => {
     const min3bv = leastClicksToWin(blank18pct)
     expect(min3bv).toBe(22)
 
@@ -59,7 +60,7 @@ describe('establish Bechtel\'s Board Benchmark Value', () => {
     expect(max3bv).toBe(35)
   })
 
-  test('sample game blank26pct stats', () => {
+  it('sample game blank26pct stats', () => {
     const min3bv = leastClicksToWin(blank26pct)
     expect(min3bv).toBe(9)
 
@@ -67,7 +68,7 @@ describe('establish Bechtel\'s Board Benchmark Value', () => {
     expect(max3bv).toBe(31)
   })
 
-  test('sample game blank31pct stats', () => {
+  it('sample game blank31pct stats', () => {
     const min3bv = leastClicksToWin(blank31pct)
     expect(min3bv).toBe(7)
 
@@ -75,7 +76,7 @@ describe('establish Bechtel\'s Board Benchmark Value', () => {
     expect(max3bv).toBe(31)
   })
 
-  test('sample game blank41pct stats', () => {
+  it('sample game blank41pct stats', () => {
     const min3bv = leastClicksToWin(blank41pct)
     expect(min3bv).toBe(5)
 
@@ -140,34 +141,34 @@ describe('Create compressed string based on highest BOARD_SIZE', () => {
 
 describe('Sanity checking on boardCode', () => {
   // suppress alarming messages in output
-  beforeEach(() => console.error = jest.fn())
+  beforeEach(() => console.error = vi.fn())
 
-  test('should find undecodeable code', () => {
+  it('should find undecodeable code', () => {
     const wrongCode = '9786708089'
     sequenceFillData(wrongCode)
     expect(console.error).toHaveBeenLastCalledWith('Invalid code')
   })
 
-  test('should find unexpected code', () => {
+  it('should find unexpected code', () => {
     const wrongCode = '444IwBhrSv'
     sequenceFillData(wrongCode)
     expect(console.error).toHaveBeenLastCalledWith('Invalid code')
   })
 
-  test('should find wrong board size', () => {
+  it('should find wrong board size', () => {
     const wrongCode = '534IwBhrSvI'
     sequenceFillData(wrongCode)
     expect(console.error).toHaveBeenLastCalledWith('Invalid size')
   })
 
-  test('should find wrong mine count', () => {
+  it('should find wrong mine count', () => {
     // size 4 en lvl 3,4,5 geven 2,3,3 mijnen
     const wrongCode = '443IwBhrSvI'
     sequenceFillData(wrongCode)
     expect(console.error).toHaveBeenLastCalledWith('Invalid mine count')
   })
 
-  test('should not go wrong', () => {
+  it('should not go wrong', () => {
     const goodCode = '444IwBhrSvI'
     sequenceFillData(goodCode)
     expect(console.error).not.toHaveBeenCalled()
@@ -175,19 +176,19 @@ describe('Sanity checking on boardCode', () => {
 })
 
 describe('Precision as long as we need it', () => {
-  test('should return a number', () => {
+  it('should return a number', () => {
     const figure = 23.456
     const result = precise(figure, 3)
     expect(typeof result).toBe('number')
   })
 
-  test('should round to significance', () => {
+  it('should round to significance', () => {
     const figure = 23.456
     const result = precise(figure, 3)
     expect(result).toBe(23.5)
   })
 
-  test('should not add trailing zeroes after the decimal point', () => {
+  it('should not add trailing zeroes after the decimal point', () => {
     const figure = 8
     const result = precise(figure, 3)
     expect(result).toBe(8)

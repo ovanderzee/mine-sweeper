@@ -1,10 +1,11 @@
 import { screen, fireEvent } from '@testing-library/react'
+import { vi } from 'vitest'
 import { renderInContext } from './../../__mocks__/render-helpers'
 import Help from './Help'
 import About from '../meta/About'
 
 describe('Help Component', () => {
-  test('should display the "QuestionMark" sign', () => {
+  it('should display the "QuestionMark" sign', () => {
     renderInContext(<Help />)
     const button = screen.getByTitle('Explanation')
     expect(button).toBeInTheDocument()
@@ -12,8 +13,8 @@ describe('Help Component', () => {
     expect(svg).toBeInTheDocument()
   })
 
-  test('should navigate when clicked', () => {
-    const navigate = jest.fn()
+  it('should navigate when clicked', () => {
+    const navigate = vi.fn()
     renderInContext(<Help />, { navigate })
     const button = screen.getByTitle('Explanation')
     fireEvent.click(button)

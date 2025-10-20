@@ -1,25 +1,27 @@
 
 import ReactDOM from 'react-dom'
 import { screen, fireEvent } from '@testing-library/react'
+import { vi, MockInstance } from 'vitest'
 import EraseScores from './EraseScores'
 import storage from '../../common/storage'
 import { liveScores } from './../../__mocks__/scores'
-import { renderInContext } from './../../__mocks__/render-helpers'
+import { renderInContext, newPortalLayer } from './../../__mocks__/render-helpers'
 
 describe('EraseScores Component', () => {
-  let emitter: () => {}, spyShowModal: jest.SpyInstance
+  let emitter: () => {}, spyShowModal: MockInstance
 
   beforeEach(() => {
-    emitter = jest.fn()
-    spyShowModal = jest.spyOn(ReactDOM, 'createPortal')
+    emitter = vi.fn()
+    spyShowModal = vi.spyOn(ReactDOM, 'createPortal')
     storage.scores = liveScores
+    newPortalLayer('modal')
   })
 
   afterEach(() => {
-    jest.clearAllMocks()
+    vi.clearAllMocks()
   })
 
-  test('should display the "Circled Division Slash" sign', () => {  // 1e
+  it('should display the "Circled Division Slash" sign', () => {  // 1e
     renderInContext(<EraseScores onErase={emitter} />)
     const button = screen.getByTitle('Clear List')
     expect(button).toBeInTheDocument()
@@ -27,7 +29,7 @@ describe('EraseScores Component', () => {
     expect(svg).toBeInTheDocument()
   })
 
-  test('should not erase scores when cancelling', () => {
+  it('should not erase scores when cancelling', () => {
     renderInContext(<EraseScores onErase={emitter} />)
     const button = screen.getByRole('button')
     fireEvent.click(button)
@@ -39,11 +41,12 @@ describe('EraseScores Component', () => {
     expect(storage.scores).toStrictEqual(liveScores)
   })
 
-  test('should erase scores when confirming', () => {
+  it('should erase scores when confirming', () => {
     renderInContext(<EraseScores onErase={emitter} />)
     const button = screen.getByRole('button')
     fireEvent.click(button)
     expect(spyShowModal).toHaveBeenCalledTimes(1)
+
     const confirmDialog = screen.getByText(/Ok/i)
     fireEvent.click(confirmDialog)
     expect(button.className).toContain('active')

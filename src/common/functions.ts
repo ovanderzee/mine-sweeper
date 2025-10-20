@@ -35,10 +35,10 @@ export const flipFocus = function (event: React.KeyboardEvent) {
     } else if (!focusable) {
       const all = document.querySelectorAll(interactionSelectors)
       if (all.length) {
-        if (all[0] !== document.activeElement) {
-          focusable = all[all.length -1] as HTMLElement
-        } else {
+        if (all[all.length -1] === document.activeElement) {
           focusable = all[0] as HTMLElement
+        } else {
+          focusable = all[all.length -1] as HTMLElement
         }
       }
     }

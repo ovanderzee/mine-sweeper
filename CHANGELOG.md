@@ -7,6 +7,7 @@
 - Fade out of dialog goes smooth but ends abrupt
 - The shield looks like plastic. Make a dent in the shield to add realism
 - Page id is obscured when not running in developemt mode
+- Debt after porting tests to vitest, see TODOs and it.skip 
 
 ### Features
 - Playmode Tough: Play without flags or mine counters

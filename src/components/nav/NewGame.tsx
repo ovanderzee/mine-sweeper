@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react'
 import PageContext from '../../store/page-context'
 import Modal from '../UI/Modal'
-import { GameStages, GameActionType, GameAction } from '../../common/game-types';
+import { GameStages, GameActionType, GameAction } from '../../common/game.d';
 
 interface NewGameProps {
   onNew: (action: GameAction) => void;

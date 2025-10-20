@@ -1,15 +1,16 @@
 import React from 'react'
 import { fireEvent, screen } from '@testing-library/react'
+import { vi } from 'vitest'
 import GameCell from './GameCell'
 import cellStates from './../../__mocks__/cell-states'
-import { CellState } from './../../common/game-types'
+import { CellState } from './../../common/game.d'
 import { LONG_PRESS_THRESHOLD } from '../../common/constants'
 import { renderInProvider } from './../../__mocks__/render-helpers'
 
 const trim = (str: string) => str.trim().replace(/\s+/, ' ')
 
 describe('Gamecell, a party of properties', () => {
-  let dispatchGameAction = jest.fn()
+  let dispatchGameAction = vi.fn()
 
   const getCellByState = (cellState: CellState): React.ReactNode => {
     // key is only required within generating loop
@@ -81,11 +82,11 @@ describe('Gamecell, a party of properties', () => {
     let cell: CellState, button: HTMLElement
 
     beforeEach(() => {
-      dispatchGameAction = jest.fn()
+      dispatchGameAction = vi.fn()
     })
 
     afterEach(() => {
-      jest.runAllTimers()
+      vi.runAllTimers()
     })
 
     it('clicked mine cell', () => {
@@ -94,7 +95,7 @@ describe('Gamecell, a party of properties', () => {
       button = screen.getByRole('button')
 
       fireEvent.pointerDown(button)
-      jest.advanceTimersByTime(LONG_PRESS_THRESHOLD * .9) // ==> MOVE action
+      vi.advanceTimersByTime(LONG_PRESS_THRESHOLD * .9) // ==> MOVE action
       fireEvent.pointerUp(button)
       const payload = {payload: JSON.stringify({cell, entry: {stage: 'clicked', burst: true}}), type: 'MOVE'}
       expect(dispatchGameAction).toHaveBeenCalledWith(payload)
@@ -106,7 +107,7 @@ describe('Gamecell, a party of properties', () => {
       button = screen.getByRole('button')
 
       fireEvent.pointerDown(button)
-      jest.advanceTimersByTime(LONG_PRESS_THRESHOLD * 1.1) // ==> FLAG action
+      vi.advanceTimersByTime(LONG_PRESS_THRESHOLD * 1.1) // ==> FLAG action
       fireEvent.pointerUp(button)
       const payload = {payload: JSON.stringify({cell, entry: {locked: true}}), type: 'FLAG'}
       expect(dispatchGameAction).toHaveBeenCalledWith(payload)
@@ -118,9 +119,9 @@ describe('Gamecell, a party of properties', () => {
       button = screen.getByRole('button')
 
       fireEvent.pointerDown(button)
-      jest.advanceTimersByTime(20)
+      vi.advanceTimersByTimeAsync(20)
       fireEvent.pointerLeave(button)
-      jest.advanceTimersByTime(20)
+      vi.advanceTimersByTimeAsync(20)
       fireEvent.pointerUp(button)
 
       expect(dispatchGameAction).not.toHaveBeenCalled()
@@ -132,7 +133,7 @@ describe('Gamecell, a party of properties', () => {
       button = screen.getByRole('button')
 
       fireEvent.pointerDown(button)
-      jest.advanceTimersByTime(LONG_PRESS_THRESHOLD * .9) // ==> MOVE action
+      vi.advanceTimersByTimeAsync(LONG_PRESS_THRESHOLD * .9) // ==> MOVE action
       fireEvent.pointerUp(button)
       expect(dispatchGameAction).not.toHaveBeenCalled()
     })
@@ -143,7 +144,7 @@ describe('Gamecell, a party of properties', () => {
       button = screen.getByRole('button')
 
       fireEvent.pointerDown(button)
-      jest.advanceTimersByTime(LONG_PRESS_THRESHOLD * 0.9) // ==> MOVE action
+      vi.advanceTimersByTimeAsync(LONG_PRESS_THRESHOLD * 0.9) // ==> MOVE action
       fireEvent.pointerUp(button)
       expect(dispatchGameAction).not.toHaveBeenCalled()
     })
@@ -153,7 +154,7 @@ describe('Gamecell, a party of properties', () => {
     let cell: CellState, button: HTMLElement
 
     beforeEach(() => {
-      dispatchGameAction = jest.fn()
+      dispatchGameAction = vi.fn()
       cell = cellStates.pristine.mijn
       renderInProvider(getCellByState(cell))
       button = screen.getByRole('button')
@@ -163,7 +164,7 @@ describe('Gamecell, a party of properties', () => {
     it('and accept "Enter" to open a cell', () => {
       const keyDownEvent = {
         key: 'Enter',
-        stopPropagation: jest.fn(),
+        stopPropagation: vi.fn(),
         target: button
       } as unknown as React.KeyboardEvent
 
@@ -176,7 +177,7 @@ describe('Gamecell, a party of properties', () => {
     it('and accept Spacebar key to flag a cell', () => {
       const keyDownEvent = {
         key: ' ',
-        stopPropagation: jest.fn(),
+        stopPropagation: vi.fn(),
         target: button
       } as unknown as React.KeyboardEvent
 

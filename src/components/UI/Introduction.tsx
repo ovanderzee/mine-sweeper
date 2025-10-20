@@ -69,7 +69,7 @@ const Introduction = (props: { onEnd: (timeout: number) => void }) => {
     </button>
   )
 
-  return createPortal(animatedHtml, OVERLAY_ELEMENT!)
+  return createPortal(animatedHtml, document.getElementById(OVERLAY_ELEMENT)!)
 }
 
 export default Introduction

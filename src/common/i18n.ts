@@ -1,6 +1,6 @@
 import nederlands from './translations/nederlands.json'
 import english from './translations/english.json'
-import { Translation, Languages } from './app-types'
+import { Translation, Languages } from './app.d'
 
 const translationLength = (translation: Translation) => Object.keys(translation)
   .map(group => Object.keys(group))

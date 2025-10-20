@@ -1,9 +1,9 @@
 import { RefObject } from 'react'
 import TimeTracker from './TimeTracker'
 import MineTracker from './MineTracker'
-import BoardFitter from './BoardFitter'
+import FullscreenPlay from './FullscreenPlay'
 import NewGame from '../nav/NewGame'
-import { GameState, GameAction } from '../../common/game-types'
+import { GameState, GameAction } from '../../common/game.d'
 import '../nav/NavOptionButton.css'
 import './Tips.css'
 
@@ -23,7 +23,7 @@ const Tips = (props: TipsProps) => (
     <section id="new-game-tip" className="tip">
       <NewGame onNew={props.onNew} stage={props.game.stage} appearance="tip" />
     </section>
-    <BoardFitter playgroundRef={props.playgroundRef} />
+    <FullscreenPlay playgroundRef={props.playgroundRef} />
   </aside>
 )
 
