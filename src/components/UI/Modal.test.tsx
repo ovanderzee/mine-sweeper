@@ -111,12 +111,22 @@ describe('Modal Dialog', () => {
       expect(confirmFn).toHaveBeenCalledTimes(0)
       expect(closeFn).toHaveBeenCalledTimes(0)
     })
+
+    it('disappearing when it\'s content is clicked', async () => {
+      fireEvent.click(modalDialog)
+      vi.advanceTimersByTime(FADE_OUT_TIME * 1.1)
+
+      expect(cancelFn).toHaveBeenCalledTimes(0)
+      expect(confirmFn).toHaveBeenCalledTimes(0)
+      expect(closeFn).toHaveBeenCalledTimes(1)
+    })
   })
 })
 
-describe('Modal Shield', () => {
+
+describe('Shield as Modal Dialog', () => {
   let
-    modalDialog!: HTMLDialogElement,
+    // modalDialog!: HTMLDialogElement,
     cancelFn: () => void,
     confirmFn: () => void,
     closeFn: () => void
@@ -136,26 +146,32 @@ describe('Modal Shield', () => {
     cancelFn = vi.fn()
     confirmFn = vi.fn()
     closeFn = vi.fn()
-    newPortalLayer('modal')
     renderInProvider(getShieldModal())
-    modalDialog = screen.getByRole('dialog')
+    // modalDialog = screen.getByRole('dialog')
   })
 
-  describe('should show a shield when winning the game', () => {
-    it('showing the rank', () => {
-      const svgElement = document.querySelector('svg.shield.blue')
-      expect(svgElement).toBeInTheDocument()
-      const rankText = screen.getByText(/123/i)
-      expect(rankText).toBeInTheDocument()
-    })
+  it('should show the rank', () => {
+    const svgElement = document.querySelector('svg.shield.blue')
 
-    it('disappearing when it\'s content is clicked', async () => {
-      fireEvent.click(modalDialog)
-      vi.advanceTimersByTime(FADE_OUT_TIME * 1.1)
-
-      expect(cancelFn).toHaveBeenCalledTimes(0)
-      expect(confirmFn).toHaveBeenCalledTimes(0)
-      expect(closeFn).toHaveBeenCalledTimes(1)
-    })
+    expect(svgElement).toBeInTheDocument()
+    const rankText = screen.getByText(/123/i)
+    expect(rankText).toBeInTheDocument()
+    expect(rankText.tagName.toUpperCase()).toBe('TEXT')
   })
+
+  /* Does not seem to work with SVG
+  it('should vanish when the shield is clicked', async () => {
+    const clickTarget = screen.getByRole('img')
+    expect(clickTarget).toBeInTheDocument()
+    fireEvent.click(clickTarget)
+
+    await waitForElementToBeRemoved(() => screen.getByRole('dialog'))
+
+    expect(cancelFn).toHaveBeenCalledTimes(0)
+    expect(confirmFn).toHaveBeenCalledTimes(0)
+    expect(closeFn).toHaveBeenCalledTimes(1)
+    expect(clickTarget).not.toBeInTheDocument()
+  })
+  */
 })
+

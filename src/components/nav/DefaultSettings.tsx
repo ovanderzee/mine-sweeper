@@ -51,7 +51,7 @@ const DefaultSettings = () => {
       title={text.nav['Reinstate Defaults']}
       onClick={resetHandler}
     >
-      <svg><use href={`#nav-reset`} /></svg>
+      <svg role="img"><use href={`#nav-reset`} /></svg>
     </button>
     {showModal && consentModal}
   </>

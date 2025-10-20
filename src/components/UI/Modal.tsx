@@ -60,7 +60,8 @@ const ModalComponent = (props: ModalProps): React.ReactNode => {
 
   const timedCloseModal = () => {
     const eventSubject = event?.target as Element
-    const targetedByPurpose = eventSubject?.tagName === 'DIALOG' || eventSubject?.tagName === 'BUTTON'
+    const validTargets = ['DIALOG', 'BUTTON', 'USE', 'TEXT']
+    const targetedByPurpose = validTargets.includes(eventSubject?.tagName.toUpperCase())
     if (event?.type === 'click' && !targetedByPurpose) return;
 
     setEndState('ending')

@@ -24,16 +24,16 @@ const About = () => {
 
       <h3>{text.help['Nav Heading']}</h3>
       <dl>
-        <dt><svg><text id="text-content" x="50%" y="55%" style={{fontSize: '1em'}}>9×</text></svg></dt>
+        <dt><svg role="img"><text id="text-content" x="50%" y="55%" style={{fontSize: '1em'}}>9×</text></svg></dt>
           <dd>{text.help['Game Scores Comment']}</dd>
-        <dt><svg><use href="#plain-podium" /></svg></dt><dd>{text.help['About Scores Comment']}</dd>
-        <dt><svg><use href="#plain-play" /></svg></dt><dd>{text.help['New Game Comment']}</dd>
-        <dt><svg><use href="#plain-replay" /></svg></dt><dd>{text.help['Replay Comment']}</dd>
-        <dt><svg><use href="#plain-question" /></svg></dt><dd>{text.help['Help Comment']}</dd>
-        <dt><svg><use href="#plain-sliders" /></svg></dt><dd>{text.help['Settings Comment']}</dd>
-        <dt><svg><use href="#plain-reset" /></svg></dt><dd>{text.help['Reset Comment']}</dd>
-        <dt><svg><use href="#plain-empty" /></svg></dt><dd>{text.help['Delete Comment']}</dd>
-        <dt><svg><use href="#plain-return" /></svg></dt><dd>{text.help['Go Back Comment']}</dd>
+        <dt><svg role="img"><use href="#plain-podium" /></svg></dt><dd>{text.help['About Scores Comment']}</dd>
+        <dt><svg role="img"><use href="#plain-play" /></svg></dt><dd>{text.help['New Game Comment']}</dd>
+        <dt><svg role="img"><use href="#plain-replay" /></svg></dt><dd>{text.help['Replay Comment']}</dd>
+        <dt><svg role="img"><use href="#plain-question" /></svg></dt><dd>{text.help['Help Comment']}</dd>
+        <dt><svg role="img"><use href="#plain-sliders" /></svg></dt><dd>{text.help['Settings Comment']}</dd>
+        <dt><svg role="img"><use href="#plain-reset" /></svg></dt><dd>{text.help['Reset Comment']}</dd>
+        <dt><svg role="img"><use href="#plain-empty" /></svg></dt><dd>{text.help['Delete Comment']}</dd>
+        <dt><svg role="img"><use href="#plain-return" /></svg></dt><dd>{text.help['Go Back Comment']}</dd>
       </dl>
 
       <h3>{text.help['Accessibility Heading']}</h3>
