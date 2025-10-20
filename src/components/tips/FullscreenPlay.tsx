@@ -52,17 +52,7 @@ const FullscreenPlay = (props: FullscreenPlayProps) => {
 
   setFit()
 
-  const afterChangeHandler = () => {
-    if (sf.isFullscreen()) {
-      fitToContain()
-      playground?.classList.remove('entering-fullscreen')
-    } else {
-      resetFit()
-      playground?.classList.remove('exiting-fullscreen')
-    }
-  }
-
-  sf = screenfull(props.playgroundRef.current, afterChangeHandler)
+  sf = screenfull(props.playgroundRef.current, fitToContain, resetFit)
 
   useEffect(() => {
     // on destroy
@@ -73,7 +63,7 @@ const FullscreenPlay = (props: FullscreenPlayProps) => {
   }, [])
 
   useEffect(() => {
-    sf = screenfull(props.playgroundRef.current, afterChangeHandler)
+    sf = screenfull(props.playgroundRef.current, fitToContain, resetFit)
     sf.addFullscreenChangeEvent()
 
     return () => {

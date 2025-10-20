@@ -51,13 +51,25 @@ const exitFullscreen = async (elem: ElementLike): Promise<void> => {
 
 const screenfullFn = function (
   elem: ElementLike,
-  changeHandler: EventHandler
+  toFullscreen: ()=>void = ()=>{},
+  toWindowed: ()=>void = ()=>{}
 ): ScreenfullApi {
+
+  const afterChangeHandler = () => {
+    if (isFullscreen()) {
+      toFullscreen()
+      elem?.classList.remove('entering-fullscreen')
+    } else {
+      toWindowed()
+      elem?.classList.remove('exiting-fullscreen')
+    }
+  }
+
   return {
     isFullscreen: isFullscreen,
     isFullscreenAble: isFullscreenAble,
-    addFullscreenChangeEvent: () => addFullscreenChangeEvent(changeHandler),
-    removeFullscreenChangeEvent: () => removeFullscreenChangeEvent(changeHandler),
+    addFullscreenChangeEvent: () => addFullscreenChangeEvent(afterChangeHandler),
+    removeFullscreenChangeEvent: () => removeFullscreenChangeEvent(afterChangeHandler),
     enterFullscreen: () => enterFullscreen(elem),
     exitFullscreen: () => exitFullscreen(elem),
   }
