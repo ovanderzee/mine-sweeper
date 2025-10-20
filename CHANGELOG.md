@@ -6,8 +6,9 @@
 - Gameboard could technically be 36 * 36 but board starts to jump when the game is operated by keyboard: provide zoom buttons next to clock
 - Fade out of dialog goes smooth but ends abrupt
 - The shield looks like plastic. Make a dent in the shield to add realism
-- Page id is obscured when not running in developemt mode
+- Page id is obscured when not running in development mode
 - Debt after porting tests to vitest, see TODOs and it.skip 
+- Gameboard jumps when using the keyboard and covering the fullscreen mode
 
 ### Features
 - Playmode Tough: Play without flags or mine counters
@@ -16,12 +17,22 @@
 - Routing on gamecode, about, config and hiscores
 - Replay game from High Scores (when routing)
 - Save a game on a new list page (with comment)
-- Zoom slider on gamepage
-- Gamelevel on x-axis
-- Calculate coagulation (min-mine borders | blank to mine ratio)
-- Informational line under game with clock, mines-to-find count-moves and cover-or-contain-game-in-view
-- Enter key to start new game after game end
 - Show gamelevel and number of neighbouring mines in graph
+- Calculate coagulation (min-mine borders | blank to mine ratio)
+- Enter key to start new game after game end
+- Show score details in popover and less in the list
+- Eliminate outliers in graph
+
+
+## [3.4.0]
+-- todo: smaller icons under fullscreen
+   check fullscreen transition
+
+### Added
+- Show the game fullscreen
+- Tips just below the game
+- Zoom game by containing or covering in fullscreen mode
+- Mines minus flags moved to tips
 
 
 ## [3.3.2] - 2025-10-11
@@ -32,6 +43,9 @@
 ### Fixed
 - Shield can be clicked to close game-won dialog
 - Fix screen content width
+
+### Removed
+- Drop analog clock type
 
 
 ## [3.3.1] - 2025-10-06
