@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom'
-import { fireEvent, render, screen } from '@testing-library/react'
+import { act, fireEvent, render, screen } from '@testing-library/react'
 import { vi } from 'vitest'
 import App from './../../App'
 
@@ -13,7 +13,9 @@ describe('Introduction', () => {
   })
 
   afterEach(() => {
-    vi.runAllTimers()
+    act(() => {
+      vi.runAllTimers()
+    })
   })
 
   it('should end after any keystroke, since the button has focus',  () => {
