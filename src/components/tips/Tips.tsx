@@ -1,7 +1,7 @@
 import { RefObject } from 'react'
 import TimeTracker from './TimeTracker'
 import MineTracker from './MineTracker'
-import BoardFitter from './BoardFitter'
+import FullscreenPlay from './FullscreenPlay'
 import { GameState } from '../../common/game.d'
 import './Tips.css'
 
@@ -18,7 +18,7 @@ const Tips = (props: TipsProps) => (
   <aside className="tips">
     <TimeTracker game={props.game} />
     <MineTracker game={props.game} />
-    <BoardFitter playgroundRef={props.playgroundRef} />
+    <FullscreenPlay playgroundRef={props.playgroundRef} />
   </aside>
 )
 

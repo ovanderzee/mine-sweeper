@@ -56,22 +56,22 @@
 
 /* BOARD */
 
-#board-fitter {
+#fullscreen-play {
   display: flex;
   gap: 0.5ex;
 }
 
-#board-fitter button {
+#fullscreen-play button {
   border: none;
   background: none;
   padding: 0;
 }
 
-#board-fitter *:has(> svg use[href]) {
+#fullscreen-play *:has(> svg use[href]) {
   color: currentcolor;
 }
 
-#board-fitter button svg {
+#fullscreen-play button svg {
   aspect-ratio: 1;
   width: 1.414em;
   vertical-align: -20%;
@@ -96,5 +96,10 @@
 }
 
 #playground {
-  transition: opacity linear
+  transition: all linear
+}
+
+#playground.entering-fullscreen,
+#playground.exiting-fullscreen {
+  opacity: 0;
 }

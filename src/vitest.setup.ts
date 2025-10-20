@@ -26,3 +26,15 @@ HTMLDialogElement.prototype.close = vi.fn();
 
 window.scrollTo = function() {};
 window.HTMLElement.prototype.scrollIntoView = function() {};
+
+/* fullscreen api lacking in jsdom and jest-dom */
+
+Element.prototype.requestFullscreen = vi.fn()
+document.exitFullscreen = vi.fn()
+// @ts-ignore // is read-only
+document.fullscreenElement = null
+// @ts-ignore // is read-only
+document.fullscreenEnabled = true
+Element.prototype.onfullscreenchange = vi.fn()
+Element.prototype.onfullscreenerror = vi.fn()
+

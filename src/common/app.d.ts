@@ -58,3 +58,19 @@ export interface InputRange {
   min: number,
   max: number,
 }
+
+type ElementLike = HTMLElement | Element | null
+
+type EventHandler = (event: Event) => void
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type Class = { new(...args: any[]): any; };
+
+interface ScreenfullApi {
+  isFullscreen: () => boolean;
+  isFullscreenAble: () => boolean;
+  addFullscreenChangeEvent: () => void;
+  removeFullscreenChangeEvent: () => void;
+  enterFullscreen: () => Promise<void>;
+  exitFullscreen: () => Promise<void>;
+}
