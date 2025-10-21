@@ -25,13 +25,16 @@
 
 
 ## [3.4.0]
--- todo: check fullscreen transition
+-- todo: persist playgreound classname from fullscreenPlay 
 
 ### Added
 - Show the game fullscreen
 - Tips just below the game
 - Zoom game by containing or covering in fullscreen mode
 - Mines minus flags moved to tips
+
+### Changed
+- Replaced Jest by Vitest
 
 
 ## [3.3.2] - 2025-10-11

@@ -33,7 +33,7 @@ const removeFullscreenChangeEvent = (handler: EventHandler): void => {
 const enterFullscreen = async (elem: ElementLike): Promise<void> => {
   if (elem && isFullscreenAble()) {
     elem?.classList.add('entering-fullscreen')
-    if (elem.requestFullscreen) {await elem.requestFullscreen()}
+    if (elem.requestFullscreen) {await elem.requestFullscreen({navigationUI: "hide"})}
     // @ts-ignore
     else if (elem?.webkitRequestFullscreen) {await elem?.webkitRequestFullscreen()}
     else {console.error('Your browser does not support our fullscreen needs')}

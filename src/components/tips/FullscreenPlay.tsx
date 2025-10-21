@@ -11,9 +11,8 @@ interface FullscreenPlayProps {
 const FullscreenPlay = (props: FullscreenPlayProps) => {
   const pageCtx = useContext(PageContext)
   const { config, text } = pageCtx
-  const boardEmSize = 25 // 23 + padding
+  const boardEmSize = 24 // 23 + padding
   const boardPxSize = boardEmSize * config.FONT_SIZE
-  const sizeObject = () => document.fullscreenElement ?? document.documentElement
   const playground = props.playgroundRef.current
   const [magnification, setMagnification] = useState(1)
   let sf: ScreenfullApi
@@ -32,7 +31,7 @@ const FullscreenPlay = (props: FullscreenPlayProps) => {
     if (!playground) return
     playground.classList.add('contain')
     playground.classList.remove('cover')
-    const smallestPxSize = Math.min(sizeObject().clientWidth, sizeObject().clientHeight)
+    const smallestPxSize = Math.min(screen.availWidth, screen.availHeight)
     fitToNeed(smallestPxSize)
   }
 
@@ -40,7 +39,7 @@ const FullscreenPlay = (props: FullscreenPlayProps) => {
     if (!playground) return
     playground.classList.add('cover')
     playground.classList.remove('contain')
-    const biggestPxSize = Math.max(sizeObject().clientWidth, sizeObject().clientHeight)
+    const biggestPxSize = Math.max(screen.availWidth, screen.availHeight)
     fitToNeed(biggestPxSize)
   }
 
@@ -87,7 +86,7 @@ const FullscreenPlay = (props: FullscreenPlayProps) => {
     <button id="window-mode" type="button"
       onClick={sf && sf.exitFullscreen}
     >
-      <svg><use href="#to-window" /></svg>
+      <svg overflow="visible"><use href="#to-window" /></svg>
     </button>
   </>
 
@@ -95,7 +94,7 @@ const FullscreenPlay = (props: FullscreenPlayProps) => {
     <button id="fullscreen-mode" type="button"
       onClick={sf && sf.enterFullscreen}
     >
-      <svg><use href="#to-fullscreen" /></svg>
+      <svg overflow="visible"><use href="#to-fullscreen" /></svg>
     </button>
   )
 

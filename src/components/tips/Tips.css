@@ -3,7 +3,7 @@
   grid-column: 1 / span var(--board-size);
   display: flex;
   justify-content: space-around;
-  padding-block: 1ex;
+  padding-block-start: 1ex;
 }
 
 .tip {
@@ -21,9 +21,13 @@
   padding: 0;
 }
 
-.tip button::before,
-.tip button::after {
-  content: none;
+.tip button svg {
+  color: inherit;
+  transition: color 100;
+}
+
+.tip button:hover svg {
+  color: var(--fire-yellorange);
 }
 
 /* TIME */
@@ -72,13 +76,7 @@
 
 #fullscreen-play {
   display: flex;
-  gap: 0.5ex;
-}
-
-#fullscreen-play button {
-  border: none;
-  background: none;
-  padding: 0;
+  gap: 1ex;
 }
 
 #fullscreen-play *:has(> svg use[href]) {
@@ -103,14 +101,5 @@
 
 .cover #contain-fit,
 .contain #cover-fit {
-  display: contents;
-}
-
-#playground {
-  transition: all linear
-}
-
-#playground.entering-fullscreen,
-#playground.exiting-fullscreen {
-  opacity: 0;
+  display: unset;
 }

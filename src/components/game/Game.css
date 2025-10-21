@@ -1,4 +1,10 @@
 
+/* Safeguard existing centering for smooth switching fullscreen mode */
+section.screen,
+#playground {
+  margin: 0 auto;
+}
+
 #playground {
   display: grid;
   justify-content: center;
