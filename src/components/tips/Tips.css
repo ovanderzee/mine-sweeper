@@ -26,12 +26,6 @@
   content: none;
 }
 
-.tip button svg {
-  aspect-ratio: 1;
-  width: 1.414em;
-  vertical-align: -20%;
-}
-
 /* TIME */
 
 #time-tracker span {
@@ -66,6 +60,14 @@
   margin-inline: .333ex;
 }
 
+/* ACTION */
+
+#tip-action button svg {
+  aspect-ratio: 1;
+  width: 1em;
+  vertical-align: -7%;
+}
+
 /* BOARD */
 
 #fullscreen-play {
@@ -89,24 +91,19 @@
   vertical-align: -20%;
 }
 
-#new-game-tip,
+#fullscreen-play button:last-child svg {
+  width: 1.178em;
+  vertical-align: -14%;
+}
+
 #contain-fit,
-:fullscreen.contain #contain-fit,
-#cover-fit,
-:fullscreen.cover #cover-fit,
-#reset-fit,
-:fullscreen #fullscreen-mode,
-#window-mode {
+#cover-fit {
   display: none;
 }
 
-:fullscreen #new-game-tip,
-:fullscreen #contain-fit,
-:fullscreen.contain #reset-fit,
-:fullscreen #cover-fit,
-:fullscreen.cover #reset-fit,
-:fullscreen #window-mode {
-  display: block;
+.cover #contain-fit,
+.contain #cover-fit {
+  display: contents;
 }
 
 #playground {

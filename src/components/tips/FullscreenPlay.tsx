@@ -84,12 +84,6 @@ const FullscreenPlay = (props: FullscreenPlayProps) => {
     >
       <svg><use href="#cover-view" /></svg>
     </button>
-    <button id="reset-fit" type="button"
-      onClick={resetFit}
-      title={text.tips['Revert magnification']}
-    >
-      <svg><use href="#revert-view" /></svg>
-    </button>
     <button id="window-mode" type="button"
       onClick={sf && sf.exitFullscreen}
     >

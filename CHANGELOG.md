@@ -25,8 +25,7 @@
 
 
 ## [3.4.0]
--- todo: smaller icons under fullscreen
-   check fullscreen transition
+-- todo: check fullscreen transition
 
 ### Added
 - Show the game fullscreen

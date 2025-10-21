@@ -20,7 +20,7 @@ const Tips = (props: TipsProps) => (
   <aside className="tips">
     <TimeTracker game={props.game} />
     <MineTracker game={props.game} />
-    <section id="new-game-tip" className="tip">
+    <section id="tip-action" className="tip">
       <NewGame onNew={props.onNew} stage={props.game.stage} appearance="tip" />
     </section>
     <FullscreenPlay playgroundRef={props.playgroundRef} />
