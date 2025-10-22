@@ -25,7 +25,6 @@
 
 
 ## [3.4.0]
--- todo: persist playgreound classname from fullscreenPlay 
 
 ### Added
 - Show the game fullscreen

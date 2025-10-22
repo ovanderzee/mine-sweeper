@@ -46,12 +46,13 @@ const Game = () => {
   });
 
   const playgroundRef = useRef<HTMLElement | null>(null)
+  const [playgroundFit, setPlaygroundFit] = useState('')
 
   const gameBoard = (
     <article
         ref={playgroundRef}
         id="playground"
-        className={`board-size__${BOARD_SIZE} ${gameState.stage}`}
+        className={`board-size__${BOARD_SIZE} ${gameState.stage} ${playgroundFit}`}
         style={{'--board-size': BOARD_SIZE} as React.CSSProperties}
     >
       {gameState.board.map((row) =>
@@ -67,6 +68,7 @@ const Game = () => {
         game={gameState}
         onNew={dispatchGameAction}
         playgroundRef={playgroundRef}
+        setPlaygroundFit={setPlaygroundFit}
       />
     </article>
   )

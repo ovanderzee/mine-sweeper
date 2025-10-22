@@ -13,7 +13,8 @@ export interface TipProps {
 
 interface TipsProps extends TipProps {
   onNew: (action: GameAction) => void
-  playgroundRef: RefObject<HTMLElement | null>;
+  playgroundRef: RefObject<HTMLElement | null>
+  setPlaygroundFit: (arg: string) => void
 }
 
 const Tips = (props: TipsProps) => (
@@ -23,7 +24,10 @@ const Tips = (props: TipsProps) => (
     <section id="tip-action" className="tip">
       <NewGame onNew={props.onNew} stage={props.game.stage} appearance="tip" />
     </section>
-    <FullscreenPlay playgroundRef={props.playgroundRef} />
+    <FullscreenPlay
+      playgroundRef={props.playgroundRef}
+      setPlaygroundFit={props.setPlaygroundFit}
+    />
   </aside>
 )
 

@@ -99,7 +99,7 @@
   display: none;
 }
 
-.cover #contain-fit,
-.contain #cover-fit {
+.cover-screen #contain-fit,
+.contain-screen #cover-fit {
   display: unset;
 }

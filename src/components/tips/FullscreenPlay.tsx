@@ -6,6 +6,7 @@ import './Tips.css'
 
 interface FullscreenPlayProps {
   playgroundRef: RefObject<HTMLElement | null>
+  setPlaygroundFit: (arg: string) => void
 }
 
 const FullscreenPlay = (props: FullscreenPlayProps) => {
@@ -15,6 +16,7 @@ const FullscreenPlay = (props: FullscreenPlayProps) => {
   const boardPxSize = boardEmSize * config.FONT_SIZE
   const playground = props.playgroundRef.current
   const [magnification, setMagnification] = useState(1)
+  const setPlaygroundFit = props.setPlaygroundFit
   let sf: ScreenfullApi
 
   const setFit = () => {
@@ -29,22 +31,20 @@ const FullscreenPlay = (props: FullscreenPlayProps) => {
 
   const fitToContain = () => {
     if (!playground) return
-    playground.classList.add('contain')
-    playground.classList.remove('cover')
+    setPlaygroundFit('contain-screen')
     const smallestPxSize = Math.min(screen.availWidth, screen.availHeight)
     fitToNeed(smallestPxSize)
   }
 
   const fitToCover = () => {
     if (!playground) return
-    playground.classList.add('cover')
-    playground.classList.remove('contain')
+    setPlaygroundFit('cover-screen')
     const biggestPxSize = Math.max(screen.availWidth, screen.availHeight)
     fitToNeed(biggestPxSize)
   }
 
   const resetFit = () => {
-    playground?.classList.remove('contain', 'cover')
+    setPlaygroundFit('')
     setMagnification(1)
     setFit()
   }
