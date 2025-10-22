@@ -1,9 +1,15 @@
 .tips {
+  --active-color: var(--bright-violet);
+
   grid-row: calc(var(--board-size) + 1);
   grid-column: 1 / span var(--board-size);
   display: flex;
   justify-content: space-around;
   padding-block-start: 1ex;
+}
+
+:fullscreen .tips {
+  --active-color: var(--fire-yellorange);
 }
 
 .tip {
@@ -27,7 +33,7 @@
 }
 
 .tip button:hover svg {
-  color: var(--fire-yellorange);
+  color: var(--active-color);
 }
 
 /* TIME */

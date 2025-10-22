@@ -100,7 +100,7 @@ const FullscreenPlay = (props: FullscreenPlayProps) => {
 
   return (
     <section id="fullscreen-play" className="tip">
-      {sf && sf.isFullscreen() ? fullscreenView : windowedView}
+      {sf.isFullscreen() ? fullscreenView : windowedView}
     </section>
   )
 }

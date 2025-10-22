@@ -1,6 +1,8 @@
 @import './navOptionButton';
 
 .screen > nav {
+  --active-color: var(--fire-yellorange);
+
   background: var(--medium-to-dark-blue);
 }
 

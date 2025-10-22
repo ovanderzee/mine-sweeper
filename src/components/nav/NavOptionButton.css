@@ -7,7 +7,7 @@ button.nav-option {
 }
 
 button.nav-option.active {
-  color: var(--fire-yellorange);
+  color: var(--active-color);
   transition: color 0s
 }
 

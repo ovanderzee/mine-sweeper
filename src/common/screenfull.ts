@@ -1,11 +1,11 @@
 import { ElementLike, EventHandler, ScreenfullApi } from './app.d'
 
-const isFullscreen = (): boolean => {
+export const isFullscreen = (): boolean => {
   // @ts-ignore
   return document?.fullscreenElement || document?.webkitFullscreenElement
 }
 
-const isFullscreenAble = (): boolean => {
+export const isFullscreenAble = (): boolean => {
   // @ts-ignore
   return document?.fullscreenEnabled || document?.webkitFullscreenEnabled
 }
