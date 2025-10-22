@@ -12,7 +12,7 @@ interface FullscreenPlayProps {
 const FullscreenPlay = (props: FullscreenPlayProps) => {
   const pageCtx = useContext(PageContext)
   const { config, text } = pageCtx
-  const boardEmSize = 24 // 23 + padding
+  const boardEmSize = 24.5 // 23 + padding
   const boardPxSize = boardEmSize * config.FONT_SIZE
   const playground = props.playgroundRef.current
   const [magnification, setMagnification] = useState(1)
