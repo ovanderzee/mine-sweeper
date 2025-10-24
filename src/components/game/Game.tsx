@@ -18,6 +18,7 @@ import './Game.css'
 
 const Game = () => {
   const pageCtx = useContext(PageContext)
+  const text = pageCtx.text
   const { BOARD_SIZE } = pageCtx.config
 
   const [gameState, dispatchGameAction] = useReducer(
@@ -50,10 +51,12 @@ const Game = () => {
 
   const gameBoard = (
     <article
-        ref={playgroundRef}
-        id="playground"
-        className={`board-size__${BOARD_SIZE} ${gameState.stage} ${playgroundFit}`}
-        style={{'--board-size': BOARD_SIZE} as React.CSSProperties}
+      ref={playgroundRef}
+      role="main"
+      aria-label={text.game['Playground']}
+      id="playground"
+      className={`board-size__${BOARD_SIZE} ${gameState.stage} ${playgroundFit}`}
+      style={{'--board-size': BOARD_SIZE} as React.CSSProperties}
     >
       {gameState.board.map((row) =>
         row.map((cell) => (

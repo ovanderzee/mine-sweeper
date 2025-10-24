@@ -14,7 +14,10 @@ const About = () => {
   const [appVersion, commitHash] = VERSION_INFO
 
   const aboutContent = (
-    <article>
+    <article
+      role="main"
+      aria-label={text.nav['Help']}
+    >
       <h2>{text.common['Minesweeper']}</h2>
 
       <h3>{text.help['Intro Heading']}</h3>

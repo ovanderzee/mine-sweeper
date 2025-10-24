@@ -27,7 +27,7 @@ describe('Flip focus', () => {
     })
 
     it('should move focus from control in nav to first control in content', async () => {
-      const aButtonInNav = navArea ? await screen.getByTitle('Explanation') : null
+      const aButtonInNav = navArea ? await screen.getByTitle('Description') : null
       aButtonInNav?.focus()
       expect(aButtonInNav).toHaveFocus()
       keyTarget && fireEvent.keyDown(keyTarget, {altKey: true, key: 'Tab'})

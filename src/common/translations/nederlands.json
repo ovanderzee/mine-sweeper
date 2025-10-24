@@ -20,6 +20,9 @@
     "pristine": "verborgen",
     "touched": "geopend"
   },
+  "game": {
+    "ariaLabel": "Playground"
+  },
   "help": {
     "Nav Heading": "Navigatie",
     "Game Scores Comment": "Aantal mijnen minus het aantal vlaggen; toegang tot de Eregalerij",
@@ -91,7 +94,7 @@
     "New Game": "Nieuw Spel",
     "Replay": "Speel Opnieuw",
     "Settings": "Instellingen",
-    "Help": "Uitleg",
+    "Help": "Beschrijving",
     "Go Back": "Keer terug naar spel"
   },
   "dialog": {

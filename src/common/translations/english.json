@@ -20,6 +20,9 @@
     "pristine": "hidden",
     "touched": "open"
   },
+  "game": {
+    "ariaLabel": "Playground"
+  },
   "help": {
     "Nav Heading": "Navigation",
     "Game Scores Comment": "Number of mines minus the number of flags; access to Hall of Fame",
@@ -91,7 +94,7 @@
     "New Game": "New Game",
     "Replay": "Replay",
     "Settings": "Settings",
-    "Help": "Explanation",
+    "Help": "Description",
     "Go Back": "Return to Game"
   },
   "dialog": {

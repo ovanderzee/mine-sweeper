@@ -63,12 +63,12 @@
             }
         </style>
         <!-- Bootstrap CSS -->
-        <link rel="stylesheet" href="ovdz_nl_24-10-2025_10-31_bestanden/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-        <script src="ovdz_nl_24-10-2025_10-31_bestanden/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-        <script src="ovdz_nl_24-10-2025_10-31_bestanden/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-        <script src="ovdz_nl_24-10-2025_10-31_bestanden/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-        <link rel="stylesheet" href="ovdz_nl_24-10-2025_10-31_bestanden/stackoverflow-light.min.css">
-        <script src="ovdz_nl_24-10-2025_10-31_bestanden/highlight.min.js"></script>
+        <link rel="stylesheet" href="ovdz_nl_Config_bestanden/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+        <script src="ovdz_nl_Config_bestanden/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="ovdz_nl_Config_bestanden/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="ovdz_nl_Config_bestanden/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="ovdz_nl_Config_bestanden/stackoverflow-light.min.css">
+        <script src="ovdz_nl_Config_bestanden/highlight.min.js"></script>
         <title>Axe-core® Accessibility Results</title>
     </head>
     <body cz-shortcut-listen="true"><main role="main">
@@ -78,7 +78,7 @@
             </h1>
             <div class="summarySection">
             </div>
-            <h2>axe-core found <span class="badge badge-warning">7</span> violations</h2>
+            <h2>axe-core found <span class="badge badge-warning">6</span> violations</h2>
             <table class="table table-striped table-bordered">
                 <thead>
                     <tr>
@@ -93,10 +93,10 @@
                 <tbody>
                     <tr>
                         <th scope="row"><a href="#1" class="card-link">1</a></th>
-                        <td>Document should have one main landmark</td>
-                        <td>landmark-one-main</td>
+                        <td>ARIA role should be appropriate for the element</td>
+                        <td>aria-allowed-role</td>
                         <td>Best practice</td>
-                        <td>moderate</td>
+                        <td>minor</td>
                         <td>1</td>
                     </tr>
                     <tr>
@@ -109,14 +109,6 @@
                     </tr>
                     <tr>
                         <th scope="row"><a href="#3" class="card-link">3</a></th>
-                        <td>All page content should be contained by landmarks</td>
-                        <td>region</td>
-                        <td>Best practice</td>
-                        <td>moderate</td>
-                        <td>1</td>
-                    </tr>
-                    <tr>
-                        <th scope="row"><a href="#4" class="card-link">4</a></th>
                         <td>&lt;svg&gt; elements with an img role must have an alternative text</td>
                         <td>svg-img-alt</td>
                         <td>WCAG 2 Level A, WCAG 1.1.1</td>
@@ -130,26 +122,26 @@
                 <div class="card-body">
                     <div class="violationCardLine">
                         <p class="card-title">
-                            <a id="1">1.</a> Document should have one main landmark
+                            <a id="1">1.</a> ARIA role should be appropriate for the element
                         </p>
-                        <a href="https://dequeuniversity.com/rules/axe/4.10/landmark-one-main?application=playwright" target="_blank" class="card-link violationCardTitleItem learnMore">Learn more</a>
+                        <a href="https://dequeuniversity.com/rules/axe/4.10/aria-allowed-role?application=playwright" target="_blank" class="card-link violationCardTitleItem learnMore">Learn more</a>
                     </div>
                     <div class="violationCardLine">
-                        <p class="card-subtitle mb-2 text-muted">landmark-one-main</p>
+                        <p class="card-subtitle mb-2 text-muted">aria-allowed-role</p>
                         <p class="card-subtitle mb-2 text-muted violationCardTitleItem">
                             Best practice
                         </p>
                     </div>
                     <div class="violationCardLine">
-                        <p class="card-text">Ensure the document has a main landmark</p>
+                        <p class="card-text">Ensure role attribute has an appropriate value for the element</p>
                         <p class="card-subtitle mb-2 text-muted violationCardTitleItem">
-                            moderate
+                            minor
                         </p>
                     </div>
                     <div class="violationCardLine">
                         <p class="card-subtitle mb-2 text-muted violationCardTitleItem">
                             Issue Tags: 
-                            <span class="badge bg-light text-dark"> cat.semantics </span>
+                            <span class="badge bg-light text-dark"> cat.aria </span>
 
                             <span class="badge bg-light text-dark"> best-practice </span>
                         </p>
@@ -170,15 +162,15 @@
                                     <td>1</td>
                                     <td>
                                         <p><strong>Element location</strong></p>
-                                        <pre><code class="css text-wrap hljs"><span class="hljs-selector-tag">html</span></code></pre>
+                                        <pre><code class="css text-wrap hljs"><span class="hljs-selector-tag">form</span></code></pre>
                                         <p><strong>Element source</strong></p>
-                                        <pre><code class="html text-wrap hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">lang</span>=<span class="hljs-string">"en"</span> <span class="hljs-attr">style</span>=<span class="hljs-string">"--fadeout-time: 499ms;"</span>&gt;</span></code></pre>
+                                        <pre><code class="html text-wrap hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">form</span> <span class="hljs-attr">role</span>=<span class="hljs-string">"main"</span> <span class="hljs-attr">aria-label</span>=<span class="hljs-string">"Instellingen"</span>&gt;</span></code></pre>
                                     </td>
                                     <td>
                                         <div class="wrapBreakWord">
-                                            <p>Fix all of the following:</p>
+                                            <p>Fix any of the following:</p>
                                             <ul class="text-muted">
-                                                <li>  Document does not have a main landmark</li>
+                                                <li>  ARIA role main is not allowed for given element</li>
                                             </ul>
                                         </div>
                                     </td>
@@ -254,69 +246,7 @@
                 <div class="card-body">
                     <div class="violationCardLine">
                         <p class="card-title">
-                            <a id="3">3.</a> All page content should be contained by landmarks
-                        </p>
-                        <a href="https://dequeuniversity.com/rules/axe/4.10/region?application=playwright" target="_blank" class="card-link violationCardTitleItem learnMore">Learn more</a>
-                    </div>
-                    <div class="violationCardLine">
-                        <p class="card-subtitle mb-2 text-muted">region</p>
-                        <p class="card-subtitle mb-2 text-muted violationCardTitleItem">
-                            Best practice
-                        </p>
-                    </div>
-                    <div class="violationCardLine">
-                        <p class="card-text">Ensure all page content is contained by landmarks</p>
-                        <p class="card-subtitle mb-2 text-muted violationCardTitleItem">
-                            moderate
-                        </p>
-                    </div>
-                    <div class="violationCardLine">
-                        <p class="card-subtitle mb-2 text-muted violationCardTitleItem">
-                            Issue Tags: 
-                            <span class="badge bg-light text-dark"> cat.keyboard </span>
-
-                            <span class="badge bg-light text-dark"> best-practice </span>
-                        </p>
-                    </div>
-                    <div class="violationNode">
-                        <table class="table table-sm table-bordered">
-                            <thead>
-                                <tr>
-                                    <th style="width: 2%">#</th>
-                                    <th style="width: 49%">Issue Description</th>
-                                    <th style="width: 49%">
-                                        To solve this violation, you need to...
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>
-                                        <p><strong>Element location</strong></p>
-                                        <pre><code class="css text-wrap hljs"><span class="hljs-selector-tag">form</span></code></pre>
-                                        <p><strong>Element source</strong></p>
-                                        <pre><code class="html text-wrap hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">form</span>&gt;</span></code></pre>
-                                    </td>
-                                    <td>
-                                        <div class="wrapBreakWord">
-                                            <p>Fix any of the following:</p>
-                                            <ul class="text-muted">
-                                                <li>  Some page content is not contained by landmarks</li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <div class="card violationCard">
-                <div class="card-body">
-                    <div class="violationCardLine">
-                        <p class="card-title">
-                            <a id="4">4.</a> &lt;svg&gt; elements with an img role must have an alternative text
+                            <a id="3">3.</a> &lt;svg&gt; elements with an img role must have an alternative text
                         </p>
                         <a href="https://dequeuniversity.com/rules/axe/4.10/svg-img-alt?application=playwright" target="_blank" class="card-link violationCardTitleItem learnMore">Learn more</a>
                     </div>

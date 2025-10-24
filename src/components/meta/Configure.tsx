@@ -197,8 +197,10 @@ function Configure() {
   return (
     <>
       <form
-          onKeyDown={(event) => preventReloadByEnter(event)}
-        >
+        role="main"
+        aria-label={text.nav['Settings']}
+        onKeyDown={(event) => preventReloadByEnter(event)}
+      >
         {onbeginContent}
         {genericContent}
         {recordContent}

@@ -111,7 +111,10 @@ const HallOfFame = () => {
   const scoreDiagram = <Diagram scores={scores} xParam={sortLabel} yParam="points" />
 
   const fameContent = (
-    <article>
+    <article
+      role="main"
+      aria-label={text.nav['Hall of Fame']}
+    >
       <h2>{text.nav['Hall of Fame']}</h2>
 
       {scores.length > SHOW_SORT_THRESHOLD && scoreSorting}
