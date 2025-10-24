@@ -75,26 +75,28 @@ const FullscreenPlay = (props: FullscreenPlayProps) => {
       onClick={fitToContain}
       title={text.tips['Contain all cells']}
     >
-      <svg><use href="#contain-view" /></svg>
+      <svg role="img" aria-label={text.icon['contain']}><use href="#contain-view" /></svg>
     </button>
     <button id="cover-fit" type="button"
       onClick={fitToCover}
       title={text.tips['Cover with cells']}
     >
-      <svg><use href="#cover-view" /></svg>
+      <svg role="img" aria-label={text.icon['cover']}><use href="#cover-view" /></svg>
     </button>
     <button id="window-mode" type="button"
       onClick={sf && sf.exitFullscreen}
+      title={text.tips['To windowed']}
     >
-      <svg overflow="visible"><use href="#to-window" /></svg>
+      <svg role="img" aria-label={text.icon['windowed']} overflow="visible"><use href="#to-window" /></svg>
     </button>
   </>
 
   const windowedView = (
     <button id="fullscreen-mode" type="button"
       onClick={sf && sf.enterFullscreen}
+      title={text.tips['To fullscreen']}
     >
-      <svg overflow="visible"><use href="#to-fullscreen" /></svg>
+      <svg role="img" aria-label={text.icon['fullscreen']} overflow="visible"><use href="#to-fullscreen" /></svg>
     </button>
   )
 

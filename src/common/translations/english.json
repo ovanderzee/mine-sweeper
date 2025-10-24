@@ -97,6 +97,21 @@
     "Help": "Description",
     "Go Back": "Return to Game"
   },
+  "icon": {
+    "podium": "podium",
+    "play": "play",
+    "cw-revolving": "clockwise revolving arrow",
+    "question": "question-mark",
+    "sliders": "sliders",
+    "ccw-revolving": "counterclockwise revolving arrow",
+    "empty set": "empty set",
+    "return": "return arrow",
+    "eye": "eye",
+    "contain": "containing view",
+    "cover": "covered view",
+    "windowed": "windowed view",
+    "fullscreen": "fullscreen view"
+  },
   "dialog": {
     "Erase Scores?": "Do you want to clear the score list?",
     "Quit and new game?": "Do you want to start a new game?",
@@ -108,6 +123,7 @@
     "Playtime": "Playtime",
     "Contain all cells": "Have all cells on screen",
     "Cover with cells": "Cover screen with cells",
-    "Revert magnification": "Revert magnification"
+    "To windowed": "Play within a window",
+    "To fullscreen": "Cover screen with minesweeper"
   }
 }

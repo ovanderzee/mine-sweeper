@@ -78,7 +78,7 @@
             </h1>
             <div class="summarySection">
             </div>
-            <h2>axe-core found <span class="badge badge-warning">9</span> violations</h2>
+            <h2>axe-core found <span class="badge badge-warning">2</span> violations</h2>
             <table class="table table-striped table-bordered">
                 <thead>
                     <tr>
@@ -93,14 +93,6 @@
                 <tbody>
                     <tr>
                         <th scope="row"><a href="#1" class="card-link">1</a></th>
-                        <td>Buttons must have discernible text</td>
-                        <td>button-name</td>
-                        <td>WCAG 2 Level A, WCAG 4.1.2</td>
-                        <td>critical</td>
-                        <td>1</td>
-                    </tr>
-                    <tr>
-                        <th scope="row"><a href="#2" class="card-link">2</a></th>
                         <td>Aside should not be contained in another landmark</td>
                         <td>landmark-complementary-is-top-level</td>
                         <td>Best practice</td>
@@ -108,20 +100,12 @@
                         <td>1</td>
                     </tr>
                     <tr>
-                        <th scope="row"><a href="#3" class="card-link">3</a></th>
+                        <th scope="row"><a href="#2" class="card-link">2</a></th>
                         <td>Page should contain a level-one heading</td>
                         <td>page-has-heading-one</td>
                         <td>Best practice</td>
                         <td>moderate</td>
                         <td>1</td>
-                    </tr>
-                    <tr>
-                        <th scope="row"><a href="#4" class="card-link">4</a></th>
-                        <td>&lt;svg&gt; elements with an img role must have an alternative text</td>
-                        <td>svg-img-alt</td>
-                        <td>WCAG 2 Level A, WCAG 1.1.1</td>
-                        <td>serious</td>
-                        <td>6</td>
                     </tr>
                 </tbody>
             </table>
@@ -130,91 +114,7 @@
                 <div class="card-body">
                     <div class="violationCardLine">
                         <p class="card-title">
-                            <a id="1">1.</a> Buttons must have discernible text
-                        </p>
-                        <a href="https://dequeuniversity.com/rules/axe/4.10/button-name?application=playwright" target="_blank" class="card-link violationCardTitleItem learnMore">Learn more</a>
-                    </div>
-                    <div class="violationCardLine">
-                        <p class="card-subtitle mb-2 text-muted">button-name</p>
-                        <p class="card-subtitle mb-2 text-muted violationCardTitleItem">
-                            WCAG 2 Level A, WCAG 4.1.2
-                        </p>
-                    </div>
-                    <div class="violationCardLine">
-                        <p class="card-text">Ensure buttons have discernible text</p>
-                        <p class="card-subtitle mb-2 text-muted violationCardTitleItem">
-                            critical
-                        </p>
-                    </div>
-                    <div class="violationCardLine">
-                        <p class="card-subtitle mb-2 text-muted violationCardTitleItem">
-                            Issue Tags: 
-                            <span class="badge bg-light text-dark"> cat.name-role-value </span>
-
-                            <span class="badge bg-light text-dark"> wcag2a </span>
-
-                            <span class="badge bg-light text-dark"> wcag412 </span>
-
-                            <span class="badge bg-light text-dark"> section508 </span>
-
-                            <span class="badge bg-light text-dark"> section508.22.a </span>
-
-                            <span class="badge bg-light text-dark"> TTv5 </span>
-
-                            <span class="badge bg-light text-dark"> TT6.a </span>
-
-                            <span class="badge bg-light text-dark"> EN-301-549 </span>
-
-                            <span class="badge bg-light text-dark"> EN-9.4.1.2 </span>
-
-                            <span class="badge bg-light text-dark"> ACT </span>
-                        </p>
-                    </div>
-                    <div class="violationNode">
-                        <table class="table table-sm table-bordered">
-                            <thead>
-                                <tr>
-                                    <th style="width: 2%">#</th>
-                                    <th style="width: 49%">Issue Description</th>
-                                    <th style="width: 49%">
-                                        To solve this violation, you need to...
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>
-                                        <p><strong>Element location</strong></p>
-                                        <pre><code class="css text-wrap hljs"><span class="hljs-selector-id">#window-mode</span></code></pre>
-                                        <p><strong>Element source</strong></p>
-                                        <pre><code class="html text-wrap hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">id</span>=<span class="hljs-string">"window-mode"</span> <span class="hljs-attr">type</span>=<span class="hljs-string">"button"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">svg</span> <span class="hljs-attr">overflow</span>=<span class="hljs-string">"visible"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">use</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"#to-window"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">use</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">svg</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></code></pre>
-                                    </td>
-                                    <td>
-                                        <div class="wrapBreakWord">
-                                            <p>Fix any of the following:</p>
-                                            <ul class="text-muted">
-                                                <li>  Element does not have inner text that is visible to screen readers</li>
-                                                <li>  aria-label attribute does not exist or is empty</li>
-                                                <li>  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty</li>
-                                                <li>  Element has no title attribute</li>
-                                                <li>  Element does not have an implicit (wrapped) &lt;label&gt;</li>
-                                                <li>  Element does not have an explicit &lt;label&gt;</li>
-                                                <li>  Element's default semantics were not overridden with role="none" or role="presentation"</li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <div class="card violationCard">
-                <div class="card-body">
-                    <div class="violationCardLine">
-                        <p class="card-title">
-                            <a id="2">2.</a> Aside should not be contained in another landmark
+                            <a id="1">1.</a> Aside should not be contained in another landmark
                         </p>
                         <a href="https://dequeuniversity.com/rules/axe/4.10/landmark-complementary-is-top-level?application=playwright" target="_blank" class="card-link violationCardTitleItem learnMore">Learn more</a>
                     </div>
@@ -276,7 +176,7 @@
                 <div class="card-body">
                     <div class="violationCardLine">
                         <p class="card-title">
-                            <a id="3">3.</a> Page should contain a level-one heading
+                            <a id="2">2.</a> Page should contain a level-one heading
                         </p>
                         <a href="https://dequeuniversity.com/rules/axe/4.10/page-has-heading-one?application=playwright" target="_blank" class="card-link violationCardTitleItem learnMore">Learn more</a>
                     </div>
@@ -325,187 +225,6 @@
                                             <p>Fix all of the following:</p>
                                             <ul class="text-muted">
                                                 <li>  Page must have a level-one heading</li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-            <div class="card violationCard">
-                <div class="card-body">
-                    <div class="violationCardLine">
-                        <p class="card-title">
-                            <a id="4">4.</a> &lt;svg&gt; elements with an img role must have an alternative text
-                        </p>
-                        <a href="https://dequeuniversity.com/rules/axe/4.10/svg-img-alt?application=playwright" target="_blank" class="card-link violationCardTitleItem learnMore">Learn more</a>
-                    </div>
-                    <div class="violationCardLine">
-                        <p class="card-subtitle mb-2 text-muted">svg-img-alt</p>
-                        <p class="card-subtitle mb-2 text-muted violationCardTitleItem">
-                            WCAG 2 Level A, WCAG 1.1.1
-                        </p>
-                    </div>
-                    <div class="violationCardLine">
-                        <p class="card-text">Ensure &lt;svg&gt; elements with an img, graphics-document or graphics-symbol role have an accessible text</p>
-                        <p class="card-subtitle mb-2 text-muted violationCardTitleItem">
-                            serious
-                        </p>
-                    </div>
-                    <div class="violationCardLine">
-                        <p class="card-subtitle mb-2 text-muted violationCardTitleItem">
-                            Issue Tags: 
-                            <span class="badge bg-light text-dark"> cat.text-alternatives </span>
-
-                            <span class="badge bg-light text-dark"> wcag2a </span>
-
-                            <span class="badge bg-light text-dark"> wcag111 </span>
-
-                            <span class="badge bg-light text-dark"> section508 </span>
-
-                            <span class="badge bg-light text-dark"> section508.22.a </span>
-
-                            <span class="badge bg-light text-dark"> TTv5 </span>
-
-                            <span class="badge bg-light text-dark"> TT7.a </span>
-
-                            <span class="badge bg-light text-dark"> EN-301-549 </span>
-
-                            <span class="badge bg-light text-dark"> EN-9.1.1.1 </span>
-
-                            <span class="badge bg-light text-dark"> ACT </span>
-                        </p>
-                    </div>
-                    <div class="violationNode">
-                        <table class="table table-sm table-bordered">
-                            <thead>
-                                <tr>
-                                    <th style="width: 2%">#</th>
-                                    <th style="width: 49%">Issue Description</th>
-                                    <th style="width: 49%">
-                                        To solve this violation, you need to...
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>
-                                        <p><strong>Element location</strong></p>
-                                        <pre><code class="css text-wrap hljs"><span class="hljs-selector-id">#tip-action</span> &gt; <span class="hljs-selector-class">.nav-option</span><span class="hljs-selector-attr">[title=<span class="hljs-string">"Nieuw Spel"</span>]</span> &gt; <span class="hljs-selector-tag">svg</span><span class="hljs-selector-attr">[role=<span class="hljs-string">"img"</span>]</span></code></pre>
-                                        <p><strong>Element source</strong></p>
-                                        <pre><code class="html text-wrap hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">svg</span> <span class="hljs-attr">role</span>=<span class="hljs-string">"img"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">use</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"#plain-play"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">use</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">svg</span>&gt;</span></code></pre>
-                                    </td>
-                                    <td>
-                                        <div class="wrapBreakWord">
-                                            <p>Fix any of the following:</p>
-                                            <ul class="text-muted">
-                                                <li>  Element has no child that is a title</li>
-                                                <li>  aria-label attribute does not exist or is empty</li>
-                                                <li>  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty</li>
-                                                <li>  Element has no title attribute</li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>
-                                        <p><strong>Element location</strong></p>
-                                        <pre><code class="css text-wrap hljs"><span class="hljs-selector-tag">button</span><span class="hljs-selector-attr">[title=<span class="hljs-string">"Eregalerij"</span>]</span> &gt; <span class="hljs-selector-tag">svg</span><span class="hljs-selector-attr">[role=<span class="hljs-string">"img"</span>]</span></code></pre>
-                                        <p><strong>Element source</strong></p>
-                                        <pre><code class="html text-wrap hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">svg</span> <span class="hljs-attr">role</span>=<span class="hljs-string">"img"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">use</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"#nav-podium"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">use</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">svg</span>&gt;</span></code></pre>
-                                    </td>
-                                    <td>
-                                        <div class="wrapBreakWord">
-                                            <p>Fix any of the following:</p>
-                                            <ul class="text-muted">
-                                                <li>  Element has no child that is a title</li>
-                                                <li>  aria-label attribute does not exist or is empty</li>
-                                                <li>  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty</li>
-                                                <li>  Element has no title attribute</li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td>
-                                        <p><strong>Element location</strong></p>
-                                        <pre><code class="css text-wrap hljs"><span class="hljs-selector-class">.sticky-slider</span> &gt; <span class="hljs-selector-class">.nav-option</span><span class="hljs-selector-attr">[title=<span class="hljs-string">"Nieuw Spel"</span>]</span> &gt; <span class="hljs-selector-tag">svg</span><span class="hljs-selector-attr">[role=<span class="hljs-string">"img"</span>]</span></code></pre>
-                                        <p><strong>Element source</strong></p>
-                                        <pre><code class="html text-wrap hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">svg</span> <span class="hljs-attr">role</span>=<span class="hljs-string">"img"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">use</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"#nav-play"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">use</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">svg</span>&gt;</span></code></pre>
-                                    </td>
-                                    <td>
-                                        <div class="wrapBreakWord">
-                                            <p>Fix any of the following:</p>
-                                            <ul class="text-muted">
-                                                <li>  Element has no child that is a title</li>
-                                                <li>  aria-label attribute does not exist or is empty</li>
-                                                <li>  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty</li>
-                                                <li>  Element has no title attribute</li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td>
-                                        <p><strong>Element location</strong></p>
-                                        <pre><code class="css text-wrap hljs"><span class="hljs-selector-tag">button</span><span class="hljs-selector-attr">[title=<span class="hljs-string">"Speel Opnieuw"</span>]</span> &gt; <span class="hljs-selector-tag">svg</span><span class="hljs-selector-attr">[role=<span class="hljs-string">"img"</span>]</span></code></pre>
-                                        <p><strong>Element source</strong></p>
-                                        <pre><code class="html text-wrap hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">svg</span> <span class="hljs-attr">role</span>=<span class="hljs-string">"img"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">use</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"#nav-replay"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">use</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">svg</span>&gt;</span></code></pre>
-                                    </td>
-                                    <td>
-                                        <div class="wrapBreakWord">
-                                            <p>Fix any of the following:</p>
-                                            <ul class="text-muted">
-                                                <li>  Element has no child that is a title</li>
-                                                <li>  aria-label attribute does not exist or is empty</li>
-                                                <li>  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty</li>
-                                                <li>  Element has no title attribute</li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td>
-                                        <p><strong>Element location</strong></p>
-                                        <pre><code class="css text-wrap hljs"><span class="hljs-selector-tag">button</span><span class="hljs-selector-attr">[title=<span class="hljs-string">"Uitleg"</span>]</span> &gt; <span class="hljs-selector-tag">svg</span><span class="hljs-selector-attr">[role=<span class="hljs-string">"img"</span>]</span></code></pre>
-                                        <p><strong>Element source</strong></p>
-                                        <pre><code class="html text-wrap hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">svg</span> <span class="hljs-attr">role</span>=<span class="hljs-string">"img"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">use</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"#nav-question"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">use</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">svg</span>&gt;</span></code></pre>
-                                    </td>
-                                    <td>
-                                        <div class="wrapBreakWord">
-                                            <p>Fix any of the following:</p>
-                                            <ul class="text-muted">
-                                                <li>  Element has no child that is a title</li>
-                                                <li>  aria-label attribute does not exist or is empty</li>
-                                                <li>  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty</li>
-                                                <li>  Element has no title attribute</li>
-                                            </ul>
-                                        </div>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td>6</td>
-                                    <td>
-                                        <p><strong>Element location</strong></p>
-                                        <pre><code class="css text-wrap hljs"><span class="hljs-selector-tag">button</span><span class="hljs-selector-attr">[title=<span class="hljs-string">"Instellingen"</span>]</span> &gt; <span class="hljs-selector-tag">svg</span><span class="hljs-selector-attr">[role=<span class="hljs-string">"img"</span>]</span></code></pre>
-                                        <p><strong>Element source</strong></p>
-                                        <pre><code class="html text-wrap hljs xml"><span class="hljs-tag">&lt;<span class="hljs-name">svg</span> <span class="hljs-attr">role</span>=<span class="hljs-string">"img"</span>&gt;</span><span class="hljs-tag">&lt;<span class="hljs-name">use</span> <span class="hljs-attr">href</span>=<span class="hljs-string">"#nav-sliders"</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">use</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">svg</span>&gt;</span></code></pre>
-                                    </td>
-                                    <td>
-                                        <div class="wrapBreakWord">
-                                            <p>Fix any of the following:</p>
-                                            <ul class="text-muted">
-                                                <li>  Element has no child that is a title</li>
-                                                <li>  aria-label attribute does not exist or is empty</li>
-                                                <li>  aria-labelledby attribute does not exist, references elements that do not exist or references elements that are empty</li>
-                                                <li>  Element has no title attribute</li>
                                             </ul>
                                         </div>
                                     </td>

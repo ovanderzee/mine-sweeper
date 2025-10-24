@@ -42,7 +42,7 @@ const Replay = (props: ReplayProps) => {
       title={text.nav['Replay']}
       onClick={replayHandler}
     >
-      <svg role="img"><use href={`#nav-replay`} /></svg>
+      <svg role="img" aria-label={text.icon['cw-revolving']}><use href={`#nav-replay`} /></svg>
     </button>
     {showModal && consentModal}
   </>

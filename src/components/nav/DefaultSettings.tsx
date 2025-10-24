@@ -51,7 +51,7 @@ const DefaultSettings = () => {
       title={text.nav['Reinstate Defaults']}
       onClick={resetHandler}
     >
-      <svg role="img"><use href={`#nav-reset`} /></svg>
+      <svg role="img" aria-label={text.icon['ccw-revolving']}><use href={`#nav-reset`} /></svg>
     </button>
     {showModal && consentModal}
   </>

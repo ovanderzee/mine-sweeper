@@ -97,6 +97,21 @@
     "Help": "Beschrijving",
     "Go Back": "Keer terug naar spel"
   },
+  "icon": {
+    "podium": "podium",
+    "play": "speel",
+    "cw-revolving": "rechtsom draaiende pijl",
+    "question": "vraagteken",
+    "sliders": "schuifjes",
+    "ccw-revolving": "linksom draaiende pijl",
+    "empty set": "lege verzameling",
+    "return": "kerende pijl",
+    "eye": "oog",
+    "contain": "compleet beeld",
+    "cover": "gevuld beeld",
+    "windowed": "beeld met vensters",
+    "fullscreen": "volledig scherm"
+  },
   "dialog": {
     "Erase Scores?": "Wil je de scorelijst wissen?",
     "Quit and new game?": "Wil je een nieuw spel beginnen?",
@@ -108,6 +123,7 @@
     "Playtime": "Speelduur",
     "Contain all cells": "Alle cellen op het scherm",
     "Cover with cells": "Vul scherm met cellen",
-    "Revert magnification": "Vergrotig ongedaan maken"
+    "To windowed": "In een venster spelen",
+    "To fullscreen": "Op volledig scherm spelen"
   }
 }

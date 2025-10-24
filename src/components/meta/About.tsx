@@ -27,16 +27,14 @@ const About = () => {
 
       <h3>{text.help['Nav Heading']}</h3>
       <dl>
-        <dt><svg role="img"><text id="text-content" x="50%" y="55%" style={{fontSize: '1em'}}>9×</text></svg></dt>
-          <dd>{text.help['Game Scores Comment']}</dd>
-        <dt><svg role="img"><use href="#plain-podium" /></svg></dt><dd>{text.help['About Scores Comment']}</dd>
-        <dt><svg role="img"><use href="#plain-play" /></svg></dt><dd>{text.help['New Game Comment']}</dd>
-        <dt><svg role="img"><use href="#plain-replay" /></svg></dt><dd>{text.help['Replay Comment']}</dd>
-        <dt><svg role="img"><use href="#plain-question" /></svg></dt><dd>{text.help['Help Comment']}</dd>
-        <dt><svg role="img"><use href="#plain-sliders" /></svg></dt><dd>{text.help['Settings Comment']}</dd>
-        <dt><svg role="img"><use href="#plain-reset" /></svg></dt><dd>{text.help['Reset Comment']}</dd>
-        <dt><svg role="img"><use href="#plain-empty" /></svg></dt><dd>{text.help['Delete Comment']}</dd>
-        <dt><svg role="img"><use href="#plain-return" /></svg></dt><dd>{text.help['Go Back Comment']}</dd>
+        <dt><svg role="img" aria-label={text.icon['podium']}><use href="#plain-podium" /></svg></dt><dd>{text.help['About Scores Comment']}</dd>
+        <dt><svg role="img" aria-label={text.icon['play']}><use href="#plain-play" /></svg></dt><dd>{text.help['New Game Comment']}</dd>
+        <dt><svg role="img" aria-label={text.icon['cw-revolving']}><use href="#plain-replay" /></svg></dt><dd>{text.help['Replay Comment']}</dd>
+        <dt><svg role="img" aria-label={text.icon['question']}><use href="#plain-question" /></svg></dt><dd>{text.help['Help Comment']}</dd>
+        <dt><svg role="img" aria-label={text.icon['sliders']}><use href="#plain-sliders" /></svg></dt><dd>{text.help['Settings Comment']}</dd>
+        <dt><svg role="img" aria-label={text.icon['ccw-revolving']}><use href="#plain-reset" /></svg></dt><dd>{text.help['Reset Comment']}</dd>
+        <dt><svg role="img" aria-label={text.icon['empty set']}><use href="#plain-empty" /></svg></dt><dd>{text.help['Delete Comment']}</dd>
+        <dt><svg role="img" aria-label={text.icon['return']}><use href="#plain-return" /></svg></dt><dd>{text.help['Go Back Comment']}</dd>
       </dl>
 
       <h3>{text.help['Accessibility Heading']}</h3>
