@@ -103,8 +103,10 @@
   "tips": {
     "Todo counter": "Aantal te vinden mijnen",
     "Playtime": "Speelduur",
-    "Contain all cells": "Alle cellen op het scherm",
+    "Contain all cells": "Alle cellen zichtbaar",
     "Cover with cells": "Vul scherm met cellen",
-    "Revert magnification": "Vergrotig ongedaan maken"
+    "Revert magnification": "Vergroting ongedaan maken",
+    "Return to window": "In een venster spelen",
+    "View fullscreen": "Op volledig scherm spelen"
   }
 }

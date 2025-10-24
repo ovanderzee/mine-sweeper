@@ -84,6 +84,7 @@ const FullscreenPlay = (props: FullscreenPlayProps) => {
       <svg><use href="#cover-view" /></svg>
     </button>
     <button id="window-mode" type="button"
+      title={text.tips['Return to window']}
       onClick={sf && sf.exitFullscreen}
     >
       <svg overflow="visible"><use href="#to-window" /></svg>
@@ -92,6 +93,7 @@ const FullscreenPlay = (props: FullscreenPlayProps) => {
 
   const windowedView = (
     <button id="fullscreen-mode" type="button"
+      title={text.tips['View fullscreen']}
       onClick={sf && sf.enterFullscreen}
     >
       <svg overflow="visible"><use href="#to-fullscreen" /></svg>

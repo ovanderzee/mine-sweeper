@@ -103,8 +103,10 @@
   "tips": {
     "Todo counter": "Number of mines to find",
     "Playtime": "Playtime",
-    "Contain all cells": "Have all cells on screen",
-    "Cover with cells": "Cover screen with cells",
-    "Revert magnification": "Revert magnification"
+    "Contain all cells": "Have all cells visible",
+    "Cover with cells": "Fill screen with cells",
+    "Revert magnification": "Revert magnification",
+    "Return to window": "Play in a window",
+    "View fullscreen": "Play on fullscreen"
   }
 }
