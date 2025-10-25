@@ -18,6 +18,7 @@ const About = () => {
       role="main"
       aria-label={text.nav['Help']}
     >
+      <h1 className="sr-only">{text.nav['Help']}</h1>
       <h2>{text.common['Minesweeper']}</h2>
 
       <h3>{text.help['Intro Heading']}</h3>
@@ -37,11 +38,13 @@ const About = () => {
         <dt><svg role="img" aria-label={text.icon['return']}><use href="#plain-return" /></svg></dt><dd>{text.help['Go Back Comment']}</dd>
       </dl>
 
-      <h3>{text.help['Accessibility Heading']}</h3>
+      <h3 className="sr-only">{text.help['Features Heading']}</h3>
+
+      <h4>{text.help['Accessibility Heading']}</h4>
       <p>{text.help['Keyboard Notice']}</p>
       <p>{text.help['Game Navigation']}</p>
 
-      <h3>{text.help['Cookie Heading']}</h3>
+      <h4>{text.help['Cookie Heading']}</h4>
       <p>{text.help['Storage Notice']}</p>
 
       <hr />

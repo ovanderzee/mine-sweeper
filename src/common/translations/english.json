@@ -20,9 +20,6 @@
     "pristine": "hidden",
     "touched": "open"
   },
-  "game": {
-    "ariaLabel": "Playground"
-  },
   "help": {
     "Nav Heading": "Navigation",
     "Game Scores Comment": "Number of mines minus the number of flags; access to Hall of Fame",
@@ -39,6 +36,8 @@
     "Playing Hint": "Explore the minefield by clicking a few cells.",
     "Flagging Paragraph": "Flag a suspected mine using a longer click. The cell will then not respond to normal clicking.",
     "Finalise Game": "You loose the game when you touch a mine. You win when the number of closed cells equal the number of mines.",
+
+    "Features Heading": "Features",
 
     "Accessibility Heading": "Accessibility",
     "Keyboard Notice": "On desktop or laptop the game could be played using the keyboard. You can reach all interactions using the Tab and Shift+Tab keystrokes.",
@@ -95,6 +94,7 @@
     "Replay": "Replay",
     "Settings": "Settings",
     "Help": "Description",
+    "Playground": "Playground",
     "Go Back": "Return to Game"
   },
   "icon": {
