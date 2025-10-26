@@ -17,7 +17,6 @@ section.screen,
   background: var(--medium-blue);
   overflow: auto;
   overscroll-behavior-x: contain;
-  overscroll-behavior-x: none;
 }
 
 #game-board {
