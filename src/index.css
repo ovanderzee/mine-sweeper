@@ -17,7 +17,8 @@
   --state-green: hsl(100,50%,37%);
   --state-red: hsl(345,50%,50%);
 
-  --pale-violet: #c6a;
+  --pale-violet: #c6a; /* hsl(320, 50%, 60%); */
+  --bright-violet: #e4b; /* hsl(318, 83%, 60%); */
 
   --fire-yellow: hsl(48, 100%, 62%);
   --fire-yellorange: hsl(40, 100%, 56%);

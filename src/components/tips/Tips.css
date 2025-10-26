@@ -1,0 +1,113 @@
+.tips {
+  --active-color: var(--bright-violet);
+
+  grid-row: calc(var(--board-size) + 1);
+  grid-column: 1 / span var(--board-size);
+  display: flex;
+  justify-content: space-between;
+  padding-block-start: 1ex;
+  width: 19em;
+  margin-inline: auto;
+}
+
+:fullscreen .tips {
+  --active-color: var(--fire-yellorange);
+}
+
+.tip {
+  color: var(--ultra-dark-blue);
+  padding-inline: 1ex;
+}
+
+.tip > * {
+  font-size: 80%;
+}
+
+.tip button {
+  border: none;
+  background: none;
+  padding: 0;
+}
+
+.tip button svg {
+  color: inherit;
+  transition: color 100;
+}
+
+.tip button:hover svg {
+  color: var(--active-color);
+}
+
+/* TIME */
+
+#time-tracker span {
+  width: 2ex;
+}
+
+/* MINE */
+
+#mine-tracker span {
+  display: inline-block;
+}
+
+#mine-tracker {
+  text-align: center;
+}
+
+#mine-tracker .icon {
+  width: .8em;
+  aspect-ratio: 1;
+}
+
+#mine-tracker #mine {
+  border-radius: 50%;
+  background: radial-gradient(ellipse at 25% 25%, transparent 8%, currentcolor 33% )
+}
+
+#mine-tracker #flag::before {
+  content: '⚑'
+}
+
+#mine-tracker #diff {
+  margin-inline: .333ex;
+}
+
+/* ACTION */
+
+#tip-action button svg {
+  aspect-ratio: 1;
+  width: 1em;
+  vertical-align: -7%;
+}
+
+/* BOARD */
+
+#fullscreen-play {
+  display: flex;
+  gap: 1ex;
+}
+
+#fullscreen-play *:has(> svg use[href]) {
+  color: currentcolor;
+}
+
+#fullscreen-play button svg {
+  aspect-ratio: 1;
+  width: 1.414em;
+  vertical-align: -20%;
+}
+
+#fullscreen-play button:last-child svg {
+  width: 1.178em;
+  vertical-align: -14%;
+}
+
+#contain-fit,
+#cover-fit {
+  display: none;
+}
+
+.cover-screen #contain-fit,
+.contain-screen #cover-fit {
+  display: unset;
+}

@@ -9,7 +9,7 @@ const Settings = () => {
   const showHandler = () => pageCtx.navigate(<Configure />)
 
   return (
-    <button type="button" title={text.nav['Settings']} onClick={showHandler}>
+    <button type="button" className="nav-option" title={text.nav['Settings']} onClick={showHandler}>
       <svg role="img"><use href={`#nav-sliders`} /></svg>
     </button>
   )

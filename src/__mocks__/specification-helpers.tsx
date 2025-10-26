@@ -1,12 +1,14 @@
 import '@testing-library/jest-dom'
-import { act } from 'react'
-import { fireEvent, render, screen } from '@testing-library/react'
+import { act, fireEvent, render, screen } from '@testing-library/react'
+import { vi } from 'vitest'
+
 import App from './../App'
 import DEFAULTS from './../common/defaults'
 import storage from './../common/storage'
-import { CellState } from './../common/game-types'
+import { CellState } from './../common/game.d'
 import { FADE_OUT_TIME } from './../common/constants'
 import { microConfig } from './configs'
+import { newPortalLayer } from './render-helpers'
 
 export const referAndNavigateTo = {
   about: () => {
@@ -28,12 +30,13 @@ export const referAndNavigateTo = {
 }
 
 export const startPageTesting = () => {
+  newPortalLayer('overlay')
   render(<App />)
   // click 'skip intro' button to goto game screen
-  const button = screen.getByLabelText('skip to play')
+  const introButton = screen.getByLabelText('skip to play')
   act(() => {
-    fireEvent.click(button)
-    jest.advanceTimersByTime(FADE_OUT_TIME * 1.1)
+    fireEvent.click(introButton)
+    vi.advanceTimersByTimeAsync(FADE_OUT_TIME * 1.1)
   })
 }
 
@@ -58,9 +61,9 @@ export const setMicroConfig = () => localStorage.setItem('mv-config', JSON.strin
 
 export const clickGameButton = (gameButton: HTMLButtonElement) => {
   fireEvent.pointerDown(gameButton)
-  jest.advanceTimersByTime(20)
+  vi.advanceTimersByTimeAsync(20)
   fireEvent.pointerUp(gameButton)
-  jest.advanceTimersByTime(20)
+  vi.advanceTimersByTimeAsync(20)
 }
 
 export const getButtonFromState = (cell: CellState): HTMLButtonElement => {
@@ -73,20 +76,29 @@ export const clickToLoose = (): void => {
   const mineButton = getButtonFromState(mines[0])
   clickGameButton(mineButton)
 
-  act(() => {
+//   act(() => {
     // bridge animation delay
-    jest.advanceTimersByTime(320 * mines.length)
-  })
+    vi.advanceTimersByTimeAsync(320 * mines.length)
+//   })
 }
 
 export const clickToWin = (): void => {
   const nonCells = storage.game?.board.flat().filter(c => c.fill < 9 && !c.stage) || []
 
-  act(() => {
+//   act(() => {
     nonCells.forEach(cell => {
       const todoBtn = getButtonFromState(cell)
       clickGameButton(todoBtn)
     })
-  })
+//   })
 }
 
+export const htmlAttrs = (elem: HTMLElement | null): string => {
+  if (!elem) return '< NO ELEMENT >'
+
+  let output = elem.tagName.toLowerCase()
+  output += elem.id && '#' + elem.id
+  output += elem.className && '.' + elem.className.replace(/\s+/g, '.')
+  output += elem.title && '$' + elem.title
+  return `<${output}>`
+}

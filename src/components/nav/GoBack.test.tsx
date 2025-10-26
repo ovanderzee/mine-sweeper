@@ -1,9 +1,10 @@
 import { screen, fireEvent } from '@testing-library/react'
+import { vi } from 'vitest'
 import { renderInContext } from './../../__mocks__/render-helpers'
 import GoBack from './GoBack'
 
 describe('GoBack Component', () => {
-  test('should display the "Enter" sign', () => {
+  it('should display the "Enter" sign', () => {
     renderInContext(<GoBack />)
     const button = screen.getByTitle('Return to Game')
     expect(button).toBeInTheDocument()
@@ -11,8 +12,8 @@ describe('GoBack Component', () => {
     expect(svg).toBeInTheDocument()
   })
 
-  test('should navigate when clicked', () => {
-    const navigate = jest.fn()
+  it('should navigate when clicked', () => {
+    const navigate = vi.fn()
     renderInContext(<GoBack />, { navigate })
     const button = screen.getByTitle('Return to Game')
     fireEvent.click(button)

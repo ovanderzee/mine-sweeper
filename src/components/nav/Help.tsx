@@ -9,7 +9,7 @@ const Help = () => {
   const showHandler = () => pageCtx.navigate(<About />)
 
   return (
-    <button type="button" title={text.nav['Help']} onClick={showHandler}>
+    <button type="button" className="nav-option" title={text.nav['Help']} onClick={showHandler}>
       <svg role="img"><use href={`#nav-question`} /></svg>
     </button>
   )

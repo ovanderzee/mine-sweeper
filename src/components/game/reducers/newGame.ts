@@ -1,6 +1,6 @@
 import { iterateNeighbours, initialBoard, initialGameState } from '../common'
-import { AppConfig } from '../../../common/app-types'
-import { GameState, CellState } from '../../../common/game-types'
+import { AppConfig } from '../../../common/app.d'
+import { GameState, CellState } from '../../../common/game.d'
 
 export const newGameReducer = (config: AppConfig): GameState => {
   const { BOARD_SIZE, MINE_COUNT } = config

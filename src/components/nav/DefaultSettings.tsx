@@ -2,7 +2,7 @@ import { useContext, useState } from 'react'
 import PageContext from '../../store/page-context'
 import DEFAULTS from '../../common/defaults'
 import storage from '../../common/storage'
-import { GameStages } from '../../common/game-types'
+import { GameStages } from '../../common/game.d'
 import Modal from '../UI/Modal'
 
 const DefaultSettings = () => {
@@ -47,7 +47,7 @@ const DefaultSettings = () => {
 
   return <>
     <button type="button"
-      className={showActive ? 'active' : ''}
+      className={`nav-option ${showActive ? 'active' : ''}`}
       title={text.nav['Reinstate Defaults']}
       onClick={resetHandler}
     >

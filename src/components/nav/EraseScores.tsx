@@ -32,7 +32,7 @@ const EraseScores = (props: { onErase: () => void }) => {
 
   return <>
     <button type="button"
-      className={showActive ? 'active' : ''}
+      className={`nav-option ${showActive ? 'active' : ''}`}
       title={text.nav['Clear List']}
       onClick={eraseHandler}
     >

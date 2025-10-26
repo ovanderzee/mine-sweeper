@@ -1,4 +1,4 @@
-import { GameState, CellState, CellStateStage } from '../../../common/game-types'
+import { GameState, CellState, CellStateStage } from '../../../common/game.d'
 import { MAX_DETONATIONS } from '../../../common/constants'
 import { calculateMineCount } from '../../../common/defaults'
 import storage from '../../../common/storage'
@@ -39,5 +39,3 @@ export const defeatReducer = (state: GameState): GameState => {
 
   return state
 }
-
-export default defeatReducer

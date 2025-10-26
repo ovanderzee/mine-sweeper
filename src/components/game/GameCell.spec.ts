@@ -1,5 +1,6 @@
 import '@testing-library/jest-dom'
 import { waitFor } from '@testing-library/react'
+import { vi, MockInstance } from 'vitest'
 import userEvent, { UserEvent } from '@testing-library/user-event'
 import * as fn from '../../common/functions'
 import storage from './../../common/storage'
@@ -9,12 +10,12 @@ import { microConfig } from './../../__mocks__/configs'
 
 describe('GameCell keystrokes', () => {
   let button!: HTMLButtonElement,
-    flipFocusSpy: jest.SpyInstance,
+    flipFocusSpy: MockInstance,
     user: UserEvent
 
   beforeEach(async () => {
     // flipFocus listener is applied high in the DOM tree
-    flipFocusSpy = jest.spyOn(fn, 'flipFocus')
+    flipFocusSpy = vi.spyOn(fn, 'flipFocus')
     storage.config = microConfig
     storage.game = newGameState
     user = userEvent.setup()
@@ -33,27 +34,27 @@ describe('GameCell keystrokes', () => {
     expect(flipFocusSpy).not.toHaveBeenCalled()
   })
 
-  /* does not work for arrows; all expections fail, all test ArrowUp
-  it('should stop propagation for own "ArrowUp" key', async () => {
-    await waitFor(() => user.keyboard('{ArrowUp}'))
+  // TODO does not work for arrows; all expections fail, all test ArrowUp
+  // also find a positive test event.stopPropagation toHaveBeenCalled
+  it.skip('should stop propagation for own "ArrowUp" key', async () => {
+    await waitFor(() => user.keyboard('{arrowUp}'))
     expect(flipFocusSpy).not.toHaveBeenCalled()
   })
 
-  it('should stop propagation for own "ArrowRight" key', async () => {
+  it.skip('should stop propagation for own "ArrowRight" key', async () => {
     await waitFor(() => user.keyboard('{ArrowRight}'))
     expect(flipFocusSpy).not.toHaveBeenCalled()
   })
 
-  it('should stop propagation for own "ArrowDown" key', async () => {
+  it.skip('should stop propagation for own "ArrowDown" key', async () => {
     await waitFor(() => user.keyboard('{ArrowDown}'))
     expect(flipFocusSpy).not.toHaveBeenCalled()
   })
 
-  it('should stop propagation for own "ArrowLeft" key', async () => {
+  it.skip('should stop propagation for own "ArrowLeft" key', async () => {
     await waitFor(() => user.keyboard('{ArrowLeft}'))
     expect(flipFocusSpy).not.toHaveBeenCalled()
   })
-  */
 
   // this must be the last keyboard test
   it('should leave unregistered keysdowns to listeners up the dom tree', async () => {

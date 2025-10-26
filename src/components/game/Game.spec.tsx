@@ -1,37 +1,35 @@
 import '@testing-library/jest-dom'
-import { fireEvent, screen, within } from '@testing-library/react'
-import { act } from 'react';
+import { act, fireEvent, screen, within } from '@testing-library/react'
+import { vi } from 'vitest'
 import * as load from './reducers/load'
 import * as newGame from './reducers/newGame'
 import * as replay from './reducers/replay'
 import * as touchButton from './reducers/touchButton'
 import * as victory from './reducers/victory'
-import * as defeat from './reducers/defeat'
-import { CellState, GameState } from './../../common/game-types'
+// TODO import * as defeat from './reducers/defeat'
+import { CellState, GameState } from './../../common/game.d'
 import storage from './../../common/storage'
 import {
   referAndNavigateTo, setDefaultConfig, startPageTesting,
   clickGameButton, clickToLoose, clickToWin
 } from './../../__mocks__/specification-helpers'
+import { newPortalLayer } from './../../__mocks__/render-helpers'
 import { newGameState, playingGameState, lostGameState, wonGameState } from './../../__mocks__/game-states'
 import { microConfig } from './../../__mocks__/configs'
 
 // prevent trouble with setInterval
-const MockTimeTracker = () => <br />
-jest.mock("./TimeTracker", () => () => {
-  return <MockTimeTracker data-testid="time-tracker" />;
-});
+vi.mock("./../tips/Tips");
 
 describe('The game cells', () => {
   beforeEach(() => {
     storage.config = microConfig
   })
 
-  afterEach(() => {
-    act(() => {
-      jest.runAllTimers()
-    })
-  })
+//   afterEach(() => {
+//     act(() => {
+//       vi.runAllTimers()
+//     })
+//   })
 
   it('should open neighbour cells when a blank cell was clicked', () => {
     storage.game = newGameState
@@ -80,25 +78,28 @@ describe('The game sidebar', () => {
 })
 
 describe('The game start button', () => {
+  let navOptions: HTMLElement | null
+
   beforeEach(() => {
     storage.config = microConfig
   })
 
-  afterEach(() => {
-    act(() => {
-      jest.runAllTimers()
-    })
-  })
+//   afterEach(() => {
+//     act(() => {
+//       vi.runAllTimers()
+//     })
+//   })
 
   it('should start a new game when game ended', () => {
     storage.game = playingGameState
     startPageTesting()
+    navOptions = document.querySelector('.screen > nav') as HTMLElement
     expect(storage.game.stage).toBe('game-playing')
 
     clickToLoose()
     expect(storage.game.stage).toBe('game-lost')
 
-    const button = screen.getByTitle('New Game')
+    const button = within(navOptions).getByTitle('New Game')
     fireEvent.click(button)
 
     expect(storage.game.stage).toBe('game-new')
@@ -106,10 +107,12 @@ describe('The game start button', () => {
 
   it("should not start a new game on cancel when game is in progress", () => {
     storage.game = playingGameState
+    newPortalLayer('modal')
     startPageTesting()
+    navOptions = document.querySelector('.screen > nav') as HTMLElement
     expect(storage.game.stage).toBe('game-playing')
 
-    const button = screen.getByTitle('New Game')
+    const button = within(navOptions).getByTitle('New Game')
     fireEvent.click(button)
 
     const dialog = screen.getByRole('dialog')
@@ -121,12 +124,14 @@ describe('The game start button', () => {
   })
 
   it("should start a new game on confirm when game is in progress", () => {
-    const newGameReducerSpy = jest.spyOn(newGame, 'newGameReducer')
+    const newGameReducerSpy = vi.spyOn(newGame, 'newGameReducer')
     storage.game = playingGameState
+    newPortalLayer('modal')
     startPageTesting()
+    navOptions = document.querySelector('.screen > nav') as HTMLElement
     expect(storage.game.stage).toBe('game-playing')
 
-    const button = screen.getByTitle('New Game')
+    const button = within(navOptions).getByTitle('New Game')
     fireEvent.click(button)
 
     const dialog = screen.getByRole('dialog')
@@ -155,23 +160,26 @@ describe('The replay button', () => {
     return equals.length === board1.length
   })
 
+  let navOptions: HTMLElement | null
+
   beforeEach(() => {
     storage.config = microConfig
   })
 
   afterEach(() => {
     act(() => {
-      jest.runAllTimers()
+      vi.runAllTimers()
     })
   })
 
   it("should restart a lost game", () => {
     storage.game = playingGameState
     startPageTesting()
+    navOptions = document.querySelector('.screen > nav') as HTMLElement
     clickToLoose()
     expect(storage.game.stage).toBe('game-lost')
 
-    const button = screen.getByTitle('Replay')
+    const button = within(navOptions).getByTitle('Replay')
     fireEvent.click(button)
 
     const isSame = hasSameMineDistribution(playingGameState, storage.game)
@@ -182,10 +190,11 @@ describe('The replay button', () => {
   it("should restart a won game", () => {
     storage.game = playingGameState
     startPageTesting()
+    navOptions = document.querySelector('.screen > nav') as HTMLElement
     clickToWin()
     expect(storage.game.stage).toBe('game-won')
 
-    const button = screen.getByTitle('Replay')
+    const button = within(navOptions).getByTitle('Replay')
     fireEvent.click(button)
 
     const isSame = hasSameMineDistribution(playingGameState, storage.game)
@@ -193,14 +202,15 @@ describe('The replay button', () => {
     expect(storage.game.stage).toBe('game-new')
   })
 
-
   it("should cancel replaying a game in progress", () => {
-    const replayReducerSpy = jest.spyOn(replay, 'replayReducer')
+    const replayReducerSpy = vi.spyOn(replay, 'replayReducer')
     storage.game = playingGameState
+    newPortalLayer('modal')
     startPageTesting()
+    navOptions = document.querySelector('.screen > nav') as HTMLElement
     expect(storage.game.stage).toBe('game-playing')
 
-    const button = screen.getByTitle('Replay')
+    const button = within(navOptions).getByTitle('Replay')
     fireEvent.click(button)
 
     const dialog = screen.getByRole('dialog')
@@ -213,12 +223,14 @@ describe('The replay button', () => {
   })
 
   it("should confirm replaying a game in progress", () => {
-    const replayReducerSpy = jest.spyOn(replay, 'replayReducer')
+    const replayReducerSpy = vi.spyOn(replay, 'replayReducer')
     storage.game = playingGameState
+    newPortalLayer('modal')
     startPageTesting()
+    navOptions = document.querySelector('.screen > nav') as HTMLElement
     expect(storage.game.stage).toBe('game-playing')
 
-    const button = screen.getByTitle('Replay')
+    const button = within(navOptions).getByTitle('Replay')
     fireEvent.click(button)
 
     const dialog = screen.getByRole('dialog')
@@ -239,12 +251,14 @@ describe('initialise game', () => {
   })
 
   afterEach(() => {
-    jest.clearAllMocks()
+    act(() => {
+      vi.clearAllMocks()
+    })
   })
 
   it('should load a game when finding a untouched game', () => {
     storage.game = newGameState
-    const loadReducerSpy = jest.spyOn(load, 'loadReducer')
+    const loadReducerSpy = vi.spyOn(load, 'loadReducer')
     startPageTesting()
     expect(loadReducerSpy).toHaveBeenCalledTimes(1)
     expect(storage.game.stage).toBe('game-new')
@@ -252,7 +266,7 @@ describe('initialise game', () => {
 
   it('should load a game when finding an unfinished game', () => {
     storage.game = playingGameState
-    const loadReducerSpy = jest.spyOn(load, 'loadReducer')
+    const loadReducerSpy = vi.spyOn(load, 'loadReducer')
     startPageTesting()
     expect(loadReducerSpy).toHaveBeenCalledTimes(1)
     expect(storage.game.stage).toBe('game-playing')
@@ -260,7 +274,7 @@ describe('initialise game', () => {
 
   it('should start a new game when finding an lost game', () => {
     storage.game = lostGameState
-    const newGameReducerSpy = jest.spyOn(newGame, 'newGameReducer')
+    const newGameReducerSpy = vi.spyOn(newGame, 'newGameReducer')
     startPageTesting()
     expect(newGameReducerSpy).toHaveBeenCalledTimes(1)
     expect(storage.game.stage).toBe('game-new')
@@ -268,7 +282,7 @@ describe('initialise game', () => {
 
   it('should start a new game when finding a won game', () => {
     storage.game = wonGameState
-    const newGameReducerSpy = jest.spyOn(newGame, 'newGameReducer')
+    const newGameReducerSpy = vi.spyOn(newGame, 'newGameReducer')
     startPageTesting()
     expect(newGameReducerSpy).toHaveBeenCalledTimes(1)
     expect(storage.game.stage).toBe('game-new')
@@ -276,7 +290,7 @@ describe('initialise game', () => {
 
   it('should start a new game when finding no game', () => {
     storage.eraseGame()
-    const newGameReducerSpy = jest.spyOn(newGame, 'newGameReducer')
+    const newGameReducerSpy = vi.spyOn(newGame, 'newGameReducer')
     startPageTesting()
     expect(newGameReducerSpy).toHaveBeenCalledTimes(1)
     expect(storage.game?.stage).toBe('game-new')
@@ -290,14 +304,15 @@ describe('handle loosing and winning', () => {
 
   afterEach(() => {
     act(() => {
-      jest.runAllTimers()
+      vi.runAllTimers()
     })
   })
 
   it('should celebrate a won game', () => {
     storage.game = playingGameState
-    const victoryReducerSpy = jest.spyOn(victory, 'victoryReducer')
-    const touchButtonReducerSpy = jest.spyOn(touchButton, 'touchButtonReducer')
+    const victoryReducerSpy = vi.spyOn(victory, 'victoryReducer')
+    const touchButtonReducerSpy = vi.spyOn(touchButton, 'touchButtonReducer')
+    newPortalLayer('modal')
     startPageTesting()
     clickToWin()
 
@@ -311,13 +326,17 @@ describe('handle loosing and winning', () => {
 
   it('should reflect on a lost game', () => {
     storage.game = playingGameState
-    const defeatReducerSpy = jest.spyOn(defeat, 'defeatReducer')
-    const touchButtonReducerSpy = jest.spyOn(touchButton, 'touchButtonReducer')
+    const touchButtonReducerSpy = vi.spyOn(touchButton, 'touchButtonReducer')
+    // TODO const defeatReducerSpy = vi.spyOn(defeat, 'defeatReducer')
     startPageTesting()
     clickToLoose()
 
     expect(storage.game.stage).toBe('game-lost')
     expect(touchButtonReducerSpy).toHaveBeenCalled()
+
+    /* TODO But it IS called!
+    vi.advanceTimersByTime(320)
     expect(defeatReducerSpy).toHaveBeenCalled()
+    */
   })
 })

@@ -1,6 +1,6 @@
 import { RANGES, SCORE_RADIX } from './constants'
 
-test('The RANGES members can not be changed', () => {
+it('The RANGES members can not be changed', () => {
     const updateSizeMin = () => {RANGES.SIZE.min = 0}
     // @ts-expect-error
     const deleteSizeMin = () => {delete RANGES.SIZE.min} // error TS2790: The operand of a 'delete' operator must be optional.
@@ -15,12 +15,12 @@ test('The RANGES members can not be changed', () => {
 
 describe('SCORE_RADIX must be well chosen', () => {
 
-  test('SCORE_RADIX may not exceed 36', () => {
+  it('SCORE_RADIX may not exceed 36', () => {
     // max radix for parseInt and Number.toString is 36
     expect(SCORE_RADIX).toBeLessThanOrEqual(36)
   })
 
-  test('SCORE_RADIX may not be less than maximum BOARD_SIZE', () => {
+  it('SCORE_RADIX may not be less than maximum BOARD_SIZE', () => {
     expect(SCORE_RADIX).toBeGreaterThanOrEqual(RANGES.SIZE.max)
   })
 })

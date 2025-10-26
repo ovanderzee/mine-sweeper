@@ -1,22 +1,23 @@
 
 import ReactDOM from 'react-dom'
 import { screen, fireEvent } from '@testing-library/react'
+import { vi, MockInstance } from 'vitest'
 import DEFAULTS from './../../common/defaults'
 import storage from './../../common/storage'
 import DefaultSettings from './DefaultSettings'
 import { microConfig, defaultChallengeConfig, simpleHardConfig } from './../../__mocks__/configs'
 import { newGameState, playingGameState, lostGameState, wonGameState } from './../../__mocks__/game-states'
-import { renderInContext, renderInProvider } from './../../__mocks__/render-helpers'
+import { renderInContext, renderInProvider, newPortalLayer } from './../../__mocks__/render-helpers'
 
 describe('DefaultSettings Component', () => {
   let configure: () => void
 
   beforeEach(() => {
     storage.eraseGame()
-    configure = jest.fn()
+    configure = vi.fn()
   })
 
-  test('should display the "Revolve Back" sign', () => {
+  it('should display the "Revolve Back" sign', () => {
     renderInContext(<DefaultSettings />)
     const button = screen.getByTitle('Revert to Defaults')
     expect(button).toBeInTheDocument()
@@ -24,7 +25,7 @@ describe('DefaultSettings Component', () => {
     expect(svg).toBeInTheDocument()
   })
 
-  test('should effect default config when clicked and no game is open (spy)', () => {
+  it('should effect default config when clicked and no game is open (spy)', () => {
     renderInContext(<DefaultSettings />, { config: microConfig, configure })
     const button = screen.getByTitle('Revert to Defaults')
     fireEvent.click(button)
@@ -32,7 +33,7 @@ describe('DefaultSettings Component', () => {
     expect(configure).toHaveBeenCalledWith()
   })
 
-  test('should effect default config when clicked and no game is open (storage)', () => {
+  it('should effect default config when clicked and no game is open (storage)', () => {
     storage.config = microConfig
     renderInProvider(<DefaultSettings />)
     const button = screen.getByTitle('Revert to Defaults')
@@ -40,7 +41,7 @@ describe('DefaultSettings Component', () => {
     expect(storage.config).toStrictEqual(DEFAULTS)
   })
 
-  test('should effect default config when clicked while game is not touched', () => {
+  it('should effect default config when clicked while game is not touched', () => {
     storage.game = newGameState
     renderInContext(<DefaultSettings />, { config: microConfig, configure })
     const button = screen.getByTitle('Revert to Defaults')
@@ -49,7 +50,7 @@ describe('DefaultSettings Component', () => {
     expect(configure).toHaveBeenCalledWith()
   })
 
-  test('should effect default config when clicked while game is lost', () => {
+  it('should effect default config when clicked while game is lost', () => {
     storage.game = lostGameState
     renderInContext(<DefaultSettings />, { config: microConfig, configure })
     const button = screen.getByTitle('Revert to Defaults')
@@ -58,7 +59,7 @@ describe('DefaultSettings Component', () => {
     expect(configure).toHaveBeenCalledWith()
   })
 
-  test('should effect default config when clicked while game is won', () => {
+  it('should effect default config when clicked while game is won', () => {
     storage.game = wonGameState
     renderInContext(<DefaultSettings />, { config: microConfig, configure })
     const button = screen.getByTitle('Revert to Defaults')
@@ -67,7 +68,7 @@ describe('DefaultSettings Component', () => {
     expect(configure).toHaveBeenCalledWith()
   })
 
-  test('should effect default config when clicked while game is playing and challenge is as in default', () => {
+  it('should effect default config when clicked while game is playing and challenge is as in default', () => {
     storage.game = playingGameState
     renderInContext(<DefaultSettings />, { config: defaultChallengeConfig, configure })
     const button = screen.getByTitle('Revert to Defaults')
@@ -77,14 +78,15 @@ describe('DefaultSettings Component', () => {
   })
 
   describe('Modal integration, check storage', () => {
-    let spyShowModal: jest.SpyInstance
+    let spyShowModal: MockInstance
 
     beforeEach(() => {
-      spyShowModal = jest.spyOn(ReactDOM, 'createPortal')
+      newPortalLayer('modal')
+      spyShowModal = vi.spyOn(ReactDOM, 'createPortal')
     })
 
     afterEach(() => {
-      jest.clearAllMocks()
+      vi.clearAllMocks()
     })
 
     test(`should keep the same config and show no visual feedback

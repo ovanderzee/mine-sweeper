@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react'
 import PageContext from '../../store/page-context'
 import Modal from '../UI/Modal'
-import { GameStages, GameActionType, GameAction } from '../../common/game-types';
+import { GameStages, GameActionType, GameAction } from '../../common/game.d';
 
 interface ReplayProps {
   onReplay: (action: GameAction) => void;
@@ -38,7 +38,7 @@ const Replay = (props: ReplayProps) => {
 
   return <>
     <button type="button"
-      className={showActive ? 'active' : ''}
+      className={`nav-option ${showActive ? 'active' : ''}`}
       title={text.nav['Replay']}
       onClick={replayHandler}
     >

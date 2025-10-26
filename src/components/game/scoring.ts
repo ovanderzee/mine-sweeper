@@ -1,8 +1,8 @@
 import LzString from 'lz-string'
 import { iterateNeighbours } from './common'
-import { AppCheckConfig } from '../../common/app-types'
+import { AppCheckConfig } from '../../common/app.d'
 import { GameState, CellState, CellStateStage,
-  GameScore, PlayScore, ScoreCalc } from '../../common/game-types'
+  GameScore, PlayScore, ScoreCalc } from '../../common/game.d'
 import { calculateMineCount } from '../../common/defaults'
 import { SCORE_RADIX } from '../../common/constants'
 

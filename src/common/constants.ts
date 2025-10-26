@@ -1,12 +1,11 @@
-import { InputRange } from './app-types'
+import { InputRange } from './app.d'
 
 // shortest game duration, to circumvent weird values, in milliseconds
 export const MIN_DURATION = 750
 
 // where the graphics are shown
-export const MODAL_ELEMENT = document.getElementById('modal')
-export const OVERLAY_ELEMENT = document.getElementById('overlay')
-export const ROOT_ELEMENT = document.getElementById('root')
+export const MODAL_ELEMENT = 'modal'
+export const OVERLAY_ELEMENT = 'overlay'
 
 // fade out time for overlays, modals and pages, also in (shorter) css-variable
 export const FADE_OUT_TIME = 550

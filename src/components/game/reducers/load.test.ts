@@ -1,10 +1,11 @@
+import { vi } from 'vitest'
 import { loadReducer } from './load'
-import { PayloadAction } from '../../../common/game-types'
+import { PayloadAction } from '../../../common/game.d'
 import storage from '../../../common/storage'
 import { playingGameState } from '../../../__mocks__/game-states'
 
-test('loads persisted state', () => {
-   const spy = jest.spyOn(JSON, 'parse')
+it('loads persisted state', () => {
+   const spy = vi.spyOn(JSON, 'parse')
    const anything = {"stage":"game-playing","board":[[{"row":0,"col":0}]]}
    const persisted = JSON.stringify(anything)
 
@@ -16,7 +17,7 @@ test('loads persisted state', () => {
    expect(state.board).toStrictEqual(anything.board)
 })
 
-test('loading from storage updates the timestamps', () => {
+it('loading from storage updates the timestamps', () => {
     storage.game = playingGameState
     const keptTimeLapse = playingGameState.tShift - playingGameState.tZero
     const keptGameState = JSON.stringify(storage.game)

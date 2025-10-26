@@ -1,5 +1,5 @@
 import React from 'react'
-import { AppConfig, PageContextProps } from '../common/app-types'
+import { AppConfig, PageContextProps } from '../common/app.d'
 
 const PageContext = React.createContext<PageContextProps>({
   render: null as unknown as React.ReactElement,

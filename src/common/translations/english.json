@@ -14,9 +14,6 @@
     "minesweeper_2": "sweeper",
     "skip_this": "skip to game"
   },
-  "game": {
-    "playtime": "playtime"
-  },
   "cell": {
     "row": "row",
     "col": "column",
@@ -80,11 +77,6 @@
     "choose your language": "choose your language",
     "Zoom Display": "Zoom display",
     "font-size to %n pixels": "font-size to %n pixels",
-    "Clock": "Clock",
-    "display playtime": "display playtime",
-    "No clock": "Do not show",
-    "Analog clock": "Analog clock",
-    "Digital clock": "Digital clock",
 
     "Record Scores": "Record Scores",
     "Name in Scores": "Name in scores",
@@ -107,5 +99,14 @@
     "Quit and new game?": "Do you want to start a new game?",
     "Quit and restart game?": "Do you want to restart the game?",
     "Quit Game?": "Change of a determining game variable. Do you want to end the game?"
+  },
+  "tips": {
+    "Todo counter": "Number of mines to find",
+    "Playtime": "Playtime",
+    "Contain all cells": "Have all cells visible",
+    "Cover with cells": "Fill screen with cells",
+    "Revert magnification": "Revert magnification",
+    "Return to window": "Play in a window",
+    "View fullscreen": "Play on fullscreen"
   }
 }

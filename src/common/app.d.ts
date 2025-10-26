@@ -21,7 +21,6 @@ export type AppSubConfig = {
   MAX_SCORES?: number;
   MINE_COUNT?: number;
   PLAYER_NAME?: string;
-  CLOCK_TYPE?: ClockTypes;
 }
 
 export interface AppCheckConfig {
@@ -37,7 +36,6 @@ export interface AppConfig {
   MAX_SCORES: number;
   MINE_COUNT: number;
   PLAYER_NAME: string;
-  CLOCK_TYPE: ClockTypes;
 }
 
 export interface PageState {
@@ -61,8 +59,18 @@ export interface InputRange {
   max: number,
 }
 
-export enum ClockTypes {
-  NONE = '',
-  ANALOG = 'analog',
-  DIGITAL = 'digital',
+type ElementLike = HTMLElement | Element | null
+
+type EventHandler = (event: Event) => void
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+type Class = { new(...args: any[]): any; };
+
+interface ScreenfullApi {
+  isFullscreen: () => boolean;
+  isFullscreenAble: () => boolean;
+  addFullscreenChangeEvent: () => void;
+  removeFullscreenChangeEvent: () => void;
+  enterFullscreen: () => Promise<void>;
+  exitFullscreen: () => Promise<void>;
 }

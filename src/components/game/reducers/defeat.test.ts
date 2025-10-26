@@ -1,11 +1,12 @@
 import { defeatReducer } from './defeat'
-import { CellStateStage, CellState } from '../../../common/game-types'
+import { vi } from 'vitest'
+import { CellStateStage, CellState } from '../../../common/game.d'
 import { playingGameState, lostGameState } from '../../../__mocks__/game-states'
 import storage from '../../../common/storage'
 import { sequenceFillData } from '../scoring'
 
 describe('defeatReducer is called in repetition', () => {
-  test('should end with all mines .clicked (CellStateStage.TESTED)', () => {
+  it('should return declining number of untouched mines', () => {
     // all cells at least opened like in a lost stage
     playingGameState.board
       .forEach(
@@ -17,7 +18,7 @@ describe('defeatReducer is called in repetition', () => {
     const gameState2 = defeatReducer(playingGameState)
     const gameState3 = defeatReducer(gameState2)
 
-    jest.runAllTimers()
+    vi.runAllTimers()
     const allMines: CellState[] = gameState3.board
       .flat()
       .filter(cell => cell.fill > 8)
@@ -70,7 +71,7 @@ describe('defeatReducer is called in repetition', () => {
     expect(bursts).toBe(times)
   })
 
-  test('should return unchanged state when no untouched mines were found', () => {
+  it('should return unchanged state when no untouched mines were found', () => {
     const gameStateOut = defeatReducer(lostGameState)
     expect(gameStateOut.mines.length).toBe(0)
 

@@ -1,4 +1,4 @@
-import { ScoreItem, ScoreParam, FlatScore } from '../../common/game-types'
+import { ScoreItem, ScoreParam, FlatScore } from '../../common/game.d'
 import LineDiagram from './LineDiagram'
 
 interface DiagramProps {

@@ -24,3 +24,4 @@ Just like real life!
 -  Toggle focus between game and option-bar with Alt+Tab
 -  Keep configuration current-game and score data in localStorage
 -  Diagram of various game properties, with enough games played
+-  Play the game fullscreen, containing or covered by the board

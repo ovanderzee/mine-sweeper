@@ -16,12 +16,11 @@ const Introduction = (props: { onEnd: (timeout: number) => void }) => {
     onEnd(FADE_OUT_TIME)
   }
 
-  const commonRef = useRef(null)
+  const commonRef = useRef<HTMLButtonElement | null>(null)
 
   useEffect(() => {
-    const current = commonRef?.current ? commonRef.current as HTMLButtonElement : undefined
-    if (current) current.focus()
-  })
+    if (commonRef.current) commonRef.current.focus()
+  }, [commonRef])
 
   const animatedHtml = (
     <button
@@ -70,7 +69,7 @@ const Introduction = (props: { onEnd: (timeout: number) => void }) => {
     </button>
   )
 
-  return createPortal(animatedHtml, OVERLAY_ELEMENT!)
+  return createPortal(animatedHtml, document.getElementById(OVERLAY_ELEMENT)!)
 }
 
 export default Introduction

@@ -1,6 +1,6 @@
 import DEFAULTS from './defaults'
-import { AppConfig, AppSubConfig } from './app-types'
-import { GameState, ScoreItem } from './game-types'
+import { AppConfig, AppSubConfig } from './app.d'
+import { GameState, ScoreItem } from './game.d'
 
 /*
   Interface for data storage.

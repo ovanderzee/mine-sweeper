@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect, useReducer } from 'react'
+import { useContext, useState, useEffect, useReducer, useRef } from 'react'
 import PageContext from '../../store/page-context'
 import GameCell from './GameCell'
 import GameCellDemoNav from './GameCellDemo'
@@ -11,9 +11,9 @@ import Settings from '../nav/Settings'
 import GameWonModal from './GameWonModal'
 import { initialGameState } from './common'
 import { gameReducer } from './game-reducer'
-import { GameStages, GameAction, GameActionType } from '../../common/game-types'
+import { GameStages, GameAction, GameActionType } from '../../common/game.d'
 import storage from '../../common/storage'
-import TimeTracker from './TimeTracker'
+import Tips from './../tips/Tips'
 import './Game.css'
 
 const Game = () => {
@@ -45,30 +45,39 @@ const Game = () => {
     }
   });
 
+  const playgroundRef = useRef<HTMLElement | null>(null)
+  const [playgroundFit, setPlaygroundFit] = useState('')
+
   const gameBoard = (
     <article
+        ref={playgroundRef}
         id="playground"
-        className={`board-size__${BOARD_SIZE} ${gameState.stage}`}
+        className={`board-size__${BOARD_SIZE} ${gameState.stage} ${playgroundFit}`}
         style={{'--board-size': BOARD_SIZE} as React.CSSProperties}
     >
-      {gameState.board.map((row) =>
-        row.map((cell) => (
-          <GameCell
-            key={`${cell.row}_${cell.col}`}
-            cell={cell}
-            onTouch={dispatchGameAction}
-          />
-        ))
-      )}
-      <aside>
-        <TimeTracker game={gameState} />
-      </aside>
+      <div id="game-board">
+        {gameState.board.map((row) =>
+          row.map((cell) => (
+            <GameCell
+              key={`${cell.row}_${cell.col}`}
+              cell={cell}
+              onTouch={dispatchGameAction}
+            />
+          ))
+        )}
+      </div>
+      <Tips
+        game={gameState}
+        onNew={dispatchGameAction}
+        playgroundRef={playgroundRef}
+        setPlaygroundFit={setPlaygroundFit}
+      />
     </article>
   )
 
   const gameNavigation = (
     <NavOptionsBar>
-      <HiScores board={gameState.board} />
+      <HiScores />
       <NewGame
         onNew={dispatchGameAction}
         stage={gameState.stage}

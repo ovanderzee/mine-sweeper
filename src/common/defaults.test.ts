@@ -12,7 +12,7 @@ import { microConfig, scoringConfig } from '../__mocks__/configs'
  * 7 = 1 in 4.3; 23.3%
  */
 
-test('Some boardSize and gameLevel to mineCount scenarios' , ()=>{
+it('Some boardSize and gameLevel to mineCount scenarios' , ()=>{
   const micro = calculateMineCount(microConfig)
   expect(micro).toBe(2)
 

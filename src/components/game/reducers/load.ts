@@ -1,4 +1,4 @@
-import { GameState, PayloadAction } from '../../../common/game-types'
+import { GameState, PayloadAction } from '../../../common/game.d'
 
 export const loadReducer = (action: PayloadAction): GameState => {
   const parsedState: GameState = JSON.parse(action.payload)

@@ -1,4 +1,4 @@
-import { CellStateStage } from './../common/game-types'
+import { CellStateStage } from './../common/game.d'
 
 const cellStates = {
   // not showing anything, can get / lose a flag

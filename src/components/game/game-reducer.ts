@@ -4,8 +4,8 @@ import { replayReducer } from './reducers/replay'
 import { touchButtonReducer } from './reducers/touchButton'
 import { victoryReducer } from './reducers/victory'
 import { defeatReducer } from './reducers/defeat'
-import { AppConfig } from '../../common/app-types'
-import { GameState, GameAction, GameActionType, PayloadAction } from '../../common/game-types'
+import { AppConfig } from '../../common/app.d'
+import { GameState, GameAction, GameActionType, PayloadAction } from '../../common/game.d'
 import storage from '../../common/storage'
 
 export const gameReducer = function (this: AppConfig, state: GameState, action: GameAction) {

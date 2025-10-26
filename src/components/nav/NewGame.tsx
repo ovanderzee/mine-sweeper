@@ -1,11 +1,12 @@
 import { useContext, useState } from 'react'
 import PageContext from '../../store/page-context'
 import Modal from '../UI/Modal'
-import { GameStages, GameActionType, GameAction } from '../../common/game-types';
+import { GameStages, GameActionType, GameAction } from '../../common/game.d';
 
 interface NewGameProps {
   onNew: (action: GameAction) => void;
   stage: GameStages;
+  appearance?: string;
 }
 
 const NewGame = (props: NewGameProps) => {
@@ -36,9 +37,9 @@ const NewGame = (props: NewGameProps) => {
     isPlaying ? setShowModal(isPlaying) : confirmHandler()
   }
 
-  return <>
+  const navOptionButton = <>
     <button type="button"
-      className={showActive ? 'active' : ''}
+      className={`nav-option ${showActive ? 'active' : ''}`}
       title={text.nav['New Game']}
       onClick={newGameHandler}
     >
@@ -46,6 +47,19 @@ const NewGame = (props: NewGameProps) => {
     </button>
     {showModal && consentModal}
   </>
+
+  const tipButton = <>
+    <button type="button"
+      className={`nav-option ${showActive ? 'active' : ''}`}
+      title={text.nav['New Game']}
+      onClick={newGameHandler}
+    >
+      <svg role="img"><use href={`#plain-play`} /></svg>
+    </button>
+    {showModal && consentModal}
+  </>
+
+  return props.appearance === 'tip' ? tipButton : navOptionButton
 }
 
 export default NewGame

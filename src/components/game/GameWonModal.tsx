@@ -1,5 +1,5 @@
 import Modal from '../UI/Modal'
-import { GameState } from '../../common/game-types'
+import { GameState } from '../../common/game.d'
 
 interface GameWonModalProps {
   close: (next: boolean) => void,
