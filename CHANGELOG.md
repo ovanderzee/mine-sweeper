@@ -22,6 +22,7 @@
 - Enter key to start new game after game end
 - Show score details in popover and less in the list
 - Eliminate outliers in graph
+- Browser tests on fullscreen feature
 
 
 ## [3.4.0]
