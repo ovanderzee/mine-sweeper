@@ -111,8 +111,11 @@ const HallOfFame = () => {
   const scoreDiagram = <Diagram scores={scores} xParam={sortLabel} yParam="points" />
 
   const fameContent = (
-    <article>
-      <h2>{text.nav['Hall of Fame']}</h2>
+    <article
+      role="main"
+      aria-label={text.nav['Hall of Fame']}
+    >
+      <h1 className="h2">{text.nav['Hall of Fame']}</h1>
 
       {scores.length > SHOW_SORT_THRESHOLD && scoreSorting}
       {scores.length > SHOW_DIAGRAM_THRESHOLD && scoreDiagram}
@@ -134,7 +137,7 @@ const HallOfFame = () => {
               <h2 className="rank" title={'#' + index}>
                 {log.rank <= 10 ? <ShieldByRank rank={log.rank} /> : log.rank}
               </h2>
-              <h4 className="user">{log.user}</h4>
+              <h3 className="user">{log.user}</h3>
               <h4 className="date" data-date={log.date}>
                 {(new Date(log.date)).toLocaleDateString()}<br/>
                 {(new Date(log.date)).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}

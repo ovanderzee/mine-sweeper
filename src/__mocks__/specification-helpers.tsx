@@ -12,7 +12,7 @@ import { newPortalLayer } from './render-helpers'
 
 export const referAndNavigateTo = {
   about: () => {
-    const button = screen.getByTitle('Explanation')
+    const button = screen.getByTitle('Description')
     fireEvent.click(button)
   },
   config: () => {

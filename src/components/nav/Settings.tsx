@@ -10,7 +10,7 @@ const Settings = () => {
 
   return (
     <button type="button" className="nav-option" title={text.nav['Settings']} onClick={showHandler}>
-      <svg role="img"><use href={`#nav-sliders`} /></svg>
+      <svg role="img" aria-label={text.icon['sliders']}><use href={`#nav-sliders`} /></svg>
     </button>
   )
 }

@@ -102,7 +102,7 @@ const ModalComponent = (props: ModalProps): React.ReactNode => {
           data-text-before={props.textBefore}
           data-text-after={props.textAfter}
         >
-          <h3 id="dialog-label" className="content">{props.children}</h3>
+          <h2 id="dialog-label" className="h3 content">{props.children}</h2>
           <div className="buttons">
             {props?.onCancel && cancelButton}
             {confirmButton}

@@ -26,8 +26,7 @@
     justify-content: space-between;
   }
 
-  .screen > article,
-  .screen > form {
+  .screen > article {
     flex: 0 1 auto;
     box-sizing: border-box;
     max-width: 100%; /* center content when font-size is too big */
@@ -41,8 +40,7 @@
     flex-wrap: nowrap;
   }
 
-  .screen > article,
-  .screen > form {
+  .screen > article {
     flex: 1 1 auto;
   }
 

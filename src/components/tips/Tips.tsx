@@ -19,7 +19,7 @@ interface TipsProps extends TipProps {
 }
 
 const Tips = (props: TipsProps) => (
-  <aside className="tips">
+  <aside className="tips" role="presentation">
     <TimeTracker game={props.game} />
     <MineTracker game={props.game} />
     <section id="tip-action" className="tip">

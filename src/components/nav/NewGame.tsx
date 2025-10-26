@@ -43,7 +43,7 @@ const NewGame = (props: NewGameProps) => {
       title={text.nav['New Game']}
       onClick={newGameHandler}
     >
-      <svg role="img"><use href={`#nav-play`} /></svg>
+      <svg role="img" aria-label={text.icon['play']}><use href={`#nav-play`} /></svg>
     </button>
     {showModal && consentModal}
   </>
@@ -54,7 +54,7 @@ const NewGame = (props: NewGameProps) => {
       title={text.nav['New Game']}
       onClick={newGameHandler}
     >
-      <svg role="img"><use href={`#plain-play`} /></svg>
+      <svg role="img" aria-label={text.icon['play']}><use href={`#plain-play`} /></svg>
     </button>
     {showModal && consentModal}
   </>

@@ -14,8 +14,8 @@
   --dark-to-light-blue: linear-gradient(to bottom, var(--dark-blue) 0%, var(--light-blue) 100%);
   --medium-to-dark-blue: linear-gradient(to bottom, var(--medium-blue) 0%, var(--dark-blue) 100%);
 
-  --state-green: hsl(100,50%,37%);
-  --state-red: hsl(345,50%,50%);
+  --state-green: hsl(100,57%,37%); /* #4C9429 */
+  --state-red: hsl(345,60%,40%); /* #A32947 */
 
   --pale-violet: #c6a; /* hsl(320, 50%, 60%); */
   --bright-violet: #e4b; /* hsl(318, 83%, 60%); */
@@ -90,16 +90,16 @@ button {
   font-weight: 500;
 }
 
-h1, h2, h3, h4, h5, h6, dl, p, ol, ul {
+h1, h2, .h2, h3, .h3, h4, h5, .h5, h6, dl, p, ol, ul {
   margin-block: 1ex;
   line-height: 133%;
 }
 
 h1 {font-size: 2em}
-h2 {font-size: 1.5em}
-h3 {font-size: 1.17em}
+h2, .h2 {font-size: 1.5em}
+h3, .h3 {font-size: 1.17em}
 h4 {font-size: 1em}
-h5 {font-size: .83em}
+h5, .h5 {font-size: .83em}
 h6 {font-size: .67em; font-weight: normal}
 
 hr {
@@ -158,4 +158,16 @@ svg[aria-hidden] {
   width: 0;
   height: 0;
   overflow: hidden;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }

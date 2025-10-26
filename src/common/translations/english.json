@@ -37,6 +37,8 @@
     "Flagging Paragraph": "Flag a suspected mine using a longer click. The cell will then not respond to normal clicking.",
     "Finalise Game": "You loose the game when you touch a mine. You win when the number of closed cells equal the number of mines.",
 
+    "Features Heading": "Features",
+
     "Accessibility Heading": "Accessibility",
     "Keyboard Notice": "On desktop or laptop the game could be played using the keyboard. You can reach all interactions using the Tab and Shift+Tab keystrokes.",
     "Game Navigation": "Navigate the minefield with the arrow keys and flag a mine with the spacebar. Confirm a dialog with enter on the right button. Press Alt+Tab to jump between content and option area.",
@@ -91,8 +93,24 @@
     "New Game": "New Game",
     "Replay": "Replay",
     "Settings": "Settings",
-    "Help": "Explanation",
+    "Help": "Description",
+    "Playground": "Playground",
     "Go Back": "Return to Game"
+  },
+  "icon": {
+    "podium": "podium",
+    "play": "play",
+    "cw-revolving": "clockwise revolving arrow",
+    "question": "question-mark",
+    "sliders": "sliders",
+    "ccw-revolving": "counterclockwise revolving arrow",
+    "empty set": "empty set",
+    "return": "return arrow",
+    "eye": "eye",
+    "contain": "containing view",
+    "cover": "covered view",
+    "windowed": "windowed view",
+    "fullscreen": "fullscreen view"
   },
   "dialog": {
     "Erase Scores?": "Do you want to clear the score list?",
@@ -105,7 +123,6 @@
     "Playtime": "Playtime",
     "Contain all cells": "Have all cells visible",
     "Cover with cells": "Fill screen with cells",
-    "Revert magnification": "Revert magnification",
     "Return to window": "Play in a window",
     "View fullscreen": "Play on fullscreen"
   }

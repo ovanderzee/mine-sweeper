@@ -11,16 +11,19 @@ const inDevelopment = window.location.hostname.match(devMatch)
 
 const GameCellDemoNav = () => {
   const pageCtx = useContext(PageContext)
+  const text = pageCtx.text
   const watchHandler = () => pageCtx.navigate(<GameCellDemo />)
 
   const navButton = <button type="button" className="nav-option" title="Cell State Demo" onClick={watchHandler}>
-      <svg role="img"><use href={`#nav-eye`} /></svg>
+      <svg role="img" aria-label={text.icon['eye']}><use href={`#nav-eye`} /></svg>
     </button>
 
   return inDevelopment && navButton
 }
 
 const GameCellDemo = () => {
+  const pageCtx = useContext(PageContext)
+  const text = pageCtx.text
   const [activatedClass, setActivatedClass] = useState('explode')
 
   const explodeHandler = () => {
@@ -120,18 +123,18 @@ const GameCellDemo = () => {
   </div>
 
   const fnSymbols = <div className="svg-symbols">
-    <svg role="img"><use href={`#nav-play`} /></svg>
-    <svg role="img"><use href={`#nav-replay`} /></svg>
-    <svg role="img"><use href={`#nav-reset`} /></svg>
-    <svg role="img"><use href={`#nav-empty`} /></svg>
+    <svg role="img" aria-label={text.icon['play']}><use href={`#nav-play`} /></svg>
+    <svg role="img" aria-label={text.icon['cw-revolving']}><use href={`#nav-replay`} /></svg>
+    <svg role="img" aria-label={text.icon['ccw-revolving']}><use href={`#nav-reset`} /></svg>
+    <svg role="img" aria-label={text.icon['empty set']}><use href={`#nav-empty`} /></svg>
   </div>
 
   const navSymbols = <div className="svg-symbols">
-    <svg role="img"><use href={`#nav-return`} /></svg>
-    <svg role="img"><use href={`#nav-sliders`} /></svg>
-    <svg role="img"><use href={`#nav-question`} /></svg>
-    <svg role="img"><use href={`#nav-podium`} /></svg>
-    <svg role="img"><use href={`#nav-eye`} /></svg>
+    <svg role="img" aria-label={text.icon['return']}><use href={`#nav-return`} /></svg>
+    <svg role="img" aria-label={text.icon['sliders']}><use href={`#nav-sliders`} /></svg>
+    <svg role="img" aria-label={text.icon['question']}><use href={`#nav-question`} /></svg>
+    <svg role="img" aria-label={text.icon['podium']}><use href={`#nav-podium`} /></svg>
+    <svg role="img" aria-label={text.icon['eye']}><use href={`#nav-eye`} /></svg>
   </div>
 
   return (

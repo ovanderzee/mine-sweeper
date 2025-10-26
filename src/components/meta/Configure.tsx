@@ -46,7 +46,7 @@ function Configure() {
   const onbeginContent = (
     <fieldset id="on-begin-play">
       <legend>{text.settings['On begin Play']}</legend>
-      <h5 className="warning">{text.settings['Will destroy current game']}</h5>
+      <div className="h5 warning">{text.settings['Will destroy current game']}</div>
 
       <div className="field">
         <label htmlFor="size">{text.settings['Size Gameboard']}</label>
@@ -194,18 +194,22 @@ function Configure() {
     </NavOptionsBar>
   )
 
-  return (
-    <>
+  return (<>
+    <article
+      role="main"
+      aria-label={text.nav['Settings']}
+    >
       <form
-          onKeyDown={(event) => preventReloadByEnter(event)}
-        >
+        onKeyDown={(event) => preventReloadByEnter(event)}
+      >
+        <h1 className="sr-only">{text.nav['Settings']}</h1>
         {onbeginContent}
         {genericContent}
         {recordContent}
       </form>
-      {configNavigation}
-    </>
-  )
+    </article>
+    {configNavigation}
+  </>)
 }
 
 export default Configure

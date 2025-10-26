@@ -32,6 +32,7 @@
 - Tips just below the game
 - Zoom game by containing or covering in fullscreen mode
 - Mines minus flags moved to tips
+- Conform to WCAG 2.1 Level AA
 
 ### Changed
 - Replaced Jest by Vitest
