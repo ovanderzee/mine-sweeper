@@ -194,11 +194,12 @@ function Configure() {
     </NavOptionsBar>
   )
 
-  return (
-    <>
+  return (<>
+    <article
+      role="main"
+      aria-label={text.nav['Settings']}
+    >
       <form
-        role="main"
-        aria-label={text.nav['Settings']}
         onKeyDown={(event) => preventReloadByEnter(event)}
       >
         <h1 className="sr-only">{text.nav['Settings']}</h1>
@@ -206,9 +207,9 @@ function Configure() {
         {genericContent}
         {recordContent}
       </form>
-      {configNavigation}
-    </>
-  )
+    </article>
+    {configNavigation}
+  </>)
 }
 
 export default Configure

@@ -22,7 +22,7 @@ export const flipFocus = function (event: React.KeyboardEvent) {
   if (event.altKey && event.key === 'Tab') {
     event.stopPropagation()
 
-    const contentArea = document.querySelector('section.screen > article, section.screen > form')
+    const contentArea = document.querySelector('section.screen > article')
     const navArea = document.querySelector('section.screen > nav')
     const contentSelector = contentArea?.querySelector(interactionSelectors) as HTMLElement
     const navSelectors = navArea?.querySelectorAll(interactionSelectors) as NodeListOf<HTMLElement>

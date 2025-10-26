@@ -1,4 +1,4 @@
-article, form {
+article {
   padding-block: 0 2em;
   padding-inline: var(--screen-gutter);
   color: #333;

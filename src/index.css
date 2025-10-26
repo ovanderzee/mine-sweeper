@@ -14,8 +14,8 @@
   --dark-to-light-blue: linear-gradient(to bottom, var(--dark-blue) 0%, var(--light-blue) 100%);
   --medium-to-dark-blue: linear-gradient(to bottom, var(--medium-blue) 0%, var(--dark-blue) 100%);
 
-  --state-green: hsl(100,50%,37%);
-  --state-red: hsl(345,50%,50%);
+  --state-green: hsl(100,57%,37%); /* #4C9429 */
+  --state-red: hsl(345,60%,40%); /* #A32947 */
 
   --pale-violet: #c6a; /* hsl(320, 50%, 60%); */
   --bright-violet: #e4b; /* hsl(318, 83%, 60%); */
