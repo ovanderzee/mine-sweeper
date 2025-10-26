@@ -1,8 +1,4 @@
-#playground {
-  overflow: visible;
-}
-
-#playground > button {
+#game-board button {
   --shadow-topleft: 0.25em 0.25em 0.25em;
   --shadow-bottomright: -0.25em -0.25em 0.25em;
 
@@ -21,8 +17,8 @@
   z-index: 5;
 }
 
-#playground > button::before,
-#playground > button::after {
+#game-board button::before,
+#game-board button::after {
   --pseudo-margin: 0;
 
   content: '';
@@ -34,14 +30,14 @@
   bottom: var(--pseudo-margin);
 }
 
-#playground button.pristine {
+#game-board button.pristine {
   background: var(--medium-pristine);
   box-shadow:
     inset var(--light-pristine) var(--shadow-topleft),
     inset var(--dark-pristine) var(--shadow-bottomright);
 }
 
-#playground button.touched {
+#game-board button.touched {
   background: var(--medium-touched);
   box-shadow:
     inset var(--dark-touched) var(--shadow-topleft),
@@ -49,22 +45,22 @@
   cursor: default;
 }
 
-#playground button.pristine.flag {
+#game-board button.pristine.flag {
   cursor: not-allowed;
 }
 
-#playground button.flag::after {
+#game-board button.flag::after {
   content: '⚑';
   font-size: 1.333em;
   z-index: -5;
 }
 
-#playground button.mijn {
+#game-board button.mijn {
   background: transparent;
   box-shadow: none;
 }
 
-#playground button.mijn::before {
+#game-board button.mijn::before {
   --pseudo-margin: 10%;
   --glow-color: white;
   --glow-offset: -1px -1px 3px 0;
@@ -72,16 +68,16 @@
   z-index: -10;
 }
 
-#playground.game-lost button.flag::after {
+.game-lost #game-board button.flag::after {
   color: var(--state-red);
 }
 
-#playground button.mijn.flag::after {
+#game-board button.mijn.flag::after {
   color: white;
   text-shadow: -1px -1px 0px #6666;
 }
 
-#playground.game-won button.mijn::before {
+.game-won #game-board button.mijn::before {
   background:
     radial-gradient(ellipse 50% 80% at 10% 50%, var(--ultra-light-blue) 14%, 16%, transparent),
     radial-gradient(ellipse 50% 50% at 52% 50%, transparent 90%, var(--extra-dark-blue) 110%),
@@ -91,13 +87,13 @@
   box-shadow: var(--glow-color) var(--glow-offset);
 }
 
-#playground.game-lost button.touched:not(.mijn) {
+.game-lost #game-board button.touched:not(.mijn) {
   background: none;
   --shadow-topleft: 1px 1px 1px;
   --shadow-bottomright: -1px -1px 1px;
 }
 
-#playground.game-lost button.mijn::before {
+.game-lost #game-board button.mijn::before {
   --glow-color: var(--fire-yellow);
 
   background: radial-gradient(
@@ -109,12 +105,12 @@
   box-shadow: var(--glow-color) var(--glow-offset);
 }
 
-#playground.game-lost button.mijn.explode {
+.game-lost #game-board button.mijn.explode {
   z-index: 10;
 }
 
-#playground.game-lost button.mijn.exploded::before,
-#playground.game-lost button.mijn.explode::before {
+.game-lost #game-board button.mijn.exploded::before,
+.game-lost #game-board button.mijn.explode::before {
   --pseudo-margin: 10%;
 
   background: radial-gradient(
@@ -125,7 +121,7 @@
   box-shadow: none;
 }
 
-#playground.game-lost button.mijn.explode .burst {
+.game-lost #game-board button.mijn.explode .burst {
   display: inline-block;
   width: 80%;
   height: 80%;

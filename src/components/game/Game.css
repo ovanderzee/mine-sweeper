@@ -2,23 +2,33 @@
 /* Safeguard existing centering for smooth switching fullscreen mode */
 section.screen,
 #playground {
-  margin: 0 auto;
+  margin-inline: auto;
 }
 
 #playground {
-  display: grid;
-  justify-content: center;
-  align-content: start;
   padding: 1.333em 0;
-  user-select: none;
+}
+
+#playground > * {
+  padding-inline: 1em;
 }
 
 #playground:fullscreen {
   background: var(--medium-blue);
   overflow: auto;
+  overscroll-behavior-x: contain;
+  overscroll-behavior-x: none;
 }
 
-#playground > button {
+#game-board {
+  display: grid;
+  align-content: start;
+  width: fit-content;
+  margin-inline: auto;
+  user-select: none;
+}
+
+#game-board button {
   font-size: calc(8em / var(--board-size));
   grid-column: var(--cell-col);
   grid-row: var(--cell-row);

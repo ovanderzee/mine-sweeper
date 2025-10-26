@@ -40,7 +40,7 @@ describe('The configure page sidebar', () => {
 
   it('should navigate to Game board', () => {
     referAndNavigateTo.gameBoard()
-    const cells = document.querySelectorAll('#playground > button')
+    const cells = document.querySelectorAll('#game-board button')
     expect(cells.length).toBe(36)
   })
 })

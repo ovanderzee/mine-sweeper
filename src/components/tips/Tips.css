@@ -4,8 +4,10 @@
   grid-row: calc(var(--board-size) + 1);
   grid-column: 1 / span var(--board-size);
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   padding-block-start: 1ex;
+  width: 19em;
+  margin-inline: auto;
 }
 
 :fullscreen .tips {

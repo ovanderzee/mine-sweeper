@@ -55,15 +55,17 @@ const Game = () => {
         className={`board-size__${BOARD_SIZE} ${gameState.stage} ${playgroundFit}`}
         style={{'--board-size': BOARD_SIZE} as React.CSSProperties}
     >
-      {gameState.board.map((row) =>
-        row.map((cell) => (
-          <GameCell
-            key={`${cell.row}_${cell.col}`}
-            cell={cell}
-            onTouch={dispatchGameAction}
-          />
-        ))
-      )}
+      <div id="game-board">
+        {gameState.board.map((row) =>
+          row.map((cell) => (
+            <GameCell
+              key={`${cell.row}_${cell.col}`}
+              cell={cell}
+              onTouch={dispatchGameAction}
+            />
+          ))
+        )}
+      </div>
       <Tips
         game={gameState}
         onNew={dispatchGameAction}
