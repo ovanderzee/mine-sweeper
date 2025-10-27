@@ -18,14 +18,16 @@ const HallOfFame = () => {
   const pageCtx = useContext(PageContext)
   const text = pageCtx.text
 
-  const rawScores = storage.scores
+  const rawScores = storage.scores.map(s => {
+    return { ...s, level: +s.code.charAt(2) } as ScoreItem
+  })
   const latest = [...rawScores].sort((a:ScoreItem, b:ScoreItem) => b.date - a.date)[0]
 
   const [scores, setScores] = useState(rawScores)
   const [sortLabel, setSortLabel] = useState<ScoreParam>('rank')
 
   const eraseScores = () => {
-    setScores(storage.scores)
+    setScores([])
   }
 
   const methodsByKind: Record<string, () => ScoreItem[]> = {
@@ -61,6 +63,10 @@ const HallOfFame = () => {
       const bySpeed = (a:ScoreItem, b:ScoreItem) => b.score.speed - a.score.speed
       return rawScores.sort(bySpeed)
     },
+    'level': () => {
+      const byLevel = (a: ScoreItem, b: ScoreItem) => (b?.level || 0) - (a?.level || 0)
+      return rawScores.sort(byLevel)
+    },
     'mines': () => {
       const byMines = (a:ScoreItem, b:ScoreItem) => a.game.mines - b.game.mines
       return rawScores.sort(byMines)
@@ -90,7 +96,7 @@ const HallOfFame = () => {
     <table className={`legend ${sortLabel}`}><tbody><tr>
       <td></td>
       <td><button type="button" className="user" onClick={sortByKind}>{text.fame['user']}</button></td>
-      <td></td>
+      <td><button type="button" className="level" onClick={sortByKind}>{text.fame['level']}</button></td>
       <td></td>
       <td><button type="button" className="date" onClick={sortByKind}>{text.fame['date']}</button></td>
     </tr><tr>
@@ -149,7 +155,7 @@ const HallOfFame = () => {
                 <span className="efficiency">{precise(log.score.efficiency, 2)}</span>/<span className="speed">{precise(log.score.speed, 2)}</span>
               </div>
               <div className="combo">
-                <span className="mines">{log.game.mines}</span>/<span className="cells">{log.game.cells}</span>
+                <span className="level">{log.level}</span>:<span className="mines">{log.game.mines}</span>/<span className="cells">{log.game.cells}</span>
               </div>
               <div className="combo">
                 <span>{log.game.effort.least}</span>&lt;<b className="moves">{log.play.moves}</b>&lt;<span>{log.game.effort.most}</span>
