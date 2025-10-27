@@ -23,6 +23,7 @@
 - Show score details in popover and less in the list
 - Eliminate outliers in graph
 - Browser tests on fullscreen feature
+- Remember last focussed game cell, as starting point for move with arrow key 
 
 
 ## [3.4.0]
