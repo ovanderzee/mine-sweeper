@@ -1,16 +1,16 @@
 @import './navOptionButton';
 
-.screen > nav {
+article[role="main"] + nav {
   --active-color: var(--fire-yellorange);
 
   background: var(--medium-to-dark-blue);
 }
 
-.screen > nav .sticky-slider {
+article[role="main"] + nav .sticky-slider {
   display: flex;
 }
 
-.screen > nav button {
+article[role="main"] + nav button {
   font-weight: bold;
   line-height: 144%;
   color: white;
@@ -23,26 +23,26 @@
     --nav-pad-bottom: .7em;
   }
 
-  .screen > nav {
+  article[role="main"] + nav {
     width: var(--app-width);
     flex: 0 0 var(--nav-height);
   }
 
-  .screen > nav .sticky-slider {
+  article[role="main"] + nav .sticky-slider {
     padding-block: var(--nav-pad-top)  var(--nav-pad-bottom);
     width: var(--app-width);
     overflow-x: auto;
   }
 
-  .screen > nav button {
+  article[role="main"] + nav button {
     flex: 1 0 auto;
   }
 
-  .screen > nav button + button {
+  article[role="main"] + nav button + button {
     border-left: 1px solid var(--dark-blue);
   }
 
-  .screen > nav button svg {
+  article[role="main"] + nav button svg {
     display: inline-block;
     height: var(--nav-height);
     aspect-ratio: 1;
@@ -55,23 +55,23 @@
     --nav-pad: .3em;
   }
 
-  .screen > nav .sticky-slider {
+  article[role="main"] + nav .sticky-slider {
     position: sticky;
     top: 0;
     flex-direction: column;
     padding-inline: var(--nav-pad);
   }
 
-  .screen > nav button {
+  article[role="main"] + nav button {
     flex: 1 1 auto;
     width: 100%;
   }
 
-  .screen > nav button + button {
+  article[role="main"] + nav button + button {
     border-top: 1px solid var(--dark-blue);
   }
 
-  .screen > nav button svg {
+  article[role="main"] + nav button svg {
     display: block;
     aspect-ratio: 1;
   }

@@ -3,29 +3,33 @@ ol {
   padding: 0;
 }
 
-li {
+ol button {
+  display: block;
+  width: 100%;
   margin-block: 1em;
+  background: transparent;
+  border: none;
   text-align: left;
 }
 
-li header,
-li footer {
+ol button header,
+ol button article {
   display: flex;
   align-items: baseline;
 }
-li footer {
+ol button article {
   justify-content: space-between;
 }
 
-li.super {
+ol button.super {
   position: relative;
   margin-block: 0.5em;
 }
-li.super header {
+ol button.super header {
   align-items: center;
 }
 
-li.latest {
+ol button.latest {
   --radius: 1ex;
 
   outline: 1.5px solid var(--dark-blue);
@@ -33,68 +37,71 @@ li.latest {
   border-radius: var(--radius);
   background: linear-gradient(105deg, var(--light-blue), var(--medium-blue), var(--dark-blue));
   margin-block: 1em;
-  padding: calc(var(--radius) / 2);
-  padding-inline-end: var(--radius);
+  padding: calc(var(--radius) / 2) var(--radius);
 }
-li.latest .date {
+ol button.latest .date {
   align-self: start;
 }
-li.latest * {
+ol button.latest * {
   color: white !important;
 }
 
-li header *,
-li footer * {
+ol button header {
+  margin-inline-start: calc(var(--radius) / -2);
+}
+
+ol button header *,
+ol button article * {
   margin: 0;
   padding: 0;
   text-align: right;
 }
 
-li header .rank {
+ol button header .rank {
   --rank-size: 2.5em;
 
   flex: 0 0 var(--rank-size);
   text-align: center;
 }
-li header .rank svg {
+ol button header .rank svg {
   width: var(--rank-size);
   height: var(--rank-size);
 }
 
-li header .user {
+ol button header .user {
   flex: 1 1 90%;
   text-align: left;
   padding: 0 0.5em;
 }
 
-li header .date {
+ol button header .date {
   flex: 0 0 auto;
 }
 
-li footer .points {
+ol button article > .points {
   flex: 0 0 3.75em;
   font-weight: bold;
   text-align: center;
 }
 
-li footer div:not(.points) {
+ol button article > :not(.points) {
   flex: 1 1 auto;
 }
 
-li footer .combo * {
+ol button article .combo * {
   margin-inline: 1px;
 }
 
-li footer .combo span:first-of-type {
+ol button article .combo span:first-of-type {
   margin-inline: 0 1px;
 }
 
-li footer .combo span:last-of-type {
+ol button article .combo span:last-of-type {
   margin-inline: 1px 0;
 }
 
-li header .date,
-li footer div:not(.points) {
+ol button header .date,
+ol button article > :not(.points) {
   font-size: 86%;
 }
 

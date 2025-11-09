@@ -11,6 +11,7 @@ import { ScoreItem, ScoreParam } from '../../common/game.d'
 import storage from '../../common/storage'
 import { precise } from '../game/scoring'
 import { SHOW_SORT_THRESHOLD, SHOW_DIAGRAM_THRESHOLD } from '../../common/constants'
+import ScorePopover from '../UI/ScorePopover'
 import './Meta.css'
 import './HallOfFame.css'
 
@@ -116,6 +117,8 @@ const HallOfFame = () => {
 
   const scoreDiagram = <Diagram scores={scores} xParam={sortLabel} yParam="points" />
 
+  const [popScore, setPopScore] = useState<ScoreItem | null>(null)
+
   const fameContent = (
     <article
       role="main"
@@ -135,9 +138,10 @@ const HallOfFame = () => {
           </li>
         )}
         {scores.map((log: ScoreItem, index) => (
-          <li
+          <button type="button" popoverTarget="score-popover" popoverTargetAction="show"
             className={`${log.rank <= 10 ? 'super' : ''} ${log.date === latest.date ? 'latest' : ''}`}
             key={`${log.rank}_${log.score.points}`}
+            onClick={() => setPopScore(log)}
           >
             <header>
               <h2 className="rank" title={'#' + index}>
@@ -149,10 +153,10 @@ const HallOfFame = () => {
                 {(new Date(log.date)).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
               </h4>
             </header>
-            <footer>
+            <article>
               <div className="points">{log.score.points}</div>
               <div className="combo">
-                <span className="efficiency">{precise(log.score.efficiency, 2)}</span>/<span className="speed">{precise(log.score.speed, 2)}</span>
+                <span className="efficiency">{precise(log.score.efficiency, 3)}</span>/<span className="speed">{precise(log.score.speed, 3)}</span>
               </div>
               <div className="combo">
                 <span className="level">{log.level}</span>:<span className="mines">{log.game.mines}</span>/<span className="cells">{log.game.cells}</span>
@@ -161,8 +165,8 @@ const HallOfFame = () => {
                 <span>{log.game.effort.least}</span>&lt;<b className="moves">{log.play.moves}</b>&lt;<span>{log.game.effort.most}</span>
               </div>
               <div className="duration">{Math.round(log.play.duration)}s</div>
-            </footer>
-          </li>
+            </article>
+          </button>
         ))}
       </ol>
     </article>
@@ -181,6 +185,9 @@ const HallOfFame = () => {
     <>
       {fameContent}
       {fameNavigation}
+      <section id="score-popover" popover="auto">
+        <ScorePopover score={popScore} />
+      </section>
     </>
   )
 }
