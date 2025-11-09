@@ -4,21 +4,29 @@ ol {
 }
 
 ol button {
+  --small-size: 86%;
+
   display: block;
   width: 100%;
   margin-block: 1em;
   background: transparent;
   border: none;
-  text-align: left;
 }
 
 ol button header,
 ol button article {
   display: flex;
+}
+ol button header {
+  margin-inline-start: calc(var(--radius) / -2);
   align-items: baseline;
 }
 ol button article {
   justify-content: space-between;
+  align-items: last baseline;
+}
+ol button.super article {
+  margin-block-start: -.333em;
 }
 
 ol button.super {
@@ -27,6 +35,58 @@ ol button.super {
 }
 ol button.super header {
   align-items: center;
+}
+
+ol button header *,
+ol button article * {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+ol button header .rank {
+  --rank-size: 2.5em;
+
+  flex: 0 0 var(--rank-size);
+  line-height: 1;
+}
+ol button header .rank svg {
+  width: var(--rank-size);
+  aspect-ratio: 1;
+}
+
+ol button header .user {
+  flex: 1 1 90%;
+  text-align: left;
+  align-self: start;
+  margin: 0 .5em .4em;
+}
+
+ol button.super header .user {
+  margin: .4em .5em;
+}
+
+ol button header .date {
+  flex: 0 0 auto;
+  font-size: var(--small-size);
+  text-align: right;
+}
+
+ol button:not(.super) header .date {
+  align-self: start;
+}
+
+ol button article .points {
+  flex: 0 0 3.75em;
+  font-weight: bold;
+}
+
+ol button article .unit {
+  display: flex;
+  flex: 1 1 auto;
+  flex-direction: column;
+  font-size: var(--small-size);
+  line-height: 1.2;
 }
 
 ol button.latest {
@@ -44,65 +104,6 @@ ol button.latest .date {
 }
 ol button.latest * {
   color: white !important;
-}
-
-ol button header {
-  margin-inline-start: calc(var(--radius) / -2);
-}
-
-ol button header *,
-ol button article * {
-  margin: 0;
-  padding: 0;
-  text-align: right;
-}
-
-ol button header .rank {
-  --rank-size: 2.5em;
-
-  flex: 0 0 var(--rank-size);
-  text-align: center;
-}
-ol button header .rank svg {
-  width: var(--rank-size);
-  height: var(--rank-size);
-}
-
-ol button header .user {
-  flex: 1 1 90%;
-  text-align: left;
-  padding: 0 0.5em;
-}
-
-ol button header .date {
-  flex: 0 0 auto;
-}
-
-ol button article > .points {
-  flex: 0 0 3.75em;
-  font-weight: bold;
-  text-align: center;
-}
-
-ol button article > :not(.points) {
-  flex: 1 1 auto;
-}
-
-ol button article .combo * {
-  margin-inline: 1px;
-}
-
-ol button article .combo span:first-of-type {
-  margin-inline: 0 1px;
-}
-
-ol button article .combo span:last-of-type {
-  margin-inline: 1px 0;
-}
-
-ol button header .date,
-ol button article > :not(.points) {
-  font-size: 86%;
 }
 
 .legend {

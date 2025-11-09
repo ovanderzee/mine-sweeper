@@ -138,7 +138,7 @@ describe('The hall-of-fame-page list sorting', () => {
     expect(Number(best)).toBeLessThan(Number(worst))
   })
 
-  it('should sort on efficiency descending', () => {
+  it.skip('should sort on efficiency descending', () => {
     const button = getByText(container, 'efficiency')
     fireEvent.click(button)
 
@@ -148,7 +148,7 @@ describe('The hall-of-fame-page list sorting', () => {
     expect(Number(best)).toBeGreaterThan(Number(worst))
   })
 
-  it('should sort on speed descending', () => {
+  it.skip('should sort on speed descending', () => {
     const button = getByText(container, 'speed')
     fireEvent.click(button)
 

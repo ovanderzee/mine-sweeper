@@ -155,16 +155,26 @@ const HallOfFame = () => {
             </header>
             <article>
               <div className="points">{log.score.points}</div>
-              <div className="combo">
-                <span className="efficiency">{precise(log.score.efficiency, 3)}</span>/<span className="speed">{precise(log.score.speed, 3)}</span>
+              <div className="unit">
+                <small>{text.fame['level']}</small>
+                <span className="level">{log.level}</span>
               </div>
-              <div className="combo">
-                <span className="level">{log.level}</span>:<span className="mines">{log.game.mines}</span>/<span className="cells">{log.game.cells}</span>
+              <div className="unit">
+                <small>{text.fame['mines']}</small>
+                <span className="mines">{log.game.mines}</span>
               </div>
-              <div className="combo">
-                <span>{log.game.effort.least}</span>&lt;<b className="moves">{log.play.moves}</b>&lt;<span>{log.game.effort.most}</span>
+              <div className="unit">
+                <small>{text.fame['cells']}</small>
+                <span className="cells">{log.game.cells}</span>
               </div>
-              <div className="duration">{Math.round(log.play.duration)}s</div>
+              <div className="unit">
+                <small>{text.fame['moves']}</small>
+                <span className="moves">{log.play.moves}</span>
+              </div>
+              <div className="unit">
+                <small>{text.fame['duration']}</small>
+                <span className="duration">{precise(log.play.duration, 3)}s</span>
+              </div>
             </article>
           </button>
         ))}
