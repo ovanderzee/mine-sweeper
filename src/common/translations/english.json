@@ -63,8 +63,13 @@
     "level": "level",
     "mines": "mines",
     "cells": "fields",
+    "effort": "required turns",
     "moves": "turns",
-    "duration": "duration"
+    "duration": "duration",
+    "configuration": "configuration",
+    "characteristics": "characteristics",
+    "game-play": "game play",
+    "result": "result"
   },
   "settings": {
     "On begin Play": "The Challenge...",

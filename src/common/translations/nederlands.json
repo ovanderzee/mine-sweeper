@@ -63,8 +63,13 @@
     "level": "nivo",
     "mines": "mijnen",
     "cells": "velden",
+    "effort": "nodige zetten",
     "moves": "zetten",
-    "duration": "duur"
+    "duration": "duur",
+    "configuration": "configuratie",
+    "characteristics": "kenmerken",
+    "game-play": "spelverloop",
+    "result": "resultaat"
   },
   "settings": {
     "On begin Play": "De Uitdaging...",

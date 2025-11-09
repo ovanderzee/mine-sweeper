@@ -115,6 +115,7 @@ ol button article > :not(.points) {
   border-block-end: 1.5px solid var(--medium-blue);
   border-spacing: 0;
   box-sizing: content-box;
+  box-shadow: 0 -1ex 1ex 0 var(--light-blue);
   margin-inline: calc(-1 * var(--screen-gutter));
   padding-block: calc(.5 * var(--screen-gutter));
   padding-inline: var(--screen-gutter);

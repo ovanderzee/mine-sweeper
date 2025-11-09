@@ -1,0 +1,119 @@
+#score-popover {
+  --radius: 1ex;
+  --half-radius: calc(var(--radius) / 2);
+  --line: 1.5px;
+  --hair-line: 1px;
+
+  outline: var(--line) solid var(--dark-blue);
+  border-radius: var(--radius);
+  background: var(--light-blue);
+  border: none;
+  border-radius: 1.5ex;
+  min-width: calc(var(--app-width) - 2em);
+  width: calc(var(--app-width) + 2em);
+  max-width: calc(100vw - 2em);
+  padding: calc(var(--half-radius) + var(--line)) calc(var(--half-radius) + var(--hair-line));
+  box-shadow: 0 0 1em 1px var(--light-blue);
+}
+
+#score-popover figure {
+  color: white;
+  border-radius: var(--radius);
+  background: linear-gradient(105deg, var(--lighter-blue),  var(--medium-blue), var(--dark-blue));
+  margin: 0 auto;
+  padding: calc(var(--radius) / 2) var(--radius);
+}
+
+#score-popover figure header {
+  display: flex;
+  align-items: start;
+}
+
+#score-popover figure header *,
+#score-popover figure article * {
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+
+#score-popover figure header .rank {
+  --rank-size: 2.5em;
+  flex: 0 0 var(--rank-size);
+  text-align: center;
+}
+
+#score-popover figure header .rank svg {
+  width: var(--rank-size);
+  aspect-ratio: 1;
+  margin-inline-start: -.67ex;
+}
+
+#score-popover figure header .user {
+  flex: 1 1 90%;
+  text-align: left;
+  padding: 0.5em;
+}
+
+#score-popover figure header .date {
+  font-size: 86%;
+  flex: 0 0 auto;
+  text-align: right;
+}
+
+#score-popover figure article .group {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  gap: 0 1ex;
+  align-items: last baseline;
+  margin-block: 1ex;
+}
+
+#score-popover figure article .group h5 {
+  flex: 0 0 7.5em;
+  align-self: first baseline;
+  line-height: 1;
+  text-transform: capitalize;
+}
+
+#score-popover figure article .group .unit {
+  flex: 0 0 auto;
+}
+
+#score-popover figure article .unit {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+#score-popover figure article .unit small {
+  font-size: 75%;
+  text-transform: capitalize;
+}
+#score-popover figure article .unit * {
+  text-align: center !important;
+}
+#score-popover figure article .unit + big {
+  font-size: inherit;
+  width: 1.2ex;
+  display: inline-block;
+  overflow: hidden;
+  direction: rtl;
+}
+
+#score-popover figure footer {
+  display: flex;
+  gap: 0 1ex;
+  margin: 1ex;
+  justify-content: end;
+  display: none;
+}
+
+@media screen and (orientation: portrait) {
+  #score-popover {
+    min-width: unset;
+    width: calc(var(--app-width) - 10vw);
+  }
+  .group h5 {
+    display: none;
+  }
+}
