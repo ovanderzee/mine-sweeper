@@ -8,7 +8,6 @@
 
 .screen > nav .sticky-slider {
   display: flex;
-  overscroll-behavior: contain;
 }
 
 .screen > nav button {
@@ -25,17 +24,13 @@
   }
 
   .screen > nav {
-    position: fixed;
     width: var(--app-width);
-    bottom: 0;
-    flex: 0 0 auto;
-    z-index: 5;
+    flex: 0 0 var(--nav-height);
   }
 
   .screen > nav .sticky-slider {
     padding-block: var(--nav-pad-top)  var(--nav-pad-bottom);
     width: var(--app-width);
-    max-width: 100dvw;
     overflow-x: auto;
   }
 

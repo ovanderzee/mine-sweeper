@@ -137,6 +137,7 @@ li footer div:not(.points) {
 .legend.efficiency .efficiency,
 .legend.speed .speed,
 .legend.mines .mines,
+.legend.level .level,
 .legend.cells .cells,
 .legend.moves .moves,
 .legend.duration .duration {
@@ -150,6 +151,7 @@ li footer div:not(.points) {
 .legend.points ~ ol .points,
 .legend.efficiency ~ ol .efficiency,
 .legend.speed ~ ol .speed,
+.legend.level ~ ol .level,
 .legend.mines ~ ol .mines,
 .legend.cells ~ ol .cells,
 .legend.moves ~ ol .moves,

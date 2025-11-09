@@ -60,6 +60,7 @@
     "points": "points",
     "efficiency": "efficiency",
     "speed": "speed",
+    "level": "level",
     "mines": "mines",
     "cells": "fields",
     "moves": "turns",

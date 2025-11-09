@@ -87,6 +87,7 @@ export interface ScoreItem {
   date: number,
   user: string,
   rank: number,
+  level?: number,
   game: GameScore,
   play: PlayScore,
   score: ScoreCalc,
