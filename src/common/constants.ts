@@ -49,7 +49,7 @@ export const getAppVersion = () => {
   try {
     return __APP_VERSION__
   }
-  catch(e) {
+  catch {
     // ReferenceError: __APP_VERSION__ is not defined
     return '0.0.0'
   }
@@ -57,7 +57,7 @@ export const getAppVersion = () => {
 
 export const getCommitHash = () => {
   try { return __COMMIT_HASH__ }
-  catch(e) { return 'abcdefg' }
+  catch { return 'abcdefg' }
 }
 
 export const VERSION_INFO = [getAppVersion(), getCommitHash()]

@@ -39,10 +39,7 @@ it('new game cells reflect number of neighbouring bombs', () => {
         let bomb_count = 0
         for (let k = c - 1; k <= c + 1; k++) {
           for (let l = r - 1; l <= r + 1; l++) {
-            try {
-              if (board[l][k].fill > 8) bomb_count++
-            }
-            catch(e) {}
+            if (board[l] && board[l][k] && board[l][k].fill > 8) bomb_count++
           }
         }
 

@@ -11,11 +11,14 @@ const Diagram = (props: DiagramProps) => {
 
   // flatten scores
   const flatScores: FlatScore[] = props.scores.map((score: ScoreItem) => {
-    const flattened: any = { ...score, ...score.game, ...score.play, ...score.score }
+    const flattened: unknown = { ...score, ...score.game, ...score.play, ...score.score }
+    // @ts-expect-error // error TS2790: The operand of a 'delete' operator must be optional.
     delete flattened.game
+    // @ts-expect-error // error TS2790: The operand of a 'delete' operator must be optional.
     delete flattened.play
+    // @ts-expect-error // error TS2790: The operand of a 'delete' operator must be optional.
     delete flattened.score
-    return flattened
+    return flattened as FlatScore
   })
 
   const svgDiagram = () => {

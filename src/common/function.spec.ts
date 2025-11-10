@@ -89,7 +89,7 @@ describe('Flip focus', () => {
       act(() => {
         const sectionScreen =  document.querySelector('section.screen')
         const interactors = sectionScreen?.querySelectorAll(interactionSelectors) || []
-        for (let interactor of interactors) {
+        for (const interactor of interactors) {
           interactor?.remove()
         }
       })

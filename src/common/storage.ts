@@ -16,7 +16,7 @@ const storage = {
     try {
       const updatable: AppSubConfig = stored ? JSON.parse(stored) : {}
       data = { ...DEFAULTS, ...updatable }
-    } catch(error) {
+    } catch {
       console.error('Invalid configuration found, replace by defaults...')
       data = DEFAULTS
     }
@@ -38,7 +38,7 @@ const storage = {
     let data: GameState | null
     try {
       data = stored ? JSON.parse(stored) : null
-    } catch(error) {
+    } catch {
       console.error('Invalid game found, start new game...')
       data = null
     }
@@ -61,7 +61,7 @@ const storage = {
     let data: ScoreItem[]
     try {
       data = stored ? JSON.parse(stored) : []
-    } catch(error) {
+    } catch {
       console.error('Invalid scorelist found, start with new list...')
       data = []
     }

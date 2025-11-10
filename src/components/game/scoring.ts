@@ -29,15 +29,14 @@ export const clickBlankAreas = (game: GameState) => {
     allCells = game.board.flat()
     allThese = allCells.filter(cell => !cell.fill && !cell.mark)
 
-    if (!allThese.length) break
+    if (allThese.length) {
+      const blank = allThese[0]
+      blank.mark = 1 // 'clicked'
 
-    const blank = allThese[0]
-    blank.mark = 1 // 'clicked'
-
-    iterateNeighbours(blank, game.board.length, recurseBlankNeighbours)
-    clicks++
-
-  } while (true)
+      iterateNeighbours(blank, game.board.length, recurseBlankNeighbours)
+      clicks++
+    }
+  } while (allThese.length);
 
   return clicks
 }
