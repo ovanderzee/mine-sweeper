@@ -31,9 +31,9 @@ window.HTMLElement.prototype.scrollIntoView = function() {};
 
 Element.prototype.requestFullscreen = vi.fn()
 document.exitFullscreen = vi.fn()
-// @ts-ignore // is read-only
+// @ts-expect-error // error TS2540: Cannot assign to 'fullscreenEnabled' because it is a read-only property.
 document.fullscreenElement = null
-// @ts-ignore // is read-only
+// @ts-expect-error // error TS2540: Cannot assign to 'fullscreenEnabled' because it is a read-only property.
 document.fullscreenEnabled = true
 Element.prototype.onfullscreenchange = vi.fn()
 Element.prototype.onfullscreenerror = vi.fn()

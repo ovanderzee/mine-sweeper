@@ -10,7 +10,7 @@ import { FADE_OUT_TIME } from './../common/constants'
 import { microConfig } from './configs'
 import { newPortalLayer } from './render-helpers'
 
-export const referAndNavigateTo = {
+export const clickNavigationButtonTo = {
   about: () => {
     const button = screen.getByTitle('Description')
     fireEvent.click(button)
@@ -42,17 +42,17 @@ export const startPageTesting = () => {
 
 export const startAboutPageTesting = () => {
   startPageTesting()
-  referAndNavigateTo.about()
+  clickNavigationButtonTo.about()
 }
 
 export const startConfigurePageTesting = () => {
   startPageTesting()
-  referAndNavigateTo.config()
+  clickNavigationButtonTo.config()
 }
 
 export const startHonourPageTesting = () => {
   startPageTesting()
-  referAndNavigateTo.hallOfFame()
+  clickNavigationButtonTo.hallOfFame()
 }
 
 export const setDefaultConfig = () => localStorage.setItem('mv-config', JSON.stringify(DEFAULTS))

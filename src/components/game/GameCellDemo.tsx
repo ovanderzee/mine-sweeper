@@ -144,7 +144,7 @@ const GameCellDemo = () => {
 
   return (
     <>
-      <article id="playground">
+      <article id="playground" role="main">
         {playing}
         {lost}
         {won}

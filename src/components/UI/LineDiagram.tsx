@@ -81,9 +81,9 @@ const LineDiagram = (props: LineDiagramProps) => {
     >
       <g className="legenda">
         <line x1="0" y1={graphSize.y} x2={graphSize.x} y2={graphSize.y} />
-        <text x="0" y={graphSize.y} dx="20" dy={lgdSpace * .9} textAnchor="middle">{text.fame[props.xParam]} &rarr;</text>
+        <text x="0" y={graphSize.y} dx="20" dy={lgdSpace * .9} textAnchor="middle">{text.VAR[props.xParam]} &rarr;</text>
         <line x1="0" y1="0" x2="0" y2={graphSize.y} />
-        <text x={-graphSize.y} y="0" dx="20" dy={lgdSpace * -.8} transform="rotate(-90)" textAnchor="middle">{text.fame[props.yParam]} &rarr;</text>
+        <text x={-graphSize.y} y="0" dx="20" dy={lgdSpace * -.8} transform="rotate(-90)" textAnchor="middle">{text.VAR[props.yParam]} &rarr;</text>
 
         <text x={graphSize.x} y={graphSize.y} dy="120" textAnchor="end" style={{fontSize: '133%'}}>
           {coordinates.length} {text.fame['won games']}, {text.fame['median']}: {med.x}, {text.fame['average']}: {avg.x}
@@ -124,7 +124,7 @@ const LineDiagram = (props: LineDiagramProps) => {
             <path d={`M ${-crossLegSize}, 0 ${crossLegSize}, 0 M 0,${-crossLegSize} 0, ${crossLegSize}`} key={`lnd_path_${i}`} />
             <circle  cx="0" cy="0" r="3" key={`lnd_circle_${i}`} aria-labelledby={`lnd_title_${i}`}>
               <title id={`lnd_title_${i}`} key={`lnd_title_${i}`}>
-                {`${text.fame[props.xParam]}: ${d.x}, ${text.fame[props.yParam]}: ${d.y}`}
+                {`${text.VAR[props.xParam]}: ${d.x}, ${text.VAR[props.yParam]}: ${d.y}`}
               </title>
             </circle>
           </g>)}

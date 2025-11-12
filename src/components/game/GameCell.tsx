@@ -34,7 +34,7 @@ const GameCell = (props: GameCellProps) => {
     if (stage) return
     if (type === GameActionType.MOVE && locked) return
 
-    let entry: CellStateEntry = {}
+    const entry: CellStateEntry = {}
     if (type === GameActionType.FLAG) {
       entry.locked = !locked
     } else { // GameActionType.MOVE

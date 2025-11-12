@@ -2,8 +2,8 @@ import { RANGES, SCORE_RADIX } from './constants'
 
 it('The RANGES members can not be changed', () => {
     const updateSizeMin = () => {RANGES.SIZE.min = 0}
-    // @ts-expect-error
-    const deleteSizeMin = () => {delete RANGES.SIZE.min} // error TS2790: The operand of a 'delete' operator must be optional.
+    // @ts-expect-error  // Test error TS2790: The operand of a 'delete' operator must be optional.
+    const deleteSizeMin = () => {delete RANGES.SIZE.min}
     const overwriteSize = () => {RANGES.SIZE = {'min': 10, 'max': 23}}
     const deleteSize = () => {delete RANGES.SIZE}
 

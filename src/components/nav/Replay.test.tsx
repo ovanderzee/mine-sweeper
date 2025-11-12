@@ -7,7 +7,7 @@ import { GameStages } from './../../common/game.d'
 import { renderInContext, newPortalLayer } from './../../__mocks__/render-helpers'
 
 describe('Replay Component', () => {
-  let dispatcher: () => {}, spyShowModal: MockInstance
+  let dispatcher: () => void, spyShowModal: MockInstance
 
   beforeEach(() => {
     dispatcher = vi.fn()

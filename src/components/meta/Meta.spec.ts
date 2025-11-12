@@ -1,6 +1,6 @@
 import '@testing-library/jest-dom'
 import { screen } from '@testing-library/react'
-import { startPageTesting, referAndNavigateTo } from './../../__mocks__/specification-helpers'
+import { startPageTesting, clickNavigationButtonTo } from './../../__mocks__/specification-helpers'
 
 describe('The meta pages', () => {
   beforeEach(() => {
@@ -8,19 +8,19 @@ describe('The meta pages', () => {
   })
 
   it('should navigate to About page', () => {
-    referAndNavigateTo.about()
+    clickNavigationButtonTo.about()
     const heading = screen.getByText(/Defuse all mines/i)
     expect(heading).toBeTruthy()
   })
 
   it('should navigate to Configure page', () => {
-    referAndNavigateTo.config()
+    clickNavigationButtonTo.config()
     const heading = screen.getByText(/General Settings/i)
     expect(heading).toBeTruthy()
   })
 
   it('should navigate to HallOfFame page', () => {
-    referAndNavigateTo.hallOfFame()
+    clickNavigationButtonTo.hallOfFame()
     const heading = screen.getByText(/Hall of Fame/i)
     expect(heading).toBeTruthy()
   })

@@ -8,7 +8,7 @@ import { liveScores } from './../../__mocks__/scores'
 import { renderInContext, newPortalLayer } from './../../__mocks__/render-helpers'
 
 describe('EraseScores Component', () => {
-  let emitter: () => {}, spyShowModal: MockInstance
+  let emitter: () => void, spyShowModal: MockInstance
 
   beforeEach(() => {
     emitter = vi.fn()

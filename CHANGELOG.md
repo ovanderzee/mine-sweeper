@@ -9,6 +9,7 @@
 - Page id is obscured when not running in development mode
 - Debt after porting tests to vitest, see TODOs and it.skip 
 - Gameboard jumps when using the keyboard and covering the fullscreen mode
+- Run tests in browser instead of jsdom, mainly for dialog, popover and fullscreen 
 
 ### Features
 - Playmode Tough: Play without flags or mine counters
@@ -23,7 +24,16 @@
 - Show score details in popover and less in the list
 - Eliminate outliers in graph
 - Browser tests on fullscreen feature
+- Remember last focussed game cell, as starting point for move with arrow key 
 
+## [3.5.0]
+
+### Added
+- Show score details in popover, list better readable
+- Sort scores by gamelevel
+
+### Changed
+- Game better scrollable
 
 ## [3.4.0]
 

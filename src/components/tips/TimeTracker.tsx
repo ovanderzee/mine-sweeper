@@ -18,6 +18,7 @@ const TimeTracker = (props: TipProps) => {
     } else {
       clearInterval(intv)
     }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [stage])
 
   const timeFormat = () => {

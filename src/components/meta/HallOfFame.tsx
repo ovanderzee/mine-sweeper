@@ -11,6 +11,7 @@ import { ScoreItem, ScoreParam } from '../../common/game.d'
 import storage from '../../common/storage'
 import { precise } from '../game/scoring'
 import { SHOW_SORT_THRESHOLD, SHOW_DIAGRAM_THRESHOLD } from '../../common/constants'
+import ScorePopover from '../UI/ScorePopover'
 import './Meta.css'
 import './HallOfFame.css'
 
@@ -95,26 +96,28 @@ const HallOfFame = () => {
   const scoreSorting = (
     <table className={`legend ${sortLabel}`}><tbody><tr>
       <td></td>
-      <td><button type="button" className="user" onClick={sortByKind}>{text.fame['user']}</button></td>
-      <td><button type="button" className="level" onClick={sortByKind}>{text.fame['level']}</button></td>
+      <td><button type="button" className="user" onClick={sortByKind}>{text.VAR['user']}</button></td>
+      <td><button type="button" className="level" onClick={sortByKind}>{text.VAR['level']}</button></td>
       <td></td>
-      <td><button type="button" className="date" onClick={sortByKind}>{text.fame['date']}</button></td>
+      <td><button type="button" className="date" onClick={sortByKind}>{text.VAR['date']}</button></td>
     </tr><tr>
-      <td><button type="button" className="rank" onClick={sortByKind}>{text.fame['rank']}</button></td>
-      <td><button type="button" className="efficiency" onClick={sortByKind}>{text.fame['efficiency']}</button></td>
-      <td><button type="button" className="mines" onClick={sortByKind}>{text.fame['mines']}</button></td>
-      <td><button type="button" className="moves" onClick={sortByKind}>{text.fame['moves']}</button></td>
-      <td><button type="button" className="duration" onClick={sortByKind}>{text.fame['duration']}</button></td>
+      <td><button type="button" className="rank" onClick={sortByKind}>{text.VAR['rank']}</button></td>
+      <td><button type="button" className="efficiency" onClick={sortByKind}>{text.VAR['efficiency']}</button></td>
+      <td><button type="button" className="mines" onClick={sortByKind}>{text.VAR['mines']}</button></td>
+      <td><button type="button" className="moves" onClick={sortByKind}>{text.VAR['moves']}</button></td>
+      <td><button type="button" className="duration" onClick={sortByKind}>{text.VAR['duration']}</button></td>
     </tr><tr>
       <td></td>
-      <td><button type="button" className="speed" onClick={sortByKind}>{text.fame['speed']}</button></td>
-      <td><button type="button" className="cells" onClick={sortByKind}>{text.fame['cells']}</button></td>
+      <td><button type="button" className="speed" onClick={sortByKind}>{text.VAR['speed']}</button></td>
+      <td><button type="button" className="cells" onClick={sortByKind}>{text.VAR['cells']}</button></td>
       <td></td>
       <td></td>
     </tr></tbody></table>
   )
 
   const scoreDiagram = <Diagram scores={scores} xParam={sortLabel} yParam="points" />
+
+  const [popScore, setPopScore] = useState<ScoreItem | null>(null)
 
   const fameContent = (
     <article
@@ -135,12 +138,14 @@ const HallOfFame = () => {
           </li>
         )}
         {scores.map((log: ScoreItem, index) => (
-          <li
+          <button type="button" popoverTarget="score-popover" popoverTargetAction="show"
             className={`${log.rank <= 10 ? 'super' : ''} ${log.date === latest.date ? 'latest' : ''}`}
             key={`${log.rank}_${log.score.points}`}
+            onClick={() => setPopScore(log)}
+            title={text.fame['Number %n in %s sort'].replace('%n', String(index+1)).replace('%s', text.VAR[sortLabel])}
           >
             <header>
-              <h2 className="rank" title={'#' + index}>
+              <h2 className="rank">
                 {log.rank <= 10 ? <ShieldByRank rank={log.rank} /> : log.rank}
               </h2>
               <h3 className="user">{log.user}</h3>
@@ -149,20 +154,30 @@ const HallOfFame = () => {
                 {(new Date(log.date)).toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
               </h4>
             </header>
-            <footer>
+            <article>
               <div className="points">{log.score.points}</div>
-              <div className="combo">
-                <span className="efficiency">{precise(log.score.efficiency, 2)}</span>/<span className="speed">{precise(log.score.speed, 2)}</span>
+              <div className="unit">
+                <small>{text.VAR['level']}</small>
+                <span className="level">{log.level}</span>
               </div>
-              <div className="combo">
-                <span className="level">{log.level}</span>:<span className="mines">{log.game.mines}</span>/<span className="cells">{log.game.cells}</span>
+              <div className="unit">
+                <small>{text.VAR['mines']}</small>
+                <span className="mines">{log.game.mines}</span>
               </div>
-              <div className="combo">
-                <span>{log.game.effort.least}</span>&lt;<b className="moves">{log.play.moves}</b>&lt;<span>{log.game.effort.most}</span>
+              <div className="unit">
+                <small>{text.VAR['cells']}</small>
+                <span className="cells">{log.game.cells}</span>
               </div>
-              <div className="duration">{Math.round(log.play.duration)}s</div>
-            </footer>
-          </li>
+              <div className="unit">
+                <small>{text.VAR['moves']}</small>
+                <span className="moves">{log.play.moves}</span>
+              </div>
+              <div className="unit">
+                <small>{text.VAR['duration']}</small>
+                <span className="duration">{precise(log.play.duration, 3)}s</span>
+              </div>
+            </article>
+          </button>
         ))}
       </ol>
     </article>
@@ -181,6 +196,9 @@ const HallOfFame = () => {
     <>
       {fameContent}
       {fameNavigation}
+      <section id="score-popover" popover="auto" aria-label={text.fame['detail-label']}>
+        <ScorePopover score={popScore} />
+      </section>
     </>
   )
 }
