@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom'
 import { vi } from 'vitest'
 import { act, fireEvent, screen, within } from '@testing-library/react'
-import { referAndNavigateTo, startPageTesting } from '../__mocks__/specification-helpers'
+import { clickNavigationButtonTo, startPageTesting } from '../__mocks__/specification-helpers'
 import { interactionSelectors } from './functions'
 
 describe('Flip focus', () => {
@@ -21,7 +21,7 @@ describe('Flip focus', () => {
     let contentArea: HTMLElement | null, navArea: HTMLElement | null
 
     beforeEach(() => {
-      referAndNavigateTo.config()
+      clickNavigationButtonTo.config()
       contentArea = keyTarget?.querySelector('form') || null
       navArea = keyTarget?.querySelector('nav') || null
     })
@@ -51,7 +51,7 @@ describe('Flip focus', () => {
     let aButton: HTMLElement | null, firstButton: HTMLElement | null, lastButton: HTMLElement | null
 
     beforeEach(async () => {
-      referAndNavigateTo.about()
+      clickNavigationButtonTo.about()
       aButton = await keyTarget && within(keyTarget!).getByTitle('Settings')
       firstButton = await keyTarget && within(keyTarget!).getByTitle('Hall of Fame')
       const allButtons = keyTarget?.querySelectorAll('button') || []

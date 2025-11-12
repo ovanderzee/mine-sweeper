@@ -34,17 +34,17 @@ const ScorePopover = (props: {score: ScoreItem | null}) => {
         <section className="group">
           <h5>{text.fame['result']}</h5>
           <div className="unit">
-            <small>{text.fame['efficiency']}</small>
+            <small>{text.VAR['efficiency']}</small>
             <span className="efficiency">{precise(log.score.efficiency, 3)}</span>
           </div>
           <big>&times;</big>
           <div className="unit">
-            <small>{text.fame['speed']}</small>
+            <small>{text.VAR['speed']}</small>
             <span className="speed">{precise(log.score.speed, 3)}/s</span>
           </div>
           <big>&rarr;</big>
           <div className="unit">
-            <small>{text.fame['points']}</small>
+            <small>{text.VAR['points']}</small>
             <span className="points">{log.score.points}</span>
           </div>
         </section>
@@ -52,12 +52,12 @@ const ScorePopover = (props: {score: ScoreItem | null}) => {
         <section className="group">
           <h5>{text.fame['game-play']}</h5>
           <div className="unit">
-            <small>{text.fame['moves']}</small>
+            <small>{text.VAR['moves']}</small>
             <span className="moves">{log.play.moves}</span>
           </div>
           <big>|</big>
           <div className="unit">
-            <small>{text.fame['duration']}</small>
+            <small>{text.VAR['duration']}</small>
             <span className="duration">{precise(log.play.duration, 3)}s</span>
           </div>
         </section>
@@ -73,17 +73,17 @@ const ScorePopover = (props: {score: ScoreItem | null}) => {
         <section className="group">
           <h5>{text.fame['configuration']}</h5>
           <div className="unit">
-            <small>{text.fame['level']}</small>
+            <small>{text.VAR['level']}</small>
             <span className="level">{log.level}</span>
           </div>
           <big>&</big>
           <div className="unit">
-            <small>{text.fame['cells']}</small>
+            <small>{text.VAR['cells']}</small>
             <span className="cells">{log.game.cells}</span>
           </div>
           <big style={{transform: 'scaley(1.25)'}}>&rarr;</big>
           <div className="unit">
-            <small>{text.fame['mines']}</small>
+            <small>{text.VAR['mines']}</small>
             <span className="mines">{log.game.mines}</span>
           </div>
         </section>

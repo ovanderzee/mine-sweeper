@@ -51,25 +51,28 @@
   "fame": {
     "Nothing Yet": "Nog geen scores",
     "won games": "spellen",
+    "Number %n in %s sort": "Nummer %n op %s",
     "median": "mediaan",
     "average": "gemiddeld",
+    "effort": "nodige zetten",
+    "detail-label": "Details gekozen score",
+    "configuration": "configuratie",
+    "characteristics": "kenmerken",
+    "game-play": "spelverloop",
+    "result": "resultaat"
+  },
+  "VAR": {
     "rank": "rang",
-    "name": "naam",
     "user": "gebruiker",
     "date": "datum",
     "points": "punten",
     "efficiency": "efficiëntie",
     "speed": "snelheid",
     "level": "nivo",
-    "mines": "mijnen",
     "cells": "velden",
-    "effort": "nodige zetten",
+    "mines": "mijnen",
     "moves": "zetten",
-    "duration": "duur",
-    "configuration": "configuratie",
-    "characteristics": "kenmerken",
-    "game-play": "spelverloop",
-    "result": "resultaat"
+    "duration": "duur"
   },
   "settings": {
     "On begin Play": "De Uitdaging...",

@@ -4,7 +4,7 @@ import { vi } from 'vitest'
 import DEFAULTS from './../../common/defaults'
 import storage from './../../common/storage'
 import * as fn from './../../common/functions'
-import { startConfigurePageTesting, referAndNavigateTo,
+import { startConfigurePageTesting, clickNavigationButtonTo,
   setDefaultConfig, setMicroConfig
 } from './../../__mocks__/specification-helpers'
 import { newPortalLayer } from '../../__mocks__/render-helpers'
@@ -27,19 +27,19 @@ describe('The configure page sidebar', () => {
   })
 
   it('should navigate to About page', () => {
-    referAndNavigateTo.about()
+    clickNavigationButtonTo.about()
     const heading = screen.getByText(/Defuse all mines/i)
     expect(heading).toBeTruthy()
   })
 
   it('should navigate to HallOfFame page', () => {
-    referAndNavigateTo.hallOfFame()
+    clickNavigationButtonTo.hallOfFame()
     const heading = screen.getByText(/Hall of Fame/i)
     expect(heading).toBeTruthy()
   })
 
   it('should navigate to Game board', () => {
-    referAndNavigateTo.gameBoard()
+    clickNavigationButtonTo.gameBoard()
     const cells = document.querySelectorAll('#game-board button')
     expect(cells.length).toBe(36)
   })

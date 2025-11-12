@@ -1,7 +1,7 @@
 import '@testing-library/jest-dom'
 import { fireEvent, screen, getByText } from '@testing-library/react'
 import storage from '../../common/storage'
-import { startHonourPageTesting, referAndNavigateTo } from './../../__mocks__/specification-helpers'
+import { startHonourPageTesting, clickNavigationButtonTo } from './../../__mocks__/specification-helpers'
 import { newPortalLayer } from '../../__mocks__/render-helpers'
 import { liveScores } from './../../__mocks__/scores'
 
@@ -12,19 +12,19 @@ describe('The hall-of-fame page sidebar', () => {
   })
 
   it('should navigate to About page', () => {
-    referAndNavigateTo.about()
+    clickNavigationButtonTo.about()
     const heading = screen.getByText(/Defuse all mines/i)
     expect(heading).toBeTruthy()
   })
 
   it('should navigate to Configure page', () => {
-    referAndNavigateTo.config()
+    clickNavigationButtonTo.config()
     const heading = screen.getByText(/The Challenge.../i)
     expect(heading).toBeTruthy()
   })
 
   it('should navigate to Game board', () => {
-    referAndNavigateTo.gameBoard()
+    clickNavigationButtonTo.gameBoard()
     const cells = document.querySelectorAll('#game-board button')
     expect(cells.length).toBe(36)
   })
@@ -45,6 +45,28 @@ describe('The hall-of-fame-page scores', () => {
     const theLatest = document.querySelectorAll('ol button.latest')
     expect(theLatest.length).toBe(1)
   })
+
+  it('should show details in a popover and overwrite it', async () => {
+    const firstButton = document.querySelector('ol button:first-child') as HTMLButtonElement
+    const lastButton = document.querySelector('ol button:last-child') as HTMLButtonElement
+    const popover = document.getElementById('score-popover') as HTMLElement
+
+    expect(popover.innerHTML).toBeFalsy()
+
+    fireEvent.click(firstButton)
+    const uniquePopoverString = screen.getByText(/required turns/i)
+    const firstScoreInnerHtml = popover.innerHTML
+
+    expect(uniquePopoverString).toBeInTheDocument()
+
+    fireEvent.click(lastButton)
+    const lastScoreInnerHtml = popover.innerHTML
+
+    expect(firstScoreInnerHtml).not.toBe(lastScoreInnerHtml)
+
+    // closing popover not testable using virtual dom
+  })
+
 })
 
 describe('The hall-of-fame-page clear list button', () => {

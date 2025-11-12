@@ -51,25 +51,28 @@
   "fame": {
     "Nothing Yet": "No scores yet",
     "won games": "won games",
+    "Number %n in %s sort": "Number %n by %s",
     "median": "median",
     "average": "average",
+    "effort": "required turns",
+    "detail-label": "Details of chosen score",
+    "configuration": "configuration",
+    "characteristics": "characteristics",
+    "game-play": "game play",
+    "result": "result"
+  },
+  "VAR": {
     "rank": "rank",
-    "name": "name",
     "user": "user",
     "date": "date",
     "points": "points",
     "efficiency": "efficiency",
     "speed": "speed",
     "level": "level",
-    "mines": "mines",
     "cells": "fields",
-    "effort": "required turns",
+    "mines": "mines",
     "moves": "turns",
-    "duration": "duration",
-    "configuration": "configuration",
-    "characteristics": "characteristics",
-    "game-play": "game play",
-    "result": "result"
+    "duration": "duration"
   },
   "settings": {
     "On begin Play": "The Challenge...",

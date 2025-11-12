@@ -10,7 +10,7 @@ import * as victory from './reducers/victory'
 import { CellState, GameState } from './../../common/game.d'
 import storage from './../../common/storage'
 import {
-  referAndNavigateTo, setDefaultConfig, startPageTesting,
+  clickNavigationButtonTo, setDefaultConfig, startPageTesting,
   clickGameButton, clickToLoose, clickToWin
 } from './../../__mocks__/specification-helpers'
 import { newPortalLayer } from './../../__mocks__/render-helpers'
@@ -59,19 +59,19 @@ describe('The game sidebar', () => {
   })
 
   it("should navigate to HallOfFame page", () => {
-    referAndNavigateTo.hallOfFame()
+    clickNavigationButtonTo.hallOfFame()
     const heading = screen.getByText(/Hall of Fame/i)
     expect(heading).toBeTruthy()
   })
 
   it("should navigate to About page", () => {
-    referAndNavigateTo.about()
+    clickNavigationButtonTo.about()
     const heading = screen.getByText(/Defuse all mines/i)
     expect(heading).toBeTruthy()
   })
 
   it("should navigate to Configure page", () => {
-    referAndNavigateTo.config()
+    clickNavigationButtonTo.config()
     const heading = screen.getByText(/General Settings/i)
     expect(heading).toBeTruthy()
   })
