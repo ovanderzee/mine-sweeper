@@ -10,7 +10,8 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "test": "vitest --run",
-    "cov": "vitest --coverage --run"
+    "cov": "vitest --coverage --run",
+    "test:browser": "vitest --config=vitest.browser.config.ts"
   },
   "dependencies": {
     "lz-string": "^1.5.0",
@@ -26,6 +27,7 @@
     "@types/react": "^19.2.5",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^5.1.1",
+    "@vitest/browser-webdriverio": "^4.0.9",
     "@vitest/coverage-v8": "^4.0.9",
     "eslint": "^9.39.1",
     "eslint-plugin-react-hooks": "^7.0.1",
@@ -37,6 +39,7 @@
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.46.4",
     "vite": "^7.2.2",
-    "vitest": "^4.0.9"
+    "vitest": "^4.0.9",
+    "vitest-browser-react": "^2.0.2"
   }
 }
