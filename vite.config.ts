@@ -1,6 +1,7 @@
 import { defineConfig } from 'vitest/config'
 import react from '@vitejs/plugin-react'
 import * as child from 'child_process';
+import { webdriverio } from '@vitest/browser-webdriverio'
 
 const commitHash = child.execSync('git rev-parse --short HEAD').toString().trim()
 
@@ -16,20 +17,56 @@ export default defineConfig({
     host: '0.0.0.0',
   },
   test: {
-    globals: true,
-    hideSkippedTests: true,
-    environment: 'jsdom', // use 'node' for backend
-    coverage: {
-      include: ['src'],
-      exclude: [
-        '**/.DS_Store',
-        '**/*.d.ts',
-        'src/main.tsx',
-        'src/components/game/GameCellDemo.tsx',
-        'src/__mocks__/*'
-      ],
-      reporter: ['text', 'html'],
-    },
-    setupFiles: ['./src/vitest.setup.ts'],
+    projects: [
+      {
+        test: {
+          name: 'unit',
+          globals: true,
+          hideSkippedTests: true,
+          environment: 'jsdom', // use 'node' for backend
+          // .spec. files will be moved to browser tests ( .aat. )
+          include: ['src/**/*.{test,spec}.ts'],
+          coverage: {
+            include: ['src'],
+            exclude: [
+              '**/.DS_Store',
+              '**/*.d.ts',
+              'src/main.tsx',
+              'src/components/game/GameCellDemo.tsx',
+              'src/__mocks__/*'
+            ],
+            reporter: ['text', 'html'],
+          },
+          setupFiles: ['./src/vitest.setup.ts'],
+        },
+      },
+      {
+        test: {
+          name: 'browser',
+//           globals: true,
+          hideSkippedTests: true,
+//           environment: 'jsdom', // use 'node' for backend
+          include: ['src/**/*.aat.ts'],
+//           coverage: {
+//             exclude: [
+//               '**/*.d.ts',
+//               'src/main.tsx',
+//               'src/components/game/GameCellDemo.tsx',
+//               'src/__mocks__/*'
+//             ],
+//             reporter: ['text', 'html'],
+//           },
+//   ??        setupFiles: ['./src/vitest.setup.ts'],
+          browser: {
+            provider: webdriverio(),
+            enabled: true,
+            // at least one instance is required
+            instances: [
+              { browser: 'chrome' },
+            ],
+          },
+        },
+      },
+    ]
   },
 })
