@@ -1,6 +1,6 @@
 import { vi, MockInstance } from 'vitest'
 import storage from './common/storage'
-import * as scoring from './components/game/scoring'
+import * as scoring from './common/scoring'
 import mv from './console'
 import { liveScores } from './__mocks__/scores'
 

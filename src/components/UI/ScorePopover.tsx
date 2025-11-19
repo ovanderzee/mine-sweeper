@@ -3,7 +3,7 @@ import PageContext from '../../store/page-context'
 
 import { ScoreItem } from '../../common/game.d'
 import { ShieldByRank } from './Shield'
-import { precise } from '../game/scoring'
+import { precise } from '../../common/scoring'
 import './ScorePopover.css'
 
 const ScorePopover = (props: {score: ScoreItem | null}) => {

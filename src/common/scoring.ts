@@ -1,11 +1,11 @@
 import LzString from 'lz-string'
-import { iterateNeighbours } from './common'
-import { AppCheckConfig } from '../../common/app.d'
+import { iterateNeighbours } from '../components/game/common'
+import { AppCheckConfig } from './app.d'
 import { GameState, CellState, CellStateStage,
-  GameScore, PlayScore, ScoreCalc } from '../../common/game.d'
-import { calculateMineCount } from '../../common/defaults'
-import { SCORE_RADIX } from '../../common/constants'
-import { ScoreItem } from '../../common/game.d'
+  GameScore, PlayScore, ScoreCalc } from './game.d'
+import { calculateMineCount } from './defaults'
+import { SCORE_RADIX } from './constants'
+import { ScoreItem } from './game.d'
 
 export const precise = (figure: number, precision: number) => Number(figure.toPrecision(precision))
 

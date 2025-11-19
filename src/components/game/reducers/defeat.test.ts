@@ -3,7 +3,7 @@ import { vi } from 'vitest'
 import { CellStateStage, CellState } from '../../../common/game.d'
 import { playingGameState, lostGameState } from '../../../__mocks__/game-states'
 import storage from '../../../common/storage'
-import { sequenceFillData } from '../scoring'
+import { sequenceFillData } from '../../../common/scoring'
 
 describe('defeatReducer is called in repetition', () => {
   it('should return declining number of untouched mines', () => {

@@ -4,7 +4,7 @@ import storage from '../../../common/storage'
 import { GameState,
   GameScore, PlayScore, ScoreItem } from '../../../common/game.d'
 import { precise, rankScores, leastClicksToWin, mostClicksToWin,
-  makeBoardCode, countMoves, calculateScore } from '../scoring'
+  makeBoardCode, countMoves, calculateScore } from '../../../common/scoring'
 
 export const victoryReducer = (state: GameState, config: AppConfig): GameState => {
   const { BOARD_SIZE, GAME_LEVEL, MINE_COUNT, PLAYER_NAME, MAX_SCORES } = config

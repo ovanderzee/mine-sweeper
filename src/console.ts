@@ -1,7 +1,7 @@
 import storage from './common/storage'
 import { liveScores } from './__mocks__/scores'
 import { ScoreItem } from './common/game.d'
-import { rankScores } from './components/game/scoring'
+import { rankScores } from './common/scoring'
 
 const mijnenVeger = {
   getAllScores: function (): ScoreItem[] {
