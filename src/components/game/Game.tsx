@@ -104,6 +104,7 @@ const Game = () => {
     if (gameWasWon) {
       const action: GameAction = { type: GameActionType.VICTORY}
       dispatchGameAction(action)
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setShowWonModal(true)
     } else if (gameWasLost) {
       // blow the untouched mines, odd number of mines will not blow in dev

@@ -22,6 +22,25 @@ const ModalComponent = (props: ModalProps): React.ReactNode => {
   const text = pageCtx.text
 
   const dialogRef = useRef<HTMLDialogElement | null>(null)
+  const [endState, setEndState] = useState('')
+
+  const timedCloseModal = () => {
+    const eventSubject = event?.target as Element
+    const validTargets = ['DIALOG', 'BUTTON', 'USE', 'TEXT']
+    const targetedByPurpose = validTargets.includes(eventSubject?.tagName.toUpperCase())
+    if (event?.type === 'click' && !targetedByPurpose) return;
+
+    setEndState('ending')
+    setTimeout(() => {
+        if (dialogRef.current) {
+          dialogRef.current.removeAttribute('open')
+          dialogRef.current.close()
+        }
+        props.closeModal()
+      },
+      FADE_OUT_TIME
+    )
+  }
 
   const keystrokeHandler = (event: React.KeyboardEvent, handler: (event: React.KeyboardEvent)=>void) => {
     if (event.key && event.key === 'Enter') handler(event)
@@ -55,26 +74,6 @@ const ModalComponent = (props: ModalProps): React.ReactNode => {
       dialogRef.current.focus()
     }
   }, [dialogRef])
-
-  const [endState, setEndState] = useState('')
-
-  const timedCloseModal = () => {
-    const eventSubject = event?.target as Element
-    const validTargets = ['DIALOG', 'BUTTON', 'USE', 'TEXT']
-    const targetedByPurpose = validTargets.includes(eventSubject?.tagName.toUpperCase())
-    if (event?.type === 'click' && !targetedByPurpose) return;
-
-    setEndState('ending')
-    setTimeout(() => {
-        if (dialogRef.current) {
-          dialogRef.current.removeAttribute('open')
-          dialogRef.current.close()
-        }
-        props.closeModal()
-      },
-      FADE_OUT_TIME
-    )
-  }
 
   const keystrokeShortcut = (event: React.KeyboardEvent): void => {
     switch (event.key) {

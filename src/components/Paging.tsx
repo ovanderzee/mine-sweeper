@@ -1,12 +1,12 @@
 import Introduction from './UI/Introduction'
-import { useContext, useEffect, useState } from 'react'
+import { useContext, useState } from 'react'
 import Game from './game/Game'
 import PageContext from '../store/page-context'
 import { flipFocus } from '../common/functions'
 
 function Paging() {
   const pageCtx = useContext(PageContext)
-  const [showIntroduction, setShowIntroduction] = useState(false)
+  const [showIntroduction, setShowIntroduction] = useState(true)
 
   const goToGame = (timeout: number) => {
     pageCtx.navigate(<Game />)
@@ -15,10 +15,6 @@ function Paging() {
       timeout
     )
   }
-
-  useEffect(() => {
-    setShowIntroduction(true)
-  }, []) // execute once
 
   const introLayer = <Introduction onEnd={goToGame} />
 

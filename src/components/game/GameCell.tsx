@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import PageContext from '../../store/page-context'
 import { LONG_PRESS_THRESHOLD } from '../../common/constants'
 import { CellState, CellStateStage, CellStateEntry, GameAction, GameActionType } from '../../common/game.d';
@@ -23,7 +23,7 @@ const GameCell = (props: GameCellProps) => {
   if (isProcessedMine) activatedClass = burst ? 'explode' : 'exploded'
   const stageLabel = text.cell[doneClass]
 
-  let startTime: number
+  const [startTime, setStartTime] = useState(0)
 
   /*
     A long press for toggling a flag
@@ -58,14 +58,14 @@ const GameCell = (props: GameCellProps) => {
     Save initial time
   */
   const beginHandler = () => {
-    startTime = Date.now()
+    setStartTime(Date.now())
   }
 
   /*
     CancelEvent: A garbled gesture is trying to cancel interaction, terminate combined events
   */
   const cancelHandler = () => {
-    startTime = 0
+    setStartTime(0)
   }
 
   /*
