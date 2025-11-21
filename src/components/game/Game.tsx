@@ -1,4 +1,4 @@
-import { useContext, useState, useEffect, useReducer, useRef } from 'react'
+import { useContext, useState, useEffect, useReducer } from 'react'
 import PageContext from '../../store/page-context'
 import GameCell from './GameCell'
 import GameCellDemoNav from './GameCellDemo'
@@ -46,12 +46,10 @@ const Game = () => {
     }
   });
 
-  const playgroundRef = useRef<HTMLElement | null>(null)
   const [playgroundFit, setPlaygroundFit] = useState('')
 
   const gameBoard = (
     <article
-      ref={playgroundRef}
       role="main"
       aria-label={text.nav['Playground']}
       id="playground"
@@ -73,7 +71,6 @@ const Game = () => {
       <Tips
         game={gameState}
         onNew={dispatchGameAction}
-        playgroundRef={playgroundRef}
         setPlaygroundFit={setPlaygroundFit}
       />
     </article>
