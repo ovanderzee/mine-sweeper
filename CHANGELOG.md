@@ -6,10 +6,10 @@
 - Gameboard could technically be 36 * 36 but board starts to jump when the game is operated by keyboard: provide zoom buttons next to clock
 - Fade out of dialog goes smooth but ends abrupt
 - The shield looks like plastic. Make a dent in the shield to add realism
-- Page id is obscured when not running in development mode
 - Debt after porting tests to vitest, see TODOs and it.skip 
 - Gameboard jumps when using the keyboard and covering the fullscreen mode
-- Run tests in browser instead of jsdom, mainly for dialog, popover and fullscreen 
+- Run tests in browser instead of jsdom, mainly for dialog, popover and fullscreen
+- Look at disabled 'set-state-in-effect' and 'exhaustive-deps', might have to do with 'value cannot be modified' or 'cannot access refs during render' lint errors
 
 ### Features
 - Playmode Tough: Play without flags or mine counters
@@ -19,12 +19,22 @@
 - Replay game from High Scores (when routing)
 - Save a game on a new list page (with comment)
 - Show gamelevel and number of neighbouring mines in graph
-- Calculate coagulation (min-mine borders | blank to mine ratio)
+- Calculate coagulation (mine-mine borders | blank to mine ratio)
 - Enter key to start new game after game end
-- Show score details in popover and less in the list
 - Eliminate outliers in graph
 - Browser tests on fullscreen feature
 - Remember last focussed game cell, as starting point for move with arrow key 
+
+
+## [3.5.1]
+
+### Added
+- Methods for managing scores in the browser console
+
+### Changed
+- Solved lint problems
+- Robuster fullscreen functionality
+
 
 ## [3.5.0]
 
@@ -34,6 +44,10 @@
 
 ### Changed
 - Game better scrollable
+
+### Removed
+- Deleted dysfunctional id on .screen
+
 
 ## [3.4.0]
 

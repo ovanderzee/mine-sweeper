@@ -22,6 +22,7 @@ export default defineConfig({
     coverage: {
       include: ['src'],
       exclude: [
+        '**/.DS_Store',
         '**/*.d.ts',
         'src/main.tsx',
         'src/components/game/GameCellDemo.tsx',
