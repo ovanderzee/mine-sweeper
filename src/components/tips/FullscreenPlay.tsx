@@ -1,4 +1,4 @@
-import { RefObject, useContext, useEffect, useState } from 'react'
+import { RefObject, useContext, useEffect, useRef, useState } from 'react'
 import PageContext from '../../store/page-context'
 import { ScreenfullApi } from '../../common/app.d'
 import screenfull from '../../common/screenfull'
@@ -17,7 +17,7 @@ const FullscreenPlay = (props: FullscreenPlayProps) => {
   const playground = props.playgroundRef.current
   const [magnification, setMagnification] = useState(1)
   const setPlaygroundFit = props.setPlaygroundFit
-  let sf: ScreenfullApi
+  const sfRef = useRef<ScreenfullApi | null>(null)
 
   const setFit = () => {
     if (!playground) return
@@ -51,24 +51,24 @@ const FullscreenPlay = (props: FullscreenPlayProps) => {
 
   setFit()
 
-  sf = screenfull(props.playgroundRef.current, fitToContain, resetFit)
-
   useEffect(() => {
     // on destroy
     return () => {
-      sf.isFullscreen() && sf.exitFullscreen()
-      sf.removeFullscreenChangeEvent()
+      if (sfRef?.current?.isFullscreen()) {
+        sfRef?.current?.removeFullscreenChangeEvent()
+      }
     }
   }, [])
 
   useEffect(() => {
-    sf = screenfull(props.playgroundRef.current, fitToContain, resetFit)
-    sf.addFullscreenChangeEvent()
-
-    return () => {
-      sf.removeFullscreenChangeEvent()
+    if (playground) {
+      sfRef.current = screenfull(props.playgroundRef.current, fitToContain, resetFit)
+      sfRef?.current.addFullscreenChangeEvent()
     }
-  }, [playground])
+    return () => {
+      sfRef?.current?.removeFullscreenChangeEvent()
+    }
+  }, [playground, sfRef])
 
   const fullscreenView = <>
     <button id="contain-fit" type="button"
@@ -85,7 +85,7 @@ const FullscreenPlay = (props: FullscreenPlayProps) => {
     </button>
     <button id="window-mode" type="button"
       title={text.tips['Return to window']}
-      onClick={sf && sf.exitFullscreen}
+      onClick={sfRef?.current ? sfRef?.current.exitFullscreen : ()=>{console.error('no window toggle')}}
     >
       <svg role="img" aria-label={text.icon['windowed']} overflow="visible"><use href="#to-window" /></svg>
     </button>
@@ -94,7 +94,7 @@ const FullscreenPlay = (props: FullscreenPlayProps) => {
   const windowedView = (
     <button id="fullscreen-mode" type="button"
       title={text.tips['View fullscreen']}
-      onClick={sf && sf.enterFullscreen}
+      onClick={sfRef?.current ? sfRef?.current.enterFullscreen : ()=>{console.error('no fullscreen toggle')}}
     >
       <svg role="img" aria-label={text.icon['fullscreen']} overflow="visible"><use href="#to-fullscreen" /></svg>
     </button>
@@ -102,7 +102,7 @@ const FullscreenPlay = (props: FullscreenPlayProps) => {
 
   return (
     <section id="fullscreen-play" className="tip">
-      {sf.isFullscreen() ? fullscreenView : windowedView}
+      {sfRef?.current?.isFullscreen() ? fullscreenView : windowedView}
     </section>
   )
 }
