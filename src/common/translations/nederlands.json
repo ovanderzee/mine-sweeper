@@ -55,6 +55,8 @@
     "median": "mediaan",
     "average": "gemiddeld",
     "effort": "nodige zetten",
+    "least": "minste",
+    "most": "meeste",
     "detail-label": "Details gekozen score",
     "configuration": "configuratie",
     "characteristics": "kenmerken",

@@ -2,44 +2,41 @@ import { useEffect, useRef, useState } from 'react'
 import './ElasticBrace.css'
 
 const ElasticBrace = () => {
-  const minBridgeLength = 12
+  const keptMargins = 4
   const braceRef = useRef<HTMLDivElement>(null)
-  const squareRef = useRef<SVGElement>(null)
+  const squareRef = useRef<SVGSVGElement>(null)
 
   const [bridgeLength, setBridgeLength] = useState(0)
-  useEffect(() => {
-    if (braceRef.current) {
-      const svgReservation = 3 * squareRef.current.clientHeight;
-      const braceTotal = braceRef.current.clientHeight
-      const reqLen = (braceTotal - svgReservation) / 2
-      setBridgeLength(Math.max(reqLen, minBridgeLength))
-console.log( braceTotal, svgReservation, reqLen, '  (', bridgeLength , minBridgeLength, ')')
-    }
-  })
 
-/*
-  const div = <div className="elastic-brace" ref={braceRef}></div>
-*/
+  useEffect(() => {
+    if (braceRef.current && squareRef.current) {
+      const svgReservation = 3 * squareRef.current.getBoundingClientRect().height;
+      const braceTotal = braceRef.current.getBoundingClientRect().height
+
+      const reqLen = (braceTotal - svgReservation) / 2
+      setBridgeLength(reqLen + keptMargins)
+    }
+  }, [bridgeLength])
 
   return (<div className="elastic-brace" ref={braceRef}>
 
-    <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg" ref={squareRef}>
+    <svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" ref={squareRef}>
       <g>
-        <path d="m 6,16 c 5.522847,0 10,4.477153 10,10" />
+        <path d="m 2,8 c 3.3137085,0 6,2.686292 6,6" />
       </g>
     </svg>
 
-    <svg width="32" height="32" viewBox="0 0 32 32" overflow="visible" xmlns="http://www.w3.org/2000/svg">
+    <svg width="16" height="16" viewBox="0 0 16 16" overflow="visible" xmlns="http://www.w3.org/2000/svg">
       <g>
-        <line x1="16" y1="6" x2="16" y2={6 - ((bridgeLength * 2 ) + 12 )} />
-        <path d="M 16,26 C 16,20.477155 20.477153,16 26,16 20.477153,16 16,11.52285 16,6" />
-        <line x1="16" y1="26" x2="16" y2={26 + ((bridgeLength * 2 ) + 12 )} />
+        <line x1="8" y1="2" x2="8" y2={2 - bridgeLength} />
+        <path d="M 8,14 C 8,10.686292 10.686292,8 14,8 10.686292,8 8,5.3137085 8,2" />
+        <line x1="8" y1="14" x2="8" y2={14 + bridgeLength} />
       </g>
     </svg>
 
-    <svg width="32" height="32" viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+    <svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
       <g>
-        <path d="m 16,6 c 0,5.522846 -4.477153,10 -10,10" />
+        <path d="M 8,2 C 8,5.3137085 5.3137085,8 2,8" />
       </g>
     </svg>
 

@@ -73,6 +73,11 @@
   grid-row: 1 / span 2;
 
   display: flex;
+  gap: 0 1ex;
+}
+
+#score-popover figure article.functional-grid .result .unit {
+  align-self: center;
 }
 
 #score-popover figure article .group,
@@ -80,12 +85,16 @@
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
-  gap: 0 1ex;
   align-items: last baseline;
 }
 
 #score-popover figure article .group {
+  gap: 0 1ex;
   margin-block: 1ex;
+}
+
+#score-popover figure article .abstract {
+  gap: 0 .5ex;
 }
 
 #score-popover figure article .group h5 {
@@ -93,11 +102,6 @@
   align-self: first baseline;
   line-height: 1;
   text-transform: capitalize;
-}
-
-#score-popover figure article .abstract {
-  flex: 0 0 14em;
-  line-height: 1;
 }
 
 #score-popover figure article .group:has(.abstract:empty),
@@ -130,7 +134,6 @@
 code {
   font-family: monospace;
   font-size: inherit;
-  width: 1.2ex;
   display: inline-block;
 }
 
