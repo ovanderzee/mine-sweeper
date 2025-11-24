@@ -1,0 +1,22 @@
+.elastic-brace {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  --width: 16px;
+  width: var(--width);
+}
+
+.elastic-brace svg {
+  width: var(--width);
+  height: var(--width);
+}
+
+.elastic-brace line,
+.elastic-brace path {
+  fill: none;
+  stroke: currentcolor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}

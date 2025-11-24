@@ -3,6 +3,7 @@ import PageContext from '../../store/page-context'
 
 import { ScoreItem } from '../../common/game.d'
 import { ShieldByRank } from './Shield'
+import ElasticBrace from './ElasticBrace'
 import { precise } from '../../common/scoring'
 import './ScorePopover.css'
 
@@ -30,35 +31,73 @@ const ScorePopover = (props: {score: ScoreItem | null}) => {
           {loggedDate.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
         </h4>
       </header>
-      <article>
+      <article className="functional-grid">
         <section className="group">
-          <h5>{text.fame['result']}</h5>
-          <div className="unit">
-            <small>{text.VAR['efficiency']}</small>
-            <span className="efficiency">{precise(log.score.efficiency, 3)}</span>
-          </div>
-          <big>&times;</big>
-          <div className="unit">
-            <small>{text.VAR['speed']}</small>
-            <span className="speed">{precise(log.score.speed, 3)}/s</span>
-          </div>
-          <big>&rarr;</big>
-          <div className="unit">
-            <small>{text.VAR['points']}</small>
-            <span className="points">{log.score.points}</span>
+          <h5>eerste</h5>
+          <div className="abstract">
+            <code>&fnof;(</code>
+            <div className="unit">
+              <small>{text.VAR['moves']}</small>
+              <span className="moves">
+                {log.game.effort.least} &le; {log.play.moves} &le; {log.game.effort.least}
+              </span>
+            </div>
+            <code>)</code>
+            <code className="xl">&rArr;</code>
+            <div className="unit">
+              <small>{text.VAR['efficiency']}</small>
+              <span className="efficiency">{precise(log.score.efficiency, 3)}</span>
+            </div>
           </div>
         </section>
 
         <section className="group">
-          <h5>{text.fame['game-play']}</h5>
-          <div className="unit">
-            <small>{text.VAR['moves']}</small>
-            <span className="moves">{log.play.moves}</span>
+          <h5>tweede</h5>
+          <div className="abstract">
+            <code>&fnof;(</code>
+            <div className="unit">
+              <small>{text.VAR['moves']}</small>
+              <span className="moves">{log.play.moves}</span>
+            </div>
+            <code className="s">/</code>
+            <div className="unit">
+              <small>{text.VAR['duration']}</small>
+              <span className="duration">{precise(log.play.duration, 3)}s</span>
+            </div>
+            <code>)</code>
+            <code className="xl">&rArr;</code>
+            <div className="unit">
+              <small>{text.VAR['speed']}</small>
+              <span className="speed">{precise(log.score.speed, 3)}s</span>
+            </div>
           </div>
-          <big>|</big>
+        </section>
+
+        <section className="result">
+          <ElasticBrace />
+        </section>
+
+      </article>
+      <article>
+
+
+        <section className="group">
+          <h5>{text.fame['result']}</h5>
+          <code>&fnof;(</code>
           <div className="unit">
-            <small>{text.VAR['duration']}</small>
-            <span className="duration">{precise(log.play.duration, 3)}s</span>
+            <small>{text.VAR['efficiency']}</small>
+            <span className="efficiency">{precise(log.score.efficiency, 3)}</span>
+          </div>
+          <code className="l">&times;</code>
+          <div className="unit">
+            <small>{text.VAR['speed']}</small>
+            <span className="speed">{precise(log.score.speed, 3)}/s</span>
+          </div>
+          <code>)</code>
+          <code className="xl">&rArr;</code>
+          <div className="unit">
+            <small>{text.VAR['points']}</small>
+            <span className="points">{log.score.points}</span>
           </div>
         </section>
 
@@ -76,12 +115,12 @@ const ScorePopover = (props: {score: ScoreItem | null}) => {
             <small>{text.VAR['level']}</small>
             <span className="level">{log.level}</span>
           </div>
-          <big>&</big>
+          <code className="s">&</code>
           <div className="unit">
             <small>{text.VAR['cells']}</small>
             <span className="cells">{log.game.cells}</span>
           </div>
-          <big style={{transform: 'scaley(1.25)'}}>&rarr;</big>
+          <code className="l">&rarr;</code>
           <div className="unit">
             <small>{text.VAR['mines']}</small>
             <span className="mines">{log.game.mines}</span>

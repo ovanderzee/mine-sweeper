@@ -64,12 +64,27 @@
   text-align: right;
 }
 
-#score-popover figure article .group {
+#score-popover figure article.functional-grid {
+  display: grid;
+}
+
+#score-popover figure article.functional-grid .result {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+
+  display: flex;
+}
+
+#score-popover figure article .group,
+#score-popover figure article .abstract {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
   gap: 0 1ex;
   align-items: last baseline;
+}
+
+#score-popover figure article .group {
   margin-block: 1ex;
 }
 
@@ -78,6 +93,22 @@
   align-self: first baseline;
   line-height: 1;
   text-transform: capitalize;
+}
+
+#score-popover figure article .abstract {
+  flex: 0 0 14em;
+  line-height: 1;
+}
+
+#score-popover figure article .group:has(.abstract:empty),
+#score-popover figure article .abstract:empty {
+  line-height: 0;
+  align-self: center;
+  margin-block: -.67ex -2ex;
+}
+
+#score-popover figure article .abstract:empty + * {
+  margin-block: -2em 0;
 }
 
 #score-popover figure article .group .unit {
@@ -96,13 +127,20 @@
 #score-popover figure article .unit * {
   text-align: center !important;
 }
-#score-popover figure article .unit + big {
+code {
+  font-family: monospace;
   font-size: inherit;
   width: 1.2ex;
   display: inline-block;
-  overflow: hidden;
-  direction: rtl;
 }
+
+code.xxs {font-size: 64%;}
+code.xs {font-size: 76%;}
+code.s {font-size: 88%;}
+code.m {font-size: 100%;}
+code.l {font-size: 112%;}
+code.xl {font-size: 124%;}
+code.xxl {font-size: 136%;}
 
 #score-popover figure footer {
   display: flex;
