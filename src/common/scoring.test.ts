@@ -4,10 +4,11 @@ import {
   leastClicksToWin, mostClicksToWin,
   unmarkCells,
   makeBoardCode, sequenceFillData,
-  precise
+  precise, rankScores
 } from './scoring'
-import { blank18pct, blank26pct, blank31pct, blank41pct } from './../../__mocks__/game-states'
-import { RANGES } from '../../common/constants'
+import { blank18pct, blank26pct, blank31pct, blank41pct } from '../__mocks__/game-states'
+import { ScoreItem } from './game.d'
+import { RANGES } from './constants'
 
 describe('some blanks need to be clicked and then all the pointercells have to be clicked', () => {
   it('sample game blank18pct has 2 blank areas and 20 pointers to click', () => {
@@ -192,5 +193,23 @@ describe('Precision as long as we need it', () => {
     const figure = 8
     const result = precise(figure, 3)
     expect(result).toBe(8)
+  })
+})
+
+describe('Sort and Rank scores', () => {
+  const oldScores = [
+    {rank: 1, score: {points: 100}},
+    {rank: 2, score: {points: 30}}
+  ] as ScoreItem[]
+  const newScore = {rank: 0, score: {points: 67}} as ScoreItem
+
+
+  it('should sort by points and rank', () => {
+    const currentScores = [ ...oldScores, newScore ]
+
+    rankScores(currentScores)
+
+    expect(currentScores[1]).toBe(newScore)
+    expect(newScore.rank).toBe(2)
   })
 })

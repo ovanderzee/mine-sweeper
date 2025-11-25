@@ -1,12 +1,18 @@
 import LzString from 'lz-string'
-import { iterateNeighbours } from './common'
-import { AppCheckConfig } from '../../common/app.d'
+import { iterateNeighbours } from '../components/game/common'
+import { AppCheckConfig } from './app.d'
 import { GameState, CellState, CellStateStage,
-  GameScore, PlayScore, ScoreCalc } from '../../common/game.d'
-import { calculateMineCount } from '../../common/defaults'
-import { SCORE_RADIX } from '../../common/constants'
+  GameScore, PlayScore, ScoreCalc } from './game.d'
+import { calculateMineCount } from './defaults'
+import { SCORE_RADIX } from './constants'
+import { ScoreItem } from './game.d'
 
 export const precise = (figure: number, precision: number) => Number(figure.toPrecision(precision))
+
+export const rankScores = (scores: ScoreItem[]): void => {
+  scores.sort((a, b) => b.score.points - a.score.points)
+  scores.forEach((score, index) => score.rank = 1 + index)
+}
 
 export const unmarkCells = (game: GameState) => {
   game.board.forEach(r => {r.forEach(c => delete c.mark)})

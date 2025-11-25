@@ -1,7 +1,7 @@
 import { useContext } from 'react'
 import PageContext from '../../store/page-context'
 import { ScoreParam, FlatScore } from '../../common/game.d'
-import { precise } from './../game/scoring'
+import { precise } from '../../common/scoring'
 import './LineDiagram.css'
 
 interface Coordinate {

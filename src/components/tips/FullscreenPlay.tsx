@@ -1,43 +1,55 @@
-import { RefObject, useContext, useEffect, useState } from 'react'
+import { useContext, useEffect, useRef, useState } from 'react'
 import PageContext from '../../store/page-context'
 import { ScreenfullApi } from '../../common/app.d'
 import screenfull from '../../common/screenfull'
 import './Tips.css'
 
 interface FullscreenPlayProps {
-  playgroundRef: RefObject<HTMLElement | null>
   setPlaygroundFit: (arg: string) => void
 }
+
+type ViewStateTuple = 'windowed' | 'fullscreen'
 
 const FullscreenPlay = (props: FullscreenPlayProps) => {
   const pageCtx = useContext(PageContext)
   const { config, text } = pageCtx
   const boardEmSize = 24.5 // 23 + padding
   const boardPxSize = boardEmSize * config.FONT_SIZE
-  const playground = props.playgroundRef.current
+  const playgroundRef = useRef<HTMLElement | null>(null)
   const [magnification, setMagnification] = useState(1)
   const setPlaygroundFit = props.setPlaygroundFit
-  let sf: ScreenfullApi
+  const sfRef = useRef<ScreenfullApi | null>(null)
 
-  const setFit = () => {
-    if (!playground) return
-    playground.style.fontSize = magnification * config.FONT_SIZE + 'px'
-  }
+  useEffect(() => {
+    playgroundRef.current = document.getElementById('playground')
+
+    // on destroy
+    return () => {
+      if (sfRef?.current?.isFullscreen()) {
+        sfRef?.current?.removeFullscreenChangeEvent()
+      }
+    }
+  }, [])
+
+  useEffect(() => {
+    if (!playgroundRef.current) return
+    playgroundRef.current.style.fontSize = magnification * config.FONT_SIZE + 'px'
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [magnification])
 
   const fitToNeed = (spaceToFill: number) => {
     setMagnification(spaceToFill / boardPxSize)
-    setFit()
   }
 
   const fitToContain = () => {
-    if (!playground) return
+    if (!playgroundRef.current) return
     setPlaygroundFit('contain-screen')
     const smallestPxSize = Math.min(screen.availWidth, screen.availHeight)
     fitToNeed(smallestPxSize)
   }
 
   const fitToCover = () => {
-    if (!playground) return
+    if (!playgroundRef.current) return
     setPlaygroundFit('cover-screen')
     const biggestPxSize = Math.max(screen.availWidth, screen.availHeight)
     fitToNeed(biggestPxSize)
@@ -46,29 +58,28 @@ const FullscreenPlay = (props: FullscreenPlayProps) => {
   const resetFit = () => {
     setPlaygroundFit('')
     setMagnification(1)
-    setFit()
   }
 
-  setFit()
+  useEffect(() => {
+    if (playgroundRef.current) {
+      sfRef.current = screenfull(playgroundRef.current, fitToContain, resetFit)
+      sfRef?.current.addFullscreenChangeEvent()
+    }
+    return () => {
+      sfRef?.current?.removeFullscreenChangeEvent()
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [playgroundRef])
 
-  sf = screenfull(props.playgroundRef.current, fitToContain, resetFit)
+  const [toViewState, setToViewState] = useState<ViewStateTuple>()
 
   useEffect(() => {
-    // on destroy
-    return () => {
-      sf.isFullscreen() && sf.exitFullscreen()
-      sf.removeFullscreenChangeEvent()
+    if (toViewState === 'windowed' && document.fullscreenElement) {
+      sfRef?.current?.exitFullscreen() ?? console.error('no window toggle')
+    } else if (toViewState === 'fullscreen' && !document.fullscreenElement) {
+      sfRef?.current?.enterFullscreen() ?? console.error('no fullscreen toggle')
     }
-  }, [])
-
-  useEffect(() => {
-    sf = screenfull(props.playgroundRef.current, fitToContain, resetFit)
-    sf.addFullscreenChangeEvent()
-
-    return () => {
-      sf.removeFullscreenChangeEvent()
-    }
-  }, [playground])
+  }, [toViewState])
 
   const fullscreenView = <>
     <button id="contain-fit" type="button"
@@ -85,7 +96,7 @@ const FullscreenPlay = (props: FullscreenPlayProps) => {
     </button>
     <button id="window-mode" type="button"
       title={text.tips['Return to window']}
-      onClick={sf && sf.exitFullscreen}
+      onClick={()=>setToViewState('windowed')}
     >
       <svg role="img" aria-label={text.icon['windowed']} overflow="visible"><use href="#to-window" /></svg>
     </button>
@@ -94,7 +105,7 @@ const FullscreenPlay = (props: FullscreenPlayProps) => {
   const windowedView = (
     <button id="fullscreen-mode" type="button"
       title={text.tips['View fullscreen']}
-      onClick={sf && sf.enterFullscreen}
+      onClick={()=>setToViewState('fullscreen')}
     >
       <svg role="img" aria-label={text.icon['fullscreen']} overflow="visible"><use href="#to-fullscreen" /></svg>
     </button>
@@ -102,7 +113,7 @@ const FullscreenPlay = (props: FullscreenPlayProps) => {
 
   return (
     <section id="fullscreen-play" className="tip">
-      {sf.isFullscreen() ? fullscreenView : windowedView}
+      {document.fullscreenElement ? fullscreenView : windowedView}
     </section>
   )
 }
