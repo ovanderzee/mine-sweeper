@@ -9,7 +9,8 @@ import { texts } from './../common/i18n'
 /*
   renderInContext
   Supplies translations and config
-  Allows checking the context
+  As in PageProvider.tsx
+  Allows checking the context like pageCtx.navigate hasBeenCalled
 */
 export const renderInContext = (component: React.ReactNode, keyValue: any = {}) => {
 
@@ -33,7 +34,9 @@ export const renderInContext = (component: React.ReactNode, keyValue: any = {}) 
 
 /*
   renderInProvider
-  Like in live application
+  Supplies translations and config
+  As in App.tsx
+  Required when component calls pageCtx.configure or pageCtx.navigate
 */
 export const renderInProvider = (component: React.ReactNode) => {
   render(
