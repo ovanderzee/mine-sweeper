@@ -10,6 +10,8 @@
 - Gameboard jumps when using the keyboard and covering the fullscreen mode
 - Run tests in browser instead of jsdom, mainly for dialog, popover and fullscreen
 - Look at disabled 'set-state-in-effect' and 'exhaustive-deps', might have to do with 'value cannot be modified' or 'cannot access refs during render' lint errors
+- vitest browser tests: close timed out after 20000ms
+- test coverage is by test config file, not integrated
 
 ### Features
 - Playmode Tough: Play without flags or mine counters

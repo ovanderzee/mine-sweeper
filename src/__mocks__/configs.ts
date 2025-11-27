@@ -47,6 +47,6 @@ export const scoringConfig = {
   "MINE_COUNT":7,
   "LANGUAGE":Languages.en,
   "FONT_SIZE":16,
-  "PLAYER_NAME":"Floor",
+  "PLAYER_NAME":"Florance",
   "MAX_SCORES":500,
 }

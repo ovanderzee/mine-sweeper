@@ -5,7 +5,7 @@ import react from '@vitejs/plugin-react'
 export default defineConfig({
   plugins: [react()],
   test: {
-    include: ['src/**/*.aat.tsx'],
+    include: ['src/**/*.aat.{ts,tsx}'],
     browser: {
       enabled: true,
       provider: webdriverio(),
@@ -16,5 +16,6 @@ export default defineConfig({
 //       { browser: 'safari' },
       ],
     },
+//     reporters: ['hanging-process'],
   },
 })
