@@ -10,7 +10,7 @@ article[role="main"] + nav .sticky-slider {
   display: flex;
 }
 
-article[role="main"] + nav button {
+article[role="main"] + nav .nav-option  {
   font-weight: bold;
   line-height: 144%;
   color: white;
@@ -34,15 +34,15 @@ article[role="main"] + nav button {
     overflow-x: auto;
   }
 
-  article[role="main"] + nav button {
+  article[role="main"] + nav .nav-option {
     flex: 1 0 auto;
   }
 
-  article[role="main"] + nav button + button {
+  article[role="main"] + nav .nav-option:not(:first-of-type) {
     border-left: 1px solid var(--dark-blue);
   }
 
-  article[role="main"] + nav button svg {
+  article[role="main"] + nav .nav-option svg {
     display: inline-block;
     height: var(--nav-height);
     aspect-ratio: 1;
@@ -62,16 +62,16 @@ article[role="main"] + nav button {
     padding-inline: var(--nav-pad);
   }
 
-  article[role="main"] + nav button {
+  article[role="main"] + nav .nav-option {
     flex: 1 1 auto;
     width: 100%;
   }
 
-  article[role="main"] + nav button + button {
+  article[role="main"] + nav .nav-option:not(:first-of-type) {
     border-top: 1px solid var(--dark-blue);
   }
 
-  article[role="main"] + nav button svg {
+  article[role="main"] + nav .nav-option svg {
     display: block;
     aspect-ratio: 1;
   }

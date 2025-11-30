@@ -8,7 +8,7 @@ import NewGame from '../nav/NewGame'
 import Replay from '../nav/Replay'
 import Help from '../nav/Help'
 import Settings from '../nav/Settings'
-import GameWonModal from './GameWonModal'
+import { ShieldModal } from '../UI/Modal'
 import { initialGameState } from './common'
 import { gameReducer } from './game-reducer'
 import { GameStages, GameAction, GameActionType } from '../../common/game.d'
@@ -114,16 +114,18 @@ const Game = () => {
     }
   }, [gameWasWon, gameWasLost, gameState.mines])
 
-  const gameWonModal = <GameWonModal
-    close={setShowWonModal}
-    state={gameState}
+  const gameWonModal = <ShieldModal
+    message={gameState.score.rank}
+    onConfirm={() => {}}
+    isShowModal={showWonModal}
+    endShowModal={()=>setShowWonModal(false)}
   />
 
   return (
     <>
       {gameBoard}
       {gameNavigation}
-      {showWonModal && gameWonModal}
+      {gameWonModal}
     </>
   )
 }

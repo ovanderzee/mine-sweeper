@@ -4,7 +4,6 @@ import { InputRange } from './app.d'
 export const MIN_DURATION = 750
 
 // where the graphics are shown
-export const MODAL_ELEMENT = 'modal'
 export const OVERLAY_ELEMENT = 'overlay'
 
 // fade out time for overlays, modals and pages, also in (shorter) css-variable

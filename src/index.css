@@ -55,8 +55,7 @@ html {
 }
 
 body,
-section.screen,
-.modal {
+section.screen {
   font-size: 15px;
 }
 
@@ -139,11 +138,6 @@ nav,
 
 #overlay:empty {
   z-index: -10;
-}
-
-#modal {
-  position: relative;
-  z-index: 20;
 }
 
 button {

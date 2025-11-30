@@ -17,5 +17,6 @@ export default defineConfig({
       ],
     },
 //     reporters: ['hanging-process'],
+    setupFiles: ['./src/vitest.set-browser.ts'],
   },
 })
