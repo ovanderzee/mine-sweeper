@@ -38,7 +38,7 @@ const AbstractModal = (props: AbstractProps): React.ReactNode => {
         props.endShowModal()
         setEndState('')
       },
-      FADE_OUT_TIME * 1.1
+      FADE_OUT_TIME
     )
   }
 

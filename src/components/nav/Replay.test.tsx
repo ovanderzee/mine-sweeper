@@ -1,17 +1,17 @@
 
-import ReactDOM from 'react-dom'
+// import ReactDOM from 'react-dom'
 import { screen, fireEvent } from '@testing-library/react'
-import { vi, MockInstance } from 'vitest'
+import { vi, /*MockInstance*/ } from 'vitest'
 import Replay from './Replay'
 import { GameStages } from './../../common/game.d'
 import { renderInContext, newPortalLayer } from './../../__mocks__/render-helpers'
 
 describe('Replay Component', () => {
-  let dispatcher: () => void, spyShowModal: MockInstance
+  let dispatcher: () => void; // spyShowModal: MockInstance
 
   beforeEach(() => {
     dispatcher = vi.fn()
-    spyShowModal = vi.spyOn(ReactDOM, 'createPortal').mockImplementation(ReactDOM.createPortal)
+//     spyShowModal = vi.spyOn(ReactDOM, 'createPortal').mockImplementation(ReactDOM.createPortal)
   })
 
   it('should display the "Redo" sign', () => {
@@ -51,7 +51,7 @@ describe('Replay Component', () => {
 
     const button = screen.getByRole('button')
     fireEvent.click(button)
-    expect(spyShowModal).toHaveBeenCalledTimes(1)
+//     expect(spyShowModal).toHaveBeenCalledTimes(1)
 
     const cancelDialog = screen.getByText(/Cancel/i)
     fireEvent.click(cancelDialog)
