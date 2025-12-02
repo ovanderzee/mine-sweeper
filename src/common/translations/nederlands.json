@@ -20,6 +20,9 @@
     "pristine": "verborgen",
     "touched": "geopend"
   },
+  "game": {
+    "congrats": "Je hebt gewonnen! Je krijgt %p punten en haalde rang %r"
+  },
   "help": {
     "Nav Heading": "Navigatie",
     "Game Scores Comment": "Aantal mijnen minus het aantal vlaggen; toegang tot de Eregalerij",

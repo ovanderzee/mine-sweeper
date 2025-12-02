@@ -115,7 +115,11 @@ const Game = () => {
   }, [gameWasWon, gameWasLost, gameState.mines])
 
   const gameWonModal = <ShieldModal
-    message={gameState.score.rank}
+    label={text.game['congrats']
+      .replace('%p', gameState.score.score.points.toString())
+      .replace('%r', gameState.score.rank.toString())
+    }
+    message={gameState.score.rank.toString()}
     onConfirm={() => {}}
     isShowModal={showWonModal}
     endShowModal={()=>setShowWonModal(false)}

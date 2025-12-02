@@ -5,6 +5,7 @@ import { FADE_OUT_TIME } from '../../common/constants'
 import './Modal.css'
 
 interface ModalProps {
+  label?: string,
   message: string,
   onConfirm: () => void,
   onCancel?: () => void,
@@ -12,7 +13,11 @@ interface ModalProps {
   endShowModal: () => void,
 }
 
-export const ApproveModal = (props: ModalProps): React.ReactNode => {
+interface AbstractProps extends ModalProps {
+  kind: string
+}
+
+const AbstractModal = (props: AbstractProps): React.ReactNode => {
   const pageCtx = useContext(PageContext)
   const text = pageCtx.text
 
@@ -82,78 +87,49 @@ export const ApproveModal = (props: ModalProps): React.ReactNode => {
 
   return (
     <dialog
-      aria-labelledby="dialog-label"
-      className={`approve-modal ${endState}`}
+      aria-label={props.label}
+      className={`${props.kind}-modal ${endState}`}
       ref={dialogRef}
       onClick={timedCloseModal}
       onKeyDown={keystrokeShortcut}
     >
-      <div className="dialog-body">
-        <h2 id="dialog-label" className="h3 content">{props.message}</h2>
-        <div className="buttons">
-          {props?.onCancel && cancelButton}
-          {confirmButton}
+      {props.kind === 'approve' &&
+        <div className="dialog-body">
+          <h2 className="h3 content">{props.message}</h2>
+          <div className="buttons">
+            {props?.onCancel && cancelButton}
+            {confirmButton}
+          </div>
         </div>
-      </div>
+      }
+      {props.kind === 'shield' &&
+        <ShieldByRank rank={Number(props.message)} />
+      }
     </dialog>
   )
+}
+
+export const ApproveModal = (props: ModalProps): React.ReactNode => {
+  return <AbstractModal
+    kind="approve"
+    label={props.message}
+    message={props.message}
+    onConfirm={props.onConfirm}
+    onCancel={props.onCancel}
+    isShowModal={props.isShowModal}
+    endShowModal={props.endShowModal}
+  />
 }
 
 export const ShieldModal = (props: ModalProps): React.ReactNode => {
-  const dialogRef = useRef<HTMLDialogElement | null>(null)
-  const [endState, setEndState] = useState('')
-
-  const timedCloseModal = () => {
-    const eventSubject = event?.target as Element
-    const validTargets = ['DIALOG', 'BUTTON', 'USE', 'TEXT']
-    const targetedByPurpose = validTargets.includes(eventSubject?.tagName.toUpperCase())
-    if (event?.type === 'click' && !targetedByPurpose) return;
-
-    setEndState('ending')
-    setTimeout(() => {
-        if (dialogRef.current) {
-          dialogRef.current.close()
-        }
-        props.endShowModal()
-        setEndState('')
-      },
-      FADE_OUT_TIME * 1.1
-    )
-  }
-
-  const closeHandler = (event: React.UIEvent) => {
-    event.stopPropagation()
-    props.onConfirm && props.onConfirm()
-    timedCloseModal()
-  }
-
-  useEffect(() => {
-    if (props.isShowModal) {
-      dialogRef.current?.showModal()
-      dialogRef.current?.focus()
-    }
-  }, [props.isShowModal])
-
-  const keystrokeShortcut = (event: React.KeyboardEvent): void => {
-    switch (event.key) {
-      case 'Escape':
-        closeHandler(event)
-        break
-      case 'Enter':
-        closeHandler(event)
-        break
-    }
-  }
-
-  return (
-    <dialog
-      aria-labelledby="dialog-label"
-      className={`game-won-modal ${endState}`}
-      ref={dialogRef}
-      onClick={timedCloseModal}
-      onKeyDown={keystrokeShortcut}
-    >
-      <ShieldByRank rank={Number(props.message)} />
-    </dialog>
-  )
+  return <AbstractModal
+    kind="shield"
+    label={props.label}
+    message={props.message}
+    onConfirm={props.onConfirm}
+    onCancel={props.onConfirm}
+    isShowModal={props.isShowModal}
+    endShowModal={props.endShowModal}
+  />
 }
+

@@ -1,13 +1,13 @@
 import { ReactNode } from 'react'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
-import { userEvent } from 'vitest/browser'
+import { Locator, userEvent } from 'vitest/browser'
 import { RenderResult } from 'vitest-browser-react'
 import { renderInApp } from './../../__mocks__/aat-helpers'
 import { FADE_OUT_TIME } from '../../common/constants'
 import { ApproveModal, ShieldModal } from './Modal'
 
 describe('Modal Dialog', () => {
-  let modalDialog!: HTMLDialogElement,
+  let modalDialog!: Locator,
     cancelFn: () => void,
     confirmFn: () => void,
     endFn: () => void,
@@ -48,7 +48,7 @@ describe('Modal Dialog', () => {
 
   describe('should cancel and close the dialog', () => {
     let screen: RenderResult,
-      cancelButton: HTMLButtonElement
+      cancelButton: Locator
 
     beforeEach(async () => {
       isShowModal = true;
@@ -88,7 +88,7 @@ describe('Modal Dialog', () => {
 
   describe('should confirm and close the dialog', () => {
     let screen: RenderResult,
-      confirmButton: HTMLButtonElement
+      confirmButton: Locator
 
     beforeEach(async () => {
       isShowModal = true;
@@ -136,7 +136,7 @@ describe('Modal Dialog', () => {
     })
 
     it('when it\'s content is clicked', async () => {
-      const dialogContent = modalDialog.element().children[0]
+      const dialogContent = modalDialog.element().children[0] as HTMLElement
       await dialogContent.click()
       vi.advanceTimersByTime(FADE_OUT_TIME * 1.1)
 
@@ -165,7 +165,8 @@ describe('Shield as Modal Dialog', () => {
 
   const getShieldModal = (): ReactNode => {
     return <ShieldModal
-      message={'123'}
+      label="You win!"
+      message="123"
       onConfirm={confirmFn}
       isShowModal={true}
       endShowModal={endFn}

@@ -20,6 +20,9 @@
     "pristine": "hidden",
     "touched": "open"
   },
+  "game": {
+    "congrats": " You won! You got %p points and reached rank %r"
+  },
   "help": {
     "Nav Heading": "Navigation",
     "Game Scores Comment": "Number of mines minus the number of flags; access to Hall of Fame",
