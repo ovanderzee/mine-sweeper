@@ -11,7 +11,8 @@
     "preview": "vite preview",
     "test": "vitest --run",
     "cov": "vitest --coverage --run",
-    "aat": "vitest --config=vitest.browser.config.ts --run"
+    "aat": "vitest --config=vitest.browser.config.ts --run",
+    "aac": "vitest --config=vitest.browser.config.ts --coverage --run"
   },
   "dependencies": {
     "lz-string": "^1.5.0",
