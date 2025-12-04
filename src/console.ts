@@ -3,37 +3,67 @@ import { liveScores } from './__mocks__/scores'
 import { ScoreItem } from './common/game.d'
 import { rankScores } from './common/scoring'
 
-const mijnenVeger = {
-  getAllScores: function (): ScoreItem[] {
-    return storage.scores
-  },
+type ScoreFilter = Partial<ScoreItem>
 
-  setAllScores: function (scores: ScoreItem[]) {
-    storage.scores = scores
-  },
+const getAllScores = function (): ScoreItem[] {
+  return storage.scores
+}
 
-  getScoresByUser: function (user: string) {
-    return this.getAllScores().filter(s => s.user === user)
-  },
+const setAllScores = function (scores: ScoreItem[]) {
+  rankScores(scores)
+  storage.scores = scores
+}
 
-  deleteScoresByUser: function (user: string) {
-    const userScores = this.getAllScores().filter(s => s.user !== user)
-    this.setAllScores(userScores)
-  },
+const getScoresByUser = function (user: string) {
+  return getAllScores().filter((s: ScoreItem) => s.user === user)
+}
 
-  updateStorageWithSampleScores: (): void => {
-    // prevent duplication: check code and timestamp
-    const newScores = liveScores.filter(l => !storage.scores.some(s => s.code === l.code && s.date === l.date))
-    const updatedScores = [ ...storage.scores, ...newScores ]
-    rankScores(updatedScores)
-    storage.scores = updatedScores
-  },
+const deleteScoresByUser = function (user: string) {
+  const userScores = getAllScores().filter((s: ScoreItem) => s.user !== user)
+  setAllScores(userScores)
+}
 
-  deleteStoredSampleScores: (): void => {
-    const newScores = storage.scores.filter(s => !liveScores.some(l => s.code === l.code && s.date === l.date))
-    rankScores(newScores)
-    storage.scores = newScores
+const updateStorageWithSampleScores = (): void => {
+  // prevent duplication: check code and timestamp
+  const newScores = liveScores.filter(l => !storage.scores.some(s => s.code === l.code && s.date === l.date))
+  const updatedScores = [ ...storage.scores, ...newScores ]
+  setAllScores(updatedScores)
+}
+
+const deleteStoredSampleScores = (): void => {
+  const newScores = storage.scores.filter(s => !liveScores.some(l => s.code === l.code && s.date === l.date))
+  setAllScores(newScores)
+}
+
+const deleteOneByProperties = (query: ScoreFilter): void => {
+  // userwise only user and rank can be used, ex.: deleteOneByProperties({ user: 'Miomy', rank: 68 })
+  // TODO Flatscores
+  const queryKeys = Object.keys(query)
+  const allScores = storage.scores
+
+  const deletables = allScores.filter(score => {
+    let toDelete = true
+    queryKeys.forEach(queryKey => {
+      toDelete = toDelete && score[queryKey] === query[queryKey]
+    })
+
+    return toDelete
+  })
+  const deletable = deletables[0]
+
+  if (confirm(`Delete ${JSON.stringify(deletable)} of ${deletables.length} items?`)) {
+    const removeIndex = allScores.findIndex(item => item === deletable);
+    allScores.splice( removeIndex, 1)
+    setAllScores(allScores)
   }
 }
 
-export default mijnenVeger
+export default {
+  getAllScores,
+  setAllScores,
+  getScoresByUser ,
+  deleteScoresByUser,
+  updateStorageWithSampleScores,
+  deleteStoredSampleScores,
+  deleteOneByProperties
+}

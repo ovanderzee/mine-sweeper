@@ -83,6 +83,7 @@ export interface ScoreCalc {
 }
 
 export interface ScoreItem {
+  [index: string],
   code: string,
   date: number,
   user: string,
