@@ -1,4 +1,5 @@
 import React from 'react'
+import { Locator } from 'vitest/browser'
 import { render, RenderResult } from 'vitest-browser-react'
 import PageContext from './../store/page-context'
 import PageProvider from './../store/PageProvider'
@@ -33,13 +34,6 @@ export const renderInPage = async (component: React.ReactNode, keyValue: any = {
   )
 }
 
-
-
-
-
-
-
-
 const setTestLanguage = () => {
     const currentConfig = storage.config
     storage.config = { ...currentConfig, LANGUAGE: Languages.en }
@@ -58,4 +52,13 @@ export const renderInApp = async (component: React.ReactNode): Promise<RenderRes
       {component}
     </PageProvider>
   )
+}
+
+export const makeScreenshot = async (loc: Locator, fName: string, save = false): Promise<string> => {
+  const { base64 } = await loc.screenshot({
+    path: `src/__screenshot__/${fName}.png`,
+    base64: true,
+    save: save
+  })
+  return base64
 }

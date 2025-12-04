@@ -9,11 +9,12 @@ export default defineConfig({
     browser: {
       enabled: true,
       provider: webdriverio(),
+      headless: true,
       // https://vitest.dev/guide/browser/webdriverio
       instances: [
-      { browser: 'chrome' },
-//       { browser: 'firefox' },
-//       { browser: 'safari' },
+        { browser: 'chrome' },
+//         { browser: 'firefox' },
+//         { browser: 'safari' },
       ],
     },
 //     reporters: ['hanging-process'],
