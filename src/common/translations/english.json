@@ -55,6 +55,8 @@
     "median": "median",
     "average": "average",
     "effort": "required turns",
+    "least": "least",
+    "most": "most",
     "detail-label": "Details of chosen score",
     "configuration": "configuration",
     "characteristics": "characteristics",
