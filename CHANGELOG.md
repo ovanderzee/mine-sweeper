@@ -10,6 +10,7 @@
 - Gameboard jumps when using the keyboard and covering the fullscreen mode
 - Run tests in browser instead of jsdom, mainly for dialog, popover and fullscreen
 - Look at disabled 'set-state-in-effect' and 'exhaustive-deps', might have to do with 'value cannot be modified' or 'cannot access refs during render' lint errors
+- Occurs when bumping the last row in the game screen: TypeError: can't access property "ControlLooksLikePasswordCredentialField"
 
 ### Features
 - Playmode Tough: Play without flags or mine counters
@@ -24,6 +25,13 @@
 - Eliminate outliers in graph
 - Browser tests on fullscreen feature
 - Remember last focussed game cell, as starting point for move with arrow key 
+- Cover/contain game zooming not only on fullscreen 
+
+
+## [3.5.2]
+
+### Changed
+- Enhanced score popover
 
 
 ## [3.5.1]
