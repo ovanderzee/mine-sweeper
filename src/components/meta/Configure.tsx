@@ -59,6 +59,7 @@ function Configure() {
             min={RANGES.SIZE.min}
             max={RANGES.SIZE.max}
             onChange={changeBoardSizeHandler}
+            onClick={changeBoardSizeHandler as unknown as React.MouseEventHandler<HTMLInputElement>}
           />
         </div>
       </div>
@@ -74,6 +75,7 @@ function Configure() {
             min={RANGES.LEVEL.min}
             max={RANGES.LEVEL.max}
             onChange={changeGameLevelHandler}
+            onClick={changeGameLevelHandler as unknown as React.MouseEventHandler<HTMLInputElement>}
           />
           <em>{text.settings['total %n mines'].replace('%n', config.MINE_COUNT.toString())}</em>
         </div>
@@ -130,6 +132,7 @@ function Configure() {
             min={RANGES.FONT.min}
             max={RANGES.FONT.max}
             onChange={changeFontSizeHandler}
+            onClick={changeFontSizeHandler as unknown as React.MouseEventHandler<HTMLInputElement>}
           />
         </div>
       </div>
@@ -179,6 +182,7 @@ function Configure() {
             min={RANGES.SCORES.min}
             max={RANGES.SCORES.max}
             onChange={changeMaxScoresHandler}
+            onClick={changeMaxScoresHandler as unknown as React.MouseEventHandler<HTMLInputElement>}
           />
         </div>
       </div>

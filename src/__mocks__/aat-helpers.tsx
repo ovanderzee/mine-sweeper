@@ -1,5 +1,5 @@
 import React from 'react'
-import { Locator } from 'vitest/browser'
+import { page, Locator } from 'vitest/browser'
 import { render, RenderResult } from 'vitest-browser-react'
 import PageContext from './../store/page-context'
 import PageProvider from './../store/PageProvider'
@@ -7,6 +7,8 @@ import { Languages } from '../common/app.d'
 import DEFAULTS from './../common/defaults'
 import storage from '../common/storage'
 import { texts } from './../common/i18n'
+
+page.viewport(560,420)
 
 /*
   renderInPage
@@ -61,4 +63,16 @@ export const makeScreenshot = async (loc: Locator, fName: string, save = false):
     save: save
   })
   return base64
+}
+
+export const clickRangeInputValue = (element: HTMLInputElement, value: string) => {
+  element.value = value
+  // added a click listener to have the event picked up
+  const clickEvent = new MouseEvent('click', { 'bubbles': true })
+  element.dispatchEvent(clickEvent)
+}
+
+export const setDefaultConfig = () => {
+  const config = JSON.stringify({ ...DEFAULTS, LANGUAGE: 'nl' })
+  localStorage.setItem('mv-config', config)
 }

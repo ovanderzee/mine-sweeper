@@ -1,11 +1,13 @@
 import React from 'react'
 
-export const preventReloadByEnter = (event: React.KeyboardEvent) => {
-  if (event.key === 'Enter') {
+export const preventReloadByEnter = (event: React.KeyboardEvent): boolean => {
+  const isAction = event.key === 'Enter'
+  if (isAction) {
     event.preventDefault()
     const ctrl = event.target as HTMLInputElement
     ctrl.blur()
   }
+  return isAction
 }
 
 export const scrollIntoViewTowardsCenter = (elem: HTMLElement) => {

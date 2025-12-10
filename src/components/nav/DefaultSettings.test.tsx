@@ -48,6 +48,7 @@ describe('DefaultSettings Component', () => {
     fireEvent.click(button)
     expect(configure).toHaveBeenCalledTimes(1)
     expect(configure).toHaveBeenCalledWith()
+    expect(storage.game).toStrictEqual(null)
   })
 
   it('should effect default config when clicked while game is lost', () => {
