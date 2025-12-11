@@ -71,7 +71,7 @@ dialog.ending {
   text-align: left;
 }
 
-.game-won-modal svg.shield {
+dialog svg.shield {
   --left: 50%;
   --top: 15%;
 
@@ -85,10 +85,6 @@ dialog.ending {
   transform: translate(-50%, -15%);
 
   animation: var(--fadeout-time) ease-out -shield
-}
-
-.game-won-modal svg.shield text {
-  font-family: "Helvetica Neue", HelveticaNeue, Helvetica, "Arial Unicode MS", "Arial Unicode", ArialUnicode, Arial, sans-serif;
 }
 
 @keyframes -shield {
