@@ -8,26 +8,20 @@ import storage from './../../common/storage'
 import HallOfFame from './HallOfFame'
 
 describe('The hall-of-fame page sidebar', () => {
+  let screen: RenderResult
 
-  it('should offer navigation to About page', async () => {
-    const screen = await renderInApp(<HallOfFame/>)
-    const navButton = screen.getByTitle('Description')
+  beforeEach(async () => screen = await renderInApp(<HallOfFame/>))
 
-    await expect.element(navButton).toBeInTheDocument()
+  it('should offer navigation to About page', () => {
+    expect(screen.getByTitle('Description')).toBeInTheDocument()
   })
 
-  it('should offer navigation to Configure page', async () => {
-    const screen = await renderInApp(<HallOfFame/>)
-    const navButton = screen.getByTitle('Settings')
-
-    await expect.element(navButton).toBeInTheDocument()
+  it('should offer navigation to Configure page', () => {
+    expect(screen.getByTitle('Settings')).toBeInTheDocument()
   })
 
-  it('should offer navigation to Game page', async () => {
-    const screen = await renderInApp(<HallOfFame/>)
-    const navButton = screen.getByTitle('Return to Game')
-
-    await expect.element(navButton).toBeInTheDocument()
+  it('should offer navigation to Game page', () => {
+    expect(screen.getByTitle('Return to Game')).toBeInTheDocument()
   })
 
 })
