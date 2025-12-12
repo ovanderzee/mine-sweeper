@@ -15,6 +15,9 @@ const FullscreenPlay = (props: FullscreenPlayProps) => {
   const { config, text } = pageCtx
   const boardEmSize = 24.5 // 23 + padding
   const boardPxSize = boardEmSize * config.FONT_SIZE
+  const canvasSizes = () => document.fullscreenElement
+    ? [screen.availWidth, screen.availHeight]
+    : [document.documentElement.clientWidth, document.documentElement.clientHeight]
   const playgroundRef = useRef<HTMLElement | null>(null)
   const [magnification, setMagnification] = useState(1)
   const setPlaygroundFit = props.setPlaygroundFit
@@ -44,14 +47,14 @@ const FullscreenPlay = (props: FullscreenPlayProps) => {
   const fitToContain = () => {
     if (!playgroundRef.current) return
     setPlaygroundFit('contain-screen')
-    const smallestPxSize = Math.min(screen.availWidth, screen.availHeight)
+    const smallestPxSize = Math.min(...canvasSizes())
     fitToNeed(smallestPxSize)
   }
 
   const fitToCover = () => {
     if (!playgroundRef.current) return
     setPlaygroundFit('cover-screen')
-    const biggestPxSize = Math.max(screen.availWidth, screen.availHeight)
+    const biggestPxSize = Math.max(...canvasSizes())
     fitToNeed(biggestPxSize)
   }
 
@@ -82,18 +85,6 @@ const FullscreenPlay = (props: FullscreenPlayProps) => {
   }, [toViewState])
 
   const fullscreenView = <>
-    <button id="contain-fit" type="button"
-      onClick={fitToContain}
-      title={text.tips['Contain all cells']}
-    >
-      <svg role="img" aria-label={text.icon['contain']}><use href="#contain-view" /></svg>
-    </button>
-    <button id="cover-fit" type="button"
-      onClick={fitToCover}
-      title={text.tips['Cover with cells']}
-    >
-      <svg role="img" aria-label={text.icon['cover']}><use href="#cover-view" /></svg>
-    </button>
     <button id="window-mode" type="button"
       title={text.tips['Return to window']}
       onClick={()=>setToViewState('windowed')}
@@ -102,17 +93,35 @@ const FullscreenPlay = (props: FullscreenPlayProps) => {
     </button>
   </>
 
-  const windowedView = (
+  const windowedView = (<>
+    <button id="reset-fit" type="button"
+      onClick={resetFit}
+      title={text.tips['Revert magnification']}
+    >
+      <svg><use href="#revert-view" /></svg>
+    </button>
     <button id="fullscreen-mode" type="button"
       title={text.tips['View fullscreen']}
       onClick={()=>setToViewState('fullscreen')}
     >
       <svg role="img" aria-label={text.icon['fullscreen']} overflow="visible"><use href="#to-fullscreen" /></svg>
     </button>
-  )
+  </>)
 
   return (
     <section id="fullscreen-play" className="tip">
+      <button id="contain-fit" type="button"
+        onClick={fitToContain}
+        title={text.tips['Contain all cells']}
+      >
+        <svg role="img" aria-label={text.icon['contain']}><use href="#contain-view" /></svg>
+      </button>
+      <button id="cover-fit" type="button"
+        onClick={fitToCover}
+        title={text.tips['Cover with cells']}
+      >
+        <svg role="img" aria-label={text.icon['cover']}><use href="#cover-view" /></svg>
+      </button>
       {document.fullscreenElement ? fullscreenView : windowedView}
     </section>
   )
