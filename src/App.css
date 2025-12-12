@@ -5,8 +5,6 @@
   display: flex;
   margin: 0 auto;
   width: var(--app-width);
-  height: 100%;
-  min-height: 100vh;
   background: var(--light-to-white-blue);
   transition: opacity 0.5s linear;
 }
@@ -39,6 +37,7 @@
 @media only screen and (orientation: landscape) {
   .screen {
     flex-wrap: nowrap;
+    min-height: 100dvh;
   }
 
   .screen > article {

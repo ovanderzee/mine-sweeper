@@ -102,12 +102,8 @@
   vertical-align: -14%;
 }
 
-#contain-fit,
-#cover-fit {
+article:not(.contain-screen):not(.cover-screen) #reset-fit,
+.contain-screen #contain-fit,
+.cover-screen #cover-fit {
   display: none;
-}
-
-.cover-screen #contain-fit,
-.contain-screen #cover-fit {
-  display: unset;
 }

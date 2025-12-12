@@ -69,6 +69,10 @@ export const ScreenFitSymbols = () => (
       </g>
       </g>
     </symbol>
+    <symbol id="revert-view" fill="currentcolor" viewBox="0 0 18 13">
+      <rect opacity={shade[1]} width="18" height="13" x="0" y="0"/>
+      <use href={`#plain-reset`} width="10" height="10" transform="translate(3.5,1)"/>
+    </symbol>
 
     <symbol id="to-fullscreen" fill="currentcolor" viewBox="0 0 15 15">
       <rect x="1" y="1" width="13" height="13" stroke="none" opacity={shade[0]} />
