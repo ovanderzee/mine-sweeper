@@ -1,7 +1,7 @@
 import { useContext, useEffect, useRef, useState } from 'react'
 import PageContext from '../../store/page-context'
 import { ScreenfullApi } from '../../common/app.d'
-import screenfull from '../../common/screenfull'
+import screenfull, { isFullscreenAble } from '../../common/screenfull'
 import './Tips.css'
 
 interface FullscreenPlayProps {
@@ -100,12 +100,15 @@ const FullscreenPlay = (props: FullscreenPlayProps) => {
     >
       <svg><use href="#revert-view" /></svg>
     </button>
-    <button id="fullscreen-mode" type="button"
-      title={text.tips['View fullscreen']}
-      onClick={()=>setToViewState('fullscreen')}
-    >
-      <svg role="img" aria-label={text.icon['fullscreen']} overflow="visible"><use href="#to-fullscreen" /></svg>
-    </button>
+
+    {isFullscreenAble() &&
+      <button id="fullscreen-mode" type="button"
+        title={text.tips['View fullscreen']}
+        onClick={()=>setToViewState('fullscreen')}
+      >
+        <svg role="img" aria-label={text.icon['fullscreen']} overflow="visible"><use href="#to-fullscreen" /></svg>
+      </button>
+    }
   </>)
 
   return (

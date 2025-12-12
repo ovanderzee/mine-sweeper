@@ -37,6 +37,10 @@ section.screen,
   width: fit-content;
 }
 
+#playground.cover-screen + nav {
+  font-size: 50%;
+}
+
 @media only screen and (orientation: portrait) {
   #playground[role="main"] + nav {
     width: 100%;
