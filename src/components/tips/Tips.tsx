@@ -1,3 +1,4 @@
+import { RefObject } from 'react'
 import TimeTracker from './TimeTracker'
 import MineTracker from './MineTracker'
 import FullscreenPlay from './FullscreenPlay'
@@ -12,7 +13,7 @@ export interface TipProps {
 
 interface TipsProps extends TipProps {
   onNew: (action: GameAction) => void
-  setPlaygroundFit: (arg: string) => void
+  playgroundRef: RefObject<HTMLElement | null>
 }
 
 const Tips = (props: TipsProps) => (
@@ -22,9 +23,7 @@ const Tips = (props: TipsProps) => (
     <section id="tip-action" className="tip">
       <NewGame onNew={props.onNew} stage={props.game.stage} appearance="tip" />
     </section>
-    <FullscreenPlay
-      setPlaygroundFit={props.setPlaygroundFit}
-    />
+    <FullscreenPlay playgroundRef={props.playgroundRef} />
   </aside>
 )
 

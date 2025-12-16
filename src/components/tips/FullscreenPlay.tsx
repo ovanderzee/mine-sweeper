@@ -1,11 +1,11 @@
-import { useContext, useEffect, useRef, useState } from 'react'
+import { RefObject, useContext, useEffect, useRef, useState } from 'react'
 import PageContext from '../../store/page-context'
 import { ScreenfullApi } from '../../common/app.d'
 import screenfull, { isFullscreenAble } from '../../common/screenfull'
 import './Tips.css'
 
 interface FullscreenPlayProps {
-  setPlaygroundFit: (arg: string) => void
+  playgroundRef: RefObject<HTMLElement | null>
 }
 
 type ViewStateTuple = 'windowed' | 'fullscreen'
@@ -18,14 +18,11 @@ const FullscreenPlay = (props: FullscreenPlayProps) => {
   const canvasSizes = () => document.fullscreenElement
     ? [screen.availWidth, screen.availHeight]
     : [document.documentElement.clientWidth, document.documentElement.clientHeight]
-  const playgroundRef = useRef<HTMLElement | null>(null)
+  const playground = props.playgroundRef.current
   const [magnification, setMagnification] = useState(1)
-  const setPlaygroundFit = props.setPlaygroundFit
   const sfRef = useRef<ScreenfullApi | null>(null)
 
   useEffect(() => {
-    playgroundRef.current = document.getElementById('playground')
-
     // on destroy
     return () => {
       if (sfRef?.current?.isFullscreen()) {
@@ -35,8 +32,8 @@ const FullscreenPlay = (props: FullscreenPlayProps) => {
   }, [])
 
   useEffect(() => {
-    if (!playgroundRef.current) return
-    playgroundRef.current.style.fontSize = magnification * config.FONT_SIZE + 'px'
+    if (!playground) return
+    playground.style.fontSize = magnification * config.FONT_SIZE + 'px'
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [magnification])
 
@@ -45,34 +42,33 @@ const FullscreenPlay = (props: FullscreenPlayProps) => {
   }
 
   const fitToContain = () => {
-    if (!playgroundRef.current) return
-    setPlaygroundFit('contain-screen')
+    playground?.classList.add('contain-screen')
+    playground?.classList.remove('cover-screen')
     const smallestPxSize = Math.min(...canvasSizes())
     fitToNeed(smallestPxSize)
   }
 
   const fitToCover = () => {
-    if (!playgroundRef.current) return
-    setPlaygroundFit('cover-screen')
+    playground?.classList.add('cover-screen')
+    playground?.classList.remove('contain-screen')
     const biggestPxSize = Math.max(...canvasSizes())
     fitToNeed(biggestPxSize)
   }
 
   const resetFit = () => {
-    setPlaygroundFit('')
+    playground?.classList.remove('contain-screen', 'cover-screen')
     setMagnification(1)
   }
 
   useEffect(() => {
-    if (playgroundRef.current) {
-      sfRef.current = screenfull(playgroundRef.current, fitToContain, resetFit)
-      sfRef?.current.addFullscreenChangeEvent()
-    }
+    sfRef.current = screenfull(playground, fitToContain, resetFit)
+    sfRef?.current.addFullscreenChangeEvent()
+
     return () => {
       sfRef?.current?.removeFullscreenChangeEvent()
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [playgroundRef])
+  }, [playground])
 
   const [toViewState, setToViewState] = useState<ViewStateTuple>()
 
