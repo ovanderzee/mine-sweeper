@@ -90,7 +90,7 @@ const GameCell = (props: GameCellProps) => {
     Keyboard input
   */
   const keystrokeHandler = (event: React.KeyboardEvent) => {
-    let goToCell!: HTMLButtonElement
+    let goToCell: HTMLElement | null = null
 
     switch(event.key) {
       case 'Enter':
@@ -102,16 +102,16 @@ const GameCell = (props: GameCellProps) => {
         actionHandler(GameActionType.FLAG)
         break
       case 'ArrowUp':
-        goToCell = document.getElementById(id(0, -1)) as HTMLButtonElement
+        goToCell = document.getElementById(id(0, -1))
         break
       case 'ArrowRight':
-        goToCell = document.getElementById(id(1, 0)) as HTMLButtonElement
+        goToCell = document.getElementById(id(1, 0))
         break
       case 'ArrowDown':
-        goToCell = document.getElementById(id(0, 1)) as HTMLButtonElement
+        goToCell = document.getElementById(id(0, 1))
         break
       case 'ArrowLeft':
-        goToCell = document.getElementById(id(-1, 0)) as HTMLButtonElement
+        goToCell = document.getElementById(id(-1, 0))
         break
     }
 
