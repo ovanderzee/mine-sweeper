@@ -32,3 +32,31 @@ section.screen,
   grid-column: var(--cell-col);
   grid-row: var(--cell-row);
 }
+
+.screen:has(#playground) {
+  width: fit-content;
+}
+
+#playground.cover-screen + nav {
+  font-size: 50%;
+}
+
+@media only screen and (orientation: portrait) {
+  #playground[role="main"] + nav {
+    width: 100%;
+  }
+
+  #playground[role="main"] + nav .sticky-slider {
+    margin-inline: auto;
+  }
+}
+
+@media only screen and (orientation: landscape) {
+  .screen:has(#playground) {
+    min-width: var(--app-width);
+  }
+
+  #playground[role="main"] {
+    min-width: calc(var(--app-width) - var(--nav-width));
+  }
+}

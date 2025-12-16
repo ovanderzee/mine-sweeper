@@ -198,8 +198,8 @@ describe('Precision as long as we need it', () => {
 
 describe('Sort and Rank scores', () => {
   const oldScores = [
-    {rank: 1, score: {points: 100}},
-    {rank: 2, score: {points: 30}}
+    {rank: 14, score: {points: 30}},
+    {rank: 2, score: {points: 100}},
   ] as ScoreItem[]
   const newScore = {rank: 0, score: {points: 67}} as ScoreItem
 
@@ -209,7 +209,13 @@ describe('Sort and Rank scores', () => {
 
     rankScores(currentScores)
 
+    expect(currentScores[0]).toBe(oldScores[1])
+    expect(currentScores[0].rank).toBe(1)
+
     expect(currentScores[1]).toBe(newScore)
-    expect(newScore.rank).toBe(2)
+    expect(currentScores[1].rank).toBe(2)
+
+    expect(currentScores[2]).toBe(oldScores[0])
+    expect(currentScores[2].rank).toBe(3)
   })
 })

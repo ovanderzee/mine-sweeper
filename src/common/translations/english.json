@@ -58,6 +58,8 @@
     "median": "median",
     "average": "average",
     "effort": "required turns",
+    "least": "least",
+    "most": "most",
     "detail-label": "Details of chosen score",
     "configuration": "configuration",
     "characteristics": "characteristics",
@@ -135,6 +137,7 @@
     "Playtime": "Playtime",
     "Contain all cells": "Have all cells visible",
     "Cover with cells": "Fill screen with cells",
+    "Revert magnification": "Revert magnification",
     "Return to window": "Play in a window",
     "View fullscreen": "Play on fullscreen"
   }

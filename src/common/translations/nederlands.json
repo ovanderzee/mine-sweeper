@@ -58,6 +58,8 @@
     "median": "mediaan",
     "average": "gemiddeld",
     "effort": "nodige zetten",
+    "least": "minste",
+    "most": "meeste",
     "detail-label": "Details gekozen score",
     "configuration": "configuratie",
     "characteristics": "kenmerken",
@@ -135,6 +137,7 @@
     "Playtime": "Speelduur",
     "Contain all cells": "Alle cellen zichtbaar",
     "Cover with cells": "Vul scherm met cellen",
+    "Revert magnification": "Vergroting ongedaan maken",
     "Return to window": "In een venster spelen",
     "View fullscreen": "Op volledig scherm spelen"
   }

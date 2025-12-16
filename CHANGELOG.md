@@ -23,13 +23,28 @@
 - Save a game on a new list page (with comment)
 - Show gamelevel and number of neighbouring mines in graph
 - Calculate coagulation (mine-mine borders | blank to mine ratio)
-- Enter key to start new game after game end
+- Focus New Game button after dismissing won-dialog or game lost
 - Eliminate outliers in graph
 - Browser tests on fullscreen feature
-- Remember last focussed game cell, as starting point for move with arrow key 
+- Remember last touched game cell, as starting point for move with arrow key 
 
 
-## [3.5.1]
+## [3.5.3]
+
+### Changed
+- Cover/contain game zooming without fullscreen ability
+
+### Fixed
+- Fixed navbar for iphone
+
+
+## [3.5.2] - 2025-12-06
+
+### Changed
+- Enhanced score popover
+
+
+## [3.5.1] - 2025-11-25
 
 ### Added
 - Methods for managing scores in the browser console
@@ -39,7 +54,7 @@
 - Robuster fullscreen functionality
 
 
-## [3.5.0]
+## [3.5.0] - 2025-11-12
 
 ### Added
 - Show score details in popover, list better readable
@@ -52,7 +67,7 @@
 - Deleted dysfunctional id on .screen
 
 
-## [3.4.0]
+## [3.4.0] - 2025-10-26
 
 ### Added
 - Show the game fullscreen
