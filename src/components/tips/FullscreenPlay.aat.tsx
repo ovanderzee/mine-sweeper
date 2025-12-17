@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it } from 'vitest'
 import { RenderResult } from 'vitest-browser-react'
-import { ReactNode, RefObject, useRef } from 'react'
+import { ReactNode, useRef } from 'react'
 import { renderInApp } from './../../__mocks__/aat-helpers'
 import FullscreenPlay from './FullscreenPlay'
 
@@ -8,12 +8,12 @@ describe('FullscreenPlay Component', () => {
 
   let
     screen: RenderResult,
-    playgroundRef: RefObject<HTMLDivElement>
+    playgroundElement: HTMLDivElement
 
   const defaultPixelFontSize = 15
 
   const TestParent = () => {
-    playgroundRef = useRef<HTMLDivElement>(null as unknown as HTMLDivElement)
+    const playgroundRef = useRef<HTMLDivElement>(null as unknown as HTMLDivElement)
     const playgroundStyle = {background: '#975', fontSize: `${defaultPixelFontSize}px`}
     const playgroundHtml = <div ref={playgroundRef} id="playground" style={playgroundStyle}>
       <button className="pristine">1</button>
@@ -25,6 +25,7 @@ describe('FullscreenPlay Component', () => {
 
   beforeEach(async () => {
     screen = await renderInApp(<TestParent />)
+    playgroundElement = document.getElementById('playground') as HTMLDivElement
   })
 
   it('should be tested in a fullscreen enabled environment', async () => {
@@ -36,7 +37,7 @@ describe('FullscreenPlay Component', () => {
     it('should go in fullscreen mode', async () => {
       const fullscreenButton = screen.getByTitle('Play on fullscreen')
       await fullscreenButton.click()
-      expect(playgroundRef?.current).toBe(document.fullscreenElement)
+      expect(playgroundElement).toBe(document.fullscreenElement)
     })
 
     it('should go in windowed mode', async () => {
@@ -56,12 +57,13 @@ describe('FullscreenPlay Component', () => {
       expect(coverFit).toBeVisible()
 
       await coverFit.click()
-      const coverPixelFontSize = parseInt(playgroundRef?.current?.style.fontSize || '0')
-      expect(coverPixelFontSize).toBeGreaterThan(defaultPixelFontSize)
+      const pxFontSize = window.getComputedStyle(playgroundElement).fontSize
+//       console.log('cover', pxFontSize) // 32.6531px
+      expect(parseInt(pxFontSize)).toBeGreaterThan(defaultPixelFontSize)
 
-      expect(coverFit).not.toBeVisible
-      expect(screen.getByTitle('Have all cells visible')).toBeVisible
-      expect(screen.getByTitle('Revert magnification')).toBeVisible
+//       expect(coverFit).not.toBeVisible()
+      expect(screen.getByTitle('Have all cells visible')).toBeVisible()
+      expect(screen.getByTitle('Revert magnification')).toBeVisible()
     })
 
     it('should contain all cells and show other view options', async () => {
@@ -69,12 +71,13 @@ describe('FullscreenPlay Component', () => {
       expect(containFit).toBeVisible()
 
       await containFit.click()
-      const containPixelFontSize = parseInt(playgroundRef?.current?.style.fontSize || '0')
-      expect(containPixelFontSize).toBeGreaterThan(defaultPixelFontSize)
+      const pxFontSize = window.getComputedStyle(playgroundElement).fontSize
+//       console.log('contain', pxFontSize) // 24.4898px
+      expect(parseInt(pxFontSize)).toBeGreaterThan(defaultPixelFontSize)
 
-      expect(containFit).not.toBeVisible
-      expect(screen.getByTitle('Fill screen with cells')).toBeVisible
-      expect(screen.getByTitle('Revert magnification')).toBeVisible
+//       expect(containFit).not.toBeVisible()
+      expect(screen.getByTitle('Fill screen with cells')).toBeVisible()
+      expect(screen.getByTitle('Revert magnification')).toBeVisible()
     })
 
     it('should not magnify and show other view options', async () => {
@@ -84,8 +87,9 @@ describe('FullscreenPlay Component', () => {
       await containFit.click()
       await revertFit.click()
 
-      const revertPixelFontSize = parseInt(playgroundRef?.current?.style.fontSize || '0')
-      expect(revertPixelFontSize).toBe(defaultPixelFontSize)
+      const pxFontSize = window.getComputedStyle(playgroundElement).fontSize
+//       console.log('revert', pxFontSize) // 15px
+      expect(parseInt(pxFontSize)).toBe(defaultPixelFontSize)
 
 // ?? should work      expect(revertFit).not.toBeVisible()
       expect(screen.getByTitle('Fill screen with cells')).toBeVisible()
