@@ -46,7 +46,7 @@ const Game = () => {
     }
   });
 
-  const playgroundRef = useRef<HTMLElement | null>(null)
+  const playgroundRef = useRef<HTMLDivElement>(null as unknown as HTMLDivElement)
 
   const gameBoard = (
     <article

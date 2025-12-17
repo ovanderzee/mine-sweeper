@@ -13,7 +13,7 @@ export interface TipProps {
 
 interface TipsProps extends TipProps {
   onNew: (action: GameAction) => void
-  playgroundRef: RefObject<HTMLElement | null>
+  playgroundRef: RefObject<HTMLDivElement>
 }
 
 const Tips = (props: TipsProps) => (

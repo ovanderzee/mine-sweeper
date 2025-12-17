@@ -8,18 +8,18 @@ describe('FullscreenPlay Component', () => {
 
   let
     screen: RenderResult,
-    playgroundRef: RefObject<HTMLElement | null>
+    playgroundRef: RefObject<HTMLDivElement>
 
   const defaultPixelFontSize = 15
 
   const TestParent = () => {
-    playgroundRef = useRef<HTMLElement | null>(null)
+    playgroundRef = useRef<HTMLDivElement>(null as unknown as HTMLDivElement)
     const playgroundStyle = {background: '#975', fontSize: `${defaultPixelFontSize}px`}
     const playgroundHtml = <div ref={playgroundRef} id="playground" style={playgroundStyle}>
       <button className="pristine">1</button>
       <button className="touched">1</button>
       <FullscreenPlay playgroundRef={playgroundRef} />
-    </div>
+    </div> as ReactNode
     return playgroundHtml
   }
 

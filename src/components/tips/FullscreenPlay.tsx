@@ -5,7 +5,7 @@ import screenfull, { isFullscreenAble } from '../../common/screenfull'
 import './Tips.css'
 
 interface FullscreenPlayProps {
-  playgroundRef: RefObject<HTMLElement | null>
+  playgroundRef: RefObject<HTMLDivElement>
 }
 
 type ViewStateTuple = 'windowed' | 'fullscreen'
