@@ -1,5 +1,5 @@
 import React from 'react'
-import { page, Locator } from 'vitest/browser'
+import { Locator } from 'vitest/browser'
 import { render, RenderResult } from 'vitest-browser-react'
 import PageContext from './../store/page-context'
 import PageProvider from './../store/PageProvider'
@@ -7,8 +7,6 @@ import { Languages } from '../common/app.d'
 import DEFAULTS from './../common/defaults'
 import storage from '../common/storage'
 import { texts } from './../common/i18n'
-
-page.viewport(560,420)
 
 /*
   renderInPage

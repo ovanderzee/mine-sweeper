@@ -10,6 +10,7 @@ export default defineConfig({
       enabled: true,
       provider: webdriverio(),
       headless: true,
+      viewport: { width: 800, height: 600 },
       // https://vitest.dev/guide/browser/webdriverio
       instances: [
         { browser: 'chrome' },
