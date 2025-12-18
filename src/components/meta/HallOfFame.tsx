@@ -122,9 +122,9 @@ const HallOfFame = () => {
   const fameContent = (
     <article
       role="main"
-      aria-label={text.nav['Hall of Fame']}
+      aria-labelledby="page-heading"
     >
-      <h1 className="h2">{text.nav['Hall of Fame']}</h1>
+      <h1 className="h2" id="page-heading">{text.nav['Hall of Fame']}</h1>
 
       {scores.length > SHOW_SORT_THRESHOLD && scoreSorting}
       {scores.length > SHOW_DIAGRAM_THRESHOLD && scoreDiagram}

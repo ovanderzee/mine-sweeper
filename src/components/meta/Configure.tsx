@@ -201,12 +201,12 @@ function Configure() {
   return (<>
     <article
       role="main"
-      aria-label={text.nav['Settings']}
+      aria-labelledby="page-heading"
     >
       <form
         onKeyDown={(event) => preventReloadByEnter(event)}
       >
-        <h1 className="sr-only">{text.nav['Settings']}</h1>
+        <h1 className="sr-only" id="page-heading">{text.nav['Settings']}</h1>
         {onbeginContent}
         {genericContent}
         {recordContent}

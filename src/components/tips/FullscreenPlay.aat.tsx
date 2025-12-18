@@ -1,4 +1,4 @@
-import { beforeEach, describe, expect, it } from 'vitest'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { RenderResult } from 'vitest-browser-react'
 import { ReactNode, useRef } from 'react'
 import { renderInApp } from './../../__mocks__/aat-helpers'
@@ -34,17 +34,23 @@ describe('FullscreenPlay Component', () => {
 
   describe('changes the view mode', () => {
 
-    it('should go in fullscreen mode', async () => {
+    it('should go into fullscreen mode', async () => {
       const fullscreenButton = screen.getByTitle('Play on fullscreen')
       await fullscreenButton.click()
       expect(playgroundElement).toBe(document.fullscreenElement)
     })
 
-    it('should go in windowed mode', async () => {
+    it('should go into windowed mode', async () => {
       const fullscreenButton = screen.getByTitle('Play on fullscreen')
       await fullscreenButton.click()
 
-      const windowedButton = screen.getByTitle('Play in a window')
+      const windowedButton = await vi.waitFor(() => {
+        // try to get the locator until it exists
+        const location = screen.getByTitle('Play in a window')
+        expect(location).toBeInTheDocument()
+        return location
+      })
+
       await windowedButton.click()
       expect(document.fullscreenElement).toBeFalsy()
     })

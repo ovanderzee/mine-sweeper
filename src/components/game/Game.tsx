@@ -52,12 +52,12 @@ const Game = () => {
     <article
       ref={playgroundRef}
       role="main"
-      aria-label={text.nav['Playground']}
+      aria-labelledby="page-heading"
       id="playground"
       className={`board-size__${BOARD_SIZE} ${gameState.stage}`}
       style={{'--board-size': BOARD_SIZE} as React.CSSProperties}
     >
-      <h1 className="sr-only">{text.nav['Playground']}</h1>
+      <h1 className="sr-only" id="page-heading">{text.nav['Playground']}</h1>
       <div id="game-board">
         {gameState.board.map((row) =>
           row.map((cell) => (

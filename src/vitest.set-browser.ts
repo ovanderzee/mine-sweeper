@@ -1,6 +1,10 @@
-import { beforeEach, vi } from 'vitest'
+import { afterEach, beforeEach, vi } from 'vitest'
 
-/* instead of jest.config fakeTimers: {"enableGlobally": true}, */
 beforeEach(() => {
   vi.useFakeTimers();
+});
+
+afterEach(() => {
+  // helps 'should go into windowed mode' sometimes
+  vi.runAllTimersAsync();
 });
