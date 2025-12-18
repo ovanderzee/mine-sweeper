@@ -13,7 +13,6 @@ import {
   clickNavigationButtonTo, setDefaultConfig, startPageTesting,
   clickGameButton, clickToLoose, clickToWin
 } from './../../__mocks__/specification-helpers'
-// import { newPortalLayer } from './../../__mocks__/render-helpers'
 import { newGameState, playingGameState, lostGameState, wonGameState } from './../../__mocks__/game-states'
 import { microConfig } from './../../__mocks__/configs'
 

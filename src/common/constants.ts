@@ -3,10 +3,7 @@ import { InputRange } from './app.d'
 // shortest game duration, to circumvent weird values, in milliseconds
 export const MIN_DURATION = 750
 
-// where the graphics are shown
-export const OVERLAY_ELEMENT = 'overlay'
-
-// fade out time for overlays, modals and pages, also in (shorter) css-variable
+// fade out time for introduction, modals and pages, also in (shorter) css-variable
 export const FADE_OUT_TIME = 550
 
 // threshold between a click and a deliberate long press, in milliseconds

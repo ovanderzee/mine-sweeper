@@ -8,7 +8,6 @@ import storage from './../common/storage'
 import { CellState } from './../common/game.d'
 import { FADE_OUT_TIME } from './../common/constants'
 import { microConfig } from './configs'
-import { newPortalLayer } from './render-helpers'
 
 export const clickNavigationButtonTo = {
   about: () => {
@@ -30,7 +29,6 @@ export const clickNavigationButtonTo = {
 }
 
 export const startPageTesting = () => {
-  newPortalLayer('overlay')
   render(<App />)
   // click 'skip intro' button to goto game screen
   const introButton = screen.getByLabelText('skip to play')

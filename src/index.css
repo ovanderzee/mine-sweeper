@@ -131,15 +131,6 @@ nav,
   overflow: hidden;
 }
 
-#overlay {
-  position: relative;
-  z-index: 10;
-}
-
-#overlay:empty {
-  z-index: -10;
-}
-
 button {
   font-family: inherit;
   cursor: pointer;
