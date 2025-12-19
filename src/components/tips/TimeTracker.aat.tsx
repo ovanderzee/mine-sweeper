@@ -1,14 +1,14 @@
 import { describe, expect, it, vi } from 'vitest'
 import TimeTracker from './TimeTracker'
 import { newGameState, playingGameState, lostGameState } from './../../__mocks__/game-states'
-import { renderInApp } from './../../__mocks__/aat-helpers'
+import { renderWithProvider } from './../../__mocks__/aat-helpers'
 
 describe('TimeTracker', () => {
   const floorSecs = (ms: number) => Math.floor(ms / 1000) % 60
   const floorMins = (ms: number) => Math.floor(ms / (1000 * 60)) % 60
 
   it('should not start before game is played', async () => {
-    const screen = await renderInApp(<TimeTracker game={newGameState} />)
+    const screen = await renderWithProvider(<TimeTracker game={newGameState} />)
     expect(screen.getByText(`00:00`)).toBeInTheDocument()
 
     // and stay the same
@@ -26,7 +26,7 @@ describe('TimeTracker', () => {
     const timeLapse = playingGameState.tShift - playingGameState.tZero
     const expMins = floorMins(timeLapse)
     const expSecs = floorSecs(timeLapse)
-    const screen = await renderInApp(<TimeTracker game={playingGameState} />)
+    const screen = await renderWithProvider(<TimeTracker game={playingGameState} />)
     //'00:45'
     expect(screen.getByText(`${expMins}:${expSecs}`)).toBeInTheDocument()
 
@@ -45,7 +45,7 @@ describe('TimeTracker', () => {
 
     const expMins = floorMins(timeLapse)
     const expSecs = floorSecs(timeLapse)
-    const screen = await renderInApp(<TimeTracker game={lostGameState} />)
+    const screen = await renderWithProvider(<TimeTracker game={lostGameState} />)
     //'03:50'
     expect(screen.getByText(`${expMins}:${expSecs}`)).toBeInTheDocument()
 

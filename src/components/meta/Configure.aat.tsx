@@ -4,7 +4,7 @@ import { RenderResult } from 'vitest-browser-react'
 import DEFAULTS from './../../common/defaults'
 import storage from './../../common/storage'
 import * as functions from './../../common/functions'
-import { renderInApp, clickRangeInputValue } from './../../__mocks__/aat-helpers'
+import { renderWithProvider, clickRangeInputValue } from './../../__mocks__/aat-helpers'
 import { playingGameState } from './../../__mocks__/game-states'
 import { microConfig } from './../../__mocks__/configs'
 import { liveScores } from './../../__mocks__/scores'
@@ -14,7 +14,7 @@ import Configure from './Configure'
 describe('The configure page sidebar', () => {
   let screen: RenderResult
 
-  beforeEach(async () => screen = await renderInApp(<Configure/>))
+  beforeEach(async () => screen = await renderWithProvider(<Configure/>))
 
   it('should offer navigation to About page', () => {
     expect(screen.getByTitle('Description')).toBeInTheDocument()
@@ -35,7 +35,7 @@ describe('The configure controls', () => {
 
   beforeEach(async () => {
     storage.config = DEFAULTS
-    screen = await renderInApp(<Configure/>)
+    screen = await renderWithProvider(<Configure/>)
   })
 
   it('should change the board-size setting', async () => {
@@ -157,7 +157,7 @@ describe('The configure-page reset button', () => {
   it('should restore default config', async () => {
     storage.game = null
     storage.config = microConfig
-    const screen = await renderInApp(<Configure/>)
+    const screen = await renderWithProvider(<Configure/>)
     await screen.getByTitle('Revert to Defaults').click()
     expect(storage.config).toStrictEqual(DEFAULTS)
   })
@@ -173,7 +173,7 @@ describe('The semantic form', () => {
 
   beforeEach(async () => {
     preventSpy = vi.spyOn(functions, 'preventReloadByEnter')
-    screen = await renderInApp(<Configure/>)
+    screen = await renderWithProvider(<Configure/>)
   })
 
   it('should call function to prevent submitting by text-inputs', async () => {

@@ -1,7 +1,7 @@
 
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { RenderResult } from 'vitest-browser-react'
-import { renderInApp, renderInPage } from './../../__mocks__/aat-helpers'
+import { renderWithProvider, renderWithContext } from './../../__mocks__/aat-helpers'
 import { microConfig, defaultChallengeConfig } from './../../__mocks__/configs'
 import { newGameState, playingGameState, lostGameState, wonGameState } from './../../__mocks__/game-states'
 import DEFAULTS from './../../common/defaults'
@@ -13,7 +13,7 @@ import DefaultSettings from './DefaultSettings'
 describe('DefaultSettings Component in PageContext', () => {
 
   it('should display the "Revolve Back" sign', async () => {
-    const screen = await renderInPage(<DefaultSettings />)
+    const screen = await renderWithContext(<DefaultSettings />)
 
     expect(screen.getByTitle('Revert to Defaults')).toBeInTheDocument()
     expect(screen.getByLabelText('counterclockwise revolving arrow')).toBeInTheDocument()
@@ -30,7 +30,7 @@ describe('DefaultSettings Component in PageContext', () => {
 
     const startWithContext = (async (gameState: GameState | null, config: AppConfig) => {
       if (gameState) storage.game = gameState
-      screen = await renderInPage(<DefaultSettings />, { config, configure })
+      screen = await renderWithContext(<DefaultSettings />, { config, configure })
       await screen.getByTitle('Revert to Defaults').click()
     })
 
@@ -95,7 +95,7 @@ describe('DefaultSettings Component in PageContext', () => {
     const startWithProvider = (async (gameState: GameState | null, config: AppConfig) => {
       if (gameState) storage.game = gameState
       if (config) storage.config = config
-      screen = await renderInApp(<DefaultSettings />)
+      screen = await renderWithProvider(<DefaultSettings />)
       await screen.getByTitle('Revert to Defaults').click()
     })
 
@@ -148,7 +148,7 @@ describe('DefaultSettings Component in PageContext', () => {
     const startWithProvider = (async (gameState: GameState, config: AppConfig) => {
       if (gameState) storage.game = gameState
       if (config) storage.config = config
-      screen = await renderInApp(<DefaultSettings />)
+      screen = await renderWithProvider(<DefaultSettings />)
       const button = screen.getByTitle('Revert to Defaults')
       await button.click()
       return button.element()

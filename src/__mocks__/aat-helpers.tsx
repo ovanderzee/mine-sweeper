@@ -7,14 +7,15 @@ import { Languages } from '../common/app.d'
 import DEFAULTS from './../common/defaults'
 import storage from '../common/storage'
 import { texts } from './../common/i18n'
+import AllSymbols from './../components/UI/AllSymbols'
 
 /*
-  renderInPage
+  renderWithContext
   Renders in app component; based on renderInContext
   Supplies translations and config
   Allows tracing calls to pageContext like pageCtx.navigate
 */
-export const renderInPage = async (component: React.ReactNode, keyValue: any = {}) => {
+export const renderWithContext = async (component: React.ReactNode, keyValue: any = {}) => {
 
   // for consistency
   if (keyValue.config) {
@@ -29,6 +30,7 @@ export const renderInPage = async (component: React.ReactNode, keyValue: any = {
 
   return await render(
     <PageContext.Provider value={{ ...fakeCtx, ...keyValue }}>
+      <AllSymbols />
       {component}
     </PageContext.Provider>
   )
@@ -40,15 +42,16 @@ const setTestLanguage = () => {
 }
 
 /*
-  renderInApp
+  renderWithProvider
   Renders in app component; based on renderInProvider
   Supplies translations and config
 */
-export const renderInApp = async (component: React.ReactNode): Promise<RenderResult> => {
+export const renderWithProvider = async (component: React.ReactNode): Promise<RenderResult> => {
   setTestLanguage()
 
   return await render(
     <PageProvider>
+      <AllSymbols />
       {component}
     </PageProvider>
   )

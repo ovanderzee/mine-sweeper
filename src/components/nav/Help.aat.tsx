@@ -1,5 +1,5 @@
 import { describe, expect, it, vi } from 'vitest'
-import { renderInApp, renderInPage } from './../../__mocks__/aat-helpers'
+import { renderWithProvider, renderWithContext } from './../../__mocks__/aat-helpers'
 
 import Help from './Help'
 import About from '../meta/About'
@@ -7,7 +7,7 @@ import About from '../meta/About'
 describe('GoBack Component', () => {
 
   it('should display the "QuestionMark" sign', async () => {
-    const screen = await renderInApp(<Help/>)
+    const screen = await renderWithProvider(<Help/>)
     const button = screen.getByTitle('Description')
     const svg = screen.getByLabelText('question-mark')
 
@@ -17,7 +17,7 @@ describe('GoBack Component', () => {
 
   it('should navigate when clicked', async () => {
     const navigate = vi.fn()
-    const screen = await renderInPage(<Help/>, { navigate })
+    const screen = await renderWithContext(<Help/>, { navigate })
     const button = screen.getByTitle('Description')
     await button.click()
 

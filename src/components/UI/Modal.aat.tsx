@@ -2,7 +2,7 @@ import { ReactNode } from 'react'
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { Locator, userEvent } from 'vitest/browser'
 import { RenderResult } from 'vitest-browser-react'
-import { renderInApp } from './../../__mocks__/aat-helpers'
+import { renderWithProvider } from './../../__mocks__/aat-helpers'
 import { FADE_OUT_TIME } from '../../common/constants'
 import { ApproveModal, ShieldModal } from './Modal'
 
@@ -32,7 +32,7 @@ describe('Modal Dialog', () => {
 
   it('should normally render a ready to use dialog element', async () => {
     isShowModal = false;
-    const screen = await renderInApp(getSimpleModal())
+    const screen = await renderWithProvider(getSimpleModal())
     modalDialog = screen.getByRole('dialog')
 
     expect(modalDialog).not.toBeInTheDocument() // but it is in the html
@@ -40,7 +40,7 @@ describe('Modal Dialog', () => {
 
   it('should put op a dialog element', async () => {
     isShowModal = true;
-    const screen = await renderInApp(getSimpleModal())
+    const screen = await renderWithProvider(getSimpleModal())
     modalDialog = screen.getByRole('dialog')
 
     expect(modalDialog).toBeVisible()
@@ -52,7 +52,7 @@ describe('Modal Dialog', () => {
 
     beforeEach(async () => {
       isShowModal = true;
-      screen = await renderInApp(getSimpleModal())
+      screen = await renderWithProvider(getSimpleModal())
       cancelButton = screen.getByText(/Cancel/i)
     })
 
@@ -92,7 +92,7 @@ describe('Modal Dialog', () => {
 
     beforeEach(async () => {
       isShowModal = true;
-      screen = await renderInApp(getSimpleModal())
+      screen = await renderWithProvider(getSimpleModal())
       confirmButton = screen.getByText(/OK/i)
     })
 
@@ -131,7 +131,7 @@ describe('Modal Dialog', () => {
 
     beforeEach(async () => {
       isShowModal = true;
-      screen = await renderInApp(getSimpleModal())
+      screen = await renderWithProvider(getSimpleModal())
       modalDialog = screen.getByRole('dialog')
     })
 
@@ -176,7 +176,7 @@ describe('Shield as Modal Dialog', () => {
   beforeEach(async () => {
     confirmFn = vi.fn()
     endFn = vi.fn()
-    screen = await renderInApp(getShieldModal())
+    screen = await renderWithProvider(getShieldModal())
   })
 
   it('should show the rank', () => {

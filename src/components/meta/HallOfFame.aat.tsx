@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it } from 'vitest'
 import { RenderResult } from 'vitest-browser-react'
 import { Locator } from 'vitest/browser'
-import { renderInApp } from './../../__mocks__/aat-helpers'
+import { renderWithProvider } from './../../__mocks__/aat-helpers'
 import { liveScores } from './../../__mocks__/scores'
 import storage from './../../common/storage'
 
@@ -10,7 +10,7 @@ import HallOfFame from './HallOfFame'
 describe('The hall-of-fame page sidebar', () => {
   let screen: RenderResult
 
-  beforeEach(async () => screen = await renderInApp(<HallOfFame/>))
+  beforeEach(async () => screen = await renderWithProvider(<HallOfFame/>))
 
   it('should offer navigation to About page', () => {
     expect(screen.getByTitle('Description')).toBeInTheDocument()
@@ -31,7 +31,7 @@ describe('The hall-of-fame-page clear list button', () => {
 
   beforeEach(async () => {
     storage.scores = liveScores
-    screen = await renderInApp(<HallOfFame/>)
+    screen = await renderWithProvider(<HallOfFame/>)
   })
 
   it('should instantaneously remove scores when confirmed', async () => {
@@ -65,7 +65,7 @@ describe('The hall-of-fame-page scores', () => {
 
   beforeEach(async () => {
     storage.scores = liveScores
-    screen = await renderInApp(<HallOfFame/>)
+    screen = await renderWithProvider(<HallOfFame/>)
   })
 
   it('should show the best scores with a badge', () => {
@@ -127,7 +127,7 @@ describe('The hall-of-fame-page list sorting', () => {
 
   beforeEach(async () => {
     storage.scores = liveScores
-    screen = await renderInApp(<HallOfFame/>)
+    screen = await renderWithProvider(<HallOfFame/>)
     panel = screen.getByRole('table')
     items = screen.getByRole('list').getByRole('button')
   })

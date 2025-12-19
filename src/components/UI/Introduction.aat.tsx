@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { RenderResult } from 'vitest-browser-react'
 import { userEvent, Locator } from 'vitest/browser'
-import { renderInApp } from './../../__mocks__/aat-helpers'
+import { renderWithProvider } from './../../__mocks__/aat-helpers'
 import Introduction from './Introduction'
 
 describe('Introduction', () => {
@@ -12,7 +12,7 @@ describe('Introduction', () => {
 
   beforeEach(async () => {
     doOnEnd = vi.fn()
-    screen = await renderInApp(<Introduction onEnd={doOnEnd} />)
+    screen = await renderWithProvider(<Introduction onEnd={doOnEnd} />)
     skipButton = screen.getByLabelText('skip to play')
   })
 

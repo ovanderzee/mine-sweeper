@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { RenderResult } from 'vitest-browser-react'
 import { ReactNode, useRef } from 'react'
-import { renderInApp } from './../../__mocks__/aat-helpers'
+import { renderWithProvider } from './../../__mocks__/aat-helpers'
 import FullscreenPlay from './FullscreenPlay'
 
 describe('FullscreenPlay Component', () => {
@@ -24,7 +24,7 @@ describe('FullscreenPlay Component', () => {
   }
 
   beforeEach(async () => {
-    screen = await renderInApp(<TestParent />)
+    screen = await renderWithProvider(<TestParent />)
     playgroundElement = document.getElementById('playground') as HTMLDivElement
   })
 
