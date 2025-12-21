@@ -35,9 +35,7 @@ const Introduction = (props: { onEnd: (timeout: number) => void }) => {
     >
       <div id="achter" />
       <h1 id="titel" className="tekst">
-        {text.intro.minesweeper_1}
-        <br />
-        {text.intro.minesweeper_2}
+        {text.common['mine sweeper']}
       </h1>
       <div id="schip">
         <div id="schip__brug"></div>

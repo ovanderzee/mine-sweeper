@@ -395,6 +395,7 @@ percent:   20%,  37%,  40%,  50%,  60%,  70%,  100%
 
 #titel {
   top: 0;
+  width: min-content;
   margin: 10% auto;
   line-height: 100%;
   color: var(--fire-red);
