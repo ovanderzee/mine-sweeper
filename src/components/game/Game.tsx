@@ -1,7 +1,7 @@
 import { useContext, useState, useEffect, useReducer, useRef } from 'react'
 import PageContext from '../../store/page-context'
 import GameCell from './GameCell'
-import GameCellDemoNav from './GameCellDemo'
+import GameCellDemoNav from '../meta/GameCellDemo'
 import NavOptionsBar from '../nav/NavOptionsBar'
 import HiScores from '../nav/HiScores'
 import NewGame from '../nav/NewGame'

@@ -46,9 +46,9 @@ describe('FullscreenPlay Component', () => {
 
       const windowedButton = await vi.waitFor(() => {
         // try to get the locator until it exists
-        const location = screen.getByTitle('Play in a window')
-        expect(location).toBeInTheDocument()
-        return location
+        const loc = screen.getByTitle('Play in a window')
+        expect(loc).toBeInTheDocument()
+        return loc
       })
 
       await windowedButton.click()

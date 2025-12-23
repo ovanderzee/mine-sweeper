@@ -13,6 +13,7 @@
 - vitest browser tests: close timed out after 20000ms
 - test coverage is by test config file, not integrated
 - added click listeners on range-inputs to test them, remove vitest/browser supports change listeners on inputs 
+- bomb explosions are clipped when portrait view
 
 ### Features
 - Playmode Tough: Play without flags or mine counters
@@ -25,8 +26,11 @@
 - Calculate coagulation (mine-mine borders | blank to mine ratio)
 - Focus New Game button after dismissing won-dialog or game lost
 - Eliminate outliers in graph
-- Browser tests on fullscreen feature
 - Remember last touched game cell, as starting point for move with arrow key 
+
+
+### Changed
+- Component tests running in the browser, to upgrade the specification tests running in jsdom.
 
 
 ## [3.5.3]
