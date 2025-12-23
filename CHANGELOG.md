@@ -27,6 +27,11 @@
 - Remember last touched game cell, as starting point for move with arrow key 
 
 
+
+### Fixed
+- The exploding mine animation is no longer clipped 
+
+
 ## [3.5.3]
 
 ### Changed

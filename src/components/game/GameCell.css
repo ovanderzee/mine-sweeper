@@ -123,10 +123,9 @@
 
 .game-lost #game-board button.mijn.explode .burst {
   display: inline-block;
-  width: 80%;
-  height: 80%;
+  width: 1.5em;
+  aspect-ratio: 1;
   transform: translate(-50%, -50%);
-  margin: 50%;
 
   background: radial-gradient(
     var(--fire-blue),
@@ -136,7 +135,7 @@
   );
   border-radius: 50%;
 
-  position: relative;
+  position: fixed;
   z-index: -15;
 
   animation-name: explode;
