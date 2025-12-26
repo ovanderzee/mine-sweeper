@@ -3,7 +3,7 @@ import { Locator } from 'vitest/browser'
 import { RenderResult } from 'vitest-browser-react'
 import { renderWithProvider, renderWithContext } from './../../__mocks__/aat-helpers'
 import { microConfig, scoringConfig } from './../../__mocks__/configs'
-import { newGameState, playingGameState, lostGameState } from './../../__mocks__/game-states'
+import { newGameState, playingGameState, lostGameState, decidedGameState } from './../../__mocks__/game-states'
 import { blank41pct } from './../../__mocks__/game-states'
 import { CellState } from './../../common/game.d'
 import DEFAULTS from './../../common/defaults'
@@ -56,7 +56,7 @@ describe('Game lifecycle', () => {
     const index = cells.findIndex(cell => cell.fill < 9)
     await screen.getByRole('main').getByRole('button').nth(index).click()
 
-    expect(storage?.game?.stage).toBe('game-playing')
+    expect(storage.game?.stage).toBe('game-playing')
     expect(screen.getByRole('main')).toHaveClass('game-playing')
   })
 
@@ -64,7 +64,7 @@ describe('Game lifecycle', () => {
     const index = cells.findIndex(cell => cell.fill > 8)
     await screen.getByRole('main').getByRole('button').nth(index).click()
 
-    expect(storage?.game?.stage).toBe('game-lost')
+    expect(storage.game?.stage).toBe('game-lost')
     expect(screen.getByRole('main')).toHaveClass('game-lost')
   })
 
@@ -78,13 +78,14 @@ describe('Game lifecycle', () => {
           loc = screen.getByRole('main').getByRole('button').nth(i)
           if (loc) await loc.click()
         } catch {
+          // @ts-expect-error // error TS2454: Variable 'loc' is used before being assigned.
           console.error(`WebDriverError: stale element reference: ${JSON.stringify(loc)} (seq.nr ${i})`)
         }
       }
     )
 
     await vi.waitFor(async () => {
-      expect(storage?.game?.stage).toBe('game-won')
+      expect(storage.game?.stage).toBe('game-won')
       expect(screen.getByRole('main')).toHaveClass('game-won')
     })
   })
@@ -174,7 +175,6 @@ describe('Polling the game', () => {
 })
 
 describe('Loading the Game', () => {
-
   beforeEach(() => {
     storage.config = microConfig
   })
@@ -214,63 +214,42 @@ describe('Loading the Game', () => {
 
 })
 
-describe.skip('handle loosing and winning', () => {
-  let
-    screen: RenderResult,
-    cells: CellState[],
-    fields: Locator
-
-  const getFieldByXY = (x: number, y: number): Locator | undefined => {
-    console.log('x', x, 'y', y)
-    return fields?.nth((x + y * scoringConfig.BOARD_SIZE)) || ''
-  }
-
-  beforeEach(async () => {
-    storage.game = playingGameState
+describe('handle loosing and winning', () => {
+  beforeEach(() => {
     storage.config = microConfig
-    screen = await renderWithProvider(<Game />)
-    cells = storage.game?.board.flat() || []
-    fields = screen.getByRole('main').getByRole('button')
   })
 
   it('should celebrate a won game', async () => {
-    cells
-      .map((cell, index) => cell.fill < 9 ? index : -1)
-      .filter(i => i > -1)
-      .forEach(async (i) => {
-        let loc: Locator
-        try { // WebDriverError: stale element reference
-          loc = screen.getByRole('main').getByRole('button').nth(i)
-          if (loc) await loc.click()
-        } catch {
-          console.error(`WebDriverError: stale element reference: ${JSON.stringify(loc)} (seq.nr ${i})`)
-        }
-      }
-    )
+    storage.game = decidedGameState
+    const screen = await renderWithProvider(<Game />)
+    const gameCells = screen.getByRole('main').getByRole('button')
+    await gameCells.nth(6).click()
 
+    expect(storage.game?.stage).toBe('game-won')
+    expect(screen.getByRole('main')).toHaveClass('game-won')
+
+    const dialog = screen.getByRole('dialog')
     await vi.waitFor(async () => {
-      expect(storage?.game?.stage).toBe('game-won')
-      expect(screen.getByRole('main')).toHaveClass('game-won')
+      expect(dialog).toBeInTheDocument()
+      expect(dialog).toHaveClass('shield-modal')
     })
-// fails often
-//     const dialog = screen.getByRole('dialog')
-//     expect(dialog).toBeInTheDocument()
   })
 
   it('should reflect on a lost game', async () => {
-    const allMines = cells.filter(cell => cell.fill > 8)
-    const index = cells.findIndex(cell => cell.fill > 8)
+    decidedGameState.board[2][2].locked = false
+    storage.game = decidedGameState
+    const screen = await renderWithProvider(<Game />)
+    const gameCells = screen.getByRole('main').getByRole('button')
+    await gameCells.nth(0).click()
 
-    await fields.nth(index).click()
-
-//     await vi.waitFor(async () => {
-//       allMines.forEach(m => {
-//         expect(getFieldByXY(m.col, m.row)).toHaveClass('explode')
-//       })
-//     })
-
-    expect(storage?.game?.stage).toBe('game-lost')
+    expect(storage.game?.stage).toBe('game-lost')
     expect(screen.getByRole('main')).toHaveClass('game-lost')
+    expect(gameCells.nth(0)).toHaveClass('explode')
+    expect(gameCells.nth(8)).not.toHaveClass('explode')
+
+    await vi.waitFor(async () => {
+      expect(gameCells.nth(8)).toHaveClass('explode')
+    })
   })
 
 })

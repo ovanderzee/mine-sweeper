@@ -51,7 +51,7 @@ describe('The game start button', () => {
     await screen.getByRole('navigation').getByTitle('New Game').click()
 
     await vi.waitFor(async () => {
-      expect(storage?.game?.stage).toBe('game-new')
+      expect(storage.game?.stage).toBe('game-new')
       expect(screen.getByRole('main')).toHaveClass('game-new')
     })
   })
@@ -86,7 +86,7 @@ describe('The replay button', () => {
   it("should restart a lost game", async () => {
     storage.game = playingGameState
     screen = await renderWithProvider(<Game/>)
-    const initialFilling = getFillDistribution(storage?.game?.board)
+    const initialFilling = getFillDistribution(storage.game?.board)
 
     const mineIndex = storage.game.board.flat().findIndex(c => c.fill > 8 && !c.stage)
     await screen.getByRole('main').getByRole('button').nth(mineIndex).click()
@@ -99,18 +99,18 @@ describe('The replay button', () => {
     await screen.getByRole('navigation').getByTitle('Replay').click()
 
     await vi.waitFor(async () => {
-      expect(storage?.game?.stage).toBe('game-new')
+      expect(storage.game?.stage).toBe('game-new')
       expect(screen.getByRole('main')).toHaveClass('game-new')
     })
 
-    const latterFilling = getFillDistribution(storage?.game?.board)
+    const latterFilling = getFillDistribution(storage.game?.board)
     expect(initialFilling).toStrictEqual(latterFilling)
   })
 
   it("should replay a game depending permission when a game is in progress", async () => {
     storage.game = playingGameState
     screen = await renderWithProvider(<Game/>)
-    const initialFilling = getFillDistribution(storage?.game?.board)
+    const initialFilling = getFillDistribution(storage.game?.board)
 
     await vi.waitFor(async () => {
       expect(storage.game?.stage).toBe('game-playing')
@@ -123,8 +123,10 @@ describe('The replay button', () => {
 
     await dialog.getByText('Cancel').click()
     expect(storage.game.stage).toBe('game-playing')
+    expect(getFillDistribution(storage.game?.board)).toStrictEqual(initialFilling)
 
     await dialog.getByText('Ok').click()
     expect(storage.game.stage).toBe('game-new')
+    expect(getFillDistribution(storage.game?.board)).toStrictEqual(initialFilling)
   })
 })
