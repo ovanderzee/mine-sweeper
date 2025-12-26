@@ -1,9 +1,9 @@
-import { beforeEach, describe, expect, it, vi, MockInstance } from 'vitest'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { userEvent } from 'vitest/browser'
 import { RenderResult } from 'vitest-browser-react'
 import DEFAULTS from './../../common/defaults'
 import storage from './../../common/storage'
-import * as functions from './../../common/functions'
+import { preventReloadByEnter } from './../../common/functions'
 import { renderWithProvider, clickRangeInputValue } from './../../__mocks__/aat-helpers'
 import { playingGameState } from './../../__mocks__/game-states'
 import { microConfig } from './../../__mocks__/configs'
@@ -168,11 +168,10 @@ describe('The semantic form', () => {
   // https://vitest.dev/guide/browser/#limitations
   vi.mock('./../../common/functions', { spy: true })
 
-  let screen: RenderResult,
-    preventSpy: MockInstance
+  let
+    screen: RenderResult
 
   beforeEach(async () => {
-    preventSpy = vi.spyOn(functions, 'preventReloadByEnter')
     screen = await renderWithProvider(<Configure/>)
   })
 
@@ -183,7 +182,7 @@ describe('The semantic form', () => {
     await userEvent.keyboard('{Enter}')
 
     expect(formField).toBeInTheDocument()
-    expect(preventSpy).toHaveBeenCalled()
-    expect(preventSpy).toHaveReturnedWith(true)
+    expect(preventReloadByEnter).toHaveBeenCalled()
+    expect(preventReloadByEnter).toHaveReturnedWith(true)
   })
 })

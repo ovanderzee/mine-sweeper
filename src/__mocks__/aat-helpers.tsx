@@ -1,4 +1,5 @@
 import React from 'react'
+import { expect, vi } from 'vitest'
 import { Locator } from 'vitest/browser'
 import { render, RenderResult } from 'vitest-browser-react'
 import PageContext from './../store/page-context'
@@ -8,6 +9,7 @@ import DEFAULTS from './../common/defaults'
 import storage from '../common/storage'
 import { texts } from './../common/i18n'
 import AllSymbols from './../components/UI/AllSymbols'
+import App from './../App'
 
 /*
   renderWithContext
@@ -55,6 +57,15 @@ export const renderWithProvider = async (component: React.ReactNode): Promise<Re
       {component}
     </PageProvider>
   )
+}
+
+export const renderWithApp = async (): Promise<RenderResult> => {
+  setTestLanguage()
+  const screen = await render(<App />)
+  const navBtn = screen.getByText('skip to game')
+  await navBtn.click()
+  await vi.waitFor(() => expect(screen.getByRole('Heading', {name: 'Playground'})).toBeInTheDocument())
+  return screen
 }
 
 export const makeScreenshot = async (loc: Locator, fName: string, save = false): Promise<string> => {
