@@ -62,9 +62,14 @@ export const renderWithProvider = async (component: React.ReactNode): Promise<Re
 export const renderWithApp = async (): Promise<RenderResult> => {
   setTestLanguage()
   const screen = await render(<App />)
-  const navBtn = screen.getByText('skip to game')
-  await navBtn.click()
-  await vi.waitFor(() => expect(screen.getByRole('Heading', {name: 'Playground'})).toBeInTheDocument())
+  const skipBtn = screen.getByText('skip to game')
+  await skipBtn.click()
+
+  await vi.waitFor(async () => {
+    await expect.element(skipBtn).not.toBeInTheDocument()
+    await expect.element(screen.getByRole('Heading', {name: 'Playground'})).toBeInTheDocument()
+  })
+
   return screen
 }
 

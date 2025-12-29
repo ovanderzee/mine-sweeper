@@ -31,7 +31,7 @@
 
 ### Changed
 - Component tests running in the browser, to upgrade the specification tests running in jsdom.
-
+- Alt+Tab sets focus to first element in a region
 
 ## [3.5.3]
 
