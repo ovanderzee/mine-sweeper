@@ -8,11 +8,9 @@
 - The shield looks like plastic. Make a dent in the shield to add realism
 - Debt after porting tests to vitest, see TODOs and it.skip 
 - Gameboard jumps when using the keyboard and covering the fullscreen mode
-- Run tests in browser instead of jsdom, mainly for dialog, popover and fullscreen
 - Look at disabled 'set-state-in-effect' and 'exhaustive-deps', might have to do with 'value cannot be modified' or 'cannot access refs during render' lint errors
-- vitest browser tests: close timed out after 20000ms
 - test coverage is by test config file, not integrated
-- added click listeners on range-inputs to test them, remove vitest/browser supports change listeners on inputs 
+- added click listeners on range-inputs to test them, remove when vitest/browser starts supporting change listeners on inputs 
 - bomb explosions are clipped when portrait view
 
 ### Features
@@ -32,6 +30,12 @@
 ### Changed
 - Component tests running in the browser, to upgrade the specification tests running in jsdom.
 - Alt+Tab sets focus to first element in a region
+- Refactored focussing between main and navigation regions
+
+### Removed
+- createPortal layering
+
+
 
 ## [3.5.3]
 
