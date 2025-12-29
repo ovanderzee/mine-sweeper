@@ -85,7 +85,7 @@ export const renderWithApp = async (name: string = 'Game'): Promise<RenderResult
   }
 
   await vi.waitFor(async () =>
-    await expect.element(screen.getByRole('Heading', {name: heading})).toBeInTheDocument()
+    await expect.element(screen.getByRole('heading', {name: heading})).toBeInTheDocument()
   )
 
   return screen

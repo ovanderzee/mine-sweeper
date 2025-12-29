@@ -1,24 +1,43 @@
-import { beforeEach, describe, expect, it } from 'vitest'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { RenderResult } from 'vitest-browser-react'
-import { renderWithProvider } from './../../__mocks__/aat-helpers'
-import About from './About'
+import { renderWithApp } from './../../__mocks__/aat-helpers'
 
 describe('The about page sidebar', () => {
-  let screen: RenderResult
+  let
+    screen: RenderResult
 
-  beforeEach(async () => screen = await renderWithProvider(<About/>))
+  beforeEach(async () => screen = await renderWithApp('About'))
 
-  it('should offer navigation to HallOfFame page', () => {
-    expect(screen.getByTitle('Hall of Fame')).toBeInTheDocument()
+  it('should offer navigation to HallOfFame page', async () => {
+    const navBtn = screen.getByRole('navigation').getByTitle('Hall of Fame')
+    expect(navBtn).toBeInTheDocument()
+    await navBtn.click()
+
+    await vi.waitFor(async () => {
+      expect(navBtn).not.toBeInTheDocument()
+      expect(screen.getByRole('heading', { name: 'Hall of Fame' })).toBeInTheDocument()
+    })
   })
 
-  it('should offer navigation to Configure page', () => {
-    expect(screen.getByTitle('Settings')).toBeInTheDocument()
+  it('should offer navigation to Configure page', async () => {
+    const navBtn = screen.getByRole('navigation').getByTitle('Settings')
+    expect(navBtn).toBeInTheDocument()
+    await navBtn.click()
+
+    await vi.waitFor(async () => {
+      expect(navBtn).not.toBeInTheDocument()
+      expect(screen.getByRole('heading', { name: 'Settings' })).toBeInTheDocument()
+    })
   })
 
-  it('should offer navigation to Game page', () => {
-    expect(screen.getByTitle('Return to Game')).toBeInTheDocument()
-  })
+  it('should offer navigation to Game page', async () => {
+    const navBtn = screen.getByRole('navigation').getByTitle('Return to Game')
+    expect(navBtn).toBeInTheDocument()
+    await navBtn.click()
 
+    await vi.waitFor(async () => {
+      expect(navBtn).not.toBeInTheDocument()
+      expect(screen.getByRole('heading', { name: 'Playground' })).toBeInTheDocument()
+    })
+  })
 })
-

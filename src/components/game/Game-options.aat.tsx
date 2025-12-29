@@ -1,29 +1,48 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { RenderResult } from 'vitest-browser-react'
-import { renderWithProvider } from './../../__mocks__/aat-helpers'
+import { renderWithApp } from './../../__mocks__/aat-helpers'
 import { playingGameState } from './../../__mocks__/game-states'
 import { microConfig } from './../../__mocks__/configs'
 import { getFillDistribution } from './../../common/scoring'
 import storage from './../../common/storage'
-import Game from './Game'
 
 describe('The game page sidebar', () => {
   let screen: RenderResult
 
-  beforeEach(async () => screen = await renderWithProvider(<Game/>))
+  beforeEach(async () => screen = await renderWithApp())
 
-  it('should offer navigation to About page', () => {
-    expect(screen.getByTitle('Description')).toBeInTheDocument()
+  it('should offer navigation to About page', async () => {
+    const navBtn = screen.getByRole('navigation').getByTitle('Description')
+    expect(navBtn).toBeInTheDocument()
+    await navBtn.click()
+
+    await vi.waitFor(async () => {
+      expect(navBtn).not.toBeInTheDocument()
+      expect(screen.getByRole('heading', { name: 'Defuse all mines' })).toBeInTheDocument()
+    })
   })
 
-  it('should offer navigation to HallOfFame page', () => {
-    expect(screen.getByTitle('Hall of Fame')).toBeInTheDocument()
+  it('should offer navigation to HallOfFame page', async () => {
+    const navBtn = screen.getByRole('navigation').getByTitle('Hall of Fame')
+    expect(navBtn).toBeInTheDocument()
+    await navBtn.click()
+
+    await vi.waitFor(async () => {
+      expect(navBtn).not.toBeInTheDocument()
+      expect(screen.getByRole('heading', { name: 'Hall of Fame' })).toBeInTheDocument()
+    })
   })
 
-  it('should offer navigation to Configure page', () => {
-    expect(screen.getByTitle('Settings')).toBeInTheDocument()
-  })
+  it('should offer navigation to Configure page', async () => {
+    const navBtn = screen.getByRole('navigation').getByTitle('Settings')
+    expect(navBtn).toBeInTheDocument()
+    await navBtn.click()
 
+    await vi.waitFor(async () => {
+      expect(navBtn).not.toBeInTheDocument()
+      expect(screen.getByRole('heading', { name: 'Settings' })).toBeInTheDocument()
+    })
+  })
 })
 
 describe('The game start button', () => {
@@ -36,7 +55,7 @@ describe('The game start button', () => {
 
   it('should start a new game when game ended', async () => {
     storage.game = playingGameState
-    screen = await renderWithProvider(<Game/>)
+    screen = await renderWithApp()
 
     expect(storage.game.stage).toBe('game-playing')
 
@@ -58,7 +77,7 @@ describe('The game start button', () => {
 
   it("should start a new game depending permission when a game is in progress", async () => {
     storage.game = playingGameState
-    screen = await renderWithProvider(<Game/>)
+    screen = await renderWithApp()
 
     expect(storage.game.stage).toBe('game-playing')
 
@@ -85,7 +104,7 @@ describe('The replay button', () => {
 
   it("should restart a lost game", async () => {
     storage.game = playingGameState
-    screen = await renderWithProvider(<Game/>)
+    screen = await renderWithApp()
     const initialFilling = getFillDistribution(storage.game?.board)
 
     const mineIndex = storage.game.board.flat().findIndex(c => c.fill > 8 && !c.stage)
@@ -109,7 +128,7 @@ describe('The replay button', () => {
 
   it("should replay a game depending permission when a game is in progress", async () => {
     storage.game = playingGameState
-    screen = await renderWithProvider(<Game/>)
+    screen = await renderWithApp()
     const initialFilling = getFillDistribution(storage.game?.board)
 
     await vi.waitFor(async () => {

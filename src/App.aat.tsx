@@ -14,7 +14,7 @@ describe('The app journey', () => {
     await navBtn.click()
 
     await vi.waitFor(async () => {
-      const loc = screen.getByRole('Heading', {name: 'Playground'})
+      const loc = screen.getByRole('heading', {name: 'Playground'})
       expect(loc).toBeInTheDocument()
       expect(navBtn).not.toBeInTheDocument()
     })
@@ -25,7 +25,7 @@ describe('The app journey', () => {
     await navBtn.click()
 
     await vi.waitFor(() => {
-      const loc = screen.getByRole('Heading', {name: 'Hall of Fame'})
+      const loc = screen.getByRole('heading', {name: 'Hall of Fame'})
       expect(loc).toBeInTheDocument()
       expect(navBtn).not.toBeInTheDocument()
     })
@@ -36,7 +36,7 @@ describe('The app journey', () => {
     await navBtn.click()
 
     await vi.waitFor(() => {
-      const loc = screen.getByRole('Heading', {name: 'Description'})
+      const loc = screen.getByRole('heading', {name: 'Description'})
       expect(loc).toBeInTheDocument()
       expect(navBtn).not.toBeInTheDocument()
     })
@@ -47,7 +47,7 @@ describe('The app journey', () => {
     await navBtn.click()
 
     await vi.waitFor(() => {
-      const loc = screen.getByRole('Heading', {name: 'Settings'})
+      const loc = screen.getByRole('heading', {name: 'Settings'})
       expect(loc).toBeInTheDocument()
       expect(navBtn).not.toBeInTheDocument()
     })
@@ -58,7 +58,7 @@ describe('The app journey', () => {
     await navBtn.click()
 
     await vi.waitFor(() => {
-      const loc = screen.getByRole('Heading', {name: 'PLayground'})
+      const loc = screen.getByRole('heading', {name: 'Playground'})
       expect(loc).toBeInTheDocument()
       expect(navBtn).not.toBeInTheDocument()
     })
