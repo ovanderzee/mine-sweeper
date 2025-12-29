@@ -59,16 +59,34 @@ export const renderWithProvider = async (component: React.ReactNode): Promise<Re
   )
 }
 
-export const renderWithApp = async (): Promise<RenderResult> => {
+export const renderWithApp = async (name: string = 'Game'): Promise<RenderResult> => {
   setTestLanguage()
   const screen = await render(<App />)
   const skipBtn = screen.getByText('skip to game')
   await skipBtn.click()
 
+  let title: string
+  switch (name) {
+    case 'About':       title = 'Description'; break;
+    case 'HallOfFame':  title = 'Hall of Fame'; break;
+    case 'Configure':   title = 'Settings'; break;
+  }
+
   await vi.waitFor(async () => {
     await expect.element(skipBtn).not.toBeInTheDocument()
-    await expect.element(screen.getByRole('Heading', {name: 'Playground'})).toBeInTheDocument()
+    if (title) await screen.getByTitle(title).click()
   })
+
+  let heading = 'Playground'
+  switch (name) {
+    case 'About':       heading = 'Description'; break;
+    case 'HallOfFame':  heading = 'Hall of Fame'; break;
+    case 'Configure':   heading = 'Settings'; break;
+  }
+
+  await vi.waitFor(async () =>
+    await expect.element(screen.getByRole('Heading', {name: heading})).toBeInTheDocument()
+  )
 
   return screen
 }
