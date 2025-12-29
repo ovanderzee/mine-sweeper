@@ -12,6 +12,8 @@
 - test coverage is by test config file, not integrated
 - added click listeners on range-inputs to test them, remove when vitest/browser starts supporting change listeners on inputs 
 - bomb explosions are clipped when portrait view
+- Vitest lacks support for pointerup/down, thus for longpress
+
 
 ### Features
 - Playmode Tough: Play without flags or mine counters

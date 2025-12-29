@@ -1,4 +1,3 @@
-import '@testing-library/jest-dom/vitest'
 import { vi } from 'vitest'
 import screenfullFn from './screenfull'
 import { ScreenfullApi } from './app.d'
