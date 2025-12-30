@@ -29,25 +29,21 @@
 - Remember last touched game cell, as starting point for move with arrow key 
 
 
+
+## [3.6.0] - 2025-12-30
+
 ### Changed
 - Component tests running in the browser, to upgrade the specification tests running in jsdom.
 - Alt+Tab sets focus to first element in a region
 - Refactored focussing between main and navigation regions
-
-### Fixed
-- The exploding mine animation is no longer clipped
-
-### Removed
-- createPortal layering
-
-
-## [3.5.3]
-
-### Changed
 - Cover/contain game zooming without fullscreen ability
 
 ### Fixed
 - Fixed navbar for iphone
+- The exploding mine animation is no longer clipped
+
+### Removed
+- createPortal layering
 
 
 ## [3.5.2] - 2025-12-06
