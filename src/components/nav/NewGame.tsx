@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react'
 import PageContext from '../../store/page-context'
-import Modal from '../UI/Modal'
+import { ApproveModal } from '../UI/Modal'
 import { GameStages, GameActionType, GameAction } from '../../common/game.d';
 
 interface NewGameProps {
@@ -23,43 +23,32 @@ const NewGame = (props: NewGameProps) => {
     setTimeout(()=>setShowActive(false), 300)
   }
 
-  const consentModal = <Modal
-    className="consent"
+  const approveModal = <ApproveModal
+    message={text.dialog['Quit and new game?']}
     onConfirm={confirmHandler}
     onCancel={() => {}}
-    closeModal={() => setShowModal(false)}
-  >
-    {text.dialog['Quit and new game?']}
-  </Modal>
+    isShowModal={showModal}
+    endShowModal={()=>setShowModal(false)}
+  />
 
   const newGameHandler = () => {
     const isPlaying = props.stage === GameStages.PLAYING
     isPlaying ? setShowModal(isPlaying) : confirmHandler()
   }
 
-  const navOptionButton = <>
+  return <>
     <button type="button"
       className={`nav-option ${showActive ? 'active' : ''}`}
       title={text.nav['New Game']}
       onClick={newGameHandler}
     >
-      <svg role="img" aria-label={text.icon['play']}><use href={`#nav-play`} /></svg>
+      {props.appearance === 'tip'
+        ? <svg role="img" aria-label={text.icon['play']}><use href={`#plain-play`} /></svg>
+        : <svg role="img" aria-label={text.icon['play']}><use href={`#nav-play`} /></svg>
+      }
     </button>
-    {showModal && consentModal}
+    {approveModal}
   </>
-
-  const tipButton = <>
-    <button type="button"
-      className={`nav-option ${showActive ? 'active' : ''}`}
-      title={text.nav['New Game']}
-      onClick={newGameHandler}
-    >
-      <svg role="img" aria-label={text.icon['play']}><use href={`#plain-play`} /></svg>
-    </button>
-    {showModal && consentModal}
-  </>
-
-  return props.appearance === 'tip' ? tipButton : navOptionButton
 }
 
 export default NewGame

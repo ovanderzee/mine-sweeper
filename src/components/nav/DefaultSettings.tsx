@@ -3,7 +3,7 @@ import PageContext from '../../store/page-context'
 import DEFAULTS from '../../common/defaults'
 import storage from '../../common/storage'
 import { GameStages } from '../../common/game.d'
-import Modal from '../UI/Modal'
+import { ApproveModal } from '../UI/Modal'
 
 const DefaultSettings = () => {
   const pageCtx = useContext(PageContext)
@@ -22,15 +22,6 @@ const DefaultSettings = () => {
     storage.eraseGame()
     confirmHandler()
   }
-
-  const consentModal = <Modal
-    className="consent"
-    onConfirm={quitAndConfirm}
-    onCancel={() => {}}
-    closeModal={() => setShowModal(false)}
-  >
-    {text.dialog['Quit Game?']}
-  </Modal>
 
   const resetHandler = () => {
     // (when playing and a game) or no game
@@ -53,7 +44,13 @@ const DefaultSettings = () => {
     >
       <svg role="img" aria-label={text.icon['ccw-revolving']}><use href={`#nav-reset`} /></svg>
     </button>
-    {showModal && consentModal}
+    <ApproveModal
+      message={text.dialog['Quit Game?']}
+      onConfirm={confirmHandler}
+      onCancel={() => {}}
+      isShowModal={showModal}
+      endShowModal={()=>setShowModal(false)}
+    />
   </>
 }
 

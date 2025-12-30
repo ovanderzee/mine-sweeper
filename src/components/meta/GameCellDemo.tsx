@@ -4,7 +4,7 @@ import NavOptionsBar from '../nav/NavOptionsBar'
 import Settings from '../nav/Settings'
 import GoBack from '../nav/GoBack'
 import './GameCellDemo.css'
-import '../meta/Meta.css'
+import './Meta.css'
 
 const devMatch = /^(localhost|\d+\.\d+\.\d+\.\d+)$/
 const inDevelopment = window.location.hostname.match(devMatch)

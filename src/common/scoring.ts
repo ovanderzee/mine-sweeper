@@ -149,3 +149,6 @@ export const countMoves = (state: GameState): number =>
     .flat()
     .filter(cell => cell.stage === CellStateStage.TESTED)
     .length
+
+export const getFillDistribution = (board: CellState[][]): number[][] =>
+  board.map((row: CellState[]) => row.map((cell: CellState) => cell.fill))

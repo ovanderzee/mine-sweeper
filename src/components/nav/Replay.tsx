@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react'
 import PageContext from '../../store/page-context'
-import Modal from '../UI/Modal'
+import { ApproveModal } from '../UI/Modal'
 import { GameStages, GameActionType, GameAction } from '../../common/game.d';
 
 interface ReplayProps {
@@ -20,16 +20,7 @@ const Replay = (props: ReplayProps) => {
     setShowActive(true)
     props.onReplay(action)
     setTimeout(()=>setShowActive(false), 300)
-}
-
-  const consentModal = <Modal
-    className="consent"
-    onConfirm={confirmHandler}
-    onCancel={() => {}}
-    closeModal={() => setShowModal(false)}
-  >
-    {text.dialog['Quit and restart game?']}
-  </Modal>
+  }
 
   const replayHandler = () => {
     const isPlaying = props.stage === GameStages.PLAYING
@@ -44,7 +35,13 @@ const Replay = (props: ReplayProps) => {
     >
       <svg role="img" aria-label={text.icon['cw-revolving']}><use href={`#nav-replay`} /></svg>
     </button>
-    {showModal && consentModal}
+    <ApproveModal
+      message={text.dialog['Quit and restart game?']}
+      onConfirm={confirmHandler}
+      onCancel={() => {}}
+      isShowModal={showModal}
+      endShowModal={()=>setShowModal(false)}
+    />
   </>
 }
 

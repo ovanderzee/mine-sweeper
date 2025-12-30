@@ -1,14 +1,14 @@
-import { useContext, useState, useEffect, useReducer } from 'react'
+import { useContext, useState, useEffect, useReducer, useRef } from 'react'
 import PageContext from '../../store/page-context'
 import GameCell from './GameCell'
-import GameCellDemoNav from './GameCellDemo'
+import GameCellDemoNav from '../meta/GameCellDemo'
 import NavOptionsBar from '../nav/NavOptionsBar'
 import HiScores from '../nav/HiScores'
 import NewGame from '../nav/NewGame'
 import Replay from '../nav/Replay'
 import Help from '../nav/Help'
 import Settings from '../nav/Settings'
-import GameWonModal from './GameWonModal'
+import { ShieldModal } from '../UI/Modal'
 import { initialGameState } from './common'
 import { gameReducer } from './game-reducer'
 import { GameStages, GameAction, GameActionType } from '../../common/game.d'
@@ -46,17 +46,18 @@ const Game = () => {
     }
   });
 
-  const [playgroundFit, setPlaygroundFit] = useState('')
+  const playgroundRef = useRef<HTMLDivElement>(null as unknown as HTMLDivElement)
 
   const gameBoard = (
     <article
+      ref={playgroundRef}
       role="main"
-      aria-label={text.nav['Playground']}
+      aria-labelledby="page-heading"
       id="playground"
-      className={`board-size__${BOARD_SIZE} ${gameState.stage} ${playgroundFit}`}
+      className={`board-size__${BOARD_SIZE} ${gameState.stage}`}
       style={{'--board-size': BOARD_SIZE} as React.CSSProperties}
     >
-      <h1 className="sr-only">{text.nav['Playground']}</h1>
+      <h1 className="sr-only" id="page-heading">{text.nav['Playground']}</h1>
       <div id="game-board">
         {gameState.board.map((row) =>
           row.map((cell) => (
@@ -71,7 +72,7 @@ const Game = () => {
       <Tips
         game={gameState}
         onNew={dispatchGameAction}
-        setPlaygroundFit={setPlaygroundFit}
+        playgroundRef={playgroundRef}
       />
     </article>
   )
@@ -114,16 +115,22 @@ const Game = () => {
     }
   }, [gameWasWon, gameWasLost, gameState.mines])
 
-  const gameWonModal = <GameWonModal
-    close={setShowWonModal}
-    state={gameState}
+  const gameWonModal = <ShieldModal
+    label={text.game['congrats']
+      .replace('%p', gameState.score.score.points.toString())
+      .replace('%r', gameState.score.rank.toString())
+    }
+    message={gameState.score.rank.toString()}
+    onConfirm={() => {}}
+    isShowModal={showWonModal}
+    endShowModal={()=>setShowWonModal(false)}
   />
 
   return (
     <>
       {gameBoard}
       {gameNavigation}
-      {showWonModal && gameWonModal}
+      {gameWonModal}
     </>
   )
 }

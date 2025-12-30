@@ -1,20 +1,9 @@
-import '@testing-library/jest-dom/vitest'
 import { vi } from 'vitest'
 
 /* instead of jest.config fakeTimers: {"enableGlobally": true}, */
 beforeEach(() => {
   vi.useFakeTimers();
 });
-
-/* overcome lacking document object */
-
-vi.mock('react-dom', async () => {
-  const original = await vi.importActual('react-dom')
-  return {
-    ...original,
-    createPortal: (node: HTMLElement): HTMLElement => node,
-  }
-})
 
 /* <dialog> lacking in jest-dom */
 

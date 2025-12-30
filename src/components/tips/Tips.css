@@ -23,7 +23,7 @@
   font-size: 80%;
 }
 
-.tip button {
+.tip > button {
   border: none;
   background: none;
   padding: 0;

@@ -89,7 +89,7 @@ ol button article .unit {
   line-height: 1.2;
 }
 
-ol button.latest {
+ol button[aria-label~=latest] {
   --radius: 1ex;
 
   outline: 1.5px solid var(--dark-blue);
@@ -99,10 +99,10 @@ ol button.latest {
   margin-block: 1em;
   padding: calc(var(--radius) / 2) var(--radius);
 }
-ol button.latest .date {
+ol button[aria-label~=latest] .date {
   align-self: start;
 }
-ol button.latest * {
+ol button[aria-label~=latest] * {
   color: white !important;
 }
 

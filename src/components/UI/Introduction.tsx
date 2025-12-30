@@ -1,7 +1,6 @@
 import { useContext, useState, useRef, useEffect } from 'react'
-import { createPortal } from 'react-dom'
 import PageContext from '../../store/page-context'
-import { OVERLAY_ELEMENT, FADE_OUT_TIME } from '../../common/constants'
+import { FADE_OUT_TIME } from '../../common/constants'
 import './Introduction.css'
 
 const Introduction = (props: { onEnd: (timeout: number) => void }) => {
@@ -36,9 +35,7 @@ const Introduction = (props: { onEnd: (timeout: number) => void }) => {
     >
       <div id="achter" />
       <h1 id="titel" className="tekst">
-        {text.intro.minesweeper_1}
-        <br />
-        {text.intro.minesweeper_2}
+        {text.common['mine sweeper']}
       </h1>
       <div id="schip">
         <div id="schip__brug"></div>
@@ -69,7 +66,7 @@ const Introduction = (props: { onEnd: (timeout: number) => void }) => {
     </button>
   )
 
-  return createPortal(animatedHtml, document.getElementById(OVERLAY_ELEMENT)!)
+  return animatedHtml
 }
 
 export default Introduction

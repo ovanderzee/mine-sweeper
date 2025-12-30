@@ -55,8 +55,7 @@ html {
 }
 
 body,
-section.screen,
-.modal {
+section.screen {
   font-size: 15px;
 }
 
@@ -130,20 +129,6 @@ nav,
 #root:has(#game .game-lost) {
   /* prevent scrollbars when mines explode */
   overflow: hidden;
-}
-
-#overlay {
-  position: relative;
-  z-index: 10;
-}
-
-#overlay:empty {
-  z-index: -10;
-}
-
-#modal {
-  position: relative;
-  z-index: 20;
 }
 
 button {

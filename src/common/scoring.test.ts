@@ -4,9 +4,9 @@ import {
   leastClicksToWin, mostClicksToWin,
   unmarkCells,
   makeBoardCode, sequenceFillData,
-  precise, rankScores
+  precise, rankScores, getFillDistribution
 } from './scoring'
-import { blank18pct, blank26pct, blank31pct, blank41pct } from '../__mocks__/game-states'
+import { newGameState, blank18pct, blank26pct, blank31pct, blank41pct } from '../__mocks__/game-states'
 import { ScoreItem } from './game.d'
 import { RANGES } from './constants'
 
@@ -218,4 +218,10 @@ describe('Sort and Rank scores', () => {
     expect(currentScores[2]).toBe(oldScores[0])
     expect(currentScores[2].rank).toBe(3)
   })
+})
+
+it('getFillDistribution should offer a comparable board', ()=>{
+  const newGameFillDistribution = [[9,1,0],[1,2,1],[0,1,9]]
+  const ngFills = getFillDistribution(newGameState.board)
+  expect(ngFills).toStrictEqual(newGameFillDistribution)
 })

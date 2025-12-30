@@ -10,8 +10,6 @@
     "default player": "anonymous"
   },
   "intro": {
-    "minesweeper_1": "mine",
-    "minesweeper_2": "sweeper",
     "skip_this": "skip to game"
   },
   "cell": {
@@ -19,6 +17,9 @@
     "col": "column",
     "pristine": "hidden",
     "touched": "open"
+  },
+  "game": {
+    "congrats": " You won! You got %p points and reached rank %r"
   },
   "help": {
     "Nav Heading": "Navigation",

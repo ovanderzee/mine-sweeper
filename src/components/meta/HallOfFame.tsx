@@ -122,9 +122,9 @@ const HallOfFame = () => {
   const fameContent = (
     <article
       role="main"
-      aria-label={text.nav['Hall of Fame']}
+      aria-labelledby="page-heading"
     >
-      <h1 className="h2">{text.nav['Hall of Fame']}</h1>
+      <h1 className="h2" id="page-heading">{text.nav['Hall of Fame']}</h1>
 
       {scores.length > SHOW_SORT_THRESHOLD && scoreSorting}
       {scores.length > SHOW_DIAGRAM_THRESHOLD && scoreDiagram}
@@ -139,7 +139,8 @@ const HallOfFame = () => {
         )}
         {scores.map((log: ScoreItem, index) => (
           <button type="button" popoverTarget="score-popover" popoverTargetAction="show"
-            className={`${log.rank <= 10 ? 'super' : ''} ${log.date === latest.date ? 'latest' : ''}`}
+            className={`${log.rank <= 10 ? 'super' : ''}`}
+            aria-label={`${log.date === latest.date ? 'latest' : ''}`}
             key={`${log.rank}_${log.score.points}`}
             onClick={() => setPopScore(log)}
             title={text.fame['Number %n in %s sort'].replace('%n', String(index+1)).replace('%s', text.VAR[sortLabel])}
@@ -196,7 +197,7 @@ const HallOfFame = () => {
     <>
       {fameContent}
       {fameNavigation}
-      <section id="score-popover" popover="auto" aria-label={text.fame['detail-label']}>
+      <section id="score-popover" popover="auto" role="status" aria-label={text.fame['detail-label']}>
         <ScorePopover score={popScore} />
       </section>
     </>

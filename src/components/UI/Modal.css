@@ -2,8 +2,7 @@ dialog {
   width: 100%;
   height: 100%;
 
-  backdrop-filter: brightness(75%) contrast(120%);
-  background: transparent;
+  background: #0003;
   border: 3px solid #6661;
 }
 
@@ -14,7 +13,7 @@ dialog.ending {
 
 /* DIALOG */
 
-.dialog {
+.dialog-body {
   background: var(--light-to-medium-blue);
   border-radius: .5em;
   box-shadow: -0.02em -0.05em 0.25em white, 0.15em 0.1em 0.25em black;
@@ -26,46 +25,19 @@ dialog.ending {
   z-index: 100;
 }
 
-.dialog::before,
-.dialog::after {
-  position: absolute;
-  z-index: -5;
-  line-height: 71%;
-  text-shadow: 0.015em 0.02em var(--dark-blue);
-}
-
-/* rang */
-.dialog::before {
-  content: attr(data-text-before);
-  left: 0.1em;
-  top: 0.1em;
-  font-size: 5em;
-  font-weight: 500;
-  color: var(--medium-blue);
-}
-
-/* score */
-.dialog::after {
-  content: attr(data-text-after);
-  left: 0.167em;
-  bottom: 0.25em;
-  color: var(--light-blue);
-  font-size: 2.2em;
-}
-
-.dialog .h3.content {
+.dialog-body .h3.content {
   font-size: 1.167em;
   margin: 1em;
 }
 
-.dialog .buttons {
+.dialog-body .buttons {
   display: flex;
   justify-content: space-between;
   margin: 0.5em;
   min-height: 1em;
 }
 
-.dialog button {
+.dialog-body button {
   margin: 0.5em;
   line-height: 2.3em;
   padding: 0 1em;
@@ -77,17 +49,17 @@ dialog.ending {
   background: var(--medium-to-dark-blue);
 }
 
-.dialog button:first-child {
+.dialog-body button:first-child {
   margin-left: inherit;
   margin-right: auto;
 }
 
-.dialog button:last-child {
+.dialog-body button:last-child {
   margin-left: auto;
   margin-right: inherit;
 }
 
-.dialog button.cancel {
+.dialog-body button.cancel {
   background: var(--light-to-medium-blue);
   color: black;
   text-shadow: -0.02em -0.05em white, 0.008em 0.02em var(--light-blue);
@@ -95,11 +67,11 @@ dialog.ending {
 
 /* CLASSES */
 
-.consent-modal .dialog {
+.approve-modal .dialog-body {
   text-align: left;
 }
 
-.game-won-modal svg.shield {
+dialog svg.shield {
   --left: 50%;
   --top: 15%;
 
@@ -113,10 +85,6 @@ dialog.ending {
   transform: translate(-50%, -15%);
 
   animation: var(--fadeout-time) ease-out -shield
-}
-
-.game-won-modal svg.shield text {
-  font-family: "Helvetica Neue", HelveticaNeue, Helvetica, "Arial Unicode MS", "Arial Unicode", ArialUnicode, Arial, sans-serif;
 }
 
 @keyframes -shield {

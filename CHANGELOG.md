@@ -8,9 +8,12 @@
 - The shield looks like plastic. Make a dent in the shield to add realism
 - Debt after porting tests to vitest, see TODOs and it.skip 
 - Gameboard jumps when using the keyboard and covering the fullscreen mode
-- Run tests in browser instead of jsdom, mainly for dialog, popover and fullscreen
 - Look at disabled 'set-state-in-effect' and 'exhaustive-deps', might have to do with 'value cannot be modified' or 'cannot access refs during render' lint errors
-- Occurs when bumping the last row in the game screen: TypeError: can't access property "ControlLooksLikePasswordCredentialField"
+- test coverage is by test config file, not integrated
+- added click listeners on range-inputs to test them, remove when vitest/browser starts supporting change listeners on inputs 
+- bomb explosions are clipped when portrait view
+- Vitest lacks support for pointerup/down, thus for longpress
+
 
 ### Features
 - Playmode Tough: Play without flags or mine counters
@@ -23,13 +26,19 @@
 - Calculate coagulation (mine-mine borders | blank to mine ratio)
 - Focus New Game button after dismissing won-dialog or game lost
 - Eliminate outliers in graph
-- Browser tests on fullscreen feature
 - Remember last touched game cell, as starting point for move with arrow key 
 
 
+### Changed
+- Component tests running in the browser, to upgrade the specification tests running in jsdom.
+- Alt+Tab sets focus to first element in a region
+- Refactored focussing between main and navigation regions
 
 ### Fixed
-- The exploding mine animation is no longer clipped 
+- The exploding mine animation is no longer clipped
+
+### Removed
+- createPortal layering
 
 
 ## [3.5.3]

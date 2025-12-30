@@ -16,9 +16,9 @@ const About = () => {
   const aboutContent = (
     <article
       role="main"
-      aria-label={text.nav['Help']}
+      aria-labelledby="page-heading"
     >
-      <h1 className="sr-only">{text.nav['Help']}</h1>
+      <h1 className="sr-only" id="page-heading">{text.nav['Help']}</h1>
       <h2>{text.common['Minesweeper']}</h2>
 
       <h3>{text.help['Intro Heading']}</h3>

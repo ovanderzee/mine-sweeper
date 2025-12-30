@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react'
 import PageContext from '../../store/page-context'
-import Modal from '../UI/Modal'
+import { ApproveModal } from '../UI/Modal'
 import storage from '../../common/storage'
 
 const EraseScores = (props: { onErase: () => void }) => {
@@ -17,15 +17,6 @@ const EraseScores = (props: { onErase: () => void }) => {
     setTimeout(()=>setShowActive(false), 300)
   }
 
-  const consentModal = <Modal
-    className="consent"
-    onConfirm={confirmHandler}
-    onCancel={() => {}}
-    closeModal={() => setShowModal(false)}
-  >
-    {text.dialog['Erase Scores?']}
-  </Modal>
-
   const eraseHandler = () => {
     setShowModal(true)
   }
@@ -38,7 +29,13 @@ const EraseScores = (props: { onErase: () => void }) => {
     >
       <svg role="img" aria-label={text.icon['empty set']}><use href={`#nav-empty`} /></svg>
     </button>
-    {showModal && consentModal}
+    <ApproveModal
+      message={text.dialog['Erase Scores?']}
+      onConfirm={confirmHandler}
+      onCancel={() => {}}
+      isShowModal={showModal}
+      endShowModal={()=>setShowModal(false)}
+    />
   </>
 }
 
