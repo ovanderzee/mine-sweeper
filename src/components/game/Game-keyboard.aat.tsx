@@ -18,7 +18,7 @@ describe('GameCell keystrokes', () => {
     storage.config = microConfig
     storage.game = newGameState
     screen = await renderWithApp()
-    button = screen.getByRole('main').getByRole('button').first()
+    button = screen.getByRole('gridcell').first()
     await button.element().focus()
   })
 
@@ -68,7 +68,7 @@ describe('navigate gameboard by keyboard', () => {
     storage.config = microConfig
     storage.game = playingGameState
     screen = await renderWithApp()
-    gameButtons = screen.getByRole('main').getByRole('button')
+    gameButtons = screen.getByRole('gridcell')
     await gameButtons.nth(4).element().focus()
   })
 

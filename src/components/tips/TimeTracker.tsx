@@ -44,9 +44,9 @@ const TimeTracker = (props: TipProps) => {
   const padded = (nr: number) => nr.toString().padStart(2, "0")
 
   return (
-    <section id="time-tracker" className="tip" title={text.tips['Playtime']}>
+    <div id="time-tracker" className="tip" title={text.tips['Playtime']}>
       <span id="minute">{padded(min)}</span>:<span id="second">{padded(sec)}</span>
-    </section>
+    </div>
   )
 }
 

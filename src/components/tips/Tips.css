@@ -26,7 +26,7 @@
 .tip > button {
   border: none;
   background: none;
-  padding: 0;
+  padding-inline: .333em !important;
 }
 
 .tip button svg {
@@ -82,9 +82,10 @@
 
 /* BOARD */
 
+#tip-action,
 #fullscreen-play {
   display: flex;
-  gap: 1ex;
+  gap: .2em;
 }
 
 #fullscreen-play *:has(> svg use[href]) {

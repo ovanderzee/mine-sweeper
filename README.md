@@ -24,5 +24,5 @@ Just like real life!
 -  Toggle focus between game and option-bar with Alt+Tab
 -  Keep configuration current-game and score data in localStorage
 -  Diagram of various game properties, with enough games played
--  Play the game fullscreen with scaling options
--  Conform to WCAG 2.1 Level AA
+-  Play the game fullscreen and with scaling options
+-  Conform to WCAG 2.1 Level AA; checked using www.a11y-audit.eu/

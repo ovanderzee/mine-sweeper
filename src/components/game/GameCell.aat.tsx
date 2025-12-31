@@ -25,7 +25,7 @@ describe('Gamecell, a party of properties', () => {
     it('pristine blank cell', async () => {
       const cell = cellStates.pristine.blank
       const screen = await renderWithProvider(getCellByState(cell))
-      const button = screen.getByRole('button').element()
+      const button = screen.getByRole('gridcell').element()
       expect(button.id).toBe('row1col2')
       expect(button.innerHTML).toBe(' ')
       expect(trim(button.className)).toBe('pristine')
@@ -36,7 +36,7 @@ describe('Gamecell, a party of properties', () => {
     it('pristine value cell with flag', async () => {
       const cell = cellStates.flagged.value
       const screen = await renderWithProvider(getCellByState(cell))
-      const button = screen.getByRole('button').element()
+      const button = screen.getByRole('gridcell').element()
       expect(button.id).toBe('row2col3')
       expect(button.innerHTML).toBe(' ')
       expect(trim(button.className)).toBe('pristine flag')
@@ -47,7 +47,7 @@ describe('Gamecell, a party of properties', () => {
     it('opened value cell', async () => {
       const cell = cellStates.opened.value
       const screen = await renderWithProvider(getCellByState(cell))
-      const button = screen.getByRole('button').element()
+      const button = screen.getByRole('gridcell').element()
       expect(button.id).toBe('row2col3')
       expect(button.innerHTML).toBe('2')
       expect(trim(button.className)).toBe('touched')
@@ -58,7 +58,7 @@ describe('Gamecell, a party of properties', () => {
     it('opened mine cell', async () => {
       const cell = cellStates.opened.mijn
       const screen = await renderWithProvider(getCellByState(cell))
-      const button = screen.getByRole('button').element()
+      const button = screen.getByRole('gridcell').element()
       expect(button.id).toBe('row3col4')
       expect(button.innerHTML).toBe(' <span class="burst"></span>')
       expect(trim(button.className)).toBe('touched mijn')
@@ -69,7 +69,7 @@ describe('Gamecell, a party of properties', () => {
     it('clicked mine cell', async () => {
       const cell = cellStates.clicked.mijn
       const screen = await renderWithProvider(getCellByState(cell))
-      const button = screen.getByRole('button').element()
+      const button = screen.getByRole('gridcell').element()
       expect(button.id).toBe('row3col4')
       expect(button.innerHTML).toBe(' <span class="burst"></span>')
       expect(trim(button.className).startsWith('touched mijn explode')).toBe(true)
@@ -89,7 +89,7 @@ describe('Gamecell, a party of properties', () => {
 //     it('clicked mine cell', async () => {
 //       const cell = cellStates.pristine.mijn
 //       const screen = await renderWithProvider(getCellByState(cell))
-//       button = screen.getByRole('button')
+//       button = screen.getByRole('gridcell')
 //
 //       await button.pointerDown()
 //       vi.advanceTimersByTime(LONG_PRESS_THRESHOLD * .9) // ==> MOVE action
@@ -101,7 +101,7 @@ describe('Gamecell, a party of properties', () => {
 //     it('flagged mine cell', async () => {
 //       const cell = cellStates.pristine.mijn
 //       const screen = await renderWithProvider(getCellByState(cell))
-//       button = screen.getByRole('button')
+//       button = screen.getByRole('gridcell')
 //
 //       await button.pointerDown()
 //       vi.advanceTimersByTime(LONG_PRESS_THRESHOLD * 1.1) // ==> FLAG action
@@ -113,7 +113,7 @@ describe('Gamecell, a party of properties', () => {
 //     it('no action when mouse moved out of bounds', async () => {
 //       const cell = cellStates.pristine.mijn
 //       const screen = await renderWithProvider(getCellByState(cell))
-//       button = screen.getByRole('button')
+//       button = screen.getByRole('gridcell')
 //
 //       await button.pointerDown()
 //       vi.advanceTimersByTimeAsync(20)
@@ -127,7 +127,7 @@ describe('Gamecell, a party of properties', () => {
 //     it('no click action when cell was already opened', async () => {
 //       const cell = cellStates.opened.blank
 //       const screen = await renderWithProvider(getCellByState(cell))
-//       button = screen.getByRole('button')
+//       button = screen.getByRole('gridcell')
 //
 //       await button.pointerDown()
 //       vi.advanceTimersByTimeAsync(LONG_PRESS_THRESHOLD * .9) // ==> MOVE action
@@ -138,7 +138,7 @@ describe('Gamecell, a party of properties', () => {
 //     it('no click action when cell was flagged', async () => {
 //       const cell = cellStates.flagged.blank
 //       const screen = await renderWithProvider(getCellByState(cell))
-//       button = screen.getByRole('button')
+//       button = screen.getByRole('gridcell')
 //
 //       await button.pointerDown()
 //       vi.advanceTimersByTimeAsync(LONG_PRESS_THRESHOLD * 0.9) // ==> MOVE action
@@ -154,7 +154,7 @@ describe('Gamecell, a party of properties', () => {
       dispatchGameAction = vi.fn()
       cell = cellStates.pristine.mijn
       const screen = await renderWithProvider(getCellByState(cell))
-      screen.getByRole('button').element().focus()
+      screen.getByRole('gridcell').element().focus()
     })
 
     it('and accept "Enter" to open a cell', async () => {

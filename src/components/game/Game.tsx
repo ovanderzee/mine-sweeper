@@ -58,8 +58,8 @@ const Game = () => {
       style={{'--board-size': BOARD_SIZE} as React.CSSProperties}
     >
       <h1 className="sr-only" id="page-heading">{text.nav['Playground']}</h1>
-      <div id="game-board">
-        {gameState.board.map((row) =>
+      <div id="game-board" role="grid">
+        {gameState.board.map((row, index) => <div role="row" key={`row_${index}`}>{
           row.map((cell) => (
             <GameCell
               key={`${cell.row}_${cell.col}`}
@@ -67,7 +67,7 @@ const Game = () => {
               onTouch={dispatchGameAction}
             />
           ))
-        )}
+        }</div>)}
       </div>
       <Tips
         game={gameState}

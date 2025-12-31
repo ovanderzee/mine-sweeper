@@ -17,14 +17,14 @@ interface TipsProps extends TipProps {
 }
 
 const Tips = (props: TipsProps) => (
-  <aside className="tips" role="presentation">
+  <div className="tips" role="toolbar">
     <TimeTracker game={props.game} />
     <MineTracker game={props.game} />
     <section id="tip-action" className="tip">
       <NewGame onNew={props.onNew} stage={props.game.stage} appearance="tip" />
     </section>
     <FullscreenPlay playgroundRef={props.playgroundRef} />
-  </aside>
+  </div>
 )
 
 export default Tips

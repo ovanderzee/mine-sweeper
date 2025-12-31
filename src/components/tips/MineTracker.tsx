@@ -12,11 +12,11 @@ const MineTracker = (props: TipProps) => {
   const flagCount = flatBoard.filter(c => c.locked).length
 
   return (
-    <section id="mine-tracker" className="tip" title={text.tips['Todo counter']}>
+    <div id="mine-tracker" className="tip" title={text.tips['Todo counter']}>
       <span id="mine" className="icon"></span>
       <span id="diff">{mineCount - flagCount}</span>
       <span id="flag" className="icon"></span>
-    </section>
+    </div>
   )
 }
 

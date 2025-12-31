@@ -108,7 +108,7 @@ const FullscreenPlay = (props: FullscreenPlayProps) => {
   </>)
 
   return (
-    <section id="fullscreen-play" className="tip">
+    <div id="fullscreen-play" className="tip">
       <button id="contain-fit" type="button"
         onClick={fitToContain}
         title={text.tips['Contain all cells']}
@@ -122,7 +122,7 @@ const FullscreenPlay = (props: FullscreenPlayProps) => {
         <svg role="img" aria-label={text.icon['cover']}><use href="#cover-view" /></svg>
       </button>
       {document.fullscreenElement ? fullscreenView : windowedView}
-    </section>
+    </div>
   )
 }
 

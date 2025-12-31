@@ -54,7 +54,7 @@ describe('Game lifecycle', () => {
 
   it('should be in playing mode after opening a non-mine cell', async () => {
     const index = cells.findIndex(cell => cell.fill < 9)
-    await screen.getByRole('main').getByRole('button').nth(index).click()
+    await screen.getByRole('gridcell').nth(index).click()
 
     expect(storage.game?.stage).toBe('game-playing')
     expect(screen.getByRole('main')).toHaveClass('game-playing')
@@ -62,7 +62,7 @@ describe('Game lifecycle', () => {
 
   it('should result in loss after opening a mine', async () => {
     const index = cells.findIndex(cell => cell.fill > 8)
-    await screen.getByRole('main').getByRole('button').nth(index).click()
+    await screen.getByRole('gridcell').nth(index).click()
 
     expect(storage.game?.stage).toBe('game-lost')
     expect(screen.getByRole('main')).toHaveClass('game-lost')
@@ -75,7 +75,7 @@ describe('Game lifecycle', () => {
       .forEach(async (i) => {
         let loc: Locator
         try { // WebDriverError: stale element reference
-          loc = screen.getByRole('main').getByRole('button').nth(i)
+          loc = screen.getByRole('gridcell').nth(i)
           if (loc) await loc.click()
         } catch {
           // @ts-expect-error // error TS2454: Variable 'loc' is used before being assigned.
@@ -105,7 +105,7 @@ describe('Polling the game', () => {
     storage.config = scoringConfig
     storage.game = blank41pct
     screen = await renderWithProvider(<Game />)
-    fields = screen.getByRole('main').getByRole('button')
+    fields = screen.getByRole('gridcell')
   })
 
   it('should open neighbouring blanks and indicators when a blank is clicked', async () => {
@@ -222,7 +222,7 @@ describe('handle loosing and winning', () => {
   it('should celebrate a won game', async () => {
     storage.game = decidedGameState
     const screen = await renderWithProvider(<Game />)
-    const gameCells = screen.getByRole('main').getByRole('button')
+    const gameCells = screen.getByRole('gridcell')
     await gameCells.nth(6).click()
 
     expect(storage.game?.stage).toBe('game-won')
@@ -239,7 +239,7 @@ describe('handle loosing and winning', () => {
     decidedGameState.board[2][2].locked = false
     storage.game = decidedGameState
     const screen = await renderWithProvider(<Game />)
-    const gameCells = screen.getByRole('main').getByRole('button')
+    const gameCells = screen.getByRole('gridcell')
     await gameCells.nth(0).click()
 
     expect(storage.game?.stage).toBe('game-lost')
