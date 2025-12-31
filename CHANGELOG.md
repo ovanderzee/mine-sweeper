@@ -11,7 +11,6 @@
 - Look at disabled 'set-state-in-effect' and 'exhaustive-deps', might have to do with 'value cannot be modified' or 'cannot access refs during render' lint errors
 - test coverage is by test config file, not integrated
 - added click listeners on range-inputs to test them, remove when vitest/browser starts supporting change listeners on inputs 
-- bomb explosions are clipped when portrait view
 - Vitest lacks support for pointerup/down, thus for longpress
 
 
@@ -28,6 +27,12 @@
 - Eliminate outliers in graph
 - Remember last touched game cell, as starting point for move with arrow key 
 
+
+
+## [3.6.1]
+
+### Changed
+- Alt+Tab will visit the toolbar in Game screen, and land on an option (instead of navigation) in the sidebar
 
 
 ## [3.6.0] - 2025-12-30

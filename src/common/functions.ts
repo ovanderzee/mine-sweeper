@@ -24,13 +24,19 @@ export const flipFocus = function (event: KeyboardEvent) {
   if (event.altKey && event.key === 'Tab') {
     event.stopPropagation()
 
-    const contentArea = document.querySelector('section.screen > article')
+    const mainArea = document.querySelector('section.screen > article')
+    const boardArea = document.querySelector('section.screen > article > [role=grid]')
+    const tipsArea = document.querySelector('section.screen > article > [role=toolbar]')
     const navArea = document.querySelector('section.screen > nav')
     let focusable: HTMLElement | undefined
 
     if (navArea?.contains(document.activeElement)) {
-      focusable = contentArea?.querySelector(interactionSelectors) as HTMLElement
-    } else if (contentArea?.contains(document.activeElement)) {
+      focusable = mainArea?.querySelector(interactionSelectors) as HTMLElement
+    } else if (boardArea?.contains(document.activeElement)) {
+      focusable = tipsArea?.querySelector(interactionSelectors) as HTMLElement
+    } else if (tipsArea?.contains(document.activeElement)) {
+      focusable = navArea?.querySelector(interactionSelectors) as HTMLElement
+    } else if (mainArea?.contains(document.activeElement)) {
       focusable = navArea?.querySelector(interactionSelectors) as HTMLElement
     }
 

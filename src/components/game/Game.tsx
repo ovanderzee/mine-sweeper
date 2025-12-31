@@ -79,7 +79,6 @@ const Game = () => {
 
   const gameNavigation = (
     <NavOptionsBar>
-      <HiScores />
       <NewGame
         onNew={dispatchGameAction}
         stage={gameState.stage}
@@ -88,6 +87,7 @@ const Game = () => {
         onReplay={dispatchGameAction}
         stage={gameState.stage}
       />
+      <HiScores />
       <Help />
       <Settings />
       <GameCellDemoNav />
