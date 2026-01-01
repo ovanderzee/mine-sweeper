@@ -1,4 +1,8 @@
 
+.screen:has(#playground) {
+  width: fit-content;
+}
+
 /* Safeguard existing centering for smooth switching fullscreen mode */
 section.screen,
 #playground {
@@ -23,7 +27,6 @@ section.screen,
 #game-board {
   display: grid;
   align-content: start;
-  width: fit-content;
   margin-inline: auto;
   user-select: none;
 }
@@ -34,15 +37,15 @@ section.screen,
   grid-row: var(--cell-row);
 }
 
-.screen:has(#playground) {
-  width: fit-content;
-}
-
 #playground.cover-screen + nav {
   font-size: 50%;
 }
 
 @media only screen and (orientation: portrait) {
+  #playground {
+    overflow: visible;
+  }
+
   #playground[role="main"] + nav {
     width: 100%;
   }

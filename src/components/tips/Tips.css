@@ -1,6 +1,8 @@
 .tips {
   --active-color: var(--bright-violet);
 
+  position: relative;
+  z-index: 10;
   grid-row: calc(var(--board-size) + 1);
   grid-column: 1 / span var(--board-size);
   display: flex;

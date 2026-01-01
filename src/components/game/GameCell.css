@@ -135,7 +135,7 @@
   );
   border-radius: 50%;
 
-  position: fixed;
+  position: absolute;
   z-index: -15;
 
   animation-name: explode;
