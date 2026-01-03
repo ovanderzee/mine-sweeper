@@ -14,6 +14,7 @@ import { gameReducer } from './game-reducer'
 import { GameStages, GameAction, GameActionType } from '../../common/game.d'
 import storage from '../../common/storage'
 import Tips from './../tips/Tips'
+import { focusFirstNavButton } from '../../common/functions'
 import './Game.css'
 
 const Game = () => {
@@ -121,7 +122,7 @@ const Game = () => {
       .replace('%r', gameState.score.rank.toString())
     }
     message={gameState.score.rank.toString()}
-    onConfirm={() => {}}
+    onConfirm={focusFirstNavButton}
     isShowModal={showWonModal}
     endShowModal={()=>setShowWonModal(false)}
   />

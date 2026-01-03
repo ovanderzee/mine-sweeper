@@ -54,3 +54,10 @@ export const flipFocus = function (event: KeyboardEvent) {
     if (focusable) focusable.focus()
   }
 }
+
+export const focusFirstNavButton = () => {
+  setTimeout(() => {
+    const el = document.querySelector('nav button') as HTMLElement
+    el?.focus()
+  }, 800)
+}

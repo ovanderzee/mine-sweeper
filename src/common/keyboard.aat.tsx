@@ -3,12 +3,12 @@ import { Locator, userEvent } from 'vitest/browser'
 import { RenderResult } from 'vitest-browser-react'
 import { renderWithApp } from './../__mocks__/aat-helpers'
 import { liveScores } from '../__mocks__/scores'
-import { flipFocus } from './functions'
+import { flipFocus, focusFirstNavButton } from './functions'
 import storage from './storage'
 
-describe('Flip focus', () => {
-  vi.mock('./functions', { spy: true })
+vi.mock('./functions', { spy: true })
 
+describe('Flip focus', () => {
   const altTabEvent = {
     altKey: true, bubbles: true, charCode: 0, code: "Tab", isTrusted: true,
     key: "Tab", keyCode: 9, stopPropagation: () => {}, type: "keydown"
@@ -178,5 +178,16 @@ describe('Flip focus', () => {
 
       expect(lastButton).toHaveFocus()
     })
+  })
+})
+
+describe('focusFirstNavButton', () => {
+  it('should move focus to first button in navigation landmark', async () => {
+    const screen = await renderWithApp()
+    const firstNavButton = screen.getByRole('navigation').getByRole('button').first()
+    focusFirstNavButton()
+    vi.advanceTimersByTime(1000)
+
+    expect(firstNavButton).toHaveFocus()
   })
 })
