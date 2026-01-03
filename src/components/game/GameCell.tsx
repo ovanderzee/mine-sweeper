@@ -128,7 +128,6 @@ const GameCell = (props: GameCellProps) => {
       aria-label={`${text.cell.row} ${row+1} ${text.cell.col} ${col+1}, ${stageLabel}`}
       className={`${doneClass} ${lockedClass} ${mineClass} ${activatedClass}`}
       id={id(0, 0)}
-      style={{'--cell-row': row + 1, '--cell-col': col + 1} as React.CSSProperties}
       onKeyDown={keystrokeHandler}
       onPointerDown={beginHandler}
       onPointerCancel={cancelHandler}

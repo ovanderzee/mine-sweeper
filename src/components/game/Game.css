@@ -25,16 +25,19 @@ section.screen,
 }
 
 #game-board {
-  display: grid;
-  align-content: start;
+  margin-inline: auto;
+  user-select: none;
+}
+
+#game-board [role=row] {
+  display: flex;
+  justify-content: center;
   margin-inline: auto;
   user-select: none;
 }
 
 #game-board button {
   font-size: calc(8em / var(--board-size));
-  grid-column: var(--cell-col);
-  grid-row: var(--cell-row);
 }
 
 #playground.cover-screen + nav {

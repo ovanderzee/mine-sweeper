@@ -30,7 +30,6 @@ describe('Gamecell, a party of properties', () => {
       expect(button.innerHTML).toBe(' ')
       expect(trim(button.className)).toBe('pristine')
       expect(button.getAttribute('aria-label')).toBe('row 2 column 3, hidden')
-      expect(button.getAttribute('style')).toBe('--cell-row: 2; --cell-col: 3;')
     })
 
     it('pristine value cell with flag', async () => {
@@ -41,7 +40,6 @@ describe('Gamecell, a party of properties', () => {
       expect(button.innerHTML).toBe(' ')
       expect(trim(button.className)).toBe('pristine flag')
       expect(button.getAttribute('aria-label')).toBe('row 3 column 4, hidden')
-      expect(button.getAttribute('style')).toBe('--cell-row: 3; --cell-col: 4;')
     })
 
     it('opened value cell', async () => {
@@ -52,7 +50,6 @@ describe('Gamecell, a party of properties', () => {
       expect(button.innerHTML).toBe('2')
       expect(trim(button.className)).toBe('touched')
       expect(button.getAttribute('aria-label')).toBe('row 3 column 4, open')
-      expect(button.getAttribute('style')).toBe('--cell-row: 3; --cell-col: 4;')
     })
 
     it('opened mine cell', async () => {
@@ -63,7 +60,6 @@ describe('Gamecell, a party of properties', () => {
       expect(button.innerHTML).toBe(' <span class="burst"></span>')
       expect(trim(button.className)).toBe('touched mijn')
       expect(button.getAttribute('aria-label')).toBe('row 4 column 5, open')
-      expect(button.getAttribute('style')).toBe('--cell-row: 4; --cell-col: 5;')
     })
 
     it('clicked mine cell', async () => {
@@ -74,7 +70,6 @@ describe('Gamecell, a party of properties', () => {
       expect(button.innerHTML).toBe(' <span class="burst"></span>')
       expect(trim(button.className).startsWith('touched mijn explode')).toBe(true)
       expect(button.getAttribute('aria-label')).toBe('row 4 column 5, open')
-      expect(button.getAttribute('style')).toBe('--cell-row: 4; --cell-col: 5;')
      })
   })
 
