@@ -1,4 +1,8 @@
 
+.screen:has(#playground) {
+  width: fit-content;
+}
+
 /* Safeguard existing centering for smooth switching fullscreen mode */
 section.screen,
 #playground {
@@ -21,21 +25,19 @@ section.screen,
 }
 
 #game-board {
-  display: grid;
-  align-content: start;
-  width: fit-content;
+  margin-inline: auto;
+  user-select: none;
+}
+
+#game-board [role=row] {
+  display: flex;
+  justify-content: center;
   margin-inline: auto;
   user-select: none;
 }
 
 #game-board button {
   font-size: calc(8em / var(--board-size));
-  grid-column: var(--cell-col);
-  grid-row: var(--cell-row);
-}
-
-.screen:has(#playground) {
-  width: fit-content;
 }
 
 #playground.cover-screen + nav {
@@ -43,6 +45,10 @@ section.screen,
 }
 
 @media only screen and (orientation: portrait) {
+  #playground {
+    overflow: visible;
+  }
+
   #playground[role="main"] + nav {
     width: 100%;
   }

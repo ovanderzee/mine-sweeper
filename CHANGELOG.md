@@ -6,12 +6,11 @@
 - Gameboard could technically be 36 * 36 but board starts to jump when the game is operated by keyboard: provide zoom buttons next to clock
 - Fade out of dialog goes smooth but ends abrupt
 - The shield looks like plastic. Make a dent in the shield to add realism
-- Debt after porting tests to vitest, see TODOs and it.skip 
+- Debt after porting tests to vitest, see TODOs and it.skip
 - Gameboard jumps when using the keyboard and covering the fullscreen mode
 - Look at disabled 'set-state-in-effect' and 'exhaustive-deps', might have to do with 'value cannot be modified' or 'cannot access refs during render' lint errors
 - test coverage is by test config file, not integrated
-- added click listeners on range-inputs to test them, remove when vitest/browser starts supporting change listeners on inputs 
-- bomb explosions are clipped when portrait view
+- added click listeners on range-inputs to test them, remove when vitest/browser starts supporting change listeners on inputs
 - Vitest lacks support for pointerup/down, thus for longpress
 
 
@@ -26,8 +25,21 @@
 - Calculate coagulation (mine-mine borders | blank to mine ratio)
 - Focus New Game button after dismissing won-dialog or game lost
 - Eliminate outliers in graph
-- Remember last touched game cell, as starting point for move with arrow key 
+- Remember last touched game cell, as starting point for move with arrow key
 
+
+
+## [3.6.1]
+
+### Changed
+- Refined ARIA roles on Game screen
+- Focus new-game button after winning or losing, for keyboard users
+- The Game screen buttonbar will show functionality first, then screen navigation, like on the other screens
+- Alt+Tab will visit the toolbar in Game screen
+
+### Fixed
+- The exploding mine animation is no longer clipped
+- Toggling Fullscreen mode will keep on working when mixing up app UI and browser UI
 
 
 ## [3.6.0] - 2025-12-30
@@ -40,7 +52,6 @@
 
 ### Fixed
 - Fixed navbar for iphone
-- The exploding mine animation is no longer clipped
 
 ### Removed
 - createPortal layering
@@ -131,7 +142,7 @@
 
 ### Changed
 - Clearer color for signaling when function was executed
-- Some more margin on mine count 
+- Some more margin on mine count
 - Smaller radio-buttons and checkboxes
 
 ### Removed

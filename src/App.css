@@ -5,8 +5,12 @@
   display: flex;
   margin: 0 auto;
   width: var(--app-width);
-  background: var(--light-to-white-blue);
   transition: opacity 0.5s linear;
+}
+
+.screen > article {
+  background: var(--light-to-white-blue);
+  flex: 1 1 auto;
 }
 
 /* not on laptop or desktop */
@@ -26,9 +30,8 @@
   }
 
   .screen > article {
-    flex: 0 1 auto;
     box-sizing: border-box;
-    max-width: 100%;
+    min-width: var(--app-width);
     line-height: initial !important;
     overflow: auto;
   }
@@ -38,10 +41,6 @@
   .screen {
     flex-wrap: nowrap;
     min-height: 100dvh;
-  }
-
-  .screen > article {
-    flex: 1 1 auto;
   }
 
   .screen > nav {

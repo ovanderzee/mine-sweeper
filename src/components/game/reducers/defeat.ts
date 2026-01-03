@@ -2,6 +2,7 @@ import { GameState, CellState, CellStateStage } from '../../../common/game.d'
 import { MAX_DETONATIONS } from '../../../common/constants'
 import { calculateMineCount } from '../../../common/defaults'
 import storage from '../../../common/storage'
+import { focusFirstNavButton } from '../../../common/functions'
 
 export const defeatReducer = (state: GameState): GameState => {
   const minesToDo: CellState[] = state.board
@@ -37,5 +38,6 @@ export const defeatReducer = (state: GameState): GameState => {
     }
   }
 
+  focusFirstNavButton()
   return state
 }

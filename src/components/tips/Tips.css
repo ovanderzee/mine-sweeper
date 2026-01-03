@@ -1,6 +1,8 @@
 .tips {
   --active-color: var(--bright-violet);
 
+  position: relative;
+  z-index: 10;
   grid-row: calc(var(--board-size) + 1);
   grid-column: 1 / span var(--board-size);
   display: flex;
@@ -26,7 +28,7 @@
 .tip > button {
   border: none;
   background: none;
-  padding: 0;
+  padding-inline: .333em !important;
 }
 
 .tip button svg {
@@ -82,9 +84,10 @@
 
 /* BOARD */
 
+#tip-action,
 #fullscreen-play {
   display: flex;
-  gap: 1ex;
+  gap: .2em;
 }
 
 #fullscreen-play *:has(> svg use[href]) {

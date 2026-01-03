@@ -2,11 +2,13 @@ import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { Locator, userEvent } from 'vitest/browser'
 import { RenderResult } from 'vitest-browser-react'
 import { renderWithApp } from './../__mocks__/aat-helpers'
-import { flipFocus } from './functions'
+import { liveScores } from '../__mocks__/scores'
+import { flipFocus, focusFirstNavButton } from './functions'
+import storage from './storage'
+
+vi.mock('./functions', { spy: true })
 
 describe('Flip focus', () => {
-  vi.mock('./functions', { spy: true })
-
   const altTabEvent = {
     altKey: true, bubbles: true, charCode: 0, code: "Tab", isTrusted: true,
     key: "Tab", keyCode: 9, stopPropagation: () => {}, type: "keydown"
@@ -14,7 +16,8 @@ describe('Flip focus', () => {
 
   describe('between landmarks', () => {
     it('should set focus somewhere', async () => {
-      const screen = await renderWithApp()
+      // try on structure-wise most standard screen
+      const screen = await renderWithApp('Configure')
       expect(document.body).toBe(document.activeElement)
 
       // await userEvent.tab({ alt: true })
@@ -32,7 +35,52 @@ describe('Flip focus', () => {
     })
   })
 
-  describe('between controls in main and navigation landmarks', () => {
+  describe('between controls in board and tips sections and navigation landmark', () => {
+    let
+      screen: RenderResult
+
+    beforeEach(async () => {
+      screen = await renderWithApp()
+    })
+
+    it('should move focus from control in navigation to first control in board', async () => {
+      const navButton = screen.getByRole('navigation').getByTitle('Description')
+      await navButton.element().focus()
+      expect(navButton).toHaveFocus()
+      flipFocus(altTabEvent)
+
+      await vi.waitFor(async () => {
+        await expect.element(screen.getByRole('gridcell').first()).toBe(document.activeElement)
+      })
+    })
+
+    it('should move focus from control in board to the "New Game" button, the first control in toolbar', async () => {
+      const boardCell = screen.getByRole('gridcell').first()
+      await boardCell.element().focus()
+      expect(boardCell).toHaveFocus()
+      flipFocus(altTabEvent)
+
+      await vi.waitFor(async () => {
+        await expect.element(screen.getByRole('toolbar').getByRole('button').first()).toBe(document.activeElement)
+        await expect.element(screen.getByRole('toolbar').getByTitle('New Game')).toBe(document.activeElement)
+      })
+    })
+
+    it('should move focus from control in toolbar to the "New Game" button, the first control in navigation', async () => {
+      const toolButton = screen.getByRole('toolbar').getByRole('button').first()
+      await toolButton.element().focus()
+      expect(toolButton).toHaveFocus()
+      flipFocus(altTabEvent)
+
+      await vi.waitFor(async () => {
+        await expect.element(screen.getByRole('navigation').getByRole('button').first()).toBe(document.activeElement)
+        await expect.element(screen.getByRole('navigation').getByTitle('New Game')).toBe(document.activeElement)
+      })
+    })
+  })
+
+
+  describe('between controls in main and navigation landmarks, Configure screen', () => {
     let
       screen: RenderResult
 
@@ -51,7 +99,7 @@ describe('Flip focus', () => {
       })
     })
 
-    it('should move focus from control in main to first control in navigation', async () => {
+    it('should move focus from control in main to the "Revert to Defaults" button, the first control in navigation', async () => {
       const mainInput = screen.getByRole('main').getByLabelText('Gamelevel')
       await mainInput.element().focus()
       expect(mainInput).toHaveFocus()
@@ -59,9 +107,34 @@ describe('Flip focus', () => {
 
       await vi.waitFor(async () => {
         await expect.element(screen.getByRole('navigation').getByRole('button').first()).toBe(document.activeElement)
-      })
+        await expect.element(screen.getByRole('navigation').getByTitle('Revert to Defaults')).toBe(document.activeElement)
+       })
     })
   })
+
+
+  describe('between controls in main and navigation landmarks, Hall of Fame screen', () => {
+    let
+      screen: RenderResult
+
+    beforeEach(async () => {
+      storage.scores = liveScores
+      screen = await renderWithApp('HallOfFame')
+    })
+
+    it('should move focus from control in main to the "Clear List" button, the first control in navigation', async () => {
+      const mainButton = screen.getByRole('main').getByRole('button').last()
+      await mainButton.element().focus()
+      expect(mainButton).toHaveFocus()
+      flipFocus(altTabEvent)
+
+      await vi.waitFor(async () => {
+        await expect.element(screen.getByRole('navigation').getByRole('button').first()).toBe(document.activeElement)
+        await expect.element(screen.getByRole('navigation').getByTitle('Clear List')).toBe(document.activeElement)
+       })
+    })
+  })
+
 
   describe('between available controls at about page', () => {
     let
@@ -105,5 +178,16 @@ describe('Flip focus', () => {
 
       expect(lastButton).toHaveFocus()
     })
+  })
+})
+
+describe('focusFirstNavButton', () => {
+  it('should move focus to first button in navigation landmark', async () => {
+    const screen = await renderWithApp()
+    const firstNavButton = screen.getByRole('navigation').getByRole('button').first()
+    focusFirstNavButton()
+    vi.advanceTimersByTime(1000)
+
+    expect(firstNavButton).toHaveFocus()
   })
 })

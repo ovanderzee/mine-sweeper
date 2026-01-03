@@ -8,8 +8,6 @@ interface FullscreenPlayProps {
   playgroundRef: RefObject<HTMLDivElement>
 }
 
-type ViewStateTuple = 'windowed' | 'fullscreen'
-
 const FullscreenPlay = (props: FullscreenPlayProps) => {
   const pageCtx = useContext(PageContext)
   const { config, text } = pageCtx
@@ -70,20 +68,18 @@ const FullscreenPlay = (props: FullscreenPlayProps) => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [playground])
 
-  const [toViewState, setToViewState] = useState<ViewStateTuple>()
-
-  useEffect(() => {
-    if (toViewState === 'windowed' && document.fullscreenElement) {
+  const changeViewState = () => {
+    if (document.fullscreenElement) {
       sfRef?.current?.exitFullscreen() ?? console.error('no window toggle')
-    } else if (toViewState === 'fullscreen' && !document.fullscreenElement) {
+    } else if (!document.fullscreenElement) {
       sfRef?.current?.enterFullscreen() ?? console.error('no fullscreen toggle')
     }
-  }, [toViewState])
+  }
 
   const fullscreenView = <>
     <button id="window-mode" type="button"
       title={text.tips['Return to window']}
-      onClick={()=>setToViewState('windowed')}
+      onClick={()=>changeViewState()}
     >
       <svg role="img" aria-label={text.icon['windowed']} overflow="visible"><use href="#to-window" /></svg>
     </button>
@@ -100,7 +96,7 @@ const FullscreenPlay = (props: FullscreenPlayProps) => {
     {isFullscreenAble() &&
       <button id="fullscreen-mode" type="button"
         title={text.tips['View fullscreen']}
-        onClick={()=>setToViewState('fullscreen')}
+        onClick={()=>changeViewState()}
       >
         <svg role="img" aria-label={text.icon['fullscreen']} overflow="visible"><use href="#to-fullscreen" /></svg>
       </button>
@@ -108,7 +104,7 @@ const FullscreenPlay = (props: FullscreenPlayProps) => {
   </>)
 
   return (
-    <section id="fullscreen-play" className="tip">
+    <div id="fullscreen-play" className="tip">
       <button id="contain-fit" type="button"
         onClick={fitToContain}
         title={text.tips['Contain all cells']}
@@ -122,7 +118,7 @@ const FullscreenPlay = (props: FullscreenPlayProps) => {
         <svg role="img" aria-label={text.icon['cover']}><use href="#cover-view" /></svg>
       </button>
       {document.fullscreenElement ? fullscreenView : windowedView}
-    </section>
+    </div>
   )
 }
 

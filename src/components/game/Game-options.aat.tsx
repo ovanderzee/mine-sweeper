@@ -60,7 +60,7 @@ describe('The game start button', () => {
     expect(storage.game.stage).toBe('game-playing')
 
     const mineIndex = storage.game.board.flat().findIndex(c => c.fill > 8 && !c.stage)
-    await screen.getByRole('main').getByRole('button').nth(mineIndex).click()
+    await screen.getByRole('gridcell').nth(mineIndex).click()
 
     await vi.waitFor(async () => {
       expect(storage.game?.stage).toBe('game-lost')
@@ -108,7 +108,7 @@ describe('The replay button', () => {
     const initialFilling = getFillDistribution(storage.game?.board)
 
     const mineIndex = storage.game.board.flat().findIndex(c => c.fill > 8 && !c.stage)
-    await screen.getByRole('main').getByRole('button').nth(mineIndex).click()
+    await screen.getByRole('gridcell').nth(mineIndex).click()
 
     await vi.waitFor(async () => {
       expect(storage.game?.stage).toBe('game-lost')

@@ -44,10 +44,10 @@ const GameCellDemo = () => {
     <label>Game Playing</label>
     <article id="playground" className="board-size__6" style={{'--board-size': 6} as React.CSSProperties}>
       <div id="game-board">
-        <button type="button" className="pristine" id="row0col0" style={{'--cell-row': 1, '--cell-col': 1} as React.CSSProperties}></button>
-        <button type="button" className="touched" id="row0col1" style={{'--cell-row': 1, '--cell-col': 2} as React.CSSProperties}></button>
-        <button type="button" className="pristine flag" id="row0col2" style={{'--cell-row': 1, '--cell-col': 3} as React.CSSProperties}></button>
-        <button type="button" className="touched" id="row0col3" style={{'--cell-row': 1, '--cell-col': 4} as React.CSSProperties}>1</button>
+        <button type="button" className="pristine" id="row0col0"></button>
+        <button type="button" className="touched" id="row0col1"></button>
+        <button type="button" className="pristine flag" id="row0col2"></button>
+        <button type="button" className="touched" id="row0col3">1</button>
       </div>
     </article>
   </div>
@@ -65,19 +65,19 @@ const GameCellDemo = () => {
     <label>Game Lost</label>
     <article id="playground" className="board-size__6 game-lost" style={{'--board-size': 6} as React.CSSProperties}>
       <div id="game-board">
-        <button type="button" className="touched mijn" id="row0col1" style={{'--cell-row': 1, '--cell-col': 1} as React.CSSProperties}></button>
-        <button type="button" className="touched mijn flag" id="row0col2" style={{'--cell-row': 1, '--cell-col': 2} as React.CSSProperties}></button>
+        <button type="button" className="touched mijn" id="row0col1"></button>
+        <button type="button" className="touched mijn flag" id="row0col2"></button>
         <button type="button" className={`touched mijn ${activatedClass}`} onClick={explodeHandler}
-            id="row0col3" style={{'--cell-row': 1, '--cell-col': 3} as React.CSSProperties}>
+            id="row0col3">
           <span className="burst"></span>
         </button>
         <button type="button" className={`touched mijn flag ${activatedClass}`} onClick={explodeHandler}
-            id="row0col4" style={{'--cell-row': 1, '--cell-col': 4} as React.CSSProperties}>
+            id="row0col4">
           <span className="burst"></span>
         </button>
-        <button type="button" className="touched" id="row1col0" style={{'--cell-row': 2, '--cell-col': 1} as React.CSSProperties}></button>
-        <button type="button" className="touched" id="row1col1" style={{'--cell-row': 2, '--cell-col': 2} as React.CSSProperties}>1</button>
-        <button type="button" className="touched flag" id="row1col2" style={{'--cell-row': 2, '--cell-col': 3} as React.CSSProperties}>1</button>
+        <button type="button" className="touched" id="row1col0"></button>
+        <button type="button" className="touched" id="row1col1">1</button>
+        <button type="button" className="touched flag" id="row1col2">1</button>
       </div>
     </article>
   </div>
@@ -94,10 +94,10 @@ const GameCellDemo = () => {
     <label>Game Won</label>
     <article id="playground" className="board-size__6 game-won" style={{'--board-size': 6} as React.CSSProperties}>
       <div id="game-board">
-        <button type="button" className="touched" id="row0col0" style={{'--cell-row': 1, '--cell-col': 1} as React.CSSProperties}></button>
-        <button type="button" className="touched" id="row0col1" style={{'--cell-row': 1, '--cell-col': 2} as React.CSSProperties}>1</button>
-        <button type="button" className="touched mijn" id="row0col2" style={{'--cell-row': 1, '--cell-col': 3} as React.CSSProperties}></button>
-        <button type="button" className="touched mijn flag" id="row0col3" style={{'--cell-row': 1, '--cell-col': 4} as React.CSSProperties}></button>
+        <button type="button" className="touched" id="row0col0"></button>
+        <button type="button" className="touched" id="row0col1">1</button>
+        <button type="button" className="touched mijn" id="row0col2"></button>
+        <button type="button" className="touched mijn flag" id="row0col3"></button>
       </div>
     </article>
   </>

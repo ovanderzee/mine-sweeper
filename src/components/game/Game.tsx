@@ -14,6 +14,7 @@ import { gameReducer } from './game-reducer'
 import { GameStages, GameAction, GameActionType } from '../../common/game.d'
 import storage from '../../common/storage'
 import Tips from './../tips/Tips'
+import { focusFirstNavButton } from '../../common/functions'
 import './Game.css'
 
 const Game = () => {
@@ -58,8 +59,8 @@ const Game = () => {
       style={{'--board-size': BOARD_SIZE} as React.CSSProperties}
     >
       <h1 className="sr-only" id="page-heading">{text.nav['Playground']}</h1>
-      <div id="game-board">
-        {gameState.board.map((row) =>
+      <div id="game-board" role="grid">
+        {gameState.board.map((row, index) => <div role="row" key={`row_${index}`}>{
           row.map((cell) => (
             <GameCell
               key={`${cell.row}_${cell.col}`}
@@ -67,7 +68,7 @@ const Game = () => {
               onTouch={dispatchGameAction}
             />
           ))
-        )}
+        }</div>)}
       </div>
       <Tips
         game={gameState}
@@ -79,7 +80,6 @@ const Game = () => {
 
   const gameNavigation = (
     <NavOptionsBar>
-      <HiScores />
       <NewGame
         onNew={dispatchGameAction}
         stage={gameState.stage}
@@ -88,6 +88,7 @@ const Game = () => {
         onReplay={dispatchGameAction}
         stage={gameState.stage}
       />
+      <HiScores />
       <Help />
       <Settings />
       <GameCellDemoNav />
@@ -121,7 +122,7 @@ const Game = () => {
       .replace('%r', gameState.score.rank.toString())
     }
     message={gameState.score.rank.toString()}
-    onConfirm={() => {}}
+    onConfirm={focusFirstNavButton}
     isShowModal={showWonModal}
     endShowModal={()=>setShowWonModal(false)}
   />
