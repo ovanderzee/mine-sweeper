@@ -1,6 +1,6 @@
 # Mine Sweeper
 
-Mine Sweeper is a game of guessing and getting feedback.
+Mine Sweeper is a game of guessing, inferring and getting feedback.
 Just like real life!
 
 ## Features
