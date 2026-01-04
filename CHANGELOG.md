@@ -8,7 +8,7 @@
 - The shield looks like plastic. Make a dent in the shield to add realism
 - Debt after porting tests to vitest, see TODOs and it.skip
 - Gameboard jumps when using the keyboard and covering the fullscreen mode
-- Look at disabled 'set-state-in-effect' and 'exhaustive-deps', might have to do with 'value cannot be modified' or 'cannot access refs during render' lint errors
+- Look at disabled 'set-state-in-effect' and 'exhaustive-deps'
 - test coverage is by test config file, not integrated
 - added click listeners on range-inputs to test them, remove when vitest/browser starts supporting change listeners on inputs
 - Vitest lacks support for pointerup/down, thus for longpress
@@ -23,13 +23,18 @@
 - Save a game on a new list page (with comment)
 - Show gamelevel and number of neighbouring mines in graph
 - Calculate coagulation (mine-mine borders | blank to mine ratio)
-- Focus New Game button after dismissing won-dialog or game lost
 - Eliminate outliers in graph
 - Remember last touched game cell, as starting point for move with arrow key
+- store board magnification in sessionStorage 
 
 
+## [next]
 
-## [3.6.1]
+### Changed
+- revise context to satisfy lint rules and apply a better filename
+
+
+## [3.6.1] - 2026-01-03
 
 ### Changed
 - Refined ARIA roles on Game screen

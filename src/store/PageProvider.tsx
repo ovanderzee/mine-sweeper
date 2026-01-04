@@ -5,18 +5,18 @@ import { texts } from '../common/i18n'
 import storage from '../common/storage'
 import { AppConfig, AppSubConfig, PageContextProps, Translation } from '../common/app.d'
 
-const defaultPageState = {
-  render: null as unknown as React.ReactElement,
-  config: null as unknown as AppConfig,
-  text: {} as Translation
-}
-
 /**
  * Wrapper to make Page available
  * @param {Object} props
  * @returns {Object} Page members and methods
  */
 const PageProvider = (props: { children: React.ReactNode }) => {
+  const defaultPageState = {
+    render: null as unknown as React.ReactElement,
+    config: null as unknown as AppConfig,
+    text: {} as Translation
+  }
+
   const { config } = storage
   defaultPageState.config = config
   defaultPageState.text = texts[config.LANGUAGE]

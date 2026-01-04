@@ -53,8 +53,10 @@ export const renderWithProvider = async (component: React.ReactNode): Promise<Re
 
   return await render(
     <PageProvider>
-      <AllSymbols />
-      {component}
+      <>
+        <AllSymbols />
+        {component}
+      </>
     </PageProvider>
   )
 }
