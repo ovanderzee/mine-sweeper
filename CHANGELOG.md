@@ -9,7 +9,6 @@
 - Debt after porting tests to vitest, see TODOs and it.skip
 - Gameboard jumps when using the keyboard and covering the fullscreen mode
 - Look at disabled 'set-state-in-effect' and 'exhaustive-deps'
-- test coverage is by test config file, not integrated
 - added click listeners on range-inputs to test them, remove when vitest/browser starts supporting change listeners on inputs
 - Vitest lacks support for pointerup/down, thus for longpress
 

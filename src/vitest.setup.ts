@@ -5,25 +5,16 @@ beforeEach(() => {
   vi.useFakeTimers();
 });
 
-/* <dialog> lacking in jest-dom */
-
-HTMLDialogElement.prototype.show = vi.fn();
-HTMLDialogElement.prototype.showModal = vi.fn();
-HTMLDialogElement.prototype.close = vi.fn();
-
 /* scroll functions not implemented in jsdom */
 
-window.scrollTo = function() {};
-window.HTMLElement.prototype.scrollIntoView = function() {};
+HTMLElement.prototype.scrollIntoView = vi.fn()
+HTMLElement.prototype.scrollIntoViewIfNeeded = vi.fn()
 
 /* fullscreen api lacking in jsdom and jest-dom */
 
+// @ts-expect-error // error TS2540: Cannot assign to 'fullscreenEnabled' because it is a read-only property.
+Document.prototype.fullscreenEnabled = true
+Document.prototype.exitFullscreen = vi.fn()
 Element.prototype.requestFullscreen = vi.fn()
-document.exitFullscreen = vi.fn()
-// @ts-expect-error // error TS2540: Cannot assign to 'fullscreenEnabled' because it is a read-only property.
-document.fullscreenElement = null
-// @ts-expect-error // error TS2540: Cannot assign to 'fullscreenEnabled' because it is a read-only property.
-document.fullscreenEnabled = true
 Element.prototype.onfullscreenchange = vi.fn()
 Element.prototype.onfullscreenerror = vi.fn()
-
