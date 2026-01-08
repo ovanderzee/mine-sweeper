@@ -10,6 +10,9 @@ const ShieldSymbols = () => {
         <filter id="blur" filterUnits="objectBoundingBox">
           <feGaussianBlur in="SourceGraphic" stdDeviation="8"></feGaussianBlur>
         </filter>
+        <filter id="cast" filterUnits="objectBoundingBox" x="-70%" width="240%" y="-50%" height="200%" opacity=".25">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="9"></feGaussianBlur>
+        </filter>
         <path id="shield" d="M72,20.424c17.969,0,41.261-10.427,41.261-10.427L135,30.185c-17.303,19.965-3.863,45.784-5.545,61.891
           C126.792,117.586,72,134.003,72,134.003s-54.792-16.417-57.455-41.928C12.864,75.969,26.303,50.149,9,30.185L30.74,9.997
           C30.74,9.997,54.031,20.424,72,20.424z"/>
@@ -18,7 +21,9 @@ const ShieldSymbols = () => {
           C 102.85804,25.020194 87.247454,30.423828 72,30.423828
           c -15.246744,0 -30.856,-5.403566 -39.162109,-8.728516 z"
             strokeWidth="1" fill="none" opacity="0.667"/>
+    		<path id="bean" d="m 0,25 c 0,13.81 7.46,25 16.67,25 9.2,0 5.67,-11.19 5.67,-25 C 22.33,11.19 25.87,0 16.67,0 7.46,0 0,11.19 0,25 Z" />
       </defs>
+
       <symbol id="shield_blue" viewBox="0 3 144 144">
         <defs>
           <linearGradient id="gradient_blue" gradientTransform="rotate(40)">
@@ -33,6 +38,10 @@ const ShieldSymbols = () => {
           <rect x="6" y="6" width="132" height="132" id="glare_blue" fill="url(#gradient_blue)" />
           <use href="#shield" id="paint" fill="var(--medium-blue)" filter="url(#blur)"
               transform="translate(63, 62) skewX(-8) skewY(-8) translate(-63, -62)" />
+          <g filter="url(#cast)" opacity=".2">
+            <use href="#bean" transform="translate(40 32) rotate(64, 16.67, 25)" fill="var(--dark-blue)" />
+            <use href="#bean" transform="translate(70 68) rotate(244, 16.67, 25)" fill="var(--light-blue)" />
+          </g>
           <use href="#edge" stroke="var(--extra-dark-blue)" />
           <use href="#edge" stroke="var(--extra-light-blue)" transform="translate(0.7, 0.7)" />
         </g>
@@ -52,6 +61,10 @@ const ShieldSymbols = () => {
           <rect x="6" y="6" width="132" height="132" id="glare_gold" fill="url(#gradient_gold)" />
           <use href="#shield" id="paint" fill="var(--medium-gold)" filter="url(#blur)"
               transform="translate(63, 62) skewX(-8) skewY(-8) translate(-63, -62)" />
+          <g filter="url(#cast)" opacity=".2">
+            <use href="#bean" transform="translate(40 32) rotate(64, 16.67, 25)" fill="var(--dark-gold)" />
+            <use href="#bean" transform="translate(70 68) rotate(244, 16.67, 25)" fill="var(--light-gold)" />
+          </g>
           <use href="#edge" stroke="var(--light-gold)" />
           <use href="#edge" stroke="var(--dark-gold)" transform="translate(0.7, 0.7)" />
         </g>
@@ -71,6 +84,10 @@ const ShieldSymbols = () => {
           <rect x="6" y="6" width="132" height="132" id="glare_silver" fill="url(#gradient_silver)" />
           <use href="#shield" id="paint" fill="var(--medium-silver)" filter="url(#blur)"
               transform="translate(63, 62) skewX(-8) skewY(-8) translate(-63, -62)" />
+          <g filter="url(#cast)" opacity=".2">
+            <use href="#bean" transform="translate(40 32) rotate(64, 16.67, 25)" fill="var(--dark-silver)" />
+            <use href="#bean" transform="translate(70 68) rotate(244, 16.67, 25)" fill="var(--light-silver)" />
+          </g>
           <use href="#edge" stroke="var(--light-silver)" />
           <use href="#edge" stroke="var(--dark-silver)" transform="translate(0.7, 0.7)" />
         </g>
@@ -90,6 +107,10 @@ const ShieldSymbols = () => {
           <rect x="6" y="6" width="132" height="132" id="glare_bronze" fill="url(#gradient_bronze)" />
           <use href="#shield" id="paint" fill="var(--medium-bronze)" filter="url(#blur)"
               transform="translate(63, 62) skewX(-8) skewY(-8) translate(-63, -62)" />
+          <g filter="url(#cast)" opacity=".2">
+            <use href="#bean" transform="translate(40 32) rotate(64, 16.67, 25)" fill="var(--dark-bronze)" />
+            <use href="#bean" transform="translate(70 68) rotate(244, 16.67, 25)" fill="var(--light-bronze)" />
+          </g>
           <use href="#edge" stroke="var(--light-bronze)" />
           <use href="#edge" stroke="var(--dark-bronze)" transform="translate(0.7, 0.7)" />
         </g>

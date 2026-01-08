@@ -5,7 +5,6 @@
 ### Problems
 - Gameboard could technically be 36 * 36 but board starts to jump when the game is operated by keyboard: provide zoom buttons next to clock
 - Fade out of dialog goes smooth but ends abrupt
-- The shield looks like plastic. Make a dent in the shield to add realism
 - Debt after porting tests to vitest, see TODOs and it.skip
 - Gameboard jumps when using the keyboard and covering the fullscreen mode
 - Look at disabled 'set-state-in-effect' and 'exhaustive-deps'
@@ -30,7 +29,8 @@
 ## [next]
 
 ### Changed
-- revise context to satisfy lint rules and apply a better filename
+- Revise context to satisfy lint rules and apply a better filename
+- Refined shield
 
 
 ## [3.6.1] - 2026-01-03
