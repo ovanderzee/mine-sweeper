@@ -3,14 +3,12 @@
 ## [Unreleased]
 
 ### Problems
-- Gameboard could technically be 36 * 36 but board starts to jump when the game is operated by keyboard: provide zoom buttons next to clock
+- Gameboard could technically be 36 * 36 = 1296 cells, but the cells will be very small, even fullscreen
 - Fade out of dialog goes smooth but ends abrupt
 - Debt after porting tests to vitest, see TODOs and it.skip
-- Gameboard jumps when using the keyboard and covering the fullscreen mode
 - Look at disabled 'set-state-in-effect' and 'exhaustive-deps'
 - added click listeners on range-inputs to test them, remove when vitest/browser starts supporting change listeners on inputs
-- Vitest lacks support for pointerup/down, thus for longpress
-
+- Vitest lacks support for pointerup/down, how to test longpress to flag cells
 
 ### Features
 - Playmode Tough: Play without flags or mine counters
@@ -23,7 +21,9 @@
 - Calculate coagulation (mine-mine borders | blank to mine ratio)
 - Eliminate outliers in graph
 - Remember last touched game cell, as starting point for move with arrow key
-- store board magnification in sessionStorage 
+- Store board magnification in sessionStorage
+- Remove too easy 3*3 and 4*4 boards and levels 1 and 6
+- Refine levels with intermediate values, maybe by percentage
 
 
 ## [next]
@@ -31,6 +31,9 @@
 ### Changed
 - Revise context to satisfy lint rules and apply a better filename
 - Refined shield
+
+### Fixed
+- Prevent the board from jumping while tabbing.
 
 
 ## [3.6.1] - 2026-01-03

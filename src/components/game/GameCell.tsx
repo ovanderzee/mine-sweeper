@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import PageContext from '../../store/page-context'
 import { LONG_PRESS_THRESHOLD } from '../../common/constants'
 import { CellState, CellStateStage, CellStateEntry, GameAction, GameActionType } from '../../common/game.d';
+import { scrollIntoViewTowardsCenter } from '../../common/functions'
 import './GameCell.css'
 
 interface GameCellProps {
@@ -116,7 +117,9 @@ const GameCell = (props: GameCellProps) => {
     }
 
     if (goToCell) {
+      event.preventDefault()
       event.stopPropagation()
+      scrollIntoViewTowardsCenter(goToCell)
       goToCell.focus()
     }
   }
