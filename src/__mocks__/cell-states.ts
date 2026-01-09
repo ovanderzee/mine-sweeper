@@ -1,6 +1,6 @@
-import { CellStateStage } from './../common/game.d'
+import { CellState, CellStateStage } from './../common/game.d'
 
-const cellStates = {
+const cellStates: Record<string, Record<string, CellState>> = {
   // not showing anything, can get / lose a flag
   pristine: {
     blank: { row: 1, col: 2, fill: 0, stage: CellStateStage.HIDDEN },
