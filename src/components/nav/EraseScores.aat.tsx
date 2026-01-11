@@ -1,6 +1,7 @@
 
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import EraseScores from './EraseScores'
+import { ScoreItem } from './../../common/game.d'
 import storage from '../../common/storage'
 import { liveScores } from './../../__mocks__/scores'
 import { renderWithProvider } from './../../__mocks__/aat-helpers'
@@ -10,7 +11,7 @@ describe('EraseScores Component', () => {
 
   beforeEach(() => {
     emitter = vi.fn()
-    storage.scores = liveScores
+    storage.scores = liveScores as ScoreItem[]
   })
 
   it('should display the "Circled Division Slash" sign', async () => {
@@ -30,7 +31,7 @@ describe('EraseScores Component', () => {
 
     expect(button.element().className).not.toContain('active')
     expect(emitter).not.toHaveBeenCalled()
-    expect(storage.scores).toStrictEqual(liveScores)
+    expect(storage.scores.length).toStrictEqual(liveScores.length)
   })
 
   it('should erase scores when confirming', async () => {

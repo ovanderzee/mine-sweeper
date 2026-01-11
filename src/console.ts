@@ -1,14 +1,14 @@
 import storage from './common/storage'
 import { liveScores } from './__mocks__/scores'
-import { ScoreItem } from './common/game.d'
+import { ScoreItem, BareScoreItem } from './common/game.d'
 
 
 const getAllScores = function (): ScoreItem[] {
   return storage.scores
 }
 
-const setAllScores = function (scores: ScoreItem[]) {
-  storage.scores = scores
+const setAllScores = function (scores: BareScoreItem[]) {
+  storage.scores = scores as ScoreItem[]
 }
 
 const getScoresByUser = function (user: string) {

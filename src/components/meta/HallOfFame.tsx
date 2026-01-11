@@ -9,7 +9,7 @@ import { ShieldByRank } from '../UI/Shield'
 import Diagram from '../UI/Diagram'
 import { ScoreItem, ScoreParam } from '../../common/game.d'
 import storage from '../../common/storage'
-import { precise, refineScores } from '../../common/scoring'
+import { precise } from '../../common/scoring'
 import { SHOW_SORT_THRESHOLD, SHOW_DIAGRAM_THRESHOLD } from '../../common/constants'
 import ScorePopover from '../UI/ScorePopover'
 import './Meta.css'
@@ -20,7 +20,6 @@ const HallOfFame = () => {
   const text = pageCtx.text
 
   const rootScores = storage.scores
-  refineScores(rootScores)
   const latest = [...rootScores].sort((a:ScoreItem, b:ScoreItem) => b.date - a.date)[0]
 
   const [scores, setScores] = useState(rootScores)

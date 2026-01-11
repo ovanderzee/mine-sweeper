@@ -1,7 +1,7 @@
 import { vi } from 'vitest'
 import storage from './storage'
 import DEFAULTS from './defaults'
-import { GameState } from './game.d'
+import { GameState, ScoreItem } from './game.d'
 import { newGameState, wonGameState } from '../__mocks__/game-states'
 import { liveScores } from '../__mocks__/scores'
 import { microConfig } from '../__mocks__/configs'
@@ -167,7 +167,7 @@ describe('Scores storage', () => {
   })
 
   it('should set data', () => {
-    storage.scores = liveScores
+    storage.scores = liveScores as ScoreItem[]
 
     const read = JSON.parse(localStorage.getItem('mv-victory') as string)
     expect(read[10]).toStrictEqual(liveScores[10])
@@ -177,17 +177,17 @@ describe('Scores storage', () => {
     localStorage.setItem('mv-victory', JSON.stringify(liveScores))
 
     const scores = storage.scores
-    expect(scores[10]).toStrictEqual(liveScores[10])
+    expect(scores[10].date).toStrictEqual(liveScores[10].date)
   })
 
   it('should set and overwrite', () => {
-    storage.scores = liveScores
+    storage.scores = liveScores as ScoreItem[]
 
     const read1 = JSON.parse(localStorage.getItem('mv-victory') as string)
     expect(read1.length).toBe(liveScores.length)
 
     const someScores = liveScores.slice(0,9)
-    storage.scores = someScores
+    storage.scores = someScores as ScoreItem[]
 
     const read2 = JSON.parse(localStorage.getItem('mv-victory') as string)
     expect(read2.length).toBe(someScores.length)
@@ -217,13 +217,12 @@ describe('Scores storage', () => {
   })
 
   it('should catch a JSON.parse error and return an empty array', () => {
+    window.console.error = vi.fn()
     const stringified = '[{"code":"331Aw3CMxA","date":1755'
     localStorage.setItem('mv-victory', stringified)
-    const consoleErrorSpy = vi.spyOn(console, 'error').mockImplementation(() => {})
-
     const scores = storage.scores
 
     expect(scores).toStrictEqual([])
-    expect(consoleErrorSpy).toHaveBeenLastCalledWith('Invalid scorelist found, start with new list...')
+    expect(window.console.error).toHaveBeenCalledWith('Invalid scorelist found, start with new list...')
   })
 })

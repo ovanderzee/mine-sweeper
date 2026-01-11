@@ -5,6 +5,7 @@ import { renderWithApp } from './../__mocks__/aat-helpers'
 import { liveScores } from '../__mocks__/scores'
 import { flipFocus, focusFirstNavButton } from './functions'
 import storage from './storage'
+import { ScoreItem } from './game.d'
 
 vi.mock('./functions', { spy: true })
 
@@ -118,7 +119,7 @@ describe('Flip focus', () => {
       screen: RenderResult
 
     beforeEach(async () => {
-      storage.scores = liveScores
+      storage.scores = liveScores as ScoreItem[]
       screen = await renderWithApp('HallOfFame')
     })
 

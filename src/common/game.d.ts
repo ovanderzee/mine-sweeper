@@ -82,16 +82,19 @@ export interface ScoreCalc {
   points: number
 }
 
-export interface ScoreItem {
+export interface BareScoreItem {
   [index: string],
   code: string,
   date: number,
   user: string,
-  rank: number,
-  level?: number,
   game: GameScore,
   play: PlayScore,
   score: ScoreCalc,
+}
+
+export interface ScoreItem extends BareScoreItem {
+  rank: number,
+  level: number,
 }
 
 export type ScoreParam = keyof ScoreItem | keyof ScoreItem["game"] | keyof ScoreItem["play"] | keyof ScoreItem["score"]

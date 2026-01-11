@@ -1,6 +1,7 @@
 import DEFAULTS from './defaults'
 import { AppConfig, AppSubConfig } from './app.d'
 import { GameState, ScoreItem } from './game.d'
+import { refineScores, stripScores } from './scoring'
 
 /*
   Interface for data storage.
@@ -60,7 +61,8 @@ const storage = {
     const stored = localStorage.getItem('mv-victory')
     let data: ScoreItem[]
     try {
-      data = stored ? JSON.parse(stored) : []
+      const bareData = stored ? JSON.parse(stored) : []
+      data = refineScores(bareData)
     } catch {
       console.error('Invalid scorelist found, start with new list...')
       data = []
@@ -68,12 +70,13 @@ const storage = {
     return data
   },
   set scores(data: ScoreItem[]) {
-      if (data?.length) {
-        const storeable = JSON.stringify(data)
-        localStorage.setItem('mv-victory', storeable)
-      } else {
-        this.eraseScores()
-      }
+    if (data?.length) {
+      const bareData = stripScores(data)
+      const storeable = JSON.stringify(bareData)
+      localStorage.setItem('mv-victory', storeable)
+    } else {
+      this.eraseScores()
+    }
   }
 }
 

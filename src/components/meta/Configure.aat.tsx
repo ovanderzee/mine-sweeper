@@ -9,6 +9,7 @@ import { playingGameState } from './../../__mocks__/game-states'
 import { microConfig } from './../../__mocks__/configs'
 import { liveScores } from './../../__mocks__/scores'
 import { RANGES } from '../../common/constants'
+import { ScoreItem } from './../../common/game.d'
 import Configure from './Configure'
 
 describe('The configure page sidebar', () => {
@@ -133,7 +134,7 @@ describe('The configure controls', () => {
   })
 
   it('should not instantaneously remove scores', () => {
-    storage.scores = liveScores
+    storage.scores = liveScores as ScoreItem[]
     const range = screen.getByLabelText('Max records')
     clickRangeInputValue(range.element() as HTMLInputElement, '33')
     expect(storage.scores.length).toBe(liveScores.length)

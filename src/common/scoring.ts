@@ -15,7 +15,7 @@ export const refineScores = (scores: ScoreItem[] | BareScoreItem[]): ScoreItem[]
     score.rank = 1 + index
     if (!score.level) score.level = +score.code.charAt(2)
     return score
-  })
+  }) as ScoreItem[]
 }
 
 export const stripScores = (scores: ScoreItem[]): BareScoreItem[] => {
