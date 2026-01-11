@@ -111,12 +111,27 @@ describe('Console methods mixing mocks and stored scores', () => {
     expect(storage.scores.length).toBe(1)
   })
 
-  it('should remove one score by properties', () => {
+  it('should remove one score by username and scored points', () => {
     storage.scores = liveScores
-    vi.spyOn(window, 'confirm').mockReturnValue(true)
+    window.alert = vi.fn()
+    window.confirm = vi.fn(() => true)
 
-    mv.deleteOneByProperties({rank: 99})
+    mv.deleteOneScoreItem(liveScores[2].user, liveScores[2].score.points)
 
+    expect(window.alert).not.toHaveBeenCalled()
+    expect(window.confirm).toHaveBeenCalled()
     expect(storage.scores.length).toBe(liveScores.length - 1)
+  })
+
+  it('should not remove a bad username - scored points match', () => {
+    storage.scores = liveScores
+    window.alert = vi.fn()
+    window.confirm = vi.fn(() => true)
+
+    mv.deleteOneScoreItem(liveScores[2].user, liveScores[99].score.points)
+
+    expect(window.alert).toHaveBeenCalled()
+    expect(window.confirm).not.toHaveBeenCalled()
+    expect(storage.scores.length).toBe(liveScores.length)
   })
 })
