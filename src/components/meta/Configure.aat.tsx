@@ -126,7 +126,7 @@ describe('The configure controls', () => {
   })
 
   it('should change the max-scores setting', () => {
-    expect(storage.config.MAX_SCORES).toBe(500)
+    expect(storage.config.MAX_SCORES).toBe(999)
     const range = screen.getByLabelText('Max records')
     clickRangeInputValue(range.element() as HTMLInputElement, '642')
     expect(storage.config.MAX_SCORES).toBe(642)

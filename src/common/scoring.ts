@@ -5,13 +5,24 @@ import { GameState, CellState, CellStateStage,
   GameScore, PlayScore, ScoreCalc } from './game.d'
 import { calculateMineCount } from './defaults'
 import { SCORE_RADIX } from './constants'
-import { ScoreItem } from './game.d'
+import { ScoreItem, BareScoreItem } from './game.d'
 
 export const precise = (figure: number, precision: number) => Number(figure.toPrecision(precision))
 
-export const rankScores = (scores: ScoreItem[]): void => {
+export const refineScores = (scores: ScoreItem[] | BareScoreItem[]): ScoreItem[] => {
   scores.sort((a, b) => b.score.points - a.score.points)
-  scores.forEach((score, index) => score.rank = 1 + index)
+  return scores.map((score, index) => {
+    score.rank = 1 + index
+    if (!score.level) score.level = +score.code.charAt(2)
+    return score
+  })
+}
+
+export const stripScores = (scores: ScoreItem[]): BareScoreItem[] => {
+  const bareData = scores.map(d => {
+    return {code: d.code, date: d.date, user: d.user, game: d.game, play: d.play, score: d.score}
+  })
+  return bareData
 }
 
 export const unmarkCells = (game: GameState) => {

@@ -1,11 +1,11 @@
-import { vi, MockInstance } from 'vitest'
+import { vi } from 'vitest'
 import storage from './common/storage'
 import * as scoring from './common/scoring'
 import mv from './console'
 import { liveScores } from './__mocks__/scores'
 
 const testScore = () => { return {
-  code: "774AwkRlTLDVr7EY0Q", date: 1514179800000, user: "Annestiene", rank: 999,
+  code: "774AwkRlTLDVr7EY0Q", date: 1514179800000, user: "Annestiene", rank: 999, level: 10,
   game: {cells: 49, mines: 7, effort: {least: 12, most: 33}},
   play: {moves: 15, duration: 41.599},
   score: {efficiency: 0.8, speed: 0.3606, points: 288}
@@ -32,14 +32,11 @@ describe('Basic Console methods', () => {
   it('should sort by points, then rank scores incremental', () => {
     const initialScores = [testScore(), testScore(), testScore()]
     initialScores[0].score.points = 102
-    initialScores[0].rank = 30
     initialScores[1].score.points = 101
-    initialScores[1].rank = 8
     initialScores[2].score.points = 103
-    initialScores[2].rank = 27
 
     mv.setAllScores(initialScores)
-    const nextScores = JSON.parse(localStorage.getItem('mv-victory') as string)
+    const nextScores = mv.getAllScores()
 
     expect(nextScores[0].score.points).toBe(103)
     expect(nextScores[0].rank).toBe(1)
@@ -73,12 +70,6 @@ describe('Console methods by user', () => {
 })
 
 describe('Console methods mixing mocks and stored scores', () => {
-  let rankScoresSpy: MockInstance
-
-  beforeEach(() => {
-    rankScoresSpy = vi.spyOn(scoring, 'rankScores')
-  })
-
   it('should add all the sample records', () => {
     storage.scores = []
 
@@ -92,22 +83,18 @@ describe('Console methods mixing mocks and stored scores', () => {
 
     mv.updateStorageWithSampleScores()
 
-    expect(rankScoresSpy).toHaveBeenCalled()
     expect(storage.scores.length).toBe(liveScores.length)
   })
 
   it('should remove all the sample records and leave the original scores', () => {
     const originalScore = testScore()
     storage.scores = [ originalScore, ...liveScores ]
-    const originalScoreRank = originalScore.rank
     mv.deleteStoredSampleScores()
 
     // storage.scores[0] is successor of originalScore
     expect(storage.scores[0].code).toBe(originalScore.code)
     expect(storage.scores[0].date).toBe(originalScore.date)
 
-    expect(storage.scores[0].rank).not.toBe(originalScoreRank)
-    expect(rankScoresSpy).toHaveBeenCalled()
     expect(storage.scores.length).toBe(1)
   })
 

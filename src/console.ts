@@ -1,14 +1,13 @@
 import storage from './common/storage'
 import { liveScores } from './__mocks__/scores'
 import { ScoreItem } from './common/game.d'
-import { rankScores } from './common/scoring'
+
 
 const getAllScores = function (): ScoreItem[] {
   return storage.scores
 }
 
 const setAllScores = function (scores: ScoreItem[]) {
-  rankScores(scores)
   storage.scores = scores
 }
 
