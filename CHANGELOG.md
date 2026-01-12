@@ -30,7 +30,9 @@
 
 ### Changed
 - Revise context to satisfy lint rules and apply a better filename
-- Refined shield
+- Refined game-won shield
+- Refined game-lost animation
+- Keep rank out of storage
 
 ### Fixed
 - Prevent the board from jumping while tabbing.

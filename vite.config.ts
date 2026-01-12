@@ -27,13 +27,6 @@ export default defineConfig({
     // @ts-expect-error // error TS2769: No overload matches this call
     coverage: {
       include: ['src'],
-      exclude: [
-        '**/.DS_Store',
-        '**/*.d.ts',
-        'src/main.tsx',
-        'src/components/game/GameCellDemo.tsx',
-        'src/__mocks__/*'
-      ],
       reporter: ['text', 'html'],
     },
     setupFiles: ['./src/vitest.setup.ts'],
@@ -41,7 +34,7 @@ export default defineConfig({
       },
       {
   test: {
-    include: ['src/**/*.aat.{ts,tsx}'],
+    include: ['src/**/*.aat.tsx'],
     name: 'aat',
     browser: {
       enabled: true,
