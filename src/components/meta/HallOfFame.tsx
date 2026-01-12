@@ -19,12 +19,10 @@ const HallOfFame = () => {
   const pageCtx = useContext(PageContext)
   const text = pageCtx.text
 
-  const rawScores = storage.scores.map(s => {
-    return { ...s, level: +s.code.charAt(2) } as ScoreItem
-  })
-  const latest = [...rawScores].sort((a:ScoreItem, b:ScoreItem) => b.date - a.date)[0]
+  const rootScores = storage.scores
+  const latest = [...rootScores].sort((a:ScoreItem, b:ScoreItem) => b.date - a.date)[0]
 
-  const [scores, setScores] = useState(rawScores)
+  const [scores, setScores] = useState(rootScores)
   const [sortLabel, setSortLabel] = useState<ScoreParam>('rank')
 
   const eraseScores = () => {
@@ -34,55 +32,55 @@ const HallOfFame = () => {
   const methodsByKind: Record<string, () => ScoreItem[]> = {
     'rank': () => {
       const byRank = (a:ScoreItem, b:ScoreItem) => a.rank - b.rank
-      return rawScores.sort(byRank)
+      return rootScores.sort(byRank)
     },
     'user': () => {
       const byRank = (a: ScoreItem, b: ScoreItem) => a.rank - b.rank
-      rawScores.sort(byRank)
-      const rankedUsers = [...new Set(rawScores.map((rs) => rs.user))]
+      rootScores.sort(byRank)
+      const rankedUsers = [...new Set(rootScores.map((rs) => rs.user))]
       const userSort: ScoreItem[] = []
       rankedUsers.forEach((user) => {
-        userSort.push(...rawScores.filter((rs) => rs.user === user))
+        userSort.push(...rootScores.filter((rs) => rs.user === user))
       })
       return userSort
     },
     'date': () => {
       const byDate = (a: ScoreItem, b: ScoreItem) => b.date - a.date
-      return rawScores.sort(byDate)
+      return rootScores.sort(byDate)
     },
   /*
     'points': () => {
       const byPoints = (a:ScoreItem, b:ScoreItem) => b.score.points - a.score.points
-      return rawScores.sort(byPoints)
+      return rootScores.sort(byPoints)
     },
   */
     'efficiency': () => {
       const byEfficiency = (a:ScoreItem, b:ScoreItem) => b.score.efficiency - a.score.efficiency
-      return rawScores.sort(byEfficiency)
+      return rootScores.sort(byEfficiency)
     },
     'speed': () => {
       const bySpeed = (a:ScoreItem, b:ScoreItem) => b.score.speed - a.score.speed
-      return rawScores.sort(bySpeed)
+      return rootScores.sort(bySpeed)
     },
     'level': () => {
       const byLevel = (a: ScoreItem, b: ScoreItem) => (b?.level || 0) - (a?.level || 0)
-      return rawScores.sort(byLevel)
+      return rootScores.sort(byLevel)
     },
     'mines': () => {
       const byMines = (a:ScoreItem, b:ScoreItem) => a.game.mines - b.game.mines
-      return rawScores.sort(byMines)
+      return rootScores.sort(byMines)
     },
     'cells': () => {
       const byCells = (a:ScoreItem, b:ScoreItem) => a.game.cells - b.game.cells
-      return rawScores.sort(byCells)
+      return rootScores.sort(byCells)
     },
     'moves': () => {
       const byMoves = (a:ScoreItem, b:ScoreItem) => a.play.moves - b.play.moves
-      return rawScores.sort(byMoves)
+      return rootScores.sort(byMoves)
     },
     'duration': () => {
       const byDuration = (a:ScoreItem, b:ScoreItem) => a.play.duration - b.play.duration
-      return rawScores.sort(byDuration)
+      return rootScores.sort(byDuration)
     }
   }
 

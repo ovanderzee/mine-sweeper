@@ -4,7 +4,7 @@ import {
   leastClicksToWin, mostClicksToWin,
   unmarkCells,
   makeBoardCode, sequenceFillData,
-  precise, rankScores, getFillDistribution
+  precise, refineScores, getFillDistribution
 } from './scoring'
 import { newGameState, blank18pct, blank26pct, blank31pct, blank41pct } from '../__mocks__/game-states'
 import { ScoreItem } from './game.d'
@@ -198,16 +198,14 @@ describe('Precision as long as we need it', () => {
 
 describe('Sort and Rank scores', () => {
   const oldScores = [
-    {rank: 14, score: {points: 30}},
-    {rank: 2, score: {points: 100}},
+    {code: "774abc123", rank: 14, score: {points: 30}},
+    {code: "774def456", rank: 2, score: {points: 100}},
   ] as ScoreItem[]
-  const newScore = {rank: 0, score: {points: 67}} as ScoreItem
+  const newScore = {code: "774ghi789", rank: 0, score: {points: 67}} as ScoreItem
 
 
   it('should sort by points and rank', () => {
-    const currentScores = [ ...oldScores, newScore ]
-
-    rankScores(currentScores)
+    const currentScores = refineScores([ ...oldScores, newScore ])
 
     expect(currentScores[0]).toBe(oldScores[1])
     expect(currentScores[0].rank).toBe(1)

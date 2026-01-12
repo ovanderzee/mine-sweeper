@@ -116,6 +116,7 @@ const GameCell = (props: GameCellProps) => {
     }
 
     if (goToCell) {
+      event.preventDefault()
       event.stopPropagation()
       goToCell.focus()
     }
@@ -136,7 +137,11 @@ const GameCell = (props: GameCellProps) => {
       onPointerUp={endHandler}
     >
       {cellContent}
-      {mineClass && <span className="burst"></span>}
+      {burst &&
+        <span
+          className="burst"
+          style={{willChange: 'opacity, scale'}}
+        ></span>}
     </button>
   )
 }

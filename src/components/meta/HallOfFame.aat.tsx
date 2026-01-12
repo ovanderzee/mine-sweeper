@@ -4,7 +4,7 @@ import { Locator } from 'vitest/browser'
 import { renderWithProvider } from './../../__mocks__/aat-helpers'
 import { liveScores } from './../../__mocks__/scores'
 import storage from './../../common/storage'
-
+import { ScoreItem } from './../../common/game.d'
 import HallOfFame from './HallOfFame'
 
 describe('The hall-of-fame page sidebar', () => {
@@ -30,7 +30,7 @@ describe('The hall-of-fame-page clear list button', () => {
   let screen: RenderResult
 
   beforeEach(async () => {
-    storage.scores = liveScores
+    storage.scores = liveScores as ScoreItem[]
     screen = await renderWithProvider(<HallOfFame/>)
   })
 
@@ -64,7 +64,7 @@ describe('The hall-of-fame-page scores', () => {
   let screen: RenderResult
 
   beforeEach(async () => {
-    storage.scores = liveScores
+    storage.scores = liveScores as ScoreItem[]
     screen = await renderWithProvider(<HallOfFame/>)
   })
 
@@ -126,7 +126,7 @@ describe('The hall-of-fame-page list sorting', () => {
   const lastEntry = (qs: string): string | undefined => lastItem(qs)?.textContent
 
   beforeEach(async () => {
-    storage.scores = liveScores
+    storage.scores = liveScores as ScoreItem[]
     screen = await renderWithProvider(<HallOfFame/>)
     panel = screen.getByRole('table')
     items = screen.getByRole('list').getByRole('button')

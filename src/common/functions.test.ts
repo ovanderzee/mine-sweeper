@@ -29,18 +29,15 @@ describe('preventReloadByEnter', () => {
 
 describe('scrollIntoViewTowardsCenter', () => {
   it('should call HTMLElement.scrollIntoViewIfNeeded', () => {
-    window.HTMLElement.prototype.scrollIntoViewIfNeeded = function() {}
-    const sivin = vi.spyOn(document.body, 'scrollIntoViewIfNeeded')
     scrollIntoViewTowardsCenter(document.body)
 
-    expect(sivin).toHaveBeenCalled()
-    delete window.HTMLElement.prototype.scrollIntoViewIfNeeded
+    expect(document.body.scrollIntoViewIfNeeded).toHaveBeenCalled()
   })
 
-  it('should call HTMLElement.scrollIntoView', () => {
-    const siv = vi.spyOn(document.body, 'scrollIntoView')
+  it('should call HTMLElement.scrollIntoView alternatively', () => {
+    HTMLElement.prototype.scrollIntoViewIfNeeded = undefined
     scrollIntoViewTowardsCenter(document.body)
 
-    expect(siv).toHaveBeenCalled()
+    expect(document.body.scrollIntoView).toHaveBeenCalled()
   })
 })

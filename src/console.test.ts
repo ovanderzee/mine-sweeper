@@ -1,11 +1,12 @@
-import { vi, MockInstance } from 'vitest'
+import { vi } from 'vitest'
 import storage from './common/storage'
 import * as scoring from './common/scoring'
 import mv from './console'
 import { liveScores } from './__mocks__/scores'
+import { ScoreItem } from './common/game.d'
 
 const testScore = () => { return {
-  code: "774AwkRlTLDVr7EY0Q", date: 1514179800000, user: "Annestiene", rank: 999,
+  code: "774AwkRlTLDVr7EY0Q", date: 1514179800000, user: "Annestiene", rank: 999, level: 10,
   game: {cells: 49, mines: 7, effort: {least: 12, most: 33}},
   play: {moves: 15, duration: 41.599},
   score: {efficiency: 0.8, speed: 0.3606, points: 288}
@@ -30,17 +31,17 @@ describe('Basic Console methods', () => {
   })
 
   it('should sort by points, then rank scores incremental', () => {
+    const refineScoresSpy = vi.spyOn(scoring, 'refineScores')
+
     const initialScores = [testScore(), testScore(), testScore()]
     initialScores[0].score.points = 102
-    initialScores[0].rank = 30
     initialScores[1].score.points = 101
-    initialScores[1].rank = 8
     initialScores[2].score.points = 103
-    initialScores[2].rank = 27
 
     mv.setAllScores(initialScores)
-    const nextScores = JSON.parse(localStorage.getItem('mv-victory') as string)
+    const nextScores = mv.getAllScores()
 
+    expect(refineScoresSpy).toHaveBeenCalled()
     expect(nextScores[0].score.points).toBe(103)
     expect(nextScores[0].rank).toBe(1)
     expect(nextScores[1].score.points).toBe(102)
@@ -53,7 +54,7 @@ describe('Basic Console methods', () => {
 
 describe('Console methods by user', () => {
   beforeEach(() => {
-    storage.scores = liveScores
+    storage.scores = liveScores as ScoreItem[]
   })
 
   it('should get the records of the specified user', () => {
@@ -73,12 +74,6 @@ describe('Console methods by user', () => {
 })
 
 describe('Console methods mixing mocks and stored scores', () => {
-  let rankScoresSpy: MockInstance
-
-  beforeEach(() => {
-    rankScoresSpy = vi.spyOn(scoring, 'rankScores')
-  })
-
   it('should add all the sample records', () => {
     storage.scores = []
 
@@ -88,35 +83,46 @@ describe('Console methods mixing mocks and stored scores', () => {
   })
 
   it('should not duplicate existing sample records', () => {
-    storage.scores = [liveScores[0], liveScores[liveScores.length-1]]
+    storage.scores = [liveScores[0], liveScores[liveScores.length-1]] as ScoreItem[]
 
     mv.updateStorageWithSampleScores()
 
-    expect(rankScoresSpy).toHaveBeenCalled()
     expect(storage.scores.length).toBe(liveScores.length)
   })
 
   it('should remove all the sample records and leave the original scores', () => {
     const originalScore = testScore()
-    storage.scores = [ originalScore, ...liveScores ]
-    const originalScoreRank = originalScore.rank
+    storage.scores = [ originalScore, ...liveScores ] as ScoreItem[]
     mv.deleteStoredSampleScores()
 
     // storage.scores[0] is successor of originalScore
     expect(storage.scores[0].code).toBe(originalScore.code)
     expect(storage.scores[0].date).toBe(originalScore.date)
 
-    expect(storage.scores[0].rank).not.toBe(originalScoreRank)
-    expect(rankScoresSpy).toHaveBeenCalled()
     expect(storage.scores.length).toBe(1)
   })
 
-  it('should remove one score by properties', () => {
-    storage.scores = liveScores
-    vi.spyOn(window, 'confirm').mockReturnValue(true)
+  it('should remove one score by username and scored points', () => {
+    storage.scores = liveScores as ScoreItem[]
+    window.alert = vi.fn()
+    window.confirm = vi.fn(() => true)
 
-    mv.deleteOneByProperties({rank: 99})
+    mv.deleteOneScoreItem(liveScores[2].user, liveScores[2].score.points)
 
+    expect(window.alert).not.toHaveBeenCalled()
+    expect(window.confirm).toHaveBeenCalled()
     expect(storage.scores.length).toBe(liveScores.length - 1)
+  })
+
+  it('should not remove a bad username - scored points match', () => {
+    storage.scores = liveScores as ScoreItem[]
+    window.alert = vi.fn()
+    window.confirm = vi.fn(() => true)
+
+    mv.deleteOneScoreItem(liveScores[2].user, liveScores[99].score.points)
+
+    expect(window.alert).toHaveBeenCalled()
+    expect(window.confirm).not.toHaveBeenCalled()
+    expect(storage.scores.length).toBe(liveScores.length)
   })
 })

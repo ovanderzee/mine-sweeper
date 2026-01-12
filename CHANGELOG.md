@@ -3,16 +3,12 @@
 ## [Unreleased]
 
 ### Problems
-- Gameboard could technically be 36 * 36 but board starts to jump when the game is operated by keyboard: provide zoom buttons next to clock
+- Gameboard could technically be 36 * 36 = 1296 cells, but the cells will be very small, even fullscreen
 - Fade out of dialog goes smooth but ends abrupt
-- The shield looks like plastic. Make a dent in the shield to add realism
 - Debt after porting tests to vitest, see TODOs and it.skip
-- Gameboard jumps when using the keyboard and covering the fullscreen mode
-- Look at disabled 'set-state-in-effect' and 'exhaustive-deps', might have to do with 'value cannot be modified' or 'cannot access refs during render' lint errors
-- test coverage is by test config file, not integrated
+- Look at disabled 'set-state-in-effect' and 'exhaustive-deps'
 - added click listeners on range-inputs to test them, remove when vitest/browser starts supporting change listeners on inputs
-- Vitest lacks support for pointerup/down, thus for longpress
-
+- Vitest lacks support for pointerup/down, how to test longpress to flag cells
 
 ### Features
 - Playmode Tough: Play without flags or mine counters
@@ -23,13 +19,26 @@
 - Save a game on a new list page (with comment)
 - Show gamelevel and number of neighbouring mines in graph
 - Calculate coagulation (mine-mine borders | blank to mine ratio)
-- Focus New Game button after dismissing won-dialog or game lost
 - Eliminate outliers in graph
 - Remember last touched game cell, as starting point for move with arrow key
+- Store board magnification in sessionStorage
+- Remove too easy 3*3 and 4*4 boards and levels 1 and 6
+- Refine levels with intermediate values, maybe by percentage
 
 
+## [next]
 
-## [3.6.1]
+### Changed
+- Revise context to satisfy lint rules and apply a better filename
+- Refined game-won shield
+- Refined game-lost animation
+- Keep rank out of storage
+
+### Fixed
+- Prevent the board from jumping while tabbing.
+
+
+## [3.6.1] - 2026-01-03
 
 ### Changed
 - Refined ARIA roles on Game screen

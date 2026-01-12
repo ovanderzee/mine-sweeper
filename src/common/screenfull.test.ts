@@ -1,4 +1,3 @@
-import { vi } from 'vitest'
 import screenfullFn from './screenfull'
 import { ScreenfullApi } from './app.d'
 
@@ -19,9 +18,15 @@ describe('Screenfull API', () => {
     expect(typeof api.exitFullscreen).toBe('function')
   })
 
-  it('should call native methods', () => {
-    const exitFullscreenSpy = vi.spyOn(document, 'exitFullscreen')
+  it('should call native requestFullscreen', async () => {
+    api.enterFullscreen()
+
+    expect(document.body.requestFullscreen).toHaveBeenCalled()
+  })
+
+  it('should call native exitFullscreen', () => {
     api.exitFullscreen()
-    expect(exitFullscreenSpy).toHaveBeenCalled()
+
+    expect(document.exitFullscreen).toHaveBeenCalled()
   })
 })

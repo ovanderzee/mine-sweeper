@@ -125,7 +125,8 @@
   display: inline-block;
   width: 1.5em;
   aspect-ratio: 1;
-  transform: translate(-50%, -50%);
+  margin: .25em;
+  transform-origin: center;
 
   background: radial-gradient(
     var(--fire-blue),
@@ -135,7 +136,7 @@
   );
   border-radius: 50%;
 
-  position: absolute;
+  position: relative;
   z-index: -15;
 
   animation-name: explode;
@@ -147,13 +148,11 @@
 
 @keyframes explode {
   from {
-    width: 50%;
-    height: 50%;
-    opacity: .8;
+    scale: 1;
+    opacity: .7;
   }
   to {
-    width: max(200vw, 200vh);
-    height: max(200vw, 200vh);
+    scale: 150;
     opacity: 0;
   }
 }

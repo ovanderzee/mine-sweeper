@@ -53,22 +53,28 @@ describe('Gamecell, a party of properties', () => {
     })
 
     it('opened mine cell', async () => {
-      const cell = cellStates.opened.mijn
+      const cell = cellStates.clicked.mijn
+      cell.burst = false
       const screen = await renderWithProvider(getCellByState(cell))
       const button = screen.getByRole('gridcell').element()
       expect(button.id).toBe('row3col4')
-      expect(button.innerHTML).toBe(' <span class="burst"></span>')
-      expect(trim(button.className)).toBe('touched mijn')
+      await vi.waitFor(() => {
+        expect(button.innerHTML).toBe(' ')
+        expect(trim(button.className)).toBe('touched mijn exploded')
+      })
       expect(button.getAttribute('aria-label')).toBe('row 4 column 5, open')
     })
 
     it('clicked mine cell', async () => {
       const cell = cellStates.clicked.mijn
+      cell.burst = true
       const screen = await renderWithProvider(getCellByState(cell))
       const button = screen.getByRole('gridcell').element()
       expect(button.id).toBe('row3col4')
-      expect(button.innerHTML).toBe(' <span class="burst"></span>')
-      expect(trim(button.className).startsWith('touched mijn explode')).toBe(true)
+      await vi.waitFor(() => {
+        expect(button.innerHTML).toBe(' <span class="burst" style="will-change: opacity, scale;"></span>')
+        expect(trim(button.className).startsWith('touched mijn explode')).toBe(true)
+      })
       expect(button.getAttribute('aria-label')).toBe('row 4 column 5, open')
      })
   })

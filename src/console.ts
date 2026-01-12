@@ -1,17 +1,14 @@
 import storage from './common/storage'
 import { liveScores } from './__mocks__/scores'
-import { ScoreItem } from './common/game.d'
-import { rankScores } from './common/scoring'
+import { ScoreItem, BareScoreItem } from './common/game.d'
 
-type ScoreFilter = Partial<ScoreItem>
 
 const getAllScores = function (): ScoreItem[] {
   return storage.scores
 }
 
-const setAllScores = function (scores: ScoreItem[]) {
-  rankScores(scores)
-  storage.scores = scores
+const setAllScores = function (scores: BareScoreItem[]) {
+  storage.scores = scores as ScoreItem[]
 }
 
 const getScoresByUser = function (user: string) {
@@ -35,26 +32,20 @@ const deleteStoredSampleScores = (): void => {
   setAllScores(newScores)
 }
 
-const deleteOneByProperties = (query: ScoreFilter): void => {
-  // userwise only user and rank can be used, ex.: deleteOneByProperties({ user: 'Miomy', rank: 68 })
+const deleteOneScoreItem = (user: string, points: number): void => {
   // TODO Flatscores
-  const queryKeys = Object.keys(query)
   const allScores = storage.scores
+  const deletables = allScores.filter(score => score.user === user && score.score.points === points)
 
-  const deletables = allScores.filter(score => {
-    let toDelete = true
-    queryKeys.forEach(queryKey => {
-      toDelete = toDelete && score[queryKey] === query[queryKey]
-    })
-
-    return toDelete
-  })
-  const deletable = deletables[0]
-
-  if (confirm(`Delete ${JSON.stringify(deletable)} of ${deletables.length} items?`)) {
-    const removeIndex = allScores.findIndex(item => item === deletable);
-    allScores.splice( removeIndex, 1)
-    setAllScores(allScores)
+  if (!deletables.length) {
+    alert(`No results found for user "${user}" with ${points} points`)
+  } else {
+    const deletable = deletables[0]
+    if (confirm(`Delete ${JSON.stringify(deletable, null, 2)}?`)) {
+      const removeIndex = allScores.findIndex(item => item === deletable);
+      allScores.splice(removeIndex, 1)
+      setAllScores(allScores)
+    }
   }
 }
 
@@ -65,5 +56,5 @@ export default {
   deleteScoresByUser,
   updateStorageWithSampleScores,
   deleteStoredSampleScores,
-  deleteOneByProperties
+  deleteOneScoreItem,
 }

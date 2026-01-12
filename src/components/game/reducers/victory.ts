@@ -3,7 +3,7 @@ import { AppConfig } from '../../../common/app.d'
 import storage from '../../../common/storage'
 import { GameState,
   GameScore, PlayScore, ScoreItem } from '../../../common/game.d'
-import { precise, rankScores, leastClicksToWin, mostClicksToWin,
+import { precise, refineScores, leastClicksToWin, mostClicksToWin,
   makeBoardCode, countMoves, calculateScore } from '../../../common/scoring'
 
 export const victoryReducer = (state: GameState, config: AppConfig): GameState => {
@@ -14,6 +14,7 @@ export const victoryReducer = (state: GameState, config: AppConfig): GameState =
     date: state.tShift,
     user: PLAYER_NAME,
     rank: 0,
+    level: 0,
   }
 
   const gameVars: GameScore = {
@@ -47,11 +48,11 @@ export const victoryReducer = (state: GameState, config: AppConfig): GameState =
     scores[foundIndex] = victory
   }
 
-  rankScores(scores)
+  const richScores = refineScores(scores)
   storage.scores = scores.slice(0, MAX_SCORES)
 
   return {
     ...state,
-    score: victory
+    score: richScores.find(scoreItem => scoreItem.date === victory.date)!
   }
 }

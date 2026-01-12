@@ -4,7 +4,7 @@ import Game from './game/Game'
 import PageContext from '../store/page-context'
 import { flipFocus } from '../common/functions'
 
-function Paging() {
+function PageRoot() {
   const pageCtx = useContext(PageContext)
   const [showIntroduction, setShowIntroduction] = useState(true)
 
@@ -37,4 +37,4 @@ function Paging() {
   )
 }
 
-export default Paging
+export default PageRoot

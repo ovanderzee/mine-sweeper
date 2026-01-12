@@ -1,13 +1,15 @@
 import PageProvider from './store/PageProvider'
-import Paging from './components/Paging'
+import PageRoot from './components/PageRoot'
 import AllSymbols from './components/UI/AllSymbols'
 import './App.css'
 
 function App() {
   return (
     <PageProvider>
-      <Paging />
-      <AllSymbols />
+      <>
+        <PageRoot />
+        <AllSymbols />
+      </>
     </PageProvider>
   )
 }
