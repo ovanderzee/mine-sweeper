@@ -77,7 +77,7 @@ describe('Console methods mixing mocks and stored scores', () => {
   it('should add all the sample records', () => {
     storage.scores = []
 
-    mv.updateStorageWithSampleScores()
+    mv.addSampleScores()
 
     expect(storage.scores.length).toBe(liveScores.length)
   })
@@ -85,7 +85,7 @@ describe('Console methods mixing mocks and stored scores', () => {
   it('should not duplicate existing sample records', () => {
     storage.scores = [liveScores[0], liveScores[liveScores.length-1]] as ScoreItem[]
 
-    mv.updateStorageWithSampleScores()
+    mv.addSampleScores()
 
     expect(storage.scores.length).toBe(liveScores.length)
   })
@@ -93,7 +93,7 @@ describe('Console methods mixing mocks and stored scores', () => {
   it('should remove all the sample records and leave the original scores', () => {
     const originalScore = testScore()
     storage.scores = [ originalScore, ...liveScores ] as ScoreItem[]
-    mv.deleteStoredSampleScores()
+    mv.deleteSampleScores()
 
     // storage.scores[0] is successor of originalScore
     expect(storage.scores[0].code).toBe(originalScore.code)
@@ -102,12 +102,13 @@ describe('Console methods mixing mocks and stored scores', () => {
     expect(storage.scores.length).toBe(1)
   })
 
-  it('should remove one score by username and scored points', () => {
+  it('should remove one score by username and rank', () => {
     storage.scores = liveScores as ScoreItem[]
+    const refinedScores = storage.scores
     window.alert = vi.fn()
     window.confirm = vi.fn(() => true)
 
-    mv.deleteOneScoreItem(liveScores[2].user, liveScores[2].score.points)
+    mv.deleteOneScore(refinedScores[2].user, refinedScores[2].rank)
 
     expect(window.alert).not.toHaveBeenCalled()
     expect(window.confirm).toHaveBeenCalled()
@@ -119,7 +120,7 @@ describe('Console methods mixing mocks and stored scores', () => {
     window.alert = vi.fn()
     window.confirm = vi.fn(() => true)
 
-    mv.deleteOneScoreItem(liveScores[2].user, liveScores[99].score.points)
+    mv.deleteOneScore(liveScores[2].user, liveScores[99].rank)
 
     expect(window.alert).toHaveBeenCalled()
     expect(window.confirm).not.toHaveBeenCalled()
