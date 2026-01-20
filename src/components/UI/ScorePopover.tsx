@@ -118,10 +118,11 @@ const ScorePopover = (props: {score: ScoreItem | null}) => {
           </div>
         </section>
       </article>
-      <footer>
-        <button type="button"
+      <footer className="buttons">
+        <button type="button" className="delete"
+          popoverTarget="score-popover" popoverTargetAction="hide"
           onClick={() => alert(`rank ${log.rank}`)}
-        >{log.user}</button>
+        >{text.common.delete}</button>
       </footer>
     </figure>
   )

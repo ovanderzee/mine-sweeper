@@ -150,7 +150,6 @@ code.xxl {font-size: 136%;}
   gap: 0 1ex;
   margin: 1ex;
   justify-content: end;
-  display: none;
 }
 
 @media screen and (orientation: portrait) {

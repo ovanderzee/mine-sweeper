@@ -4,7 +4,8 @@
     "mine sweeper": "mine sweeper",
     "Mines": "Mines",
     "confirm": "OK",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "delete": "Delete"
   },
   "config": {
     "default player": "anonymous"
