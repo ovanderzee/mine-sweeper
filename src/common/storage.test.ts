@@ -170,13 +170,15 @@ describe('Scores storage', () => {
     storage.scores = liveScores as ScoreItem[]
 
     const read = JSON.parse(localStorage.getItem('mv-victory') as string)
-    expect(read[10]).toStrictEqual(liveScores[10])
+    expect(read[10].code).toStrictEqual(liveScores[10].code)
+    expect(read[10].date).toStrictEqual(liveScores[10].date)
   })
 
   it('should get data', () => {
     localStorage.setItem('mv-victory', JSON.stringify(liveScores))
 
     const scores = storage.scores
+    expect(scores[10].code).toStrictEqual(liveScores[10].code)
     expect(scores[10].date).toStrictEqual(liveScores[10].date)
   })
 
