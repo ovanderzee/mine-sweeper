@@ -6,7 +6,7 @@ import { refineScores, stripScores } from './scoring'
 /*
   Interface for data storage.
   Store and retrieve object literals
-  Config always exists and can be a change
+  Config is always needed
   Game and Scores can be emptied
 */
 

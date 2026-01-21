@@ -32,24 +32,6 @@ const deleteSampleScores = (): void => {
   setAllScores(newScores)
 }
 
-const deleteOneScore = (user: string, rank: number): void => {
-  // TODO Flatscores
-  const allScores = storage.scores
-  const deletables = allScores.filter(score => score.user === user && score.rank === rank)
-
-  if (!deletables.length) {
-    alert(`No results found for user "${user}" with ${rank} rank`)
-  } else {
-    const deletable = deletables[0]
-
-    if (confirm(`Delete ${JSON.stringify(deletable, null, 2)}?`)) {
-      const removeIndex = allScores.findIndex(item => item === deletable);
-      allScores.splice(removeIndex, 1)
-      setAllScores(allScores)
-    }
-  }
-}
-
 export default {
   getAllScores,
   setAllScores,
@@ -57,5 +39,4 @@ export default {
   deleteScoresByUser,
   addSampleScores,
   deleteSampleScores,
-  deleteOneScore,
 }

@@ -7,7 +7,12 @@ import ElasticBrace from './ElasticBrace'
 import { precise } from '../../common/scoring'
 import './ScorePopover.css'
 
-const ScorePopover = (props: {score: ScoreItem | null}) => {
+interface ScorePopoverProps {
+  score: ScoreItem | null
+  delete: (time: number) => void
+}
+
+const ScorePopover = (props: ScorePopoverProps) => {
   const pageCtx = useContext(PageContext)
   const text = pageCtx.text
   const log = props.score
@@ -121,12 +126,11 @@ const ScorePopover = (props: {score: ScoreItem | null}) => {
       <footer className="buttons">
         <button type="button" className="delete"
           popoverTarget="score-popover" popoverTargetAction="hide"
-          onClick={() => alert(`rank ${log.rank}`)}
+          onClick={() => props.delete(log.date)}
         >{text.common.delete}</button>
       </footer>
     </figure>
   )
-
 }
 
 export default ScorePopover

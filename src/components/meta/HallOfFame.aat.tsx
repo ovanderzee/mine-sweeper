@@ -233,3 +233,29 @@ describe('The hall-of-fame-page list sorting', () => {
   })
 
 })
+
+describe('The hall-of-fame-page list sorting', () => {
+  let screen: RenderResult
+
+  beforeEach(async () => {
+    storage.scores = liveScores as ScoreItem[]
+    screen = await renderWithProvider(<HallOfFame/>)
+  })
+
+  it('should remove one score with button in popover', async () => {
+    const scoresCount = storage.scores.length
+
+    const firstListButton = screen.getByRole('list').getByRole('button').first()
+    await firstListButton.click()
+    const popover = screen.getByRole('status')
+    const deleteButton = popover.getByRole('button').getByText('Delete')
+    await deleteButton.click()
+
+    expect(popover).not.toBeInTheDocument()
+    expect(storage.scores.length).toBe(scoresCount - 1)
+  })
+
+})
+
+
+

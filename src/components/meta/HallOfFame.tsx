@@ -9,7 +9,7 @@ import { ShieldByRank } from '../UI/Shield'
 import Diagram from '../UI/Diagram'
 import { ScoreItem, ScoreParam } from '../../common/game.d'
 import storage from '../../common/storage'
-import { precise } from '../../common/scoring'
+import { precise, refineScores } from '../../common/scoring'
 import { SHOW_SORT_THRESHOLD, SHOW_DIAGRAM_THRESHOLD } from '../../common/constants'
 import ScorePopover from '../UI/ScorePopover'
 import './Meta.css'
@@ -191,12 +191,23 @@ const HallOfFame = () => {
     </NavOptionsBar>
   )
 
+  const deleteOneScore = (time: number): void => {
+    const removeIndex = rootScores.findIndex(score => score.date === time)
+
+    if (removeIndex > -1) {
+      rootScores.splice(removeIndex, 1)
+      storage.scores = rootScores
+      setScores(refineScores(rootScores))
+      setScores(methodsByKind[sortLabel]())
+    }
+  }
+
   return (
     <>
       {fameContent}
       {fameNavigation}
       <section id="score-popover" popover="auto" role="status" aria-label={text.fame['detail-label']}>
-        <ScorePopover score={popScore} />
+        <ScorePopover score={popScore} delete={deleteOneScore} />
       </section>
     </>
   )

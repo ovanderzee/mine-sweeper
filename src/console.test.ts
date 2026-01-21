@@ -102,28 +102,4 @@ describe('Console methods mixing mocks and stored scores', () => {
     expect(storage.scores.length).toBe(1)
   })
 
-  it('should remove one score by username and rank', () => {
-    storage.scores = liveScores as ScoreItem[]
-    const refinedScores = storage.scores
-    window.alert = vi.fn()
-    window.confirm = vi.fn(() => true)
-
-    mv.deleteOneScore(refinedScores[2].user, refinedScores[2].rank)
-
-    expect(window.alert).not.toHaveBeenCalled()
-    expect(window.confirm).toHaveBeenCalled()
-    expect(storage.scores.length).toBe(liveScores.length - 1)
-  })
-
-  it('should not remove a bad username - scored points match', () => {
-    storage.scores = liveScores as ScoreItem[]
-    window.alert = vi.fn()
-    window.confirm = vi.fn(() => true)
-
-    mv.deleteOneScore(liveScores[2].user, liveScores[99].rank)
-
-    expect(window.alert).toHaveBeenCalled()
-    expect(window.confirm).not.toHaveBeenCalled()
-    expect(storage.scores.length).toBe(liveScores.length)
-  })
 })
