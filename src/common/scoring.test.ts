@@ -200,21 +200,25 @@ describe('Sort and Rank scores', () => {
   const oldScores = [
     {code: "774abc123", rank: 14, score: {points: 30}},
     {code: "774def456", rank: 2, score: {points: 100}},
+    {code: "774ghi789", rank: 9, score: {points: 67}},
   ] as ScoreItem[]
-  const newScore = {code: "774ghi789", rank: 0, score: {points: 67}} as ScoreItem
+  const newScore = {code: "774xyz789", rank: 0, score: {points: 67}} as ScoreItem
 
 
-  it('should sort by points and rank', () => {
+  it('should sort by points and rank, oldest score first', () => {
     const currentScores = refineScores([ ...oldScores, newScore ])
 
     expect(currentScores[0]).toBe(oldScores[1])
     expect(currentScores[0].rank).toBe(1)
 
-    expect(currentScores[1]).toBe(newScore)
+    expect(currentScores[1]).toBe(oldScores[2])
     expect(currentScores[1].rank).toBe(2)
 
-    expect(currentScores[2]).toBe(oldScores[0])
-    expect(currentScores[2].rank).toBe(3)
+    expect(currentScores[2]).toBe(newScore)
+    expect(currentScores[2].rank).toBe(2)
+
+    expect(currentScores[3]).toBe(oldScores[0])
+    expect(currentScores[3].rank).toBe(4)
   })
 })
 

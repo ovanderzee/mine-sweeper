@@ -139,7 +139,7 @@ const HallOfFame = () => {
           <button type="button" popoverTarget="score-popover" popoverTargetAction="show"
             className={`${log.rank <= 10 ? 'super' : ''}`}
             aria-label={`${log.date === latest.date ? 'latest' : ''}`}
-            key={`${log.rank}_${log.score.points}`}
+            key={`${log.date}_${log.score.points}`}
             onClick={() => setPopScore(log)}
             title={text.fame['Number %n in %s sort'].replace('%n', String(index+1)).replace('%s', text.VAR[sortLabel])}
           >
