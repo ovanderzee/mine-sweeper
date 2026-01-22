@@ -98,7 +98,7 @@ const ScorePopover = (props: ScorePopoverProps) => {
         <section className="group">
           <h5>{text.fame['characteristics']}</h5>
           <div className="unit">
-            <small>{text.fame['effort']}</small>
+            <small>{text.VAR['effort']}</small>
             <span>{log.game.effort.least} - {log.game.effort.most}</span>
           </div>
         </section>

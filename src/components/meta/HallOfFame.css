@@ -4,13 +4,15 @@ ol {
 }
 
 ol button {
-  --small-size: 86%;
+  --small-size: 75%;
+  --radius: 1ex;
 
   display: block;
   width: 100%;
   margin-block: 1em;
   background: transparent;
   border: none;
+  border-radius: var(--radius);
 }
 
 ol button header,
@@ -18,12 +20,11 @@ ol button article {
   display: flex;
 }
 ol button header {
-  margin-inline-start: calc(var(--radius) / -2);
   align-items: baseline;
 }
 ol button article {
   justify-content: space-between;
-  align-items: last baseline;
+  column-gap: .6em;
 }
 ol button.super article {
   margin-block-start: -.333em;
@@ -79,24 +80,29 @@ ol button:not(.super) header .date {
 ol button article .points {
   flex: 0 0 3.75em;
   font-weight: bold;
+  padding-block-start: .5em;
 }
 
-ol button article .unit {
+ol button article .group {
   display: flex;
   flex: 1 1 auto;
   flex-direction: column;
+  align-items: stretch;
+  justify-content: end;
   font-size: var(--small-size);
   line-height: 1.2;
 }
 
-ol button[aria-label~=latest] {
-  --radius: 1ex;
+ol button article .unit {
+  display: flex;
+  align-items: last baseline;
+  justify-content: space-between;
+}
 
+ol button[aria-label~=latest] {
   outline: 1.5px solid var(--dark-blue);
   outline-offset: .5ex;
-  border-radius: var(--radius);
   background: linear-gradient(105deg, var(--light-blue), var(--medium-blue), var(--dark-blue));
-  margin-block: 1em;
   padding: calc(var(--radius) / 2) var(--radius);
 }
 ol button[aria-label~=latest] .date {

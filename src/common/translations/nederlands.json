@@ -56,7 +56,6 @@
     "Number %n in %s sort": "%s nr. %n",
     "median": "mediaan",
     "average": "gemiddeld",
-    "effort": "nodige zetten",
     "least": "minste",
     "most": "meeste",
     "detail-label": "Details gekozen score",
@@ -75,6 +74,7 @@
     "level": "nivo",
     "cells": "velden",
     "mines": "mijnen",
+    "effort": "min. zetten",
     "moves": "zetten",
     "duration": "duur"
   },

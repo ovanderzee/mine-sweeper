@@ -88,7 +88,7 @@ describe('The hall-of-fame-page scores', () => {
     // appear
     const firstButton = buttons.first()
     await firstButton.click()
-    const popoverIdentifier = popover.getByText(/required turns/i)
+    const popoverIdentifier = popover.getByText(/req\. turns/i)
     const firstPoints = storage.scores[0].score.points.toString()
     const firstText = firstButton.getByText(firstPoints, { exact: true })
 
@@ -99,7 +99,7 @@ describe('The hall-of-fame-page scores', () => {
     // overwrite
     const lastButton = buttons.last()
     await lastButton.click()
-    const popoverIdentifier2 = popover.getByText(/required turns/i)
+    const popoverIdentifier2 = popover.getByText(/req\. turns/i)
     const lastPoints = storage.scores[buttons.length - 1].score.points.toString()
     const lastText = lastButton.getByText(lastPoints, { exact: true })
 
@@ -168,21 +168,21 @@ describe('The hall-of-fame-page list sorting', () => {
     expect(worst).toBeInTheDocument()
   })
 
-  it.skip('should sort on efficiency descending', async () => {
+  it('should sort on efficiency descending', async () => {
     await panel.getByText('efficiency').click()
 
-    const best = firstEntry('.efficiency')
-    const worst = lastEntry('.efficiency')
+    const best = firstEntry('.efficiency :last-child')
+    const worst = lastEntry('.efficiency :last-child')
 
     expect(Number(best)).toBeGreaterThan(Number(worst))
   })
 
 
-  it.skip('should sort on speed descending', async () => {
+  it('should sort on speed descending', async () => {
     await panel.getByText('speed').click()
 
-    const best = firstEntry('.speed')
-    const worst = lastEntry('.speed')
+    const best = firstEntry('.speed :last-child')
+    const worst = lastEntry('.speed :last-child')
 
     expect(Number(best)).toBeGreaterThan(Number(worst))
   })
@@ -190,8 +190,8 @@ describe('The hall-of-fame-page list sorting', () => {
   it('should sort on level descending', async () => {
     await panel.getByText('level').click()
 
-    const best = firstEntry('.level')
-    const worst = lastEntry('.level')
+    const best = firstEntry('.level :last-child')
+    const worst = lastEntry('.level :last-child')
 
     expect(Number(best)).toBeGreaterThan(Number(worst))
   })
@@ -199,8 +199,8 @@ describe('The hall-of-fame-page list sorting', () => {
   it('should sort on mines ascending', async () => {
     await panel.getByText('mines').click()
 
-    const best = firstEntry('.mines')
-    const worst = lastEntry('.mines')
+    const best = firstEntry('.mines :last-child')
+    const worst = lastEntry('.mines :last-child')
 
     expect(Number(best)).toBeLessThan(Number(worst))
   })
@@ -208,8 +208,8 @@ describe('The hall-of-fame-page list sorting', () => {
   it('should sort on fields ascending', async () => {
     await panel.getByText('fields').click()
 
-    const best = firstEntry('.cells')
-    const worst = lastEntry('.cells')
+    const best = firstEntry('.cells :last-child')
+    const worst = lastEntry('.cells :last-child')
 
     expect(Number(best)).toBeLessThan(Number(worst))
   })
@@ -217,8 +217,8 @@ describe('The hall-of-fame-page list sorting', () => {
   it('should sort on turns ascending', async () => {
     await panel.getByText('turns').click()
 
-    const best = firstEntry('.moves')
-    const worst = lastEntry('.moves')
+    const best = firstEntry('.moves :last-child')
+    const worst = lastEntry('.moves :last-child')
 
     expect(Number(best)).toBeLessThan(Number(worst))
   })
@@ -226,8 +226,8 @@ describe('The hall-of-fame-page list sorting', () => {
   it('should sort on duration ascending', async () => {
     await panel.getByText('duration').click()
 
-    const best = firstEntry('.duration')
-    const worst = lastEntry('.duration')
+    const best = firstEntry('.duration :last-child')
+    const worst = lastEntry('.duration :last-child')
 
     expect(parseFloat(best || '0')).toBeLessThan(parseFloat(worst || '0'))
   })

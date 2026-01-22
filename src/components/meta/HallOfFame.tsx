@@ -155,26 +155,44 @@ const HallOfFame = () => {
             </header>
             <article>
               <div className="points">{log.score.points}</div>
-              <div className="unit">
-                <small>{text.VAR['level']}</small>
-                <span className="level">{log.level}</span>
-              </div>
-              <div className="unit">
-                <small>{text.VAR['mines']}</small>
-                <span className="mines">{log.game.mines}</span>
-              </div>
-              <div className="unit">
-                <small>{text.VAR['cells']}</small>
-                <span className="cells">{log.game.cells}</span>
-              </div>
-              <div className="unit">
-                <small>{text.VAR['moves']}</small>
-                <span className="moves">{log.play.moves}</span>
-              </div>
-              <div className="unit">
-                <small>{text.VAR['duration']}</small>
-                <span className="duration">{precise(log.play.duration, 3)}s</span>
-              </div>
+              <section className="group game">
+                <div className="unit level">
+                  <span>{text.VAR['level']}</span>
+                  <span>{log.level}</span>
+                </div>
+                <div className="unit mines">
+                  <span>{text.VAR['mines']}</span>
+                  <span>{log.game.mines}</span>
+                </div>
+                <div className="unit cells">
+                  <span>{text.VAR['cells']}</span>
+                  <span>{log.game.cells}</span>
+                </div>
+              </section>
+              <section className="group play">
+                <div className="unit effort">
+                  <span>{text.VAR['effort']}</span>
+                  <span>{log.game.effort.least}</span>
+                </div>
+                <div className="unit moves">
+                  <span>{text.VAR['moves']}</span>
+                  <span>{log.play.moves}</span>
+                </div>
+                <div className="unit duration">
+                  <span>{text.VAR['duration']}</span>
+                  <span>{precise(log.play.duration, 3)}s</span>
+                </div>
+              </section>
+              <section className="group score">
+                <div className="unit efficiency">
+                  <span>{text.VAR['efficiency']}</span>
+                  <span>{precise(log.score.efficiency, 2)}</span>
+                </div>
+                <div className="unit speed">
+                  <span>{text.VAR['speed']}</span>
+                  <span>{precise(log.score.speed, 2)}</span>
+                </div>
+              </section>
             </article>
           </button>
         ))}

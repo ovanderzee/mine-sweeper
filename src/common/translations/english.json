@@ -56,7 +56,6 @@
     "Number %n in %s sort": "Number %n by %s",
     "median": "median",
     "average": "average",
-    "effort": "required turns",
     "least": "least",
     "most": "most",
     "detail-label": "Details of chosen score",
@@ -75,6 +74,7 @@
     "level": "level",
     "cells": "fields",
     "mines": "mines",
+    "effort": "req. turns",
     "moves": "turns",
     "duration": "duration"
   },
