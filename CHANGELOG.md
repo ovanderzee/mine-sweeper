@@ -24,31 +24,31 @@
 - Store board magnification in sessionStorage
 - Remove too easy 3*3 and 4*4 boards and levels 1 and 6
 - Refine levels with intermediate values, maybe by percentage
+- Backspace to open random cells
 
 
 ## [next]
 
-### Changed
-- Revise context to satisfy lint rules and apply a better filename
-- Refined game-won shield
-- Refined game-lost animation
-- Keep rank out of storage
-
-### Fixed
-- Prevent the board from jumping while tabbing.
+### Added
+- Individual scores can be deleted
 
 
-## [3.6.1] - 2026-01-03
+## [3.6.1] - 2026-01-12
 
 ### Changed
 - Refined ARIA roles on Game screen
 - Focus new-game button after winning or losing, for keyboard users
 - The Game screen buttonbar will show functionality first, then screen navigation, like on the other screens
 - Alt+Tab will visit the toolbar in Game screen
+- Conform page-provider to lint rules
+- Refined game-won shield
+- Refined game-lost animation
+- Keep rank out of storage
 
 ### Fixed
 - The exploding mine animation is no longer clipped
 - Toggling Fullscreen mode will keep on working when mixing up app UI and browser UI
+- Prevent the board from jumping while tabbing.
 
 
 ## [3.6.0] - 2025-12-30
