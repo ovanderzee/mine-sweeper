@@ -9,11 +9,14 @@ import { ShieldByRank } from '../UI/Shield'
 import Diagram from '../UI/Diagram'
 import { ScoreItem, ScoreParam } from '../../common/game.d'
 import storage from '../../common/storage'
-import { precise, refineScores } from '../../common/scoring'
+import { precise, refineScores, sequenceFillData } from '../../common/scoring'
 import { SHOW_SORT_THRESHOLD, SHOW_DIAGRAM_THRESHOLD } from '../../common/constants'
 import ScorePopover from '../UI/ScorePopover'
+import Game from '../game/Game'
+import { initialGameState } from '../game/common'
 import './Meta.css'
 import './HallOfFame.css'
+
 
 const HallOfFame = () => {
   const pageCtx = useContext(PageContext)
@@ -245,12 +248,23 @@ const HallOfFame = () => {
     }
   }
 
+  const replayStoredGame = (code: string): void => {
+    const [newBoard, checkConfig] = sequenceFillData(code)
+    pageCtx.configure(checkConfig)
+    const gameState = {
+      ...initialGameState,
+      board: newBoard,
+    }
+    storage.game = gameState
+    pageCtx.navigate(<Game />)
+  }
+
   return (
     <>
       {fameContent}
       {fameNavigation}
       <section id="score-popover" popover="auto" role="status" aria-label={text.fame['detail-label']}>
-        <ScorePopover score={popScore} delete={deleteOneScore} />
+        <ScorePopover score={popScore} delete={deleteOneScore} replay={replayStoredGame} />
       </section>
     </>
   )

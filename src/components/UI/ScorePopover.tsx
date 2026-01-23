@@ -10,6 +10,7 @@ import './ScorePopover.css'
 interface ScorePopoverProps {
   score: ScoreItem | null
   delete: (time: number) => void
+  replay: (code: string) => void
 }
 
 const ScorePopover = (props: ScorePopoverProps) => {
@@ -128,6 +129,10 @@ const ScorePopover = (props: ScorePopoverProps) => {
           popoverTarget="score-popover" popoverTargetAction="hide"
           onClick={() => props.delete(log.date)}
         >{text.common.delete}</button>
+        <button type="button" className="replay"
+          popoverTarget="score-popover" popoverTargetAction="hide"
+          onClick={() => props.replay(log.code)}
+        >{text.nav.Replay}</button>
       </footer>
     </figure>
   )

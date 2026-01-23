@@ -119,6 +119,15 @@ button.delete {
   }
 }
 
+button.replay {
+  color: white;
+  background: var(--dark-blue);
+
+  &:hover {
+    background: linear-gradient(var(--medium-blue), var(--dark-blue));
+  }
+}
+
 h1, h2, .h2, h3, .h3, h4, h5, .h5, h6, dl, p, ol, ul {
   margin-block: 1ex;
   line-height: 133%;

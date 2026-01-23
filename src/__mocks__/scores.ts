@@ -204,6 +204,7 @@ export const liveScores: BareScoreItem[] = [
   {"code":"bb4Aw14IzqVrcgvR0nmS9NqRzjeqUQA","date":1758653210171,"user":"AltDelete","game":{"cells":121,"mines":17,"effort":{"least":34,"most":70}},"play":{"moves":36,"duration":102.47},"score":{"efficiency":0.9444,"speed":0.3513,"points":332}},
   {"code":"bb3Aw18SCMmjzwjRDptnSKM87ZwQA","date":1761567869727,"user":"Dr. Esperanto","game":{"cells":121,"mines":13,"effort":{"least":19,"most":58}},"play":{"moves":19,"duration":57.183},"score":{"efficiency":1,"speed":0.3323,"points":332}},
   {"code":"dd3AwkRlSunziYNqMTprsrwPKRBNXTY7WIA","date":1764751527969,"user":"PechPatch","game":{"cells":169,"mines":17,"effort":{"least":29,"most":89}},"play":{"moves":39,"duration":87.525},"score":{"efficiency":0.7436,"speed":0.4456,"points":331}},
+  {"code":"994AwRmrcuib+aXGJ1ULVSQ","date":1758575630012,"user":"FareSee","game":{"cells":81,"mines":11,"effort":{"least":15,"most":52}},"play":{"moves":20,"duration":45.311},"score":{"efficiency":0.75,"speed":0.4414,"points":331}},
   {"code":"aa4AwRm-NI0KmHUYq9lwSNyvpmIA","date":1753809719800,"user":"Techwants","game":{"cells":100,"mines":14,"effort":{"least":25,"most":72}},"play":{"moves":32,"duration":75.834},"score":{"efficiency":0.7813,"speed":0.422,"points":330}},
   {"code":"884AzCMI8OzSyY3okyESA","date":1753793111650,"user":"RestBool","game":{"cells":64,"mines":9,"effort":{"least":9,"most":34}},"play":{"moves":11,"duration":27.268},"score":{"efficiency":0.8182,"speed":0.4034,"points":330}},
   {"code":"aa3Aw18WCMo7x0tR0lvCjrhA","date":1763203669758,"user":"ThinThen","game":{"cells":100,"mines":10,"effort":{"least":8,"most":47}},"play":{"moves":12,"duration":24.261},"score":{"efficiency":0.6667,"speed":0.4946,"points":330}},
@@ -558,8 +559,7 @@ export const liveScores: BareScoreItem[] = [
   {"code":"ee4Aw0RlSQr1+HBuZkytXFsaevpRPRKdLQ-Mk46koA","date":1755457778432,"user":"Waruss","game":{"cells":196,"mines":27,"effort":{"least":32,"most":115}},"play":{"moves":44,"duration":271.24},"score":{"efficiency":0.7273,"speed":0.1622,"points":118}},
   {"code":"kk4IwBj4z2U12IKnBTlxEmX1VDPbPDaTRE5fS3G82+0h9Kip5tHSFustzVemma0h0IaOG0gA","date":1756068484072,"user":"Mastodont","game":{"cells":400,"mines":54,"effort":{"least":67,"most":225}},"play":{"moves":78,"duration":578.9},"score":{"efficiency":0.859,"speed":0.1347,"points":116}},
   {"code":"cc4AwkRlMM8eL6ltJtXo5xWfpd3OPeFfIA","date":1753824027132,"user":"SymZilt","game":{"cells":144,"mines":20,"effort":{"least":22,"most":78}},"play":{"moves":26,"duration":201.4},"score":{"efficiency":0.8462,"speed":0.1291,"points":109}},
-  {"code":"774Aw0RlSpDuWbmmCQ","date":1755378199069,"user":"Aija","game":{"cells":49,"mines":7,"effort":{"least":6,"most":24}},"play":{"moves":6,"duration":58.215},"score":{"efficiency":1,"speed":0.1031,"points":103}},
-  {"code":"994AwRmrcuib+aXGJ1ULVSQ","date":1758575630012,"user":"FareSee","game":{"cells":81,"mines":11,"effort":{"least":15,"most":52}},"play":{"moves":23,"duration":575.93},"score":{"efficiency":0.6522,"speed":0.03994,"points":26}}
+  {"code":"774Aw0RlSpDuWbmmCQ","date":1755378199069,"user":"Aija","game":{"cells":49,"mines":7,"effort":{"least":6,"most":24}},"play":{"moves":6,"duration":58.215},"score":{"efficiency":1,"speed":0.1031,"points":103}}
 ]
 
 /**

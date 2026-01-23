@@ -1,9 +1,10 @@
 import { beforeEach, describe, expect, it } from 'vitest'
 import { RenderResult } from 'vitest-browser-react'
 import { Locator, userEvent } from 'vitest/browser'
-import { renderWithProvider } from './../../__mocks__/aat-helpers'
+import { renderWithProvider, renderWithApp } from './../../__mocks__/aat-helpers'
 import { liveScores } from './../../__mocks__/scores'
 import storage from './../../common/storage'
+import { sequenceFillData } from './../../common/scoring'
 import { ScoreItem } from './../../common/game.d'
 import HallOfFame from './HallOfFame'
 
@@ -233,15 +234,15 @@ describe('The hall-of-fame-page list sorting', () => {
 
 })
 
-describe('The hall-of-fame-page list sorting', () => {
+describe('The hall-of-fame-page popover buttons', () => {
   let screen: RenderResult
 
   beforeEach(async () => {
     storage.scores = liveScores as ScoreItem[]
-    screen = await renderWithProvider(<HallOfFame/>)
   })
 
-  it('should remove one score with button in popover', async () => {
+  it('should delete one score with button in popover', async () => {
+    screen = await renderWithProvider(<HallOfFame/>)
     const scoresCount = storage.scores.length
 
     const firstListButton = screen.getByRole('list').getByRole('button').first()
@@ -254,7 +255,23 @@ describe('The hall-of-fame-page list sorting', () => {
     expect(storage.scores.length).toBe(scoresCount - 1)
   })
 
+  it('should replay with button in popover', async () => {
+    screen = await renderWithApp('HallOfFame')
+
+    const firstListButton = screen.getByRole('list').getByRole('button').first()
+    await firstListButton.click()
+    const popover = screen.getByRole('status')
+    const replayButton = popover.getByRole('button').getByText('Replay')
+    await replayButton.click()
+
+    expect(popover).not.toBeInTheDocument()
+    expect(firstListButton).not.toBeInTheDocument()
+    // arrive at game
+    const gridArea = screen.getByRole('grid')
+    expect(gridArea).toBeInTheDocument()
+
+    const boardFromScore = sequenceFillData(storage.scores[0].code)[0]
+    const boardFromGame = storage.game!.board ? storage.game!.board : null
+    expect(boardFromScore).toStrictEqual(boardFromGame)
+  })
 })
-
-
-

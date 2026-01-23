@@ -147,9 +147,10 @@ code.xxl {font-size: 136%;}
 
 #score-popover figure footer {
   display: flex;
-  gap: 0 1ex;
-  margin: 1ex;
+  gap: 0;
+  margin-block: .75em 0.25em;
   justify-content: end;
+  flex-wrap: wrap;
 }
 
 @media screen and (orientation: portrait) {
