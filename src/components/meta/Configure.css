@@ -1,6 +1,6 @@
 form {
   --block-spacing: 0.2em;
-  --inline-spacing: 0.4em;
+  --inline-spacing: 0.4em 1.8em;
   --item-spacing: 0.8em;
 }
 
@@ -72,7 +72,8 @@ textarea {
   caret-color: var(--darker-blue);
   color: var(--ultra-dark-blue);
   margin-block: var(--block-spacing);
-  padding: var(--block-spacing) var(--inline-spacing);
+  padding-block: var(--block-spacing);
+  padding-inline: var(--inline-spacing);
   width: 15em;
   min-height: var(--min-height); /* min-: not interference with line-height */
 }

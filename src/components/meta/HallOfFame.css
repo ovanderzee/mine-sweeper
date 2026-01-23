@@ -119,44 +119,30 @@ ol button[aria-label~=latest] * {
   display: block;
   width: 100%;
   background: var(--light-blue);
-  border-block-end: 1.5px solid var(--medium-blue);
-  border-spacing: 0;
+  outline: 1px solid var(--medium-blue);
   box-sizing: content-box;
   margin-inline: calc(-1 * var(--screen-gutter));
   padding-block: calc(.5 * var(--screen-gutter));
   padding-inline: var(--screen-gutter);
 }
 
-.legend tbody {
-  display: table;
-  width: 100%;
+.legend div {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 1em;
+  align-items: baseline;
+  width: min-content;
+  margin-inline: auto;
 }
 
-.legend button {
-  font-weight: bold;
-  background: transparent;
-  border-style: solid;
-  border-color: transparent;
-  border-inline-width: 3px;
-  border-block-width: 0;
-  border-radius: .5ex;
-  padding: 0 .333ex .333ex .333ex;
-  line-height: 1;
+.legend label {
+  grid-column: 1;
+  justify-self: end;
 }
 
-.legend.rank .rank,
-.legend.user .user,
-.legend.date .date,
-.legend.points .points,
-.legend.efficiency .efficiency,
-.legend.speed .speed,
-.legend.mines .mines,
-.legend.level .level,
-.legend.cells .cells,
-.legend.moves .moves,
-.legend.duration .duration {
-  color: var(--state-red);
-  border-color: var(--state-red);
+.legend select {
+  grid-column: 2;
+  width: 10em;
 }
 
 .legend.rank ~ ol .rank,

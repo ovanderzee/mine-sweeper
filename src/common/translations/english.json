@@ -62,7 +62,9 @@
     "configuration": "configuration",
     "characteristics": "characteristics",
     "game-play": "game play",
-    "result": "result"
+    "result": "result",
+    "sort": "show",
+    "versus": "against"
   },
   "VAR": {
     "rank": "rank",

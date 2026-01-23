@@ -24,12 +24,20 @@ const HallOfFame = () => {
 
   const [scores, setScores] = useState(rootScores)
   const [sortLabel, setSortLabel] = useState<ScoreParam>('rank')
+  const [valueLabel, setValueLabel] = useState<ScoreParam>('points')
 
   const eraseScores = () => {
     setScores([])
   }
 
-  const methodsByKind: Record<string, () => ScoreItem[]> = {
+  const parameters = [
+    'rank', 'user', 'date',
+    'level', 'mines', 'cells',
+    'moves', 'duration',
+    'efficiency', 'speed', 'points',
+  ] as ScoreParam[]
+
+  const methodsByKind: Record<ScoreParam, () => ScoreItem[]> = {
     'rank': () => {
       const byRank = (a:ScoreItem, b:ScoreItem) => a.rank - b.rank
       return rootScores.sort(byRank)
@@ -48,12 +56,10 @@ const HallOfFame = () => {
       const byDate = (a: ScoreItem, b: ScoreItem) => b.date - a.date
       return rootScores.sort(byDate)
     },
-  /*
     'points': () => {
       const byPoints = (a:ScoreItem, b:ScoreItem) => b.score.points - a.score.points
       return rootScores.sort(byPoints)
     },
-  */
     'efficiency': () => {
       const byEfficiency = (a:ScoreItem, b:ScoreItem) => b.score.efficiency - a.score.efficiency
       return rootScores.sort(byEfficiency)
@@ -84,36 +90,55 @@ const HallOfFame = () => {
     }
   }
 
-  const sortByKind = function (event: React.UIEvent): void {
-    const label = (event.target as HTMLElement).className
-    setSortLabel(label as ScoreParam)
-    setScores(methodsByKind[label]())
+  const sortByKind = function (event: React.ChangeEvent): void {
+    const ctrl = event.target as HTMLSelectElement
+    setSortLabel(ctrl.value as ScoreParam)
+    setScores(methodsByKind[ctrl.value]())
     window.scrollTo({top: 0, left: 0})
   }
 
+  const changeValue = (event: React.ChangeEvent) => {
+    const ctrl = event.target as HTMLSelectElement
+    setValueLabel(ctrl.value as ScoreParam)
+  }
+
   const scoreSorting = (
-    <table className={`legend ${sortLabel}`}><tbody><tr>
-      <td></td>
-      <td><button type="button" className="user" onClick={sortByKind}>{text.VAR['user']}</button></td>
-      <td><button type="button" className="level" onClick={sortByKind}>{text.VAR['level']}</button></td>
-      <td></td>
-      <td><button type="button" className="date" onClick={sortByKind}>{text.VAR['date']}</button></td>
-    </tr><tr>
-      <td><button type="button" className="rank" onClick={sortByKind}>{text.VAR['rank']}</button></td>
-      <td><button type="button" className="efficiency" onClick={sortByKind}>{text.VAR['efficiency']}</button></td>
-      <td><button type="button" className="mines" onClick={sortByKind}>{text.VAR['mines']}</button></td>
-      <td><button type="button" className="moves" onClick={sortByKind}>{text.VAR['moves']}</button></td>
-      <td><button type="button" className="duration" onClick={sortByKind}>{text.VAR['duration']}</button></td>
-    </tr><tr>
-      <td></td>
-      <td><button type="button" className="speed" onClick={sortByKind}>{text.VAR['speed']}</button></td>
-      <td><button type="button" className="cells" onClick={sortByKind}>{text.VAR['cells']}</button></td>
-      <td></td>
-      <td></td>
-    </tr></tbody></table>
+    <form className={`legend ${sortLabel}`}>
+      <div>
+        <label htmlFor="x-axis">{text.fame['sort']}</label>
+        <select
+          id="x-axis"
+          value={sortLabel}
+          onChange={sortByKind}
+        >
+          {parameters.map((param) => (
+            <option
+              key={param}
+              value={param}
+            >{text.VAR[param]}</option>
+          ))}
+        </select>
+
+        <label htmlFor="y-axis">{text.fame['versus']}</label>
+        <select
+          id="y-axis"
+          value={valueLabel}
+          onChange={changeValue}
+        >
+          {parameters
+            .filter(p => !(p === 'user' || p === 'date'))
+            .map((param) => (
+            <option
+              key={param}
+              value={param}
+            >{text.VAR[param]}</option>
+          ))}
+        </select>
+      </div>
+    </form>
   )
 
-  const scoreDiagram = <Diagram scores={scores} xParam={sortLabel} yParam="points" />
+  const scoreDiagram = <Diagram scores={scores} xParam={sortLabel} yParam={valueLabel} />
 
   const [popScore, setPopScore] = useState<ScoreItem | null>(null)
 

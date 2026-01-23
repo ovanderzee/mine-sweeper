@@ -62,7 +62,9 @@
     "configuration": "configuratie",
     "characteristics": "kenmerken",
     "game-play": "spelverloop",
-    "result": "resultaat"
+    "result": "resultaat",
+    "sort": "toon",
+    "versus": "tegen"
   },
   "VAR": {
     "rank": "rang",

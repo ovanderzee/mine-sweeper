@@ -1,6 +1,6 @@
 import { beforeEach, describe, expect, it } from 'vitest'
 import { RenderResult } from 'vitest-browser-react'
-import { Locator } from 'vitest/browser'
+import { Locator, userEvent } from 'vitest/browser'
 import { renderWithProvider } from './../../__mocks__/aat-helpers'
 import { liveScores } from './../../__mocks__/scores'
 import storage from './../../common/storage'
@@ -116,7 +116,7 @@ describe('The hall-of-fame-page scores', () => {
 
 describe('The hall-of-fame-page list sorting', () => {
   let screen: RenderResult,
-    panel: Locator,
+    selectX: Locator,
     items: Locator
 
   const firstItem = (qs: string): HTMLElement | null | undefined => items.first().query()?.querySelector(qs)
@@ -128,7 +128,7 @@ describe('The hall-of-fame-page list sorting', () => {
   beforeEach(async () => {
     storage.scores = liveScores as ScoreItem[]
     screen = await renderWithProvider(<HallOfFame/>)
-    panel = screen.getByRole('table')
+    selectX = screen.getByLabelText('show')
     items = screen.getByRole('list').getByRole('button')
   })
 
@@ -138,7 +138,7 @@ describe('The hall-of-fame-page list sorting', () => {
     const uniqueUsers = [...new Set(scoreUsers)]
     const worstUser = uniqueUsers[uniqueUsers.length - 1]
 
-    await panel.getByText('user').click()
+    await userEvent.selectOptions(selectX, 'user')
 
     const bestUser = firstEntry('.user')
     const bestUserBest = firstEntry('.points')
@@ -150,7 +150,7 @@ describe('The hall-of-fame-page list sorting', () => {
   })
 
   it('should sort on date descending', async () => {
-    await panel.getByText('date').click()
+    await userEvent.selectOptions(selectX, 'date')
 
     const recent = firstItem('.date')?.dataset.date
     const early = lastItem('.date')?.dataset.date
@@ -159,7 +159,7 @@ describe('The hall-of-fame-page list sorting', () => {
   })
 
   it('should sort on rank ascending', async () => {
-    await panel.getByText('rank').click()
+    await userEvent.selectOptions(selectX, 'rank')
 
     const best = items.first().getByRole('heading').getByRole('img').getByText('1')
     const worst = items.last().getByRole('heading', { name: liveScores.length.toString() })
@@ -169,7 +169,7 @@ describe('The hall-of-fame-page list sorting', () => {
   })
 
   it('should sort on efficiency descending', async () => {
-    await panel.getByText('efficiency').click()
+    await userEvent.selectOptions(selectX, 'efficiency')
 
     const best = firstEntry('.efficiency :last-child')
     const worst = lastEntry('.efficiency :last-child')
@@ -177,9 +177,8 @@ describe('The hall-of-fame-page list sorting', () => {
     expect(Number(best)).toBeGreaterThan(Number(worst))
   })
 
-
   it('should sort on speed descending', async () => {
-    await panel.getByText('speed').click()
+    await userEvent.selectOptions(selectX, 'speed')
 
     const best = firstEntry('.speed :last-child')
     const worst = lastEntry('.speed :last-child')
@@ -188,7 +187,7 @@ describe('The hall-of-fame-page list sorting', () => {
   })
 
   it('should sort on level descending', async () => {
-    await panel.getByText('level').click()
+    await userEvent.selectOptions(selectX, 'level')
 
     const best = firstEntry('.level :last-child')
     const worst = lastEntry('.level :last-child')
@@ -197,7 +196,7 @@ describe('The hall-of-fame-page list sorting', () => {
   })
 
   it('should sort on mines ascending', async () => {
-    await panel.getByText('mines').click()
+    await userEvent.selectOptions(selectX, 'mines')
 
     const best = firstEntry('.mines :last-child')
     const worst = lastEntry('.mines :last-child')
@@ -206,7 +205,7 @@ describe('The hall-of-fame-page list sorting', () => {
   })
 
   it('should sort on fields ascending', async () => {
-    await panel.getByText('fields').click()
+    await userEvent.selectOptions(selectX, 'fields')
 
     const best = firstEntry('.cells :last-child')
     const worst = lastEntry('.cells :last-child')
@@ -215,7 +214,7 @@ describe('The hall-of-fame-page list sorting', () => {
   })
 
   it('should sort on turns ascending', async () => {
-    await panel.getByText('turns').click()
+    await userEvent.selectOptions(selectX, 'turns')
 
     const best = firstEntry('.moves :last-child')
     const worst = lastEntry('.moves :last-child')
@@ -224,7 +223,7 @@ describe('The hall-of-fame-page list sorting', () => {
   })
 
   it('should sort on duration ascending', async () => {
-    await panel.getByText('duration').click()
+    await userEvent.selectOptions(selectX, 'duration')
 
     const best = firstEntry('.duration :last-child')
     const worst = lastEntry('.duration :last-child')
