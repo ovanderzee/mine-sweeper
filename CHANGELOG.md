@@ -25,6 +25,9 @@
 - Remove too easy 3*3 and 4*4 boards and levels 1 and 6
 - Refine levels with intermediate values, maybe by percentage
 - Backspace to open random cells
+- Open/close mark section
+- Set limit for marking, tests on marking
+- Consent for ending playing game and changing the config when replaying from score list
 
 
 ## [next]

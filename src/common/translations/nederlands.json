@@ -64,7 +64,8 @@
     "game-play": "spelverloop",
     "result": "resultaat",
     "sort": "toon",
-    "versus": "tegen"
+    "versus": "tegen",
+    "mark": "merk"
   },
   "VAR": {
     "rank": "rang",

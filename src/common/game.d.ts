@@ -100,3 +100,9 @@ export interface ScoreItem extends BareScoreItem {
 export type ScoreParam = keyof ScoreItem | keyof ScoreItem["game"] | keyof ScoreItem["play"] | keyof ScoreItem["score"]
 
 export type FlatScore = Record<ScoreParam, number>
+
+export type MarkScoreData = {
+  param: ScoreParam;
+  operate: string;
+  quant: number;
+}

@@ -6,10 +6,13 @@ svg.line-diagram {
   width: 100%;
 }
 
-.line-diagram circle,
-.line-diagram rect {
+.line-diagram circle {
   fill: var(--state-red);
   stroke: none;
+}
+
+.line-diagram .mark circle {
+  fill: var(--fire-orange);
 }
 
 .line-diagram line {

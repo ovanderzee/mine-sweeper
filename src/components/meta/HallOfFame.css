@@ -127,7 +127,7 @@ ol button[aria-label~=latest] * {
   padding-inline: var(--screen-gutter);
 }
 
-.legend div {
+.legend div.controls {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 0 1em;
@@ -141,9 +141,21 @@ ol button[aria-label~=latest] * {
   justify-self: end;
 }
 
-.legend select {
+.legend select,
+.legend .mark {
   grid-column: 2;
-  width: 10em;
+  width: 12em;
+}
+
+.legend div.mark {
+  display: flex;
+  justify-content: space-between;
+  gap: 0 .5em;
+}
+
+.legend .mark select {
+  flex: 1 0 auto;
+  width: auto;
 }
 
 .legend.rank ~ ol .rank,

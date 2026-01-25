@@ -92,6 +92,7 @@ select {
   background-position: right .7em top 50%;
   /* icon size, then gradient */
   background-size: .65em auto;
+  text-transform: capitalize;
 }
 /* Hide arrow icon in IE browsers */
 select::-ms-expand {
