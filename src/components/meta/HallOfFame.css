@@ -104,6 +104,7 @@ ol button[aria-label~=latest] {
   outline-offset: .5ex;
   background: linear-gradient(105deg, var(--light-blue), var(--medium-blue), var(--dark-blue));
   padding: calc(var(--radius) / 2) var(--radius);
+  margin-block: 1em;
 }
 ol button[aria-label~=latest] .date {
   align-self: start;
