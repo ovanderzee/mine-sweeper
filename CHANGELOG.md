@@ -8,29 +8,37 @@
 - Debt after porting tests to vitest, see TODOs and it.skip
 - Look at disabled 'set-state-in-effect' and 'exhaustive-deps'
 - added click listeners on range-inputs to test them, remove when vitest/browser starts supporting change listeners on inputs
-- Vitest lacks support for pointerup/down, how to test longpress to flag cells
+- Vitest lacks support for pointerup/down, how to test longpress to flag cells?
+- Random timeouts in first vi.waitFor of renderWithApp function
 
 ### Features
 - Playmode Tough: Play without flags or mine counters
 - Playmode Risky: Win or loose when flag count equals mine count
 - Pause button, correct time on unpause
 - Routing on gamecode, about, config and hiscores
-- Replay game from High Scores (when routing)
 - Save a game on a new list page (with comment)
-- Show gamelevel and number of neighbouring mines in graph
+- Show number of neighbouring mines in graph
 - Calculate coagulation (mine-mine borders | blank to mine ratio)
 - Eliminate outliers in graph
 - Remember last touched game cell, as starting point for move with arrow key
 - Store board magnification in sessionStorage
-- Remove too easy 3*3 and 4*4 boards and levels 1 and 6
 - Refine levels with intermediate values, maybe by percentage
 - Backspace to open random cells
 
 
-## [next]
+## [3.7.0] - 2026-02-11
 
 ### Added
-- Individual scores can be deleted
+- Individual scores can be deleted in Score popover
+- Replay game from Score popover
+
+### Changed
+- Compose Diagram by a dropdown for the x- and y-axis
+- Score ListItems
+- Equal ranks for equal points
+
+### Removed
+- Removed too easy 3*3 and 4*4 boards and levels 1 and 6
 
 
 ## [3.6.1] - 2026-01-12
