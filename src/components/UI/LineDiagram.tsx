@@ -35,7 +35,7 @@ const findMedian = (sequence: number[]): number => {
 const calcBoundingAxis = (highest: number) => {
   const exponent = Math.floor(Math.log10(highest)) - 1
   const dataScale = Math.pow(10, exponent)
-  return Math.ceil(highest / dataScale) * dataScale
+  return precise(Math.ceil(highest / dataScale) * dataScale, 4)
 }
 
 const LineDiagram = (props: LineDiagramProps) => {

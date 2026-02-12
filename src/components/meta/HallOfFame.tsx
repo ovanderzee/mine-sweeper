@@ -10,7 +10,7 @@ import Diagram from '../UI/Diagram'
 import { ScoreItem, ScoreParam, MarkScoreData } from '../../common/game.d'
 import storage from '../../common/storage'
 import { precise, refineScores, sequenceFillData } from '../../common/scoring'
-import { SHOW_SORT_THRESHOLD, SHOW_DIAGRAM_THRESHOLD } from '../../common/constants'
+import { SHOW_SORT_THRESHOLD, SHOW_DIAGRAM_THRESHOLD, SHOW_MARKING_THRESHOLD } from '../../common/constants'
 import ScorePopover from '../UI/ScorePopover'
 import Game from '../game/Game'
 import { initialGameState } from '../game/common'
@@ -144,6 +144,7 @@ const HallOfFame = () => {
           )}
         </select>
 
+      {scores.length > SHOW_MARKING_THRESHOLD && (<>
         <label className="label">{text.fame['mark']}</label>
         <div className="mark">
           <select id="mark-param" value={markData.param} onChange={changeMarkParameter}>
@@ -159,6 +160,7 @@ const HallOfFame = () => {
           </select>
         </div>
         <input id="mark-quant" className="mark" value={markData.quant} onChange={changeMarkQuantifier} />
+      </>)}
       </div>
     </form>
   )
