@@ -1,9 +1,10 @@
-import { beforeEach, describe, expect, it } from 'vitest'
+import { beforeAll, afterAll, beforeEach, describe, expect, it, vi } from 'vitest'
 import { RenderResult } from 'vitest-browser-react'
 import { Locator, userEvent } from 'vitest/browser'
 import { renderWithProvider, renderWithApp } from './../../__mocks__/aat-helpers'
 import { liveScores } from './../../__mocks__/scores'
 import storage from './../../common/storage'
+import { preventReloadByEnter } from './../../common/functions'
 import { sequenceFillData } from './../../common/scoring'
 import { ScoreItem } from './../../common/game.d'
 import HallOfFame from './HallOfFame'
@@ -268,5 +269,28 @@ describe('The hall-of-fame-page popover buttons', () => {
     const boardFromScore = sequenceFillData(storage.scores[0].code)[0]
     const boardFromGame = storage.game!.board ? storage.game!.board : null
     expect(boardFromScore).toStrictEqual(boardFromGame)
+  })
+})
+
+describe('The semantic form', () => {
+  // https://vitest.dev/guide/browser/#limitations
+  vi.mock('./../../common/functions', { spy: true })
+
+  let
+    screen: RenderResult
+
+  beforeEach(async () => {
+    screen = await renderWithProvider(<HallOfFame/>)
+  })
+
+  it('should call function to prevent submitting by text-inputs', async () => {
+    const formField = screen.getByTitle('Mark value').query()
+
+    await formField?.focus()
+    await userEvent.keyboard('{Enter}')
+
+    expect(formField).toBeInTheDocument()
+    expect(preventReloadByEnter).toHaveBeenCalled()
+    expect(preventReloadByEnter).toHaveReturnedWith(true)
   })
 })
