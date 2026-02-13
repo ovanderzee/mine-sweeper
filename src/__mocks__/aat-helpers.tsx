@@ -78,8 +78,18 @@ export const renderWithApp = async (name: string = 'Game'): Promise<RenderResult
   const gameHeader = screen.getByRole('heading').getByText(heading)
 
   await vi.waitFor(async () => {
-//     await expect.element(skipBtn).not.toBeInTheDocument()
-    await expect.element(gameHeader).toBeInTheDocument()
+    // fails:
+    //   should accept numbers as input /HallOfFame.aat.tsx:282:21 TypeError: inputField.clear is not a function
+    //   should start a new game when storage contains an finished game: /Game.aat.tsx:211:26 AssertionError: expected [ [ 9, 1, +0 ], [ 1, 2, 1 ], …(1) ] to not strictly equal
+    // soms 1 soms 2 failures
+    await expect.element(skipBtn).not.toBeInTheDocument()
+    // fails:
+    //   should accept numbers as input //HallOfFame.aat.tsx:284:37 Caused by: Error: Matcher did not succeed in time.
+    //   should load an unfinished game from storage /Game.aat.tsx:82:18 WebDriverError: stale element reference: "html > body > div > #playground > #game-board > div:nth-child(2) > #row1col1" (seq.nr 4) (meedere keren)
+    //   should restart a lost game &&
+    //   should replay a game depending permission when a game is in progress /Game-options.aat.tsx:139:62  element click intercepted: WebDriverError: element click intercepted ... Other element would receive the click: <button type="button" id="intro" class="ending"
+    // 8 failures
+//     await expect.element(gameHeader).toBeInTheDocument()
     if (title) await screen.getByTitle(title).click()
   })
 

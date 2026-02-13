@@ -46,11 +46,13 @@ export default defineConfig({
         { browser: 'chrome' },
       ],
     },
+    printConsoleTrace: true,
     setupFiles: ['./src/vitest.set-browser.ts'],
   },
       }
     ]
   },
+  cacheDir: '.vite-cache', // to persist optimisations
   optimizeDeps: {
     include: ['react/jsx-dev-runtime']
   }
