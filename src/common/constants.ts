@@ -30,7 +30,7 @@ const newRange = (min: number, max: number): InputRange => Object.defineProperti
 const RANGES = {} as Record<string, InputRange>
 Object.defineProperties(RANGES, {
   SIZE: newReadOnly(newRange(6, 20)),
-  LEVEL: newReadOnly(newRange(1, 6)),
+  LEVEL: newReadOnly(newRange(2, 5)),
   FONT: newReadOnly(newRange(8, 36)),
   SCORES: newReadOnly(newRange(8, 1024)),
 });
