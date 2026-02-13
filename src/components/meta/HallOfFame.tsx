@@ -11,6 +11,7 @@ import { ScoreItem, ScoreParam, MarkScoreData } from '../../common/game.d'
 import storage from '../../common/storage'
 import { precise, refineScores, sequenceFillData } from '../../common/scoring'
 import { SHOW_SORT_THRESHOLD, SHOW_DIAGRAM_THRESHOLD, SHOW_MARKING_THRESHOLD } from '../../common/constants'
+import { preventReloadByEnter } from '../../common/functions'
 import ScorePopover from '../UI/ScorePopover'
 import Game from '../game/Game'
 import { initialGameState } from '../game/common'
@@ -38,10 +39,11 @@ const HallOfFame = () => {
     'moves', 'duration',
     'efficiency', 'speed', 'points',
   ] as ScoreParam[]
+  const mathParameters = parameters.filter(p => !(p === 'user' || p === 'date'))
 
   const operators = ['<','≤','=','≥','>']
   const initialMarkData = {param: sortLabel, operate: operators[0], quant: 0}
-  const [markData, setMarkData] = useState<MarkScoreData | null>(initialMarkData)
+  const [markData, setMarkData] = useState<MarkScoreData>(initialMarkData)
 
   const methodsByKind: Record<ScoreParam, () => ScoreItem[]> = {
     'rank': () => {
@@ -122,12 +124,18 @@ const HallOfFame = () => {
 
   const changeMarkQuantifier = (event: React.ChangeEvent) => {
     const ctrl = event.target as HTMLInputElement
-    const quant = +ctrl.value as number
+    let quant = parseFloat(ctrl.value)
+    const nativeEvent = event.nativeEvent as InputEvent
+    if (nativeEvent.data === ',') ctrl.value = ctrl.value.replace(',','.')
+    if (!quant) quant = 0
+    if (!ctrl.value.endsWith('.')) ctrl.value = quant.toString()
     setMarkData({...markData, quant})
   }
 
   const scoreSorting = (
-    <form className={`legend ${sortLabel}`}>
+    <form className={`legend ${sortLabel}`}
+      onKeyDown={(event) => preventReloadByEnter(event)}
+    >
       <div className="controls">
         <label htmlFor="x-axis">{text.fame['sort']}</label>
         <select id="x-axis" value={sortLabel} onChange={sortByKind}>
@@ -138,8 +146,7 @@ const HallOfFame = () => {
 
         <label htmlFor="y-axis">{text.fame['versus']}</label>
         <select id="y-axis" value={valueLabel} onChange={changeValue}>
-          {parameters
-            .filter(p => !(p === 'user' || p === 'date'))
+          {mathParameters
             .map((param) => <option key={param} value={param}>{text.VAR[param]}</option>
           )}
         </select>
@@ -148,8 +155,7 @@ const HallOfFame = () => {
         <label className="label">{text.fame['mark']}</label>
         <div className="mark">
           <select id="mark-param" value={markData.param} onChange={changeMarkParameter}>
-            {parameters
-              .filter(p => !(p === 'user' || p === 'date'))
+            {mathParameters
               .map((param) => <option key={param} value={param}>{text.VAR[param]}</option>
             )}
           </select>
@@ -159,7 +165,7 @@ const HallOfFame = () => {
             )}
           </select>
         </div>
-        <input id="mark-quant" className="mark" value={markData.quant} onChange={changeMarkQuantifier} />
+        <input id="mark-quant" className="mark" defaultValue="0" onChange={changeMarkQuantifier} />
       </>)}
       </div>
     </form>
