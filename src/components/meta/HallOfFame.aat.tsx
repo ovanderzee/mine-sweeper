@@ -235,14 +235,9 @@ describe('The hall-of-fame-page list sorting', () => {
 })
 
 describe('The hall-of-fame-page popover buttons', () => {
-  let screen: RenderResult
-
-  beforeEach(async () => {
-    storage.scores = liveScores as ScoreItem[]
-  })
 
   it('should delete one score with button in popover', async () => {
-    screen = await renderWithProvider(<HallOfFame/>)
+    const screen = await renderWithProvider(<HallOfFame/>)
     const scoresCount = storage.scores.length
 
     const firstListButton = screen.getByRole('list').getByRole('button').first()
@@ -256,7 +251,7 @@ describe('The hall-of-fame-page popover buttons', () => {
   })
 
   it('should replay with button in popover', async () => {
-    screen = await renderWithApp('HallOfFame')
+    const screen = await renderWithApp('HallOfFame')
 
     const firstListButton = screen.getByRole('list').getByRole('button').first()
     await firstListButton.click()

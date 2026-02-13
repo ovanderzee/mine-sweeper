@@ -74,12 +74,15 @@ export const renderWithApp = async (name: string = 'Game'): Promise<RenderResult
     case 'Configure':   title = 'Settings'; break;
   }
 
+  let heading = 'Playground'
+  const gameHeader = screen.getByRole('heading').getByText(heading)
+
   await vi.waitFor(async () => {
-    await expect.element(skipBtn).not.toBeInTheDocument()
+//     await expect.element(skipBtn).not.toBeInTheDocument()
+    await expect.element(gameHeader).toBeInTheDocument()
     if (title) await screen.getByTitle(title).click()
   })
 
-  let heading = 'Playground'
   switch (name) {
     case 'About':       heading = 'Description'; break;
     case 'HallOfFame':  heading = 'Hall of Fame'; break;

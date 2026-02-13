@@ -50,5 +50,8 @@ export default defineConfig({
   },
       }
     ]
+  },
+  optimizeDeps: {
+    include: ['react/jsx-dev-runtime']
   }
 })

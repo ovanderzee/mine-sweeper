@@ -25,8 +25,14 @@
 - Refine levels with intermediate values, maybe by percentage
 - Backspace to open random cells
 - Open/close mark section
-- Set limit for marking, tests on marking
+- Tests on marking
 - Consent for ending playing game and changing the config when replaying from score list
+
+## [next]
+
+### Added
+- Analyse scores by marking ranges of score parameters
+- Score threshold for marking
 
 
 ## [3.7.0] - 2026-02-11

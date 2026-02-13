@@ -184,6 +184,8 @@ svg[aria-hidden] {
   overflow: hidden;
 }
 
+/* SCREEN READER */
+
 .sr-only {
   position: absolute;
   width: 1px;
