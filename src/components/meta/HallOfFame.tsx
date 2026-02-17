@@ -154,18 +154,21 @@ const HallOfFame = () => {
       {scores.length > SHOW_MARKING_THRESHOLD && (<>
         <label className="label">{text.fame['mark']}</label>
         <div className="mark">
-          <select id="mark-param" value={markData.param} onChange={changeMarkParameter}>
+          <select id="mark-param" value={markData.param} onChange={changeMarkParameter}
+            title={text.fame['mark-parameter']}>
             {mathParameters
               .map((param) => <option key={param} value={param}>{text.VAR[param]}</option>
             )}
           </select>
-          <select id="mark-operator" value={markData.operate} onChange={changeMarkOperator}>
+          <select id="mark-operator" value={markData.operate} onChange={changeMarkOperator}
+            title={text.fame['mark-relation']}>
             {operators
               .map((operate) => <option key={operate} value={operate}>{operate}</option>
             )}
           </select>
         </div>
-        <input id="mark-quant" className="mark" defaultValue="0" onChange={changeMarkQuantifier} />
+        <input id="mark-quant" className="mark" defaultValue="0" onChange={changeMarkQuantifier}
+          title={text.fame['mark-value']} />
       </>)}
       </div>
     </form>

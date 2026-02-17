@@ -1,7 +1,7 @@
-import { beforeAll, afterAll, beforeEach, describe, expect, it, vi } from 'vitest'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { RenderResult } from 'vitest-browser-react'
 import { Locator, userEvent } from 'vitest/browser'
-import { renderWithProvider, renderWithApp } from './../../__mocks__/aat-helpers'
+import { renderWithProvider, renderWithContext, renderWithApp } from './../../__mocks__/aat-helpers'
 import { liveScores } from './../../__mocks__/scores'
 import storage from './../../common/storage'
 import { preventReloadByEnter } from './../../common/functions'
@@ -272,18 +272,43 @@ describe('The hall-of-fame-page popover buttons', () => {
   })
 })
 
-describe('The semantic form', () => {
-  // https://vitest.dev/guide/browser/#limitations
-  vi.mock('./../../common/functions', { spy: true })
+describe('Marking data', () => {
 
-  let
-    screen: RenderResult
+  it('should accept numbers broken with dot as input', async () => {
+    const screen = await renderWithContext(<HallOfFame/>)
+    const inputField = screen.getByTitle('Mark value').query()
+    await inputField?.focus()
 
-  beforeEach(async () => {
-    screen = await renderWithProvider(<HallOfFame/>)
+//     await userEvent.clear(inputField), werkt niet
+    await userEvent.keyboard('12')
+    await expect.element(inputField).toHaveDisplayValue('12')
+
+    await userEvent.keyboard('.')
+    await expect.element(inputField).toHaveDisplayValue('12.')
+
+    await userEvent.keyboard('3')
+    await expect.element(inputField).toHaveDisplayValue('12.3')
+  })
+
+  it('should accept numbers broken with comma as input', async () => {
+    const screen = await renderWithContext(<HallOfFame/>)
+    const inputField = screen.getByTitle('Mark value').query()
+    await inputField?.focus()
+
+    await userEvent.keyboard('12')
+    await expect.element(inputField).toHaveDisplayValue('12')
+
+    await userEvent.keyboard(',')
+    await expect.element(inputField).toHaveDisplayValue('12.')
+
+    await userEvent.keyboard('3')
+    await expect.element(inputField).toHaveDisplayValue('12.3')
   })
 
   it('should call function to prevent submitting by text-inputs', async () => {
+    // https://vitest.dev/guide/browser/#limitations
+    vi.mock('./../../common/functions', { spy: true })
+    const screen = await renderWithProvider(<HallOfFame/>)
     const formField = screen.getByTitle('Mark value').query()
 
     await formField?.focus()

@@ -65,7 +65,10 @@
     "result": "result",
     "sort": "show",
     "versus": "against",
-    "mark": "mark"
+    "mark": "mark",
+    "mark-parameter": "Mark parameter",
+    "mark-relation": "Mark relation",
+    "mark-value": "Mark value"
   },
   "VAR": {
     "rank": "rank",

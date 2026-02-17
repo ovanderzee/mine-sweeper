@@ -65,7 +65,10 @@
     "result": "resultaat",
     "sort": "toon",
     "versus": "tegen",
-    "mark": "merk"
+    "mark": "merk",
+    "mark-parameter": "Merk parameter",
+    "mark-relation": "Merk relatie",
+    "mark-value": "Merk waarde"
   },
   "VAR": {
     "rank": "rang",

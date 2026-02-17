@@ -6,6 +6,7 @@ import PageContext from './../store/page-context'
 import PageProvider from './../store/PageProvider'
 import { Languages } from '../common/app.d'
 import DEFAULTS from './../common/defaults'
+import { FADE_OUT_TIME } from './../common/constants'
 import storage from '../common/storage'
 import { texts } from './../common/i18n'
 import AllSymbols from './../components/UI/AllSymbols'
@@ -74,34 +75,20 @@ export const renderWithApp = async (name: string = 'Game'): Promise<RenderResult
     case 'Configure':   title = 'Settings'; break;
   }
 
+  // fadeout introducing animation
+  vi.advanceTimersByTime(FADE_OUT_TIME * 1.1)
+
+  await expect.element(skipBtn).not.toBeInTheDocument()
+  if (title) await screen.getByTitle(title).click()
+
   let heading = 'Playground'
-  const gameHeader = screen.getByRole('heading').getByText(heading)
-
-  await vi.waitFor(async () => {
-    // fails:
-    //   should accept numbers as input /HallOfFame.aat.tsx:282:21 TypeError: inputField.clear is not a function
-    //   should start a new game when storage contains an finished game: /Game.aat.tsx:211:26 AssertionError: expected [ [ 9, 1, +0 ], [ 1, 2, 1 ], …(1) ] to not strictly equal
-    // soms 1 soms 2 failures
-    await expect.element(skipBtn).not.toBeInTheDocument()
-    // fails:
-    //   should accept numbers as input //HallOfFame.aat.tsx:284:37 Caused by: Error: Matcher did not succeed in time.
-    //   should load an unfinished game from storage /Game.aat.tsx:82:18 WebDriverError: stale element reference: "html > body > div > #playground > #game-board > div:nth-child(2) > #row1col1" (seq.nr 4) (meedere keren)
-    //   should restart a lost game &&
-    //   should replay a game depending permission when a game is in progress /Game-options.aat.tsx:139:62  element click intercepted: WebDriverError: element click intercepted ... Other element would receive the click: <button type="button" id="intro" class="ending"
-    // 8 failures
-//     await expect.element(gameHeader).toBeInTheDocument()
-    if (title) await screen.getByTitle(title).click()
-  })
-
   switch (name) {
     case 'About':       heading = 'Description'; break;
     case 'HallOfFame':  heading = 'Hall of Fame'; break;
     case 'Configure':   heading = 'Settings'; break;
   }
 
-  await vi.waitFor(async () =>
-    await expect.element(screen.getByRole('heading', {name: heading})).toBeInTheDocument()
-  )
+  await expect.element(screen.getByRole('heading', {name: heading})).toBeInTheDocument()
 
   return screen
 }
