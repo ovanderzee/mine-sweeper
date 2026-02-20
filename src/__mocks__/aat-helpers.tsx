@@ -68,7 +68,7 @@ export const renderWithApp = async (name: string = 'Game'): Promise<RenderResult
   const skipBtn = screen.getByText('skip to game')
   await skipBtn.click()
 
-  let title: string
+  let title = ''
   switch (name) {
     case 'About':       title = 'Description'; break;
     case 'HallOfFame':  title = 'Hall of Fame'; break;

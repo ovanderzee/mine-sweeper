@@ -17,8 +17,8 @@ describe('Game dimensions', () => {
     localStorage.removeItem('mv-game')
   })
 
-  it('should create a game with default properties', () => {
-    renderWithContext(<Game />, { config: DEFAULTS })
+  it('should create a game with default properties', async () => {
+    await renderWithContext(<Game />, { config: DEFAULTS })
     const cells = storage.game?.board.flat() || []
     expect(cells.length).toBe(36)
 
@@ -26,8 +26,8 @@ describe('Game dimensions', () => {
     expect(mines.length).toBe(4)
   })
 
-  it('should create a game with micro config properties', () => {
-    renderWithContext(<Game />, { config: microConfig })
+  it('should create a game with micro config properties', async () => {
+    await renderWithContext(<Game />, { config: microConfig })
     const cells = storage.game?.board.flat() || []
     expect(cells.length).toBe(9)
 
