@@ -232,7 +232,35 @@ describe('The hall-of-fame-page list sorting', () => {
 
     expect(parseFloat(best || '0')).toBeLessThan(parseFloat(worst || '0'))
   })
+})
 
+describe('The hall-of-fame-page x- and y-axis', () => {
+  let screen: RenderResult,
+    selectX: Locator,
+    selectY: Locator,
+    legendX: Locator,
+    legendY: Locator
+
+  beforeEach(async () => {
+    storage.scores = liveScores as ScoreItem[]
+    screen = await renderWithProvider(<HallOfFame/>)
+    selectX = screen.getByLabelText('show')
+    selectY = screen.getByLabelText('against')
+    legendX = screen.getByRole('document').getByTestId('x-parameter')
+    legendY = screen.getByRole('document').getByTestId('y-parameter')
+  })
+
+  it('should change parameter for x-axis', async () => {
+    await expect.element(legendX).toHaveTextContent('rank')
+    await userEvent.selectOptions(selectX, 'efficiency')
+    await expect.element(legendX).toHaveTextContent('efficiency')
+  })
+
+  it('should change parameter for y-axis', async () => {
+    await expect.element(legendY).toHaveTextContent('points')
+    await userEvent.selectOptions(selectY, 'turns')
+    await expect.element(legendY).toHaveTextContent('turns')
+  })
 })
 
 describe('The hall-of-fame-page popover buttons', () => {

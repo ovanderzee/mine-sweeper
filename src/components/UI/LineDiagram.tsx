@@ -94,9 +94,11 @@ const LineDiagram = (props: LineDiagramProps) => {
     >
       <g className="legenda">
         <line x1="0" y1={graphSize.y} x2={graphSize.x} y2={graphSize.y} />
-        <text x="0" y={graphSize.y} dx="20" dy={lgdSpace * .9} textAnchor="middle">{text.VAR[props.xParam]} &rarr;</text>
+        <text x="0" y={graphSize.y} dx="20" dy={lgdSpace * .9} textAnchor="middle" data-testid="x-parameter"
+          >{text.VAR[props.xParam]} &rarr;</text>
         <line x1="0" y1="0" x2="0" y2={graphSize.y} />
-        <text x={-graphSize.y} y="0" dx="20" dy={lgdSpace * -.8} transform="rotate(-90)" textAnchor="middle">{text.VAR[props.yParam]} &rarr;</text>
+        <text x={-graphSize.y} y="0" dx="20" dy={lgdSpace * -.8} transform="rotate(-90)" textAnchor="middle" data-testid="y-parameter"
+          >{text.VAR[props.yParam]} &rarr;</text>
 
         <text x={graphSize.x} y={graphSize.y} dy="120" textAnchor="end" style={{fontSize: '133%'}}>
           {coordinates.length} {text.fame['won games']}, {text.fame['median']}: {med.x}, {text.fame['average']}: {avg.x}
