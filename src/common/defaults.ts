@@ -8,7 +8,7 @@ export const calculateMineCount = ((cfg: AppCheckConfig): number => {
   return Math.ceil(approx)
 })
 
-const DEFAULTS = {
+export const DEFAULTS = {
   BOARD_SIZE: 6,
   GAME_LEVEL: 3,
   MINE_COUNT: Math.ceil(6 * 6 * 3 / 30),

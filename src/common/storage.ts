@@ -1,4 +1,4 @@
-import DEFAULTS from './defaults'
+import { DEFAULTS } from  './defaults'
 import { AppConfig, AppSubConfig } from './app.d'
 import { GameState, ScoreItem } from './game.d'
 import { refineScores, stripScores } from './scoring'

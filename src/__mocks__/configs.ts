@@ -1,5 +1,5 @@
 import { Languages } from '../common/app.d'
-import DEFAULTS from '../common/defaults'
+import { DEFAULTS } from  '../common/defaults'
 
 //  BOARD_SIZE, GAME_LEVEL, MINE_COUNT as in DEFAULTS
 export const defaultChallengeConfig = {

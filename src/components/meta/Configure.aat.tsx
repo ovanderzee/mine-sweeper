@@ -1,7 +1,7 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { userEvent } from 'vitest/browser'
 import { RenderResult } from 'vitest-browser-react'
-import DEFAULTS from './../../common/defaults'
+import { DEFAULTS } from  './../../common/defaults'
 import storage from './../../common/storage'
 import { preventReloadByEnter } from './../../common/functions'
 import { renderWithProvider, clickRangeInputValue } from './../../__mocks__/aat-helpers'

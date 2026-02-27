@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react'
 import PageContext from '../../store/page-context'
-import DEFAULTS from '../../common/defaults'
+import { DEFAULTS } from  '../../common/defaults'
 import storage from '../../common/storage'
 import { GameStages } from '../../common/game.d'
 import { ApproveModal } from '../UI/Modal'

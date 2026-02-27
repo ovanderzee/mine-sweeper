@@ -1,4 +1,4 @@
-import DEFAULTS, { calculateMineCount } from './defaults'
+import { DEFAULTS, calculateMineCount } from './defaults'
 import { microConfig, scoringConfig } from '../__mocks__/configs'
 
 /**
