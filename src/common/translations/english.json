@@ -64,7 +64,11 @@
     "game-play": "game play",
     "result": "result",
     "sort": "show",
-    "versus": "against"
+    "versus": "against",
+    "mark": "mark",
+    "mark-parameter": "Mark parameter",
+    "mark-relation": "Mark relation",
+    "mark-value": "Mark value"
   },
   "VAR": {
     "rank": "rank",

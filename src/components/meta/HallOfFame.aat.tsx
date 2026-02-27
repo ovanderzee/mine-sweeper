@@ -1,9 +1,10 @@
-import { beforeEach, describe, expect, it } from 'vitest'
+import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { RenderResult } from 'vitest-browser-react'
 import { Locator, userEvent } from 'vitest/browser'
-import { renderWithProvider, renderWithApp } from './../../__mocks__/aat-helpers'
+import { renderWithProvider, renderWithContext, renderWithApp } from './../../__mocks__/aat-helpers'
 import { liveScores } from './../../__mocks__/scores'
 import storage from './../../common/storage'
+import { preventReloadByEnter } from './../../common/functions'
 import { sequenceFillData } from './../../common/scoring'
 import { ScoreItem } from './../../common/game.d'
 import HallOfFame from './HallOfFame'
@@ -231,18 +232,41 @@ describe('The hall-of-fame-page list sorting', () => {
 
     expect(parseFloat(best || '0')).toBeLessThan(parseFloat(worst || '0'))
   })
-
 })
 
-describe('The hall-of-fame-page popover buttons', () => {
-  let screen: RenderResult
+describe('The hall-of-fame-page x- and y-axis', () => {
+  let screen: RenderResult,
+    selectX: Locator,
+    selectY: Locator,
+    legendX: Locator,
+    legendY: Locator
 
   beforeEach(async () => {
     storage.scores = liveScores as ScoreItem[]
+    screen = await renderWithProvider(<HallOfFame/>)
+    selectX = screen.getByLabelText('show')
+    selectY = screen.getByLabelText('against')
+    legendX = screen.getByRole('document').getByTestId('x-parameter')
+    legendY = screen.getByRole('document').getByTestId('y-parameter')
   })
 
+  it('should change parameter for x-axis', async () => {
+    await expect.element(legendX).toHaveTextContent('rank')
+    await userEvent.selectOptions(selectX, 'efficiency')
+    await expect.element(legendX).toHaveTextContent('efficiency')
+  })
+
+  it('should change parameter for y-axis', async () => {
+    await expect.element(legendY).toHaveTextContent('points')
+    await userEvent.selectOptions(selectY, 'turns')
+    await expect.element(legendY).toHaveTextContent('turns')
+  })
+})
+
+describe('The hall-of-fame-page popover buttons', () => {
+
   it('should delete one score with button in popover', async () => {
-    screen = await renderWithProvider(<HallOfFame/>)
+    const screen = await renderWithProvider(<HallOfFame/>)
     const scoresCount = storage.scores.length
 
     const firstListButton = screen.getByRole('list').getByRole('button').first()
@@ -256,7 +280,7 @@ describe('The hall-of-fame-page popover buttons', () => {
   })
 
   it('should replay with button in popover', async () => {
-    screen = await renderWithApp('HallOfFame')
+    const screen = await renderWithApp('HallOfFame')
 
     const firstListButton = screen.getByRole('list').getByRole('button').first()
     await firstListButton.click()
@@ -273,5 +297,53 @@ describe('The hall-of-fame-page popover buttons', () => {
     const boardFromScore = sequenceFillData(storage.scores[0].code)[0]
     const boardFromGame = storage.game!.board ? storage.game!.board : null
     expect(boardFromScore).toStrictEqual(boardFromGame)
+  })
+})
+
+describe('Marking data', () => {
+
+  it('should accept numbers broken with dot as input', async () => {
+    const screen = await renderWithContext(<HallOfFame/>)
+    const inputField = screen.getByTitle('Mark value').query()
+    await inputField?.focus()
+
+//     await userEvent.clear(inputField), werkt niet
+    await userEvent.keyboard('12')
+    await expect.element(inputField).toHaveDisplayValue('12')
+
+    await userEvent.keyboard('.')
+    await expect.element(inputField).toHaveDisplayValue('12.')
+
+    await userEvent.keyboard('3')
+    await expect.element(inputField).toHaveDisplayValue('12.3')
+  })
+
+  it('should accept numbers broken with comma as input', async () => {
+    const screen = await renderWithContext(<HallOfFame/>)
+    const inputField = screen.getByTitle('Mark value').query()
+    await inputField?.focus()
+
+    await userEvent.keyboard('12')
+    await expect.element(inputField).toHaveDisplayValue('12')
+
+    await userEvent.keyboard(',')
+    await expect.element(inputField).toHaveDisplayValue('12.')
+
+    await userEvent.keyboard('3')
+    await expect.element(inputField).toHaveDisplayValue('12.3')
+  })
+
+  it('should call function to prevent submitting by text-inputs', async () => {
+    // https://vitest.dev/guide/browser/#limitations
+    vi.mock('./../../common/functions', { spy: true })
+    const screen = await renderWithProvider(<HallOfFame/>)
+    const formField = screen.getByTitle('Mark value').query()
+
+    await formField?.focus()
+    await userEvent.keyboard('{Enter}')
+
+    expect(formField).toBeInTheDocument()
+    expect(preventReloadByEnter).toHaveBeenCalled()
+    expect(preventReloadByEnter).toHaveReturnedWith(true)
   })
 })
