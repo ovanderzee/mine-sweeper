@@ -1,5 +1,5 @@
-import { DEFAULTS } from  './defaults'
-import { AppConfig, AppSubConfig } from './app.d'
+import { DEFAULTS, NORMAL } from  './defaults'
+import { AppConfig, AppSubConfig, AppSession, AppSubSession } from './app.d'
 import { GameState, ScoreItem } from './game.d'
 import { refineScores, stripScores } from './scoring'
 
@@ -28,6 +28,26 @@ const storage = {
       const complete = { ...this.config, ...data }
       const storeable = JSON.stringify(complete)
       localStorage.setItem('mv-config', storeable)
+    }
+  },
+
+  get session(): AppSession {
+    const stored = sessionStorage.getItem('mv-session')
+    let data: AppSession
+    try {
+      const updatable: AppSubSession = stored ? JSON.parse(stored) : {}
+      data = { ...NORMAL, ...updatable }
+    } catch {
+      console.error('Invalid session found, setting to normal values...')
+      data = NORMAL
+    }
+    return data
+  },
+  set session(data: AppSubSession) {
+    if (data) {
+      const complete = { ...this.session, ...data }
+      const storeable = JSON.stringify(complete)
+      sessionStorage.setItem('mv-session', storeable)
     }
   },
 

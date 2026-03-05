@@ -38,6 +38,22 @@ export interface AppConfig {
   PLAYER_NAME: string;
 }
 
+export enum BoardFit {
+  NORMAL = '',
+  CONTAIN = 'contain',
+  COVER = 'cover',
+}
+
+export type AppSubSession = {
+  MAGNIFICATION?: number;
+  BOARD_FIT?: BoardFit;
+}
+
+export interface AppSession {
+  MAGNIFICATION: number;
+  BOARD_FIT: BoardFit;
+}
+
 export interface PageState {
   render: React.ReactElement;
   config: AppConfig;
@@ -48,6 +64,7 @@ export interface PageContextProps {
   render: React.ReactElement | null,
   navigate: (component: React.ReactElement) => void,
   config: AppConfig,
+  session: AppSession,
   text: Translation,
   configure: (changesObject?: AppSubConfig) => void
 }

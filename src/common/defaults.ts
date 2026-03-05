@@ -1,5 +1,5 @@
 import { texts, currentLanguage } from './i18n'
-import { AppCheckConfig } from './app.d'
+import { AppCheckConfig, BoardFit } from './app.d'
 
 export const GAME_DIVISOR = 30
 
@@ -18,4 +18,7 @@ export const DEFAULTS = {
   MAX_SCORES: 999,
 }
 
-export default DEFAULTS
+export const NORMAL = {
+  MAGNIFICATION: 1,
+  BOARD_FIT: BoardFit.NORMAL,
+}
