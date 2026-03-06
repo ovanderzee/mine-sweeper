@@ -6,7 +6,7 @@ import { microConfig, scoringConfig } from './../../__mocks__/configs'
 import { newGameState, playingGameState, lostGameState, decidedGameState } from './../../__mocks__/game-states'
 import { blank41pct } from './../../__mocks__/game-states'
 import { CellState } from './../../common/game.d'
-import { DEFAULTS } from  './../../common/defaults'
+import { DEFAULTS, NORMAL } from  './../../common/defaults'
 import { getFillDistribution } from './../../common/scoring'
 import storage from './../../common/storage'
 import Game from './Game'
@@ -18,7 +18,7 @@ describe('Game dimensions', () => {
   })
 
   it('should create a game with default properties', async () => {
-    await renderWithContext(<Game />, { config: DEFAULTS })
+    await renderWithContext(<Game />, { config: DEFAULTS, session: NORMAL })
     const cells = storage.game?.board.flat() || []
     expect(cells.length).toBe(36)
 
@@ -27,7 +27,7 @@ describe('Game dimensions', () => {
   })
 
   it('should create a game with micro config properties', async () => {
-    await renderWithContext(<Game />, { config: microConfig })
+    await renderWithContext(<Game />, { config: microConfig, session: NORMAL })
     const cells = storage.game?.board.flat() || []
     expect(cells.length).toBe(9)
 
