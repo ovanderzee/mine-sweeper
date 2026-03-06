@@ -105,8 +105,8 @@
   vertical-align: -14%;
 }
 
-article:not(.contain-screen):not(.cover-screen) #reset-fit,
-.contain-screen #contain-fit,
-.cover-screen #cover-fit {
+.normal-board #reset-fit,
+.contain-board #contain-fit,
+.cover-board #cover-fit {
   display: none;
 }

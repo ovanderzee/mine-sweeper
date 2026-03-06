@@ -40,7 +40,7 @@ section.screen,
   font-size: calc(8em / var(--board-size));
 }
 
-#playground.cover-screen + nav {
+#playground.cover-board + nav {
   font-size: 50%;
 }
 

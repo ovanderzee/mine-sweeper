@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
 import PageContext from './page-context'
-import { DEFAULTS, calculateMineCount } from '../common/defaults'
+import { DEFAULTS, calculateMineCount, NORMAL } from '../common/defaults'
 import { texts } from '../common/i18n'
 import storage from '../common/storage'
-import { AppConfig, AppSubConfig, PageContextProps, Translation } from '../common/app.d'
+import { AppConfig, AppSubConfig, AppSession, AppSubSession, PageContextProps, Translation } from '../common/app.d'
 
 /**
  * Wrapper to make Page available
@@ -14,11 +14,13 @@ const PageProvider = (props: { children: React.ReactNode }) => {
   const defaultPageState = {
     render: null as unknown as React.ReactElement,
     config: null as unknown as AppConfig,
+    session: null as unknown as AppSession,
     text: {} as Translation
   }
 
-  const { config } = storage
+  const { config, session } = storage
   defaultPageState.config = config
+  defaultPageState.session = session
   defaultPageState.text = texts[config.LANGUAGE]
 
   const [pageState, setPageState] = useState(defaultPageState)
@@ -51,12 +53,28 @@ const PageProvider = (props: { children: React.ReactNode }) => {
     })
   }
 
+  const updSessionHandler = (changes: AppSubSession = NORMAL) => {
+    setPageState(prev => {
+      const update = {
+        ...prev,
+        session: {
+          ...prev.session,
+          ...changes,
+        }
+      }
+      storage.session = update.session
+      return update
+    })
+  }
+
   const pageCtx: PageContextProps = {
     render: pageState.render,
     navigate: navigationHandler,
     config: pageState.config,
+    session: pageState.session,
     text: pageState.text,
     configure: configurationHandler,
+    updSession: updSessionHandler,
   }
 
   return (

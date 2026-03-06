@@ -39,7 +39,7 @@ export interface AppConfig {
 }
 
 export enum BoardFit {
-  NORMAL = '',
+  NORMAL = 'normal',
   CONTAIN = 'contain',
   COVER = 'cover',
 }
@@ -67,6 +67,7 @@ export interface PageContextProps {
   session: AppSession,
   text: Translation,
   configure: (changesObject?: AppSubConfig) => void
+  updSession: (changesObject?: AppSubSession) => void
 }
 
 export type Primitive = string | number
