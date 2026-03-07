@@ -4,13 +4,15 @@ ol {
 }
 
 ol button {
-  --small-size: 86%;
+  --small-size: 75%;
+  --radius: 1ex;
 
   display: block;
   width: 100%;
   margin-block: 1em;
   background: transparent;
   border: none;
+  border-radius: var(--radius);
 }
 
 ol button header,
@@ -18,12 +20,11 @@ ol button article {
   display: flex;
 }
 ol button header {
-  margin-inline-start: calc(var(--radius) / -2);
   align-items: baseline;
 }
 ol button article {
   justify-content: space-between;
-  align-items: last baseline;
+  column-gap: .6em;
 }
 ol button.super article {
   margin-block-start: -.333em;
@@ -79,25 +80,31 @@ ol button:not(.super) header .date {
 ol button article .points {
   flex: 0 0 3.75em;
   font-weight: bold;
+  padding-block-start: .5em;
 }
 
-ol button article .unit {
+ol button article .group {
   display: flex;
   flex: 1 1 auto;
   flex-direction: column;
+  align-items: stretch;
+  justify-content: end;
   font-size: var(--small-size);
   line-height: 1.2;
 }
 
-ol button[aria-label~=latest] {
-  --radius: 1ex;
+ol button article .unit {
+  display: flex;
+  align-items: last baseline;
+  justify-content: space-between;
+}
 
+ol button[aria-label~=latest] {
   outline: 1.5px solid var(--dark-blue);
   outline-offset: .5ex;
-  border-radius: var(--radius);
   background: linear-gradient(105deg, var(--light-blue), var(--medium-blue), var(--dark-blue));
-  margin-block: 1em;
   padding: calc(var(--radius) / 2) var(--radius);
+  margin-block: 1em;
 }
 ol button[aria-label~=latest] .date {
   align-self: start;
@@ -113,44 +120,42 @@ ol button[aria-label~=latest] * {
   display: block;
   width: 100%;
   background: var(--light-blue);
-  border-block-end: 1.5px solid var(--medium-blue);
-  border-spacing: 0;
+  outline: 1px solid var(--medium-blue);
   box-sizing: content-box;
   margin-inline: calc(-1 * var(--screen-gutter));
   padding-block: calc(.5 * var(--screen-gutter));
   padding-inline: var(--screen-gutter);
 }
 
-.legend tbody {
-  display: table;
-  width: 100%;
+.legend div.controls {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 1em;
+  align-items: baseline;
+  width: min-content;
+  margin-inline: auto;
 }
 
-.legend button {
-  font-weight: bold;
-  background: transparent;
-  border-style: solid;
-  border-color: transparent;
-  border-inline-width: 3px;
-  border-block-width: 0;
-  border-radius: .5ex;
-  padding: 0 .333ex .333ex .333ex;
-  line-height: 1;
+.legend label {
+  grid-column: 1;
+  justify-self: end;
 }
 
-.legend.rank .rank,
-.legend.user .user,
-.legend.date .date,
-.legend.points .points,
-.legend.efficiency .efficiency,
-.legend.speed .speed,
-.legend.mines .mines,
-.legend.level .level,
-.legend.cells .cells,
-.legend.moves .moves,
-.legend.duration .duration {
-  color: var(--state-red);
-  border-color: var(--state-red);
+.legend select,
+.legend .mark {
+  grid-column: 2;
+  width: 12em;
+}
+
+.legend div.mark {
+  display: flex;
+  justify-content: space-between;
+  gap: 0 .5em;
+}
+
+.legend .mark select {
+  flex: 1 0 auto;
+  width: auto;
 }
 
 .legend.rank ~ ol .rank,

@@ -37,18 +37,6 @@ dialog.ending {
   min-height: 1em;
 }
 
-.dialog-body button {
-  margin: 0.5em;
-  line-height: 2.3em;
-  padding: 0 1em;
-  border: 0 none;
-  border-radius: 0.5em;
-  color: white;
-  text-shadow: -0.02em -0.05em black, 0.008em 0.02em var(--light-blue);
-  box-shadow: -0.02em -0.05em 0.1em black, 0.05em 0.02em 0.5em white;
-  background: var(--medium-to-dark-blue);
-}
-
 .dialog-body button:first-child {
   margin-left: inherit;
   margin-right: auto;
@@ -57,12 +45,6 @@ dialog.ending {
 .dialog-body button:last-child {
   margin-left: auto;
   margin-right: inherit;
-}
-
-.dialog-body button.cancel {
-  background: var(--light-to-medium-blue);
-  color: black;
-  text-shadow: -0.02em -0.05em white, 0.008em 0.02em var(--light-blue);
 }
 
 /* CLASSES */

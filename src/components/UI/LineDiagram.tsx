@@ -1,18 +1,20 @@
 import { useContext } from 'react'
 import PageContext from '../../store/page-context'
-import { ScoreParam, FlatScore } from '../../common/game.d'
+import { ScoreParam, FlatScore, MarkScoreData } from '../../common/game.d'
 import { precise } from '../../common/scoring'
 import './LineDiagram.css'
 
 interface Coordinate {
   x: number,
-  y: number
+  y: number,
+  mark?: string,
 }
 
 interface LineDiagramProps {
   data: FlatScore[],
   xParam: ScoreParam,
   yParam: ScoreParam,
+  markData: MarkScoreData | null,
 }
 
 const findAverage = (sequence: number[]): number => {
@@ -33,7 +35,7 @@ const findMedian = (sequence: number[]): number => {
 const calcBoundingAxis = (highest: number) => {
   const exponent = Math.floor(Math.log10(highest)) - 1
   const dataScale = Math.pow(10, exponent)
-  return Math.ceil(highest / dataScale) * dataScale
+  return precise(Math.ceil(highest / dataScale) * dataScale, 4)
 }
 
 const LineDiagram = (props: LineDiagramProps) => {
@@ -41,7 +43,18 @@ const LineDiagram = (props: LineDiagramProps) => {
   const text = pageCtx.text
 
   const coordinates: Coordinate[] = props.data.map((flat: FlatScore) => {
-    return { x: flat[props.xParam], y: flat[props.yParam] }
+    let isMarked = false;
+    const toMark = () => {
+      switch (props.markData?.operate) {
+        case '<': return flat[props.markData?.param] < props.markData?.quant
+        case '≤': return flat[props.markData?.param] <= props.markData?.quant
+        case '=': return flat[props.markData?.param] === props.markData?.quant
+        case '≥': return flat[props.markData?.param] >= props.markData?.quant
+        case '>': return flat[props.markData?.param] > props.markData?.quant
+      }
+    }
+    if (props?.markData) isMarked = Boolean(toMark())
+    return { x: flat[props.xParam], y: flat[props.yParam], mark: isMarked ? 'mark' : ''}
   })
 
   const avg: Coordinate = {
@@ -81,9 +94,11 @@ const LineDiagram = (props: LineDiagramProps) => {
     >
       <g className="legenda">
         <line x1="0" y1={graphSize.y} x2={graphSize.x} y2={graphSize.y} />
-        <text x="0" y={graphSize.y} dx="20" dy={lgdSpace * .9} textAnchor="middle">{text.VAR[props.xParam]} &rarr;</text>
+        <text x="0" y={graphSize.y} dx="20" dy={lgdSpace * .9} textAnchor="middle" data-testid="x-parameter"
+          >{text.VAR[props.xParam]} &rarr;</text>
         <line x1="0" y1="0" x2="0" y2={graphSize.y} />
-        <text x={-graphSize.y} y="0" dx="20" dy={lgdSpace * -.8} transform="rotate(-90)" textAnchor="middle">{text.VAR[props.yParam]} &rarr;</text>
+        <text x={-graphSize.y} y="0" dx="20" dy={lgdSpace * -.8} transform="rotate(-90)" textAnchor="middle" data-testid="y-parameter"
+          >{text.VAR[props.yParam]} &rarr;</text>
 
         <text x={graphSize.x} y={graphSize.y} dy="120" textAnchor="end" style={{fontSize: '133%'}}>
           {coordinates.length} {text.fame['won games']}, {text.fame['median']}: {med.x}, {text.fame['average']}: {avg.x}
@@ -118,7 +133,7 @@ const LineDiagram = (props: LineDiagramProps) => {
       </g>
       <g className="data-points">
         {coordinates.map((d, i) =>
-          <g className="data-point" key={`lnd_group_${i}`}
+          <g className={`data-point ${d.mark}`} key={`lnd_group_${i}`}
             transform={`translate(${d.x * dataScale.x}, ${(axisMax.y - d.y) * dataScale.y})`}
           >
             <path d={`M ${-crossLegSize}, 0 ${crossLegSize}, 0 M 0,${-crossLegSize} 0, ${crossLegSize}`} key={`lnd_path_${i}`} />

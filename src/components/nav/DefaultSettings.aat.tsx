@@ -1,10 +1,9 @@
 
-import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { RenderResult } from 'vitest-browser-react'
 import { renderWithProvider, renderWithContext } from './../../__mocks__/aat-helpers'
 import { microConfig, defaultChallengeConfig } from './../../__mocks__/configs'
 import { newGameState, playingGameState, lostGameState, wonGameState } from './../../__mocks__/game-states'
-import DEFAULTS from './../../common/defaults'
+import { DEFAULTS } from  './../../common/defaults'
 import storage from './../../common/storage'
 import { GameState } from './../../common/game.d'
 import { AppConfig } from './../../common/app.d'

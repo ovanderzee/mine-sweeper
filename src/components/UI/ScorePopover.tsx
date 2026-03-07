@@ -7,7 +7,13 @@ import ElasticBrace from './ElasticBrace'
 import { precise } from '../../common/scoring'
 import './ScorePopover.css'
 
-const ScorePopover = (props: {score: ScoreItem | null}) => {
+interface ScorePopoverProps {
+  score: ScoreItem | null
+  delete: (time: number) => void
+  replay: (code: string) => void
+}
+
+const ScorePopover = (props: ScorePopoverProps) => {
   const pageCtx = useContext(PageContext)
   const text = pageCtx.text
   const log = props.score
@@ -93,7 +99,7 @@ const ScorePopover = (props: {score: ScoreItem | null}) => {
         <section className="group">
           <h5>{text.fame['characteristics']}</h5>
           <div className="unit">
-            <small>{text.fame['effort']}</small>
+            <small>{text.VAR['effort']}</small>
             <span>{log.game.effort.least} - {log.game.effort.most}</span>
           </div>
         </section>
@@ -118,14 +124,18 @@ const ScorePopover = (props: {score: ScoreItem | null}) => {
           </div>
         </section>
       </article>
-      <footer>
-        <button type="button"
-          onClick={() => alert(`rank ${log.rank}`)}
-        >{log.user}</button>
+      <footer className="buttons">
+        <button type="button" className="delete"
+          popoverTarget="score-popover" popoverTargetAction="hide"
+          onClick={() => props.delete(log.date)}
+        >{text.common.delete}</button>
+        <button type="button" className="replay"
+          popoverTarget="score-popover" popoverTargetAction="hide"
+          onClick={() => props.replay(log.code)}
+        >{text.nav.Replay}</button>
       </footer>
     </figure>
   )
-
 }
 
 export default ScorePopover

@@ -1,9 +1,10 @@
-import { beforeEach, describe, expect, it } from 'vitest'
 import { RenderResult } from 'vitest-browser-react'
-import { Locator } from 'vitest/browser'
-import { renderWithProvider } from './../../__mocks__/aat-helpers'
+import { Locator, userEvent } from 'vitest/browser'
+import { renderWithProvider, renderWithContext, renderWithApp } from './../../__mocks__/aat-helpers'
 import { liveScores } from './../../__mocks__/scores'
 import storage from './../../common/storage'
+import { preventReloadByEnter } from './../../common/functions'
+import { sequenceFillData } from './../../common/scoring'
 import { ScoreItem } from './../../common/game.d'
 import HallOfFame from './HallOfFame'
 
@@ -88,7 +89,7 @@ describe('The hall-of-fame-page scores', () => {
     // appear
     const firstButton = buttons.first()
     await firstButton.click()
-    const popoverIdentifier = popover.getByText(/required turns/i)
+    const popoverIdentifier = popover.getByText(/req\. turns/i)
     const firstPoints = storage.scores[0].score.points.toString()
     const firstText = firstButton.getByText(firstPoints, { exact: true })
 
@@ -99,7 +100,7 @@ describe('The hall-of-fame-page scores', () => {
     // overwrite
     const lastButton = buttons.last()
     await lastButton.click()
-    const popoverIdentifier2 = popover.getByText(/required turns/i)
+    const popoverIdentifier2 = popover.getByText(/req\. turns/i)
     const lastPoints = storage.scores[buttons.length - 1].score.points.toString()
     const lastText = lastButton.getByText(lastPoints, { exact: true })
 
@@ -116,7 +117,7 @@ describe('The hall-of-fame-page scores', () => {
 
 describe('The hall-of-fame-page list sorting', () => {
   let screen: RenderResult,
-    panel: Locator,
+    selectX: Locator,
     items: Locator
 
   const firstItem = (qs: string): HTMLElement | null | undefined => items.first().query()?.querySelector(qs)
@@ -128,7 +129,7 @@ describe('The hall-of-fame-page list sorting', () => {
   beforeEach(async () => {
     storage.scores = liveScores as ScoreItem[]
     screen = await renderWithProvider(<HallOfFame/>)
-    panel = screen.getByRole('table')
+    selectX = screen.getByLabelText('show')
     items = screen.getByRole('list').getByRole('button')
   })
 
@@ -138,7 +139,7 @@ describe('The hall-of-fame-page list sorting', () => {
     const uniqueUsers = [...new Set(scoreUsers)]
     const worstUser = uniqueUsers[uniqueUsers.length - 1]
 
-    await panel.getByText('user').click()
+    await userEvent.selectOptions(selectX, 'user')
 
     const bestUser = firstEntry('.user')
     const bestUserBest = firstEntry('.points')
@@ -150,7 +151,7 @@ describe('The hall-of-fame-page list sorting', () => {
   })
 
   it('should sort on date descending', async () => {
-    await panel.getByText('date').click()
+    await userEvent.selectOptions(selectX, 'date')
 
     const recent = firstItem('.date')?.dataset.date
     const early = lastItem('.date')?.dataset.date
@@ -159,7 +160,7 @@ describe('The hall-of-fame-page list sorting', () => {
   })
 
   it('should sort on rank ascending', async () => {
-    await panel.getByText('rank').click()
+    await userEvent.selectOptions(selectX, 'rank')
 
     const best = items.first().getByRole('heading').getByRole('img').getByText('1')
     const worst = items.last().getByRole('heading', { name: liveScores.length.toString() })
@@ -168,68 +169,180 @@ describe('The hall-of-fame-page list sorting', () => {
     expect(worst).toBeInTheDocument()
   })
 
-  it.skip('should sort on efficiency descending', async () => {
-    await panel.getByText('efficiency').click()
+  it('should sort on efficiency descending', async () => {
+    await userEvent.selectOptions(selectX, 'efficiency')
 
-    const best = firstEntry('.efficiency')
-    const worst = lastEntry('.efficiency')
+    const best = firstEntry('.efficiency :last-child')
+    const worst = lastEntry('.efficiency :last-child')
 
     expect(Number(best)).toBeGreaterThan(Number(worst))
   })
 
+  it('should sort on speed descending', async () => {
+    await userEvent.selectOptions(selectX, 'speed')
 
-  it.skip('should sort on speed descending', async () => {
-    await panel.getByText('speed').click()
-
-    const best = firstEntry('.speed')
-    const worst = lastEntry('.speed')
+    const best = firstEntry('.speed :last-child')
+    const worst = lastEntry('.speed :last-child')
 
     expect(Number(best)).toBeGreaterThan(Number(worst))
   })
 
   it('should sort on level descending', async () => {
-    await panel.getByText('level').click()
+    await userEvent.selectOptions(selectX, 'level')
 
-    const best = firstEntry('.level')
-    const worst = lastEntry('.level')
+    const best = firstEntry('.level :last-child')
+    const worst = lastEntry('.level :last-child')
 
     expect(Number(best)).toBeGreaterThan(Number(worst))
   })
 
   it('should sort on mines ascending', async () => {
-    await panel.getByText('mines').click()
+    await userEvent.selectOptions(selectX, 'mines')
 
-    const best = firstEntry('.mines')
-    const worst = lastEntry('.mines')
+    const best = firstEntry('.mines :last-child')
+    const worst = lastEntry('.mines :last-child')
 
     expect(Number(best)).toBeLessThan(Number(worst))
   })
 
   it('should sort on fields ascending', async () => {
-    await panel.getByText('fields').click()
+    await userEvent.selectOptions(selectX, 'fields')
 
-    const best = firstEntry('.cells')
-    const worst = lastEntry('.cells')
+    const best = firstEntry('.cells :last-child')
+    const worst = lastEntry('.cells :last-child')
 
     expect(Number(best)).toBeLessThan(Number(worst))
   })
 
   it('should sort on turns ascending', async () => {
-    await panel.getByText('turns').click()
+    await userEvent.selectOptions(selectX, 'turns')
 
-    const best = firstEntry('.moves')
-    const worst = lastEntry('.moves')
+    const best = firstEntry('.moves :last-child')
+    const worst = lastEntry('.moves :last-child')
 
     expect(Number(best)).toBeLessThan(Number(worst))
   })
 
   it('should sort on duration ascending', async () => {
-    await panel.getByText('duration').click()
+    await userEvent.selectOptions(selectX, 'duration')
 
-    const best = firstEntry('.duration')
-    const worst = lastEntry('.duration')
+    const best = firstEntry('.duration :last-child')
+    const worst = lastEntry('.duration :last-child')
 
     expect(parseFloat(best || '0')).toBeLessThan(parseFloat(worst || '0'))
   })
+})
 
+describe('The hall-of-fame-page x- and y-axis', () => {
+  let screen: RenderResult,
+    selectX: Locator,
+    selectY: Locator,
+    legendX: Locator,
+    legendY: Locator
+
+  beforeEach(async () => {
+    storage.scores = liveScores as ScoreItem[]
+    screen = await renderWithProvider(<HallOfFame/>)
+    selectX = screen.getByLabelText('show')
+    selectY = screen.getByLabelText('against')
+    legendX = screen.getByRole('document').getByTestId('x-parameter')
+    legendY = screen.getByRole('document').getByTestId('y-parameter')
+  })
+
+  it('should change parameter for x-axis', async () => {
+    await expect.element(legendX).toHaveTextContent('rank')
+    await userEvent.selectOptions(selectX, 'efficiency')
+    await expect.element(legendX).toHaveTextContent('efficiency')
+  })
+
+  it('should change parameter for y-axis', async () => {
+    await expect.element(legendY).toHaveTextContent('points')
+    await userEvent.selectOptions(selectY, 'turns')
+    await expect.element(legendY).toHaveTextContent('turns')
+  })
+})
+
+describe('The hall-of-fame-page popover buttons', () => {
+
+  it('should delete one score with button in popover', async () => {
+    const screen = await renderWithProvider(<HallOfFame/>)
+    const scoresCount = storage.scores.length
+
+    const firstListButton = screen.getByRole('list').getByRole('button').first()
+    await firstListButton.click()
+    const popover = screen.getByRole('status')
+    const deleteButton = popover.getByRole('button').getByText('Delete')
+    await deleteButton.click()
+
+    expect(popover).not.toBeInTheDocument()
+    expect(storage.scores.length).toBe(scoresCount - 1)
+  })
+
+  it('should replay with button in popover', async () => {
+    const screen = await renderWithApp('HallOfFame')
+
+    const firstListButton = screen.getByRole('list').getByRole('button').first()
+    await firstListButton.click()
+    const popover = screen.getByRole('status')
+    const replayButton = popover.getByRole('button').getByText('Replay')
+    await replayButton.click()
+
+    expect(popover).not.toBeInTheDocument()
+    expect(firstListButton).not.toBeInTheDocument()
+    // arrive at game
+    const gridArea = screen.getByRole('grid')
+    expect(gridArea).toBeInTheDocument()
+
+    const boardFromScore = sequenceFillData(storage.scores[0].code)[0]
+    const boardFromGame = storage.game!.board ? storage.game!.board : null
+    expect(boardFromScore).toStrictEqual(boardFromGame)
+  })
+})
+
+describe('Marking data', () => {
+
+  it('should accept numbers broken with dot as input', async () => {
+    const screen = await renderWithContext(<HallOfFame/>)
+    const inputField = screen.getByTitle('Mark value').query()
+    await inputField?.focus()
+
+//     await userEvent.clear(inputField), werkt niet
+    await userEvent.keyboard('12')
+    await expect.element(inputField).toHaveDisplayValue('12')
+
+    await userEvent.keyboard('.')
+    await expect.element(inputField).toHaveDisplayValue('12.')
+
+    await userEvent.keyboard('3')
+    await expect.element(inputField).toHaveDisplayValue('12.3')
+  })
+
+  it('should accept numbers broken with comma as input', async () => {
+    const screen = await renderWithContext(<HallOfFame/>)
+    const inputField = screen.getByTitle('Mark value').query()
+    await inputField?.focus()
+
+    await userEvent.keyboard('12')
+    await expect.element(inputField).toHaveDisplayValue('12')
+
+    await userEvent.keyboard(',')
+    await expect.element(inputField).toHaveDisplayValue('12.')
+
+    await userEvent.keyboard('3')
+    await expect.element(inputField).toHaveDisplayValue('12.3')
+  })
+
+  it('should call function to prevent submitting by text-inputs', async () => {
+    // https://vitest.dev/guide/browser/#limitations
+    vi.mock('./../../common/functions', { spy: true })
+    const screen = await renderWithProvider(<HallOfFame/>)
+    const formField = screen.getByTitle('Mark value').query()
+
+    await formField?.focus()
+    await userEvent.keyboard('{Enter}')
+
+    expect(formField).toBeInTheDocument()
+    expect(preventReloadByEnter).toHaveBeenCalled()
+    expect(preventReloadByEnter).toHaveReturnedWith(true)
+  })
 })

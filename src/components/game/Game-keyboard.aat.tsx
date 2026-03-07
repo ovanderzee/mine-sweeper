@@ -1,4 +1,3 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { Locator, userEvent } from 'vitest/browser'
 import { RenderResult } from 'vitest-browser-react'
 import { renderWithApp } from './../../__mocks__/aat-helpers'
@@ -18,44 +17,43 @@ describe('GameCell keystrokes', () => {
     storage.config = microConfig
     storage.game = newGameState
     screen = await renderWithApp()
-    button = screen.getByRole('gridcell').first()
+    button = screen.getByRole('gridcell').nth(4)
     await button.element().focus()
   })
 
   it('should stop propagation for own "Enter" key', async () => {
-    await vi.waitFor(() => userEvent.keyboard('{Enter}'))
+    await userEvent.keyboard('{Enter}')
     expect(flipFocus).not.toHaveBeenCalled()
   })
 
   it('should stop propagation for own "Spacebar" key', async () => {
-    await vi.waitFor(() => userEvent.keyboard(' '))
+    await userEvent.keyboard(' ')
     expect(flipFocus).not.toHaveBeenCalled()
   })
 
-  // TODO does not work for arrows; all expections fail for ArrowUp and ArrowLeft
-  it.skip('should stop propagation for own "ArrowUp" key', async () => {
+  it('should stop propagation for own "ArrowUp" key', async () => {
     await userEvent.keyboard('{arrowUp}')
-    await vi.waitFor(() => expect(flipFocus).not.toHaveBeenCalled())
+    expect(flipFocus).not.toHaveBeenCalled()
   })
 
   it('should stop propagation for own "ArrowRight" key', async () => {
     await userEvent.keyboard('{ArrowRight}')
-    await vi.waitFor(() => expect(flipFocus).not.toHaveBeenCalled())
+    expect(flipFocus).not.toHaveBeenCalled()
   })
 
   it('should stop propagation for own "ArrowDown" key', async () => {
     await userEvent.keyboard('{ArrowDown}')
-    await vi.waitFor(() => expect(flipFocus).not.toHaveBeenCalled())
+    expect(flipFocus).not.toHaveBeenCalled()
   })
 
-  it.skip('should stop propagation for own "ArrowLeft" key', async () => {
+  it('should stop propagation for own "ArrowLeft" key', async () => {
     await userEvent.keyboard('{ArrowLeft}')
-    await vi.waitFor(() => expect(flipFocus).not.toHaveBeenCalled())
+    expect(flipFocus).not.toHaveBeenCalled()
   })
 
-  it('should delegate unregistered keysdowns to listeners up the dom tree', async () => {
+  it('should delegate unregistered key-downs to listeners up the dom tree', async () => {
     await userEvent.keyboard('_')
-    await vi.waitFor(() => expect(flipFocus).toHaveBeenCalled())
+    expect(flipFocus).toHaveBeenCalled()
   })
 })
 
@@ -75,45 +73,45 @@ describe('navigate gameboard by keyboard', () => {
   it('should accept arrowUp key to activate upper cells ', async () => {
     await userEvent.keyboard('{ArrowUp}')
     const upButton = gameButtons.nth(1)
-    await vi.waitFor(() => expect(upButton.element()).toBe(document.activeElement))
+    await expect.element(upButton).toBe(document.activeElement)
     // one more up, hit the edge, no change
     await userEvent.keyboard('{ArrowUp}')
     const edgeButton = gameButtons.nth(1)
-    await vi.waitFor(() => expect(edgeButton.element()).toBe(document.activeElement))
+    await expect.element(edgeButton).toBe(document.activeElement)
     expect(edgeButton).toStrictEqual(upButton)
   })
 
   it('should accept arrowRight keys to activate right cells', async () => {
     await userEvent.keyboard('{arrowRight}')
-    const fwdButton = gameButtons.nth(5)
-    await vi.waitFor(() => expect(fwdButton.element()).toBe(document.activeElement))
+    const rightButton = gameButtons.nth(5)
+    await expect.element(rightButton).toBe(document.activeElement)
     // one more up, hit the edge, no change
     await userEvent.keyboard('{arrowRight}')
     const edgeButton = gameButtons.nth(5)
-    await vi.waitFor(() => expect(edgeButton.element()).toBe(document.activeElement))
-    expect(edgeButton).toStrictEqual(fwdButton)
+    await expect.element(edgeButton).toBe(document.activeElement)
+    expect(edgeButton).toStrictEqual(rightButton)
   })
 
   it('should accept ArrowDown keys to activate lower cells', async () => {
     await userEvent.keyboard('{ArrowDown}')
     const downButton = gameButtons.nth(7)
-    await vi.waitFor(() => expect(downButton.element()).toBe(document.activeElement))
+    await expect.element(downButton).toBe(document.activeElement)
     // one more up, hit the edge, no change
     await userEvent.keyboard('{ArrowDown}')
     const edgeButton = gameButtons.nth(7)
-    await vi.waitFor(() => expect(edgeButton.element()).toBe(document.activeElement))
+    await expect.element(edgeButton).toBe(document.activeElement)
     expect(edgeButton).toStrictEqual(downButton)
   })
 
   it('should accept ArrowLeft keys to activate left cells', async () => {
     await userEvent.keyboard('{ArrowLeft}')
-    const rewButton = gameButtons.nth(3)
-    await vi.waitFor(() => expect(rewButton.element()).toBe(document.activeElement))
+    const leftButton = gameButtons.nth(3)
+    await expect.element(leftButton).toBe(document.activeElement)
     // one more up, hit the edge, no change
     await userEvent.keyboard('{ArrowLeft}')
     const edgeButton = gameButtons.nth(3)
-    await vi.waitFor(() => expect(edgeButton.element()).toBe(document.activeElement))
-    expect(edgeButton).toStrictEqual(rewButton)
+    await expect.element(edgeButton).toBe(document.activeElement)
+    expect(edgeButton).toStrictEqual(leftButton)
   })
 
 })

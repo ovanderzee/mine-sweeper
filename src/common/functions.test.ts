@@ -1,4 +1,3 @@
-import { vi } from 'vitest'
 import React from 'react'
 import { preventReloadByEnter, scrollIntoViewTowardsCenter } from './functions'
 

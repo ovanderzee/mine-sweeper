@@ -4,7 +4,8 @@
     "mine sweeper": "mine sweeper",
     "Mines": "Mines",
     "confirm": "OK",
-    "cancel": "Cancel"
+    "cancel": "Cancel",
+    "delete": "Delete"
   },
   "config": {
     "default player": "anonymous"
@@ -55,14 +56,19 @@
     "Number %n in %s sort": "Number %n by %s",
     "median": "median",
     "average": "average",
-    "effort": "required turns",
     "least": "least",
     "most": "most",
     "detail-label": "Details of chosen score",
     "configuration": "configuration",
     "characteristics": "characteristics",
     "game-play": "game play",
-    "result": "result"
+    "result": "result",
+    "sort": "show",
+    "versus": "against",
+    "mark": "mark",
+    "mark-parameter": "Mark parameter",
+    "mark-relation": "Mark relation",
+    "mark-value": "Mark value"
   },
   "VAR": {
     "rank": "rank",
@@ -74,6 +80,7 @@
     "level": "level",
     "cells": "fields",
     "mines": "mines",
+    "effort": "req. turns",
     "moves": "turns",
     "duration": "duration"
   },

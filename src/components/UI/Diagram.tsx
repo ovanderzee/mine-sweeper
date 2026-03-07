@@ -1,10 +1,11 @@
-import { ScoreItem, ScoreParam, FlatScore } from '../../common/game.d'
+import { ScoreItem, ScoreParam, FlatScore, MarkScoreData } from '../../common/game.d'
 import LineDiagram from './LineDiagram'
 
 interface DiagramProps {
   scores: ScoreItem[],
   xParam: ScoreParam,
   yParam: ScoreParam,
+  markData: MarkScoreData | null,
 }
 
 const Diagram = (props: DiagramProps) => {
@@ -29,7 +30,7 @@ const Diagram = (props: DiagramProps) => {
     const yType = typeof flatScores[0][props.yParam]
 
     if (xType === 'number' && yType === 'number') {
-      return (<LineDiagram data={flatScores} xParam={props.xParam} yParam={props.yParam} />)
+      return (<LineDiagram data={flatScores} xParam={props.xParam} yParam={props.yParam} markData={props.markData} />)
     }
   }
   return svgDiagram()

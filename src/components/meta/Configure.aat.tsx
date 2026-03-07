@@ -1,7 +1,6 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { userEvent } from 'vitest/browser'
 import { RenderResult } from 'vitest-browser-react'
-import DEFAULTS from './../../common/defaults'
+import { DEFAULTS } from  './../../common/defaults'
 import storage from './../../common/storage'
 import { preventReloadByEnter } from './../../common/functions'
 import { renderWithProvider, clickRangeInputValue } from './../../__mocks__/aat-helpers'
@@ -70,8 +69,8 @@ describe('The configure controls', () => {
   it('should change the gamelevel setting', () => {
     expect(storage.config.GAME_LEVEL).toBe(3)
     const range = screen.getByLabelText('Gamelevel')
-    clickRangeInputValue(range.element() as HTMLInputElement, '6')
-    expect(storage.config.GAME_LEVEL).toBe(6)
+    clickRangeInputValue(range.element() as HTMLInputElement, '5')
+    expect(storage.config.GAME_LEVEL).toBe(5)
   })
 
   it('should enforce minimum gamelevel setting', () => {

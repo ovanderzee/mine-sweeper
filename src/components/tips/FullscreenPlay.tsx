@@ -1,7 +1,8 @@
-import { RefObject, useContext, useEffect, useRef, useState } from 'react'
+import { RefObject, useContext, useEffect, useRef } from 'react'
 import PageContext from '../../store/page-context'
-import { ScreenfullApi } from '../../common/app.d'
+import { ScreenfullApi, BoardFit } from '../../common/app.d'
 import screenfull, { isFullscreenAble } from '../../common/screenfull'
+import { NORMAL } from '../../common/defaults'
 import './Tips.css'
 
 interface FullscreenPlayProps {
@@ -17,7 +18,6 @@ const FullscreenPlay = (props: FullscreenPlayProps) => {
     ? [screen.availWidth, screen.availHeight]
     : [document.documentElement.clientWidth, document.documentElement.clientHeight]
   const playground = props.playgroundRef.current
-  const [magnification, setMagnification] = useState(1)
   const sfRef = useRef<ScreenfullApi | null>(null)
 
   useEffect(() => {
@@ -29,33 +29,23 @@ const FullscreenPlay = (props: FullscreenPlayProps) => {
     }
   }, [])
 
-  useEffect(() => {
-    if (!playground) return
-    playground.style.fontSize = magnification * config.FONT_SIZE + 'px'
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [magnification])
-
-  const fitToNeed = (spaceToFill: number) => {
-    setMagnification(spaceToFill / boardPxSize)
+  const fitToNeed = (spaceToFill: number, fitLabel: BoardFit) => {
+    const factor = spaceToFill / boardPxSize
+    pageCtx.updSession({ MAGNIFICATION: factor, BOARD_FIT: fitLabel })
   }
 
   const fitToContain = () => {
-    playground?.classList.add('contain-screen')
-    playground?.classList.remove('cover-screen')
     const smallestPxSize = Math.min(...canvasSizes())
-    fitToNeed(smallestPxSize)
+    fitToNeed(smallestPxSize, BoardFit.CONTAIN)
   }
 
   const fitToCover = () => {
-    playground?.classList.add('cover-screen')
-    playground?.classList.remove('contain-screen')
     const biggestPxSize = Math.max(...canvasSizes())
-    fitToNeed(biggestPxSize)
+    fitToNeed(biggestPxSize, BoardFit.COVER)
   }
 
   const resetFit = () => {
-    playground?.classList.remove('contain-screen', 'cover-screen')
-    setMagnification(1)
+    pageCtx.updSession( NORMAL )
   }
 
   useEffect(() => {

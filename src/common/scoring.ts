@@ -11,8 +11,9 @@ export const precise = (figure: number, precision: number) => Number(figure.toPr
 
 export const refineScores = (scores: ScoreItem[] | BareScoreItem[]): ScoreItem[] => {
   scores.sort((a, b) => b.score.points - a.score.points)
-  return scores.map((score, index) => {
-    score.rank = 1 + index
+  const points = scores.map(s => s.score.points)
+  return scores.map(score => {
+    score.rank = points.findIndex(points => points === score.score.points) + 1
     if (!score.level) score.level = +score.code.charAt(2)
     return score
   }) as ScoreItem[]

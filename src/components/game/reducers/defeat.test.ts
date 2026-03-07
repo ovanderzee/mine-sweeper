@@ -1,5 +1,4 @@
 import { defeatReducer } from './defeat'
-import { vi } from 'vitest'
 import { CellStateStage, CellState } from '../../../common/game.d'
 import { playingGameState, lostGameState } from '../../../__mocks__/game-states'
 import storage from '../../../common/storage'

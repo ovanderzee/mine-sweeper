@@ -89,6 +89,45 @@ button {
   font-weight: 500;
 }
 
+.buttons button {
+  margin: 0.5em;
+  line-height: 0;
+  padding: 1.1em 1em;
+  border: 0 none;
+  border-radius: 0.5em;
+  box-shadow: -0.02em -0.05em 0.1em black, 0.05em 0.02em 0.5em white;
+}
+
+button.confirm {
+  background: var(--medium-to-dark-blue);
+  color: white;
+  text-shadow: -0.02em -0.05em black, 0.008em 0.02em var(--light-blue);
+}
+
+button.cancel {
+  background: var(--light-to-medium-blue);
+  color: black;
+  text-shadow: -0.02em -0.05em white, 0.008em 0.02em var(--light-blue);
+}
+
+button.delete {
+  color: white;
+  background: var(--state-red);
+
+  &:hover {
+    background: linear-gradient(var(--fire-red), var(--state-red));
+  }
+}
+
+button.replay {
+  color: white;
+  background: var(--dark-blue);
+
+  &:hover {
+    background: linear-gradient(var(--medium-blue), var(--dark-blue));
+  }
+}
+
 h1, h2, .h2, h3, .h3, h4, h5, .h5, h6, dl, p, ol, ul {
   margin-block: 1ex;
   line-height: 133%;
@@ -126,7 +165,7 @@ nav,
   z-index: 0;
 }
 
-#root:has(#game .game-lost) {
+#root:has(#playground .game-lost) {
   /* prevent scrollbars when mines explode */
   overflow: hidden;
 }
@@ -144,6 +183,8 @@ svg[aria-hidden] {
   height: 0;
   overflow: hidden;
 }
+
+/* SCREEN READER */
 
 .sr-only {
   position: absolute;

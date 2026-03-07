@@ -20,33 +20,16 @@ const deleteScoresByUser = function (user: string) {
   setAllScores(userScores)
 }
 
-const updateStorageWithSampleScores = (): void => {
+const addSampleScores = (): void => {
   // prevent duplication: check code and timestamp
   const newScores = liveScores.filter(l => !storage.scores.some(s => s.code === l.code && s.date === l.date))
   const updatedScores = [ ...storage.scores, ...newScores ]
   setAllScores(updatedScores)
 }
 
-const deleteStoredSampleScores = (): void => {
+const deleteSampleScores = (): void => {
   const newScores = storage.scores.filter(s => !liveScores.some(l => s.code === l.code && s.date === l.date))
   setAllScores(newScores)
-}
-
-const deleteOneScoreItem = (user: string, points: number): void => {
-  // TODO Flatscores
-  const allScores = storage.scores
-  const deletables = allScores.filter(score => score.user === user && score.score.points === points)
-
-  if (!deletables.length) {
-    alert(`No results found for user "${user}" with ${points} points`)
-  } else {
-    const deletable = deletables[0]
-    if (confirm(`Delete ${JSON.stringify(deletable, null, 2)}?`)) {
-      const removeIndex = allScores.findIndex(item => item === deletable);
-      allScores.splice(removeIndex, 1)
-      setAllScores(allScores)
-    }
-  }
 }
 
 export default {
@@ -54,7 +37,6 @@ export default {
   setAllScores,
   getScoresByUser ,
   deleteScoresByUser,
-  updateStorageWithSampleScores,
-  deleteStoredSampleScores,
-  deleteOneScoreItem,
+  addSampleScores,
+  deleteSampleScores,
 }

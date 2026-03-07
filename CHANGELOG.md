@@ -8,47 +8,73 @@
 - Debt after porting tests to vitest, see TODOs and it.skip
 - Look at disabled 'set-state-in-effect' and 'exhaustive-deps'
 - added click listeners on range-inputs to test them, remove when vitest/browser starts supporting change listeners on inputs
-- Vitest lacks support for pointerup/down, how to test longpress to flag cells
+- Vitest lacks support for pointerup/down, how to test longpress to flag cells?
+- Random timeouts in first vi.waitFor of renderWithApp function
 
 ### Features
 - Playmode Tough: Play without flags or mine counters
 - Playmode Risky: Win or loose when flag count equals mine count
 - Pause button, correct time on unpause
 - Routing on gamecode, about, config and hiscores
-- Replay game from High Scores (when routing)
 - Save a game on a new list page (with comment)
-- Show gamelevel and number of neighbouring mines in graph
+- Show number of neighbouring mines in graph
 - Calculate coagulation (mine-mine borders | blank to mine ratio)
 - Eliminate outliers in graph
 - Remember last touched game cell, as starting point for move with arrow key
 - Store board magnification in sessionStorage
-- Remove too easy 3*3 and 4*4 boards and levels 1 and 6
 - Refine levels with intermediate values, maybe by percentage
+- Backspace to open random cells
+- Open/close mark section
+- Tests on marking
+- Consent for ending playing game and changing the config when replaying from score list
 
 
 ## [next]
 
-### Changed
-- Revise context to satisfy lint rules and apply a better filename
-- Refined game-won shield
-- Refined game-lost animation
-- Keep rank out of storage
+
+## [3.8.0] - 2026-03-07
+
+### Added
+- Analyse scores by marking ranges of score parameters
+- Score threshold for marking
+- Persist board magnification in session
 
 ### Fixed
-- Prevent the board from jumping while tabbing.
+- Suppress scrollbars when game is lost
+- Attended test stability
 
 
-## [3.6.1] - 2026-01-03
+## [3.7.0] - 2026-02-11
+
+### Added
+- Individual scores can be deleted in Score popover
+- Replay game from Score popover
+
+### Changed
+- Compose Diagram by a dropdown for the x- and y-axis
+- Score ListItems
+- Equal ranks for equal points
+
+### Removed
+- Removed too easy 3*3 and 4*4 boards and levels 1 and 6
+
+
+## [3.6.1] - 2026-01-12
 
 ### Changed
 - Refined ARIA roles on Game screen
 - Focus new-game button after winning or losing, for keyboard users
 - The Game screen buttonbar will show functionality first, then screen navigation, like on the other screens
 - Alt+Tab will visit the toolbar in Game screen
+- Conform page-provider to lint rules
+- Refined game-won shield
+- Refined game-lost animation
+- Keep rank out of storage
 
 ### Fixed
 - The exploding mine animation is no longer clipped
 - Toggling Fullscreen mode will keep on working when mixing up app UI and browser UI
+- Prevent the board from jumping while tabbing.
 
 
 ## [3.6.0] - 2025-12-30

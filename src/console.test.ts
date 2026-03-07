@@ -1,4 +1,3 @@
-import { vi } from 'vitest'
 import storage from './common/storage'
 import * as scoring from './common/scoring'
 import mv from './console'
@@ -77,7 +76,7 @@ describe('Console methods mixing mocks and stored scores', () => {
   it('should add all the sample records', () => {
     storage.scores = []
 
-    mv.updateStorageWithSampleScores()
+    mv.addSampleScores()
 
     expect(storage.scores.length).toBe(liveScores.length)
   })
@@ -85,7 +84,7 @@ describe('Console methods mixing mocks and stored scores', () => {
   it('should not duplicate existing sample records', () => {
     storage.scores = [liveScores[0], liveScores[liveScores.length-1]] as ScoreItem[]
 
-    mv.updateStorageWithSampleScores()
+    mv.addSampleScores()
 
     expect(storage.scores.length).toBe(liveScores.length)
   })
@@ -93,7 +92,7 @@ describe('Console methods mixing mocks and stored scores', () => {
   it('should remove all the sample records and leave the original scores', () => {
     const originalScore = testScore()
     storage.scores = [ originalScore, ...liveScores ] as ScoreItem[]
-    mv.deleteStoredSampleScores()
+    mv.deleteSampleScores()
 
     // storage.scores[0] is successor of originalScore
     expect(storage.scores[0].code).toBe(originalScore.code)
@@ -102,27 +101,4 @@ describe('Console methods mixing mocks and stored scores', () => {
     expect(storage.scores.length).toBe(1)
   })
 
-  it('should remove one score by username and scored points', () => {
-    storage.scores = liveScores as ScoreItem[]
-    window.alert = vi.fn()
-    window.confirm = vi.fn(() => true)
-
-    mv.deleteOneScoreItem(liveScores[2].user, liveScores[2].score.points)
-
-    expect(window.alert).not.toHaveBeenCalled()
-    expect(window.confirm).toHaveBeenCalled()
-    expect(storage.scores.length).toBe(liveScores.length - 1)
-  })
-
-  it('should not remove a bad username - scored points match', () => {
-    storage.scores = liveScores as ScoreItem[]
-    window.alert = vi.fn()
-    window.confirm = vi.fn(() => true)
-
-    mv.deleteOneScoreItem(liveScores[2].user, liveScores[99].score.points)
-
-    expect(window.alert).toHaveBeenCalled()
-    expect(window.confirm).not.toHaveBeenCalled()
-    expect(storage.scores.length).toBe(liveScores.length)
-  })
 })

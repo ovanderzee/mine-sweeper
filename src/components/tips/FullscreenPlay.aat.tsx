@@ -1,6 +1,6 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { RenderResult } from 'vitest-browser-react'
 import { renderWithApp } from './../../__mocks__/aat-helpers'
+import { NORMAL } from  './../../common/defaults'
 
 describe('FullscreenPlay Component', () => {
 
@@ -11,6 +11,7 @@ describe('FullscreenPlay Component', () => {
   const defaultPixelFontSize = 15
 
   beforeEach(async () => {
+    sessionStorage.setItem('mv-session', JSON.stringify(NORMAL))
     screen = await renderWithApp()
     playgroundElement = document.getElementById('playground') as HTMLDivElement
   })
@@ -75,18 +76,18 @@ describe('FullscreenPlay Component', () => {
 
     it('should not magnify and show other view options', async () => {
       const containFit = screen.getByTitle('Have all cells visible')
-      const revertFit = screen.getByTitle('Revert magnification')
-
       await containFit.click()
+
+      const revertFit = screen.getByTitle('Revert magnification')
       await revertFit.click()
 
       const pxFontSize = window.getComputedStyle(playgroundElement).fontSize
       // pxFontSize 15px
       expect(parseInt(pxFontSize)).toBe(defaultPixelFontSize)
 
-      expect(revertFit).not.toBeVisible()
+      expect(screen.getByTitle('Revert magnification')).not.toBeVisible()
       expect(screen.getByTitle('Fill screen with cells')).toBeVisible()
-      expect(containFit).toBeVisible()
+      expect(screen.getByTitle('Have all cells visible')).toBeVisible()
     })
 
   })

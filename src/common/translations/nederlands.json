@@ -4,7 +4,8 @@
     "mine sweeper": "mijnen veger",
     "Mines": "Mijnen",
     "confirm": "Oké",
-    "cancel": "Annuleer"
+    "cancel": "Annuleer",
+    "delete": "Verwijder"
   },
   "config": {
     "default player": "anoniem"
@@ -55,14 +56,19 @@
     "Number %n in %s sort": "%s nr. %n",
     "median": "mediaan",
     "average": "gemiddeld",
-    "effort": "nodige zetten",
     "least": "minste",
     "most": "meeste",
     "detail-label": "Details gekozen score",
     "configuration": "configuratie",
     "characteristics": "kenmerken",
     "game-play": "spelverloop",
-    "result": "resultaat"
+    "result": "resultaat",
+    "sort": "toon",
+    "versus": "tegen",
+    "mark": "merk",
+    "mark-parameter": "Merk parameter",
+    "mark-relation": "Merk relatie",
+    "mark-value": "Merk waarde"
   },
   "VAR": {
     "rank": "rang",
@@ -74,6 +80,7 @@
     "level": "nivo",
     "cells": "velden",
     "mines": "mijnen",
+    "effort": "min. zetten",
     "moves": "zetten",
     "duration": "duur"
   },

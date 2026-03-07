@@ -1,5 +1,5 @@
 import { texts, currentLanguage } from './i18n'
-import { AppCheckConfig } from './app.d'
+import { AppCheckConfig, BoardFit } from './app.d'
 
 export const GAME_DIVISOR = 30
 
@@ -8,7 +8,7 @@ export const calculateMineCount = ((cfg: AppCheckConfig): number => {
   return Math.ceil(approx)
 })
 
-const DEFAULTS = {
+export const DEFAULTS = {
   BOARD_SIZE: 6,
   GAME_LEVEL: 3,
   MINE_COUNT: Math.ceil(6 * 6 * 3 / 30),
@@ -18,4 +18,7 @@ const DEFAULTS = {
   MAX_SCORES: 999,
 }
 
-export default DEFAULTS
+export const NORMAL = {
+  MAGNIFICATION: 1,
+  BOARD_FIT: BoardFit.NORMAL,
+}

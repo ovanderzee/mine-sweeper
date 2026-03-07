@@ -1,11 +1,11 @@
 import React from 'react'
-import { expect, vi } from 'vitest'
 import { Locator } from 'vitest/browser'
 import { render, RenderResult } from 'vitest-browser-react'
 import PageContext from './../store/page-context'
 import PageProvider from './../store/PageProvider'
 import { Languages } from '../common/app.d'
-import DEFAULTS from './../common/defaults'
+import { DEFAULTS } from  './../common/defaults'
+import { FADE_OUT_TIME } from './../common/constants'
 import storage from '../common/storage'
 import { texts } from './../common/i18n'
 import AllSymbols from './../components/UI/AllSymbols'
@@ -67,17 +67,18 @@ export const renderWithApp = async (name: string = 'Game'): Promise<RenderResult
   const skipBtn = screen.getByText('skip to game')
   await skipBtn.click()
 
-  let title: string
+  let title = ''
   switch (name) {
     case 'About':       title = 'Description'; break;
     case 'HallOfFame':  title = 'Hall of Fame'; break;
     case 'Configure':   title = 'Settings'; break;
   }
 
-  await vi.waitFor(async () => {
-    await expect.element(skipBtn).not.toBeInTheDocument()
-    if (title) await screen.getByTitle(title).click()
-  })
+  // fadeout introducing animation
+  vi.advanceTimersByTime(FADE_OUT_TIME * 1.1)
+
+  await expect.element(skipBtn).not.toBeInTheDocument()
+  if (title) await screen.getByTitle(title).click()
 
   let heading = 'Playground'
   switch (name) {
@@ -86,9 +87,7 @@ export const renderWithApp = async (name: string = 'Game'): Promise<RenderResult
     case 'Configure':   heading = 'Settings'; break;
   }
 
-  await vi.waitFor(async () =>
-    await expect.element(screen.getByRole('heading', {name: heading})).toBeInTheDocument()
-  )
+  await expect.element(screen.getByRole('heading', {name: heading})).toBeInTheDocument()
 
   return screen
 }
