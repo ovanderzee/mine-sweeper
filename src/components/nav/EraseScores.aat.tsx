@@ -1,5 +1,4 @@
 
-import { beforeEach, describe, expect, it, vi } from 'vitest'
 import EraseScores from './EraseScores'
 import { ScoreItem } from './../../common/game.d'
 import storage from '../../common/storage'

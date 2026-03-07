@@ -1,4 +1,3 @@
-import { vi } from 'vitest'
 import storage from './storage'
 import { DEFAULTS } from  './defaults'
 import { GameState, ScoreItem } from './game.d'

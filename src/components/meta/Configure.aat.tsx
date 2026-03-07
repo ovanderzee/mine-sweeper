@@ -1,4 +1,3 @@
-import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { userEvent } from 'vitest/browser'
 import { RenderResult } from 'vitest-browser-react'
 import { DEFAULTS } from  './../../common/defaults'

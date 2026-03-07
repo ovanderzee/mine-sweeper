@@ -1,5 +1,4 @@
 
-import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { RenderResult } from 'vitest-browser-react'
 import { renderWithProvider, renderWithContext } from './../../__mocks__/aat-helpers'
 import { microConfig, defaultChallengeConfig } from './../../__mocks__/configs'

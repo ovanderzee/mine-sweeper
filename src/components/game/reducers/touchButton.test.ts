@@ -1,4 +1,3 @@
-import { vi } from 'vitest'
 import { touchButtonReducer } from './touchButton'
 import { newGameState, playingGameState } from '../../../__mocks__/game-states'
 import { microConfig } from '../../../__mocks__/configs'

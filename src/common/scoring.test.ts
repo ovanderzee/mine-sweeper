@@ -1,4 +1,3 @@
-import { vi } from 'vitest'
 import {
   clickBlankAreas, clickRemainingPointers,
   leastClicksToWin, mostClicksToWin,

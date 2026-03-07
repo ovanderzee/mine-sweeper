@@ -1,5 +1,4 @@
 import React from 'react'
-import { beforeEach, describe, expect, it, vi } from 'vitest'
 import { userEvent } from 'vitest/browser'
 import cellStates from './../../__mocks__/cell-states'
 import { renderWithProvider } from './../../__mocks__/aat-helpers'

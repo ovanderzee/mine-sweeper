@@ -24,6 +24,7 @@ export default defineConfig({
         test: {
           include: ['src/**/*.aat.tsx'],
           name: 'aat',
+          globals: true,
           browser: {
             enabled: true,
             provider: webdriverio(),

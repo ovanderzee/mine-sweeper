@@ -1,5 +1,4 @@
 import React from 'react'
-import { expect, vi } from 'vitest'
 import { Locator } from 'vitest/browser'
 import { render, RenderResult } from 'vitest-browser-react'
 import PageContext from './../store/page-context'

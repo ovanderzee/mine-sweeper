@@ -1,4 +1,3 @@
-import { vi } from 'vitest'
 import storage from './common/storage'
 import * as scoring from './common/scoring'
 import mv from './console'
