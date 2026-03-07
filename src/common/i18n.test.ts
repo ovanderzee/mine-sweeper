@@ -1,3 +1,4 @@
+import { MockInstance } from 'vitest'
 import * as i18n from './i18n'
 
 describe('infer language from navigator.languages array', () => {
