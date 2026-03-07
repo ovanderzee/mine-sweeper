@@ -28,11 +28,20 @@
 - Tests on marking
 - Consent for ending playing game and changing the config when replaying from score list
 
+
 ## [next]
+
+
+## [3.8.0] - 2026-03-07
 
 ### Added
 - Analyse scores by marking ranges of score parameters
 - Score threshold for marking
+- Persist board magnification in session
+
+### Fixed
+- Suppress scrollbars when game is lost
+- Attended test stability
 
 
 ## [3.7.0] - 2026-02-11
