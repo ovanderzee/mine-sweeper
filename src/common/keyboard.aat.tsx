@@ -2,7 +2,7 @@ import { Locator, userEvent } from 'vitest/browser'
 import { RenderResult } from 'vitest-browser-react'
 import { renderWithApp } from './../__mocks__/aat-helpers'
 import { liveScores } from '../__mocks__/scores'
-import { flipFocus, focusFirstNavButton } from './functions'
+import { rootKeyListener, focusFirstNavButton } from './functions'
 import storage from './storage'
 import { ScoreItem } from './game.d'
 
@@ -22,13 +22,13 @@ describe('Flip focus', () => {
 
       // await userEvent.tab({ alt: true })
       await userEvent.keyboard('{Alt>}{Tab}{/Alt}')
-      expect(flipFocus).toHaveBeenCalled()
+      expect(rootKeyListener).toHaveBeenCalled()
       // the second cell gets focus, instead of the first
       // await expect.element(screen.getByRole('main').getByRole('slider').first()).toBe(document.activeElement)
       await expect.element(screen.getByRole('main')).toContain(document.activeElement)
 
       await userEvent.keyboard('{Alt>}{Tab}{/Alt}')
-      expect(flipFocus).toHaveBeenCalled()
+      expect(rootKeyListener).toHaveBeenCalled()
       // the second button gets focus, instead of the first
       // await expect.element(screen.getByRole('navigation').getByRole('button').first()).toBe(document.activeElement)
       await expect.element(screen.getByRole('navigation')).toContain(document.activeElement)
@@ -47,7 +47,7 @@ describe('Flip focus', () => {
       const navButton = screen.getByRole('navigation').getByTitle('Description')
       await navButton.element().focus()
       expect(navButton).toHaveFocus()
-      flipFocus(altTabEvent)
+      rootKeyListener(altTabEvent)
 
       await vi.waitFor(async () => {
         await expect.element(screen.getByRole('gridcell').first()).toBe(document.activeElement)
@@ -58,7 +58,7 @@ describe('Flip focus', () => {
       const boardCell = screen.getByRole('gridcell').first()
       await boardCell.element().focus()
       expect(boardCell).toHaveFocus()
-      flipFocus(altTabEvent)
+      rootKeyListener(altTabEvent)
 
       await vi.waitFor(async () => {
         await expect.element(screen.getByRole('toolbar').getByRole('button').first()).toBe(document.activeElement)
@@ -70,7 +70,7 @@ describe('Flip focus', () => {
       const toolButton = screen.getByRole('toolbar').getByRole('button').first()
       await toolButton.element().focus()
       expect(toolButton).toHaveFocus()
-      flipFocus(altTabEvent)
+      rootKeyListener(altTabEvent)
 
       await vi.waitFor(async () => {
         await expect.element(screen.getByRole('navigation').getByRole('button').first()).toBe(document.activeElement)
@@ -92,7 +92,7 @@ describe('Flip focus', () => {
       const navButton = screen.getByRole('navigation').getByTitle('Description')
       await navButton.element().focus()
       expect(navButton).toHaveFocus()
-      flipFocus(altTabEvent)
+      rootKeyListener(altTabEvent)
 
       await vi.waitFor(async () => {
         await expect.element(screen.getByRole('main').getByRole('slider').first()).toBe(document.activeElement)
@@ -103,7 +103,7 @@ describe('Flip focus', () => {
       const mainInput = screen.getByRole('main').getByLabelText('Gamelevel')
       await mainInput.element().focus()
       expect(mainInput).toHaveFocus()
-      flipFocus(altTabEvent)
+      rootKeyListener(altTabEvent)
 
       await vi.waitFor(async () => {
         await expect.element(screen.getByRole('navigation').getByRole('button').first()).toBe(document.activeElement)
@@ -126,7 +126,7 @@ describe('Flip focus', () => {
       const mainButton = screen.getByRole('main').getByRole('button').last()
       await mainButton.element().focus()
       expect(mainButton).toHaveFocus()
-      flipFocus(altTabEvent)
+      rootKeyListener(altTabEvent)
 
       await vi.waitFor(async () => {
         await expect.element(screen.getByRole('navigation').getByRole('button').first()).toBe(document.activeElement)
@@ -158,7 +158,7 @@ describe('Flip focus', () => {
     it('should move focus from a control to first control', async () => {
       aButton?.element().focus()
       expect(aButton).toHaveFocus()
-      flipFocus(altTabEvent)
+      rootKeyListener(altTabEvent)
 
       expect(firstButton).toHaveFocus()
     })
@@ -166,7 +166,7 @@ describe('Flip focus', () => {
     it('should move focus from last control to first control', async () => {
       lastButton?.element().focus()
       expect(lastButton).toHaveFocus()
-      flipFocus(altTabEvent)
+      rootKeyListener(altTabEvent)
 
       expect(firstButton).toHaveFocus()
     })
@@ -174,7 +174,7 @@ describe('Flip focus', () => {
     it('should move focus from first control to last control', async () => {
       firstButton?.element().focus()
       expect(firstButton).toHaveFocus()
-      flipFocus(altTabEvent)
+      rootKeyListener(altTabEvent)
 
       expect(lastButton).toHaveFocus()
     })

@@ -20,10 +20,7 @@ export const scrollIntoViewTowardsCenter = (elem: HTMLElement) => {
 
 export const interactionSelectors = 'input, select, textarea, button, object, a, area[href], [tabindex]'
 
-export const flipFocus = function (event: KeyboardEvent) {
-  if (event.altKey && event.key === 'Tab') {
-    event.stopPropagation()
-
+const flipFocus = () => {
     const mainArea = document.querySelector('section.screen > article')
     const boardArea = document.querySelector('section.screen > article > [role=grid]')
     const tipsArea = document.querySelector('section.screen > article > [role=toolbar]')
@@ -52,7 +49,16 @@ export const flipFocus = function (event: KeyboardEvent) {
     }
 
     if (focusable) focusable.focus()
+}
+
+export const rootKeyListener = (event: KeyboardEvent) => {
+  event.stopPropagation()
+  if (!event.altKey) return
+
+  switch (event.key) {
+    case 'Tab': flipFocus(); break
   }
+
 }
 
 export const focusFirstNavButton = () => {

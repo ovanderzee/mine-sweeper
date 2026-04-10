@@ -2,7 +2,7 @@ import Introduction from './UI/Introduction'
 import { useContext, useEffect, useState } from 'react'
 import Game from './game/Game'
 import PageContext from '../store/page-context'
-import { flipFocus } from '../common/functions'
+import { rootKeyListener } from '../common/functions'
 
 function PageRoot() {
   const pageCtx = useContext(PageContext)
@@ -19,10 +19,10 @@ function PageRoot() {
   const introLayer = <Introduction onEnd={goToGame} />
 
   useEffect(() => {
-    document.body.addEventListener('keydown', flipFocus)
+    document.body.addEventListener('keydown', rootKeyListener)
 
     return () => {
-      document.body.removeEventListener('keydown', flipFocus)
+      document.body.removeEventListener('keydown', rootKeyListener)
     }
   }, [])
 
