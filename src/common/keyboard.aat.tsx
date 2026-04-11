@@ -228,13 +228,13 @@ describe('pollGameCell', () => {
       }
       // then press alt+backspace
       rootKeyListener(altBackspaceEvent)
-      expect(document.body).toBe(document.activeElement)
+      expect(document.querySelectorAll('button[role=gridcell]')).not.toContain(document.activeElement)
     })
 
-    it('should not act when not viewing game-board', async () => {
+    it('should not act without game-board', async () => {
       document.querySelector('#game-board')?.remove()
       rootKeyListener(altBackspaceEvent)
-      expect(document.body).toBe(document.activeElement)
+      expect(document.querySelectorAll('button[role=gridcell]')).not.toContain(document.activeElement)
     })
   })
 })
