@@ -79,7 +79,6 @@ describe('Flip focus', () => {
     })
   })
 
-
   describe('between controls in main and navigation landmarks, Configure screen', () => {
     let
       screen: RenderResult
@@ -112,7 +111,6 @@ describe('Flip focus', () => {
     })
   })
 
-
   describe('between controls in main and navigation landmarks, Hall of Fame screen', () => {
     let
       screen: RenderResult
@@ -134,7 +132,6 @@ describe('Flip focus', () => {
        })
     })
   })
-
 
   describe('between available controls at about page', () => {
     let
@@ -181,6 +178,7 @@ describe('Flip focus', () => {
   })
 })
 
+
 describe('focusFirstNavButton', () => {
   it('should move focus to first button in navigation landmark', async () => {
     const screen = await renderWithApp()
@@ -191,3 +189,53 @@ describe('focusFirstNavButton', () => {
     expect(firstNavButton).toHaveFocus()
   })
 })
+
+
+describe('pollGameCell', () => {
+  const altBackspaceEvent = {
+    altKey: true, bubbles: true, charCode: 0, code: "Backspace", isTrusted: true,
+    key: "Backspace", keyCode: 8, stopPropagation: () => {}, type: "keydown"
+  } as KeyboardEvent
+
+  describe('on page screen', () => {
+    let
+      screen: RenderResult,
+      gameBoard: Locator
+
+    beforeEach(async () => {
+      screen = await renderWithApp()
+      expect(document.body).toBe(document.activeElement)
+      gameBoard = screen.getByRole('grid')
+    })
+
+    it('should focus and open a random cell', async () => {
+      rootKeyListener(altBackspaceEvent)
+      await expect.element(gameBoard).toContain(document.activeElement)
+      const targetButton = document.activeElement as HTMLElement
+
+      expect(targetButton.id).toMatch(/row\dcol\d/i)
+      await expect.element(targetButton).toHaveClass('touched')
+      await expect.element(targetButton).toHaveFocus()
+    })
+
+    it('should not act when game ended', async () => {
+      // first end the game
+      const gameCells = gameBoard.getByRole('gridcell').elements()
+      for (const cell of gameCells) {
+        await cell.focus()
+        await userEvent.keyboard('{Enter}')
+        await cell.blur()
+      }
+      // then press alt+backspace
+      rootKeyListener(altBackspaceEvent)
+      expect(document.body).toBe(document.activeElement)
+    })
+
+    it('should not act when not viewing game-board', async () => {
+      document.querySelector('#game-board')?.remove()
+      rootKeyListener(altBackspaceEvent)
+      expect(document.body).toBe(document.activeElement)
+    })
+  })
+})
+

@@ -18,6 +18,19 @@ export const scrollIntoViewTowardsCenter = (elem: HTMLElement) => {
   }
 }
 
+const accessibleClick = (element: HTMLElement) => {
+  element.focus()
+  const event = new KeyboardEvent('keydown', {
+    key: 'Enter',
+    code: 'Enter',
+    keyCode: 13,
+    bubbles: true,
+    cancelable: true
+  })
+
+  element.dispatchEvent(event)
+}
+
 export const interactionSelectors = 'input, select, textarea, button, object, a, area[href], [tabindex]'
 
 const flipFocus = () => {
@@ -51,14 +64,26 @@ const flipFocus = () => {
     if (focusable) focusable.focus()
 }
 
+const pollGameCell = (): void => {
+  if (!document.querySelector('#game-board')) return
+
+  const pristineCells = document.querySelectorAll('.pristine')
+  const pristineCellCount = pristineCells.length
+  if (!pristineCellCount) return
+
+  const sequenceNumber = Math.floor(Math.random() * pristineCellCount)
+  const randomCell = pristineCells[sequenceNumber] as HTMLElement
+  accessibleClick(randomCell)
+}
+
 export const rootKeyListener = (event: KeyboardEvent) => {
   event.stopPropagation()
   if (!event.altKey) return
 
   switch (event.key) {
     case 'Tab': flipFocus(); break
+    case 'Backspace': pollGameCell(); break
   }
-
 }
 
 export const focusFirstNavButton = () => {
