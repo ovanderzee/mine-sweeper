@@ -47,11 +47,13 @@ export enum BoardFit {
 export type AppSubSession = {
   MAGNIFICATION?: number;
   BOARD_FIT?: BoardFit;
+  ACTIVE_CELL_ID?: string;
 }
 
 export interface AppSession {
   MAGNIFICATION: number;
   BOARD_FIT: BoardFit;
+  ACTIVE_CELL_ID?: string;
 }
 
 export interface PageState {

@@ -21,7 +21,7 @@ const Game = () => {
   const pageCtx = useContext(PageContext)
   const text = pageCtx.text
   const { BOARD_SIZE, FONT_SIZE } = pageCtx.config
-  const { MAGNIFICATION, BOARD_FIT } = pageCtx.session
+  const { MAGNIFICATION, BOARD_FIT, ACTIVE_CELL_ID } = pageCtx.session
 
   const [gameState, dispatchGameAction] = useReducer(
     gameReducer.bind(pageCtx.config),
@@ -42,6 +42,11 @@ const Game = () => {
         dispatchGameAction(action)
       }
     }
+    if (gameState.stage === GameStages.PLAYING) {
+      const cell = document.querySelector('#' + ACTIVE_CELL_ID) as HTMLElement
+      cell?.focus()
+    }
+
     return () => {
       const action: GameAction = { type: GameActionType.STORE}
       dispatchGameAction(action)
