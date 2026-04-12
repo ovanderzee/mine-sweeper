@@ -18,12 +18,22 @@ export const scrollIntoViewTowardsCenter = (elem: HTMLElement) => {
   }
 }
 
+const accessibleClick = (element: HTMLElement) => {
+  element.focus()
+  const event = new KeyboardEvent('keydown', {
+    key: 'Enter',
+    code: 'Enter',
+    keyCode: 13,
+    bubbles: true,
+    cancelable: true
+  })
+
+  element.dispatchEvent(event)
+}
+
 export const interactionSelectors = 'input, select, textarea, button, object, a, area[href], [tabindex]'
 
-export const flipFocus = function (event: KeyboardEvent) {
-  if (event.altKey && event.key === 'Tab') {
-    event.stopPropagation()
-
+const flipFocus = () => {
     const mainArea = document.querySelector('section.screen > article')
     const boardArea = document.querySelector('section.screen > article > [role=grid]')
     const tipsArea = document.querySelector('section.screen > article > [role=toolbar]')
@@ -52,6 +62,27 @@ export const flipFocus = function (event: KeyboardEvent) {
     }
 
     if (focusable) focusable.focus()
+}
+
+const pollGameCell = (): void => {
+  if (!document.querySelector('#game-board')) return
+
+  const pristineCells = document.querySelectorAll('.pristine')
+  const pristineCellCount = pristineCells.length
+  if (!pristineCellCount) return
+
+  const sequenceNumber = Math.floor(Math.random() * pristineCellCount)
+  const randomCell = pristineCells[sequenceNumber] as HTMLElement
+  accessibleClick(randomCell)
+}
+
+export const rootKeyListener = (event: KeyboardEvent) => {
+  event.stopPropagation()
+  if (!event.altKey) return
+
+  switch (event.key) {
+    case 'Tab': flipFocus(); break
+    case 'Backspace': pollGameCell(); break
   }
 }
 

@@ -3,8 +3,12 @@ dl {
   text-align: left;
 }
 
-dl {
+dl.icons {
   --term-width: 2.5em;
+}
+
+dl.keys {
+  --term-width: 5em;
 }
 
 dt, dd {

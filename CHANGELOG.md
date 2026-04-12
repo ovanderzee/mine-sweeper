@@ -23,13 +23,18 @@
 - Remember last touched game cell, as starting point for move with arrow key
 - Store board magnification in sessionStorage
 - Refine levels with intermediate values, maybe by percentage
-- Backspace to open random cells
 - Open/close mark section
 - Tests on marking
 - Consent for ending playing game and changing the config when replaying from score list
 
 
 ## [next]
+
+
+## [3.9.0] - 2026-04
+
+### Added
+- Polling random cells to start playing
 
 
 ## [3.8.0] - 2026-03-07

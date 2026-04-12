@@ -3,7 +3,7 @@ import { RenderResult } from 'vitest-browser-react'
 import { renderWithApp } from './../../__mocks__/aat-helpers'
 import { newGameState, playingGameState } from './../../__mocks__/game-states'
 import { microConfig } from './../../__mocks__/configs'
-import { flipFocus } from '../../common/functions'
+import { rootKeyListener } from '../../common/functions'
 import storage from './../../common/storage'
 
 describe('GameCell keystrokes', () => {
@@ -23,37 +23,37 @@ describe('GameCell keystrokes', () => {
 
   it('should stop propagation for own "Enter" key', async () => {
     await userEvent.keyboard('{Enter}')
-    expect(flipFocus).not.toHaveBeenCalled()
+    expect(rootKeyListener).not.toHaveBeenCalled()
   })
 
   it('should stop propagation for own "Spacebar" key', async () => {
     await userEvent.keyboard(' ')
-    expect(flipFocus).not.toHaveBeenCalled()
+    expect(rootKeyListener).not.toHaveBeenCalled()
   })
 
   it('should stop propagation for own "ArrowUp" key', async () => {
     await userEvent.keyboard('{arrowUp}')
-    expect(flipFocus).not.toHaveBeenCalled()
+    expect(rootKeyListener).not.toHaveBeenCalled()
   })
 
   it('should stop propagation for own "ArrowRight" key', async () => {
     await userEvent.keyboard('{ArrowRight}')
-    expect(flipFocus).not.toHaveBeenCalled()
+    expect(rootKeyListener).not.toHaveBeenCalled()
   })
 
   it('should stop propagation for own "ArrowDown" key', async () => {
     await userEvent.keyboard('{ArrowDown}')
-    expect(flipFocus).not.toHaveBeenCalled()
+    expect(rootKeyListener).not.toHaveBeenCalled()
   })
 
   it('should stop propagation for own "ArrowLeft" key', async () => {
     await userEvent.keyboard('{ArrowLeft}')
-    expect(flipFocus).not.toHaveBeenCalled()
+    expect(rootKeyListener).not.toHaveBeenCalled()
   })
 
   it('should delegate unregistered key-downs to listeners up the dom tree', async () => {
     await userEvent.keyboard('_')
-    expect(flipFocus).toHaveBeenCalled()
+    expect(rootKeyListener).toHaveBeenCalled()
   })
 })
 

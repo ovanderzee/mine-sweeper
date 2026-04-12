@@ -43,12 +43,27 @@
 
     "Accessibility Heading": "Toegankelijkheid",
     "Keyboard Notice": "Op desktop en laptop kan het spel met het toetsenbord gespeeld worden. Je kunt alle interactie bereiken met de Tab en de Shift+Tab toetsaanslag.",
-    "Game Navigation": "Navigeer op het mijnenveld met de pijl-toetsen en vlag af met de spatiebalk. Bevestig een dialoog met enter op de juiste knop. Gebruik Alt+Tab (of control+option+Tab op een Mac) om van en naar de optieblak te komen.",
 
     "Cookie Heading": "Cookies",
-    "Storage Notice": "Configuratie-, spel- en scoregegevens worden op uw machine bewaard, zodat de app probleemloos werkt. U bent de enige die uw data gebruikt.",
+    "Storage Notice": "Configuratie-, spel- en scoregegevens worden op je computer bewaard, zodat de app probleemloos werkt. Jij bent de enige die je data gebruikt.",
 
     "appVersion": "app versie"
+  },
+  "key": {
+    "EndAnimationKey": "Een toets",
+    "EndAnimationText": "Beëindig Introductie",
+    "AltTabKey": "Alt-Tab",
+    "AltTabText": "Spring naar eerste interactie in hoofd of menu sectie",
+    "AltBackspaceKey": "Alt-Verwijder-Links",
+    "AltBackspaceText": "Open een cel om te beginnen",
+    "SpaceKey": "Spatiebalk",
+    "SpaceText": "Vergrendel een cel met een vlag",
+    "ArrowsKey": "Pijlen",
+    "ArrowsText": "Beweeg over het speelbord",
+    "DialogEnterKey": "Enter",
+    "DialogEnterText": "Bevestig de dialoog",
+    "DialogEscapeKey": "Escape",
+    "DialogEscapeText": "Annuleer de dialoog"
   },
   "fame": {
     "Nothing Yet": "Nog geen scores",
