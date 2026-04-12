@@ -27,7 +27,7 @@ const About = () => {
       <p>{text.help['Finalise Game']}</p>
 
       <h3>{text.help['Nav Heading']}</h3>
-      <dl>
+      <dl className="icons">
         <dt><svg role="img" aria-label={text.icon['podium']}><use href="#plain-podium" /></svg></dt><dd>{text.help['About Scores Comment']}</dd>
         <dt><svg role="img" aria-label={text.icon['play']}><use href="#plain-play" /></svg></dt><dd>{text.help['New Game Comment']}</dd>
         <dt><svg role="img" aria-label={text.icon['cw-revolving']}><use href="#plain-replay" /></svg></dt><dd>{text.help['Replay Comment']}</dd>
@@ -42,6 +42,17 @@ const About = () => {
 
       <h4>{text.help['Accessibility Heading']}</h4>
       <p>{text.help['Keyboard Notice']}</p>
+
+      <dl className="keys">
+        <dt>{text.key['EndAnimationKey']}</dt><dd>{text.key['EndAnimationText']}</dd>
+        <dt>{text.key['AltTabKey']}</dt><dd>{text.key['AltTabText']}</dd>
+        <dt>{text.key['AltBackspaceKey']}</dt><dd>{text.key['AltBackspaceText']}</dd>
+        <dt>{text.key['SpaceKey']}</dt><dd>{text.key['SpaceText']}</dd>
+        <dt>{text.key['ArrowsKey']}</dt><dd>{text.key['ArrowsText']}</dd>
+        <dt>{text.key['DialogEnterKey']}</dt><dd>{text.key['DialogEnterText']}</dd>
+        <dt>{text.key['DialogEscapeKey']}</dt><dd>{text.key['DialogEscapeText']}</dd>
+      </dl>
+
       <p>{text.help['Game Navigation']}</p>
 
       <h4>{text.help['Cookie Heading']}</h4>

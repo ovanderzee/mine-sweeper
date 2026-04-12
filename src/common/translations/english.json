@@ -43,12 +43,27 @@
 
     "Accessibility Heading": "Accessibility",
     "Keyboard Notice": "On desktop or laptop the game could be played using the keyboard. You can reach all interactions using the Tab and Shift+Tab keystrokes.",
-    "Game Navigation": "Navigate the minefield with the arrow keys and flag a mine with the spacebar. Confirm a dialog with enter on the right button. Press Alt+Tab (or control+option+Tab on Mac) to jump between content and option area.",
 
     "Cookie Heading": "Cookies",
     "Storage Notice": "Configuration, game and score data are saved on your device to ensure the app works smoothly. You are the only one using your data.",
 
     "appVersion": "app version"
+  },
+  "key": {
+    "EndAnimationKey": "Any key",
+    "EndAnimationText": "End Introduction",
+    "AltTabKey": "Alt-Tab",
+    "AltTabText": "Jump to first interaction in main or navigation section",
+    "AltBackspaceKey": "Alt-Back-space",
+    "AltBackspaceText": "OPen random cell to start playing",
+    "SpaceKey": "Spacebar",
+    "SpaceText": "Lock a cell with a flag",
+    "ArrowsKey": "Arrows",
+    "ArrowsText": "Move over the gameboard",
+    "DialogEnterKey": "Enter",
+    "DialogEnterText": "Confirm the dialog",
+    "DialogEscapeKey": "Escape",
+    "DialogEscapeText": "Cancel the dialog"
   },
   "fame": {
     "Nothing Yet": "No scores yet",
