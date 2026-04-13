@@ -102,7 +102,7 @@ const HallOfFame = () => {
   const sortByKind = function (event: React.ChangeEvent): void {
     const ctrl = event.target as HTMLSelectElement
     setSortLabel(ctrl.value as ScoreParam)
-    setScores(methodsByKind[sortLabel]())
+    setScores(methodsByKind[ctrl.value as ScoreParam]())
     window.scrollTo({top: 0, left: 0})
   }
 
