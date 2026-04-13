@@ -25,6 +25,9 @@ const GameCell = (props: GameCellProps) => {
 
   const [startTime, setStartTime] = useState(0)
 
+  const id = `row${row}col${col}`
+  const focusHandler = () => pageCtx.updSession({ ACTIVE_CELL_ID: id })
+
   /*
     A long press for toggling a flag
     A short press for opening the cell
@@ -84,7 +87,11 @@ const GameCell = (props: GameCellProps) => {
     }
   }
 
-  const id = (x: number, y: number) => `row${row + y}col${col + x}`
+  const cellById = (x: number, y: number) => {
+    const id = `row${row + y}col${col + x}`
+    const elm = document.getElementById(id)
+    return elm
+  }
 
   /*
     Keyboard input
@@ -102,16 +109,16 @@ const GameCell = (props: GameCellProps) => {
         actionHandler(GameActionType.FLAG)
         break
       case 'ArrowUp':
-        goToCell = document.getElementById(id(0, -1))
+        goToCell = cellById(0, -1)
         break
       case 'ArrowRight':
-        goToCell = document.getElementById(id(1, 0))
+        goToCell = cellById(1, 0)
         break
       case 'ArrowDown':
-        goToCell = document.getElementById(id(0, 1))
+        goToCell = cellById(0, 1)
         break
       case 'ArrowLeft':
-        goToCell = document.getElementById(id(-1, 0))
+        goToCell = cellById(-1, 0)
         break
     }
 
@@ -128,7 +135,8 @@ const GameCell = (props: GameCellProps) => {
       role="gridcell"
       aria-label={`${text.cell.row} ${row+1} ${text.cell.col} ${col+1}, ${stageLabel}`}
       className={`${doneClass} ${lockedClass} ${mineClass} ${activatedClass}`}
-      id={id(0, 0)}
+      id={id}
+      onFocus={focusHandler}
       onKeyDown={keystrokeHandler}
       onPointerDown={beginHandler}
       onPointerCancel={cancelHandler}

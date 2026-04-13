@@ -107,7 +107,7 @@ describe('Flip focus', () => {
       await vi.waitFor(async () => {
         await expect.element(screen.getByRole('navigation').getByRole('button').first()).toBe(document.activeElement)
         await expect.element(screen.getByRole('navigation').getByTitle('Revert to Defaults')).toBe(document.activeElement)
-       })
+      })
     })
   })
 
