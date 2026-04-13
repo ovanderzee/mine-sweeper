@@ -3,6 +3,7 @@ import { RenderResult } from 'vitest-browser-react'
 import { renderWithApp } from './../../__mocks__/aat-helpers'
 import { newGameState, playingGameState } from './../../__mocks__/game-states'
 import { microConfig } from './../../__mocks__/configs'
+import { NORMAL } from  './../../common/defaults'
 import { rootKeyListener } from '../../common/functions'
 import storage from './../../common/storage'
 
@@ -113,5 +114,43 @@ describe('navigate gameboard by keyboard', () => {
     await expect.element(edgeButton).toBe(document.activeElement)
     expect(edgeButton).toStrictEqual(leftButton)
   })
-
 })
+
+
+describe('Global keystrokes for accessibility', () => {
+  beforeEach(() => {
+    storage.config = microConfig
+    storage.session = { ...NORMAL, ACTIVE_CELL_ID: 'row1col2' }
+  })
+
+  it('should show a clean interface and therefore not focus the current cell in a new game', async () => {
+    storage.game = newGameState
+    await renderWithApp()
+
+    expect(document.querySelectorAll('button[role=gridcell]')).not.toContain(document.activeElement)
+  })
+
+  it('should focus the current cell in a playing game', async () => {
+    storage.game = playingGameState
+    await renderWithApp()
+
+    expect(document.querySelectorAll('button[role=gridcell]')).toContain(document.activeElement)
+  })
+
+  it('and accept Arrows to store the cell id', async () => {
+    storage.game = playingGameState
+    const screen = await renderWithApp()
+    await screen.getByRole('gridcell').first().click()
+
+    await vi.waitFor(async () => {
+      expect(storage.session['ACTIVE_CELL_ID']).toBe('row0col0')
+    })
+
+    await userEvent.keyboard('{ArrowRight}')
+
+    await vi.waitFor(async () => {
+      expect(storage.session['ACTIVE_CELL_ID']).toBe('row0col1')
+    })
+  })
+})
+

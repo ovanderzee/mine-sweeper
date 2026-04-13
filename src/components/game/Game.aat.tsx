@@ -213,7 +213,7 @@ describe('Loading the Game', () => {
 
 })
 
-describe('handle loosing and winning', () => {
+describe('Handle loosing and winning', () => {
   // can be flaky
   beforeEach(() => {
     storage.config = microConfig
