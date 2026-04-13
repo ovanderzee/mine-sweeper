@@ -8,6 +8,9 @@ import { sequenceFillData } from './../../common/scoring'
 import { ScoreItem } from './../../common/game.d'
 import HallOfFame from './HallOfFame'
 
+
+vi.mock('./../../common/functions', { spy: true })
+
 describe('The hall-of-fame page sidebar', () => {
   let screen: RenderResult
 
@@ -109,7 +112,7 @@ describe('The hall-of-fame-page scores', () => {
     expect(lastText).toBeInTheDocument()
 
     // dismiss by clicking somewhere else
-    await screen.getByRole('heading').click()
+    await screen.getByRole('heading').first().click()
 
     expect(popover).not.toBeInTheDocument()
   })
@@ -333,8 +336,6 @@ describe('Marking data', () => {
   })
 
   it('should call function to prevent submitting by text-inputs', async () => {
-    // https://vitest.dev/guide/browser/#limitations
-    vi.mock('./../../common/functions', { spy: true })
     const screen = await renderWithProvider(<HallOfFame/>)
     const formField = screen.getByTitle('Mark value').query()
 

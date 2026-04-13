@@ -7,9 +7,9 @@ import { NORMAL } from  './../../common/defaults'
 import { rootKeyListener } from '../../common/functions'
 import storage from './../../common/storage'
 
-describe('GameCell keystrokes', () => {
-  vi.mock('./../../common/functions', { spy: true })
+vi.mock('./../../common/functions', { spy: true })
 
+describe('GameCell keystrokes', () => {
   let
     screen: RenderResult,
     button: Locator

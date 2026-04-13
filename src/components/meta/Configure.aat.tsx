@@ -11,6 +11,9 @@ import { RANGES } from '../../common/constants'
 import { ScoreItem } from './../../common/game.d'
 import Configure from './Configure'
 
+// https://vitest.dev/guide/browser/#limitations
+vi.mock('./../../common/functions', { spy: true })
+
 describe('The configure page sidebar', () => {
   let screen: RenderResult
 
@@ -165,9 +168,6 @@ describe('The configure-page reset button', () => {
 })
 
 describe('The semantic form', () => {
-  // https://vitest.dev/guide/browser/#limitations
-  vi.mock('./../../common/functions', { spy: true })
-
   let
     screen: RenderResult
 
