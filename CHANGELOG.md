@@ -36,6 +36,12 @@
 - Polling random cells to start playing
 - Focus last touched game cell when returning to game view
 
+### Changed
+- Update vite, vitest and other devdependencies
+
+### Fixed
+- Improved some tests
+
 
 ## [3.8.0] - 2026-03-07
 

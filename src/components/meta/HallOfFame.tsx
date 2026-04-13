@@ -45,6 +45,7 @@ const HallOfFame = () => {
   const initialMarkData = {param: sortLabel, operate: operators[0], quant: 0}
   const [markData, setMarkData] = useState<MarkScoreData>(initialMarkData)
 
+  // @ts-expect-error // error TS2739: Type ... is missing the following properties from type 'Record<ScoreParam, () => ScoreItem[]>': play, game, effort, code, score
   const methodsByKind: Record<ScoreParam, () => ScoreItem[]> = {
     'rank': () => {
       const byRank = (a:ScoreItem, b:ScoreItem) => a.rank - b.rank
@@ -101,7 +102,7 @@ const HallOfFame = () => {
   const sortByKind = function (event: React.ChangeEvent): void {
     const ctrl = event.target as HTMLSelectElement
     setSortLabel(ctrl.value as ScoreParam)
-    setScores(methodsByKind[ctrl.value]())
+    setScores(methodsByKind[ctrl.value as ScoreParam]())
     window.scrollTo({top: 0, left: 0})
   }
 

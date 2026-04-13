@@ -67,21 +67,12 @@ describe('Game lifecycle', () => {
     expect(screen.getByRole('main')).toHaveClass('game-lost')
   })
 
-  it('should result in win after opening a the last non-mine (flaky)', async () => {
-    cells
-      .map((cell, index) => cell.fill < 9 ? index : -1)
-      .filter(i => i > -1)
-      .forEach(async (i) => {
-        let loc: Locator
-        try { // WebDriverError: stale element reference
-          loc = screen.getByRole('gridcell').nth(i)
-          if (loc) await loc.click()
-        } catch {
-          // @ts-expect-error // error TS2454: Variable 'loc' is used before being assigned.
-          console.error(`WebDriverError: stale element reference: ${JSON.stringify(loc)} (seq.nr ${i})`)
-        }
+  it('should result in win after opening a the last non-mine', async () => {
+    cells.forEach(async (cell, index) => {
+      if (cell.fill < 9) {
+        await screen.getByRole('gridcell').nth(index).click()
       }
-    )
+    })
 
     await vi.waitFor(async () => {
       expect(storage.game?.stage).toBe('game-won')
