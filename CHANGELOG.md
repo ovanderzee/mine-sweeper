@@ -20,7 +20,6 @@
 - Show number of neighbouring mines in graph
 - Calculate coagulation (mine-mine borders | blank to mine ratio)
 - Eliminate outliers in graph
-- Remember last touched game cell, as starting point for move with arrow key
 - Store board magnification in sessionStorage
 - Refine levels with intermediate values, maybe by percentage
 - Open/close mark section
@@ -35,6 +34,7 @@
 
 ### Added
 - Polling random cells to start playing
+- Focus last touched game cell when returning to game view
 
 
 ## [3.8.0] - 2026-03-07
