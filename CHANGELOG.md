@@ -30,7 +30,13 @@
 ## [next]
 
 
-## [3.9.0] - 2026-04
+## [3.9.1] - 2026-04-14
+
+### Fixed
+- CSS production build
+
+
+## [3.9.0] - 2026-04-13
 
 ### Added
 - Polling random cells to start playing
