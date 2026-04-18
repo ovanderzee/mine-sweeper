@@ -21,6 +21,7 @@ export type AppSubConfig = {
   MAX_SCORES?: number;
   MINE_COUNT?: number;
   PLAYER_NAME?: string;
+  TOUGH_MODE?: boolean;
 }
 
 export interface AppCheckConfig {
@@ -36,6 +37,7 @@ export interface AppConfig {
   MAX_SCORES: number;
   MINE_COUNT: number;
   PLAYER_NAME: string;
+  TOUGH_MODE: boolean;
 }
 
 export enum BoardFit {
