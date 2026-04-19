@@ -3,7 +3,7 @@ import { AppConfig } from '../../../common/app.d'
 import { GameState, GameStages, GameActionType, PayloadAction, CellActionData, CellStateStage, CellState, CellStateEntry } from '../../../common/game.d'
 
 export const touchButtonReducer = (state: GameState, action: PayloadAction, config: AppConfig): GameState => {
-  const { BOARD_SIZE, MINE_COUNT } = config
+  const { BOARD_SIZE, MINE_COUNT, TOUGH_MODE } = config
   const payload: CellActionData = JSON.parse(action.payload)
   const { fill, row, col } = payload.cell
   const updState = { ...state }
@@ -29,11 +29,13 @@ export const touchButtonReducer = (state: GameState, action: PayloadAction, conf
   updCell = touchCell(updCell, payload.entry)
 
   if (action.type === GameActionType.FLAG) {
-    // then entry = {locked: <Boolean>}
-    return {
-      ...updState,
-      board: updBoard,
+    if (!TOUGH_MODE) {
+      return {
+        ...updState,
+        board: updBoard,
+      }
     }
+    return state
   }
 
   /** Followup touches */

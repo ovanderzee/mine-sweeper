@@ -87,9 +87,11 @@ describe('Polling the game', () => {
     screen: RenderResult,
     fields: Locator
 
-  const getFieldByXY = (x: number, y: number): Locator | undefined => {
-    return fields?.nth((x + y * scoringConfig.BOARD_SIZE)) || ''
+  const getFieldByXY = (x: number, y: number): Locator => {
+    return fields?.nth(x + (y * scoringConfig.BOARD_SIZE))
   }
+
+  // const cellState = (x: number, y: number): CellState | undefined => storage.game?.board[y][x]
 
   beforeEach(async () => {
     storage.config = scoringConfig
