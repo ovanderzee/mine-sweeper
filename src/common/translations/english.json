@@ -107,6 +107,9 @@
     "Gamelevel": "Gamelevel",
     "one mine to %n cells": "one mine to %n fields",
     "total %n mines": "game with %n mines",
+    "Play mode": "Play mode",
+    "Tough": "Tough",
+    "tough mode": "play without flags, clock or counter",
 
     "General Settings": "General Settings",
     "Translations": "Translations",

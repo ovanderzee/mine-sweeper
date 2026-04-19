@@ -43,6 +43,13 @@ function Configure() {
 
   const cellCount = Math.pow(config.BOARD_SIZE, 2)
   const cellsPerMine = Math.round(GAME_DIVISOR * 10 / config.GAME_LEVEL) / 10
+
+  const changeToughModeHandler = (event: React.ChangeEvent) => {
+    exitCurrentGame()
+    const ctrl = event.target as HTMLInputElement
+    pageCtx.configure({ TOUGH_MODE: ctrl.checked })
+  }
+
   const onbeginContent = (
     <fieldset id="on-begin-play">
       <legend>{text.settings['On begin Play']}</legend>
@@ -79,6 +86,21 @@ function Configure() {
           />
           <em>{text.settings['total %n mines'].replace('%n', config.MINE_COUNT.toString())}</em>
         </div>
+      </div>
+
+      <div className="field">
+        <div className="label">{text.settings['Play mode']}</div>
+        <label>
+          <input
+            id="tough-mode"
+            type="checkbox"
+            checked={config.TOUGH_MODE}
+            onChange={changeToughModeHandler}
+            onClick={changeToughModeHandler as unknown as React.MouseEventHandler<HTMLInputElement>}
+          /> &nbsp;
+          {text.settings['Tough']}<br />
+          <em>{text.settings['tough mode']}</em>
+        </label>
       </div>
     </fieldset>
   )
