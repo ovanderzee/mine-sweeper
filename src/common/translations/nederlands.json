@@ -101,7 +101,7 @@
   },
   "settings": {
     "On begin Play": "De Uitdaging...",
-    "Will destroy current game": "Bij aanpassing verandert het spel mee",
+    "Will destroy current game": "Aanpassing start een nieuw spel",
     "Size Gameboard": "Afmeting speelbord",
     "%n cells": "%n velden",
     "Gamelevel": "Speelnivo",
