@@ -1,9 +1,10 @@
 import React from 'react'
 import { userEvent } from 'vitest/browser'
 import cellStates from './../../__mocks__/cell-states'
-import { renderWithProvider } from './../../__mocks__/aat-helpers'
+import { renderWithProvider, renderWithContext } from './../../__mocks__/aat-helpers'
 import { CellState } from './../../common/game.d'
 // import { LONG_PRESS_THRESHOLD } from '../../common/constants'
+import { DEFAULTS, NORMAL } from '../../common/defaults'
 import GameCell from './GameCell'
 
 const trim = (str: string) => str.trim().replace(/\s+/, ' ')
@@ -51,7 +52,7 @@ describe('Gamecell, a party of properties', () => {
       expect(button.getAttribute('aria-label')).toBe('row 3 column 4, open')
     })
 
-    it('opened mine cell', async () => {
+    it('opened mine cell programmatically', async () => {
       const cell = cellStates.clicked.mijn
       cell.burst = false
       const screen = await renderWithProvider(getCellByState(cell))
@@ -153,7 +154,7 @@ describe('Gamecell, a party of properties', () => {
     beforeEach(async () => {
       dispatchGameAction = vi.fn()
       cell = cellStates.pristine.mijn
-      const screen = await renderWithProvider(getCellByState(cell))
+      const screen = await renderWithContext(getCellByState(cell), { config: DEFAULTS, session: NORMAL })
       screen.getByRole('gridcell').element().focus()
     })
 
@@ -167,6 +168,23 @@ describe('Gamecell, a party of properties', () => {
       await userEvent.keyboard(' ')
       const response = {payload: JSON.stringify({cell, entry: {locked: true}}), type: 'FLAG'}
       expect(dispatchGameAction).toHaveBeenCalledWith(response)
+    })
+  })
+
+  describe('should NOT respond to keystrokes when TOUGH_MODE is in effect ', async () => {
+    let cell: CellState
+    const TOUGH_CONFIG = { ...DEFAULTS, "TOUGH_MODE": true }
+
+    beforeEach(async () => {
+      dispatchGameAction = vi.fn()
+      cell = cellStates.pristine.mijn
+      const screen = await renderWithContext(getCellByState(cell), { config: TOUGH_CONFIG, session: NORMAL })
+      screen.getByRole('gridcell').element().focus()
+    })
+
+    it('and reject Spacebar key to flag a cell', async () => {
+      await userEvent.keyboard(' ')
+      expect(dispatchGameAction).not.toHaveBeenCalled()
     })
   })
 })

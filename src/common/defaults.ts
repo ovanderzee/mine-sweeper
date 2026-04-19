@@ -16,6 +16,7 @@ export const DEFAULTS = {
   FONT_SIZE: 15,
   PLAYER_NAME: texts[currentLanguage].config['default player'],
   MAX_SCORES: 999,
+  TOUGH_MODE: false,
 }
 
 export const NORMAL = {

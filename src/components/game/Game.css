@@ -1,5 +1,5 @@
 
-.screen:has(#playground) {
+.screen:has(#playground [role=toolbar]) {
   width: fit-content;
 }
 

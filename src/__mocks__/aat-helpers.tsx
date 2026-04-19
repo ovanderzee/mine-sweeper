@@ -4,7 +4,7 @@ import { render, RenderResult } from 'vitest-browser-react'
 import PageContext from './../store/page-context'
 import PageProvider from './../store/PageProvider'
 import { Languages } from '../common/app.d'
-import { DEFAULTS } from  './../common/defaults'
+import { DEFAULTS, NORMAL } from  './../common/defaults'
 import { FADE_OUT_TIME } from './../common/constants'
 import storage from '../common/storage'
 import { texts } from './../common/i18n'
@@ -25,9 +25,13 @@ export const renderWithContext = async (component: React.ReactNode, keyValue: an
   }
 
   const fakeCtx = {
+    //     render: pageState.render,
     navigate: () => {},
     config: DEFAULTS,
-    text: texts['en']
+    session: NORMAL,
+    text: texts['en'],
+    configure: () => {},
+    updSession: () => {},
   }
 
   return await render(

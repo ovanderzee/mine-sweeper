@@ -1,4 +1,5 @@
-import { RefObject } from 'react'
+import { RefObject, useContext } from 'react'
+import PageContext from '../../store/page-context'
 import TimeTracker from './TimeTracker'
 import MineTracker from './MineTracker'
 import FullscreenPlay from './FullscreenPlay'
@@ -16,15 +17,22 @@ interface TipsProps extends TipProps {
   playgroundRef: RefObject<HTMLDivElement>
 }
 
-const Tips = (props: TipsProps) => (
-  <div className="tips" role="toolbar">
-    <TimeTracker game={props.game} />
-    <MineTracker game={props.game} />
-    <section id="tip-action" className="tip">
-      <NewGame onNew={props.onNew} stage={props.game.stage} appearance="tip" />
-    </section>
-    <FullscreenPlay playgroundRef={props.playgroundRef} />
-  </div>
-)
+const Tips = (props: TipsProps) => {
+  const pageCtx = useContext(PageContext)
+  const { config } = pageCtx
+
+  return (
+    <div className="tips" role="toolbar">
+      {!config.TOUGH_MODE && (<>
+        <TimeTracker game={props.game} />
+        <MineTracker game={props.game} />
+      </>)}
+      <section id="tip-action" className="tip">
+        <NewGame onNew={props.onNew} stage={props.game.stage} appearance="tip" />
+      </section>
+      <FullscreenPlay playgroundRef={props.playgroundRef} />
+    </div>
+  )
+}
 
 export default Tips

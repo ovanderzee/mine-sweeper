@@ -11,6 +11,7 @@ interface GameCellProps {
 
 const GameCell = (props: GameCellProps) => {
   const pageCtx = useContext(PageContext)
+  const { TOUGH_MODE } = pageCtx.config
   const text = pageCtx.text
 
   const { stage, fill, row, col, locked, burst } = props.cell
@@ -36,6 +37,7 @@ const GameCell = (props: GameCellProps) => {
   const actionHandler = (type: GameActionType) => {
     if (stage) return
     if (type === GameActionType.MOVE && locked) return
+    if (type === GameActionType.FLAG && TOUGH_MODE) return
 
     const entry: CellStateEntry = {}
     if (type === GameActionType.FLAG) {

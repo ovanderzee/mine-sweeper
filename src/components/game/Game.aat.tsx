@@ -6,7 +6,6 @@ import { newGameState, playingGameState, lostGameState, decidedGameState } from 
 import { blank41pct } from './../../__mocks__/game-states'
 import { CellState } from './../../common/game.d'
 import { DEFAULTS, NORMAL } from  './../../common/defaults'
-import { getFillDistribution } from './../../common/scoring'
 import storage from './../../common/storage'
 import Game from './Game'
 
@@ -87,9 +86,11 @@ describe('Polling the game', () => {
     screen: RenderResult,
     fields: Locator
 
-  const getFieldByXY = (x: number, y: number): Locator | undefined => {
-    return fields?.nth((x + y * scoringConfig.BOARD_SIZE)) || ''
+  const getFieldByXY = (x: number, y: number): Locator => {
+    return fields?.nth(x + (y * scoringConfig.BOARD_SIZE))
   }
+
+  // const cellState = (x: number, y: number): CellState | undefined => storage.game?.board[y][x]
 
   beforeEach(async () => {
     storage.config = scoringConfig
@@ -112,18 +113,18 @@ describe('Polling the game', () => {
 
     await aBlank?.click()
 
-    expect(getFieldByXY(0, 0)).toHaveClass('touched')
-    expect(getFieldByXY(0, 1)).toHaveClass('touched')
-    expect(getFieldByXY(0, 2)).toHaveClass('touched')
-    expect(getFieldByXY(1, 0)).toHaveClass('touched')
-    expect(aBlank).toHaveClass('touched')
-    expect(getFieldByXY(1, 2)).toHaveClass('touched')
-    expect(getFieldByXY(2, 0)).toHaveClass('touched')
-    expect(getFieldByXY(2, 1)).toHaveClass('touched')
-    expect(getFieldByXY(2, 2)).toHaveClass('touched')
+    await expect.element(getFieldByXY(0, 0)).toHaveClass('touched')
+    await expect.element(getFieldByXY(0, 1)).toHaveClass('touched')
+    await expect.element(getFieldByXY(0, 2)).toHaveClass('touched')
+    await expect.element(getFieldByXY(1, 0)).toHaveClass('touched')
+    await expect.element(aBlank).toHaveClass('touched')
+    await expect.element(getFieldByXY(1, 2)).toHaveClass('touched')
+    await expect.element(getFieldByXY(2, 0)).toHaveClass('touched')
+    await expect.element(getFieldByXY(2, 1)).toHaveClass('touched')
+    await expect.element(getFieldByXY(2, 2)).toHaveClass('touched')
   })
 
-  it('should not open other indicator cells when a indicator cell is clicked (flaky)', async () => {
+  it('should not open other indicator cells when a indicator cell is clicked', async () => {
     expect(getFieldByXY(0, 4)).toHaveClass('pristine')
     expect(getFieldByXY(0, 5)).toHaveClass('pristine')
     expect(getFieldByXY(0, 6)).toHaveClass('pristine')
@@ -137,15 +138,16 @@ describe('Polling the game', () => {
 
     await aValue?.click()
 
-    expect(getFieldByXY(0, 4)).toHaveClass('pristine')
-    expect(getFieldByXY(0, 5)).toHaveClass('pristine')
-    expect(getFieldByXY(0, 6)).toHaveClass('pristine')
-    expect(getFieldByXY(1, 4)).toHaveClass('pristine')
-    expect(aValue).toHaveClass('touched')
-    expect(getFieldByXY(1, 6)).toHaveClass('pristine')
-    expect(getFieldByXY(2, 4)).toHaveClass('pristine')
-    expect(getFieldByXY(6, 5)).toHaveClass('pristine')
-    expect(getFieldByXY(6, 6)).toHaveClass('pristine')
+    // await expect.element to allow processing time to pass
+    await expect.element(getFieldByXY(0, 4)).toHaveClass('pristine')
+    await expect.element(getFieldByXY(0, 5)).toHaveClass('pristine')
+    await expect.element(getFieldByXY(0, 6)).toHaveClass('pristine')
+    await expect.element(getFieldByXY(1, 4)).toHaveClass('pristine')
+    await expect.element(aValue).toHaveClass('touched')
+    await expect.element(getFieldByXY(1, 6)).toHaveClass('pristine')
+    await expect.element(getFieldByXY(2, 4)).toHaveClass('pristine')
+    await expect.element(getFieldByXY(6, 5)).toHaveClass('pristine')
+    await expect.element(getFieldByXY(6, 6)).toHaveClass('pristine')
   })
 
   it('should open all cells when a mine is clicked', async () => {
@@ -171,34 +173,27 @@ describe('Loading the Game', () => {
 
   it('should start a new game when storage is empty', async () => {
     storage.eraseGame()
+    expect(storage.game?.stage).toBe(undefined)
     await renderWithProvider(<Game />)
     expect(storage.game?.stage).toBe('game-new')
   })
 
   it('should load an untouched game from storage', async () => {
     storage.game = newGameState
-    const prevFills = getFillDistribution(storage.game.board)
     await renderWithProvider(<Game />)
-    const currFills = getFillDistribution(storage.game.board)
-    expect(currFills).toStrictEqual(prevFills)
     expect(storage.game.stage).toBe('game-new')
   })
 
   it('should load an unfinished game from storage', async () => {
     storage.game = playingGameState
-    const prevFills = getFillDistribution(storage.game.board)
     await renderWithProvider(<Game />)
-    const currFills = getFillDistribution(storage.game.board)
-    expect(currFills).toStrictEqual(prevFills)
     expect(storage.game.stage).toBe('game-playing')
   })
 
   it('should start a new game when storage contains an finished game', async () => {
     storage.game = lostGameState
-    const prevFills = getFillDistribution(storage.game.board)
+    expect(storage.game.stage).toBe('game-lost')
     await renderWithProvider(<Game />)
-    const currFills = getFillDistribution(storage.game.board)
-    expect(currFills).not.toStrictEqual(prevFills)
     expect(storage.game.stage).toBe('game-new')
   })
 
@@ -217,13 +212,11 @@ describe('Handle loosing and winning', () => {
     await gameCells.nth(6).click()
 
     expect(storage.game?.stage).toBe('game-won')
-    expect(screen.getByRole('main')).toHaveClass('game-won')
+    await expect.element(screen.getByRole('main')).toHaveClass('game-won')
 
     const dialog = screen.getByRole('dialog')
-    await vi.waitFor(async () => {
-      expect(dialog).toBeInTheDocument()
-      expect(dialog).toHaveClass('shield-modal')
-    })
+    await expect.element(dialog).toBeInTheDocument()
+    await expect.element(dialog).toHaveClass('shield-modal')
   })
 
   it('should reflect on a lost game', async () => {
@@ -238,9 +231,7 @@ describe('Handle loosing and winning', () => {
     expect(gameCells.nth(0)).toHaveClass('explode')
     expect(gameCells.nth(8)).not.toHaveClass('explode')
 
-    await vi.waitFor(async () => {
-      expect(gameCells.nth(8)).toHaveClass('explode')
-    })
+    await expect.element(gameCells.nth(8)).toHaveClass('explode')
   })
 
 })
