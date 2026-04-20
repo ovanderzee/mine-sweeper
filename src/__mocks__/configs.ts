@@ -1,4 +1,4 @@
-import { Languages } from '../common/app.d'
+import { Languages, PlayMode } from '../common/app.d'
 import { DEFAULTS } from  '../common/defaults'
 
 //  BOARD_SIZE, GAME_LEVEL, MINE_COUNT as in DEFAULTS
@@ -35,6 +35,7 @@ export const simpleHardConfig = {
   "MINE_COUNT":4,
   "LANGUAGE": Languages.en,
   "PLAYER_NAME":"Jonathan",
+  "PLAY_MODE": PlayMode.TOUGH
 }
 
 export const scoringConfig = {

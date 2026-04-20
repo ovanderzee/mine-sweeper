@@ -5,7 +5,7 @@ import DefaultSettings from '../nav/DefaultSettings'
 import HiScores from '../nav/HiScores'
 import Help from '../nav/Help'
 import GoBack from '../nav/GoBack'
-import { Languages, LanguageTranslation } from '../../common/app.d'
+import { Languages, LanguageTranslation, PlayMode } from '../../common/app.d'
 import { RANGES } from '../../common/constants'
 import { GAME_DIVISOR } from '../../common/defaults'
 import storage from '../../common/storage'
@@ -47,7 +47,7 @@ function Configure() {
   const changeToughModeHandler = (event: React.ChangeEvent) => {
     exitCurrentGame()
     const ctrl = event.target as HTMLInputElement
-    pageCtx.configure({ TOUGH_MODE: ctrl.checked })
+    pageCtx.configure({ PLAY_MODE: ctrl.checked ? PlayMode.TOUGH : PlayMode.NORMAL})
   }
 
   const onbeginContent = (
@@ -94,7 +94,7 @@ function Configure() {
           <input
             id="tough-mode"
             type="checkbox"
-            checked={config.TOUGH_MODE}
+            checked={config.PLAY_MODE === PlayMode.TOUGH}
             onChange={changeToughModeHandler}
             onClick={changeToughModeHandler as unknown as React.MouseEventHandler<HTMLInputElement>}
           /> &nbsp;

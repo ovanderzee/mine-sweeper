@@ -4,6 +4,7 @@ import TimeTracker from './TimeTracker'
 import MineTracker from './MineTracker'
 import FullscreenPlay from './FullscreenPlay'
 import NewGame from '../nav/NewGame'
+import { PlayMode } from '../../common/app.d'
 import { GameState, GameAction } from '../../common/game.d'
 import '../nav/NavOptionButton.css'
 import './Tips.css'
@@ -23,7 +24,7 @@ const Tips = (props: TipsProps) => {
 
   return (
     <div className="tips" role="toolbar">
-      {!config.TOUGH_MODE && (<>
+      {config.PLAY_MODE !== PlayMode.TOUGH && (<>
         <TimeTracker game={props.game} />
         <MineTracker game={props.game} />
       </>)}

@@ -1,5 +1,5 @@
 import { texts, currentLanguage } from './i18n'
-import { AppCheckConfig, BoardFit } from './app.d'
+import { AppCheckConfig, BoardFit, PlayMode } from './app.d'
 
 export const GAME_DIVISOR = 30
 
@@ -16,7 +16,7 @@ export const DEFAULTS = {
   FONT_SIZE: 15,
   PLAYER_NAME: texts[currentLanguage].config['default player'],
   MAX_SCORES: 999,
-  TOUGH_MODE: false,
+  PLAY_MODE: PlayMode.NORMAL,
 }
 
 export const NORMAL = {
