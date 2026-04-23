@@ -108,8 +108,10 @@
     "one mine to %n cells": "één mijn per %n velden",
     "total %n mines": "spel met %n mijnen",
     "Play mode": "Speelmodus",
+    "Normal": "Normaal",
+    "normal mode": "speel met vlaggen en terugkoppeling",
     "Tough": "Moeilijk",
-    "tough mode": "speel zonder vlaggen, klok of mijnenteller",
+    "tough mode": "speel zonder vlaggen of terugkoppeling",
 
     "General Settings": "Algemene Instellingen",
     "Translations": "Vertalingen",

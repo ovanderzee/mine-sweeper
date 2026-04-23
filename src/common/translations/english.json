@@ -108,8 +108,10 @@
     "one mine to %n cells": "one mine to %n fields",
     "total %n mines": "game with %n mines",
     "Play mode": "Play mode",
+    "Normal": "Normal",
+    "normal mode": "play with flags and feedback",
     "Tough": "Tough",
-    "tough mode": "play without flags, clock or counter",
+    "tough mode": "play without flags or feedback",
 
     "General Settings": "General Settings",
     "Translations": "Translations",
