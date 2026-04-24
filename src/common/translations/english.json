@@ -112,6 +112,8 @@
     "normal mode": "play with flags and feedback",
     "Tough": "Tough",
     "tough mode": "play without flags or feedback",
+    "Sharp": "Sharp",
+    "sharp mode": "game is decided when the number of flags and mines is equal",
 
     "General Settings": "General Settings",
     "Translations": "Translations",

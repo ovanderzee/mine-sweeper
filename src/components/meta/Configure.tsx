@@ -54,6 +54,11 @@ function Configure() {
     pageCtx.configure({ PLAY_MODE: PlayMode.TOUGH})
   }
 
+  const changeSharpModeHandler = () => {
+    exitCurrentGame()
+    pageCtx.configure({ PLAY_MODE: PlayMode.SHARP})
+  }
+
   const onbeginContent = (
     <fieldset id="on-begin-play">
       <legend>{text.settings['On begin Play']}</legend>
@@ -118,6 +123,17 @@ function Configure() {
           <em>{text.settings['tough mode']}</em>
         </label>
 
+        <label>
+          <input
+            name="play-mode"
+            type="radio"
+            checked={config.PLAY_MODE === PlayMode.SHARP}
+            onChange={changeSharpModeHandler}
+            onClick={changeSharpModeHandler as unknown as React.MouseEventHandler<HTMLInputElement>}
+          /> &nbsp;
+          {text.settings['Sharp']}<br />
+          <em>{text.settings['sharp mode']}</em>
+        </label>
       </div>
     </fieldset>
   )

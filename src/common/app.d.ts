@@ -14,8 +14,9 @@ export enum LanguageTranslation {
 }
 
 export enum PlayMode {
-  NORMAL = 'NORMAL',
-  TOUGH = 'TOUGH'
+  NORMAL = 'normal',
+  TOUGH = 'tough',
+  SHARP = 'sharp',
 }
 
 export type AppSubConfig = {

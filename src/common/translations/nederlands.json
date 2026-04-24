@@ -110,8 +110,10 @@
     "Play mode": "Speelmodus",
     "Normal": "Normaal",
     "normal mode": "speel met vlaggen en terugkoppeling",
-    "Tough": "Moeilijk",
+    "Tough": "Lastig",
     "tough mode": "speel zonder vlaggen of terugkoppeling",
+    "Sharp": "Scherp",
+    "sharp mode": "spel wordt beslist wanneer het aantal vlaggen en mijnen gelijk is",
 
     "General Settings": "Algemene Instellingen",
     "Translations": "Vertalingen",
