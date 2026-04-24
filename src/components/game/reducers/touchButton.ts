@@ -28,22 +28,29 @@ export const touchButtonReducer = (state: GameState, action: PayloadAction, conf
 
   updCell = touchCell(updCell, payload.entry)
 
-  if (action.type === GameActionType.FLAG) {
-    if (PLAY_MODE !== PlayMode.TOUGH) {
-      return {
-        ...updState,
-        board: updBoard,
-      }
-    }
-    return state
-  }
-
-  /** Followup touches */
-
   const findPristineCells = (): CellState[] =>
     updBoard
       .flat()
       .filter(cell => !cell.stage)
+
+  if (action.type === GameActionType.FLAG) {
+    if (PLAY_MODE === PlayMode.SHARP) {
+      const flaggedCells = updBoard.flat().filter(cell => cell.locked)
+      if (flaggedCells.length === MINE_COUNT) {
+        // test flags match all mines, touch remaining buttons, game decided
+        const pristineCells = findPristineCells()
+        pristineCells.forEach((cell) => touchCell(cell, { stage: CellStateStage.RELEASED }))
+        const gameLost = flaggedCells.some(cell => cell.fill < 9)
+        updState.stage = gameLost ? GameStages.LOST : GameStages.WON
+      }
+    }
+    return {
+      ...updState,
+      board: updBoard,
+    }
+  }
+
+  /** Followup touches */
 
   if (fill === 0) {
     // blank cell touched, touch it's neighbours recursively
@@ -67,7 +74,7 @@ export const touchButtonReducer = (state: GameState, action: PayloadAction, conf
   }
 
   const pristineCells = findPristineCells()
-  if (pristineCells.length === MINE_COUNT) {
+  if (pristineCells.length === MINE_COUNT && PLAY_MODE !== PlayMode.SHARP) {
     // only mines remain, touch remaining buttons, game won
     pristineCells.forEach((cell) => touchCell(cell, { stage: CellStateStage.RELEASED }))
     updState.stage = GameStages.WON
