@@ -166,6 +166,10 @@
     "Cover with cells": "Fill screen with cells",
     "Revert magnification": "Revert magnification",
     "Return to window": "Play in a window",
-    "View fullscreen": "Play on fullscreen"
+    "View fullscreen": "Play on fullscreen",
+
+    "normal hint": "",
+    "tough hint": "don't touch a single mine",
+    "sharp hint": "flag only every mine"
   }
 }

@@ -166,6 +166,10 @@
     "Cover with cells": "Vul scherm met cellen",
     "Revert magnification": "Vergroting ongedaan maken",
     "Return to window": "In een venster spelen",
-    "View fullscreen": "Op volledig scherm spelen"
+    "View fullscreen": "Op volledig scherm spelen",
+
+    "normal hint": "",
+    "tough hint": "raak geen enkele mijn",
+    "sharp hint": "vlag alleen elke mijn af"
   }
 }

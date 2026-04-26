@@ -102,7 +102,24 @@ const GameCellDemo = () => {
     </article>
   </>
 
-  const stateColors = <div className="css-colors">
+  const blueColors = <div className="css-colors">
+    <div style={{'background': 'var(--ultra-light-blue)'} as React.CSSProperties}>u</div>
+    <div style={{'background': 'var(--extra-light-blue)'} as React.CSSProperties}>e</div>
+    <div style={{'background': 'var(--light-blue)'} as React.CSSProperties}>l</div>
+    <div style={{'background': 'var(--lighter-blue)'} as React.CSSProperties}>l</div>
+    <div style={{'background': 'var(--medium-blue)'} as React.CSSProperties}>m</div>
+    <div style={{'background': 'var(--darker-blue)', 'color': 'white'} as React.CSSProperties}>d</div>
+    <div style={{'background': 'var(--dark-blue)', 'color': 'white'} as React.CSSProperties}>d</div>
+    <div style={{'background': 'var(--extra-dark-blue)', 'color': 'white'} as React.CSSProperties}>e</div>
+    <div style={{'background': 'var(--ultra-dark-blue)', 'color': 'white'} as React.CSSProperties}>u</div>
+  </div>
+
+  const darkColors = <div className="css-colors" style={{'color': 'white'}}>
+    <div style={{'background': 'var(--dark-brown)'} as React.CSSProperties}>dark-brown</div>
+    <div style={{'background': 'var(--dark-red)'} as React.CSSProperties}>dark-red</div>
+  </div>
+
+  const stateColors = <div className="css-colors" style={{'color': 'white'}}>
     <div style={{'background': 'var(--state-green)'} as React.CSSProperties}>state-green</div>
     <div style={{'background': 'var(--state-red)'} as React.CSSProperties}>state-red</div>
   </div>
@@ -112,7 +129,7 @@ const GameCellDemo = () => {
     <div style={{'background': 'var(--fire-yellorange)'}}>fire-yellorange</div>
     <div style={{'background': 'var(--fire-orange)'}}>fire-orange</div>
     <div style={{'background': 'var(--fire-red)'}}>fire-red</div>
-    <div style={{'background': 'var(--fire-blue)'}}>fire-blue</div>
+    <div style={{'background': 'var(--fire-blue)', 'color': 'white'}}>fire-blue</div>
   </div>
 
   const pristineColors = <div className="css-colors">
@@ -148,6 +165,8 @@ const GameCellDemo = () => {
         {playing}
         {lost}
         {won}
+        {blueColors}
+        {darkColors}
         {stateColors}
         {fireColors}
         {pristineColors}

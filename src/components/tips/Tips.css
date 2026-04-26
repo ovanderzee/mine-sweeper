@@ -7,6 +7,7 @@
   grid-column: 1 / span var(--board-size);
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
   padding-block-start: 1ex;
   width: 19em;
   margin-inline: auto;
@@ -19,6 +20,21 @@
 .tip {
   color: var(--ultra-dark-blue);
   padding-inline: 1ex;
+}
+
+.tough-mode .tip {
+  color: var(--dark-brown);
+}
+
+.sharp-mode .tip {
+  color: var(--dark-red);
+}
+
+#playmode-text.tip {
+  width: 100%;
+  flex: 1 0 100%;
+  font-size: 80%;
+  text-align: left;
 }
 
 .tip > * {
@@ -63,11 +79,20 @@
 
 #mine-tracker #mine {
   border-radius: 50%;
-  background: radial-gradient(ellipse at 25% 25%, transparent 8%, currentcolor 33% )
+  background: radial-gradient(ellipse at 25% 25%, transparent 8%, currentcolor 33% );
 }
 
 #mine-tracker #flag::before {
-  content: '⚑'
+  content: '⚑';
+}
+
+#mine-tracker #none::before {
+  content: '⚑';
+}
+
+#mine-tracker #none::after {
+  content: '×';
+  font-size: 120%;
 }
 
 #mine-tracker #diff {
