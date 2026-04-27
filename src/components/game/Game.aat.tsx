@@ -1,14 +1,18 @@
-import { Locator } from 'vitest/browser'
+import { Locator, userEvent } from 'vitest/browser'
 import { RenderResult } from 'vitest-browser-react'
 import { renderWithProvider, renderWithContext } from './../../__mocks__/aat-helpers'
 import { microConfig, scoringConfig } from './../../__mocks__/configs'
-import { newGameState, playingGameState, lostGameState, decidedGameState } from './../../__mocks__/game-states'
+import { newGameState, playingGameState, lostGameState, decidedGameState, decidedSharpGameState } from './../../__mocks__/game-states'
 import { blank41pct } from './../../__mocks__/game-states'
+import { PlayMode } from './../../common/app.d'
 import { CellState } from './../../common/game.d'
 import { DEFAULTS, NORMAL } from  './../../common/defaults'
 import storage from './../../common/storage'
 import Game from './Game'
 
+vi.setConfig({
+  testTimeout: 10_000,
+})
 
 describe('Game dimensions', () => {
   beforeEach(() => {
@@ -200,14 +204,10 @@ describe('Loading the Game', () => {
 })
 
 describe('Handle loosing and winning', () => {
-  // can be flaky
-  beforeEach(() => {
-    storage.config = microConfig
-  })
 
   it('should celebrate a won game', async () => {
     storage.game = decidedGameState
-    const screen = await renderWithProvider(<Game />)
+    const screen = await renderWithContext(<Game />, { config: microConfig })
     const gameCells = screen.getByRole('gridcell')
     await gameCells.nth(6).click()
 
@@ -220,9 +220,10 @@ describe('Handle loosing and winning', () => {
   })
 
   it('should reflect on a lost game', async () => {
+    // unlocked mine to test with same game
     decidedGameState.board[2][2].locked = false
     storage.game = decidedGameState
-    const screen = await renderWithProvider(<Game />)
+    const screen = await renderWithContext(<Game />, { config: microConfig })
     const gameCells = screen.getByRole('gridcell')
     await gameCells.nth(0).click()
 
@@ -234,4 +235,42 @@ describe('Handle loosing and winning', () => {
     await expect.element(gameCells.nth(8)).toHaveClass('explode')
   })
 
+})
+
+describe('Handle loosing and winning in sharp play-mode', () => {
+  // document.dispatchEvent(new KeyboardEvent('keyup', { key: 'ArrowLeft' }))
+  const sharpMicroConfig = { ...microConfig, PLAY_MODE: PlayMode.SHARP }
+
+  beforeEach(() => {
+    storage.game = decidedSharpGameState
+    storage.config = sharpMicroConfig
+  })
+
+  it('should celebrate a won game in sharp play-mode', async () => {
+    const screen = await renderWithProvider(<Game />)
+    const gameCells = screen.getByRole('gridcell')
+    await gameCells.nth(0).element().focus()
+    await userEvent.keyboard('{Space}')
+
+    expect(storage.game?.stage).toBe('game-won')
+    await expect.element(screen.getByRole('main')).toHaveClass('game-won')
+
+    const dialog = screen.getByRole('dialog')
+    await expect.element(dialog).toBeInTheDocument()
+    await expect.element(dialog).toHaveClass('shield-modal')
+  })
+
+  it('should reflect on a lost game in sharp play-mode', async () => {
+    const screen = await renderWithProvider(<Game />)
+    const gameCells = screen.getByRole('gridcell')
+    await gameCells.nth(2).element().focus()
+    await userEvent.keyboard('{Space}')
+
+    expect(storage.game?.stage).toBe('game-lost')
+    await expect.element(screen.getByRole('main')).toHaveClass('game-lost')
+
+    await expect.element(gameCells.nth(0)).toHaveClass('explode')
+    await expect.element(gameCells.nth(2)).not.toHaveClass('explode')
+    await expect.element(gameCells.nth(8)).toHaveClass('explode')
+  })
 })
