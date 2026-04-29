@@ -18,16 +18,7 @@
 }
 
 .tip {
-  color: var(--ultra-dark-blue);
   padding-inline: 1ex;
-}
-
-.tough-mode .tip {
-  color: var(--dark-brown);
-}
-
-.sharp-mode .tip {
-  color: var(--dark-red);
 }
 
 #playmode-text.tip {

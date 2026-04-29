@@ -7,6 +7,7 @@ import Settings from '../nav/Settings'
 import GoBack from '../nav/GoBack'
 import { ShieldByRank } from '../UI/Shield'
 import Diagram from '../UI/Diagram'
+import { PlayMode } from '../../common/app.d'
 import { ScoreItem, ScoreParam, MarkScoreData } from '../../common/game.d'
 import storage from '../../common/storage'
 import { precise, refineScores, sequenceFillData } from '../../common/scoring'
@@ -216,7 +217,12 @@ const HallOfFame = () => {
               </h4>
             </header>
             <article>
-              <div className="points">{log.score.points}</div>
+              <div className="character">
+                <h4 className="points">{log.score.points}</h4>
+                {log.game.playMode != PlayMode.NORMAL &&
+                  <h5 className={`${log.game.playMode}-mode`}>{log.game.playMode}</h5>
+                }
+              </div>
               <section className="group game">
                 <div className="unit level">
                   <span>{text.VAR['level']}</span>

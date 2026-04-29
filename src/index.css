@@ -199,3 +199,20 @@ svg[aria-hidden] {
   white-space: nowrap;
   border: 0;
 }
+
+/* CONSTRUCTIONS */
+
+button .character h5,
+.tip {
+  color: var(--ultra-dark-blue);
+}
+
+button .character h5.tough-mode,
+.tough-mode .tip {
+  color: var(--dark-brown);
+}
+
+button .character h5.sharp-mode,
+.sharp-mode .tip {
+  color: var(--dark-red);
+}
