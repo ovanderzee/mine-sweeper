@@ -103,6 +103,31 @@ export const decidedGameState: GameState = {
   "mines": []
 }
 
+export const decidedSharpGameState: GameState = {
+  "stage": GameStages.PLAYING,
+  "board": [
+    [
+      { "stage": CellStateStage.HIDDEN, "fill": 9, "row": 0, "col": 0 },
+      { "stage": CellStateStage.HIDDEN, "fill": 1, "row": 0, "col": 1 },
+      { "stage": CellStateStage.HIDDEN, "fill": 0, "row": 0, "col": 2 }
+    ],
+    [
+      { "stage": CellStateStage.HIDDEN, "fill": 1, "row": 1, "col": 0 },
+      { "stage": CellStateStage.HIDDEN, "fill": 2, "row": 1, "col": 1 },
+      { "stage": CellStateStage.HIDDEN, "fill": 1, "row": 1, "col": 2 }
+    ],
+    [
+      { "stage": CellStateStage.HIDDEN, "fill": 0, "row": 2, "col": 0 },
+      { "stage": CellStateStage.HIDDEN, "fill": 1, "row": 2, "col": 1 },
+      { "stage": CellStateStage.HIDDEN, "fill": 9, "row": 2, "col": 2, locked: true }
+    ]
+  ],
+  "tZero": 1745517111606,
+  "tShift": 1745517342474, // 3m 50s
+  "score": initialScore,
+  "mines": []
+}
+
 export const wonGameState: GameState = {
   "stage": GameStages.WON,
   "board": [

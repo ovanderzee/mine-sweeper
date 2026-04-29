@@ -12,8 +12,6 @@
 - Random timeouts in first vi.waitFor of renderWithApp function
 
 ### Features
-- Playmode Tough: Play without flags or mine counters
-- Playmode Risky: Win or loose when flag count equals mine count
 - Pause button, correct time on unpause
 - Routing on gamecode, about, config and hiscores
 - Save a game on a new list page (with comment)
@@ -27,7 +25,11 @@
 - Consent for ending playing game and changing the config when replaying from score list
 
 
-## [next]
+## [3.10.0] - 2026-04
+
+### Added
+- Playmode Tough: Play without flags or mine counters
+- Playmode Sharp: Win or loose when flag count equals mine count
 
 
 ## [3.9.1] - 2026-04-14

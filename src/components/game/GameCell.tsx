@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import PageContext from '../../store/page-context'
 import { LONG_PRESS_THRESHOLD } from '../../common/constants'
+import { PlayMode } from '../../common/app.d'
 import { CellState, CellStateStage, CellStateEntry, GameAction, GameActionType } from '../../common/game.d';
 import './GameCell.css'
 
@@ -11,7 +12,7 @@ interface GameCellProps {
 
 const GameCell = (props: GameCellProps) => {
   const pageCtx = useContext(PageContext)
-  const { TOUGH_MODE } = pageCtx.config
+  const { PLAY_MODE } = pageCtx.config
   const text = pageCtx.text
 
   const { stage, fill, row, col, locked, burst } = props.cell
@@ -37,7 +38,7 @@ const GameCell = (props: GameCellProps) => {
   const actionHandler = (type: GameActionType) => {
     if (stage) return
     if (type === GameActionType.MOVE && locked) return
-    if (type === GameActionType.FLAG && TOUGH_MODE) return
+    if (type === GameActionType.FLAG && PLAY_MODE === PlayMode.TOUGH) return
 
     const entry: CellStateEntry = {}
     if (type === GameActionType.FLAG) {

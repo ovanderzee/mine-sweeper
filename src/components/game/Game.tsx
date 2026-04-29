@@ -20,7 +20,7 @@ import './Game.css'
 const Game = () => {
   const pageCtx = useContext(PageContext)
   const text = pageCtx.text
-  const { BOARD_SIZE, FONT_SIZE } = pageCtx.config
+  const { BOARD_SIZE, FONT_SIZE, PLAY_MODE } = pageCtx.config
   const { MAGNIFICATION, BOARD_FIT, ACTIVE_CELL_ID } = pageCtx.session
 
   const [gameState, dispatchGameAction] = useReducer(
@@ -61,7 +61,7 @@ const Game = () => {
       role="main"
       aria-labelledby="page-heading"
       id="playground"
-      className={`board-size__${BOARD_SIZE} ${gameState.stage} ${BOARD_FIT}-board`}
+      className={`board-size__${BOARD_SIZE} ${gameState.stage} ${BOARD_FIT}-board ${PLAY_MODE}-mode`}
       style={{'--board-size': BOARD_SIZE, 'fontSize': MAGNIFICATION * FONT_SIZE + 'px'} as React.CSSProperties}
     >
       <h1 className="sr-only" id="page-heading">{text.nav['Playground']}</h1>

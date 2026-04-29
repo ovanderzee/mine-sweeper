@@ -1,5 +1,16 @@
 import React from 'react'
-import { preventReloadByEnter, scrollIntoViewTowardsCenter } from './functions'
+import { capitalise, preventReloadByEnter, scrollIntoViewTowardsCenter } from './functions'
+
+describe('capitalise', () => {
+  it('should transform to one capital letter followed by zero or more lowercase letters', () => {
+    const result = capitalise('ABCdef')
+    expect(result).toBe('Abcdef')
+
+    const result2 = capitalise('uvwXYZ')
+    expect(result2).toBe('Uvwxyz')
+  })
+})
+
 
 describe('preventReloadByEnter', () => {
   it('should call event.preventDefault when Enter was pressed', () => {

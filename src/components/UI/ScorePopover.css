@@ -52,10 +52,18 @@
   margin-inline-start: -.67ex;
 }
 
-#score-popover figure header .user {
+#score-popover figure header .character {
   flex: 1 1 90%;
   text-align: left;
-  padding: 0.5em;
+  padding: 0.5rem;
+}
+
+#score-popover figure header .character > * {
+  margin: 0;
+}
+
+#score-popover figure header .character .play-mode {
+  padding-block-start: 0.5rem;
 }
 
 #score-popover figure header .date {

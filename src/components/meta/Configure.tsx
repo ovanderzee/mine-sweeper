@@ -5,7 +5,7 @@ import DefaultSettings from '../nav/DefaultSettings'
 import HiScores from '../nav/HiScores'
 import Help from '../nav/Help'
 import GoBack from '../nav/GoBack'
-import { Languages, LanguageTranslation } from '../../common/app.d'
+import { Languages, LanguageTranslation, PlayMode } from '../../common/app.d'
 import { RANGES } from '../../common/constants'
 import { GAME_DIVISOR } from '../../common/defaults'
 import storage from '../../common/storage'
@@ -44,10 +44,19 @@ function Configure() {
   const cellCount = Math.pow(config.BOARD_SIZE, 2)
   const cellsPerMine = Math.round(GAME_DIVISOR * 10 / config.GAME_LEVEL) / 10
 
-  const changeToughModeHandler = (event: React.ChangeEvent) => {
+  const changeNormalModeHandler = () => {
     exitCurrentGame()
-    const ctrl = event.target as HTMLInputElement
-    pageCtx.configure({ TOUGH_MODE: ctrl.checked })
+    pageCtx.configure({ PLAY_MODE: PlayMode.NORMAL})
+  }
+
+  const changeToughModeHandler = () => {
+    exitCurrentGame()
+    pageCtx.configure({ PLAY_MODE: PlayMode.TOUGH})
+  }
+
+  const changeSharpModeHandler = () => {
+    exitCurrentGame()
+    pageCtx.configure({ PLAY_MODE: PlayMode.SHARP})
   }
 
   const onbeginContent = (
@@ -92,14 +101,38 @@ function Configure() {
         <div className="label">{text.settings['Play mode']}</div>
         <label>
           <input
-            id="tough-mode"
-            type="checkbox"
-            checked={config.TOUGH_MODE}
+            name="playmode"
+            type="radio"
+            checked={config.PLAY_MODE === PlayMode.NORMAL}
+            onChange={changeNormalModeHandler}
+            onClick={changeNormalModeHandler as unknown as React.MouseEventHandler<HTMLInputElement>}
+          /> &nbsp;
+          {text.settings['Normal']}<br />
+          <em>{text.settings['normal mode']}</em>
+        </label>
+
+        <label>
+          <input
+            name="playmode"
+            type="radio"
+            checked={config.PLAY_MODE === PlayMode.TOUGH}
             onChange={changeToughModeHandler}
             onClick={changeToughModeHandler as unknown as React.MouseEventHandler<HTMLInputElement>}
           /> &nbsp;
           {text.settings['Tough']}<br />
           <em>{text.settings['tough mode']}</em>
+        </label>
+
+        <label>
+          <input
+            name="play-mode"
+            type="radio"
+            checked={config.PLAY_MODE === PlayMode.SHARP}
+            onChange={changeSharpModeHandler}
+            onClick={changeSharpModeHandler as unknown as React.MouseEventHandler<HTMLInputElement>}
+          /> &nbsp;
+          {text.settings['Sharp']}<br />
+          <em>{text.settings['sharp mode']}</em>
         </label>
       </div>
     </fieldset>

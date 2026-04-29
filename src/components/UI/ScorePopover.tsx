@@ -1,6 +1,7 @@
 import { useContext } from 'react'
 import PageContext from '../../store/page-context'
 
+import { PlayMode } from '../../common/app.d'
 import { ScoreItem } from '../../common/game.d'
 import { ShieldByRank } from './Shield'
 import ElasticBrace from './ElasticBrace'
@@ -24,14 +25,19 @@ const ScorePopover = (props: ScorePopoverProps) => {
 
   return (
     <figure
-      className={`${log.rank <= 10 ? 'super' : ''} latest`}
+      className={log.rank <= 10 ? 'super' : ''}
       key={`${log.rank}_${log.score.points}`}
     >
       <header>
         <h2 className="rank">
           {log.rank <= 10 ? <ShieldByRank rank={log.rank} /> : log.rank}
         </h2>
-        <h3 className="user">{log.user}</h3>
+        <div className="character">
+          <h3 className="user">{log.user}</h3>
+          {log.game.playMode != PlayMode.NORMAL &&
+            <h5 className={`${log.game.playMode}-mode play-mode`}>{log.game.playMode}</h5>
+          }
+        </div>
         <h4 className="date" data-date={log.date}>
           {loggedDate.toLocaleDateString()}<br/>
           {loggedDate.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}

@@ -2,6 +2,7 @@ import React from 'react'
 import { userEvent } from 'vitest/browser'
 import cellStates from './../../__mocks__/cell-states'
 import { renderWithProvider, renderWithContext } from './../../__mocks__/aat-helpers'
+import { PlayMode } from './../../common/app.d'
 import { CellState } from './../../common/game.d'
 // import { LONG_PRESS_THRESHOLD } from '../../common/constants'
 import { DEFAULTS, NORMAL } from '../../common/defaults'
@@ -171,9 +172,9 @@ describe('Gamecell, a party of properties', () => {
     })
   })
 
-  describe('should NOT respond to keystrokes when TOUGH_MODE is in effect ', async () => {
+  describe('should NOT respond to keystrokes when tough play-mode is in effect ', async () => {
     let cell: CellState
-    const TOUGH_CONFIG = { ...DEFAULTS, "TOUGH_MODE": true }
+    const TOUGH_CONFIG = { ...DEFAULTS, PLAY_MODE: PlayMode.TOUGH }
 
     beforeEach(async () => {
       dispatchGameAction = vi.fn()

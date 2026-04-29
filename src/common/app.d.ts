@@ -13,6 +13,12 @@ export enum LanguageTranslation {
   nl = 'Nederlands',
 }
 
+export enum PlayMode {
+  NORMAL = 'normal',
+  TOUGH = 'tough',
+  SHARP = 'sharp',
+}
+
 export type AppSubConfig = {
   BOARD_SIZE?: number;
   FONT_SIZE?: number;
@@ -21,7 +27,7 @@ export type AppSubConfig = {
   MAX_SCORES?: number;
   MINE_COUNT?: number;
   PLAYER_NAME?: string;
-  TOUGH_MODE?: boolean;
+  PLAY_MODE?: PlayMode;
 }
 
 export interface AppCheckConfig {
@@ -37,7 +43,7 @@ export interface AppConfig {
   MAX_SCORES: number;
   MINE_COUNT: number;
   PLAYER_NAME: string;
-  TOUGH_MODE: boolean;
+  PLAY_MODE: PlayMode;
 }
 
 export enum BoardFit {
