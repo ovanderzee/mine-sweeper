@@ -22,11 +22,14 @@
 - Consent for ending playing game and changing the config when replaying from score list
 
 
-## [3.10.0] - 2026-04
+## [3.10.0] - 2026-04-29
 
 ### Added
 - Playmode Tough: Play without flags or mine counters
 - Playmode Sharp: Win or loose when flag count equals mine count
+
+### Fixed
+- Replaced most waitFor blocks and used expect.element in test files
 
 
 ## [3.9.1] - 2026-04-14
