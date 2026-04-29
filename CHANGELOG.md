@@ -14,11 +14,8 @@
 ### Features
 - Pause button, correct time on unpause
 - Routing on gamecode, about, config and hiscores
-- Save a game on a new list page (with comment)
 - Show number of neighbouring mines in graph
 - Calculate coagulation (mine-mine borders | blank to mine ratio)
-- Eliminate outliers in graph
-- Store board magnification in sessionStorage
 - Refine levels with intermediate values, maybe by percentage
 - Open/close mark section
 - Tests on marking

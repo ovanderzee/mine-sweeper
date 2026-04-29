@@ -13,7 +13,6 @@ article[role="main"] + nav .sticky-slider {
 article[role="main"] + nav .nav-option  {
   font-weight: bold;
   line-height: 144%;
-  color: white;
   text-shadow: -0.02em -0.05em black, 0.008em 0.02em var(--light-blue);
 }
 
