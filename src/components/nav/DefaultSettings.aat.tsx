@@ -14,8 +14,8 @@ describe('DefaultSettings Component in PageContext', () => {
   it('should display the "Revolve Back" sign', async () => {
     const screen = await renderWithContext(<DefaultSettings />)
 
-    expect(screen.getByTitle('Revert to Defaults')).toBeInTheDocument()
-    expect(screen.getByLabelText('counterclockwise revolving arrow')).toBeInTheDocument()
+    await expect.element(screen.getByTitle('Revert to Defaults')).toBeInTheDocument()
+    await expect.element(screen.getByLabelText('counterclockwise revolving arrow')).toBeInTheDocument()
   })
 
   describe('should effect default config when clicked', () => {

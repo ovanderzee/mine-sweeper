@@ -15,10 +15,8 @@ describe('The game page sidebar', () => {
     expect(navBtn).toBeInTheDocument()
     await navBtn.click()
 
-    await vi.waitFor(async () => {
-      expect(navBtn).not.toBeInTheDocument()
-      expect(screen.getByRole('heading', { name: 'Defuse all mines' })).toBeInTheDocument()
-    })
+    await expect.element(navBtn).not.toBeInTheDocument()
+    await expect.element(screen.getByRole('heading', { name: 'Defuse all mines' })).toBeInTheDocument()
   })
 
   it('should offer navigation to HallOfFame page', async () => {
@@ -26,10 +24,8 @@ describe('The game page sidebar', () => {
     expect(navBtn).toBeInTheDocument()
     await navBtn.click()
 
-    await vi.waitFor(async () => {
-      expect(navBtn).not.toBeInTheDocument()
-      expect(screen.getByRole('heading', { name: 'Hall of Fame' })).toBeInTheDocument()
-    })
+    await expect.element(navBtn).not.toBeInTheDocument()
+    await expect.element(screen.getByRole('heading', { name: 'Hall of Fame' })).toBeInTheDocument()
   })
 
   it('should offer navigation to Configure page', async () => {
@@ -37,10 +33,8 @@ describe('The game page sidebar', () => {
     expect(navBtn).toBeInTheDocument()
     await navBtn.click()
 
-    await vi.waitFor(async () => {
-      expect(navBtn).not.toBeInTheDocument()
-      expect(screen.getByRole('heading', { name: 'Settings' })).toBeInTheDocument()
-    })
+    await expect.element(navBtn).not.toBeInTheDocument()
+    await expect.element(screen.getByRole('heading', { name: 'Settings' })).toBeInTheDocument()
   })
 })
 
@@ -61,17 +55,13 @@ describe('The game start button', () => {
     const mineIndex = storage.game.board.flat().findIndex(c => c.fill > 8 && !c.stage)
     await screen.getByRole('gridcell').nth(mineIndex).click()
 
-    await vi.waitFor(async () => {
-      expect(storage.game?.stage).toBe('game-lost')
-      expect(screen.getByRole('main')).toHaveClass('game-lost')
-    })
+    await expect.element(screen.getByRole('main')).toHaveClass('game-lost')
+    expect(storage.game?.stage).toBe('game-lost')
 
     await screen.getByRole('navigation').getByTitle('New Game').click()
 
-    await vi.waitFor(async () => {
-      expect(storage.game?.stage).toBe('game-new')
-      expect(screen.getByRole('main')).toHaveClass('game-new')
-    })
+    expect(storage.game?.stage).toBe('game-new')
+    await expect.element(screen.getByRole('main')).toHaveClass('game-new')
   })
 
   it("should start a new game depending permission when a game is in progress", async () => {
@@ -109,17 +99,13 @@ describe('The replay button', () => {
     const mineIndex = storage.game.board.flat().findIndex(c => c.fill > 8 && !c.stage)
     await screen.getByRole('gridcell').nth(mineIndex).click()
 
-    await vi.waitFor(async () => {
-      expect(storage.game?.stage).toBe('game-lost')
-      expect(screen.getByRole('main')).toHaveClass('game-lost')
-    })
+    await expect.element(screen.getByRole('main')).toHaveClass('game-lost')
+    expect(storage.game?.stage).toBe('game-lost')
 
     await screen.getByRole('navigation').getByTitle('Replay').click()
 
-    await vi.waitFor(async () => {
-      expect(storage.game?.stage).toBe('game-new')
-      expect(screen.getByRole('main')).toHaveClass('game-new')
-    })
+    await expect.element(screen.getByRole('main')).toHaveClass('game-new')
+    expect(storage.game?.stage).toBe('game-new')
 
     const latterFilling = getFillDistribution(storage.game?.board)
     expect(initialFilling).toStrictEqual(latterFilling)
@@ -130,10 +116,8 @@ describe('The replay button', () => {
     screen = await renderWithApp()
     const initialFilling = getFillDistribution(storage.game?.board)
 
-    await vi.waitFor(async () => {
-      expect(storage.game?.stage).toBe('game-playing')
-      expect(screen.getByRole('main')).toHaveClass('game-playing')
-    })
+    await expect.element(screen.getByRole('main')).toHaveClass('game-playing')
+    expect(storage.game?.stage).toBe('game-playing')
 
     await screen.getByRole('navigation').getByTitle('Replay').click()
     const dialog = screen.getByRole('dialog')

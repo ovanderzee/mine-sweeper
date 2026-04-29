@@ -7,7 +7,7 @@ describe('MineTracker Component', async () => {
   it('should display bombs minus flags count', async () => {
     storage.game = decidedGameState
     const screen = await renderWithProvider(<MineTracker game={decidedGameState} />)
-    expect(screen.getByText('1')).toBeInTheDocument()
+    await expect.element(screen.getByText('1')).toBeInTheDocument()
   })
 })
 

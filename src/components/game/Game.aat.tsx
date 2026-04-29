@@ -45,29 +45,29 @@ describe('Game lifecycle', () => {
 
   beforeEach(async () => {
     localStorage.removeItem('mv-game')
-    screen = await renderWithProvider(<Game />)
+    screen = await renderWithContext(<Game />, { config: microConfig })
     cells = storage.game?.board.flat() || []
   })
 
-  it('should begin as new game', () => {
+  it('should begin as new game', async () => {
+    await expect.element(screen.getByRole('main')).toHaveClass('game-new')
     expect(storage.game?.stage).toBe('game-new')
-    expect(screen.getByRole('main')).toHaveClass('game-new')
   })
 
   it('should be in playing mode after opening a non-mine cell', async () => {
     const index = cells.findIndex(cell => cell.fill < 9)
     await screen.getByRole('gridcell').nth(index).click()
 
+    await expect.element(screen.getByRole('main')).toHaveClass('game-playing')
     expect(storage.game?.stage).toBe('game-playing')
-    expect(screen.getByRole('main')).toHaveClass('game-playing')
   })
 
   it('should result in loss after opening a mine', async () => {
     const index = cells.findIndex(cell => cell.fill > 8)
     await screen.getByRole('gridcell').nth(index).click()
 
+    await expect.element(screen.getByRole('main')).toHaveClass('game-lost')
     expect(storage.game?.stage).toBe('game-lost')
-    expect(screen.getByRole('main')).toHaveClass('game-lost')
   })
 
   it('should result in win after opening a the last non-mine', async () => {
@@ -77,10 +77,8 @@ describe('Game lifecycle', () => {
       }
     })
 
-    await vi.waitFor(async () => {
-      expect(storage.game?.stage).toBe('game-won')
-      expect(screen.getByRole('main')).toHaveClass('game-won')
-    })
+    await expect.element(screen.getByRole('main')).toHaveClass('game-won')
+    expect(storage.game?.stage).toBe('game-won')
   })
 
 })
@@ -228,7 +226,7 @@ describe('Handle loosing and winning', () => {
     await gameCells.nth(0).click()
 
     expect(storage.game?.stage).toBe('game-lost')
-    expect(screen.getByRole('main')).toHaveClass('game-lost')
+    await expect.element(screen.getByRole('main')).toHaveClass('game-lost')
     expect(gameCells.nth(0)).toHaveClass('explode')
     expect(gameCells.nth(8)).not.toHaveClass('explode')
 

@@ -13,8 +13,8 @@ describe('NewGame Component', () => {
   it('should display the "Start Playing" sign', async () => {
     const screen = await renderWithContext(<NewGame onNew={dispatcher} stage={GameStages.PLAYING} />)
 
-    expect(screen.getByTitle('New Game')).toBeInTheDocument()
-    expect(screen.getByLabelText('play')).toBeInTheDocument()
+    await expect.element(screen.getByTitle('New Game')).toBeInTheDocument()
+    await expect.element(screen.getByLabelText('play')).toBeInTheDocument()
 
   })
 

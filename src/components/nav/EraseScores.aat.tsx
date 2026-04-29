@@ -16,8 +16,8 @@ describe('EraseScores Component', () => {
   it('should display the "Circled Division Slash" sign', async () => {
     const screen = await renderWithProvider(<EraseScores onErase={emitter} />)
 
-    expect(screen.getByTitle('Clear List')).toBeInTheDocument()
-    expect(screen.getByLabelText('empty set')).toBeInTheDocument()
+    await expect.element(screen.getByTitle('Clear List')).toBeInTheDocument()
+    await expect.element(screen.getByLabelText('empty set')).toBeInTheDocument()
   })
 
   it('should not erase scores when cancelling', async () => {

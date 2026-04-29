@@ -8,13 +8,13 @@ describe('TimeTracker', () => {
 
   it('should not start before game is played', async () => {
     const screen = await renderWithProvider(<TimeTracker game={newGameState} />)
-    expect(screen.getByText(`00:00`)).toBeInTheDocument()
+    await expect.element(screen.getByText(`00:00`)).toBeInTheDocument()
 
     // and stay the same
     const advanceMilliSecs = 57000
     vi.advanceTimersByTime(advanceMilliSecs)
 
-    expect(screen.getByText(`00:00`)).toBeInTheDocument()
+    await expect.element(screen.getByText(`00:00`)).toBeInTheDocument()
   })
 
   it('should track advancing time when game is played', async () => {
@@ -36,7 +36,7 @@ describe('TimeTracker', () => {
     const expMins2 = floorMins(timeLapse2)
     const expSecs2 = floorSecs(timeLapse2)
     //'01:42'
-    expect(screen.getByText(`${expMins2}:${expSecs2}`)).toBeInTheDocument()
+    await expect.element(screen.getByText(`${expMins2}:${expSecs2}`)).toBeInTheDocument()
   })
 
   it('should not advance time when game has ended', async () => {
@@ -46,13 +46,13 @@ describe('TimeTracker', () => {
     const expSecs = floorSecs(timeLapse)
     const screen = await renderWithProvider(<TimeTracker game={lostGameState} />)
     //'03:50'
-    expect(screen.getByText(`${expMins}:${expSecs}`)).toBeInTheDocument()
+    await expect.element(screen.getByText(`${expMins}:${expSecs}`)).toBeInTheDocument()
 
     const advanceMilliSecs = 57000
     vi.advanceTimersByTime(advanceMilliSecs)
 
     // and stay the same
-    expect(screen.getByText(`${expMins}:${expSecs}`)).toBeInTheDocument()
+    await expect.element(screen.getByText(`${expMins}:${expSecs}`)).toBeInTheDocument()
   })
 
 })

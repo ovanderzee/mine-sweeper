@@ -13,8 +13,8 @@ describe('Replay Component', () => {
   it('should display the "Redo" sign', async () => {
     const screen = await renderWithContext(<Replay onReplay={dispatcher} stage={GameStages.PLAYING} />)
 
-    expect(screen.getByTitle('Replay')).toBeInTheDocument()
-    expect(screen.getByLabelText('clockwise revolving arrow')).toBeInTheDocument()
+    await expect.element(screen.getByTitle('Replay')).toBeInTheDocument()
+    await expect.element(screen.getByLabelText('clockwise revolving arrow')).toBeInTheDocument()
   })
 
   it('should reset game when clicked while game is new', async () => {

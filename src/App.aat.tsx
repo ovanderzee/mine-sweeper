@@ -8,62 +8,51 @@ describe('The app journey', () => {
     const screen = await renderWithProvider(<App />)
 
     // land in Introduction
-    expect(screen.getByText('mine sweeper')).toBeInTheDocument()
+    await expect.element(screen.getByText('mine sweeper')).toBeInTheDocument()
     let navBtn = screen.getByText('skip to game')
     await navBtn.click()
 
-    await vi.waitFor(async () => {
-      const loc = screen.getByRole('heading', {name: 'Playground'})
-      expect(loc).toBeInTheDocument()
-      expect(navBtn).not.toBeInTheDocument()
-    })
+    const loc1 = screen.getByRole('heading', {name: 'Playground'})
+    await expect.element(loc1).toBeInTheDocument()
+    await expect.element(navBtn).not.toBeInTheDocument()
 
     // now in Game
 
     navBtn = screen.getByTitle('Hall of Fame')
     await navBtn.click()
 
-    await vi.waitFor(() => {
-      const loc = screen.getByRole('heading', {name: 'Hall of Fame'})
-      expect(loc).toBeInTheDocument()
-      expect(navBtn).not.toBeInTheDocument()
-    })
+    const locHF = screen.getByRole('heading', {name: 'Hall of Fame'})
+    await expect.element(locHF).toBeInTheDocument()
+    await expect.element(navBtn).not.toBeInTheDocument()
 
     // now in Hall of Fame
 
     navBtn = screen.getByTitle('Description')
     await navBtn.click()
 
-    await vi.waitFor(() => {
-      const loc = screen.getByRole('heading', {name: 'Description'})
-      expect(loc).toBeInTheDocument()
-      expect(navBtn).not.toBeInTheDocument()
-    })
+    const locAD = screen.getByRole('heading', {name: 'Description'})
+    await expect.element(locAD).toBeInTheDocument()
+    await expect.element(navBtn).not.toBeInTheDocument()
 
     // now in About
 
     navBtn = screen.getByTitle('Settings')
     await navBtn.click()
 
-    await vi.waitFor(() => {
-      const loc = screen.getByRole('heading', {name: 'Settings'})
-      expect(loc).toBeInTheDocument()
-      expect(navBtn).not.toBeInTheDocument()
-    })
+    const locSet = screen.getByRole('heading', {name: 'Settings'})
+    await expect.element(locSet).toBeInTheDocument()
+    await expect.element(navBtn).not.toBeInTheDocument()
 
     // now in Configure
 
     navBtn = screen.getByTitle('Return to Game')
     await navBtn.click()
 
-    await vi.waitFor(() => {
-      const loc = screen.getByRole('heading', {name: 'Playground'})
-      expect(loc).toBeInTheDocument()
-      expect(navBtn).not.toBeInTheDocument()
-    })
+    const locPG = screen.getByRole('heading', {name: 'Playground'})
+    await expect.element(locPG).toBeInTheDocument()
+    await expect.element(navBtn).not.toBeInTheDocument()
 
     // back in Game
-
   })
 })
 

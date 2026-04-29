@@ -19,16 +19,16 @@ describe('The configure page sidebar', () => {
 
   beforeEach(async () => screen = await renderWithProvider(<Configure/>))
 
-  it('should offer navigation to About page', () => {
-    expect(screen.getByTitle('Description')).toBeInTheDocument()
+  it('should offer navigation to About page', async () => {
+    await expect.element(screen.getByTitle('Description')).toBeInTheDocument()
   })
 
-  it('should offer navigation to HallOfFame page', () => {
-    expect(screen.getByTitle('Hall of Fame')).toBeInTheDocument()
+  it('should offer navigation to HallOfFame page', async () => {
+    await expect.element(screen.getByTitle('Hall of Fame')).toBeInTheDocument()
   })
 
-  it('should offer navigation to Game page', () => {
-    expect(screen.getByTitle('Return to Game')).toBeInTheDocument()
+  it('should offer navigation to Game page', async () => {
+    await expect.element(screen.getByTitle('Return to Game')).toBeInTheDocument()
   })
 
 })

@@ -49,9 +49,7 @@ describe('Flip focus', () => {
       expect(navButton).toHaveFocus()
       rootKeyListener(altTabEvent)
 
-      await vi.waitFor(async () => {
-        await expect.element(screen.getByRole('gridcell').first()).toBe(document.activeElement)
-      })
+      await expect.element(screen.getByRole('gridcell').first()).toBe(document.activeElement)
     })
 
     it('should move focus from control in board to the "New Game" button, the first control in toolbar', async () => {
@@ -60,10 +58,8 @@ describe('Flip focus', () => {
       expect(boardCell).toHaveFocus()
       rootKeyListener(altTabEvent)
 
-      await vi.waitFor(async () => {
-        await expect.element(screen.getByRole('toolbar').getByRole('button').first()).toBe(document.activeElement)
-        await expect.element(screen.getByRole('toolbar').getByTitle('New Game')).toBe(document.activeElement)
-      })
+      await expect.element(screen.getByRole('toolbar').getByRole('button').first()).toBe(document.activeElement)
+      await expect.element(screen.getByRole('toolbar').getByTitle('New Game')).toBe(document.activeElement)
     })
 
     it('should move focus from control in toolbar to the "New Game" button, the first control in navigation', async () => {
@@ -72,10 +68,8 @@ describe('Flip focus', () => {
       expect(toolButton).toHaveFocus()
       rootKeyListener(altTabEvent)
 
-      await vi.waitFor(async () => {
-        await expect.element(screen.getByRole('navigation').getByRole('button').first()).toBe(document.activeElement)
-        await expect.element(screen.getByRole('navigation').getByTitle('New Game')).toBe(document.activeElement)
-      })
+      await expect.element(screen.getByRole('navigation').getByRole('button').first()).toBe(document.activeElement)
+      await expect.element(screen.getByRole('navigation').getByTitle('New Game')).toBe(document.activeElement)
     })
   })
 
@@ -93,9 +87,7 @@ describe('Flip focus', () => {
       expect(navButton).toHaveFocus()
       rootKeyListener(altTabEvent)
 
-      await vi.waitFor(async () => {
-        await expect.element(screen.getByRole('main').getByRole('slider').first()).toBe(document.activeElement)
-      })
+      await expect.element(screen.getByRole('main').getByRole('slider').first()).toBe(document.activeElement)
     })
 
     it('should move focus from control in main to the "Revert to Defaults" button, the first control in navigation', async () => {
@@ -104,10 +96,8 @@ describe('Flip focus', () => {
       expect(mainInput).toHaveFocus()
       rootKeyListener(altTabEvent)
 
-      await vi.waitFor(async () => {
-        await expect.element(screen.getByRole('navigation').getByRole('button').first()).toBe(document.activeElement)
-        await expect.element(screen.getByRole('navigation').getByTitle('Revert to Defaults')).toBe(document.activeElement)
-      })
+      await expect.element(screen.getByRole('navigation').getByRole('button').first()).toBe(document.activeElement)
+      await expect.element(screen.getByRole('navigation').getByTitle('Revert to Defaults')).toBe(document.activeElement)
     })
   })
 
@@ -126,10 +116,8 @@ describe('Flip focus', () => {
       expect(mainButton).toHaveFocus()
       rootKeyListener(altTabEvent)
 
-      await vi.waitFor(async () => {
-        await expect.element(screen.getByRole('navigation').getByRole('button').first()).toBe(document.activeElement)
-        await expect.element(screen.getByRole('navigation').getByTitle('Clear List')).toBe(document.activeElement)
-       })
+      await expect.element(screen.getByRole('navigation').getByRole('button').first()).toBe(document.activeElement)
+      await expect.element(screen.getByRole('navigation').getByTitle('Clear List')).toBe(document.activeElement)
     })
   })
 

@@ -16,16 +16,16 @@ describe('The hall-of-fame page sidebar', () => {
 
   beforeEach(async () => screen = await renderWithProvider(<HallOfFame/>))
 
-  it('should offer navigation to About page', () => {
-    expect(screen.getByTitle('Description')).toBeInTheDocument()
+  it('should offer navigation to About page', async () => {
+    await expect.element(screen.getByTitle('Description')).toBeInTheDocument()
   })
 
-  it('should offer navigation to Configure page', () => {
-    expect(screen.getByTitle('Settings')).toBeInTheDocument()
+  it('should offer navigation to Configure page', async () => {
+    await expect.element(screen.getByTitle('Settings')).toBeInTheDocument()
   })
 
-  it('should offer navigation to Game page', () => {
-    expect(screen.getByTitle('Return to Game')).toBeInTheDocument()
+  it('should offer navigation to Game page', async () => {
+    await expect.element(screen.getByTitle('Return to Game')).toBeInTheDocument()
   })
 
 })

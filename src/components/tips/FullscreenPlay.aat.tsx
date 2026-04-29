@@ -32,12 +32,9 @@ describe('FullscreenPlay Component', () => {
       const fullscreenButton = screen.getByTitle('Play on fullscreen')
       await fullscreenButton.click()
 
-      const windowedButton = await vi.waitFor(() => {
-        // try to get the locator until it exists
-        const loc = screen.getByTitle('Play in a window')
-        expect(loc).toBeInTheDocument()
-        return loc
-      })
+      // try to get the locator until it exists
+      const windowedButton = screen.getByTitle('Play in a window')
+      await expect.element(windowedButton).toBeInTheDocument()
 
       await windowedButton.click()
       expect(document.fullscreenElement).toBeFalsy()
@@ -55,9 +52,9 @@ describe('FullscreenPlay Component', () => {
       // pxFontSize 32.6531px
       expect(parseInt(pxFontSize)).toBeGreaterThan(defaultPixelFontSize)
 
+      await expect.element(screen.getByTitle('Have all cells visible')).toBeVisible()
+      await expect.element(screen.getByTitle('Revert magnification')).toBeVisible()
       expect(coverFit).not.toBeVisible()
-      expect(screen.getByTitle('Have all cells visible')).toBeVisible()
-      expect(screen.getByTitle('Revert magnification')).toBeVisible()
     })
 
     it('should contain all cells and show other view options', async () => {
@@ -69,9 +66,9 @@ describe('FullscreenPlay Component', () => {
       // pxFontSize 24.4898px
       expect(parseInt(pxFontSize)).toBeGreaterThan(defaultPixelFontSize)
 
+      await expect.element(screen.getByTitle('Fill screen with cells')).toBeVisible()
+      await expect.element(screen.getByTitle('Revert magnification')).toBeVisible()
       expect(containFit).not.toBeVisible()
-      expect(screen.getByTitle('Fill screen with cells')).toBeVisible()
-      expect(screen.getByTitle('Revert magnification')).toBeVisible()
     })
 
     it('should not magnify and show other view options', async () => {
@@ -85,9 +82,9 @@ describe('FullscreenPlay Component', () => {
       // pxFontSize 15px
       expect(parseInt(pxFontSize)).toBe(defaultPixelFontSize)
 
-      expect(screen.getByTitle('Revert magnification')).not.toBeVisible()
-      expect(screen.getByTitle('Fill screen with cells')).toBeVisible()
-      expect(screen.getByTitle('Have all cells visible')).toBeVisible()
+      await expect.element(screen.getByTitle('Revert magnification')).not.toBeVisible()
+      await expect.element(screen.getByTitle('Fill screen with cells')).toBeVisible()
+      await expect.element(screen.getByTitle('Have all cells visible')).toBeVisible()
     })
 
   })
