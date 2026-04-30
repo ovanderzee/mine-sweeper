@@ -6,10 +6,8 @@
 - Gameboard could technically be 36 * 36 = 1296 cells, but the cells will be very small, even fullscreen
 - Fade out of dialog goes smooth but ends abrupt
 - Debt after porting tests to vitest, see TODOs and it.skip
-- Look at disabled 'set-state-in-effect' and 'exhaustive-deps'
 - added click listeners on range-inputs to test them, remove when vitest/browser starts supporting change listeners on inputs
 - Vitest lacks support for pointerup/down, how to test longpress to flag cells?
-- Random timeouts in first vi.waitFor of renderWithApp function
 
 ### Features
 - Pause button, correct time on unpause
@@ -20,6 +18,12 @@
 - Open/close mark section
 - Tests on marking
 - Consent for ending playing game and changing the config when replaying from score list
+- Do not open pristine cells on win sharp game
+
+
+## [3.10.1] - 2026-05
+
+###
 
 
 ## [3.10.0] - 2026-04-29
