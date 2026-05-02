@@ -27,15 +27,17 @@ const Tips = (props: TipsProps) => {
 
   return (
     <div className="tips" role="toolbar">
+      {config.PLAY_MODE !== PlayMode.NORMAL &&
+        <div className="tip" id="playmode-text" title={text.tips[`${config.PLAY_MODE} hint`]}>
+          <span><b>{capPlayMode}</b></span>
+        </div>
+      }
       {config.PLAY_MODE !== PlayMode.TOUGH && <TimeTracker game={props.game} />}
       <MineTracker game={props.game} />
       <section id="tip-action" className="tip">
         <NewGame onNew={props.onNew} stage={props.game.stage} appearance="tip" />
       </section>
       <FullscreenPlay playgroundRef={props.playgroundRef} />
-      {config.PLAY_MODE !== PlayMode.NORMAL && <div className="tip" id="playmode-text">
-        {capPlayMode + ': ' + text.tips[`${config.PLAY_MODE} hint`]}
-      </div>}
     </div>
   )
 }

@@ -3,14 +3,12 @@
 
   position: relative;
   z-index: 10;
-  grid-row: calc(var(--board-size) + 1);
-  grid-column: 1 / span var(--board-size);
   display: flex;
+  align-items: baseline;
   justify-content: space-between;
   flex-wrap: wrap;
-  padding-block-start: 1ex;
-  width: 19em;
-  margin-inline: auto;
+  width: 18.5em;
+  margin: 1ex auto;
 }
 
 :fullscreen .tips {
@@ -18,14 +16,7 @@
 }
 
 .tip {
-  padding-inline: 1ex;
-}
-
-#playmode-text.tip {
-  width: 100%;
-  flex: 1 0 100%;
-  font-size: 80%;
-  text-align: left;
+  font-weight: bold;
 }
 
 .tip > * {
@@ -35,7 +26,7 @@
 .tip > button {
   border: none;
   background: none;
-  padding-inline: .333em !important;
+  padding-inline: 0 !important;
 }
 
 .tip button svg {
@@ -45,6 +36,18 @@
 
 .tip button:hover svg {
   color: var(--active-color);
+}
+
+/* PLAY MODE */
+
+#playmode-text.tip span {
+  background: currentcolor;
+  padding: .5ex 1ex;
+  font-size: 72%;
+}
+
+#playmode-text.tip span b {
+  color: white;
 }
 
 /* TIME */
@@ -103,8 +106,12 @@
 #tip-action,
 #fullscreen-play {
   display: flex;
-  gap: .2em;
+  gap: 1ex;
 }
+
+/**************
+ * FULLSCREEN *
+ **************/
 
 #fullscreen-play *:has(> svg use[href]) {
   color: currentcolor;
