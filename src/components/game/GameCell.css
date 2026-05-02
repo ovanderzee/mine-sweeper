@@ -69,7 +69,7 @@
 }
 
 .game-lost #game-board button.flag::after {
-  color: var(--state-red);
+  color: var(--fire-yellorange);
 }
 
 #game-board button.mijn.flag::after {

@@ -18,12 +18,12 @@
 - Open/close mark section
 - Tests on marking
 - Consent for ending playing game and changing the config when replaying from score list
-- Do not open pristine cells on win sharp game
 
 
-## [3.10.1] - 2026-05
+## [3.10.1] - 2026-05-02
 
-###
+### Changed
+- When game in sharp mode is decided, make all cells immutable, and show the mines 
 
 
 ## [3.10.0] - 2026-04-29

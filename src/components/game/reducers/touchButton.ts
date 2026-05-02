@@ -37,9 +37,12 @@ export const touchButtonReducer = (state: GameState, action: PayloadAction, conf
     if (PLAY_MODE === PlayMode.SHARP) {
       const flaggedCells = updBoard.flat().filter(cell => cell.locked)
       if (flaggedCells.length === MINE_COUNT) {
-        // test flags match all mines, touch remaining buttons, game decided
-        const pristineCells = findPristineCells()
-        pristineCells.forEach((cell) => touchCell(cell, { stage: CellStateStage.RELEASED }))
+        // game decided, show mines, prevent interaction
+        updBoard.flat().forEach(cell => {
+          if (cell.fill > 8) touchCell(cell, { stage: CellStateStage.RELEASED })
+          cell.disabled = true
+        })
+        // check flags and mines match
         const gameLost = flaggedCells.some(cell => cell.fill < 9)
         updState.stage = gameLost ? GameStages.LOST : GameStages.WON
       }

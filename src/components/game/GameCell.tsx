@@ -36,7 +36,7 @@ const GameCell = (props: GameCellProps) => {
   */
 
   const actionHandler = (type: GameActionType) => {
-    if (stage) return
+    if (stage || props.cell.disabled) return
     if (type === GameActionType.MOVE && locked) return
     if (type === GameActionType.FLAG && PLAY_MODE === PlayMode.TOUGH) return
 
@@ -146,6 +146,7 @@ const GameCell = (props: GameCellProps) => {
       onPointerLeave={cancelHandler}
       onPointerOut={cancelHandler}
       onPointerUp={endHandler}
+      disabled={props.cell.disabled}
     >
       {cellContent}
       {burst &&
