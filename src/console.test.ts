@@ -102,3 +102,17 @@ describe('Console methods mixing mocks and stored scores', () => {
   })
 
 })
+
+describe('Console maintenance methods', () => {
+
+  it('should remove scores without moves', () => {
+    const currScore = testScore()
+    currScore.play.moves = 0
+
+    storage.scores = [ currScore ] as ScoreItem[]
+    mv.deleteInvalidScores()
+
+    expect(storage.scores.length).toBe(0)
+  })
+
+})

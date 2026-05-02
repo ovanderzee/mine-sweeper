@@ -258,6 +258,29 @@ describe('Handle loosing and winning in sharp play-mode', () => {
     await expect.element(dialog).toHaveClass('shield-modal')
   })
 
+  it('should celebrate but not store the scores of game won without moves', async () => {
+    storage.game = newGameState
+    const initialNumberOfStoredScores = storage.scores.length
+
+    const screen = await renderWithProvider(<Game />)
+    const gameCells = screen.getByRole('gridcell')
+    await gameCells.first().element().focus()
+    await userEvent.keyboard('{Space}')
+
+    await gameCells.last().element().focus()
+    await userEvent.keyboard('{Space}')
+
+    expect(storage.game?.stage).toBe('game-won')
+    await expect.element(screen.getByRole('main')).toHaveClass('game-won')
+
+    const dialog = screen.getByRole('dialog')
+    await expect.element(dialog).toBeInTheDocument()
+    await expect.element(dialog).toHaveClass('shield-modal')
+
+    const resultingNumberOfStoredScores = storage.scores.length
+    expect(resultingNumberOfStoredScores).toBe(initialNumberOfStoredScores)
+  })
+
   it('should reflect on a lost game in sharp play-mode', async () => {
     const screen = await renderWithProvider(<Game />)
     const gameCells = screen.getByRole('gridcell')

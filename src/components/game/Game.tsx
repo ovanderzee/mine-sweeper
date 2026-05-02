@@ -11,7 +11,7 @@ import Settings from '../nav/Settings'
 import { ShieldModal } from '../UI/Modal'
 import { initialGameState } from './common'
 import { gameReducer } from './game-reducer'
-import { GameStages, GameAction, GameActionType } from '../../common/game.d'
+import { GameStages, GameAction, GameActionType, CellStateStage } from '../../common/game.d'
 import storage from '../../common/storage'
 import Tips from './../tips/Tips'
 import { focusFirstNavButton } from '../../common/functions'
@@ -107,14 +107,22 @@ const Game = () => {
 
   useEffect(() => {
     if (gameWasWon) {
-      const action: GameAction = { type: GameActionType.VICTORY}
-      dispatchGameAction(action)
+      /**
+        In sharp mode the number of moves can theoretically be zero,
+        which makes the score calculation impossible.
+       */
+      const allCells = gameState.board.flat()
+      const movesDone = allCells.some(cell => cell.stage === CellStateStage.TESTED)
+      if (movesDone) {
+        const action: GameAction = { type: GameActionType.VICTORY }
+        dispatchGameAction(action)
+      }
       // eslint-disable-next-line react-hooks/set-state-in-effect // state is used to display a message
       setShowWonModal(true)
     } else if (gameWasLost) {
       // blow the untouched mines, odd number of mines will not blow in dev
       const waitTime = 100 + Math.ceil(200 * Math.random())
-      const action: GameAction = { type: GameActionType.DEFEAT}
+      const action: GameAction = { type: GameActionType.DEFEAT }
       setTimeout(
         () => dispatchGameAction(action),
         waitTime
