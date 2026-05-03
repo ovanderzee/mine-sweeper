@@ -2,6 +2,7 @@ import React, { useContext, useState, useRef, useEffect } from 'react'
 import PageContext from '../../store/page-context'
 import { ShieldByRank } from './Shield'
 import { FADE_OUT_TIME } from '../../common/constants'
+import { minorMagnification } from '../../common/functions'
 import './Modal.css'
 
 interface ModalProps {
@@ -19,7 +20,7 @@ interface AbstractProps extends ModalProps {
 
 const AbstractModal = (props: AbstractProps): React.ReactNode => {
   const pageCtx = useContext(PageContext)
-  const text = pageCtx.text
+  const { config, session, text } = pageCtx
 
   const dialogRef = useRef<HTMLDialogElement | null>(null)
   const [endState, setEndState] = useState('')
@@ -92,6 +93,7 @@ const AbstractModal = (props: AbstractProps): React.ReactNode => {
       ref={dialogRef}
       onClick={timedCloseModal}
       onKeyDown={keystrokeShortcut}
+      style={{'fontSize': minorMagnification(session.MAGNIFICATION) * config.FONT_SIZE + 'px'} as React.CSSProperties}
     >
       {props.kind === 'approve' &&
         <div className="dialog-body">

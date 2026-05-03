@@ -4,6 +4,8 @@ export const capitalise = (word: string): string => {
   return word ? word.substring(0,1).toUpperCase() + word.substring(1).toLowerCase() : ''
 }
 
+export const minorMagnification = (factor: number): number => ((factor - 1) * .333) + 1
+
 export const preventReloadByEnter = (event: React.KeyboardEvent): boolean => {
   const isAction = event.key === 'Enter'
   if (isAction) {

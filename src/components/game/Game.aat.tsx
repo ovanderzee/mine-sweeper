@@ -244,10 +244,12 @@ describe('Handle loosing and winning in sharp play-mode', () => {
     storage.config = sharpMicroConfig
   })
 
-  it('should celebrate a won game in sharp play-mode', async () => {
+  it('should celebrate a won game in sharp play-mode and show pristine cells', async () => {
     const screen = await renderWithProvider(<Game />)
     const gameCells = screen.getByRole('gridcell')
-    await gameCells.nth(0).element().focus()
+    await gameCells.nth(4).element().focus()
+    await userEvent.keyboard('{Enter}')
+    await gameCells.first().element().focus()
     await userEvent.keyboard('{Space}')
 
     expect(storage.game?.stage).toBe('game-won')
@@ -256,19 +258,55 @@ describe('Handle loosing and winning in sharp play-mode', () => {
     const dialog = screen.getByRole('dialog')
     await expect.element(dialog).toBeInTheDocument()
     await expect.element(dialog).toHaveClass('shield-modal')
+
+    vi.advanceTimersByTimeAsync(5000)
+    await expect.element(gameCells.first()).toHaveClass('touched flag mijn')
+    await expect.element(gameCells.nth(1)).toHaveClass('pristine')
+    await expect.element(gameCells.nth(2)).toHaveClass('pristine')
+    await expect.element(gameCells.nth(3)).toHaveClass('pristine')
+    await expect.element(gameCells.nth(4)).toHaveClass('touched')
+    await expect.element(gameCells.nth(5)).toHaveClass('pristine')
+    await expect.element(gameCells.nth(6)).toHaveClass('pristine')
+    await expect.element(gameCells.nth(7)).toHaveClass('pristine')
+    await expect.element(gameCells.last()).toHaveClass('touched flag mijn')
   })
 
-  it('should reflect on a lost game in sharp play-mode', async () => {
+  it('should celebrate but not store the scores of game won without moves', async () => {
+    storage.game = newGameState
+    const initialNumberOfStoredScores = storage.scores.length
+
     const screen = await renderWithProvider(<Game />)
     const gameCells = screen.getByRole('gridcell')
+    await gameCells.first().element().focus()
+    await userEvent.keyboard('{Space}')
+
+    await gameCells.last().element().focus()
+    await userEvent.keyboard('{Space}')
+
+    expect(storage.game?.stage).toBe('game-won')
+    await expect.element(screen.getByRole('main')).toHaveClass('game-won')
+
+    const dialog = screen.getByRole('dialog')
+    await expect.element(dialog).toBeInTheDocument()
+    await expect.element(dialog).toHaveClass('shield-modal')
+
+    const resultingNumberOfStoredScores = storage.scores.length
+    expect(resultingNumberOfStoredScores).toBe(initialNumberOfStoredScores)
+  })
+
+  it('should reflect on a lost game in sharp play-mode and show pristine cells', async () => {
+    const screen = await renderWithProvider(<Game />)
+    const gameCells = screen.getByRole('gridcell')
+    await gameCells.nth(4).element().focus()
+    await userEvent.keyboard('{Enter}')
     await gameCells.nth(2).element().focus()
     await userEvent.keyboard('{Space}')
 
     expect(storage.game?.stage).toBe('game-lost')
     await expect.element(screen.getByRole('main')).toHaveClass('game-lost')
 
-    await expect.element(gameCells.nth(0)).toHaveClass('explode')
-    await expect.element(gameCells.nth(2)).not.toHaveClass('explode')
-    await expect.element(gameCells.nth(8)).toHaveClass('explode')
+    await expect.element(gameCells.first()).toHaveClass('touched explode')
+    await expect.element(gameCells.nth(2)).toHaveClass('pristine flag')
+    await expect.element(gameCells.last()).toHaveClass('touched flag explode')
   })
 })

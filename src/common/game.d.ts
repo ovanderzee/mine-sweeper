@@ -8,6 +8,7 @@ export class CellStateEntry {
   stage?: CellStateStage;
   locked?: boolean;
   burst?: boolean;
+  disabled?: boolean;
 }
 
 export class CellState extends CellStateEntry {

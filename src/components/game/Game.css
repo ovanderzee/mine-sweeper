@@ -10,12 +10,8 @@ section.screen,
 }
 
 #playground {
-  padding: 1.333em 0;
+  padding-block: 1.333em;
   transition: font-size var(--fadeout-time) ease;
-}
-
-#playground > * {
-  padding-inline: 1em;
 }
 
 #playground:fullscreen {
@@ -64,6 +60,6 @@ section.screen,
   }
 
   #playground[role="main"] {
-    min-width: calc(var(--app-width) - var(--nav-width));
+    min-width: calc(var(--app-width) - var(--nav-width) - calc(var(--screen-gutter) * 2));
   }
 }

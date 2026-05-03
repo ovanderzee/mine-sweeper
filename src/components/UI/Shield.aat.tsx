@@ -60,4 +60,11 @@ describe('Shields display a readable text', async () => {
     expect(triple.clientHeight).toBeGreaterThan(quadruple.clientHeight)
   })
 
+  it('should show an \'Multiplication X\' when rank equals zero', async () => {
+    const screen = await render(<ShieldByRank rank={0} />)
+    const none = screen.getByText(String.fromCharCode(10005))
+
+    await expect.element(none).toBeInTheDocument()
+  })
+
 })

@@ -1,5 +1,5 @@
 import React from 'react'
-import { capitalise, preventReloadByEnter, scrollIntoViewTowardsCenter } from './functions'
+import { capitalise, minorMagnification, preventReloadByEnter, scrollIntoViewTowardsCenter } from './functions'
 
 describe('capitalise', () => {
   it('should transform to one capital letter followed by zero or more lowercase letters', () => {
@@ -11,6 +11,35 @@ describe('capitalise', () => {
   })
 })
 
+describe(`minorMagnification,
+  calculating a value smaller than the input,
+  and a value 1 based on input of 1`, () => {
+
+  const testExpectation = (factor: number, result: number): void => {
+    expect(result).toBeLessThanOrEqual(factor)
+    expect(result).toBeGreaterThanOrEqual(1)
+  }
+
+  it('should return a value smaller than a very big argument', () => {
+    const factor = 10
+    testExpectation(factor, minorMagnification(factor))
+  })
+
+  it('should return a value smaller than a big argument', () => {
+    const factor = 3
+    testExpectation(factor, minorMagnification(factor))
+  })
+
+  it('should return a value smaller than the argument', () => {
+    const factor = 1.1
+    testExpectation(factor, minorMagnification(factor))
+  })
+
+  it('should return a value not smaller than 1', () => {
+    const factor = 1
+    testExpectation(factor, minorMagnification(factor))
+  })
+})
 
 describe('preventReloadByEnter', () => {
   it('should call event.preventDefault when Enter was pressed', () => {

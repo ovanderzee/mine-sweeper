@@ -21,11 +21,18 @@ const cellStates: Record<string, Record<string, CellState>> = {
     mijn: { row: 3, col: 4, fill: 9, stage: CellStateStage.RELEASED },
   },
   // immutable, flag meaningless
-  // clicked is programmatically done with all mines
+  // clicked is programmatically done with all mines when games is lost
   clicked: {
     blank: { row: 1, col: 2, fill: 0, stage: CellStateStage.TESTED },
     value: { row: 2, col: 3, fill: 2, stage: CellStateStage.TESTED },
     mijn: { row: 3, col: 4, fill: 9, stage: CellStateStage.TESTED },
+  },
+  // immutable, flag meaningless
+  // disabled is programmatically done with all mines in sharp playmode when game is decided
+  disabled: {
+    blank: { row: 1, col: 2, fill: 0, stage: CellStateStage.HIDDEN, disabled: true },
+    value: { row: 2, col: 3, fill: 2, stage: CellStateStage.HIDDEN, disabled: true },
+    mijn: { row: 3, col: 4, fill: 9, stage: CellStateStage.HIDDEN, disabled: true },
   },
 }
 

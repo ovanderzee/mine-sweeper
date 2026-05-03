@@ -172,7 +172,7 @@ describe('Gamecell, a party of properties', () => {
     })
   })
 
-  describe('should NOT respond to keystrokes when tough play-mode is in effect ', async () => {
+  describe('should NOT respond to spacebar-keystroke when tough play-mode is in effect ', async () => {
     let cell: CellState
     const TOUGH_CONFIG = { ...DEFAULTS, PLAY_MODE: PlayMode.TOUGH }
 

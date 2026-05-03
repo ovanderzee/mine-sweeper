@@ -28,7 +28,8 @@ const Shield = (props: ShieldProps) => {
 export const ShieldByRank = (props: {rank: number; }) => {
   const colorSetMap: ColorSet[] = ['blue', 'gold', 'silver', 'bronze']
   const colorSet = colorSetMap[props.rank] || 'blue'
-  return <Shield colorSet={colorSet} text={`${props.rank}`} />
+  const text = props.rank > 0 ? props.rank.toString() : '✕' // Multiplication X
+  return <Shield colorSet={colorSet} text={`${text}`} />
 }
 
 export default Shield

@@ -5,7 +5,7 @@ import MineTracker from './MineTracker'
 import FullscreenPlay from './FullscreenPlay'
 import NewGame from '../nav/NewGame'
 import { PlayMode } from '../../common/app.d'
-import { capitalise } from '../../common/functions'
+import { capitalise, minorMagnification } from '../../common/functions'
 import { GameState, GameAction } from '../../common/game.d'
 import '../nav/NavOptionButton.css'
 import './Tips.css'
@@ -21,21 +21,27 @@ interface TipsProps extends TipProps {
 
 const Tips = (props: TipsProps) => {
   const pageCtx = useContext(PageContext)
-  const { text, config } = pageCtx
+  const { config, session, text } = pageCtx
 
   const capPlayMode = text.settings[capitalise(config.PLAY_MODE)]
 
   return (
-    <div className="tips" role="toolbar">
+    <div
+      className="tips"
+      role="toolbar"
+      style={{'fontSize': minorMagnification(session.MAGNIFICATION) * config.FONT_SIZE + 'px'} as React.CSSProperties}
+    >
+      {config.PLAY_MODE !== PlayMode.NORMAL &&
+        <div className="tip" id="playmode-text" title={text.tips[`${config.PLAY_MODE} hint`]}>
+          <span><b>{capPlayMode}</b></span>
+        </div>
+      }
       {config.PLAY_MODE !== PlayMode.TOUGH && <TimeTracker game={props.game} />}
       <MineTracker game={props.game} />
       <section id="tip-action" className="tip">
         <NewGame onNew={props.onNew} stage={props.game.stage} appearance="tip" />
       </section>
       <FullscreenPlay playgroundRef={props.playgroundRef} />
-      {config.PLAY_MODE !== PlayMode.NORMAL && <div className="tip" id="playmode-text">
-        {capPlayMode + ': ' + text.tips[`${config.PLAY_MODE} hint`]}
-      </div>}
     </div>
   )
 }
