@@ -20,10 +20,15 @@
 - Consent for ending playing game and changing the config when replaying from score list
 
 
-## [3.10.1] - 2026-05-02
+## [3.10.1] - 2026-05-03
+
+### Added
+- Separate magnification for tips and dialog in playground
+- Theoretical win case with zero moves in sharp mode is not stored
 
 ### Changed
-- When game in sharp mode is decided, make all cells immutable, and show the mines 
+- When game in sharp mode is decided, make all cells immutable, and show the mines
+- Restyled tips
 
 
 ## [3.10.0] - 2026-04-29
