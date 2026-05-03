@@ -55,7 +55,7 @@
     "AltTabKey": "Alt-Tab",
     "AltTabText": "Jump to first interaction in main or navigation section",
     "AltBackspaceKey": "Alt-Back-space",
-    "AltBackspaceText": "OPen random cell to start playing",
+    "AltBackspaceText": "Open random cell to start playing",
     "SpaceKey": "Spacebar",
     "SpaceText": "Lock a cell with a flag",
     "ArrowsKey": "Arrows",
