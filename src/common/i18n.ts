@@ -1,5 +1,6 @@
-import nederlands from './translations/nederlands.json'
-import english from './translations/english.json'
+/* @ts-ignore */
+import nederlands from './translations/nederlands.json' with { type: "json" };
+import english from './translations/english.json' with { type: "json" };
 import { Translation, Languages } from './app.d'
 
 const translationLength = (translation: Translation) => Object.keys(translation)
@@ -21,9 +22,9 @@ const translationIds = Object.keys(Languages)
 */
 export const inferLanguage = (): Languages => {
   const navigatorLanguages: string[] =
-    Array.isArray(window.navigator.languages) && window.navigator.languages.length
-      ? window.navigator.languages
-      : [window.navigator.language]
+    Array.isArray(navigator.languages) && navigator.languages.length
+      ? navigator.languages
+      : [navigator.language]
 
   const availableLanguages: string[] = navigatorLanguages.map((lang) => lang.substr(0, 2))
 
