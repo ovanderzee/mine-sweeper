@@ -1,12 +1,16 @@
 import { useContext } from 'react'
 import PageContext from '../../store/page-context'
 import HallOfFame from '../meta/HallOfFame'
+import { PageProps } from '../../common/game.d'
 
-const HiScores = () => {
+const HiScores = (props: PageProps) => {
   const pageCtx = useContext(PageContext)
   const text = pageCtx.text
 
-  const showHandler = () => pageCtx.navigate(<HallOfFame />)
+  const showHandler = () => {
+    props.onPause && props.onPause()
+    setTimeout(() => pageCtx.navigate(<HallOfFame />), 10)
+  }
 
   return (
     <button type="button" className="nav-option" title={text.nav['Hall of Fame']} onClick={showHandler}>

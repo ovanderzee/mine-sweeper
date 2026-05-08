@@ -3,16 +3,21 @@ import PageContext from '../../store/page-context'
 import NavOptionsBar from '../nav/NavOptionsBar'
 import Settings from '../nav/Settings'
 import GoBack from '../nav/GoBack'
+import { PageProps } from '../../common/game.d'
 import './GameCellDemo.css'
 import './Meta.css'
 
 const devMatch = /^(localhost|\d+\.\d+\.\d+\.\d+)$/
 const inDevelopment = window.location.hostname.match(devMatch)
 
-const GameCellDemoNav = () => {
+const GameCellDemoNav = (props: PageProps) => {
   const pageCtx = useContext(PageContext)
   const text = pageCtx.text
-  const watchHandler = () => pageCtx.navigate(<GameCellDemo />)
+
+  const watchHandler = () => {
+    props.onPause && props.onPause()
+    setTimeout(() => pageCtx.navigate(<GameCellDemo />), 10)
+  }
 
   const navButton = <button type="button" className="nav-option" title="Cell State Demo" onClick={watchHandler}>
       <svg role="img" aria-label={text.icon['eye']}><use href={`#nav-eye`} /></svg>

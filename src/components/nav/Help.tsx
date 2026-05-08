@@ -1,12 +1,16 @@
 import { useContext } from 'react'
 import PageContext from '../../store/page-context'
 import About from '../meta/About'
+import { PageProps } from '../../common/game.d'
 
-const Help = () => {
+const Help = (props: PageProps) => {
   const pageCtx = useContext(PageContext)
   const text = pageCtx.text
 
-  const showHandler = () => pageCtx.navigate(<About />)
+  const showHandler = () => {
+    props.onPause && props.onPause()
+    setTimeout(() => pageCtx.navigate(<About />), 10)
+  }
 
   return (
     <button type="button" className="nav-option" title={text.nav['Help']} onClick={showHandler}>

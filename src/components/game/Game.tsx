@@ -53,6 +53,12 @@ const Game = () => {
     }
   });
 
+  const pause = () => {
+    gameState.tShift = Date.now()
+    const action: GameAction = { type: GameActionType.STORE}
+    dispatchGameAction(action)
+  }
+
   const playgroundRef = useRef<HTMLDivElement>(null as unknown as HTMLDivElement)
 
   const gameBoard = (
@@ -94,10 +100,10 @@ const Game = () => {
         onReplay={dispatchGameAction}
         stage={gameState.stage}
       />
-      <HiScores />
-      <Help />
-      <Settings />
-      <GameCellDemoNav />
+      <HiScores onPause={pause} />
+      <Help onPause={pause} />
+      <Settings onPause={pause} />
+      <GameCellDemoNav onPause={pause} />
     </NavOptionsBar>
   )
 
