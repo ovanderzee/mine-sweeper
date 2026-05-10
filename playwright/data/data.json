@@ -1,0 +1,14 @@
+{
+  "cookies": [],
+  "origins": [
+    {
+      "origin": "http://localhost:4173",
+      "localStorage": [
+        {
+          "name": "mv-game",
+          "value": "{\"stage\":\"game-new\",\"board\":[[{\"stage\":\"\",\"fill\":0,\"row\":0,\"col\":0},{\"stage\":\"\",\"fill\":0,\"row\":0,\"col\":1},{\"stage\":\"\",\"fill\":0,\"row\":0,\"col\":2},{\"stage\":\"\",\"fill\":0,\"row\":0,\"col\":3},{\"stage\":\"\",\"fill\":0,\"row\":0,\"col\":4},{\"stage\":\"\",\"fill\":0,\"row\":0,\"col\":5}],[{\"stage\":\"\",\"fill\":1,\"row\":1,\"col\":0},{\"stage\":\"\",\"fill\":2,\"row\":1,\"col\":1},{\"stage\":\"\",\"fill\":2,\"row\":1,\"col\":2},{\"stage\":\"\",\"fill\":1,\"row\":1,\"col\":3},{\"stage\":\"\",\"fill\":0,\"row\":1,\"col\":4},{\"stage\":\"\",\"fill\":0,\"row\":1,\"col\":5}],[{\"stage\":\"\",\"fill\":1,\"row\":2,\"col\":0},{\"stage\":\"\",\"fill\":10,\"row\":2,\"col\":1},{\"stage\":\"\",\"fill\":10,\"row\":2,\"col\":2},{\"stage\":\"\",\"fill\":1,\"row\":2,\"col\":3},{\"stage\":\"\",\"fill\":1,\"row\":2,\"col\":4},{\"stage\":\"\",\"fill\":1,\"row\":2,\"col\":5}],[{\"stage\":\"\",\"fill\":1,\"row\":3,\"col\":0},{\"stage\":\"\",\"fill\":2,\"row\":3,\"col\":1},{\"stage\":\"\",\"fill\":2,\"row\":3,\"col\":2},{\"stage\":\"\",\"fill\":1,\"row\":3,\"col\":3},{\"stage\":\"\",\"fill\":1,\"row\":3,\"col\":4},{\"stage\":\"\",\"fill\":9,\"row\":3,\"col\":5}],[{\"stage\":\"\",\"fill\":1,\"row\":4,\"col\":0},{\"stage\":\"\",\"fill\":1,\"row\":4,\"col\":1},{\"stage\":\"\",\"fill\":1,\"row\":4,\"col\":2},{\"stage\":\"\",\"fill\":0,\"row\":4,\"col\":3},{\"stage\":\"\",\"fill\":1,\"row\":4,\"col\":4},{\"stage\":\"\",\"fill\":1,\"row\":4,\"col\":5}],[{\"stage\":\"\",\"fill\":1,\"row\":5,\"col\":0},{\"stage\":\"\",\"fill\":9,\"row\":5,\"col\":1},{\"stage\":\"\",\"fill\":1,\"row\":5,\"col\":2},{\"stage\":\"\",\"fill\":0,\"row\":5,\"col\":3},{\"stage\":\"\",\"fill\":0,\"row\":5,\"col\":4},{\"stage\":\"\",\"fill\":0,\"row\":5,\"col\":5}]],\"tZero\":0,\"tShift\":0,\"score\":{\"code\":\"\",\"date\":0,\"user\":\"\",\"rank\":0,\"level\":0,\"game\":{\"cells\":0,\"mines\":0,\"effort\":{\"least\":0,\"most\":0}},\"play\":{\"moves\":0,\"duration\":0},\"score\":{\"efficiency\":0,\"speed\":0,\"points\":0}},\"mines\":[]}"
+        }
+      ]
+    }
+  ]
+}

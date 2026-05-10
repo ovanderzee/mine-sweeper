@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test';
-import { openPlayground } from '../helpers/helpers';
+import { openPlayground } from '../helpers/run-helpers';
 
 test('see app running', async ({ page }) => {
   await page.goto('http://localhost:4173/');
