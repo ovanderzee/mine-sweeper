@@ -1,21 +1,67 @@
-import { test, expect } from '@playwright/test';
-import { openPlayground } from '../helpers/run-helpers';
+import { test, expect } from '@playwright/test'
+import { boardSize, nextBlank, nextPointer, nextMine } from '../helpers/game-helpers'
+import { openPlayground } from '../helpers/run-helpers'
 
-test('see app running', async ({ page }) => {
-  await page.goto('http://localhost:4173/');
+test.describe('result clicking cell', async () => {
+  let mainElement
 
-  // Expect a title "to contain" a substring.
-  await expect(page).toHaveTitle(/Mijnenveger/);
-});
+  test.beforeEach(async ({ page }) => {
+    await openPlayground(page)
+    mainElement = await page.getByRole('main')
+  })
 
-test('access game board', async ({ page }) => {
-  await openPlayground(page);
+  test('should touch blank and open neighbouring cells', async ({ page }, info) => {
+    const blankIndex = nextBlank()
+    const cellButton = await page.getByRole('gridcell').nth(blankIndex)
+    await expect(mainElement).toHaveClass(/game-new/)
+    const initialTouchedButtonCount = await page.locator('button.touched').count()
 
-  // Expects page to have a heading with the name of Installation.
-  await expect(page.getByRole('heading', { name: 'Playground' })).toBeVisible();
-});
+    await cellButton.click()
+    await page.screenshot({ path: `${info.outputDir}/click-blank.png`, fullPage: true });
 
-test('should touch first cell', async ({ page }) => {
+    await expect(cellButton).toHaveClass(/touched/)
+    await expect(mainElement).toHaveClass(/game-playing/)
+
+    const finalTouchedButtonCount = await page.locator('button.touched').count()
+    await expect(finalTouchedButtonCount).toBeGreaterThan(initialTouchedButtonCount)
+  })
+
+  test('should touch pointer and open no other cells', async ({ page }, info) => {
+    const pointerIndex = nextPointer()
+    const cellButton = await page.getByRole('gridcell').nth(pointerIndex)
+    await expect(mainElement).toHaveClass(/game-new/)
+    const initialTouchedButtonCount = await page.locator('button.touched').count()
+
+    await cellButton.click()
+    await page.screenshot({ path: `${info.outputDir}/click-pointer.png`, fullPage: true });
+
+    await expect(cellButton).toHaveClass(/touched/)
+    await expect(mainElement).toHaveClass(/game-playing/)
+
+    const finalTouchedButtonCount = await page.locator('button.touched').count()
+    await expect(finalTouchedButtonCount - initialTouchedButtonCount).toBe(1)
+  })
+
+  test('should touch mine and loose the game', async ({ page }, info) => {
+    const mineIndex = nextMine()
+    const cellButton = await page.getByRole('gridcell').nth(mineIndex)
+    await expect(mainElement).toHaveClass(/game-new/)
+
+    await cellButton.click()
+    await page.screenshot({ path: `${info.outputDir}/click-mine.png`, fullPage: true });
+
+    await expect(cellButton).toHaveClass(/touched/)
+    await expect(mainElement).toHaveClass(/game-lost/)
+
+    const finalTouchedButtonCount = await page.locator('button.touched').count()
+    await expect(finalTouchedButtonCount).toBe(Math.pow(boardSize, 2))
+  })
+})
+
+
+/*
+
+test('should promote cell once', async ({ page }) => {
   await openPlayground(page);
   const leftTopButton = page.getByRole('gridcell').first()
   // open cell
@@ -27,15 +73,4 @@ test('should touch first cell', async ({ page }) => {
   // await expect(leftTopButton).toHaveClass(/touched/);
 });
 
-test('should flag first cell', async ({ page }) => {
-  await openPlayground(page);
-  const leftTopButton = page.getByRole('gridcell').first()
-  // set flag
-  leftTopButton.click({delay: 500})
-  await expect(leftTopButton).toHaveClass(/flag/);
-  // remove flag
-  leftTopButton.click({delay: 500})
-  await expect(leftTopButton).not.toHaveClass(/flag/);
-});
-
-
+*/
