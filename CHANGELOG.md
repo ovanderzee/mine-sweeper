@@ -5,7 +5,7 @@
 ### Problems
 - Gameboard could technically be 36 * 36 = 1296 cells, but the cells will be very small, even fullscreen
 - Fade out of dialog goes smooth but ends abrupt
-- Debt after porting tests to vitest, see TODOs and it.skip
+- Debt after porting tests to vitest, see comment-disabled tests
 - added click listeners on range-inputs to test them, remove when vitest/browser starts supporting change listeners on inputs
 - Vitest lacks support for pointerup/down, how to test longpress to flag cells?
 
@@ -18,6 +18,18 @@
 - Open/close mark section
 - Tests on marking
 - Consent for ending playing game and changing the config when replaying from score list
+- Checkout Core Web Vitals-optimalisation
+- Describe commandline tools, remove max. scores setting.
+- Playing time needs to account for deactivation of playground
+- Rename 'Tough' to 'Bare'
+
+
+## [next] - 2026-06
+
+# Added
+- Playwright end-to-end tests
+
+### Changed
 
 
 ## [3.10.1] - 2026-05-03
