@@ -11,7 +11,7 @@ test.describe('result clicking cell', async () => {
   })
 
   test('should touch blank and open neighbouring cells', async ({ page }, info) => {
-    const blankIndex = nextBlank()
+    const blankIndex = await nextBlank(page)
     const cellButton = await page.getByRole('gridcell').nth(blankIndex)
     await expect(mainElement).toHaveClass(/game-new/)
     const initialTouchedButtonCount = await page.locator('button.touched').count()
@@ -27,7 +27,7 @@ test.describe('result clicking cell', async () => {
   })
 
   test('should touch pointer and open no other cells', async ({ page }, info) => {
-    const pointerIndex = nextPointer()
+    const pointerIndex = await nextPointer(page)
     const cellButton = await page.getByRole('gridcell').nth(pointerIndex)
     await expect(mainElement).toHaveClass(/game-new/)
     const initialTouchedButtonCount = await page.locator('button.touched').count()
@@ -43,7 +43,7 @@ test.describe('result clicking cell', async () => {
   })
 
   test('should touch mine and loose the game', async ({ page }, info) => {
-    const mineIndex = nextMine()
+    const mineIndex = await nextMine(page)
     const cellButton = await page.getByRole('gridcell').nth(mineIndex)
     await expect(mainElement).toHaveClass(/game-new/)
 
