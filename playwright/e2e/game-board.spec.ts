@@ -56,6 +56,16 @@ test.describe('result clicking cell', async () => {
     const finalTouchedButtonCount = await page.locator('button.touched').count()
     await expect(finalTouchedButtonCount).toBe(Math.pow(boardSize, 2))
   })
+
+  test('should flag first cell', async ({ page }) => {
+    const leftTopButton = await page.getByRole('gridcell').first()
+    // set flag
+    await leftTopButton.click({delay: 500})
+    await expect(leftTopButton).toHaveClass(/flag/)
+    // remove flag
+    await leftTopButton.click({delay: 500})
+    await expect(leftTopButton).not.toHaveClass(/flag/)
+  })
 })
 
 

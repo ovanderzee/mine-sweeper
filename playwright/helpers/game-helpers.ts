@@ -29,3 +29,8 @@ export const nextMine = async (page) => {
   return getButtonIndex(cell)
 }
 
+// options
+
+export const applyNewGame = async (page): void => await page.getByRole('navigation').getByTitle('New Game').click()
+
+export const applyReplayGame = async (page): void => await page.getByTitle('Replay').click()
