@@ -11,3 +11,7 @@ export const openPlayground = async (page): void => {
   // close intro animation
   await page.getByRole('button').click()
 }
+
+export const visitAboutScreen = async (page): void => await page.getByTitle('Description').click()
+
+export const visitPlayground = async (page): void => await page.getByTitle('Return to Game').click()
