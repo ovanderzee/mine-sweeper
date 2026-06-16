@@ -2,9 +2,18 @@ import { test, expect } from '@playwright/test'
 import { testUrl } from '../helpers/run-helpers'
 
 export const getGameData = async (page) => {
-//   console.log('page' , page)
   const localData = await page.evaluate(() => localStorage.getItem('mv-game'));
   return JSON.parse(localData)
+}
+
+export const elapsedSeconds = async (page): number => {
+  const gameState = await getGameData(page)
+  return Math.round((gameState.tShift - gameState.tZero) / 1000)
+}
+
+export const gameStage = async (page): string => {
+  const gameState = await getGameData(page)
+  return gameState.stage
 }
 
 export let boardSize = 0
@@ -14,7 +23,12 @@ export const getFlatBoard = async (page) => {
   return stored.board.flat()
 }
 
-const getButtonIndex = (data) => (data.row * boardSize) + data.col
+const getButtonIndex = (data) => {
+  if (data)
+    return (data.row * boardSize) + data.col
+  else
+    throw new Error('No button to process')
+}
 
 export const nextBlank = async (page) => {
   const cell = (await getFlatBoard(page)).find(c => c.fill === 0 && !c.stage)

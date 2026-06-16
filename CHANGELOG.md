@@ -22,6 +22,7 @@
 - Describe commandline tools, remove max. scores setting.
 - Playing time needs to account for deactivation of playground
 - Rename 'Tough' to 'Bare'
+- (Dummy) Pause screen - no special logic
 
 
 ## [next] - 2026-06

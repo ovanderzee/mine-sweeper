@@ -1,5 +1,5 @@
 import { test, expect } from '@playwright/test'
-import { openPlayground, visitAboutScreen, visitPlayground } from '../helpers/run-helpers'
+import { openPlayground, visitAboutScreen, visitPlayground, sleep } from '../helpers/run-helpers'
 
 test.describe('run integrity', () => {
   test.beforeEach(async ({ page }) => {
@@ -26,4 +26,15 @@ test.describe('run integrity', () => {
     await visitPlayground(page)
     await expect(page.getByRole('heading', {name: 'Playground'})).toBeVisible()
   })
+})
+
+test('should waste some milliseconds to allow things to happen in the website', async ({ page }) => {
+  const wait = 12
+  const t0 = Date.now()
+  await sleep(wait)
+  const tDiff = Date.now() - t0
+  const lag = 3
+
+  await expect(tDiff).toBeGreaterThanOrEqual(wait)
+  await expect(tDiff).toBeLessThan(wait + lag)
 })
