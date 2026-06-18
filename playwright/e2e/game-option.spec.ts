@@ -1,4 +1,4 @@
-import { test, expect } from '@playwright/test'
+import { test, expect, Page } from '@playwright/test'
 import { openPlayground } from '../helpers/run-helpers'
 import { applyNewGame, applyReplayGame } from '../helpers/game-helpers'
 
@@ -12,7 +12,7 @@ test.describe('new game and replay', () => {
     await expect(firstCell).toHaveClass(/touched/)
   })
 
-  const proceed = async (page): void => {
+  const proceed = async (page: Page): Promise<void> => {
     const consentBtn = await page.getByRole('dialog').getByRole('button', {name: 'OK'})
     await consentBtn.click()
   }

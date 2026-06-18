@@ -1,9 +1,9 @@
-import { test, expect } from '@playwright/test'
+import { test, expect, Locator } from '@playwright/test'
 import { boardSize, nextBlank, nextPointer, nextMine } from '../helpers/game-helpers'
 import { openPlayground } from '../helpers/run-helpers'
 
 test.describe('result clicking cell', async () => {
-  let mainElement
+  let mainElement: Locator
 
   test.beforeEach(async ({ page }) => {
     await openPlayground(page)

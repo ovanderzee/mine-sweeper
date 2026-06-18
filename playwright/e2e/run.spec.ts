@@ -28,7 +28,7 @@ test.describe('run integrity', () => {
   })
 })
 
-test('should waste some milliseconds to allow things to happen in the website', async ({ page }) => {
+test('should waste some milliseconds to allow things to happen in the website', async () => {
   const wait = 12
   const t0 = Date.now()
   await sleep(wait)
