@@ -1,4 +1,4 @@
-import { test as setup, expect } from '@playwright/test'
+import { test as setup } from '@playwright/test'
 import { testUrl, writeStorageState } from '../helpers/run-helpers'
 
 setup('generated game and config', async ({ page }) => {
