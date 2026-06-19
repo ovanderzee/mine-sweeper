@@ -7,7 +7,6 @@
 - Fade out of dialog goes smooth but ends abrupt
 - Debt after porting tests to vitest, see comment-disabled tests
 - added click listeners on range-inputs to test them, remove when vitest/browser starts supporting change listeners on inputs
-- Vitest lacks support for pointerup/down, how to test longpress to flag cells?
 
 ### Features
 - Pause button, correct time on unpause
@@ -29,6 +28,7 @@
 
 # Added
 - Playwright end-to-end tests
+- Tests for longprees
 
 ### Changed
 

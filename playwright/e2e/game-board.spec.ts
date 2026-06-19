@@ -56,15 +56,30 @@ test.describe('result clicking cell', async () => {
     const finalTouchedButtonCount = await page.locator('button.touched').count()
     await expect(finalTouchedButtonCount).toBe(Math.pow(boardSize, 2))
   })
+})
 
-  test('should flag first cell', async ({ page }) => {
-    const leftTopButton = await page.getByRole('gridcell').first()
+test.describe('flagging cells', async () => {
+  let pointerIndex: number
+  let pointerButton: Locator
+
+  test.beforeEach(async ({ page }) => {
+    await openPlayground(page)
+    pointerIndex = await nextPointer(page)
+    pointerButton = await page.getByRole('gridcell').nth(pointerIndex)
+  })
+
+  test('should flag pointer cell', async () => {
     // set flag
-    await leftTopButton.click({delay: 500})
-    await expect(leftTopButton).toHaveClass(/flag/)
+    await pointerButton.click({delay: 500})
+    await expect(pointerButton).toHaveClass(/flag/)
     // remove flag
-    await leftTopButton.click({delay: 500})
-    await expect(leftTopButton).not.toHaveClass(/flag/)
+    await pointerButton.click({delay: 500})
+    await expect(pointerButton).not.toHaveClass(/flag/)
+  })
+
+  test('should not flag pointer cell', async () => {
+    await pointerButton.click({delay: 50})
+    await expect(pointerButton).not.toHaveClass(/flag/)
   })
 })
 
