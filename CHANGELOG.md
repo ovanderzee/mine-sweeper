@@ -20,7 +20,6 @@
 - Consent for ending playing game and changing the config when replaying from score list
 - Checkout Core Web Vitals-optimalisation
 - Describe commandline tools, remove max. scores setting.
-- Playing time needs to account for deactivation of playground
 
 
 ## [next] - 2026-06

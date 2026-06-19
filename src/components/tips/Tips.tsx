@@ -4,6 +4,7 @@ import TimeTracker from './TimeTracker'
 import MineTracker from './MineTracker'
 import FullscreenPlay from './FullscreenPlay'
 import NewGame from '../nav/NewGame'
+import Pause from '../nav/Pause'
 import { PlayMode } from '../../common/app.d'
 import { capitalise, minorMagnification } from '../../common/functions'
 import { GameState, GameAction } from '../../common/game.d'
@@ -16,6 +17,7 @@ export interface TipProps {
 
 interface TipsProps extends TipProps {
   onNew: (action: GameAction) => void
+  onPause: () => void
   playgroundRef: RefObject<HTMLDivElement>
 }
 
@@ -42,6 +44,7 @@ const Tips = (props: TipsProps) => {
       </>}
       <section id="tip-action" className="tip">
         <NewGame onNew={props.onNew} stage={props.game.stage} appearance="tip" />
+        <Pause onPause={props.onPause} appearance="tip" />
       </section>
       <FullscreenPlay playgroundRef={props.playgroundRef} />
     </div>

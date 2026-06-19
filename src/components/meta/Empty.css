@@ -1,0 +1,29 @@
+#pausing {
+  padding-block-start: 2em;
+
+  button {
+    border: none;
+    background: none;
+    width: 19em;
+    height: 19em;
+    margin: auto;
+    animation: 10s ease-in-out infinite slow-pulse;
+  }
+
+  button:hover {
+    animation: none;
+  }
+
+  img {
+    margin: 7%;
+    width: 86%;
+  }
+}
+
+@keyframes slow-pulse {
+  from {opacity: .4;}
+  25% {opacity: .8;}
+  50% {opacity: .5;}
+  75% {opacity: .6;}
+  to {opacity: .4;}
+}

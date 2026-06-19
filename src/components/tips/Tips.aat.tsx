@@ -11,6 +11,7 @@ describe('Tips offers data and view-control', () => {
   const TipsCmp = (<Tips
     game={playingGameState}
     onNew={vi.fn()}
+    onPause={vi.fn()}
     playgroundRef={{} as RefObject<HTMLDivElement>}
   />)
 
@@ -49,12 +50,12 @@ describe('Tips offers data and view-control', () => {
       screen = await renderWithContext(TipsCmp, { config: BARE_CONFIG })
     })
 
-    it('should show clock', async () => {
+    it('should not show clock', async () => {
       const clock = screen.getByTitle('Playtime')
       expect(clock).not.toBeInTheDocument()
     })
 
-    it('should show counter', async () => {
+    it('should not show counter', async () => {
       const counter = screen.getByTitle('Number of mines to find')
       expect(counter).not.toBeInTheDocument()
     })

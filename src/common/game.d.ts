@@ -111,4 +111,5 @@ export type MarkScoreData = {
 
 export interface PageProps {
   onPause?: () => void;
+  appearance?: string;
 }

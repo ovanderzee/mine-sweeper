@@ -10,6 +10,10 @@ const SymbolCollection = (p: SymbolDiff) => (<>
     <path id="punt"
        d="m 50,25 v 0 m 0,0 L 0,0 V 50 L 50,25 m 0,0 v 0" />
   </g></symbol>
+  <symbol id={`${p.prefix}-pause`} viewBox={p.viewbox}><g filter={`url(#${p.prefix}-shadow)`}>
+    <rect x="0" y="0" width="20" height="50" />
+    <rect x="30" y="0" width="20" height="50" />
+  </g></symbol>
   <symbol id={`${p.prefix}-reset`} viewBox={p.viewbox}><g filter={`url(#${p.prefix}-shadow)`}>
     <path id="herstel"
        d="M 34.374731,21.10675 V 8.761869 H 46.720027 M 15.646972,8.798829 C 9.848617,12.136031 6.267664,18.309893 6.25,25 6.25,35.355339 14.64466,43.75 25,43.75 35.355339,43.75 43.75,35.355339 43.75,25 43.7477,18.302301 40.172981,12.114404 34.372,8.766602" />

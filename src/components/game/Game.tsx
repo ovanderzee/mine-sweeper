@@ -85,6 +85,7 @@ const Game = () => {
       <Tips
         game={gameState}
         onNew={dispatchGameAction}
+        onPause={pause}
         playgroundRef={playgroundRef}
       />
     </article>
