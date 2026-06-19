@@ -3,7 +3,7 @@ import { openPlayground, sleep, visitPlayground, visitAboutScreen } from '../hel
 import { elapsedSeconds, nextPointer, nextMine,
          applyReplayGame } from '../helpers/game-helpers'
 
-test.describe('recording time', async () => {
+test.describe('recording time', () => {
 
   const interactByTarget = async (nextTargetFn: (p: Page)=>Promise<number>, timeLapse: number, page: Page) => {
     const index = await nextTargetFn(page)
@@ -37,7 +37,7 @@ test.describe('recording time', async () => {
     await expect(await page.getByRole('main')).toHaveClass(/game-lost/)
   })
 
-  test('should pass time in an interrupted play', async ({ page }) => {
+  test('should pass time in an interrupted play (by viewing another screen)', async ({ page }) => {
     await page.clock.install()
     await openPlayground(page)
     await applyReplayGame(page)
@@ -54,6 +54,39 @@ test.describe('recording time', async () => {
     // pause starts
     await visitAboutScreen(page)
     await expect(await elapsedSeconds(page)).toBe(8)
+    await page.clock.fastForward('00:07')
+
+    // pause ends
+    await visitPlayground(page)
+    await expect(await elapsedSeconds(page)).toBe(8)
+    await page.clock.fastForward('00:09')
+
+    await interactByTarget(nextPointer, 17, page)
+    await page.clock.fastForward('00:11')
+
+    // loose
+    await interactByTarget(nextMine, 28, page)
+
+    await expect(await page.getByRole('main')).toHaveClass(/game-lost/)
+  })
+
+  test('should pass time in an interrupted play (by pause interface)', async ({ page }) => {
+    await page.clock.install()
+    await openPlayground(page)
+    await applyReplayGame(page)
+
+    await expect(await page.getByRole('main')).toHaveClass(/game-new/)
+
+    // play
+    await interactByTarget(nextPointer, 0, page)
+    await page.clock.fastForward('00:03')
+
+    await interactByTarget(nextPointer, 3, page)
+    await page.clock.fastForward('00:05')
+
+    // pause starts
+    const pauseButton = await page.getByTitle('Pause')
+    await pauseButton.click()
     await page.clock.fastForward('00:07')
 
     // pause ends

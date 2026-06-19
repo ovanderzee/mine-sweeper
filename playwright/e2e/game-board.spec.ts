@@ -58,7 +58,7 @@ test.describe('result clicking cell', async () => {
   })
 })
 
-test.describe('flagging cells', async () => {
+test.describe('flagging cells', () => {
   let pointerIndex: number
   let pointerButton: Locator
 

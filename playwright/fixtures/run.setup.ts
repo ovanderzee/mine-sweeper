@@ -10,7 +10,7 @@ setup('generated game and config', async ({ page }) => {
   // Alternatively, you can wait until the page reaches a state where all cookies are set.
   await page.getByRole('button').click()
   // Wait for button for 1 second
-  // await page.clock.fastForward('00:01')
+  await page.clock.fastForward('00:01')
   // Store it.
   await writeStorageState(page)
 });
