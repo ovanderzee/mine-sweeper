@@ -36,7 +36,7 @@ const Tips = (props: TipsProps) => {
           <span><b>{capPlayMode}</b></span>
         </div>
       }
-      {config.PLAY_MODE !== PlayMode.TOUGH && <TimeTracker game={props.game} />}
+      {config.PLAY_MODE !== PlayMode.BARE && <TimeTracker game={props.game} />}
       <MineTracker game={props.game} />
       <section id="tip-action" className="tip">
         <NewGame onNew={props.onNew} stage={props.game.stage} appearance="tip" />

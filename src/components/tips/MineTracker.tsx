@@ -15,9 +15,9 @@ const MineTracker = (props: TipProps) => {
   return (
     <div id="mine-tracker" className="tip" title={text.tips['Todo counter']}>
       {config.PLAY_MODE === PlayMode.NORMAL && <span id="mine" className="icon"></span>}
-      {config.PLAY_MODE === PlayMode.TOUGH && <span id="none" className="icon"></span>}
+      {config.PLAY_MODE === PlayMode.BARE && <span id="none" className="icon"></span>}
       {config.PLAY_MODE === PlayMode.SHARP && <span id="flag" className="icon"></span>}
-      {config.PLAY_MODE !== PlayMode.TOUGH && <span id="diff">{mineCount - flagCount}</span>}
+      {config.PLAY_MODE !== PlayMode.BARE && <span id="diff">{mineCount - flagCount}</span>}
     </div>
   )
 }

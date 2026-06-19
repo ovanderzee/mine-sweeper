@@ -208,8 +208,8 @@ button .character h5,
   text-transform: uppercase;
 }
 
-button .character h5.tough-mode,
-.tough-mode .tip {
+button .character h5.bare-mode,
+.bare-mode .tip {
   color: var(--dark-brown);
 }
 

@@ -110,8 +110,8 @@
     "Play mode": "Play mode",
     "Normal": "Normal",
     "normal mode": "as described",
-    "Tough": "Tough",
-    "tough mode": "play without flags or feedback",
+    "Bare": "Bare",
+    "bare mode": "play without flags or feedback",
     "Sharp": "Sharp",
     "sharp mode": "game is decided when the number of flags and mines is equal",
 
@@ -169,7 +169,7 @@
     "View fullscreen": "Play on fullscreen",
 
     "normal hint": "",
-    "tough hint": "don't touch a single mine",
+    "bare hint": "don't touch a single mine",
     "sharp hint": "flag only every mine"
   }
 }

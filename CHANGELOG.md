@@ -21,7 +21,6 @@
 - Checkout Core Web Vitals-optimalisation
 - Describe commandline tools, remove max. scores setting.
 - Playing time needs to account for deactivation of playground
-- Rename 'Tough' to 'Bare'
 
 
 ## [next] - 2026-06
@@ -30,6 +29,7 @@
 - Playwright end-to-end tests
 
 ### Changed
+- Renamed 'Tough' mode to 'Bare'
 
 
 ## [3.10.1] - 2026-05-03
