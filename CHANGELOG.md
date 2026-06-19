@@ -30,6 +30,8 @@
 
 ### Changed
 - Renamed 'Tough' mode to 'Bare'
+- Playtimer only runs when playground is visible
+- Remove no-flagging icon in bare-mode
 
 
 ## [3.10.1] - 2026-05-03

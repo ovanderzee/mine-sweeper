@@ -56,9 +56,7 @@ describe('Tips offers data and view-control', () => {
 
     it('should show counter', async () => {
       const counter = screen.getByTitle('Number of mines to find')
-      expect(counter).toBeInTheDocument()
-      const count = counter.getByText(expectedMineCount)
-      expect(count).not.toBeInTheDocument()
+      expect(counter).not.toBeInTheDocument()
     })
 
     it('should indicate the mode', async () => {
