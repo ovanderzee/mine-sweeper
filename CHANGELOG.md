@@ -9,7 +9,6 @@
 - added click listeners on range-inputs to test them, remove when vitest/browser starts supporting change listeners on inputs
 
 ### Features
-- Pause button, correct time on unpause
 - Routing on gamecode, about, config and hiscores
 - Show number of neighbouring mines in graph
 - Calculate coagulation (mine-mine borders | blank to mine ratio)
@@ -19,9 +18,10 @@
 - Consent for ending playing game and changing the config when replaying from score list
 - Checkout Core Web Vitals-optimalisation
 - Describe commandline tools, remove max. scores setting.
+- Set level based on percentage of cells are mine. This will enable a fine-grained set of useable levels
 
 
-## [next] - 2026-06
+## [3.11.0] - 2026-06-21
 
 # Added
 - Playwright end-to-end tests
