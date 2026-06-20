@@ -35,10 +35,10 @@ export const renderWithContext = async (component: React.ReactNode, keyValue: an
   }
 
   return await render(
-    <PageContext.Provider value={{ ...fakeCtx, ...keyValue }}>
+    <PageContext value={{ ...fakeCtx, ...keyValue }}>
       <AllSymbols />
       {component}
-    </PageContext.Provider>
+    </PageContext>
   )
 }
 

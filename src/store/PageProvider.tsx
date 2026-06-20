@@ -78,9 +78,9 @@ const PageProvider = (props: { children: React.ReactNode }) => {
   }
 
   return (
-    <PageContext.Provider value={pageCtx}>
+    <PageContext value={pageCtx}>
       {props.children}
-    </PageContext.Provider>
+    </PageContext>
   )
 }
 
