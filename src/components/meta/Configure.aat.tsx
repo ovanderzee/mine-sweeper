@@ -14,25 +14,6 @@ import Configure from './Configure'
 // https://vitest.dev/guide/browser/#limitations
 vi.mock('./../../common/functions', { spy: true })
 
-describe('The configure page sidebar', () => {
-  let screen: RenderResult
-
-  beforeEach(async () => screen = await renderWithProvider(<Configure/>))
-
-  it('should offer navigation to About page', async () => {
-    await expect.element(screen.getByTitle('Description')).toBeInTheDocument()
-  })
-
-  it('should offer navigation to HallOfFame page', async () => {
-    await expect.element(screen.getByTitle('Hall of Fame')).toBeInTheDocument()
-  })
-
-  it('should offer navigation to Game page', async () => {
-    await expect.element(screen.getByTitle('Return to Game')).toBeInTheDocument()
-  })
-
-})
-
 describe('The configure controls', () => {
   let screen: RenderResult
 

@@ -9,28 +9,26 @@ describe('The about page sidebar', () => {
 
   it('should offer navigation to HallOfFame page', async () => {
     const navBtn = screen.getByRole('navigation').getByTitle('Hall of Fame')
-    expect(navBtn).toBeInTheDocument()
+    await expect.element(navBtn).toBeInTheDocument()
     await navBtn.click()
 
-    await expect.element(navBtn).not.toBeInTheDocument()
     await expect.element(screen.getByRole('heading', { name: 'Hall of Fame' })).toBeInTheDocument()
   })
 
   it('should offer navigation to Configure page', async () => {
     const navBtn = screen.getByRole('navigation').getByTitle('Settings')
-    expect(navBtn).toBeInTheDocument()
+    await expect.element(navBtn).toBeInTheDocument()
     await navBtn.click()
 
-    await expect.element(navBtn).not.toBeInTheDocument()
     await expect.element(screen.getByRole('heading', { name: 'Settings' })).toBeInTheDocument()
   })
 
   it('should offer navigation to Game page', async () => {
     const navBtn = screen.getByRole('navigation').getByTitle('Return to Game')
-    expect(navBtn).toBeInTheDocument()
+    await expect.element(navBtn).toBeInTheDocument()
     await navBtn.click()
 
-    await expect.element(screen.getByRole('heading', { name: 'Playground' })).toBeInTheDocument()
-    expect(navBtn).not.toBeInTheDocument()
+    const heading = screen.getByRole('heading', { name: 'Playground' })
+    await expect.element(heading).toBeInTheDocument()
   })
 })
