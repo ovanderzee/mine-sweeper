@@ -11,7 +11,7 @@ test.describe('recording time', () => {
     await cell.click()
 
     // when click has fully been processed, time can be measured
-    await sleep(25)
+    await sleep(50)
 
     await expect(await elapsedSeconds(page)).toBe(timeLapse)
   }
