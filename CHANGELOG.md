@@ -32,6 +32,9 @@
 - Playtimer only runs when playground is visible
 - Remove no-flagging icon in bare-mode
 
+### Fixed
+- Prevent too high first game screen 
+
 
 ## [3.10.1] - 2026-05-03
 
