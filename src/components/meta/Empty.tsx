@@ -14,15 +14,16 @@ const Empty = () => {
     <article
       id="pausing"
       role="main"
+      className="game-lost"
       aria-labelledby="page-heading"
     >
       <h1 className="sr-only" id="page-heading">{text.nav['Pause']}</h1>
       <div id="game-board">
         <button type="button"
+          className="touched mijn"
           onClick={() => pageCtx.navigate(<Game />)}
           title={text.nav['Resume']}
         >
-          <img src="./artwork/bomb.svg" />
         </button>
       </div>
     </article>

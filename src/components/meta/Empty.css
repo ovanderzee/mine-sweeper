@@ -13,11 +13,6 @@
   button:hover {
     animation: none;
   }
-
-  img {
-    margin: 7%;
-    width: 86%;
-  }
 }
 
 @keyframes slow-pulse {

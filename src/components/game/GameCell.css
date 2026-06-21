@@ -98,7 +98,8 @@
 
   background: radial-gradient(
     ellipse at 25% 25%,
-    white 10%,
+    white 0%,
+    #eee 9%,
     #975 27%,
     #032 46%
   );
