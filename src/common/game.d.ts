@@ -108,3 +108,8 @@ export type MarkScoreData = {
   operate: string;
   quant: number;
 }
+
+export interface PageProps {
+  onPause?: () => void;
+  appearance?: string;
+}

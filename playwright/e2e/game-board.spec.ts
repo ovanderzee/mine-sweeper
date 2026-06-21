@@ -1,9 +1,9 @@
-import { test, expect } from '@playwright/test'
+import { test, expect, Locator } from '@playwright/test'
 import { boardSize, nextBlank, nextPointer, nextMine } from '../helpers/game-helpers'
 import { openPlayground } from '../helpers/run-helpers'
 
 test.describe('result clicking cell', async () => {
-  let mainElement
+  let mainElement: Locator
 
   test.beforeEach(async ({ page }) => {
     await openPlayground(page)
@@ -11,7 +11,7 @@ test.describe('result clicking cell', async () => {
   })
 
   test('should touch blank and open neighbouring cells', async ({ page }, info) => {
-    const blankIndex = nextBlank()
+    const blankIndex = await nextBlank(page)
     const cellButton = await page.getByRole('gridcell').nth(blankIndex)
     await expect(mainElement).toHaveClass(/game-new/)
     const initialTouchedButtonCount = await page.locator('button.touched').count()
@@ -27,7 +27,7 @@ test.describe('result clicking cell', async () => {
   })
 
   test('should touch pointer and open no other cells', async ({ page }, info) => {
-    const pointerIndex = nextPointer()
+    const pointerIndex = await nextPointer(page)
     const cellButton = await page.getByRole('gridcell').nth(pointerIndex)
     await expect(mainElement).toHaveClass(/game-new/)
     const initialTouchedButtonCount = await page.locator('button.touched').count()
@@ -43,7 +43,7 @@ test.describe('result clicking cell', async () => {
   })
 
   test('should touch mine and loose the game', async ({ page }, info) => {
-    const mineIndex = nextMine()
+    const mineIndex = await nextMine(page)
     const cellButton = await page.getByRole('gridcell').nth(mineIndex)
     await expect(mainElement).toHaveClass(/game-new/)
 
@@ -55,6 +55,31 @@ test.describe('result clicking cell', async () => {
 
     const finalTouchedButtonCount = await page.locator('button.touched').count()
     await expect(finalTouchedButtonCount).toBe(Math.pow(boardSize, 2))
+  })
+})
+
+test.describe('flagging cells', () => {
+  let pointerIndex: number
+  let pointerButton: Locator
+
+  test.beforeEach(async ({ page }) => {
+    await openPlayground(page)
+    pointerIndex = await nextPointer(page)
+    pointerButton = await page.getByRole('gridcell').nth(pointerIndex)
+  })
+
+  test('should flag pointer cell', async () => {
+    // set flag
+    await pointerButton.click({delay: 500})
+    await expect(pointerButton).toHaveClass(/flag/)
+    // remove flag
+    await pointerButton.click({delay: 500})
+    await expect(pointerButton).not.toHaveClass(/flag/)
+  })
+
+  test('should not flag pointer cell', async () => {
+    await pointerButton.click({delay: 50})
+    await expect(pointerButton).not.toHaveClass(/flag/)
   })
 })
 

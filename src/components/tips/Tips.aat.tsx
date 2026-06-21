@@ -11,6 +11,7 @@ describe('Tips offers data and view-control', () => {
   const TipsCmp = (<Tips
     game={playingGameState}
     onNew={vi.fn()}
+    onPause={vi.fn()}
     playgroundRef={{} as RefObject<HTMLDivElement>}
   />)
 
@@ -41,28 +42,26 @@ describe('Tips offers data and view-control', () => {
     })
   })
 
-  describe('in tough play-mode', () => {
-    const TOUGH_CONFIG = { ...microConfig, PLAY_MODE: PlayMode.TOUGH }
+  describe('in bare play-mode', () => {
+    const BARE_CONFIG = { ...microConfig, PLAY_MODE: PlayMode.BARE }
     let screen: RenderResult
 
     beforeEach(async () => {
-      screen = await renderWithContext(TipsCmp, { config: TOUGH_CONFIG })
+      screen = await renderWithContext(TipsCmp, { config: BARE_CONFIG })
     })
 
-    it('should show clock', async () => {
+    it('should not show clock', async () => {
       const clock = screen.getByTitle('Playtime')
       expect(clock).not.toBeInTheDocument()
     })
 
-    it('should show counter', async () => {
+    it('should not show counter', async () => {
       const counter = screen.getByTitle('Number of mines to find')
-      expect(counter).toBeInTheDocument()
-      const count = counter.getByText(expectedMineCount)
-      expect(count).not.toBeInTheDocument()
+      expect(counter).not.toBeInTheDocument()
     })
 
     it('should indicate the mode', async () => {
-      const indicator = screen.getByText(/Tough/i)
+      const indicator = screen.getByText(/Bare/i)
       expect(indicator).toBeInTheDocument()
     })
   })

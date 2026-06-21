@@ -15,7 +15,7 @@ export enum LanguageTranslation {
 
 export enum PlayMode {
   NORMAL = 'normal',
-  TOUGH = 'tough',
+  BARE = 'bare',
   SHARP = 'sharp',
 }
 

@@ -19,6 +19,12 @@ svg text#text-content {
     stroke: none;
   }
 
+  #plain-pause rect,
+  #nav-pause rect {
+    fill: currentcolor;
+    stroke: none;
+  }
+
   #plain-replay path,
   #plain-reset path,
   #nav-replay path,

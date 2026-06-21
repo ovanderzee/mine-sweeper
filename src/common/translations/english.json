@@ -1,7 +1,6 @@
 {
   "common": {
-    "Minesweeper": "Minesweeper",
-    "mine sweeper": "mine sweeper",
+    "appName": "MineSweep",
     "Mines": "Mines",
     "confirm": "OK",
     "cancel": "Cancel",
@@ -110,8 +109,8 @@
     "Play mode": "Play mode",
     "Normal": "Normal",
     "normal mode": "as described",
-    "Tough": "Tough",
-    "tough mode": "play without flags or feedback",
+    "Bare": "Bare",
+    "bare mode": "play without flags or feedback",
     "Sharp": "Sharp",
     "sharp mode": "game is decided when the number of flags and mines is equal",
 
@@ -132,6 +131,8 @@
     "Clear List": "Clear List",
     "Reinstate Defaults": "Revert to Defaults",
     "New Game": "New Game",
+    "Pause": "Pause",
+    "Resume": "Continue game",
     "Replay": "Replay",
     "Settings": "Settings",
     "Help": "Description",
@@ -169,7 +170,7 @@
     "View fullscreen": "Play on fullscreen",
 
     "normal hint": "",
-    "tough hint": "don't touch a single mine",
+    "bare hint": "don't touch a single mine",
     "sharp hint": "flag only every mine"
   }
 }

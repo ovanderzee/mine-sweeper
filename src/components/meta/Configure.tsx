@@ -49,9 +49,9 @@ function Configure() {
     pageCtx.configure({ PLAY_MODE: PlayMode.NORMAL})
   }
 
-  const changeToughModeHandler = () => {
+  const changeBareModeHandler = () => {
     exitCurrentGame()
-    pageCtx.configure({ PLAY_MODE: PlayMode.TOUGH})
+    pageCtx.configure({ PLAY_MODE: PlayMode.BARE})
   }
 
   const changeSharpModeHandler = () => {
@@ -115,12 +115,12 @@ function Configure() {
           <input
             name="playmode"
             type="radio"
-            checked={config.PLAY_MODE === PlayMode.TOUGH}
-            onChange={changeToughModeHandler}
-            onClick={changeToughModeHandler as unknown as React.MouseEventHandler<HTMLInputElement>}
+            checked={config.PLAY_MODE === PlayMode.BARE}
+            onChange={changeBareModeHandler}
+            onClick={changeBareModeHandler as unknown as React.MouseEventHandler<HTMLInputElement>}
           /> &nbsp;
-          {text.settings['Tough']}<br />
-          <em>{text.settings['tough mode']}</em>
+          {text.settings['Bare']}<br />
+          <em>{text.settings['bare mode']}</em>
         </label>
 
         <label>

@@ -8,6 +8,7 @@ export default defineConfig({
     projects: [
       {
         test: {
+          include: ['src/**/*.test.tsx'],
           name: 'unit',
           globals: true,
           hideSkippedTests: true,

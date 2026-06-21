@@ -38,7 +38,7 @@ const GameCell = (props: GameCellProps) => {
   const actionHandler = (type: GameActionType) => {
     if (stage || props.cell.disabled) return
     if (type === GameActionType.MOVE && locked) return
-    if (type === GameActionType.FLAG && PLAY_MODE === PlayMode.TOUGH) return
+    if (type === GameActionType.FLAG && PLAY_MODE === PlayMode.BARE) return
 
     const entry: CellStateEntry = {}
     if (type === GameActionType.FLAG) {

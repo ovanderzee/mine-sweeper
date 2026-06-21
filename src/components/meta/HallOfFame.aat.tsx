@@ -1,6 +1,6 @@
 import { RenderResult } from 'vitest-browser-react'
 import { Locator, userEvent } from 'vitest/browser'
-import { renderWithProvider, renderWithContext, renderWithApp } from './../../__mocks__/aat-helpers'
+import { renderWithProvider, renderWithApp } from './../../__mocks__/aat-helpers'
 import { liveScores } from './../../__mocks__/scores'
 import storage from './../../common/storage'
 import { preventReloadByEnter } from './../../common/functions'
@@ -10,25 +10,6 @@ import HallOfFame from './HallOfFame'
 
 
 vi.mock('./../../common/functions', { spy: true })
-
-describe('The hall-of-fame page sidebar', () => {
-  let screen: RenderResult
-
-  beforeEach(async () => screen = await renderWithProvider(<HallOfFame/>))
-
-  it('should offer navigation to About page', async () => {
-    await expect.element(screen.getByTitle('Description')).toBeInTheDocument()
-  })
-
-  it('should offer navigation to Configure page', async () => {
-    await expect.element(screen.getByTitle('Settings')).toBeInTheDocument()
-  })
-
-  it('should offer navigation to Game page', async () => {
-    await expect.element(screen.getByTitle('Return to Game')).toBeInTheDocument()
-  })
-
-})
 
 describe('The hall-of-fame-page clear list button', () => {
   let screen: RenderResult
@@ -305,7 +286,7 @@ describe('The hall-of-fame-page popover buttons', () => {
 describe('Marking data', () => {
 
   it('should accept numbers broken with dot as input', async () => {
-    const screen = await renderWithContext(<HallOfFame/>)
+    const screen = await renderWithProvider(<HallOfFame/>)
     const inputField = screen.getByTitle('Mark value').query()
     await inputField?.focus()
 
@@ -321,7 +302,7 @@ describe('Marking data', () => {
   })
 
   it('should accept numbers broken with comma as input', async () => {
-    const screen = await renderWithContext(<HallOfFame/>)
+    const screen = await renderWithProvider(<HallOfFame/>)
     const inputField = screen.getByTitle('Mark value').query()
     await inputField?.focus()
 

@@ -1,7 +1,6 @@
 {
   "common": {
-    "Minesweeper": "Mijnenveger",
-    "mine sweeper": "mijnen veger",
+    "appName": "MineSweep",
     "Mines": "Mijnen",
     "confirm": "Oké",
     "cancel": "Annuleer",
@@ -110,8 +109,8 @@
     "Play mode": "Speelmodus",
     "Normal": "Normaal",
     "normal mode": "zoals beschreven",
-    "Tough": "Lastig",
-    "tough mode": "speel zonder vlaggen of terugkoppeling",
+    "Bare": "Kaal",
+    "bare mode": "speel zonder vlaggen of terugkoppeling",
     "Sharp": "Scherp",
     "sharp mode": "spel wordt beslist wanneer het aantal vlaggen en mijnen gelijk is",
 
@@ -132,6 +131,8 @@
     "Clear List": "Wis lijst",
     "Reinstate Defaults": "Terug naar standaard waarden",
     "New Game": "Nieuw Spel",
+    "Pause": "Pauze",
+    "Resume": "Speel verder",
     "Replay": "Speel Opnieuw",
     "Settings": "Instellingen",
     "Help": "Beschrijving",
@@ -169,7 +170,7 @@
     "View fullscreen": "Op volledig scherm spelen",
 
     "normal hint": "",
-    "tough hint": "raak geen enkele mijn",
+    "bare hint": "raak geen enkele mijn",
     "sharp hint": "vlag alleen elke mijn af"
   }
 }

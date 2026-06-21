@@ -25,7 +25,7 @@
     flex-direction: column;
     align-content: space-between;
     justify-content: space-between;
-    height: 100dvh;
+    height: 100svh;
     overscroll-behavior-x: contain;
   }
 
@@ -40,7 +40,7 @@
 @media only screen and (orientation: landscape) {
   .screen {
     flex-wrap: nowrap;
-    min-height: 100dvh;
+    min-height: 100svh;
   }
 
   .screen > nav {

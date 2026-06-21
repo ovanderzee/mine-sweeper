@@ -5,12 +5,10 @@
 ### Problems
 - Gameboard could technically be 36 * 36 = 1296 cells, but the cells will be very small, even fullscreen
 - Fade out of dialog goes smooth but ends abrupt
-- Debt after porting tests to vitest, see TODOs and it.skip
+- Debt after porting tests to vitest, see comment-disabled tests
 - added click listeners on range-inputs to test them, remove when vitest/browser starts supporting change listeners on inputs
-- Vitest lacks support for pointerup/down, how to test longpress to flag cells?
 
 ### Features
-- Pause button, correct time on unpause
 - Routing on gamecode, about, config and hiscores
 - Show number of neighbouring mines in graph
 - Calculate coagulation (mine-mine borders | blank to mine ratio)
@@ -18,6 +16,25 @@
 - Open/close mark section
 - Tests on marking
 - Consent for ending playing game and changing the config when replaying from score list
+- Checkout Core Web Vitals-optimalisation
+- Describe commandline tools, remove max. scores setting.
+- Set level based on percentage of cells are mine. This will enable a fine-grained set of useable levels
+
+
+## [3.11.0] - 2026-06-21
+
+# Added
+- Playwright end-to-end tests
+- Tests for longprees
+
+### Changed
+- Renamed app to 'MineSweep'
+- Renamed 'Tough' mode to 'Bare'
+- Playtimer only runs when playground is visible
+- Remove no-flagging icon in bare-mode
+
+### Fixed
+- Prevent too high first game screen 
 
 
 ## [3.10.1] - 2026-05-03

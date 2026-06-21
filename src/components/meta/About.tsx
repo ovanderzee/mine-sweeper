@@ -19,7 +19,7 @@ const About = () => {
       aria-labelledby="page-heading"
     >
       <h1 className="sr-only" id="page-heading">{text.nav['Help']}</h1>
-      <h2>{text.common['Minesweeper']}</h2>
+      <h2>{text.common['appName']}</h2>
 
       <h3>{text.help['Intro Heading']}</h3>
       <p>{text.help['Playing Hint']}</p>

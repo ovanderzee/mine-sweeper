@@ -172,14 +172,14 @@ describe('Gamecell, a party of properties', () => {
     })
   })
 
-  describe('should NOT respond to spacebar-keystroke when tough play-mode is in effect ', async () => {
+  describe('should NOT respond to spacebar-keystroke when bare play-mode is in effect ', async () => {
     let cell: CellState
-    const TOUGH_CONFIG = { ...DEFAULTS, PLAY_MODE: PlayMode.TOUGH }
+    const BARE_CONFIG = { ...DEFAULTS, PLAY_MODE: PlayMode.BARE }
 
     beforeEach(async () => {
       dispatchGameAction = vi.fn()
       cell = cellStates.pristine.mijn
-      const screen = await renderWithContext(getCellByState(cell), { config: TOUGH_CONFIG, session: NORMAL })
+      const screen = await renderWithContext(getCellByState(cell), { config: BARE_CONFIG, session: NORMAL })
       screen.getByRole('gridcell').element().focus()
     })
 

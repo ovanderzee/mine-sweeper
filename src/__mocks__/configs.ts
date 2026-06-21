@@ -35,7 +35,7 @@ export const simpleHardConfig = {
   "MINE_COUNT":4,
   "LANGUAGE": Languages.en,
   "PLAYER_NAME":"Jonathan",
-  "PLAY_MODE": PlayMode.TOUGH
+  "PLAY_MODE": PlayMode.BARE
 }
 
 export const scoringConfig = {
