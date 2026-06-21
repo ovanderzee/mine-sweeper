@@ -8,7 +8,7 @@ test.describe('run integrity', () => {
 
   test('should see app running', async ({ page }) => {
     // Expect a title "to contain" a substring.
-    await expect(page).toHaveTitle(/Mijnenveger/)
+    await expect(page).toHaveTitle(/MineSweep/)
   });
 
   test('should access game board', async ({ page }) => {

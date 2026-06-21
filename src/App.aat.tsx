@@ -8,7 +8,7 @@ describe('The app journey', () => {
     const screen = await renderWithProvider(<App />)
 
     // land in Introduction
-    await expect.element(screen.getByText('mine sweeper')).toBeInTheDocument()
+    await expect.element(screen.getByText(/Mine.+Sweep/)).toBeInTheDocument()
     let navBtn = screen.getByText('skip to game')
     await navBtn.click()
 
