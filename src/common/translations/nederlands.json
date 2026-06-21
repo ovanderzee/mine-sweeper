@@ -1,7 +1,6 @@
 {
   "common": {
-    "Minesweeper": "Mijnenveger",
-    "mine sweeper": "mijnen veger",
+    "appName": "MineSweep",
     "Mines": "Mijnen",
     "confirm": "Oké",
     "cancel": "Annuleer",

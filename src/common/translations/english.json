@@ -1,7 +1,6 @@
 {
   "common": {
-    "Minesweeper": "Minesweeper",
-    "mine sweeper": "mine sweeper",
+    "appName": "MineSweep",
     "Mines": "Mines",
     "confirm": "OK",
     "cancel": "Cancel",

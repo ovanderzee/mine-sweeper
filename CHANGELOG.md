@@ -28,6 +28,7 @@
 - Tests for longprees
 
 ### Changed
+- Renamed app to 'MineSweep'
 - Renamed 'Tough' mode to 'Bare'
 - Playtimer only runs when playground is visible
 - Remove no-flagging icon in bare-mode

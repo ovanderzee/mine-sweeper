@@ -34,9 +34,7 @@ const Introduction = (props: { onEnd: (timeout: number) => void }) => {
       tabIndex={-1}
     >
       <div id="achter" />
-      <h1 id="titel" className="tekst">
-        {text.common['mine sweeper']}
-      </h1>
+      <h1 id="titel" className="tekst">Mine&#x200B;Sweep</h1>
       <div id="schip">
         <div id="schip__brug"></div>
         <div id="schip__links"></div>
