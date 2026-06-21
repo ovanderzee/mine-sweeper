@@ -12,18 +12,26 @@
 - Routing on gamecode, about, config and hiscores
 - Show number of neighbouring mines in graph
 - Calculate coagulation (mine-mine borders | blank to mine ratio)
-- Refine levels with intermediate values, maybe by percentage
+* Refine levels with intermediate values, maybe by percentage
 - Open/close mark section
 - Tests on marking
 - Consent for ending playing game and changing the config when replaying from score list
 - Checkout Core Web Vitals-optimalisation
-- Describe commandline tools, remove max. scores setting.
-- Set level based on percentage of cells are mine. This will enable a fine-grained set of useable levels
+* Describe commandline tools, remove max. scores setting.
+* Set level based on percentage of cells are mine. This will enable a fine-grained set of useable levels
+
+
+## [4.0.0] - 2026-06-21
+
+### Added
+
+### Changed
+
 
 
 ## [3.11.0] - 2026-06-21
 
-# Added
+### Added
 - Playwright end-to-end tests
 - Tests for longprees
 
