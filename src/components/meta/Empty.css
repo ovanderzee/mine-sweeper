@@ -7,6 +7,14 @@
     width: 19em;
     height: 19em;
     margin: auto;
+
+    #play-mine {
+      opacity: 0;
+    }
+
+    g[clip-path] {
+      transition: opacity ease-in-out 200ms;
+    }
   }
 
   button svg {
@@ -19,16 +27,21 @@
     animation: 10s ease-in-out infinite slow-pulse;
   }
 
-  button:hover circle#base-mine {
-    animation: none;
+  button:hover {
+    #pause-mine {
+      opacity: 0;
+    }
+    #play-mine {
+      opacity: 1;
+    }
   }
 
 }
 
 @keyframes slow-pulse {
-  from {opacity: .4;}
-  25% {opacity: .8;}
-  50% {opacity: .5;}
-  75% {opacity: .6;}
-  to {opacity: .4;}
+  from {opacity: .5;}
+  25% {opacity: .92;}
+  50% {opacity: .6;}
+  75% {opacity: .76;}
+  to {opacity: .5;}
 }

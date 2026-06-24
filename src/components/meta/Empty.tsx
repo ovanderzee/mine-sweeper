@@ -43,12 +43,39 @@ const Empty = () => {
                 />
               </filter>
 
+              <path id="pause-icon"
+                d="
+                  M 50 50 L 50 100 L 70 100 L 70 50 L 50 50 z
+                  M 80 50 L 80 100 L 100 100 L 100 50 L 80 50 z
+                "
+              />
+              <path id="play-icon"
+                transform="translate(5)"
+                d="M 50 50 L 100 75 L 50 100 L 50 50 z"
+              />
+
               <circle id="base-mine" cx="75" cy="75" r="55" />
             </defs>
+
             <use href="#base-mine" id="full-mine"
               fill="url(#MineGradient)"
               filter="url(#drop-shadow)"
             />
+
+            <clipPath id="pause-clip">
+              <use href="#pause-icon" />
+            </clipPath>
+            <g id="pause-mine" clipPath="url(#pause-clip)">
+              <use href="#base-mine" fill="url(#MineGradient)" />
+            </g>
+
+            <clipPath id="play-clip">
+              <use href="#play-icon" />
+            </clipPath>
+            <g id="play-mine" clipPath="url(#play-clip)">
+              <use href="#base-mine" fill="url(#MineGradient)" />
+            </g>
+
           </svg>
         </button>
       </div>
