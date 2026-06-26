@@ -10,8 +10,8 @@ export const calculateMineCount = ((cfg: AppCheckConfig): number => {
 
 export const DEFAULTS = {
   BOARD_SIZE: 6,
-  GAME_LEVEL: 3,
-  MINE_COUNT: Math.ceil(6 * 6 * 3 / 30),
+  GAME_LEVEL: 6,
+  MINE_COUNT: Math.ceil(6 * 6 * 6 / 60),
   LANGUAGE: currentLanguage,
   FONT_SIZE: 15,
   PLAYER_NAME: texts[currentLanguage].config['default player'],

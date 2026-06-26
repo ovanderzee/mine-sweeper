@@ -83,8 +83,9 @@ export const mostClicksToWin = (game: GameState) => {
 export const makeBoardCode = (board: CellState[][], gameLevel: number): string => {
   const allCells = board.flat()
 
-  // three positions to check the integrity: size(radix), size(radix), level(10)
+  // three positions to check the integrity: size(radix), size(radix), level(radix)
   const size18 = Math.pow(allCells.length, 0.5).toString(SCORE_RADIX)
+  const level18 = gameLevel.toString(SCORE_RADIX)
 
   // booleanesque value for fill in one position
   const fill02 = allCells
@@ -92,7 +93,7 @@ export const makeBoardCode = (board: CellState[][], gameLevel: number): string =
     .join('');
   const fillLz = LzString.compressToEncodedURIComponent(fill02)
 
-  return `${size18}${size18}${gameLevel}${fillLz}`
+  return `${size18}${size18}${level18}${fillLz}`
 }
 
 export const sequenceFillData = (boardCode: string): [CellState[][], AppCheckConfig] => {
