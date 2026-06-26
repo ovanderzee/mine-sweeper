@@ -24,6 +24,7 @@
 ## [4.0.0] - 2026-06-21
 
 ### Added
+- Animation on pausing screen
 
 ### Changed
 
@@ -34,6 +35,7 @@
 ### Added
 - Playwright end-to-end tests
 - Tests for longprees
+- Target screen for pausing
 
 ### Changed
 - Renamed app to 'MineSweep'

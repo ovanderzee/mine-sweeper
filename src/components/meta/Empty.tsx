@@ -50,8 +50,7 @@ const Empty = () => {
                 "
               />
               <path id="play-icon"
-                transform="translate(5)"
-                d="M 50 50 L 100 75 L 50 100 L 50 50 z"
+                d="M 55 50 L 105 75 L 55 100 L 55 50 z"
               />
 
               <circle id="base-mine" cx="75" cy="75" r="55" />
