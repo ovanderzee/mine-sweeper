@@ -106,7 +106,7 @@
 #tip-action,
 #fullscreen-play {
   display: flex;
-  gap: 1ex;
+  gap: 1.333ex;
 }
 
 /**************

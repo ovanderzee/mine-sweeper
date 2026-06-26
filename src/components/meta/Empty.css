@@ -7,18 +7,61 @@
     width: 19em;
     height: 19em;
     margin: auto;
-    animation: 10s ease-in-out infinite slow-pulse;
+
+    g[clip-path] {
+      transition: opacity ease-in-out 200ms;
+    }
   }
 
-  button:hover {
-    animation: none;
+  button svg {
+    margin: 10%;
+    width: 80%;
+    height: 80%;
+  }
+
+  button use#full-mine {
+    animation: 7s ease-in-out infinite slow-pulse;
+  }
+
+  button #pause-clip {
+    transform-origin: 68.7% 68.7%;
+    animation: 7s ease infinite slow-pause-pulse;
+  }
+
+  button #pause-mine {
+    transform-origin: 68.7% 68.7%;
+    animation: 7s ease infinite slow-pause-opaque;
+  }
+
+  button #play-clip {
+    transform-origin: 68.7% 67.3%;
+    animation: 7s ease infinite slow-play-move;
   }
 }
 
 @keyframes slow-pulse {
-  from {opacity: .4;}
-  25% {opacity: .8;}
-  50% {opacity: .5;}
-  75% {opacity: .6;}
-  to {opacity: .4;}
+  from {opacity: .5;}
+  33% {opacity: .92;}
+  67% {opacity: .6;}
+  to {opacity: .5;}
+}
+
+@keyframes slow-pause-pulse {
+  from {transform: scale(4);}
+  20% {transform: scale(0.01);}
+  67% {transform: scale(0);}
+  to {transform: scale(0);}
+}
+
+@keyframes slow-pause-opaque {
+  from {opacity: 0;}
+  10% {opacity: 1;}
+  to {opacity: 0;}
+}
+
+@keyframes slow-play-move {
+  from {transform: scale(0) translate(-4000%);}
+  59% {transform: scale(0) translate(-200%);}
+  83% {transform: scale(2) translate(200%);}
+  to {transform: scale(0) translate(1000%);}
 }
