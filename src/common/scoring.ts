@@ -14,7 +14,7 @@ export const refineScores = (scores: ScoreItem[]): ScoreItem[] => {
   const points = scores.map(s => s.score.points)
   return scores.map(score => {
     score.rank = points.findIndex(points => points === score.score.points) + 1
-    if (!score.level) score.level = +score.code.charAt(2)
+    if (!score.level) score.level = parseInt(score.code.charAt(2), SCORE_RADIX)
     return score
   }) as ScoreItem[]
 }
@@ -101,7 +101,7 @@ export const sequenceFillData = (boardCode: string): [CellState[][], AppCheckCon
 
   const checkData = boardCode.substring(0, BREAK_BEFORE)
   const checkSize = parseInt(checkData.charAt(0), SCORE_RADIX)
-  const checkLevel = Number(checkData.charAt(2))
+  const checkLevel = parseInt(checkData.charAt(2), SCORE_RADIX)
   const checkConfig: AppCheckConfig = { BOARD_SIZE: checkSize, GAME_LEVEL: checkLevel }
 
   const boardData = boardCode.substring(BREAK_BEFORE)
