@@ -6,7 +6,6 @@ export const defaultChallengeConfig = {
   ...DEFAULTS,
   "LANGUAGE": Languages.en,
   "PLAYER_NAME":"Hyacinth",
-  "MAX_SCORES":10,
 }
 
 // fits various gamestates

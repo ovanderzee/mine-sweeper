@@ -15,7 +15,6 @@ export const DEFAULTS = {
   LANGUAGE: currentLanguage,
   FONT_SIZE: 15,
   PLAYER_NAME: texts[currentLanguage].config['default player'],
-  MAX_SCORES: 999,
   PLAY_MODE: PlayMode.NORMAL,
 }
 

@@ -200,15 +200,6 @@ function Configure() {
     pageCtx.configure({ PLAYER_NAME: ctrl.value })
   }
 
-  const changeMaxScoresHandler = (event: React.ChangeEvent) => {
-    const ctrl = event.target as HTMLInputElement
-    const value = Math.min(
-      RANGES.SCORES.max,
-      Math.max(RANGES.SCORES.min, +ctrl.value)
-    )
-    pageCtx.configure({ MAX_SCORES: value })
-  }
-
   const recordContent = (
     <fieldset id="record-score">
       <legend>{text.settings['Record Scores']}</legend>
@@ -226,21 +217,6 @@ function Configure() {
         </div>
       </div>
 
-      <div className="field">
-        <label htmlFor="max">{text.settings['Max records']}</label>
-        <div>
-          <em>{text.settings['clip to %n'].replace('%n', config.MAX_SCORES.toString())}</em>
-          <input
-            id="max"
-            type="range"
-            value={config.MAX_SCORES}
-            min={RANGES.SCORES.min}
-            max={RANGES.SCORES.max}
-            onChange={changeMaxScoresHandler}
-            onClick={changeMaxScoresHandler as unknown as React.MouseEventHandler<HTMLInputElement>}
-          />
-        </div>
-      </div>
     </fieldset>
   )
 

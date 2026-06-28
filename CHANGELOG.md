@@ -16,8 +16,7 @@
 - Tests on marking
 - Consent for ending playing game and changing the config when replaying from score list
 - Checkout Core Web Vitals-optimalisation
-* Describe commandline tools, remove max. scores setting.
-
+* Describe commandline tools
 
 ## [4.0.0] - 2026-06-28
 
@@ -28,6 +27,9 @@
 ### Changed
 - Levels refined with intermediate values, level values have been doubled and localStorage is adapted accordingly.
 - BREAKING: from version 4 there is no way back to previous versions without data loss.
+
+### Removed
+- Removed max scores entry. Not really necessary.
 
 
 ## [3.11.0] - 2026-06-21

@@ -24,7 +24,6 @@ export type AppSubConfig = {
   FONT_SIZE?: number;
   GAME_LEVEL?: number;
   LANGUAGE?: Languages;
-  MAX_SCORES?: number;
   MINE_COUNT?: number;
   PLAYER_NAME?: string;
   PLAY_MODE?: PlayMode;
@@ -40,7 +39,6 @@ export interface AppConfig {
   FONT_SIZE: number;
   GAME_LEVEL: number;
   LANGUAGE: Languages;
-  MAX_SCORES: number;
   MINE_COUNT: number;
   PLAYER_NAME: string;
   PLAY_MODE: PlayMode;
