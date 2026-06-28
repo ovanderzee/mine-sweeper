@@ -32,11 +32,6 @@ const deleteSampleScores = (): void => {
   setAllScores(newScores)
 }
 
-const deleteInvalidScores = function () {
-  const validScores = getAllScores().filter((s: ScoreItem) => s.play.moves > 0)
-  setAllScores(validScores)
-}
-
 export default {
   getAllScores,
   setAllScores,
@@ -44,5 +39,4 @@ export default {
   deleteScoresByUser,
   addSampleScores,
   deleteSampleScores,
-  deleteInvalidScores,
 }

@@ -15,14 +15,14 @@
 - Open/close mark section
 - Tests on marking
 - Consent for ending playing game and changing the config when replaying from score list
-- Checkout Core Web Vitals-optimalisation
-* Describe commandline tools
+
 
 ## [4.0.0] - 2026-06-28
 
 ### Added
 - Animation on pausing screen
 - Logic for updating data in storage
+- Console tools overview in markdown
 
 ### Changed
 - Levels refined with intermediate values, level values have been doubled and localStorage is adapted accordingly.
