@@ -12,22 +12,22 @@
 - Routing on gamecode, about, config and hiscores
 - Show number of neighbouring mines in graph
 - Calculate coagulation (mine-mine borders | blank to mine ratio)
-* Refine levels with intermediate values, maybe by percentage
 - Open/close mark section
 - Tests on marking
 - Consent for ending playing game and changing the config when replaying from score list
 - Checkout Core Web Vitals-optimalisation
 * Describe commandline tools, remove max. scores setting.
-* Set level based on percentage of cells are mine. This will enable a fine-grained set of useable levels
 
 
-## [4.0.0] - 2026-06-21
+## [4.0.0] - 2026-06-28
 
 ### Added
 - Animation on pausing screen
+- Logic for updating data in storage
 
 ### Changed
-
+- Levels refined with intermediate values, level values have been doubled and localStorage is adapted accordingly.
+- BREAKING: from version 4 there is no way back to previous versions without data loss.
 
 
 ## [3.11.0] - 2026-06-21
