@@ -27,6 +27,7 @@
 ### Changed
 - Levels refined with intermediate values, level values have been doubled and localStorage is adapted accordingly.
 - BREAKING: from version 4 there is no way back to previous versions without data loss.
+- No text selection on the playground and navigation sections
 
 ### Removed
 - Removed max scores entry. Not really necessary.
@@ -36,7 +37,7 @@
 
 ### Added
 - Playwright end-to-end tests
-- Tests for longprees
+- Tests for longpress
 - Target screen for pausing
 
 ### Changed

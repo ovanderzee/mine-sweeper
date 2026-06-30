@@ -175,6 +175,10 @@ nav,
 button {
   font-family: inherit;
   cursor: pointer;
+}
+
+#playground *,
+nav * {
   -webkit-user-select: none;
   user-select: none;
 }
