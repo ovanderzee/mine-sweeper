@@ -1,4 +1,4 @@
-/* @ts-ignore */
+
 import nederlands from './translations/nederlands.json' with { type: "json" };
 import english from './translations/english.json' with { type: "json" };
 import { Translation, Languages } from './app.d'

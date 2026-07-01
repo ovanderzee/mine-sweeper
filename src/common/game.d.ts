@@ -20,6 +20,7 @@ export class CellState extends CellStateEntry {
 
 export enum GameActionType {
   LOAD = 'LOAD',
+  PAUSE = 'PAUSE',
   STORE = 'STORE',
   NEW = 'NEW',
   REPLAY = 'REPLAY',

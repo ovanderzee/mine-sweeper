@@ -54,9 +54,8 @@ const Game = () => {
   });
 
   const pause = () => {
-    gameState.tShift = Date.now()
-    const action: GameAction = { type: GameActionType.STORE}
-    dispatchGameAction(action)
+    const pauseAction: GameAction = { type: GameActionType.PAUSE}
+    dispatchGameAction(pauseAction)
   }
 
   const playgroundRef = useRef<HTMLDivElement>(null as unknown as HTMLDivElement)
@@ -124,7 +123,7 @@ const Game = () => {
         const action: GameAction = { type: GameActionType.VICTORY }
         dispatchGameAction(action)
       }
-      // eslint-disable-next-line react-hooks/set-state-in-effect // state is used to display a message
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- state is used to display a message
       setShowWonModal(true)
     } else if (gameWasLost) {
       // blow the untouched mines, odd number of mines will not blow in dev
