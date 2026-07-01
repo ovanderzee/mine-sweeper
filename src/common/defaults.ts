@@ -1,7 +1,7 @@
 import { texts, currentLanguage } from './i18n'
 import { AppCheckConfig, BoardFit, PlayMode } from './app.d'
 
-export const GAME_DIVISOR = 30
+export const GAME_DIVISOR = 60
 
 export const calculateMineCount = ((cfg: AppCheckConfig): number => {
   const approx = Math.pow(cfg.BOARD_SIZE, 2) * cfg.GAME_LEVEL / GAME_DIVISOR
@@ -10,8 +10,8 @@ export const calculateMineCount = ((cfg: AppCheckConfig): number => {
 
 export const DEFAULTS = {
   BOARD_SIZE: 6,
-  GAME_LEVEL: 3,
-  MINE_COUNT: Math.ceil(6 * 6 * 3 / 30),
+  GAME_LEVEL: 6,
+  MINE_COUNT: Math.ceil(6 * 6 * 6 / 60),
   LANGUAGE: currentLanguage,
   FONT_SIZE: 15,
   PLAYER_NAME: texts[currentLanguage].config['default player'],

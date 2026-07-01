@@ -13,7 +13,7 @@ export const defaultChallengeConfig = {
 export const microConfig = {
   ...DEFAULTS,
   "BOARD_SIZE":3,
-  "GAME_LEVEL":4,
+  "GAME_LEVEL":8,
   "MINE_COUNT":2,
   "LANGUAGE":Languages.en,
   "PLAYER_NAME":"Midas",
@@ -22,7 +22,7 @@ export const microConfig = {
 export const simpleEasyConfig = {
   ...DEFAULTS,
   "BOARD_SIZE":4,
-  "GAME_LEVEL":3,
+  "GAME_LEVEL":6,
   "MINE_COUNT":2,
   "LANGUAGE": Languages.en,
   "PLAYER_NAME":"Hans",
@@ -31,7 +31,7 @@ export const simpleEasyConfig = {
 export const simpleHardConfig = {
   ...DEFAULTS,
   "BOARD_SIZE":4,
-  "GAME_LEVEL":6,
+  "GAME_LEVEL":10,
   "MINE_COUNT":4,
   "LANGUAGE": Languages.en,
   "PLAYER_NAME":"Jonathan",
@@ -41,7 +41,7 @@ export const simpleHardConfig = {
 export const scoringConfig = {
   ...DEFAULTS,
   "BOARD_SIZE":7,
-  "GAME_LEVEL":4,
+  "GAME_LEVEL":8,
   "MINE_COUNT":7,
   "LANGUAGE":Languages.en,
   "PLAYER_NAME":"Florance",

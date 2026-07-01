@@ -98,10 +98,10 @@ describe('Create compressed string containing fill data', () => {
     [{"fill":1,"row":8,"col":0},{"fill":10,"row":8,"col":1},{"fill":2,"row":8,"col":2},{"fill":1,"row":8,"col":3},{"fill":0,"row":8,"col":4},{"fill":2,"row":8,"col":5},{"fill":4,"row":8,"col":6},{"fill":13,"row":8,"col":7},{"fill":4,"row":8,"col":8},{"fill":2,"row":8,"col":9}],
     [{"fill":1,"row":9,"col":0},{"fill":1,"row":9,"col":1},{"fill":1,"row":9,"col":2},{"fill":0,"row":9,"col":3},{"fill":0,"row":9,"col":4},{"fill":1,"row":9,"col":5},{"fill":10,"row":9,"col":6},{"fill":3,"row":9,"col":7},{"fill":10,"row":9,"col":8},{"fill":1,"row":9,"col":9}]
   ]
-  const testBoardCode = "aa9IwBjdCUruSbnIi8nPiuo3I9ApLKUIA"
+  const testBoardCode = "aaiIwBjdCUruSbnIi8nPiuo3I9ApLKUIA"
 
   it('should convert a board to a boardCode', () => {
-    const boardCode = makeBoardCode(testBoard, 9)
+    const boardCode = makeBoardCode(testBoard, 18)
     expect(boardCode).toBe(testBoardCode)
   })
 
@@ -109,7 +109,7 @@ describe('Create compressed string containing fill data', () => {
     const [fillData, checkConfig] = sequenceFillData(testBoardCode)
     expect(fillData).toStrictEqual(testBoard)
     expect(checkConfig.BOARD_SIZE).toBe(10)
-    expect(checkConfig.GAME_LEVEL).toBe(9)
+    expect(checkConfig.GAME_LEVEL).toBe(18)
   })
 })
 
@@ -144,32 +144,32 @@ describe('Sanity checking on boardCode', () => {
   beforeEach(() => console.error = vi.fn())
 
   it('should find undecodeable code', () => {
-    const wrongCode = '9786708089'
+    const wrongCode = '97g6708089'
     sequenceFillData(wrongCode)
     expect(console.error).toHaveBeenLastCalledWith('Invalid code')
   })
 
   it('should find unexpected code', () => {
-    const wrongCode = '444IwBhrSv'
+    const wrongCode = '448IwBhrSv'
     sequenceFillData(wrongCode)
     expect(console.error).toHaveBeenLastCalledWith('Invalid code')
   })
 
   it('should find wrong board size', () => {
-    const wrongCode = '534IwBhrSvI'
+    const wrongCode = '538IwBhrSvI'
     sequenceFillData(wrongCode)
     expect(console.error).toHaveBeenLastCalledWith('Invalid size')
   })
 
   it('should find wrong mine count', () => {
-    // size 4 en lvl 3,4,5 geven 2,3,3 mijnen
-    const wrongCode = '443IwBhrSvI'
+    // size 4 en lvl 6,8,10 geven 2,3,3 mijnen
+    const wrongCode = '446IwBhrSvI'
     sequenceFillData(wrongCode)
     expect(console.error).toHaveBeenLastCalledWith('Invalid mine count')
   })
 
   it('should not go wrong', () => {
-    const goodCode = '444IwBhrSvI'
+    const goodCode = '448IwBhrSvI'
     sequenceFillData(goodCode)
     expect(console.error).not.toHaveBeenCalled()
   })
@@ -197,11 +197,11 @@ describe('Precision as long as we need it', () => {
 
 describe('Sort and Rank scores', () => {
   const oldScores = [
-    {code: "774abc123", rank: 14, score: {points: 30}},
-    {code: "774def456", rank: 2, score: {points: 100}},
-    {code: "774ghi789", rank: 9, score: {points: 67}},
+    {code: "778abc123", rank: 14, score: {points: 30}},
+    {code: "778def456", rank: 2, score: {points: 100}},
+    {code: "778ghi789", rank: 9, score: {points: 67}},
   ] as ScoreItem[]
-  const newScore = {code: "774xyz789", rank: 0, score: {points: 67}} as ScoreItem
+  const newScore = {code: "778xyz789", rank: 0, score: {points: 67}} as ScoreItem
 
 
   it('should sort by points and rank, oldest score first', () => {

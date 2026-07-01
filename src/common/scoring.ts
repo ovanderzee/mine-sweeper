@@ -14,7 +14,7 @@ export const refineScores = (scores: ScoreItem[]): ScoreItem[] => {
   const points = scores.map(s => s.score.points)
   return scores.map(score => {
     score.rank = points.findIndex(points => points === score.score.points) + 1
-    if (!score.level) score.level = +score.code.charAt(2)
+    if (!score.level) score.level = parseInt(score.code.charAt(2), SCORE_RADIX)
     return score
   }) as ScoreItem[]
 }
@@ -83,8 +83,9 @@ export const mostClicksToWin = (game: GameState) => {
 export const makeBoardCode = (board: CellState[][], gameLevel: number): string => {
   const allCells = board.flat()
 
-  // three positions to check the integrity: size(radix), size(radix), level(10)
+  // three positions to check the integrity: size(radix), size(radix), level(radix)
   const size18 = Math.pow(allCells.length, 0.5).toString(SCORE_RADIX)
+  const level18 = gameLevel.toString(SCORE_RADIX)
 
   // booleanesque value for fill in one position
   const fill02 = allCells
@@ -92,7 +93,7 @@ export const makeBoardCode = (board: CellState[][], gameLevel: number): string =
     .join('');
   const fillLz = LzString.compressToEncodedURIComponent(fill02)
 
-  return `${size18}${size18}${gameLevel}${fillLz}`
+  return `${size18}${size18}${level18}${fillLz}`
 }
 
 export const sequenceFillData = (boardCode: string): [CellState[][], AppCheckConfig] => {
@@ -100,7 +101,7 @@ export const sequenceFillData = (boardCode: string): [CellState[][], AppCheckCon
 
   const checkData = boardCode.substring(0, BREAK_BEFORE)
   const checkSize = parseInt(checkData.charAt(0), SCORE_RADIX)
-  const checkLevel = Number(checkData.charAt(2))
+  const checkLevel = parseInt(checkData.charAt(2), SCORE_RADIX)
   const checkConfig: AppCheckConfig = { BOARD_SIZE: checkSize, GAME_LEVEL: checkLevel }
 
   const boardData = boardCode.substring(BREAK_BEFORE)

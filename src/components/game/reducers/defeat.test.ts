@@ -34,7 +34,7 @@ describe('defeatReducer is called in repetition', () => {
       times = 0,
       releasedMines: number,
       gameState = { ...playingGameState }
-    const [board, config] = sequenceFillData('kk4Aw2iMaS1styvRK7kgiz32pmqWi+BK+GhySxaZp9ljNV1j5tTDdJ2rnf1HB36F0eLpyFggA')
+    const [board, config] = sequenceFillData('kk8Aw2iMaS1styvRK7kgiz32pmqWi+BK+GhySxaZp9ljNV1j5tTDdJ2rnf1HB36F0eLpyFggA')
     storage.config = { ...storage.config, ...config }
     const findReleasedMines = () => gameState.board
       .flat()

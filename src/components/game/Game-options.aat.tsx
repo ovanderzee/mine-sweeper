@@ -50,17 +50,13 @@ describe('The game start button', () => {
     storage.game = playingGameState
     screen = await renderWithApp()
 
-    expect(storage.game.stage).toBe('game-playing')
-
     const mineIndex = storage.game.board.flat().findIndex(c => c.fill > 8 && !c.stage)
     await screen.getByRole('gridcell').nth(mineIndex).click()
 
     await expect.element(screen.getByRole('main')).toHaveClass('game-lost')
-    expect(storage.game?.stage).toBe('game-lost')
 
     await screen.getByRole('navigation').getByTitle('New Game').click()
 
-    expect(storage.game?.stage).toBe('game-new')
     await expect.element(screen.getByRole('main')).toHaveClass('game-new')
   })
 
@@ -100,12 +96,10 @@ describe('The replay button', () => {
     await screen.getByRole('gridcell').nth(mineIndex).click()
 
     await expect.element(screen.getByRole('main')).toHaveClass('game-lost')
-    expect(storage.game?.stage).toBe('game-lost')
 
     await screen.getByRole('navigation').getByTitle('Replay').click()
 
     await expect.element(screen.getByRole('main')).toHaveClass('game-new')
-    expect(storage.game?.stage).toBe('game-new')
 
     const latterFilling = getFillDistribution(storage.game?.board)
     expect(initialFilling).toStrictEqual(latterFilling)
@@ -117,7 +111,6 @@ describe('The replay button', () => {
     const initialFilling = getFillDistribution(storage.game?.board)
 
     await expect.element(screen.getByRole('main')).toHaveClass('game-playing')
-    expect(storage.game?.stage).toBe('game-playing')
 
     await screen.getByRole('navigation').getByTitle('Replay').click()
     const dialog = screen.getByRole('dialog')

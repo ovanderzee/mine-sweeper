@@ -1,6 +1,7 @@
 import { useContext, useState, useRef, useEffect } from 'react'
 import PageContext from '../../store/page-context'
 import { FADE_OUT_TIME } from '../../common/constants'
+import updater from '../../common/update'
 import './Introduction.css'
 
 const Introduction = (props: { onEnd: (timeout: number) => void }) => {
@@ -63,6 +64,8 @@ const Introduction = (props: { onEnd: (timeout: number) => void }) => {
       <small className="tekst">{text.intro.skip_this}</small>
     </button>
   )
+
+  setTimeout(updater, 100)
 
   return animatedHtml
 }

@@ -51,7 +51,7 @@ describe('The configure controls', () => {
   })
 
   it('should change the gamelevel setting', () => {
-    expect(storage.config.GAME_LEVEL).toBe(3)
+    expect(storage.config.GAME_LEVEL).toBe(6)
     const range = screen.getByLabelText('Gamelevel')
     clickRangeInputValue(range.element() as HTMLInputElement, '5')
     expect(storage.config.GAME_LEVEL).toBe(5)
@@ -65,7 +65,7 @@ describe('The configure controls', () => {
 
   it('should enforce maximum gamelevel setting', () => {
     const range = screen.getByLabelText('Gamelevel')
-    clickRangeInputValue(range.element() as HTMLInputElement, '10')
+    clickRangeInputValue(range.element() as HTMLInputElement, '16')
     expect(storage.config.GAME_LEVEL).toBe(RANGES.LEVEL.max)
   })
 
