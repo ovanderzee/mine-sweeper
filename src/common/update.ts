@@ -1,6 +1,9 @@
 import { ScoreItem } from './game.d'
 import { SCORE_RADIX } from './constants'
 
+/**
+ Add updates at the end
+ */
 const updater = () => {
 
   const victoryStorage = localStorage.getItem('mv-victory')
@@ -18,6 +21,13 @@ const updater = () => {
     console.log('Scorelist updated to use intermediate levels.')
   }
 
+  const cfgMaxScoresStorage = localStorage.getItem('mv-config') || '{}'
+  const cfgMaxScoresObject = JSON.parse(cfgMaxScoresStorage)
+  if (Object.hasOwn(cfgMaxScoresObject, 'MAX_SCORES')) {
+    delete cfgMaxScoresObject.MAX_SCORES
+    localStorage.setItem('mv-config', JSON.stringify(cfgMaxScoresObject))
+    console.log('Configuration cleaned up.')
+  }
 }
 
 export default updater
