@@ -106,6 +106,17 @@ describe('The configure controls', () => {
     await userEvent.fill(input, 'Moorefly')
     expect(storage.config.PLAYER_NAME).toBe('Moorefly')
   })
+
+  it('should toggle the verbose setting', async () => {
+    const verboseCbx = screen.getByLabelText('verbose')
+    expect(storage.config.VERBOSE_BTN).toBe(true)
+
+    await verboseCbx.click()
+    expect(storage.config.VERBOSE_BTN).toBe(false)
+
+    await verboseCbx.click()
+    expect(storage.config.VERBOSE_BTN).toBe(true)
+  })
 })
 
 describe('The configure-page reset button', () => {

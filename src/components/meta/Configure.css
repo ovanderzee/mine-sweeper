@@ -151,10 +151,10 @@ label:not([for]) > * {
     vertical-align: -.15em;
   }
 
-    label:not([for]) input[type="checkbox"] + span,
-    label:not([for]) input[type="radio"] + span {
-      width: 7em;
-    }
+  label:not([for]) input[type="checkbox"],
+  label:not([for]) input[type="checkbox"] + em {
+    display: inline !important;
+  }
 
 label:not([for]):focus-within {
   filter: hue-rotate(-15deg) saturate(65%);

@@ -15,7 +15,8 @@
 - Open/close mark section
 - Tests on marking
 - Consent for ending playing game and changing the config when replaying from score list
-
+- Apply current language when reverting to defaults
+- Supply isDefaultGameState from configure screen
 
 ## [4.0.0] - 2026-06-28
 

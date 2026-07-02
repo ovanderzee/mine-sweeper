@@ -219,6 +219,29 @@ function Configure() {
     </div>
   )
 
+  const changeVerbosenessHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
+    pageCtx.configure({ VERBOSE_BTN: event.target.checked })
+  }
+
+  const changeToggleFieldContent = (
+    <div className="field">
+      <div className="label">{text.settings['Toggle fields']}</div>
+
+      <label>
+        <input
+          aria-label="verbose"
+          name="verbose"
+          type="checkbox"
+          checked={config.VERBOSE_BTN === true}
+          onChange={changeVerbosenessHandler}
+          onClick={changeVerbosenessHandler as unknown as React.MouseEventHandler<HTMLInputElement>}
+        /> &nbsp;
+        <em>{text.settings['Verbose Check']}</em>
+      </label>
+
+    </div>
+  )
+
   const configNavigation = (
     <NavOptionsBar>
       <DefaultSettings />
@@ -249,6 +272,7 @@ function Configure() {
           {changeLanguageContent}
           {changeFontSizeContent}
           {changePlayerNameContent}
+          {changeToggleFieldContent}
         </fieldset>
       </form>
     </article>

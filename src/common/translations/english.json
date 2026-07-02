@@ -124,7 +124,10 @@
     "Name in Scores": "Name in scores",
     "type your name": "enter your name",
     "Max records": "Max records",
-    "clip to %n": "clip to %n"
+    "clip to %n": "clip to %n",
+
+    "Toggle fields": "Optional features",
+    "Verbose Check": "descriptions for navigation and option buttons"
   },
   "nav": {
     "Hall of Fame": "Hall of Fame",
