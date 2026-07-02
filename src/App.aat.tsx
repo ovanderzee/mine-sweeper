@@ -45,7 +45,7 @@ describe('The app journey', () => {
 
     // now in Configure
 
-    navBtn = screen.getByTitle('Return to Game')
+    navBtn = screen.getByTitle('To Game')
     await navBtn.click()
 
     const locPG = screen.getByRole('heading', {name: 'Playground'})

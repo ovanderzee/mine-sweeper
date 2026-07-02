@@ -19,7 +19,7 @@ const GameCellDemoNav = (props: PageProps) => {
     setTimeout(() => pageCtx.navigate(<GameCellDemo />), 10)
   }
 
-  const navButton = <button type="button" className="nav-option" title="Cell State Demo" onClick={watchHandler}>
+  const navButton = <button type="button" className="nav-option" title="State Demo" onClick={watchHandler}>
       <svg role="img" aria-label={text.icon['eye']}><use href={`#nav-eye`} /></svg>
     </button>
 

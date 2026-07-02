@@ -132,7 +132,7 @@
   "nav": {
     "Hall of Fame": "Hall of Fame",
     "Clear List": "Clear List",
-    "Reinstate Defaults": "Revert to Defaults",
+    "Reinstate Defaults": "Use Defaults",
     "New Game": "New Game",
     "Pause": "Pause",
     "Resume": "Continue game",
@@ -140,7 +140,7 @@
     "Settings": "Settings",
     "Help": "Description",
     "Playground": "Playground",
-    "Go Back": "Return to Game"
+    "Go Back": "To Game"
   },
   "icon": {
     "podium": "podium",

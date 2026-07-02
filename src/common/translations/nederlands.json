@@ -132,7 +132,7 @@
   "nav": {
     "Hall of Fame": "Eregalerij",
     "Clear List": "Wis lijst",
-    "Reinstate Defaults": "Terug naar standaard waarden",
+    "Reinstate Defaults": "Standaarden",
     "New Game": "Nieuw Spel",
     "Pause": "Pauze",
     "Resume": "Speel verder",
@@ -140,7 +140,7 @@
     "Settings": "Instellingen",
     "Help": "Beschrijving",
     "Playground": "Speelbord",
-    "Go Back": "Keer terug naar spel"
+    "Go Back": "Naar Spel"
   },
   "icon": {
     "podium": "podium",

@@ -125,7 +125,7 @@ describe('The configure-page reset button', () => {
     storage.game = null
     storage.config = microConfig
     const screen = await renderWithProvider(<Configure/>)
-    await screen.getByTitle('Revert to Defaults').click()
+    await screen.getByTitle('Use Defaults').click()
     expect(storage.config).toStrictEqual(DEFAULTS)
   })
 

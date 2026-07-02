@@ -90,14 +90,14 @@ describe('Flip focus', () => {
       await expect.element(screen.getByRole('main').getByRole('slider').first()).toBe(document.activeElement)
     })
 
-    it('should move focus from control in main to the "Revert to Defaults" button, the first control in navigation', async () => {
+    it('should move focus from control in main to the "Use Defaults" button, the first control in navigation', async () => {
       const mainInput = screen.getByRole('main').getByLabelText('Gamelevel')
       await mainInput.element().focus()
       expect(mainInput).toHaveFocus()
       rootKeyListener(altTabEvent)
 
       await expect.element(screen.getByRole('navigation').getByRole('button').first()).toBe(document.activeElement)
-      await expect.element(screen.getByRole('navigation').getByTitle('Revert to Defaults')).toBe(document.activeElement)
+      await expect.element(screen.getByRole('navigation').getByTitle('Use Defaults')).toBe(document.activeElement)
     })
   })
 
