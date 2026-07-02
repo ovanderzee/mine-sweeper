@@ -7,7 +7,7 @@
     "delete": "Delete"
   },
   "config": {
-    "default player": "anonymous"
+    "default player": "Anonymous"
   },
   "intro": {
     "skip_this": "skip to game"
