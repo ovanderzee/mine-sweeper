@@ -25,6 +25,7 @@ const About = () => {
       <p>{text.help['Playing Hint']}</p>
       <p>{text.help['Flagging Paragraph']}</p>
       <p>{text.help['Finalise Game']}</p>
+      <p>{text.help['Play Modes']}</p>
 
       <h3>{text.help['Nav Heading']}</h3>
       <dl className="icons">
@@ -60,7 +61,7 @@ const About = () => {
 
       <hr />
 
-      <h5>Onno van der Zee, 2013 - 2025</h5>
+      <h5>Onno van der Zee, 2013 - 2026</h5>
       <h6>{text.help['appVersion']}: {appVersion} ({commitHash})</h6>
     </article>
   )

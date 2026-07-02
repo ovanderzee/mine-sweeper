@@ -37,6 +37,7 @@
     "Playing Hint": "Explore the minefield by clicking a few cells.",
     "Flagging Paragraph": "Flag a suspected mine using a longer click. The cell will then not respond to normal clicking.",
     "Finalise Game": "You loose the game when you touch a mine. You win when the number of closed cells equal the number of mines.",
+    "Play Modes": "The advanced player can find more of a challenge with a different play mode.",
 
     "Features Heading": "Features",
 
