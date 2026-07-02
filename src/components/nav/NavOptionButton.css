@@ -20,7 +20,7 @@ button.nav-option span {
   display: inline-block;
 }
 
-nav button.nav-option::after {
+nav button.nav-option.verbose::after {
   display: block;
   content: attr(title);
   font-size: 50%;

@@ -27,6 +27,7 @@ export type AppSubConfig = {
   MINE_COUNT?: number;
   PLAYER_NAME?: string;
   PLAY_MODE?: PlayMode;
+  VERBOSE_BTN?: boolean;
 }
 
 export interface AppCheckConfig {
@@ -42,6 +43,7 @@ export interface AppConfig {
   MINE_COUNT: number;
   PLAYER_NAME: string;
   PLAY_MODE: PlayMode;
+  VERBOSE_BTN: boolean;
 }
 
 export enum BoardFit {
