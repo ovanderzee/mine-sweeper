@@ -26,3 +26,5 @@ Just like real life!
 -  Diagram of various game properties, with enough games played
 -  Play the game fullscreen and with scaling options
 -  Conform to WCAG 2.1 Level AA; checked using www.a11y-audit.eu/
+-  Challenging Play modes
+-  The game could be paused

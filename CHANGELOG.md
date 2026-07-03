@@ -15,8 +15,6 @@
 - Open/close mark section
 - Tests on marking
 - Consent for ending playing game and changing the config when replaying from score list
-- Checkout Core Web Vitals-optimalisation
-* Describe commandline tools, remove max. scores setting.
 
 
 ## [4.0.0] - 2026-06-28
@@ -24,17 +22,23 @@
 ### Added
 - Animation on pausing screen
 - Logic for updating data in storage
+- Console tools overview in markdown
 
 ### Changed
 - Levels refined with intermediate values, level values have been doubled and localStorage is adapted accordingly.
 - BREAKING: from version 4 there is no way back to previous versions without data loss.
+- No text selection on the playground and navigation sections
+- Solved some lint issues
+
+### Removed
+- Removed max scores entry. Not really necessary.
 
 
 ## [3.11.0] - 2026-06-21
 
 ### Added
 - Playwright end-to-end tests
-- Tests for longprees
+- Tests for longpress
 - Target screen for pausing
 
 ### Changed

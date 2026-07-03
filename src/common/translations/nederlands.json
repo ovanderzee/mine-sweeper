@@ -7,7 +7,7 @@
     "delete": "Verwijder"
   },
   "config": {
-    "default player": "anoniem"
+    "default player": "Anoniem"
   },
   "intro": {
     "skip_this": "direct naar spel"
@@ -37,6 +37,7 @@
     "Playing Hint": "Onderzoek het mijnenveld door enkele cellen aan te klikken.",
     "Flagging Paragraph": "Vlag een vermoedde mijn af met een wat langere klik. De cel reageert dan niet meer op normaal aanklikken.",
     "Finalise Game": "Je verliest als je een mijn aanraakt. Je wint wanneer het aantal gesloten cellen gelijk is aan het aantal mijnen.",
+    "Play Modes": "De gevorderde speler kan met een andere speelmodus meer uitdaging vinden.",
 
     "Features Heading": "Functionaliteiten",
 

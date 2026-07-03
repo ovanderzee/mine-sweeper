@@ -6,9 +6,7 @@ import { preventReloadByEnter } from './../../common/functions'
 import { renderWithProvider, clickRangeInputValue } from './../../__mocks__/aat-helpers'
 import { playingGameState } from './../../__mocks__/game-states'
 import { microConfig } from './../../__mocks__/configs'
-import { liveScores } from './../../__mocks__/scores'
 import { RANGES } from '../../common/constants'
-import { ScoreItem } from './../../common/game.d'
 import Configure from './Configure'
 
 // https://vitest.dev/guide/browser/#limitations
@@ -107,32 +105,6 @@ describe('The configure controls', () => {
     const input = screen.getByLabelText('Name in scores')
     await userEvent.fill(input, 'Moorefly')
     expect(storage.config.PLAYER_NAME).toBe('Moorefly')
-  })
-
-  it('should change the max-scores setting', () => {
-    expect(storage.config.MAX_SCORES).toBe(999)
-    const range = screen.getByLabelText('Max records')
-    clickRangeInputValue(range.element() as HTMLInputElement, '642')
-    expect(storage.config.MAX_SCORES).toBe(642)
-  })
-
-  it('should not instantaneously remove scores', () => {
-    storage.scores = liveScores as ScoreItem[]
-    const range = screen.getByLabelText('Max records')
-    clickRangeInputValue(range.element() as HTMLInputElement, '33')
-    expect(storage.scores.length).toBe(liveScores.length)
-  })
-
-  it('should enforce minimum max-scores setting', () => {
-    const range = screen.getByLabelText('Max records')
-    clickRangeInputValue(range.element() as HTMLInputElement, '0')
-    expect(storage.config.MAX_SCORES).toBe(RANGES.SCORES.min)
-  })
-
-  it('should enforce maximum max-scores setting', () => {
-    const range = screen.getByLabelText('Max records')
-    clickRangeInputValue(range.element() as HTMLInputElement, '1940')
-    expect(storage.config.MAX_SCORES).toBe(RANGES.SCORES.max)
   })
 })
 

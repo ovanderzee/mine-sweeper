@@ -50,7 +50,6 @@ describe('Configuration storage', () => {
     expect(config.LANGUAGE).toBe(DEFAULTS.LANGUAGE)
     expect(config.FONT_SIZE).toBe(18)
     expect(config.PLAYER_NAME).toBe('Breadbrood')
-    expect(config.MAX_SCORES).toBe(DEFAULTS.MAX_SCORES)
   })
 
   it('should get defaults when no localStorage item exists', () => {
@@ -75,7 +74,6 @@ describe('Configuration storage', () => {
     expect(config.LANGUAGE).toBe(DEFAULTS.LANGUAGE)
     expect(config.FONT_SIZE).toBe(18)
     expect(config.PLAYER_NAME).toBe('Heidi')
-    expect(config.MAX_SCORES).toBe(DEFAULTS.MAX_SCORES)
   })
 
   it('should catch a JSON.parse error and return the default config', () => {

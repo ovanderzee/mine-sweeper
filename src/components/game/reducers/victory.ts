@@ -7,7 +7,7 @@ import { precise, refineScores, leastClicksToWin, mostClicksToWin,
   makeBoardCode, countMoves, calculateScore } from '../../../common/scoring'
 
 export const victoryReducer = (state: GameState, config: AppConfig): GameState => {
-  const { BOARD_SIZE, GAME_LEVEL, MINE_COUNT, PLAYER_NAME, PLAY_MODE, MAX_SCORES } = config
+  const { BOARD_SIZE, GAME_LEVEL, MINE_COUNT, PLAYER_NAME, PLAY_MODE } = config
 
   const victoryVars = {
     code: makeBoardCode(state.board, GAME_LEVEL),
@@ -50,7 +50,7 @@ export const victoryReducer = (state: GameState, config: AppConfig): GameState =
   }
 
   const richScores = refineScores(scores)
-  storage.scores = scores.slice(0, MAX_SCORES)
+  storage.scores = scores
 
   return {
     ...state,

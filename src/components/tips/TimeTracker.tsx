@@ -8,12 +8,13 @@ const TimeTracker = (props: TipProps) => {
   const pageCtx = useContext(PageContext)
   const { text } = pageCtx
   const { stage, tZero, tShift } = props.game
-
+  // eslint-disable-next-line react-hooks/purity -- Date.now() is impure yet predictable
   const [now, setNow] = useState(Date.now())
   const [intv, setIntv] = useState(0)
 
   useEffect(() => {
     if (stage === GameStages.PLAYING) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- 'stage' is orchestrated from outside, to render a message
       setIntv(window.setInterval(() => setNow(Date.now()), 33))
     } else {
       clearInterval(intv)

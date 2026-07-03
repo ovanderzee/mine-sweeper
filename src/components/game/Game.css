@@ -22,14 +22,12 @@ section.screen,
 
 #game-board {
   margin-inline: auto;
-  user-select: none;
 }
 
 #game-board [role=row] {
   display: flex;
   justify-content: center;
   margin-inline: auto;
-  user-select: none;
 }
 
 #game-board button {

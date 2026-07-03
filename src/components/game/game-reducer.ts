@@ -16,6 +16,11 @@ export const gameReducer = function (this: AppConfig, state: GameState, action: 
   switch(action.type) {
     case GameActionType.LOAD: return loadReducer(action as PayloadAction)
 
+    case GameActionType.PAUSE:
+      state.tShift = Date.now()
+      storage.game = state
+      return state
+
     case GameActionType.STORE:
       storage.game = state
       return state
