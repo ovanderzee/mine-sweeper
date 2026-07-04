@@ -14,7 +14,7 @@
 - Calculate coagulation (mine-mine borders | blank to mine ratio)
 - Open/close mark section
 - Tests on marking
-- Consent for ending playing game and changing the config when replaying from score list
+- Consent for ending game in progress and changing the config when replaying from score list
 
 
 ## [4.0.0] - 2026-06-28
@@ -23,7 +23,7 @@
 - Animation on pausing screen
 - Logic for updating data in storage
 - Console tools overview in markdown
-- Toggle descriptions for navigation and option buttons
+- Toggle descriptions for navigation and option buttons, show by default
 
 ### Changed
 - Levels refined with intermediate values, level values have been doubled and localStorage is adapted accordingly.
