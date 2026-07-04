@@ -16,6 +16,7 @@ export const DEFAULTS = {
   FONT_SIZE: 15,
   PLAYER_NAME: texts[currentLanguage].config['default player'],
   PLAY_MODE: PlayMode.NORMAL,
+  VERBOSE_BTN: true,
 }
 
 export const NORMAL = {

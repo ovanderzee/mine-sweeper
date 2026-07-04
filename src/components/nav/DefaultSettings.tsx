@@ -16,6 +16,8 @@ const DefaultSettings = () => {
     setShowActive(true)
     pageCtx.configure()
     setTimeout(()=>setShowActive(false), 300)
+    // cannot set select-element by attribute
+    pageCtx.configure({ LANGUAGE: DEFAULTS.LANGUAGE })
   }
 
   const quitAndConfirm = () => {

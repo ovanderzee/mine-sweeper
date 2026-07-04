@@ -24,7 +24,7 @@ describe('The about page sidebar', () => {
   })
 
   it('should offer navigation to Game page', async () => {
-    const navBtn = screen.getByRole('navigation').getByTitle('Return to Game')
+    const navBtn = screen.getByRole('navigation').getByTitle('To Game')
     await expect.element(navBtn).toBeInTheDocument()
     await navBtn.click()
 

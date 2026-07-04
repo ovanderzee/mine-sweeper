@@ -14,7 +14,7 @@ describe('DefaultSettings Component in PageContext', () => {
   it('should display the "Revolve Back" sign', async () => {
     const screen = await renderWithContext(<DefaultSettings />)
 
-    await expect.element(screen.getByTitle('Revert to Defaults')).toBeInTheDocument()
+    await expect.element(screen.getByTitle('Use Defaults')).toBeInTheDocument()
     await expect.element(screen.getByLabelText('counterclockwise revolving arrow')).toBeInTheDocument()
   })
 
@@ -30,19 +30,19 @@ describe('DefaultSettings Component in PageContext', () => {
     const startWithContext = (async (gameState: GameState | null, config: AppConfig) => {
       if (gameState) storage.game = gameState
       screen = await renderWithContext(<DefaultSettings />, { config, configure })
-      await screen.getByTitle('Revert to Defaults').click()
+      await screen.getByTitle('Use Defaults').click()
     })
 
     it('and no game is open (spy)', async () => {
       await startWithContext(null, microConfig)
-      expect(configure).toHaveBeenCalledTimes(1)
-      expect(configure).toHaveBeenCalledWith()
+      expect(configure).toHaveBeenCalledTimes(2)
+      expect(configure).toHaveBeenNthCalledWith(1,)
     })
 
     it('and game is new (spy)', async () => {
       await startWithContext(newGameState, microConfig)
-      expect(configure).toHaveBeenCalledTimes(1)
-      expect(configure).toHaveBeenCalledWith()
+      expect(configure).toHaveBeenCalledTimes(2)
+      expect(configure).toHaveBeenNthCalledWith(1,)
     })
 
     it('and game is playing and action is cancelled (spy)', async () => {
@@ -58,28 +58,28 @@ describe('DefaultSettings Component in PageContext', () => {
       const dialog = screen.getByRole('dialog')
       expect(dialog).toBeInTheDocument()
       await dialog.getByRole('button', {name: 'Ok'}).click()
-      expect(configure).toHaveBeenCalledTimes(1)
-      expect(configure).toHaveBeenCalledWith()
+      expect(configure).toHaveBeenCalledTimes(2)
+      expect(configure).toHaveBeenNthCalledWith(1,)
     })
 
     it('and game is playing with default challenge (spy)', async () => {
       await startWithContext(playingGameState, defaultChallengeConfig)
       const dialog = screen.getByRole('dialog')
       expect(dialog).not.toBeInTheDocument()
-      expect(configure).toHaveBeenCalledTimes(1)
-      expect(configure).toHaveBeenCalledWith()
+      expect(configure).toHaveBeenCalledTimes(2)
+      expect(configure).toHaveBeenNthCalledWith(1,)
     })
 
     it('and game is lost (spy)', async () => {
       await startWithContext(lostGameState, microConfig)
-      expect(configure).toHaveBeenCalledTimes(1)
-      expect(configure).toHaveBeenCalledWith()
+      expect(configure).toHaveBeenCalledTimes(2)
+      expect(configure).toHaveBeenNthCalledWith(1,)
     })
 
     it('and game is won (spy)', async () => {
       await startWithContext(wonGameState, microConfig)
-      expect(configure).toHaveBeenCalledTimes(1)
-      expect(configure).toHaveBeenCalledWith()
+      expect(configure).toHaveBeenCalledTimes(2)
+      expect(configure).toHaveBeenNthCalledWith(1,)
     })
 
   })
@@ -95,7 +95,7 @@ describe('DefaultSettings Component in PageContext', () => {
       if (gameState) storage.game = gameState
       if (config) storage.config = config
       screen = await renderWithProvider(<DefaultSettings />)
-      await screen.getByTitle('Revert to Defaults').click()
+      await screen.getByTitle('Use Defaults').click()
     })
 
     it('and no game is open (storage)', async () => {
@@ -108,7 +108,7 @@ describe('DefaultSettings Component in PageContext', () => {
       expect(storage.config).toStrictEqual(DEFAULTS)
     })
 
-    it('and game is playing and action is cancelled (storage)', async () => {
+    it('but not when game is playing and action is cancelled (storage)', async () => {
       await startWithProvider(playingGameState, microConfig)
       const dialog = screen.getByRole('dialog')
       await dialog.getByRole('button', {name: 'Cancel'}).click()
@@ -148,7 +148,7 @@ describe('DefaultSettings Component in PageContext', () => {
       if (gameState) storage.game = gameState
       if (config) storage.config = config
       screen = await renderWithProvider(<DefaultSettings />)
-      const button = screen.getByTitle('Revert to Defaults')
+      const button = screen.getByRole('button').first()
       await button.click()
       return button.element()
     })
@@ -156,13 +156,15 @@ describe('DefaultSettings Component in PageContext', () => {
     it('and game is new (feedback)', async () => {
       const buttonElement = await startWithProvider(newGameState, microConfig)
       expect(buttonElement.className).toContain('active')
+      expect(storage.config).toStrictEqual(DEFAULTS)
      })
 
-    it('and game is playing and action is cancelled (feedback)', async () => {
+    it('but not when game is playing and action is cancelled (feedback)', async () => {
       const buttonElement = await startWithProvider(playingGameState, microConfig)
       const dialog = screen.getByRole('dialog')
       await dialog.getByRole('button', {name: 'Cancel'}).click()
       expect(buttonElement.className).not.toContain('active')
+      expect(storage.config).toStrictEqual(microConfig)
     })
 
     it('and game is playing and action is confirmed (feedback)', async () => {
@@ -170,21 +172,25 @@ describe('DefaultSettings Component in PageContext', () => {
       const dialog = screen.getByRole('dialog')
       await dialog.getByRole('button', {name: 'Ok'}).click()
       expect(buttonElement.className).toContain('active')
+      expect(storage.config).toStrictEqual(DEFAULTS)
     })
 
     it('and game is playing with default challenge (feedback)', async () => {
       const buttonElement = await startWithProvider(playingGameState, defaultChallengeConfig)
       expect(buttonElement.className).toContain('active')
+      expect(storage.config).toStrictEqual(DEFAULTS)
     })
 
     it('and game is lost (feedback)', async () => {
       const buttonElement = await startWithProvider(lostGameState, microConfig)
       expect(buttonElement.className).toContain('active')
+      expect(storage.config).toStrictEqual(DEFAULTS)
     })
 
     it('and game is won (feedback)', async () => {
       const buttonElement = await startWithProvider(wonGameState, microConfig)
       expect(buttonElement.className).toContain('active')
+      expect(storage.config).toStrictEqual(DEFAULTS)
     })
 
   })

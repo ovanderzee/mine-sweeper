@@ -20,3 +20,20 @@ button.nav-option span {
   display: inline-block;
 }
 
+nav.verbose button.nav-option::after {
+  display: block;
+  content: attr(title);
+  font-size: 50%;
+  text-transform: uppercase;
+  font-weight: normal;
+
+  @media only screen and (orientation: landscape) {
+    position: relative;
+    top: -1em;
+    line-height: 1.67;
+  }
+
+  @media only screen and (orientation: portrait) {
+    line-height: 0;
+  }
+}

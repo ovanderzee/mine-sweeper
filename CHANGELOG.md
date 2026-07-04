@@ -23,6 +23,7 @@
 - Animation on pausing screen
 - Logic for updating data in storage
 - Console tools overview in markdown
+- Toggle descriptions for navigation and option buttons
 
 ### Changed
 - Levels refined with intermediate values, level values have been doubled and localStorage is adapted accordingly.
@@ -32,6 +33,9 @@
 
 ### Removed
 - Removed max scores entry. Not really necessary.
+
+### Fixed
+- Apply current language when reverting to defaults - the select-element cannot be by attribute alone
 
 
 ## [3.11.0] - 2026-06-21

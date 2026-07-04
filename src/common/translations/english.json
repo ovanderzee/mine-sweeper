@@ -121,16 +121,18 @@
     "Zoom Display": "Zoom display",
     "font-size to %n pixels": "font-size to %n pixels",
 
-    "Record Scores": "Record Scores",
     "Name in Scores": "Name in scores",
     "type your name": "enter your name",
     "Max records": "Max records",
-    "clip to %n": "clip to %n"
+    "clip to %n": "clip to %n",
+
+    "Toggle fields": "Optional features",
+    "Verbose Check": "descriptions for navigation and option buttons"
   },
   "nav": {
     "Hall of Fame": "Hall of Fame",
     "Clear List": "Clear List",
-    "Reinstate Defaults": "Revert to Defaults",
+    "Reinstate Defaults": "Use Defaults",
     "New Game": "New Game",
     "Pause": "Pause",
     "Resume": "Continue game",
@@ -138,7 +140,7 @@
     "Settings": "Settings",
     "Help": "Description",
     "Playground": "Playground",
-    "Go Back": "Return to Game"
+    "Go Back": "To Game"
   },
   "icon": {
     "podium": "podium",

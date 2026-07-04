@@ -121,16 +121,18 @@
     "Zoom Display": "Vergroting scherm",
     "font-size to %n pixels": "letter grootte op %n pixels",
 
-    "Record Scores": "Scores Opslaan",
     "Name in Scores": "Naam in scorelijst",
     "type your name": "vul je naam in",
     "Max records": "Max. scores",
-    "clip to %n": "beperk tot %n"
+    "clip to %n": "beperk tot %n",
+
+    "Toggle fields": "Keuzevelden",
+    "Verbose Check": "beschrijvingen bij navigatie- en optieknoppen"
   },
   "nav": {
     "Hall of Fame": "Eregalerij",
     "Clear List": "Wis lijst",
-    "Reinstate Defaults": "Terug naar standaard waarden",
+    "Reinstate Defaults": "Standaarden",
     "New Game": "Nieuw Spel",
     "Pause": "Pauze",
     "Resume": "Speel verder",
@@ -138,7 +140,7 @@
     "Settings": "Instellingen",
     "Help": "Beschrijving",
     "Playground": "Speelbord",
-    "Go Back": "Keer terug naar spel"
+    "Go Back": "Naar Spel"
   },
   "icon": {
     "podium": "podium",
