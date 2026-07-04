@@ -14,13 +14,13 @@ export const victoryReducer = (state: GameState, config: AppConfig): GameState =
     date: state.tShift,
     user: PLAYER_NAME,
     rank: 0,
-    level: 0,
   }
 
   const gameVars: GameScore = {
     cells: Math.pow(BOARD_SIZE, 2),
     mines: MINE_COUNT,
-    playMode: PLAY_MODE,
+    level: GAME_LEVEL,
+    mode: PLAY_MODE,
     effort: {
       least: leastClicksToWin(state),
       most: mostClicksToWin(state)

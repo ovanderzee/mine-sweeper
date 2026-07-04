@@ -24,6 +24,7 @@
 - Logic for updating data in storage
 - Console tools overview in markdown
 - Toggle descriptions for navigation and option buttons, show by default
+- Write level always and mode when selected in game object of scoreItem
 
 ### Changed
 - Levels refined with intermediate values, level values have been doubled and localStorage is adapted accordingly.

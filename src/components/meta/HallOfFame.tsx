@@ -79,7 +79,7 @@ const HallOfFame = () => {
       return rootScores.sort(bySpeed)
     },
     'level': () => {
-      const byLevel = (a: ScoreItem, b: ScoreItem) => (b?.level || 0) - (a?.level || 0)
+      const byLevel = (a: ScoreItem, b: ScoreItem) => (b.game?.level || 0) - (a.game?.level || 0)
       return rootScores.sort(byLevel)
     },
     'mines': () => {
@@ -226,7 +226,7 @@ const HallOfFame = () => {
               <section className="group game">
                 <div className="unit level">
                   <span>{text.VAR['level']}</span>
-                  <span>{log.level}</span>
+                  <span>{log.game.level}</span>
                 </div>
                 <div className="unit mines">
                   <span>{text.VAR['mines']}</span>

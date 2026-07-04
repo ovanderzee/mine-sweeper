@@ -115,7 +115,7 @@ const ScorePopover = (props: ScorePopoverProps) => {
           <code>&fnof;(</code>
           <div className="unit">
             <small>{text.VAR['level']}</small>
-            <span className="level">{log.level}</span>
+            <span className="level">{log.game.level}</span>
           </div>
           <code className="s">&</code>
           <div className="unit">

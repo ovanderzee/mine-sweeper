@@ -151,8 +151,8 @@ export const wonGameState: GameState = {
   "tShift": 1745518137216, // 917ms later
   "mines": [],
   "score": {
-    code: '338IwBj5Yg', date: 1745518137216, user: 'Midas', rank: 1, level: 8,
-    game: {cells: 9, mines: 2, effort: {least: 2, most: 7}},
+    code: '338IwBj5Yg', date: 1745518137216, user: 'Midas', rank: 1,
+    game: {cells: 9, mines: 2, level: 8, effort: {least: 2, most: 7}},
     play: {moves: 4, duration: 45.244},
     score: {efficiency: 0.5, speed: 0.08841, points: 44}
   },

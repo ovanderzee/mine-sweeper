@@ -14,7 +14,6 @@ export const refineScores = (scores: ScoreItem[]): ScoreItem[] => {
   const points = scores.map(s => s.score.points)
   return scores.map(score => {
     score.rank = points.findIndex(points => points === score.score.points) + 1
-    if (!score.level) score.level = parseInt(score.code.charAt(2), SCORE_RADIX)
     return score
   }) as ScoreItem[]
 }
