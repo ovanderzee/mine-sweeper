@@ -68,7 +68,6 @@ describe('LocalStorage updater', () => {
 
     const wonGamesStorage = localStorage.getItem('mv-won-games')
     const resultScore: ScoreItem[] = wonGamesStorage ? JSON.parse(wonGamesStorage) : []
-    console.log('resultScore', resultScore)
     if (resultScore.length) {
       expect(resultScore instanceof Array).toBe(true)
       expect(resultScore).toStrictEqual(outputScores)

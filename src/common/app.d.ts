@@ -21,28 +21,34 @@ export enum PlayMode {
 
 export type AppSubConfig = {
   BOARD_SIZE?: number;
-  FONT_SIZE?: number;
   GAME_LEVEL?: number;
-  LANGUAGE?: Languages;
   MINE_COUNT?: number;
-  PLAYER_NAME?: string;
   PLAY_MODE?: PlayMode;
+  LANGUAGE?: Languages;
+  FONT_SIZE?: number;
+  PLAYER_NAME?: string;
   VERBOSE_BTN?: boolean;
 }
 
 export interface AppCheckConfig {
   BOARD_SIZE: number;
   GAME_LEVEL: number;
+  MINE_COUNT?: number;
+  PLAY_MODE?: PlayMode;
+  LANGUAGE?: Languages;
+  FONT_SIZE?: number;
+  PLAYER_NAME?: string;
+  VERBOSE_BTN?: boolean;
 }
 
 export interface AppConfig {
   BOARD_SIZE: number;
-  FONT_SIZE: number;
   GAME_LEVEL: number;
-  LANGUAGE: Languages;
   MINE_COUNT: number;
-  PLAYER_NAME: string;
   PLAY_MODE: PlayMode;
+  LANGUAGE: Languages;
+  FONT_SIZE: number;
+  PLAYER_NAME: string;
   VERBOSE_BTN: boolean;
 }
 

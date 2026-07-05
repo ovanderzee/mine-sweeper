@@ -1,17 +1,13 @@
 import { BareScoreItem } from '../common/game.d'
-import { ScoreItem } from '../common/game.d'
-import { capitalise } from '../common/functions'
-import { DEFAULTS } from '../common/defaults'
-import { SCORE_RADIX } from '../common/constants'
-import { AppConfig, PlayMode } from '../common/app.d'
-
 
 // live registered scores
 export const liveScores: BareScoreItem[] = [
   {"code":"6660Aw1+gjJUTZA","date":1769180239586,"user":"EasyPeacy","game":{"cells":36,"mines":4,"effort":{"least":2,"most":14},"level":6},"play":{"moves":2,"duration":1.385},"score":{"efficiency":1,"speed":1.444,"points":1444}},
+  {"code":"6662Aw18gjO3RzSA","date":1783288530857,"user":"AangenaamAnoniem","game":{"cells":36,"mines":4,"level":6,"mode":"Sharp","effort":{"least":8,"most":18}},"play":{"moves":5,"duration":5.936},"score":{"efficiency":1.6,"speed":0.8423,"points":1348}},
   {"code":"6660AwkRldLDL+RA","date":1769180624067,"user":"EasyPeacy","game":{"cells":36,"mines":4,"effort":{"least":1,"most":8},"level":6},"play":{"moves":2,"duration":0.852},"score":{"efficiency":0.5,"speed":2.347,"points":1174}},
   {"code":"6660Aw4RlSvbokxA","date":1769180634533,"user":"EasyPeacy","game":{"cells":36,"mines":4,"effort":{"least":4,"most":17},"level":6},"play":{"moves":5,"duration":3.882},"score":{"efficiency":0.8,"speed":1.288,"points":1030}},
   {"code":"6660Aw18SCMFTwyA","date":1769180467384,"user":"EasyPeacy","game":{"cells":36,"mines":4,"effort":{"least":5,"most":13},"level":6},"play":{"moves":5,"duration":5.284},"score":{"efficiency":1,"speed":0.9463,"points":946}},
+  {"code":"6662IwBjrSvbI2RA","date":1783288684122,"user":"AangenaamAnoniem","game":{"cells":36,"mines":4,"level":6,"mode":"Sharp","effort":{"least":5,"most":21}},"play":{"moves":2,"duration":6.13},"score":{"efficiency":2.5,"speed":0.3263,"points":816}},
   {"code":"6660AwRm4zSm3PJA","date":1769180819298,"user":"EasyPeacy","game":{"cells":36,"mines":4,"effort":{"least":11,"most":21},"level":6},"play":{"moves":12,"duration":13.816},"score":{"efficiency":0.9167,"speed":0.8686,"points":796}},
   {"code":"6660AzCMIypV2-RA","date":1769180277383,"user":"EasyPeacy","game":{"cells":36,"mines":4,"effort":{"least":6,"most":21},"level":6},"play":{"moves":8,"duration":7.682},"score":{"efficiency":0.75,"speed":1.041,"points":781}},
   {"code":"6660Aw3CMZZFXriA","date":1769180226261,"user":"EasyPeacy","game":{"cells":36,"mines":4,"effort":{"least":9,"most":24},"level":6},"play":{"moves":9,"duration":11.726},"score":{"efficiency":1,"speed":0.7675,"points":768}},
@@ -22,21 +18,29 @@ export const liveScores: BareScoreItem[] = [
   {"code":"6660AwkRlT2rZo","date":1769180174452,"user":"EasyPeacy","game":{"cells":36,"mines":4,"effort":{"least":7,"most":23},"level":6},"play":{"moves":10,"duration":10.317},"score":{"efficiency":0.7,"speed":0.9693,"points":679}},
   {"code":"8860IwBlIzyzY66KXBCRA","date":1763636949679,"user":"Maxo","game":{"cells":64,"mines":7,"effort":{"least":9,"most":28},"level":6},"play":{"moves":9,"duration":13.35},"score":{"efficiency":1,"speed":0.6742,"points":674}},
   {"code":"6680AwkRlUw9L25A","date":1753788387156,"user":"ThirdyMix","game":{"cells":36,"mines":5,"effort":{"least":4,"most":17},"level":8},"play":{"moves":5,"duration":6.117},"score":{"efficiency":0.8,"speed":0.82,"points":656}},
+  {"code":"6662IwBj4tS7Lig","date":1783288666138,"user":"AangenaamAnoniem","game":{"cells":36,"mines":4,"level":6,"mode":"Sharp","effort":{"least":3,"most":16}},"play":{"moves":1,"duration":4.683},"score":{"efficiency":3,"speed":0.2135,"points":641}},
   {"code":"8860Aw4RlSIzb96NtGsg","date":1763634995248,"user":"Maxo","game":{"cells":64,"mines":7,"effort":{"least":12,"most":31},"level":6},"play":{"moves":12,"duration":18.898},"score":{"efficiency":1,"speed":0.635,"points":635}},
+  {"code":"6662Aw14IwlVr4KA","date":1783288555189,"user":"AangenaamAnoniem","game":{"cells":36,"mines":4,"level":6,"mode":"Sharp","effort":{"least":5,"most":17}},"play":{"moves":4,"duration":8.003},"score":{"efficiency":1.25,"speed":0.4998,"points":625}},
   {"code":"7760IwBj-UO6p+SjkA","date":1767118954802,"user":"iAmIan","game":{"cells":49,"mines":5,"effort":{"least":9,"most":29},"level":6},"play":{"moves":10,"duration":14.582},"score":{"efficiency":0.9,"speed":0.6858,"points":617}},
   {"code":"bb60Aw3CMqWNbLQvWiyuR56twbyQA","date":1761566950182,"user":"Dr. Esperanto","game":{"cells":121,"mines":13,"effort":{"least":20,"most":69},"level":6},"play":{"moves":22,"duration":32.431},"score":{"efficiency":0.9091,"speed":0.6784,"points":617}},
   {"code":"7760Aw3CMaa1nt0RUQ","date":1767118885846,"user":"iAmIan","game":{"cells":49,"mines":5,"effort":{"least":13,"most":33},"level":6},"play":{"moves":16,"duration":21.608},"score":{"efficiency":0.8125,"speed":0.7405,"points":602}},
+  {"code":"6660Aw4RnVQrt+RA","date":1783285564933,"user":"AangenaamAnoniem","game":{"cells":36,"mines":4,"level":6,"mode":"Normal","effort":{"least":12,"most":24}},"play":{"moves":15,"duration":20.251},"score":{"efficiency":0.8,"speed":0.7407,"points":593}},
   {"code":"6660AwRm4yrUJrJA","date":1769180254251,"user":"EasyPeacy","game":{"cells":36,"mines":4,"effort":{"least":5,"most":24},"level":6},"play":{"moves":9,"duration":8.449},"score":{"efficiency":0.5556,"speed":1.065,"points":592}},
   {"code":"7760Aw18IztO8FXhIA","date":1767118831964,"user":"iAmIan","game":{"cells":49,"mines":5,"effort":{"least":5,"most":19},"level":6},"play":{"moves":6,"duration":8.458},"score":{"efficiency":0.8333,"speed":0.7094,"points":591}},
+  {"code":"6662AzCMIl0zWmHCA","date":1783285619883,"user":"AangenaamAnoniem","game":{"cells":36,"mines":4,"level":6,"mode":"Sharp","effort":{"least":9,"most":20}},"play":{"moves":5,"duration":15.3},"score":{"efficiency":1.8,"speed":0.3268,"points":588}},
   {"code":"7760Aw18IzsXXpUWIA","date":1767119087401,"user":"iAmIan","game":{"cells":49,"mines":5,"effort":{"least":13,"most":25},"level":6},"play":{"moves":14,"duration":22.15},"score":{"efficiency":0.9286,"speed":0.6321,"points":587}},
   {"code":"8860Aw2iMZRPJXntOzXCA","date":1763676141369,"user":"Maxo","game":{"cells":64,"mines":7,"effort":{"least":12,"most":33},"level":6},"play":{"moves":12,"duration":21.15},"score":{"efficiency":1,"speed":0.5674,"points":567}},
   {"code":"7760Aw0RmCNHbnokXIA","date":1767118736109,"user":"iAmIan","game":{"cells":49,"mines":5,"effort":{"least":11,"most":29},"level":6},"play":{"moves":14,"duration":19.481},"score":{"efficiency":0.7857,"speed":0.7186,"points":565}},
   {"code":"9960AzCMPEuzr27yYxCIqqIA","date":1767297734604,"user":"St.Desire","game":{"cells":81,"mines":9,"effort":{"least":20,"most":53},"level":6},"play":{"moves":25,"duration":35.371},"score":{"efficiency":0.8,"speed":0.7068,"points":565}},
   {"code":"77a0Aw1sIwe3LU3DWQ","date":1770821607149,"user":"BoronChip","game":{"cells":49,"mines":9,"effort":{"least":14,"most":29},"level":10},"play":{"moves":19,"duration":24.782},"score":{"efficiency":0.7368,"speed":0.7667,"points":565}},
+  {"code":"6662Aw14Ixlo+0iA","date":1783288715156,"user":"AangenaamAnoniem","game":{"cells":36,"mines":4,"level":6,"mode":"Sharp","effort":{"least":5,"most":17}},"play":{"moves":2,"duration":9.168},"score":{"efficiency":2.5,"speed":0.2182,"points":546}},
+  {"code":"6662AwkRlTg8smpA","date":1783288946508,"user":"AangenaamAnoniem","game":{"cells":36,"mines":4,"level":6,"mode":"Sharp","effort":{"least":6,"most":24}},"play":{"moves":7,"duration":11.051},"score":{"efficiency":0.8571,"speed":0.6334,"points":543}},
   {"code":"6680Aw10IzF4hU1kA","date":1753788287172,"user":"ThirdyMix","game":{"cells":36,"mines":5,"effort":{"least":12,"most":21},"level":8},"play":{"moves":12,"duration":22.032},"score":{"efficiency":1,"speed":0.54,"points":540}},
   {"code":"6680Aw0iMFtW95A","date":1753808674081,"user":"ThirdyMix","game":{"cells":36,"mines":5,"effort":{"least":16,"most":23},"level":8},"play":{"moves":17,"duration":30.072},"score":{"efficiency":0.9412,"speed":0.5653,"points":532}},
   {"code":"8860AwiMIyu9e+rgcJSg","date":1763676208120,"user":"Maxo","game":{"cells":64,"mines":7,"effort":{"least":10,"most":38},"level":6},"play":{"moves":14,"duration":18.901},"score":{"efficiency":0.7143,"speed":0.7407,"points":529}},
+  {"code":"6662AwiMIz0spyg","date":1783288608772,"user":"AangenaamAnoniem","game":{"cells":36,"mines":4,"level":6,"mode":"Sharp","effort":{"least":9,"most":24}},"play":{"moves":12,"duration":17.019},"score":{"efficiency":0.75,"speed":0.7051,"points":529}},
   {"code":"66a0Aw1iMbJNStiA","date":1770818362071,"user":"SiliconCopy","game":{"cells":36,"mines":6,"effort":{"least":14,"most":25},"level":10},"play":{"moves":14,"duration":26.533},"score":{"efficiency":1,"speed":0.5276,"points":528}},
+  {"code":"6662AwRm4zLUrixA","date":1783288459319,"user":"AangenaamAnoniem","game":{"cells":36,"mines":4,"level":6,"mode":"Sharp","effort":{"least":18,"most":28}},"play":{"moves":14,"duration":34.281},"score":{"efficiency":1.286,"speed":0.4084,"points":525}},
   {"code":"66a0Aw3CMqWbdLwUA","date":1770819033713,"user":"SiliconCopy","game":{"cells":36,"mines":6,"effort":{"least":15,"most":28},"level":10},"play":{"moves":19,"duration":28.668},"score":{"efficiency":0.7895,"speed":0.6628,"points":523}},
   {"code":"bb60Aw2iMYpHc43lJyWvRzXEZ7GQA","date":1761516713673,"user":"Dr. Esperanto","game":{"cells":121,"mines":13,"effort":{"least":14,"most":49},"level":6},"play":{"moves":14,"duration":26.817},"score":{"efficiency":1,"speed":0.5221,"points":522}},
   {"code":"6680Aw1kIzl2zQ","date":1753788397788,"user":"ThirdyMix","game":{"cells":36,"mines":5,"effort":{"least":4,"most":13},"level":8},"play":{"moves":4,"duration":7.682},"score":{"efficiency":1,"speed":0.52,"points":520}},
@@ -51,13 +55,16 @@ export const liveScores: BareScoreItem[] = [
   {"code":"88a0Aw2iMYVKZMOsO9xoUA","date":1770967502667,"user":"MetAlina","game":{"cells":64,"mines":11,"effort":{"least":26,"most":37},"level":10},"play":{"moves":26,"duration":52.722},"score":{"efficiency":1,"speed":0.493,"points":493}},
   {"code":"7760Aw10IztxbZ2okQ","date":1767118906464,"user":"iAmIan","game":{"cells":49,"mines":5,"effort":{"least":8,"most":23},"level":6},"play":{"moves":9,"duration":16.26},"score":{"efficiency":0.8889,"speed":0.5535,"points":492}},
   {"code":"6660AwRm4tIna3xA","date":1769180793631,"user":"EasyPeacy","game":{"cells":36,"mines":4,"effort":{"least":10,"most":20},"level":6},"play":{"moves":10,"duration":20.383},"score":{"efficiency":1,"speed":0.4906,"points":491}},
+  {"code":"6662AwiMIznNq-JA","date":1783288566589,"user":"AangenaamAnoniem","game":{"cells":36,"mines":4,"level":6,"mode":"Sharp","effort":{"least":3,"most":17}},"play":{"moves":2,"duration":6.169},"score":{"efficiency":1.5,"speed":0.3242,"points":486}},
   {"code":"aa60IwBj-USjeuZwUsiXvqr6g","date":1763204308253,"user":"ThinThen","game":{"cells":100,"mines":10,"effort":{"least":19,"most":54},"level":6},"play":{"moves":24,"duration":39.185},"score":{"efficiency":0.7917,"speed":0.6125,"points":485}},
   {"code":"dd60IwBj9cozO+H1ohdppR1YsRf7HTbIA","date":1764752292526,"user":"Pastiche","game":{"cells":169,"mines":17,"effort":{"least":35,"most":85},"level":6},"play":{"moves":41,"duration":72.883},"score":{"efficiency":0.8537,"speed":0.5625,"points":480}},
   {"code":"7760Aw4RlSu6Iz4MkA","date":1767119116784,"user":"iAmIan","game":{"cells":49,"mines":5,"effort":{"least":4,"most":21},"level":6},"play":{"moves":7,"duration":8.399},"score":{"efficiency":0.5714,"speed":0.8334,"points":476}},
   {"code":"ee60AwiMIznKp3LhsxCzrQ+mIoz3A7AwtYk6UtIA","date":1769449261331,"user":"WizzardOfUs","game":{"cells":196,"mines":20,"effort":{"least":38,"most":112},"level":6},"play":{"moves":46,"duration":80.996},"score":{"efficiency":0.8261,"speed":0.5679,"points":469}},
+  {"code":"6662AwiMIz2Vs+HCA","date":1783288627288,"user":"AangenaamAnoniem","game":{"cells":36,"mines":4,"level":6,"mode":"Sharp","effort":{"least":7,"most":20}},"play":{"moves":9,"duration":14.951},"score":{"efficiency":0.7778,"speed":0.602,"points":468}},
   {"code":"dd60AwiMIyvLhv6yXZraPW5HI4vcGPfLTDIA","date":1764754616797,"user":"Pastiche","game":{"cells":169,"mines":17,"effort":{"least":23,"most":88},"level":6},"play":{"moves":29,"duration":49.233},"score":{"efficiency":0.7931,"speed":0.589,"points":467}},
   {"code":"77a0AwkRjVNcd5oNouMg","date":1770820437144,"user":"BoronChip","game":{"cells":49,"mines":9,"effort":{"least":17,"most":30},"level":10},"play":{"moves":17,"duration":36.434},"score":{"efficiency":1,"speed":0.4666,"points":467}},
   {"code":"6660AwiMIzw9s-JA","date":1769180695701,"user":"EasyPeacy","game":{"cells":36,"mines":4,"effort":{"least":5,"most":18},"level":6},"play":{"moves":9,"duration":10.72},"score":{"efficiency":0.5556,"speed":0.8396,"points":466}},
+  {"code":"6662Aw1iMLpa3UiA","date":1783288831357,"user":"AangenaamAnoniem","game":{"cells":36,"mines":4,"level":6,"mode":"Sharp","effort":{"least":7,"most":24}},"play":{"moves":5,"duration":15.017},"score":{"efficiency":1.4,"speed":0.333,"points":466}},
   {"code":"6680AwiM-664Aw1iMyWOtL3EA","date":1753808612878,"user":"ThirdyMix","game":{"cells":36,"mines":5,"effort":{"least":12,"most":26},"level":8},"play":{"moves":16,"duration":25.817},"score":{"efficiency":0.75,"speed":0.6197,"points":465}},
   {"code":"7760Aw3CMYalSt3osQ","date":1767119158233,"user":"iAmIan","game":{"cells":49,"mines":5,"effort":{"least":12,"most":33},"level":6},"play":{"moves":12,"duration":25.865},"score":{"efficiency":1,"speed":0.4639,"points":464}},
   {"code":"6680AwiMI5Wz0+EiA","date":1753788300491,"user":"ThirdyMix","game":{"cells":36,"mines":5,"effort":{"least":4,"most":16},"level":8},"play":{"moves":5,"duration":8.667},"score":{"efficiency":0.8,"speed":0.58,"points":464}},
@@ -89,11 +96,13 @@ export const liveScores: BareScoreItem[] = [
   {"code":"8860Aw0iMZVkdt2jJcg","date":1764014517532,"user":"Maxo","game":{"cells":64,"mines":7,"effort":{"least":13,"most":37},"level":6},"play":{"moves":14,"duration":30.586},"score":{"efficiency":0.9286,"speed":0.4577,"points":425}},
   {"code":"aa60Aw0RjUpTl9qKcuK2MreGpA","date":1763204128329,"user":"ThinThen","game":{"cells":100,"mines":10,"effort":{"least":13,"most":43},"level":6},"play":{"moves":16,"duration":30.839},"score":{"efficiency":0.8125,"speed":0.5188,"points":422}},
   {"code":"dda0AzCMI83LIvKzPFy2oerVRI-3DQrfU+HEylHIA","date":1771158323019,"user":"Bellsart","game":{"cells":169,"mines":29,"effort":{"least":56,"most":109},"level":10},"play":{"moves":62,"duration":132.8},"score":{"efficiency":0.9032,"speed":0.4669,"points":422}},
+  {"code":"6662AwRm4i3bM27CA","date":1783288743291,"user":"AangenaamAnoniem","game":{"cells":36,"mines":4,"level":6,"mode":"Sharp","effort":{"least":6,"most":24}},"play":{"moves":5,"duration":14.204},"score":{"efficiency":1.2,"speed":0.352,"points":422}},
   {"code":"aa60AzCMLCu9wuoOslNWWU9WRA","date":1763204527636,"user":"ThinThen","game":{"cells":100,"mines":10,"effort":{"least":14,"most":54},"level":6},"play":{"moves":19,"duration":33.214},"score":{"efficiency":0.7368,"speed":0.572,"points":421}},
   {"code":"cc60IwBj4y1LbqY3gl0JPBuGub-XNIA","date":1763223480307,"user":"Asterisk","game":{"cells":144,"mines":15,"effort":{"least":19,"most":73},"level":6},"play":{"moves":22,"duration":45.078},"score":{"efficiency":0.8636,"speed":0.488,"points":421}},
   {"code":"dda0AzCMIzPVwupRolI7NZhbNLNVbeI9MWLNbWIyIA","date":1771271079979,"user":"Bellsart","game":{"cells":169,"mines":29,"effort":{"least":64,"most":118},"level":10},"play":{"moves":77,"duration":152.11},"score":{"efficiency":0.8312,"speed":0.5062,"points":421}},
   {"code":"cc60Aw1iMKWzTX0Q5SaTm0HHZaluW+oQA","date":1763223874468,"user":"Asterisk","game":{"cells":144,"mines":15,"effort":{"least":28,"most":89},"level":6},"play":{"moves":42,"duration":66.591},"score":{"efficiency":0.6667,"speed":0.6307,"points":420}},
   {"code":"7760AwRl3CunZsoLsIA","date":1767118931945,"user":"iAmIan","game":{"cells":49,"mines":5,"effort":{"least":8,"most":27},"level":6},"play":{"moves":13,"duration":19.191},"score":{"efficiency":0.6154,"speed":0.6774,"points":417}},
+  {"code":"6662Aw1-gjByX5A","date":1783288521504,"user":"AangenaamAnoniem","game":{"cells":36,"mines":4,"level":6,"mode":"Sharp","effort":{"least":4,"most":17}},"play":{"moves":5,"duration":9.597},"score":{"efficiency":0.8,"speed":0.521,"points":417}},
   {"code":"ii60AwRmvSss2+ELnRNXmfEL0-b0PVHIrfYmU8tG6KxeujKE6tpBvHIA","date":1769070446826,"user":"Buffect","game":{"cells":324,"mines":33,"effort":{"least":38,"most":171},"level":6},"play":{"moves":49,"duration":91.441},"score":{"efficiency":0.7755,"speed":0.5359,"points":416}},
   {"code":"77a0AwRmvSwz27aNgmYg","date":1770821221198,"user":"BoronChip","game":{"cells":49,"mines":9,"effort":{"least":18,"most":36},"level":10},"play":{"moves":22,"duration":43.3},"score":{"efficiency":0.8182,"speed":0.5081,"points":416}},
   {"code":"dda0AwRm4yssw3rgTO1X0Z0HPqqvUQjPdEOc-bJHKIA","date":1771158475597,"user":"Bellsart","game":{"cells":169,"mines":29,"effort":{"least":60,"most":119},"level":10},"play":{"moves":76,"duration":144.12},"score":{"efficiency":0.7895,"speed":0.5273,"points":416}},
@@ -101,6 +110,7 @@ export const liveScores: BareScoreItem[] = [
   {"code":"bb60AwiMpSunbqLUQ5CyvrDlXe8IA","date":1761567237838,"user":"Dr. Esperanto","game":{"cells":121,"mines":13,"effort":{"least":20,"most":58},"level":6},"play":{"moves":25,"duration":48.292},"score":{"efficiency":0.8,"speed":0.5177,"points":414}},
   {"code":"ii60AzCMZSpca3qPklFlrqrmfQY0WfbSYrIvXbMykuq0je+-GxlGt1yIA","date":1769177993289,"user":"Buffect","game":{"cells":324,"mines":33,"effort":{"least":37,"most":172},"level":6},"play":{"moves":45,"duration":89.389},"score":{"efficiency":0.8222,"speed":0.5034,"points":414}},
   {"code":"66a0Aw0RlSM5tvaSA","date":1770818622736,"user":"SiliconCopy","game":{"cells":36,"mines":6,"effort":{"least":10,"most":20},"level":10},"play":{"moves":10,"duration":24.167},"score":{"efficiency":1,"speed":0.4138,"points":414}},
+  {"code":"6662Aw18gjF7aciA","date":1783288697906,"user":"AangenaamAnoniem","game":{"cells":36,"mines":4,"level":6,"mode":"Sharp","effort":{"least":4,"most":18}},"play":{"moves":3,"duration":9.667},"score":{"efficiency":1.333,"speed":0.3103,"points":414}},
   {"code":"ee60AzCMJcOnNv7yol1nNRDTNq-3WbdXY1UKKIA","date":1769462572010,"user":"WizzardOfUs","game":{"cells":196,"mines":20,"effort":{"least":29,"most":108},"level":6},"play":{"moves":34,"duration":70.181},"score":{"efficiency":0.8529,"speed":0.4845,"points":413}},
   {"code":"77a0Aw18Ixl6lE3iBsg","date":1770820737912,"user":"BoronChip","game":{"cells":49,"mines":9,"effort":{"least":19,"most":30},"level":10},"play":{"moves":19,"duration":46.117},"score":{"efficiency":1,"speed":0.412,"points":412}},
   {"code":"hh60AwkRlYMnbnqkfKloWbTKf23pLNXODYhEsky8HZfa27BopIA","date":1761486950856,"user":"Refungee","game":{"cells":289,"mines":29,"effort":{"least":51,"most":159},"level":6},"play":{"moves":59,"duration":124.13},"score":{"efficiency":0.8644,"speed":0.4753,"points":411}},
@@ -145,6 +155,7 @@ export const liveScores: BareScoreItem[] = [
   {"code":"8860Aw4Rg01Gtlq0fFqZA","date":1763675870202,"user":"Maxo","game":{"cells":64,"mines":7,"effort":{"least":9,"most":25},"level":6},"play":{"moves":9,"duration":23.38},"score":{"efficiency":1,"speed":0.3849,"points":385}},
   {"code":"88a0AwiMIzXS2dq1jOqlpEA","date":1770889438417,"user":"MetAlina","game":{"cells":64,"mines":11,"effort":{"least":23,"most":43},"level":10},"play":{"moves":26,"duration":59.786},"score":{"efficiency":0.8846,"speed":0.4349,"points":385}},
   {"code":"7760Aw0RldKno6EiA","date":1767118813017,"user":"iAmIan","game":{"cells":49,"mines":5,"effort":{"least":3,"most":17},"level":6},"play":{"moves":4,"duration":7.806},"score":{"efficiency":0.75,"speed":0.5124,"points":384}},
+  {"code":"6662Aw0RlYJac+FA","date":1783288360905,"user":"AangenaamAnoniem","game":{"cells":36,"mines":4,"level":6,"mode":"Sharp","effort":{"least":5,"most":21}},"play":{"moves":6,"duration":13.019},"score":{"efficiency":0.8333,"speed":0.4609,"points":384}},
   {"code":"cc60Aw0RnUumQ3jwc6SoTSjLLbjrdYIA","date":1763222920163,"user":"Asterisk","game":{"cells":144,"mines":15,"effort":{"least":28,"most":86},"level":6},"play":{"moves":39,"duration":73.225},"score":{"efficiency":0.7179,"speed":0.5326,"points":382}},
   {"code":"ee60Aw18ZwIxXK3jMjSoeumVoU8q2+uS6ZOyl4QA","date":1769464534594,"user":"WizzardOfUs","game":{"cells":196,"mines":20,"effort":{"least":25,"most":105},"level":6},"play":{"moves":33,"duration":65.446},"score":{"efficiency":0.7576,"speed":0.5042,"points":382}},
   {"code":"aa80IwBjNcvZM6GJg0cVI2","date":1753810863933,"user":"Techwants","game":{"cells":100,"mines":14,"effort":{"least":32,"most":67},"level":8},"play":{"moves":36,"duration":84.017},"score":{"efficiency":0.8889,"speed":0.4285,"points":381}},
@@ -558,6 +569,7 @@ export const liveScores: BareScoreItem[] = [
   {"code":"hh60AzCMIsPSc+HzomdyvQ5is7-g-bI6Qs3PY2MtJbUTKc50oA","date":1761486813390,"user":"Refungee","game":{"cells":289,"mines":29,"effort":{"least":36,"most":143},"level":6},"play":{"moves":46,"duration":153.16},"score":{"efficiency":0.7826,"speed":0.3003,"points":235}},
   {"code":"88a0AwRm4zSmT8ykRZqbvEA","date":1770890929139,"user":"MetAlina","game":{"cells":64,"mines":11,"effort":{"least":18,"most":41},"level":10},"play":{"moves":25,"duration":76.733},"score":{"efficiency":0.72,"speed":0.3258,"points":235}},
   {"code":"bb80Aw3CM4WO1bwoxp4thzqHRurkeYQA","date":1758654109679,"user":"AltDelete","game":{"cells":121,"mines":17,"effort":{"least":17,"most":71},"level":8},"play":{"moves":28,"duration":72.583},"score":{"efficiency":0.6071,"speed":0.3858,"points":234}},
+  {"code":"6662Aw10Iwlw94KA","date":1783288499854,"user":"AangenaamAnoniem","game":{"cells":36,"mines":4,"level":6,"mode":"Sharp","effort":{"least":8,"most":21}},"play":{"moves":4,"duration":34.217},"score":{"efficiency":2,"speed":0.1169,"points":234}},
   {"code":"gg60Aw18Z4IzLUngqSkVWW0MLb5iyeoxKkW+B5pmcRVJoQA","date":1768515667126,"user":"Dracare","game":{"cells":256,"mines":26,"effort":{"least":37,"most":134},"level":6},"play":{"moves":53,"duration":158.73},"score":{"efficiency":0.6981,"speed":0.3339,"points":233}},
   {"code":"gg80AzCMIj2yryYnLZslvQ+bUb-sXA-RIvURFLMzQnZG7DR41sIA","date":1756109086483,"user":"Exclamator","game":{"cells":256,"mines":35,"effort":{"least":54,"most":145},"level":8},"play":{"moves":62,"duration":231.33},"score":{"efficiency":0.871,"speed":0.268,"points":233}},
   {"code":"aa80IwBhrTymo-bUqYExrpx3sZkA","date":1753811957777,"user":"Techwants","game":{"cells":100,"mines":14,"effort":{"least":28,"most":58},"level":8},"play":{"moves":29,"duration":120.3},"score":{"efficiency":0.9655,"speed":0.2411,"points":233}},
@@ -701,27 +713,3 @@ liveScores.sort((a, b) => b.score.points - a.score.points)
 liveScores.forEach((live) => {delete live.rank; delete live.level})
 console.log('liveScores', JSON.stringify(liveScores))
  */
-
-
-/*
-const playModeNames = Object.values(PlayMode)
-
-    const scores: ScoreItem[] = liveScores
-    const converted = scores.map((s: ScoreItem) => {
-      // one-bit values in code property
-      const playModeString = capitalise(s.game?.playMode) || '--'
-      const playModeNumber = playModeNames.findIndex(el => el === playModeString)
-      const boundModeNumber = Math.max(playModeNumber, 0)
-      const newCode = s.code.substring(0,3) + boundModeNumber + s.code.substring(3)
-      s.code = newCode
-      // format score items
-      if (playModeNumber > 0) {
-        s.game.mode = playModeNames[playModeNumber]
-      }
-      delete s.game?.playMode
-      s.game.level = parseInt(s.code.charAt(2), SCORE_RADIX)
-      return s
-    })
-
-    localStorage.setItem('mv-', JSON.stringify(converted))
-*/

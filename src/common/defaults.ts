@@ -1,9 +1,9 @@
 import { texts, currentLanguage } from './i18n'
-import { AppCheckConfig, BoardFit, PlayMode } from './app.d'
+import { BoardFit, PlayMode } from './app.d'
 
 export const GAME_DIVISOR = 60
 
-export const calculateMineCount = ((cfg: AppCheckConfig): number => {
+export const calculateMineCount = ((cfg: { BOARD_SIZE: number, GAME_LEVEL: number }): number => {
   const approx = Math.pow(cfg.BOARD_SIZE, 2) * cfg.GAME_LEVEL / GAME_DIVISOR
   return Math.ceil(approx)
 })

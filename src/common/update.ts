@@ -13,8 +13,8 @@ const updater = () => {
   if (victoryStorage) {
     const scores: ScoreItem[] = JSON.parse(victoryStorage)
     const converted = scores.map((s: ScoreItem) => {
-      const thirdDecimal = Number(s.code.charAt(2)) * 2
-      const newCode = s.code.substring(0,2) + thirdDecimal.toString(SCORE_RADIX) + s.code.substring(3)
+      const gameLevel = Number(s.code.charAt(2)) * 2
+      const newCode = s.code.substring(0,2) + gameLevel.toString(SCORE_RADIX) + s.code.substring(3)
       s.code = newCode
       return s
     })
@@ -55,7 +55,7 @@ const updater = () => {
     const converted = scores.map((s: ScoreItem) => {
       // one-bit values in code property
       const playModeString = capitalise(s.game?.playMode) || '--'
-      const playModeNumber = playModeNames.findIndex(el => el === playModeString)
+      const playModeNumber = playModeNames.indexOf(playModeString as unknown as PlayMode)
       const boundModeNumber = Math.max(playModeNumber, 0)
       const newCode = s.code.substring(0,3) + boundModeNumber + s.code.substring(3)
       s.code = newCode

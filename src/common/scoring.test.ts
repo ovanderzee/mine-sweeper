@@ -7,6 +7,7 @@ import {
 } from './scoring'
 import { newGameState, blank18pct, blank26pct, blank31pct, blank41pct } from '../__mocks__/game-states'
 import { ScoreItem } from './game.d'
+import { PlayMode } from './app.d'
 import { RANGES } from './constants'
 
 describe('some blanks need to be clicked and then all the pointercells have to be clicked', () => {
@@ -98,23 +99,25 @@ describe('Create compressed string containing fill data', () => {
     [{"fill":1,"row":8,"col":0},{"fill":10,"row":8,"col":1},{"fill":2,"row":8,"col":2},{"fill":1,"row":8,"col":3},{"fill":0,"row":8,"col":4},{"fill":2,"row":8,"col":5},{"fill":4,"row":8,"col":6},{"fill":13,"row":8,"col":7},{"fill":4,"row":8,"col":8},{"fill":2,"row":8,"col":9}],
     [{"fill":1,"row":9,"col":0},{"fill":1,"row":9,"col":1},{"fill":1,"row":9,"col":2},{"fill":0,"row":9,"col":3},{"fill":0,"row":9,"col":4},{"fill":1,"row":9,"col":5},{"fill":10,"row":9,"col":6},{"fill":3,"row":9,"col":7},{"fill":10,"row":9,"col":8},{"fill":1,"row":9,"col":9}]
   ]
-  const testBoardCode = "aaiIwBjdCUruSbnIi8nPiuo3I9ApLKUIA"
+  const testBoardCode = "aai1IwBjdCUruSbnIi8nPiuo3I9ApLKUIA"
 
-  it('should convert a board to a boardCode', () => {
-    const boardCode = makeBoardCode(testBoard, 18)
+  it('should convert a filled board to a boardCode', () => {
+    const boardCode = makeBoardCode(testBoard, 18, PlayMode.BARE)
     expect(boardCode).toBe(testBoardCode)
   })
 
-  it('should convert a boardCode to a board', () => {
+  it('should convert a boardCode to a filled board', () => {
     const [fillData, checkConfig] = sequenceFillData(testBoardCode)
     expect(fillData).toStrictEqual(testBoard)
     expect(checkConfig.BOARD_SIZE).toBe(10)
     expect(checkConfig.GAME_LEVEL).toBe(18)
+    expect(checkConfig.PLAY_MODE).toBe(PlayMode.BARE)
   })
 })
 
 describe('Create compressed string based on highest BOARD_SIZE', () => {
   const testGameLevel = 0
+  const testPlayMode = PlayMode.NORMAL
 
   const testBoard = Array(RANGES.SIZE.max)
   for (let x = 0; x < RANGES.SIZE.max; x++) {
@@ -124,18 +127,19 @@ describe('Create compressed string based on highest BOARD_SIZE', () => {
     }
   }
 
-  const testBoardCode = "kk0Aw18ZXTt-DFOS1b0c17PcaA"
+  const testBoardCode = "kk00Aw18ZXTt-DFOS1b0c17PcaA"
 
-  it('should convert a board to a boardCode, otherwise update the string', () => {
-    const boardCode = makeBoardCode(testBoard, testGameLevel)
+  it('should convert an mineless board to a boardCode, otherwise update the string', () => {
+    const boardCode = makeBoardCode(testBoard, testGameLevel, testPlayMode)
     expect(boardCode).toBe(testBoardCode)
   })
 
-  it('should convert a boardCode to a board', () => {
+  it('should convert a boardCode to an mineless board', () => {
     const [fillData, checkConfig] = sequenceFillData(testBoardCode)
     expect(fillData).toStrictEqual(testBoard)
     expect(checkConfig.BOARD_SIZE).toBe(RANGES.SIZE.max)
     expect(checkConfig.GAME_LEVEL).toBe(testGameLevel)
+    expect(checkConfig.PLAY_MODE).toBe(testPlayMode)
   })
 })
 
@@ -144,32 +148,39 @@ describe('Sanity checking on boardCode', () => {
   beforeEach(() => console.error = vi.fn())
 
   it('should find undecodeable code', () => {
-    const wrongCode = '97g6708089'
+    const wrongCode = '97g06708089'
     sequenceFillData(wrongCode)
     expect(console.error).toHaveBeenLastCalledWith('Invalid code')
   })
 
   it('should find unexpected code', () => {
-    const wrongCode = '448IwBhrSv'
+    const wrongCode = '4480IwBhrSv'
     sequenceFillData(wrongCode)
     expect(console.error).toHaveBeenLastCalledWith('Invalid code')
   })
 
   it('should find wrong board size', () => {
-    const wrongCode = '538IwBhrSvI'
+    const wrongCode = '5380IwBhrSvI'
     sequenceFillData(wrongCode)
     expect(console.error).toHaveBeenLastCalledWith('Invalid size')
   })
 
   it('should find wrong mine count', () => {
     // size 4 en lvl 6,8,10 geven 2,3,3 mijnen
-    const wrongCode = '446IwBhrSvI'
+    const wrongCode = '4460IwBhrSvI'
     sequenceFillData(wrongCode)
     expect(console.error).toHaveBeenLastCalledWith('Invalid mine count')
   })
 
+  it('should find wrong playmode', () => {
+    // size 4 en lvl 6,8,10 geven 2,3,3 mijnen
+    const wrongCode = '4489IwBhrSvI'
+    sequenceFillData(wrongCode)
+    expect(console.error).toHaveBeenLastCalledWith('Invalid playmode')
+  })
+
   it('should not go wrong', () => {
-    const goodCode = '448IwBhrSvI'
+    const goodCode = '4480IwBhrSvI'
     sequenceFillData(goodCode)
     expect(console.error).not.toHaveBeenCalled()
   })
@@ -197,11 +208,11 @@ describe('Precision as long as we need it', () => {
 
 describe('Sort and Rank scores', () => {
   const oldScores = [
-    {code: "778abc123", rank: 14, score: {points: 30}},
-    {code: "778def456", rank: 2, score: {points: 100}},
-    {code: "778ghi789", rank: 9, score: {points: 67}},
+    {code: "7780abc123", rank: 14, score: {points: 30}},
+    {code: "7780def456", rank: 2, score: {points: 100}},
+    {code: "7780ghi789", rank: 9, score: {points: 67}},
   ] as ScoreItem[]
-  const newScore = {code: "778xyz789", rank: 0, score: {points: 67}} as ScoreItem
+  const newScore = {code: "7780xyz789", rank: 0, score: {points: 67}} as ScoreItem
 
 
   it('should sort by points and rank, oldest score first', () => {

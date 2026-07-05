@@ -10,7 +10,7 @@ export const victoryReducer = (state: GameState, config: AppConfig): GameState =
   const { BOARD_SIZE, GAME_LEVEL, MINE_COUNT, PLAYER_NAME, PLAY_MODE } = config
 
   const victoryVars = {
-    code: makeBoardCode(state.board, GAME_LEVEL),
+    code: makeBoardCode(state.board, GAME_LEVEL, PLAY_MODE),
     date: state.tShift,
     user: PLAYER_NAME,
     rank: 0,

@@ -5,7 +5,7 @@ import { liveScores } from './__mocks__/scores'
 import { ScoreItem } from './common/game.d'
 
 const testScore = () => { return {
-  code: "774AwkRlTLDVr7EY0Q", date: 1514179800000, user: "Annestiene", rank: 999,
+  code: "7740AwkRlTLDVr7EY0Q", date: 1514179800000, user: "Annestiene", rank: 0,
   game: {cells: 49, mines: 7, effort: {least: 12, most: 33}}, level: 10,
   play: {moves: 15, duration: 41.599},
   score: {efficiency: 0.8, speed: 0.3606, points: 288}
