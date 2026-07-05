@@ -219,8 +219,8 @@ const HallOfFame = () => {
             <article>
               <div className="character">
                 <h4 className="points">{log.score.points}</h4>
-                {log.game.playMode != PlayMode.NORMAL &&
-                  <h5 className={`${log.game.playMode}-mode`}>{log.game.playMode}</h5>
+                {log.game.mode != PlayMode.NORMAL &&
+                  <h5 className={`${log.game.mode}-mode`}>{log.game.mode}</h5>
                 }
               </div>
               <section className="group game">

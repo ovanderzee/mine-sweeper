@@ -78,7 +78,7 @@ const storage = {
     localStorage.removeItem('mv-won-games')
   },
   get scores(): ScoreItem[] {
-    const stored = localStorage.getItem('mv-victories') // won-games
+    const stored = localStorage.getItem('mv-won-games')
     let data: ScoreItem[]
     try {
       const bareData = stored ? JSON.parse(stored) : []

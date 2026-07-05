@@ -97,7 +97,7 @@ function Configure() {
         <input
           name="playmode"
           type="radio"
-          checked={config.PLAY_MODE === PlayMode.NORMAL}
+          checked={config.PLAY_MODE === PlayMode.NORMAL || !config.PLAY_MODE}
           onChange={()=>changePlayModeHandler(PlayMode.NORMAL)}
           onClick={()=>changePlayModeHandler(PlayMode.NORMAL)}
         /> &nbsp;

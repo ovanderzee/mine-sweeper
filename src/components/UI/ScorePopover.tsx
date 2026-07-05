@@ -34,8 +34,8 @@ const ScorePopover = (props: ScorePopoverProps) => {
         </h2>
         <div className="character">
           <h3 className="user">{log.user}</h3>
-          {log.game.playMode != PlayMode.NORMAL &&
-            <h5 className={`${log.game.playMode}-mode play-mode`}>{log.game.playMode}</h5>
+          {log.game.mode != PlayMode.NORMAL &&
+            <h5 className={`${log.game.mode}-mode play-mode`}>{log.game.mode}</h5>
           }
         </div>
         <h4 className="date" data-date={log.date}>
