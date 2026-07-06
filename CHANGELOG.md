@@ -14,7 +14,10 @@
 - Calculate coagulation (mine-mine borders | blank to mine ratio)
 - Open/close mark section
 - Tests on marking
-- Consent for ending game in progress and changing the config when replaying from score list
+- Consent for ending playing game and changing the config when replaying from score list
+- Calculate efficiency in sharp mode according to lower minimal number of moves
+-- todo: remove normal label, 
+-- remove playMode property in ScoreItem
 
 
 ## [4.0.0] - 2026-06-28
@@ -25,12 +28,17 @@
 - Console tools overview in markdown
 - Toggle descriptions for navigation and option buttons, show by default
 - Write level always and mode when selected in game section of scoreItem
+- Toggle descriptions for navigation and option buttons
+- Added gamelevels between the existing levels
+- Ability to update stored data
 
 ### Changed
 - Levels refined with intermediate values, level values have been doubled and localStorage is adapted accordingly.
 - BREAKING: from version 4 there is no way back to previous versions without data loss.
 - No text selection on the playground and navigation sections
 - Solved some lint issues
+- Gamelevel parameter in score
+- Refactored Hall of Fame
 
 ### Removed
 - Removed max scores entry. Not really necessary.
