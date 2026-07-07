@@ -4,11 +4,7 @@ import { SCORE_RADIX } from './constants'
 import { capitalise } from './functions'
 import { AppConfig, PlayMode } from './app.d'
 
-/**
- Add updates at the end
- */
-const updater = () => {
-
+export const doubleGameLevel = () => {
   const victoryStorage = localStorage.getItem('mv-victory')
   if (victoryStorage) {
     const scores: ScoreItem[] = JSON.parse(victoryStorage)
@@ -23,7 +19,9 @@ const updater = () => {
     localStorage.removeItem('mv-victory')
     console.log('Scorelist updated to use intermediate levels.')
   }
+}
 
+export const removeMaxScores = () => {
   const cfgMaxScoresStorage = localStorage.getItem('mv-config') || '{}'
   const cfgMaxScoresObject = JSON.parse(cfgMaxScoresStorage)
   if (Object.hasOwn(cfgMaxScoresObject, 'MAX_SCORES')) {
@@ -31,7 +29,9 @@ const updater = () => {
     localStorage.setItem('mv-config', JSON.stringify(cfgMaxScoresObject))
     console.log('Configuration cleaned up.')
   }
+}
 
+export const changePlayModeValues = () => {
   const victoriesStorage = localStorage.getItem('mv-victories')
   if (victoriesStorage) {
     const playModeNames = Object.values(PlayMode)
@@ -54,6 +54,7 @@ const updater = () => {
     const scores: ScoreItem[] = JSON.parse(victoriesStorage)
     const converted = scores.map((s: ScoreItem) => {
       // one-bit values in code property
+      // @ts-ignore // error TS2339: Property 'playMode' does not exist on type 'GameScore'.
       const playModeString = capitalise(s.game?.playMode) || '--'
       const playModeNumber = playModeNames.indexOf(playModeString as unknown as PlayMode)
       const boundModeNumber = Math.max(playModeNumber, 0)
@@ -63,6 +64,7 @@ const updater = () => {
       if (playModeNumber > 0) {
         s.game.mode = playModeString
       }
+      // @ts-ignore // error TS2339: Property 'playMode' does not exist on type 'GameScore'.
       delete s.game?.playMode
       s.game.level = parseInt(s.code.charAt(2), SCORE_RADIX)
       return s
@@ -74,4 +76,11 @@ const updater = () => {
   }
 }
 
-export default updater
+/**
+ Add updates at the end
+ */
+export default {
+  doubleGameLevel,
+  removeMaxScores,
+  changePlayModeValues,
+}

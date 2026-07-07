@@ -2,8 +2,9 @@ import { RenderResult } from 'vitest-browser-react'
 import { userEvent, Locator } from 'vitest/browser'
 import { renderWithProvider } from './../../__mocks__/aat-helpers'
 import Introduction from './Introduction'
+import update from '../../common/update'
 
-describe('Introduction', () => {
+describe('Introduction ends automatically', () => {
   let
     screen: RenderResult,
     skipButton: Locator,
@@ -37,6 +38,26 @@ describe('Introduction', () => {
     await vi.waitFor(doOnEnd)
 
     expect(doOnEnd).toHaveBeenCalled()
+  })
+
+})
+
+describe('Introduction performs update', () => {
+
+  it('should execute each update', async () => {
+    const updateKeys = Object.keys(update)
+    type UpdateKeyType = "changePlayModeValues" | "removeMaxScores" | "doubleGameLevel"
+
+    const spies = updateKeys.map(
+      (key) => vi.spyOn(update, key as UpdateKeyType)
+    )
+
+    await renderWithProvider(<Introduction onEnd={()=>{}} />)
+    vi.advanceTimersByTime(200)
+
+    expect(spies[0]).toHaveBeenCalled()
+    expect(spies[1]).toHaveBeenCalled()
+    expect(spies[2]).toHaveBeenCalled()
   })
 
 })

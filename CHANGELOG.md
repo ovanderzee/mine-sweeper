@@ -16,8 +16,6 @@
 - Tests on marking
 - Consent for ending playing game and changing the config when replaying from score list
 - Calculate efficiency in sharp mode according to lower minimal number of moves
--- todo: remove normal label, 
--- remove playMode property in ScoreItem
 
 
 ## [4.0.0] - 2026-06-28

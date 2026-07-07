@@ -68,7 +68,6 @@ export interface GameScore {
   cells: number,
   mines: number,
   level?: number,
-  playMode?: PlayMode, // backwards compatibility
   mode?: PlayMode,
   effort: {
     least: number,
