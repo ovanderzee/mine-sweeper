@@ -6,7 +6,7 @@ import FullscreenPlay from './FullscreenPlay'
 import NewGame from '../nav/NewGame'
 import Pause from '../nav/Pause'
 import { PlayMode } from '../../common/app.d'
-import { capitalise, minorMagnification } from '../../common/functions'
+import { minorMagnification } from '../../common/functions'
 import { GameState, GameAction } from '../../common/game.d'
 import '../nav/NavOptionButton.css'
 import './Tips.css'
@@ -25,8 +25,6 @@ const Tips = (props: TipsProps) => {
   const pageCtx = useContext(PageContext)
   const { config, session, text } = pageCtx
 
-  const capPlayMode = text.settings[capitalise(config.PLAY_MODE)]
-
   return (
     <div
       className="tips"
@@ -35,7 +33,7 @@ const Tips = (props: TipsProps) => {
     >
       {config.PLAY_MODE !== PlayMode.NORMAL &&
         <div className="tip" id="playmode-text" title={text.tips[`${config.PLAY_MODE} hint`]}>
-          <span><b>{capPlayMode}</b></span>
+          <span><b>{text.settings[config.PLAY_MODE]}</b></span>
         </div>
       }
       {config.PLAY_MODE !== PlayMode.BARE && <>

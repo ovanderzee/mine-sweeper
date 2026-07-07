@@ -34,8 +34,8 @@ const ScorePopover = (props: ScorePopoverProps) => {
         </h2>
         <div className="character">
           <h3 className="user">{log.user}</h3>
-          {log.game.playMode != PlayMode.NORMAL &&
-            <h5 className={`${log.game.playMode}-mode play-mode`}>{log.game.playMode}</h5>
+          {log.game.mode != PlayMode.NORMAL &&
+            <h5 className={`${log.game.mode}-mode play-mode`}>{log.game.mode}</h5>
           }
         </div>
         <h4 className="date" data-date={log.date}>
@@ -115,7 +115,7 @@ const ScorePopover = (props: ScorePopoverProps) => {
           <code>&fnof;(</code>
           <div className="unit">
             <small>{text.VAR['level']}</small>
-            <span className="level">{log.level}</span>
+            <span className="level">{log.game.level}</span>
           </div>
           <code className="s">&</code>
           <div className="unit">

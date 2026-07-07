@@ -37,8 +37,8 @@ export const initialBoard = (BOARD_SIZE: number) =>
   )
 
 export const initialScore: ScoreItem = {
-  code: '', date: 0, user: '', rank: 0, level: 0,
-  game: {cells: 0, mines: 0, effort: {least: 0, most: 0}},
+  code: '', date: 0, user: '', rank: 0,
+  game: {cells: 0, mines: 0, level: 0, effort: {least: 0, most: 0}},
   play: {moves: 0, duration: 0},
   score: {efficiency: 0, speed: 0, points: 0}
 }

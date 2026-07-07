@@ -1,6 +1,6 @@
 import LzString from 'lz-string'
 import { iterateNeighbours } from '../components/game/common'
-import { AppCheckConfig } from './app.d'
+import { AppCheckConfig, PlayMode } from './app.d'
 import { GameState, CellState, CellStateStage,
   GameScore, PlayScore, ScoreCalc } from './game.d'
 import { calculateMineCount } from './defaults'
@@ -14,7 +14,9 @@ export const refineScores = (scores: ScoreItem[]): ScoreItem[] => {
   const points = scores.map(s => s.score.points)
   return scores.map(score => {
     score.rank = points.findIndex(points => points === score.score.points) + 1
-    if (!score.level) score.level = parseInt(score.code.charAt(2), SCORE_RADIX)
+    if (score.game && !score.game.mode) {
+      score.game.mode = PlayMode.NORMAL
+    }
     return score
   }) as ScoreItem[]
 }
@@ -80,12 +82,13 @@ export const mostClicksToWin = (game: GameState) => {
   return areas + pointers
 }
 
-export const makeBoardCode = (board: CellState[][], gameLevel: number): string => {
+export const makeBoardCode = (board: CellState[][], gameLevel: number, playMode: PlayMode): string => {
   const allCells = board.flat()
 
   // three positions to check the integrity: size(radix), size(radix), level(radix)
   const size18 = Math.pow(allCells.length, 0.5).toString(SCORE_RADIX)
   const level18 = gameLevel.toString(SCORE_RADIX)
+  const mode10 = Object.values(PlayMode).indexOf(playMode)
 
   // booleanesque value for fill in one position
   const fill02 = allCells
@@ -93,16 +96,18 @@ export const makeBoardCode = (board: CellState[][], gameLevel: number): string =
     .join('');
   const fillLz = LzString.compressToEncodedURIComponent(fill02)
 
-  return `${size18}${size18}${level18}${fillLz}`
+  return `${size18}${size18}${level18}${mode10}${fillLz}`
 }
 
 export const sequenceFillData = (boardCode: string): [CellState[][], AppCheckConfig] => {
-  const BREAK_BEFORE = 3
+  const BREAK_BEFORE = 4
 
   const checkData = boardCode.substring(0, BREAK_BEFORE)
   const checkSize = parseInt(checkData.charAt(0), SCORE_RADIX)
   const checkLevel = parseInt(checkData.charAt(2), SCORE_RADIX)
-  const checkConfig: AppCheckConfig = { BOARD_SIZE: checkSize, GAME_LEVEL: checkLevel }
+  const checkModeNumeric = parseInt(checkData.charAt(3), SCORE_RADIX)
+  const checkMode = Object.values(PlayMode)[checkModeNumeric]
+  const checkConfig: AppCheckConfig = { BOARD_SIZE: checkSize, GAME_LEVEL: checkLevel, PLAY_MODE: checkMode }
 
   const boardData = boardCode.substring(BREAK_BEFORE)
   const content = LzString.decompressFromEncodedURIComponent(boardData)
@@ -111,7 +116,7 @@ export const sequenceFillData = (boardCode: string): [CellState[][], AppCheckCon
   // check integrity
   const invalidCode = !content || content.length !== content.match(/[0-1]/g)?.length
 
-  let wrongSize, wrongMineCount
+  let wrongSize, wrongMineCount, wrongPlayMode
   if (!invalidCode) {
     // check expected size
     const size = Math.pow(content.length, 0.5)
@@ -119,10 +124,13 @@ export const sequenceFillData = (boardCode: string): [CellState[][], AppCheckCon
 
     // check expected mine count
     wrongMineCount = calculateMineCount(checkConfig) !== flatContent.filter(fill => fill === 1).length
+
+    // check maximum playMode value
+    wrongPlayMode = Object.values(PlayMode).indexOf(checkMode) === -1
   }
 
-  if (invalidCode || wrongSize || wrongMineCount) {
-    console.error(`Invalid ${wrongSize ? 'size' : wrongMineCount ? 'mine count' : 'code'}`)
+  if (invalidCode || wrongSize || wrongMineCount || wrongPlayMode) {
+    console.error(`Invalid ${wrongSize ? 'size' : wrongMineCount ? 'mine count' : wrongPlayMode ? 'playmode' : 'code'}`)
     return [[[]], checkConfig]
   }
 

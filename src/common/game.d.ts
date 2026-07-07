@@ -67,7 +67,8 @@ export interface GameState {
 export interface GameScore {
   cells: number,
   mines: number,
-  playMode?: PlayMode,
+  level?: number,
+  mode?: PlayMode,
   effort: {
     least: number,
     most: number,
@@ -97,7 +98,6 @@ export interface BareScoreItem {
 
 export interface ScoreItem extends BareScoreItem {
   rank: number,
-  level: number,
 }
 
 export type ScoreParam = keyof ScoreItem | keyof ScoreItem["game"] | keyof ScoreItem["play"] | keyof ScoreItem["score"]

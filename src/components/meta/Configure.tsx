@@ -85,19 +85,9 @@ function Configure() {
     </div>
    )
 
-  const changeNormalModeHandler = () => {
+  const changePlayModeHandler = (mode: PlayMode) => {
     exitCurrentGame()
-    pageCtx.configure({ PLAY_MODE: PlayMode.NORMAL})
-  }
-
-  const changeBareModeHandler = () => {
-    exitCurrentGame()
-    pageCtx.configure({ PLAY_MODE: PlayMode.BARE})
-  }
-
-  const changeSharpModeHandler = () => {
-    exitCurrentGame()
-    pageCtx.configure({ PLAY_MODE: PlayMode.SHARP})
+    pageCtx.configure({ PLAY_MODE: mode})
   }
 
   const changePlayModeContent = (
@@ -107,9 +97,9 @@ function Configure() {
         <input
           name="playmode"
           type="radio"
-          checked={config.PLAY_MODE === PlayMode.NORMAL}
-          onChange={changeNormalModeHandler}
-          onClick={changeNormalModeHandler as unknown as React.MouseEventHandler<HTMLInputElement>}
+          checked={config.PLAY_MODE === PlayMode.NORMAL || !config.PLAY_MODE}
+          onChange={()=>changePlayModeHandler(PlayMode.NORMAL)}
+          onClick={()=>changePlayModeHandler(PlayMode.NORMAL)}
         /> &nbsp;
         {text.settings['Normal']}<br />
         <em>{text.settings['normal mode']}</em>
@@ -120,8 +110,8 @@ function Configure() {
           name="playmode"
           type="radio"
           checked={config.PLAY_MODE === PlayMode.BARE}
-          onChange={changeBareModeHandler}
-          onClick={changeBareModeHandler as unknown as React.MouseEventHandler<HTMLInputElement>}
+          onChange={()=>changePlayModeHandler(PlayMode.BARE)}
+          onClick={()=>changePlayModeHandler(PlayMode.BARE)}
         /> &nbsp;
         {text.settings['Bare']}<br />
         <em>{text.settings['bare mode']}</em>
@@ -132,8 +122,8 @@ function Configure() {
           name="play-mode"
           type="radio"
           checked={config.PLAY_MODE === PlayMode.SHARP}
-          onChange={changeSharpModeHandler}
-          onClick={changeSharpModeHandler as unknown as React.MouseEventHandler<HTMLInputElement>}
+          onChange={()=>changePlayModeHandler(PlayMode.SHARP)}
+          onClick={()=>changePlayModeHandler(PlayMode.SHARP)}
         /> &nbsp;
         {text.settings['Sharp']}<br />
         <em>{text.settings['sharp mode']}</em>

@@ -66,7 +66,7 @@ const Game = () => {
       role="main"
       aria-labelledby="page-heading"
       id="playground"
-      className={`board-size__${BOARD_SIZE} ${gameState.stage} ${BOARD_FIT}-board ${PLAY_MODE}-mode`}
+      className={`board-size__${BOARD_SIZE} ${gameState.stage} ${BOARD_FIT}-board ${PLAY_MODE.toString().toLowerCase()}-mode`}
       style={{'--board-size': BOARD_SIZE, 'fontSize': MAGNIFICATION * FONT_SIZE + 'px'} as React.CSSProperties}
     >
       <h1 className="sr-only" id="page-heading">{text.nav['Playground']}</h1>

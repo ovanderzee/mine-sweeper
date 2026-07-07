@@ -26,7 +26,7 @@ export const visitAboutScreen = async (page: Page): Promise<void> => {
 }
 
 export const visitPlayground = async (page: Page): Promise<void> => {
-  await page.getByTitle('Return to Game').click()
+  await page.getByTitle('To Game').click()
   // when click has fully been processed, time can be measured
   await sleep(10)
 }
