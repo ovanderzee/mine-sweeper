@@ -123,18 +123,18 @@ input[type="range"] {
   box-shadow: none; /* chrome */
 }
 
-input[type="range"]#zoom {
-  --invisible-margin: 7em;
-
-  margin-block: calc(-1 * var(--invisible-margin));
-  padding-block: var(--invisible-margin);
-}
-
 input[type="range"]::-webkit-slider-thumb,
 input[type="range"]::-moz-range-thumb,
 input[type="range"]::-ms-thumb {
   -webkit-appearance: none;
   background: var(--medium-blue);
+}
+
+input[type="range"]#zoom {
+  --invisible-margin: 7em;
+
+  margin-block: calc(-.9 * var(--invisible-margin));
+  padding-block: var(--invisible-margin);
 }
 
 label:not([for]) > * {
@@ -149,6 +149,8 @@ label:not([for]) > * {
     width: var(--min-height);
     height: var(--min-height);
     vertical-align: -.15em;
+    /* triggers compliant appearance in Chrome */
+    box-shadow: 0 0 0 transparent;
   }
 
   label:not([for]) input[type="checkbox"],
