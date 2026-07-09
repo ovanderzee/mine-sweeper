@@ -10,12 +10,6 @@ article[role="main"] + nav .sticky-slider {
   display: flex;
 }
 
-article[role="main"] + nav .nav-option  {
-  font-weight: bold;
-  line-height: 144%;
-  text-shadow: -0.02em -0.05em black, 0.008em 0.02em var(--light-blue);
-}
-
 @media only screen and (orientation: portrait) {
   .screen {
     --nav-pad-top: .3em;
@@ -41,12 +35,6 @@ article[role="main"] + nav .nav-option  {
     border-left: 1px solid var(--dark-blue);
   }
 
-  article[role="main"] + nav .nav-option svg {
-    display: inline-block;
-    height: var(--nav-height);
-    aspect-ratio: 1;
-    margin-block: calc(-1 * var(--nav-pad-top)) calc(-1 * var(--nav-pad-bottom));
-  }
 }
 
 @media only screen and (orientation: landscape) {
@@ -68,10 +56,5 @@ article[role="main"] + nav .nav-option  {
 
   article[role="main"] + nav .nav-option:not(:first-of-type) {
     border-top: 1px solid var(--dark-blue);
-  }
-
-  article[role="main"] + nav .nav-option svg {
-    display: block;
-    aspect-ratio: 1;
   }
 }
