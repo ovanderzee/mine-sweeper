@@ -118,9 +118,41 @@ select:disabled, select[aria-disabled=true] {
 }
 
 input[type="range"] {
+  --border-color: oklab(from currentColor L a b / .2);
+
+  accent-color: var(--darker-blue);
+  background: transparent;
+  border: none;
+  box-shadow: 0 0 0 transparent;
+}
+
+/* MOZILLA */
+
+/* hele schuifpad */
+input[type="range"]::-moz-range-track {
+  background: var(--border-color);
+  border: var(--border-color) 1px solid;
+}
+
+/* schuifpad-links */
+input[type="range"]::-moz-range-progress {
+  background: var(--darker-blue);
+}
+
+/* schuifknop */
+input[type="range"]::-moz-range-thumb {
+  background: var(--darker-blue);
+  border: var(--border-color) 1px solid;
+  /* border-color may not have opacity? */
+  outline: 2px solid white;
+  outline-offset: -3px;
+}
+
+/*
+input[type="range"] {
   accent-color: var(--darker-blue);
   margin-block: 0;
-  box-shadow: none; /* chrome */
+  box-shadow: none; // chrome
 }
 
 input[type="range"]::-webkit-slider-thumb,
@@ -129,6 +161,7 @@ input[type="range"]::-ms-thumb {
   -webkit-appearance: none;
   background: var(--medium-blue);
 }
+*/
 
 input[type="range"]#zoom {
   --invisible-margin: 7em;
