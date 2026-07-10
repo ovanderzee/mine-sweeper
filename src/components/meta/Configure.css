@@ -148,20 +148,39 @@ input[type="range"]::-moz-range-thumb {
   outline-offset: -3px;
 }
 
-/*
-input[type="range"] {
-  accent-color: var(--darker-blue);
-  margin-block: 0;
-  box-shadow: none; // chrome
+/* WEBKIT: CHROME, EDGE */
+
+/* hele schuifpad incl. border */
+input[type="range"]::-webkit-slider-runnable-track {
+  --track-min: 1.4px;
+  --track-inc: calc(var(--font-size) * -.43);
+  --track-margin: calc(var(--track-min) + var(--track-inc));
+  --stop1: calc(50% - 1px);
+  --stop2: calc(50% + 1px);
+
+  background: var(--darker-blue);
+  background: linear-gradient( transparent var(--stop1), var(--light-blue) var(--stop1), var(--light-blue) var(--stop2), transparent var(--stop2)) ;
+
+  margin-inline: var(--track-margin);
 }
 
-input[type="range"]::-webkit-slider-thumb,
-input[type="range"]::-moz-range-thumb,
-input[type="range"]::-ms-thumb {
+/* schuifknop */
+input[type="range"]::-webkit-slider-thumb {
+  --thumb-min: 1;
+  --thumb-inc: calc(var(--font-zoom) * .8);
+  --thumb-scale: calc(var(--thumb-min) + var(--thumb-inc));
+  /** safari is terrible here:
+    The original dot stays and can creep from under the generated one
+  */
   -webkit-appearance: none;
-  background: var(--medium-blue);
+  box-shadow: inset 0 0 0 1em var(--darker-blue);
+  height: .75em;
+  width: .75em;
+  border-radius: 50%;
+  outline: 2px solid white;
+  outline-offset: -4px;
+  transform: scale(var(--thumb-scale));
 }
-*/
 
 input[type="range"]#zoom {
   --invisible-margin: 7em;
@@ -184,6 +203,11 @@ label:not([for]) > * {
     vertical-align: -.15em;
     /* triggers compliant appearance in Chrome */
     box-shadow: 0 0 0 transparent;
+  }
+
+  label:not([for]) input[type="checkbox"]:checked,
+  label:not([for]) input[type="radio"]:checked {
+    outli-ne: var(--darker-blue) 1px solid;
   }
 
   label:not([for]) input[type="checkbox"],
