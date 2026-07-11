@@ -27,10 +27,16 @@ function PageRoot() {
     }
   }, [])
 
+  const inlineStyles = {
+    '--font-size': `${pageCtx.config.FONT_SIZE}px`,
+    '--font-zoom': `${pageCtx.config.FONT_SIZE / DEFAULTS.FONT_SIZE}`,
+    fontSize: `${pageCtx.config.FONT_SIZE}px`,
+  } as React.CSSProperties
+
   return (
     <section
       className="screen"
-      style={{fontSize: `${pageCtx.config.FONT_SIZE}px`, '--font-size': `${pageCtx.config.FONT_SIZE}px`, '--font-zoom': `${pageCtx.config.FONT_SIZE / DEFAULTS.FONT_SIZE}`}}
+      style={inlineStyles}
     >
       {pageCtx.render}
       {showIntroduction && introLayer}
