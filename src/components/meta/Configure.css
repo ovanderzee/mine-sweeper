@@ -229,8 +229,15 @@ label:not([for]) > * {
     border-radius: 50%;
   }
 
+  label:not([for]) input[type="checkbox"]:checked,
+  label:not([for]) input[type="radio"]:checked {
+    border-color: var(--darker-blue);
+  }
+
   label:not([for]) input[type="checkbox"]:checked {
-    border-color: currentcolor;
+    background: var(--darker-blue) no-repeat center;
+    background-image: url("data:image/svg+xml;base64,PHN2ZwogICB2aWV3Qm94PSIwIDAgNTAgNTAiCiAgIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIKPgogIDxnPgogICAgPHBhdGgKICAgICAgIHN0eWxlPSJmaWxsOm5vbmU7c3Ryb2tlOndoaXRlO3N0cm9rZS13aWR0aDo2O3N0cm9rZS1saW5lY2FwOnJvdW5kO3N0cm9rZS1saW5lam9pbjpyb3VuZCIKICAgICAgIGQ9Ik0gNi45Njg0OTQ0LDE0LjYxNzEyIEMgMTMuMTYzODQ4LDIyLjE1MjU1IDE2Ljc4MzU5NCwzMy43MjIyNzEgMTkuODM1NzY3LDQzLjAzMTk2OSAyNC43MTAwMDIsMzMuMTc1Mjk5IDQwLjY0NTgwMiw5Ljc1MDQ4OTYgNDcuMDAwMDEyLDMiCiAgICAvPgogIDwvZz4KPC9zdmc+Cg==");
+    background-size: .9em;
   }
 
   label:not([for]) input[type="radio"]:checked {
@@ -241,10 +248,8 @@ label:not([for]) > * {
     );
 
     background: var(--darker-blue) var(--dot-gradient);
-    border-color: var(--darker-blue);
   }
 
-  label:not([for]) input[type="checkbox"],
   label:not([for]) input[type="checkbox"] + em {
     display: inline !important;
   }
