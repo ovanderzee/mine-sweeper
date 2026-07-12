@@ -229,19 +229,19 @@ label:not([for]) > * {
     border-radius: 50%;
   }
 
-  label:not([for]) input[type="checkbox"]:checked,
-  label:not([for]) input[type="radio"]:checked {
-    box-shadow: inset 0 0 0 1em var(--darker-blue);
-  }
-
   label:not([for]) input[type="checkbox"]:checked {
     border-color: currentcolor;
   }
 
   label:not([for]) input[type="radio"]:checked {
+    --dot-gradient: radial-gradient(
+      white 32%,
+      var(--medium-blue),
+      transparent 36%
+    );
+
+    background: var(--darker-blue) var(--dot-gradient);
     border-color: var(--darker-blue);
-    outline: .4ex solid white;
-    outline-offset: -.8ex;
   }
 
   label:not([for]) input[type="checkbox"],
