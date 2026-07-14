@@ -20,7 +20,6 @@
 - Similar Game button with score details, Soortgelijk Spel
 - Rename user with score details
 - Fix alignment in mediaquery for magnification buttons in tips
-- Change Zoom Display from range to numeric input, better user experience
 
 
 ## [4.0.0] - 2026-06-28
