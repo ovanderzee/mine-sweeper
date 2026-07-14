@@ -171,9 +171,9 @@ input[type="range"]::-webkit-slider-runnable-track {
 
 /* schuifknop */
 input[type="range"]::-webkit-slider-thumb {
-  --thumb-min: 1;
-  --thumb-inc: calc(var(--font-zoom) * 0.5);
-  --thumb-scale: calc(var(--thumb-min) + var(--thumb-inc));
+  --min-thumb-size: 1.667em;
+  --max-thumb-size: 2em;
+  --thumb-size: calc(var(--min-thumb-size) / var(--font-zoom));
   /** in safari:
     The original dot stays and can creep from under the generated one
     The thumb-scale is exaggerated in safari
@@ -181,13 +181,18 @@ input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   background: transparent;
   box-shadow: inset 0 0 0 1em var(--darker-blue);
-  width: 1.17em;
+  width: var(--thumb-size); /* safari, x(edge, chrome) */
+  height: var(--thumb-size); /* safari, x(edge, chrome) */
+  min-width: var(--min-thumb-size);
+  max-width: var(--max-thumb-size);
+  min-height: var(--min-thumb-size);
+  max-height: var(--max-thumb-size);
   aspect-ratio: 1;
   margin: .1em; /* less shape distortion in safari */
   border-radius: 50%;
   outline: 2px solid white;
   outline-offset: -4px;
-  transform: scale(var(--thumb-scale));
+  transform: scale(var(--thumb-size)); /* safari, edge, chrome */
   /* overflow: hidden; freezes thumb on utter left */
   clip-path: ellipse(80% 80%);
 }

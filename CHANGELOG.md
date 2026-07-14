@@ -16,6 +16,7 @@
 - Tests on marking
 - Consent for ending playing game and changing the config when replaying from score list
 - Calculate efficiency in sharp mode according to lower minimal number of moves
+- Fix alignment in mediaquery for magnification buttons in tips
 
 
 ## [4.0.0] - 2026-06-28
@@ -37,12 +38,15 @@
 - Solved some lint issues
 - Gamelevel parameter in score
 - Refactored Hall of Fame
+- Restyled range, radio and checkbox inputs
+- Minor text changes on configuration screen
 
 ### Removed
 - Removed max scores entry. Not really necessary.
 
 ### Fixed
 - Apply current language when reverting to defaults - the select-element cannot be by attribute alone
+- Made Zoom Display act smoother
 
 
 ## [3.11.0] - 2026-06-21
