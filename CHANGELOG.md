@@ -50,6 +50,7 @@
 
 ### Fixed
 - Apply current language when reverting to defaults - the select-element cannot be by attribute alone
+- Normal text color in Hall-of-Fame list
 
 
 ## [3.11.0] - 2026-06-21

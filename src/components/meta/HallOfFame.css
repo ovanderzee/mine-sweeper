@@ -13,6 +13,7 @@ ol button {
   background: transparent;
   border: none;
   border-radius: var(--radius);
+  color: inherit; /* ios/safari wants definition */
 }
 
 ol button header,
