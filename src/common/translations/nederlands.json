@@ -105,7 +105,7 @@
     "Size Gameboard": "Afmeting speelbord",
     "%n cells": "%n velden",
     "Gamelevel": "Speelnivo",
-    "one mine to %n cells": "één mijn per %n velden",
+    "level %l; one mine to %n cells": "nivo %l; één mijn per %n velden",
     "total %n mines": "spel met %n mijnen",
     "Play mode": "Speelmodus",
     "Normal": "Normaal",

@@ -1,7 +1,15 @@
 import { Page } from '@playwright/test'
 import { dataPath } from '../_project'
+import { AppConfig } from '../../src/common/app.d'
+import { DEFAULTS } from '../../src/common/defaults'
 
 export const testUrl = 'http://localhost:4173'
+
+export const getConfigurationData = async (page: Page): Promise<AppConfig> => {
+  const localData = await page.evaluate(() => localStorage.getItem('mv-config'))
+  const localCfg = JSON.parse(localData || '')
+  return { ...DEFAULTS, ...localCfg }
+}
 
 export const writeStorageState = async (page: Page): Promise<void> => {
   await page.context().storageState({ path: dataPath })
@@ -21,6 +29,12 @@ export const openPlayground = async (page: Page): Promise<void> => {
 
 export const visitAboutScreen = async (page: Page): Promise<void> => {
   await page.getByTitle('Description').click()
+  // when click has fully been processed, time can be measured
+  await sleep(10)
+}
+
+export const visitConfigurationScreen = async (page: Page): Promise<void> => {
+  await page.getByTitle('Settings').click()
   // when click has fully been processed, time can be measured
   await sleep(10)
 }
