@@ -7,6 +7,7 @@
 - Fade out of dialog goes smooth but ends abrupt
 - Debt after porting tests to vitest, see comment-disabled tests
 - added click listeners on range-inputs to test them, remove when vitest/browser starts supporting change listeners on inputs
+- Have playwright data.json ignored
 
 ### Features
 - Routing on gamecode, about, config and hiscores

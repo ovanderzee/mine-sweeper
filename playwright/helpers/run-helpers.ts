@@ -1,6 +1,7 @@
 import { Page } from '@playwright/test'
 import { dataPath } from '../_project'
 import { AppConfig } from '../../src/common/app.d'
+import { GameState } from '../../src/common/game.d'
 import { DEFAULTS } from '../../src/common/defaults'
 
 export const testUrl = 'http://localhost:4173'
@@ -9,6 +10,11 @@ export const getConfigurationData = async (page: Page): Promise<AppConfig> => {
   const localData = await page.evaluate(() => localStorage.getItem('mv-config'))
   const localCfg = JSON.parse(localData || '')
   return { ...DEFAULTS, ...localCfg }
+}
+
+export const getGameData = async (page: Page): Promise<GameState> => {
+  const localData = await page.evaluate(() => localStorage.getItem('mv-game'));
+  return JSON.parse(localData || '')
 }
 
 export const writeStorageState = async (page: Page): Promise<void> => {
