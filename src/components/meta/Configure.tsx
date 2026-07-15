@@ -42,7 +42,7 @@ function Configure() {
     <div className="field">
       <label htmlFor="size">{text.settings['Size Gameboard']}</label>
       <div>
-        <em>{text.settings['%n cells'].replace('%n', cellCount.toString())}</em>
+        <em>{text.settings['%i x %i; %n cells'].replaceAll('%i', config.BOARD_SIZE.toString()).replace('%n', cellCount.toString())}</em>
         <input
           id="size"
           type="range"
