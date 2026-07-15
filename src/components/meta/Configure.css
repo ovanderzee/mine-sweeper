@@ -118,23 +118,94 @@ select:disabled, select[aria-disabled=true] {
 }
 
 input[type="range"] {
+  --border-color: oklab(from currentColor L a b / .2);
+
   accent-color: var(--darker-blue);
-  margin-block: 0;
-  box-shadow: none; /* chrome */
+  background: transparent;
+  border: none;
+  box-shadow: 0 0 0 transparent;
+  margin-block: .5em;
+}
+
+/* MOZILLA */
+
+/* hele schuifpad */
+input[type="range"]::-moz-range-track {
+  background: var(--border-color);
+  border: var(--border-color) 1px solid;
+}
+
+/* schuifpad-links */
+input[type="range"]::-moz-range-progress {
+  background: var(--darker-blue);
+}
+
+/* schuifknop */
+input[type="range"]::-moz-range-thumb {
+  background: var(--darker-blue);
+  border: var(--border-color) 1px solid;
+  /* border-color may not have opacity? */
+  outline: 2px solid white;
+  outline-offset: -3px;
+}
+
+/* WEBKIT: CHROME, EDGE */
+
+/* hele schuifpad incl. border */
+input[type="range"]::-webkit-slider-runnable-track {
+  --track-min: 1.4px;
+  --track-inc: calc(var(--font-size) * -.43);
+  --track-margin: calc(var(--track-min) + var(--track-inc));
+  --stop1: calc(50% - 1px);
+  --stop2: calc(50% + 1px);
+
+  background: linear-gradient(
+    transparent var(--stop1),
+    var(--light-blue) var(--stop1),
+    var(--light-blue) var(--stop2),
+    transparent var(--stop2)
+  );
+
+  margin-inline: var(--track-margin);
+}
+
+/* schuifknop */
+input[type="range"]::-webkit-slider-thumb {
+  --min-thumb-size: 1.667em;
+  --max-thumb-size: 2em;
+  --thumb-size: calc(var(--min-thumb-size) / var(--font-zoom));
+  /** in safari:
+    The original dot stays and can creep from under the generated one
+    The thumb-scale is exaggerated in safari
+  */
+  -webkit-appearance: none;
+  background: transparent;
+  box-shadow: inset 0 0 0 1em var(--darker-blue);
+  width: var(--thumb-size); /* safari, x(edge, chrome) */
+  height: var(--thumb-size); /* safari, x(edge, chrome) */
+  min-width: var(--min-thumb-size);
+  max-width: var(--max-thumb-size);
+  min-height: var(--min-thumb-size);
+  max-height: var(--max-thumb-size);
+  aspect-ratio: 1;
+  margin: .1em; /* less shape distortion in safari */
+  border-radius: 50%;
+  outline: 2px solid white;
+  outline-offset: -4px;
+  transform: scale(var(--thumb-size)); /* safari, edge, chrome */
+  /* overflow: hidden; freezes thumb on utter left */
+  clip-path: ellipse(80% 80%);
 }
 
 input[type="range"]#zoom {
   --invisible-margin: 7em;
 
-  margin-block: calc(-1 * var(--invisible-margin));
+  margin-block: calc(-.9 * var(--invisible-margin));
   padding-block: var(--invisible-margin);
 }
 
-input[type="range"]::-webkit-slider-thumb,
-input[type="range"]::-moz-range-thumb,
-input[type="range"]::-ms-thumb {
-  -webkit-appearance: none;
-  background: var(--medium-blue);
+label:not([for]) {
+  margin-block: .5em;
 }
 
 label:not([for]) > * {
@@ -143,15 +214,47 @@ label:not([for]) > * {
 
   label:not([for]) input[type="checkbox"],
   label:not([for]) input[type="radio"] {
+    -webkit-appearance: none;
     --min-height: 1.2em;
 
-    accent-color: var(--darker-blue);
     width: var(--min-height);
     height: var(--min-height);
-    vertical-align: -.15em;
+    margin: 0;
+    vertical-align: -.2em;
+
+    /* triggers compliant appearance in Chrome */
+    box-shadow: inset 0 0 0 0 transparent;
   }
 
-  label:not([for]) input[type="checkbox"],
+  label:not([for]) input[type="checkbox"] {
+    border-radius: .333ex;
+  }
+
+  label:not([for]) input[type="radio"] {
+    border-radius: 50%;
+  }
+
+  label:not([for]) input[type="checkbox"]:checked,
+  label:not([for]) input[type="radio"]:checked {
+    border-color: var(--darker-blue);
+  }
+
+  label:not([for]) input[type="checkbox"]:checked {
+    background: var(--darker-blue) no-repeat center;
+    background-image: url("data:image/svg+xml;base64,PHN2ZwogICB2aWV3Qm94PSIwIDAgNTAgNTAiCiAgIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIKPgogIDxnPgogICAgPHBhdGgKICAgICAgIHN0eWxlPSJmaWxsOm5vbmU7c3Ryb2tlOndoaXRlO3N0cm9rZS13aWR0aDo2O3N0cm9rZS1saW5lY2FwOnJvdW5kO3N0cm9rZS1saW5lam9pbjpyb3VuZCIKICAgICAgIGQ9Ik0gNi45Njg0OTQ0LDE0LjYxNzEyIEMgMTMuMTYzODQ4LDIyLjE1MjU1IDE2Ljc4MzU5NCwzMy43MjIyNzEgMTkuODM1NzY3LDQzLjAzMTk2OSAyNC43MTAwMDIsMzMuMTc1Mjk5IDQwLjY0NTgwMiw5Ljc1MDQ4OTYgNDcuMDAwMDEyLDMiCiAgICAvPgogIDwvZz4KPC9zdmc+Cg==");
+    background-size: .9em;
+  }
+
+  label:not([for]) input[type="radio"]:checked {
+    --dot-gradient: radial-gradient(
+      white 32%,
+      var(--medium-blue),
+      transparent 36%
+    );
+
+    background: var(--darker-blue) var(--dot-gradient);
+  }
+
   label:not([for]) input[type="checkbox"] + em {
     display: inline !important;
   }

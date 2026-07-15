@@ -70,7 +70,7 @@ function Configure() {
     <div className="field">
       <label htmlFor="level">{text.settings['Gamelevel']}</label>
       <div>
-        <em>{text.settings['one mine to %n cells'].replace('%n', cellsPerMine.toString())}</em>
+        <em>{text.settings['level %l; one mine to %n cells'].replace('%l', config.GAME_LEVEL.toString()).replace('%n', cellsPerMine.toString())}</em>
         <input
           id="level"
           type="range"

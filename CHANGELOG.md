@@ -8,6 +8,8 @@
 - Debt after porting tests to vitest, see comment-disabled tests
 - Added click listeners on range-inputs to test them, remove when vitest/browser starts supporting change listeners on inputs
 - How to calculate efficacy? Mines per move? Mines per second? Pristine cells left?
+- Have playwright data.json ignored
+- How to debounce or cancel a css transition (changing font-size control)
 
 ### Features
 - Routing on gamecode, about, config and hiscores
@@ -19,10 +21,9 @@
 - Calculate efficiency in sharp mode according to lower minimal number of moves
 - Similar Game button with score details, Soortgelijk Spel
 - Rename user with score details
-- Fix alignment in mediaquery for magnification buttons in tips
 
 
-## [4.0.0] - 2026-06-28
+## [4.0.0] - 2026-07-15
 
 ### Added
 - Animation on pausing screen
@@ -49,7 +50,9 @@
 
 ### Fixed
 - Apply current language when reverting to defaults - the select-element cannot be by attribute alone
-- Normal text color in Hall-of-Fame list
+- Standard text color in Hall-of-Fame list
+- Made Zoom Display act smoother
+- Aligned tips-buttons
 
 
 ## [3.11.0] - 2026-06-21

@@ -105,7 +105,7 @@
     "Size Gameboard": "Gameboard dimensions",
     "%n cells": "%n fields",
     "Gamelevel": "Gamelevel",
-    "one mine to %n cells": "one mine to %n fields",
+    "level %l; one mine to %n cells": "level %l; one mine to %n fields",
     "total %n mines": "game with %n mines",
     "Play mode": "Play mode",
     "Normal": "Normal",
@@ -119,7 +119,7 @@
     "Translations": "Translations",
     "choose your language": "choose your language",
     "Zoom Display": "Zoom display",
-    "font-size to %n pixels": "font-size to %n pixels",
+    "font-size to %n pixels": "font-size %n pixels",
 
     "Name in Scores": "Name in scores",
     "type your name": "enter your name",

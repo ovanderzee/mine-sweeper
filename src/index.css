@@ -8,6 +8,7 @@
   --dark-blue: #37a; /* hsl(206 53.9% 43.3%) */
   --extra-dark-blue: #169; /* hsl(203 80% 33.3%) */
   --ultra-dark-blue: #012; /* hsl(210 100% 6.7%) */
+  --darker-blue-opaque: oklab(from var(--extra-dark-blue) L a b / 33%);
 
   --light-to-white-blue: linear-gradient(to bottom, var(--light-blue) 0%, white 100%);
   --light-to-medium-blue: linear-gradient(to bottom, var(--light-blue) 0%, var(--medium-blue) 100%);
@@ -80,6 +81,13 @@ button {
   font-kerning: normal;
   letter-spacing: 0px;
   text-align: center;
+}
+
+input[type="checkbox"],
+input[type="radio"],
+input[type="range"],
+select {
+  cursor: pointer;
 }
 
 input,

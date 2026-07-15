@@ -1,10 +1,6 @@
 import { Page } from '@playwright/test'
-import { GameState, CellState } from '../../src/common/game.d'
-
-export const getGameData = async (page: Page): Promise<GameState> => {
-  const localData = await page.evaluate(() => localStorage.getItem('mv-game'));
-  return JSON.parse(localData || '')
-}
+import { CellState } from '../../src/common/game.d'
+import { getGameData } from './run-helpers'
 
 export const elapsedSeconds = async (page: Page): Promise<number> => {
   const gameState = await getGameData(page)

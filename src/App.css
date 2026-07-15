@@ -5,12 +5,13 @@
   display: flex;
   margin: 0 auto;
   width: var(--app-width);
-  transition: opacity 0.5s linear;
+  transition: opacity 0.5s, font-size 0.75s 0.333s;
 }
 
 .screen > article {
   background: var(--light-to-white-blue);
   flex: 1 1 auto;
+  line-height: initial !important;
 }
 
 /* not on laptop or desktop */
