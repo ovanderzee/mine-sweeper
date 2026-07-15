@@ -3,6 +3,9 @@ button.nav-option {
   background: transparent;
   border: 0 none;
   padding: 0;
+  font-weight: bold;
+  line-height: 144%;
+  text-shadow: -0.02em -0.05em black, 0.008em 0.02em var(--light-blue);
   transition: color 2s;
 }
 
@@ -26,14 +29,35 @@ nav.verbose button.nav-option::after {
   font-size: 50%;
   text-transform: uppercase;
   font-weight: normal;
+}
 
-  @media only screen and (orientation: landscape) {
+@media only screen and (orientation: landscape) {
+  article[role="main"] + nav .nav-option svg {
+    display: block;
+    aspect-ratio: 1;
+  }
+
+  nav.verbose button.nav-option::after {
     position: relative;
     top: -1em;
     line-height: 1.67;
   }
+}
 
-  @media only screen and (orientation: portrait) {
+@media only screen and (orientation: portrait) {
+  nav .nav-option svg {
+    display: inline-block;
+    height: var(--nav-height);
+    aspect-ratio: 1;
+    margin-block: calc(-1 * var(--nav-pad-top)) calc(-1 * var(--nav-pad-bottom));
+  }
+
+  nav.verbose button.nav-option::after {
     line-height: 0;
+  }
+
+  nav.verbose button.nav-option svg {
+    position: relative;
+    top: -.25em;
   }
 }

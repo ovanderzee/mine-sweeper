@@ -62,14 +62,14 @@ const GameCellDemo = () => {
     You loose when a mine is clicked
     Hence the exploded mine can not have a flag
     When you loose:
-        pristine class cells are reclassified touched.
-        mines are classifiesd as 'mijn'
+        pristine cells are classified touched (but not in sharp-mode)
+        mines are classified 'mijn'
         the clicked mine is also classified as explode
   */
   const lost = <div>
     <label>Game Lost</label>
     <article id="playground" className="board-size__6 game-lost" style={{'--board-size': 6} as React.CSSProperties}>
-      <div id="game-board">
+      <div id="game-board"><div role="row">
         <button type="button" className="touched mijn" id="row0col1"></button>
         <button type="button" className="touched mijn flag" id="row0col2"></button>
         <button type="button" className={`touched mijn ${activatedClass}`} onClick={explodeHandler}
@@ -80,10 +80,17 @@ const GameCellDemo = () => {
             id="row0col4">
           <span className="burst"></span>
         </button>
+      </div><div role="row">
         <button type="button" className="touched" id="row1col0"></button>
         <button type="button" className="touched" id="row1col1">1</button>
         <button type="button" className="touched flag" id="row1col2">1</button>
-      </div>
+      </div><div role="row">
+        <div style={{'fontSize': '68%', 'lineHeight': '1.2', 'alignContent': 'center'}}>
+          <strong>Sharp mode</strong><br />leaves pristine <br />cells pristine
+        </div>
+        <button type="button" className="pristine" id="row2col2"></button>
+        <button type="button" className="pristine flag" id="row1col2"></button>
+      </div></div>
     </article>
   </div>
 
@@ -92,8 +99,8 @@ const GameCellDemo = () => {
     You win when all pristines are mines and no mines were clicked
     Because a flag locks the cell, you can not win with a flag on a non-mine
     When you win:
-        pristine class cells are reclassified touched.
-        mines become classified as 'mijn'
+        pristine cells are classified touched (but not in sharp-mode)
+        mines are classified 'mijn'
   */
   const won = <>
     <label>Game Won</label>

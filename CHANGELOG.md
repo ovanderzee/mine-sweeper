@@ -6,7 +6,8 @@
 - Gameboard could technically be 36 * 36 = 1296 cells, but the cells will be very small, even fullscreen
 - Fade out of dialog goes smooth but ends abrupt
 - Debt after porting tests to vitest, see comment-disabled tests
-- added click listeners on range-inputs to test them, remove when vitest/browser starts supporting change listeners on inputs
+- Added click listeners on range-inputs to test them, remove when vitest/browser starts supporting change listeners on inputs
+- How to calculate efficacy? Mines per move? Mines per second? Pristine cells left?
 
 ### Features
 - Routing on gamecode, about, config and hiscores
@@ -16,6 +17,9 @@
 - Tests on marking
 - Consent for ending playing game and changing the config when replaying from score list
 - Calculate efficiency in sharp mode according to lower minimal number of moves
+- Similar Game button with score details, Soortgelijk Spel
+- Rename user with score details
+- Fix alignment in mediaquery for magnification buttons in tips
 
 
 ## [4.0.0] - 2026-06-28
@@ -37,12 +41,15 @@
 - Solved some lint issues
 - Gamelevel parameter in score
 - Refactored Hall of Fame
+- Restyled range, radio and checkbox inputs
+- Minor text changes on configuration screen
 
 ### Removed
 - Removed max scores entry. Not really necessary.
 
 ### Fixed
 - Apply current language when reverting to defaults - the select-element cannot be by attribute alone
+- Normal text color in Hall-of-Fame list
 
 
 ## [3.11.0] - 2026-06-21
