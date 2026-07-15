@@ -27,6 +27,7 @@
 
 ### Changed
 - Boardsize parameter on configuration screen
+- Ease the transit from Intro to Game
 
 
 ## [4.0.0] - 2026-07-15
