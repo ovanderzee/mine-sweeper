@@ -28,6 +28,7 @@
 ### Changed
 - Boardsize parameter on configuration screen
 - Ease the transit from Intro to Game
+- More pace in pause animation
 
 
 ## [4.0.0] - 2026-07-15
