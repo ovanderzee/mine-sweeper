@@ -17,6 +17,7 @@ describe('victoryReducer makes up scores', () => {
     const victoryState = victoryReducer(wonGameState, microConfig)
 
     expect(victoryState.score.rank).toBeGreaterThan(0)
+    expect(victoryState.score.signature).toBeTruthy()
     expect(victoryState.score.score.points).toBeGreaterThan(0)
   })
 });

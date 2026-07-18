@@ -18,6 +18,18 @@ export const refineScores = (scores: BareScoreItem[]): ScoreItem[] => {
     if (score.game && !score.game.mode) {
       score.game.mode = PlayMode.NORMAL
     }
+
+    const [board, ] = sequenceFillData(score.code)
+    const flatBoard = board.flat()
+    const countByFill = (fill: number) => flatBoard.filter(c => c.fill === fill).length
+    const fillCounts: number[] = []
+    for(let i = 0; i < 18; i++) {
+      fillCounts.push(countByFill(i))
+    }
+    score.signature = {
+      fill_frequency: fillCounts,
+    }
+
     return score
   })
 }
