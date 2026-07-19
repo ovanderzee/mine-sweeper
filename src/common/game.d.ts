@@ -67,7 +67,7 @@ export interface GameState {
 export interface GameScore {
   cells: number,
   mines: number,
-  level?: number,
+  level: number,
   mode?: PlayMode,
   effort: {
     least: number,

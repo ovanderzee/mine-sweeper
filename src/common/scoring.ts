@@ -9,16 +9,17 @@ import { ScoreItem, BareScoreItem } from './game.d'
 
 export const precise = (figure: number, precision: number) => Number(figure.toPrecision(precision))
 
-export const refineScores = (scores: ScoreItem[]): ScoreItem[] => {
+export const refineScores = (scores: BareScoreItem[]): ScoreItem[] => {
   scores.sort((a, b) => b.score.points - a.score.points)
   const points = scores.map(s => s.score.points)
-  return scores.map(score => {
+  return scores.map(s => {
+    const score = s as ScoreItem
     score.rank = points.findIndex(points => points === score.score.points) + 1
     if (score.game && !score.game.mode) {
       score.game.mode = PlayMode.NORMAL
     }
     return score
-  }) as ScoreItem[]
+  })
 }
 
 export const stripScores = (scores: ScoreItem[]): BareScoreItem[] => {
