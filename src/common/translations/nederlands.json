@@ -103,7 +103,7 @@
     "On begin Play": "De Uitdaging...",
     "Will destroy current game": "Aanpassing start een nieuw spel",
     "Size Gameboard": "Afmeting speelbord",
-    "%n cells": "%n velden",
+    "%i x %i; %n cells": "%i×%i; %n velden",
     "Gamelevel": "Speelnivo",
     "level %l; one mine to %n cells": "nivo %l; één mijn per %n velden",
     "total %n mines": "spel met %n mijnen",

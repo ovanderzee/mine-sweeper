@@ -11,7 +11,7 @@
 }
 #intro.ending {
   opacity: 0;
-  transition: opacity var(--fadeout-time) ease;
+  transition: opacity var(--fadeout-time);
 }
 #intro::before,
 #intro::after,
@@ -385,6 +385,11 @@ percent:   20%,  37%,  40%,  50%,  60%,  70%,  100%
 }
 
 /* TITEL */
+
+.ending .tekst {
+  color: hsl(from var(--fire-red) h calc(s/2) l )
+  transition: all var(--fadeout-time);
+}
 
 .tekst {
   position: absolute;

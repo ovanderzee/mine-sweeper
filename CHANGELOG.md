@@ -23,6 +23,14 @@
 - Rename user with score details
 
 
+## [4.0.1] - 2026
+
+### Changed
+- Boardsize parameter on configuration screen
+- Ease the transit from Intro to Game
+- More pace in pause animation
+
+
 ## [4.0.0] - 2026-07-15
 
 ### Added
@@ -30,17 +38,16 @@
 - Logic for updating data in storage
 - Console tools overview in markdown
 - Toggle descriptions for navigation and option buttons, show by default
-- Write level always and mode when selected in game section of scoreItem
+- Write level always and write mode when not "Normal" in game section of scoreItem
 - Toggle descriptions for navigation and option buttons
 - Added gamelevels between the existing levels
 - Ability to update stored data
 
 ### Changed
-- Levels refined with intermediate values, level values have been doubled and localStorage is adapted accordingly.
 - BREAKING: from version 4 there is no way back to previous versions without data loss.
 - No text selection on the playground and navigation sections
 - Solved some lint issues
-- Gamelevel parameter in score
+- Gamelevel parameter in score-data and on configuration screen
 - Refactored Hall of Fame
 - Restyled range, radio and checkbox inputs
 - Minor text changes on configuration screen

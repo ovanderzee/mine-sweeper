@@ -233,6 +233,8 @@ describe('Handle loosing and winning', () => {
     expect(gameCells.nth(0)).toHaveClass('explode')
     expect(gameCells.nth(8)).not.toHaveClass('explode')
 
+    // after a setTimeeout
+    vi.advanceTimersByTime(300)
     await expect.element(gameCells.nth(8)).toHaveClass('explode')
   })
 
@@ -275,6 +277,7 @@ describe('Handle loosing and winning in sharp play-mode', () => {
   })
 
   it('should celebrate but not store the scores of game won without moves', async () => {
+    // dismiss the "luck" you have when in sharp mode and flagging all the mines in a new gema, without opening any cell
     storage.game = newGameState
     const initialNumberOfStoredScores = storage.scores.length
 
