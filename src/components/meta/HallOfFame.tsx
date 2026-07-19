@@ -264,7 +264,7 @@ const HallOfFame = () => {
               </section>
             </article>
             <footer>
-              <Histogram frequency={log.signature.fill_frequency} />
+              <Histogram data={log.signature.fill_frequency} />
             </footer>
           </button>
         ))}

@@ -1,36 +1,21 @@
 import { useContext } from 'react'
 import PageContext from '../../store/page-context'
-import { ScoreParam, FlatScore, MarkScoreData } from '../../common/game.d'
 import { precise } from '../../common/scoring'
-import './LineDiagram.css'
+import './Histogram.css'
 
 interface Coordinate {
   x: number,
   y: number,
-  mark?: string,
+  color?: string,
 }
 
 interface HistogramProps {
-  data: FlatScore[],
-  xParam: ScoreParam,
-  yParam: ScoreParam,
-  markData: MarkScoreData | null,
+  data: number[],
 }
 
-const findAverage = (sequence: number[]): number => {
-  const sum = sequence.reduce((acc, curr) => acc + curr)
-  return precise(sum / sequence.length, 4)
-}
-
-const findMedian = (sequence: number[]): number => {
-  if (sequence.length % 2) {
-    return sequence[Math.ceil(sequence.length / 2)]
-  } else {
-    const a = sequence[(sequence.length / 2) - 1]
-    const b = sequence[sequence.length / 2]
-    return precise((a + b) / 2, 4)
-  }
-}
+const fillColors = [
+  'var(--dark-blue)', 'var(--state-green)', 'var(--state-red)'
+]
 
 const calcBoundingAxis = (highest: number) => {
   const exponent = Math.floor(Math.log10(highest)) - 1
@@ -38,34 +23,19 @@ const calcBoundingAxis = (highest: number) => {
   return precise(Math.ceil(highest / dataScale) * dataScale, 4)
 }
 
-const Histogram = (props: LineDiagramProps) => {
+const Histogram = (props: HistogramProps) => {
   const pageCtx = useContext(PageContext)
   const text = pageCtx.text
 
-  const coordinates: Coordinate[] = props.data.map((flat: FlatScore) => {
-    let isMarked = false;
-    const toMark = () => {
-      switch (props.markData?.operate) {
-        case '<': return flat[props.markData?.param] < props.markData?.quant
-        case '≤': return flat[props.markData?.param] <= props.markData?.quant
-        case '=': return flat[props.markData?.param] === props.markData?.quant
-        case '≥': return flat[props.markData?.param] >= props.markData?.quant
-        case '>': return flat[props.markData?.param] > props.markData?.quant
-      }
+  const coordinates: Coordinate[] = props.data.map((value: number, index: number) => {
+    let color = fillColors[1]
+    if (index > 8) {
+      color = fillColors[2]
+    } else if (index < 1) {
+      color = fillColors[0]
     }
-    if (props?.markData) isMarked = Boolean(toMark())
-    return { x: flat[props.xParam], y: flat[props.yParam], mark: isMarked ? 'mark' : ''}
+    return { x: index, y: value, color}
   })
-
-  const avg: Coordinate = {
-    x: findAverage(coordinates.map((s: Coordinate) => s.x)),
-    y: findAverage(coordinates.map((s: Coordinate) => s.y))
-  }
-
-  const med: Coordinate = {
-    x: findMedian(coordinates.map((s: Coordinate) => s.x)),
-    y: findMedian(coordinates.map((s: Coordinate) => s.y))
-  }
 
   const max: Coordinate = {
     x: Math.max(coordinates.length),
@@ -101,26 +71,13 @@ const Histogram = (props: LineDiagramProps) => {
           >{text.VAR[props.yParam]} &rarr;</text>
 
         <text x={graphSize.x} y={graphSize.y} dy="120" textAnchor="end" style={{fontSize: '133%'}}>
-          {coordinates.length} {text.fame['won games']}, {text.fame['median']}: {med.x}, {text.fame['average']}: {avg.x}
+          {coordinates.length} {text.fame['won games']}
         </text>
       </g>
       <g className="x-axis">
         // zero
         <line x1="0" y1={graphSize.y} x2="0" y2={graphSize.y + 20} />
         <text x="0" y={graphSize.y} dy={lgdSpace * .5} textAnchor="middle">0</text>
-
-        // how normal
-        <line x1={avg.x * dataScale.x} y1={graphSize.y} x2={avg.x * dataScale.x} y2={graphSize.y + 20} />
-        <text x={avg.x * dataScale.x} y={graphSize.y} dy="50" textAnchor="middle" aria-labelledby="average">
-          <title id="average">{text.fame['average']}: {avg.x}</title>
-          <tspan>x</tspan><tspan dx="-.5%">&#772;</tspan>
-        </text>
-        <line x1={med.x * dataScale.x} y1={graphSize.y} x2={med.x * dataScale.x} y2={graphSize.y + 20} />
-        <text x={med.x * dataScale.x} y={graphSize.y} dy="50" textAnchor="middle" aria-labelledby="median">
-          <title id="median">{text.fame['median']}: {med.x}</title>
-          <tspan>x</tspan><tspan dx="-.5%">&#771;</tspan>
-        </text>
-
         // max
         <line x1={graphSize.x} y1={graphSize.y} x2={graphSize.x} y2={graphSize.y + 20} />
         <text x={graphSize.x} y={graphSize.y} dy={lgdSpace * .5} textAnchor="end">{axisMax.x}</text>
@@ -133,7 +90,7 @@ const Histogram = (props: LineDiagramProps) => {
       </g>
       <g className="data-points">
         {coordinates.map((d, i) =>
-          <g className={`data-point ${d.mark}`} key={`lnd_group_${i}`}
+          <g className={`data-point`} key={`lnd_group_${i}`}
             transform={`translate(${d.x * dataScale.x}, ${(axisMax.y - d.y) * dataScale.y})`}
           >
             <path d={`M ${-crossLegSize}, 0 ${crossLegSize}, 0 M 0,${-crossLegSize} 0, ${crossLegSize}`} key={`lnd_path_${i}`} />
