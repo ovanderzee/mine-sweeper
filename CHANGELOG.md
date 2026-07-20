@@ -21,6 +21,7 @@
 - Calculate efficiency in sharp mode according to lower minimal number of moves
 - Similar Game button with score details, Soortgelijk Spel
 - Rename user with score details
+- Next/Previous button in ScorePopover
 
 
 ## [4.0.1] - 2026

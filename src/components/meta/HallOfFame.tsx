@@ -7,7 +7,6 @@ import Settings from '../nav/Settings'
 import GoBack from '../nav/GoBack'
 import { ShieldByRank } from '../UI/Shield'
 import Diagram from '../UI/Diagram'
-import Histogram from '../UI/Histogram'
 import { PlayMode } from '../../common/app.d'
 import { ScoreItem, ScoreParam, MarkScoreData } from '../../common/game.d'
 import storage from '../../common/storage'
@@ -263,10 +262,6 @@ const HallOfFame = () => {
                 </div>
               </section>
             </article>
-            <footer>
-              {false && <Histogram data={log.signature.fill_frequency} sn={index} />}
-
-            </footer>
           </button>
         ))}
       </ol>

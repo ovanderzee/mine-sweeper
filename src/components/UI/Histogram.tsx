@@ -45,7 +45,7 @@ const Histogram = (props: HistogramProps) => {
   const lgdSpace = 80  // legenda left and bottom
   const lgdOver = { x: 0, y: 10 }
   const pointsSpace = { x: 5, y: 10 } // graph top and right
-  const graphSize = { x: 600, y: 100 }
+  const graphSize = { x: 460, y: 100 }
   const axisMax = { x: calcBoundingAxis(max.x), y: calcBoundingAxis(max.y) }
   const dataScale = { x: graphSize.x / axisMax.x, y: graphSize.y / axisMax.y }
 
@@ -68,7 +68,7 @@ const Histogram = (props: HistogramProps) => {
     >
       <g className="legenda">
         <line x1="0" y1={graphSize.y} x2={graphSize.x} y2={graphSize.y} />
-        <text x="0" y={graphSize.y} dy={lgdSpace * .56} textAnchor="start" data-testid="x-parameter"
+        <text x="-33" y={graphSize.y} dy={lgdSpace * .56} textAnchor="start" data-testid="x-parameter"
           >{text.VAR.surrounding} &rarr;</text>
         <line x1="0" y1="0" x2="0" y2={graphSize.y} />
         <text x="2" y="-60" transform="rotate(-90)" textAnchor="end" data-testid="y-parameter"

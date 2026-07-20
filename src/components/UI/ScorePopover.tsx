@@ -6,6 +6,7 @@ import { ScoreItem } from '../../common/game.d'
 import { ShieldByRank } from './Shield'
 import ElasticBrace from './ElasticBrace'
 import { precise } from '../../common/scoring'
+import Histogram from './Histogram'
 import './ScorePopover.css'
 
 interface ScorePopoverProps {
@@ -130,15 +131,18 @@ const ScorePopover = (props: ScorePopoverProps) => {
           </div>
         </section>
       </article>
-      <footer className="buttons">
-        <button type="button" className="delete"
-          popoverTarget="score-popover" popoverTargetAction="hide"
-          onClick={() => props.delete(log.date)}
-        >{text.common.delete}</button>
-        <button type="button" className="replay"
-          popoverTarget="score-popover" popoverTargetAction="hide"
-          onClick={() => props.replay(log.code)}
-        >{text.nav.Replay}</button>
+      <footer>
+        <Histogram data={log.signature.fill_frequency} />
+        <div className="buttons">
+          <button type="button" className="delete"
+            popoverTarget="score-popover" popoverTargetAction="hide"
+            onClick={() => props.delete(log.date)}
+          >{text.common.delete}</button>
+          <button type="button" className="replay"
+            popoverTarget="score-popover" popoverTargetAction="hide"
+            onClick={() => props.replay(log.code)}
+          >{text.nav.Replay}</button>
+        </div>
       </footer>
     </figure>
   )
