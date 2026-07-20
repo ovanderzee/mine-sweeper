@@ -1,0 +1,12 @@
+.frequency-histogram {
+  margin-block-start: 1em;
+}
+
+.frequency-histogram line {
+  stroke: currentcolor;
+  stroke-width: 1;
+}
+
+.frequency-histogram text {
+  font-size: 1em;
+}
