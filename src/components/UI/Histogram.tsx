@@ -6,7 +6,7 @@ import './Histogram.css'
 interface Coordinate {
   x: number,
   y: number,
-  color?: string,
+  color?: string
 }
 
 interface HistogramProps {
@@ -42,8 +42,8 @@ const Histogram = (props: HistogramProps) => {
     y: Math.max(...coordinates.map((s: Coordinate) => s.y))
   }
 
-  const lgdSpace = 100  // legenda left and bottom
-  const lgdOver = { x: 0, y: 30 }
+  const lgdSpace = 80  // legenda left and bottom
+  const lgdOver = { x: 0, y: 10 }
   const pointsSpace = { x: 5, y: 10 } // graph top and right
   const graphSize = { x: 600, y: 100 }
   const axisMax = { x: calcBoundingAxis(max.x), y: calcBoundingAxis(max.y) }
@@ -68,25 +68,25 @@ const Histogram = (props: HistogramProps) => {
     >
       <g className="legenda">
         <line x1="0" y1={graphSize.y} x2={graphSize.x} y2={graphSize.y} />
-        <text x={graphSize.x} y={graphSize.y} dy={lgdSpace * .67} textAnchor="end" data-testid="x-parameter"
+        <text x="0" y={graphSize.y} dy={lgdSpace * .56} textAnchor="start" data-testid="x-parameter"
           >{text.VAR.surrounding} &rarr;</text>
         <line x1="0" y1="0" x2="0" y2={graphSize.y} />
-        <text x="0" y="-70" transform="rotate(-90)" textAnchor="end" data-testid="y-parameter"
+        <text x="2" y="-60" transform="rotate(-90)" textAnchor="end" data-testid="y-parameter"
           >{text.VAR.occurrences} &rarr;</text>
-        <text x={graphSize.x} y={graphSize.y} dy="120" textAnchor="end">
-          <tspan>{text.VAR.blanks}</tspan>
-          <tspan>{text.VAR.pointers}</tspan>
-          <tspan>{text.VAR.mines}</tspan>
+        <text x={graphSize.x} y={graphSize.y} dy={lgdSpace * .56} textAnchor="end">
+          &nbsp; <tspan fill={fillColors[0]}>&#x2588;</tspan> {text.VAR.blanks}
+          &nbsp; <tspan fill={fillColors[1]}>&#x2588;</tspan> {text.VAR.pointers}
+          &nbsp; <tspan fill={fillColors[2]}>&#x2588;</tspan> {text.VAR.mines}
         </text>
       </g>
       <g className="x-axis">
         {xValues}
       </g>
       <g className="y-axis">
-        <line x1="0" y1="0" x2="-20" y2="0" />
-        <text x="-33" y="6" textAnchor="end">{axisMax.y}</text>
-        <line x1="0" y1={graphSize.y} x2="-20" y2={graphSize.y} />
-        <text x="-33" y="106" textAnchor="middle">0</text>
+        <line x1="0" y1="0" x2="-10" y2="0" />
+        <text x="-20" y="6" textAnchor="end">{axisMax.y}</text>
+        <line x1="0" y1={graphSize.y} x2="-10" y2={graphSize.y} />
+        <text x="-20" y="106" textAnchor="end">0</text>
       </g>
       <g className="data-points">
         {coordinates.map((d, i) =>

@@ -1,4 +1,9 @@
 .frequency-histogram {
+  font-family: inherit;
+  font-size: initial;
+  fill: currentcolor;
+  stroke: none;
+  width: 100%;
   margin-block-start: 1em;
 }
 
@@ -8,5 +13,5 @@
 }
 
 .frequency-histogram text {
-  font-size: 1em;
+  stroke: none;
 }

@@ -264,7 +264,8 @@ const HallOfFame = () => {
               </section>
             </article>
             <footer>
-              <Histogram data={log.signature.fill_frequency} />
+              {false && <Histogram data={log.signature.fill_frequency} sn={index} />}
+
             </footer>
           </button>
         ))}
