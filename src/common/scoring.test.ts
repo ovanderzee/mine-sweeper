@@ -2,7 +2,7 @@ import {
   clickBlankAreas, clickRemainingPointers,
   leastClicksToWin, mostClicksToWin,
   unmarkCells,
-  makeBoardCode, sequenceFillData,
+  makeBoardCode, rebuildGameData,
   precise, refineScores, getFillDistribution
 } from './scoring'
 import { newGameState, blank18pct, blank26pct, blank31pct, blank41pct } from '../__mocks__/game-states'
@@ -107,11 +107,11 @@ describe('Create compressed string containing fill data', () => {
   })
 
   it('should convert a boardCode to a filled board', () => {
-    const [fillData, checkConfig] = sequenceFillData(testBoardCode)
-    expect(fillData).toStrictEqual(testBoard)
-    expect(checkConfig.BOARD_SIZE).toBe(10)
-    expect(checkConfig.GAME_LEVEL).toBe(18)
-    expect(checkConfig.PLAY_MODE).toBe(PlayMode.BARE)
+    const buildData = rebuildGameData(testBoardCode)
+    expect(buildData.board).toStrictEqual(testBoard)
+    expect(buildData.config.BOARD_SIZE).toBe(10)
+    expect(buildData.config.GAME_LEVEL).toBe(18)
+    expect(buildData.config.PLAY_MODE).toBe(PlayMode.BARE)
   })
 })
 
@@ -135,11 +135,11 @@ describe('Create compressed string based on highest BOARD_SIZE', () => {
   })
 
   it('should convert a boardCode to an mineless board', () => {
-    const [fillData, checkConfig] = sequenceFillData(testBoardCode)
-    expect(fillData).toStrictEqual(testBoard)
-    expect(checkConfig.BOARD_SIZE).toBe(RANGES.SIZE.max)
-    expect(checkConfig.GAME_LEVEL).toBe(testGameLevel)
-    expect(checkConfig.PLAY_MODE).toBe(testPlayMode)
+    const buildData = rebuildGameData(testBoardCode)
+    expect(buildData.board).toStrictEqual(testBoard)
+    expect(buildData.config.BOARD_SIZE).toBe(RANGES.SIZE.max)
+    expect(buildData.config.GAME_LEVEL).toBe(testGameLevel)
+    expect(buildData.config.PLAY_MODE).toBe(testPlayMode)
   })
 })
 
@@ -149,39 +149,39 @@ describe('Sanity checking on boardCode', () => {
 
   it('should find undecodeable code', () => {
     const wrongCode = '97g06708089'
-    sequenceFillData(wrongCode)
+    rebuildGameData(wrongCode)
     expect(console.error).toHaveBeenLastCalledWith('Invalid code')
   })
 
   it('should find unexpected code', () => {
     const wrongCode = '4480IwBhrSv'
-    sequenceFillData(wrongCode)
+    rebuildGameData(wrongCode)
     expect(console.error).toHaveBeenLastCalledWith('Invalid code')
   })
 
   it('should find wrong board size', () => {
     const wrongCode = '5380IwBhrSvI'
-    sequenceFillData(wrongCode)
+    rebuildGameData(wrongCode)
     expect(console.error).toHaveBeenLastCalledWith('Invalid size')
   })
 
   it('should find wrong mine count', () => {
     // size 4 en lvl 6,8,10 geven 2,3,3 mijnen
     const wrongCode = '4460IwBhrSvI'
-    sequenceFillData(wrongCode)
+    rebuildGameData(wrongCode)
     expect(console.error).toHaveBeenLastCalledWith('Invalid mine count')
   })
 
   it('should find wrong playmode', () => {
     // size 4 en lvl 6,8,10 geven 2,3,3 mijnen
     const wrongCode = '4489IwBhrSvI'
-    sequenceFillData(wrongCode)
+    rebuildGameData(wrongCode)
     expect(console.error).toHaveBeenLastCalledWith('Invalid playmode')
   })
 
   it('should not go wrong', () => {
     const goodCode = '4480IwBhrSvI'
-    sequenceFillData(goodCode)
+    rebuildGameData(goodCode)
     expect(console.error).not.toHaveBeenCalled()
   })
 })

@@ -71,10 +71,9 @@ describe('Game lifecycle', () => {
   })
 
   it('should result in win after opening a the last non-mine', async () => {
-    cells.forEach(async (cell) => {
+    cells.forEach(async (cell, index) => {
       if (cell.fill < 9) {
-        const cellButton = document.querySelector(`#row${cell.row}col${cell.col}`) as HTMLButtonElement
-        await userEvent.click(cellButton)
+        await screen.getByRole('gridcell').nth(index).click()
       }
     })
 

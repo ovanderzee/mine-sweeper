@@ -19,7 +19,7 @@ export const refineScores = (scores: BareScoreItem[]): ScoreItem[] => {
       score.game.mode = PlayMode.NORMAL
     }
 
-    const [board, ] = sequenceFillData(score.code)
+    const board = rebuildGameData(score.code).board
     const flatBoard = board.flat()
     const countByFill = (fill: number) => flatBoard.filter(c => c.fill === fill).length
     const fillCounts: number[] = []
@@ -112,7 +112,7 @@ export const makeBoardCode = (board: CellState[][], gameLevel: number, playMode:
   return `${size18}${size18}${level18}${mode10}${fillLz}`
 }
 
-export const sequenceFillData = (boardCode: string): [CellState[][], AppCheckConfig] => {
+export const rebuildGameData = (boardCode: string): {board: CellState[][], config: AppCheckConfig} => {
   const BREAK_BEFORE = 4
 
   const checkData = boardCode.substring(0, BREAK_BEFORE)
@@ -144,7 +144,7 @@ export const sequenceFillData = (boardCode: string): [CellState[][], AppCheckCon
 
   if (invalidCode || wrongSize || wrongMineCount || wrongPlayMode) {
     console.error(`Invalid ${wrongSize ? 'size' : wrongMineCount ? 'mine count' : wrongPlayMode ? 'playmode' : 'code'}`)
-    return [[[]], checkConfig]
+    return {board: [[]], config: checkConfig}
   }
 
   // do not check but rebuild board
@@ -168,7 +168,7 @@ export const sequenceFillData = (boardCode: string): [CellState[][], AppCheckCon
     row.forEach(cell => cell.fill > 8 ? iterateNeighbours(cell, checkSize, countNeighbourMines) : null)
   )
 
-  return [newBoard, checkConfig]
+  return {board: newBoard, config: checkConfig}
 }
 
 export const calculateScore = (game: GameScore, play: PlayScore): ScoreCalc => {

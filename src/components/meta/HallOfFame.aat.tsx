@@ -4,7 +4,7 @@ import { renderWithProvider, renderWithApp } from './../../__mocks__/aat-helpers
 import { liveScores } from './../../__mocks__/scores'
 import storage from './../../common/storage'
 import { preventReloadByEnter } from './../../common/functions'
-import { sequenceFillData } from './../../common/scoring'
+import { rebuildGameData } from './../../common/scoring'
 import { ScoreItem } from './../../common/game.d'
 import HallOfFame from './HallOfFame'
 
@@ -73,27 +73,30 @@ describe('The hall-of-fame-page scores', () => {
     // appear
     const firstButton = buttons.first()
     await firstButton.click()
-    const popoverIdentifier = popover.getByText(/req\. turns/i)
     const firstPoints = storage.scores[0].score.points.toString()
-    const firstText = firstButton.getByText(firstPoints, { exact: true })
+    const firstIdentifier = `<span class="points">${firstPoints}</span>`
 
-    expect(popover).toBeInTheDocument()
-    expect(popoverIdentifier).toBeInTheDocument()
-    expect(firstText).toBeInTheDocument()
+    // helpful screenshots
+    popover.element().style.background = 'black'
+    expect(popover).toContainHTML(firstIdentifier)
 
-    // overwrite
-    const lastButton = buttons.last()
-    await lastButton.click()
-    const popoverIdentifier2 = popover.getByText(/req\. turns/i)
-    const lastPoints = storage.scores[buttons.length - 1].score.points.toString()
-    const lastText = lastButton.getByText(lastPoints, { exact: true })
+    // overwrite popover contents
+    // cannot click while list buttons are covered by popover; tab past popover buttons
+    await userEvent.tab() // popover button 1
+    await userEvent.tab() // popover button 2
+    await userEvent.tab() // second list-item
+    await userEvent.keyboard('{Enter}')
 
-    expect(popover).toBeInTheDocument()
-    expect(popoverIdentifier2).toBeInTheDocument()
-    expect(lastText).toBeInTheDocument()
+    expect(popover).toBeInTheDocument() // same popover container
 
-    // dismiss by clicking somewhere else
-    await screen.getByRole('heading').first().click()
+    const secondPoints = storage.scores[1].score.points.toString()
+    const secondIdentifier = `<span class="points">${secondPoints}</span>`
+
+    expect(popover).not.toContainHTML(firstIdentifier)
+    expect(popover).toContainHTML(secondIdentifier)
+
+    // dismiss popover
+    await userEvent.keyboard('{Escape}')
 
     expect(popover).not.toBeInTheDocument()
   })
@@ -277,7 +280,7 @@ describe('The hall-of-fame-page popover buttons', () => {
     const gridArea = screen.getByRole('grid')
     expect(gridArea).toBeInTheDocument()
 
-    const boardFromScore = sequenceFillData(storage.scores[0].code)[0]
+    const boardFromScore = rebuildGameData(storage.scores[0].code).board
     const boardFromGame = storage.game!.board ? storage.game!.board : null
     expect(boardFromScore).toStrictEqual(boardFromGame)
   })
