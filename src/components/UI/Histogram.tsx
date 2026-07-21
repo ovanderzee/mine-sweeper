@@ -56,7 +56,7 @@ const Histogram = (props: HistogramProps) => {
 
   // @ts-expect-error // error TS6133: 'd' is declared but its value is never read.
   const xValues = coordinates.map((d, i) =>
-    (i%9) && <text x={dataScale.x * (i + .5)} y="120" textAnchor="middle">{i % 9}</text>
+    (i%9) && <text x={dataScale.x * (i + .5)} y="120" textAnchor="middle" key={`lnd_x_${i}`}>{i % 9}</text>
   )
 
   return (
@@ -66,6 +66,23 @@ const Histogram = (props: HistogramProps) => {
       viewBox={`${lgdSpace * -1} ${pointsSpace.y * -1} ${diagramSize.x} ${diagramSize.y}`}
       xmlns="http://www.w3.org/2000/svg"
     >
+      <g className="data-points">
+        {coordinates.map((d, i) =>
+          <g className={`data-point`} key={`lnd_group_${i}`} fill={d.color}
+            transform={`translate(${d.x * dataScale.x}, ${axisMax.y * dataScale.y})`}
+          >
+            <path d={`M 0,0 V -100 H ${dataScale.x} V 0 Z`} key={`lnd_back_${i}`} opacity=".4" aria-labelledby={`lnd_back_title_${i}`}>
+              <title id={`lnd_back_title_${i}`} key={`lnd_back_title_${i}`}>
+                {`${text.VAR.surrounding}: ${d.x % 9}, ${text.VAR.occurrences}: ${d.y}`}
+              </title>
+            </path>
+            <path d={`M 0,0 V ${-d.y * dataScale.y} H ${dataScale.x} V 0 Z`} key={`lnd_front_${i}`} aria-labelledby={`lnd_front_title_${i}`}>
+              <title id={`lnd_front_title_${i}`} key={`lnd_front_title_${i}`}>
+                {`${text.VAR.surrounding}: ${d.x % 9}, ${text.VAR.occurrences}: ${d.y}`}
+              </title>
+            </path>
+          </g>)}
+      </g>
       <g className="legenda">
         <line x1="0" y1={graphSize.y} x2={graphSize.x} y2={graphSize.y} />
         <text x="-33" y={graphSize.y} dy={lgdSpace * .56} textAnchor="start" data-testid="x-parameter"
@@ -87,23 +104,6 @@ const Histogram = (props: HistogramProps) => {
         <text x="-20" y="6" textAnchor="end">{axisMax.y}</text>
         <line x1="0" y1={graphSize.y} x2="-10" y2={graphSize.y} />
         <text x="-20" y="106" textAnchor="end">0</text>
-      </g>
-      <g className="data-points">
-        {coordinates.map((d, i) =>
-          <g className={`data-point`} key={`lnd_group_${i}`} fill={d.color}
-            transform={`translate(${d.x * dataScale.x}, ${axisMax.y * dataScale.y})`}
-          >
-            <path d={`M 0,0 V -100 H ${dataScale.x} V 0 Z`} key={`lnd_back_${i}`} opacity=".4" aria-labelledby={`lnd_title_${i}`}>
-              <title id={`lnd_title_${i}`} key={`lnd_title_${i}`}>
-                {`${text.VAR.surrounding}: ${d.x % 9}, ${text.VAR.occurrences}: ${d.y}`}
-              </title>
-            </path>
-            <path d={`M 0,0 V ${-d.y * dataScale.y} H ${dataScale.x} V 0 Z`} key={`lnd_front_${i}`} aria-labelledby={`lnd_title_${i}`}>
-              <title id={`lnd_title_${i}`} key={`lnd_title_${i}`}>
-                {`${text.VAR.surrounding}: ${d.x % 9}, ${text.VAR.occurrences}: ${d.y}`}
-              </title>
-            </path>
-          </g>)}
       </g>
 
     </svg>
