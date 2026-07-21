@@ -97,7 +97,11 @@
     "mines": "mijnen",
     "effort": "min. zetten",
     "moves": "zetten",
-    "duration": "duur"
+    "duration": "duur",
+    "occurrences": "Voorkomens",
+    "surrounding": "Aantal omliggende mijnen",
+    "blanks": "blanco's",
+    "pointers": "indicators"
   },
   "settings": {
     "On begin Play": "De Uitdaging...",

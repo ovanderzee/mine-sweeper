@@ -97,7 +97,11 @@
     "mines": "mines",
     "effort": "req. turns",
     "moves": "turns",
-    "duration": "duration"
+    "duration": "duration",
+    "occurrences": "Occurrences",
+    "surrounding": "Number of surrounding mines",
+    "blanks": "blanks",
+    "pointers": "pointers"
   },
   "settings": {
     "On begin Play": "The Challenge...",

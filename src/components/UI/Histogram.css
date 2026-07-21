@@ -1,0 +1,21 @@
+.frequency-histogram {
+  font-family: inherit;
+  font-size: initial;
+  fill: currentcolor;
+  stroke: none;
+  width: 100%;
+  margin-block-start: 1em;
+}
+
+.frequency-histogram line {
+  stroke: currentcolor;
+  stroke-width: 1;
+}
+
+.frequency-histogram text {
+  stroke: none;
+}
+
+.frequency-histogram .legenda tspan {
+  text-shadow: 0 0 1px white, 0 0 1px white, 0 0 1px white, 0 0 1px white;
+}

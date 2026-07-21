@@ -6,7 +6,8 @@ import { ScoreItem } from './common/game.d'
 
 const testScore = () => { return {
   code: "7740AwkRlTLDVr7EY0Q", date: 1514179800000, user: "Annestiene", rank: 0,
-  game: {cells: 49, mines: 7, effort: {least: 12, most: 33}}, level: 10,
+  game: {cells: 49, mines: 7, level: 10, effort: {least: 12, most: 33}},
+  signature: {fill_frequency: [18,17,6,4,2,0,0,0,0]},
   play: {moves: 15, duration: 41.599},
   score: {efficiency: 0.8, speed: 0.3606, points: 288}
 }}
