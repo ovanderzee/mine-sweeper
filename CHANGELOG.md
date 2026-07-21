@@ -24,12 +24,18 @@
 - Next/Previous button in ScorePopover
 
 
-## [4.0.1] - 2026
+## [4.1.0] - 2026
+
+### Added
+- Histogram with fill distribution on Score popover
 
 ### Changed
 - Boardsize parameter on configuration screen
 - Ease the transit from Intro to Game
 - More pace in pause animation
+
+### Fixed
+- Typing of scores
 
 
 ## [4.0.0] - 2026-07-15
