@@ -12,10 +12,8 @@
   min-width: calc(var(--app-width) - 2em);
   width: calc(var(--app-width) + 2em);
   max-width: calc(100vw - 2em);
-  max-height: calc(100vh - 2em);
   padding: calc(var(--half-radius) + var(--line)) calc(var(--half-radius) + var(--hair-line));
   box-shadow: 0 0 1em 1px var(--light-blue);
-  overscroll-behavior: contain;
 }
 
 #score-popover figure {
@@ -24,6 +22,9 @@
   background: linear-gradient(105deg, var(--lighter-blue),  var(--medium-blue), var(--dark-blue));
   margin: 0 auto;
   padding: calc(var(--radius) / 2) var(--radius);
+  max-height: calc(100vh - 2em);
+  overscroll-behavior: contain;
+  overflow: auto;
 }
 
 #score-popover figure header {
