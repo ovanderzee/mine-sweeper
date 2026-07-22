@@ -84,10 +84,13 @@ describe('Configuration storage', () => {
     const config = storage.config
 
     expect(config).toStrictEqual(DEFAULTS)
-    expect(consoleErrorSpy).toHaveBeenLastCalledWith('Invalid configuration found, replace by defaults...')
+    expect(consoleErrorSpy).toHaveBeenLastCalledWith('Invalid configuration found, use defaults...')
+
+    vi.clearAllMocks()
   })
 })
 
+// SET MINECOUNT WHEN STORING AND READING  OR RREMOVE OR MAKE IT A CLASS WITH A SETTER
 
 describe('Game storage', () => {
   beforeEach(() => {
@@ -154,7 +157,8 @@ describe('Game storage', () => {
     const game = storage.game
 
     expect(game).toBe(null)
-    expect(consoleErrorSpy).toHaveBeenLastCalledWith('Invalid game found, start new game...')
+    expect(consoleErrorSpy).toHaveBeenLastCalledWith('Invalid game found, use a new game...')
+    vi.clearAllMocks()
   })
 })
 
@@ -222,6 +226,6 @@ describe('Scores storage', () => {
     const scores = storage.scores
 
     expect(scores).toStrictEqual([])
-    expect(window.console.error).toHaveBeenCalledWith('Invalid scorelist found, start with new list...')
+    expect(window.console.error).toHaveBeenCalledWith('Invalid scorelist found, use a new list...')
   })
 })
