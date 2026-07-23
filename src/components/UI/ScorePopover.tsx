@@ -132,16 +132,22 @@ const ScorePopover = (props: ScorePopoverProps) => {
         </section>
       </article>
       <footer>
-        <Histogram data={log.signature.fill_frequency} />
+        {log.signature.invalid_code ?
+          <div className="frequency-histogram"><span>{text.error['Invalid code']}</span></div> :
+          <Histogram data={log.signature.fill_frequency} />
+        }
         <div className="buttons">
           <button type="button" className="delete"
             popoverTarget="score-popover" popoverTargetAction="hide"
             onClick={() => props.delete(log.date)}
           >{text.common.delete}</button>
-          <button type="button" className="replay"
-            popoverTarget="score-popover" popoverTargetAction="hide"
-            onClick={() => props.replay(log.code)}
-          >{text.nav.Replay}</button>
+          {log.signature.invalid_code ?
+            <span>{text.error['No replay']}</span> :
+            <button type="button" className="replay"
+              popoverTarget="score-popover" popoverTargetAction="hide"
+              onClick={() => props.replay(log.code)}
+            >{text.nav.Replay}</button>
+          }
         </div>
       </footer>
     </figure>

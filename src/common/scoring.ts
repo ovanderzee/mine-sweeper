@@ -28,6 +28,7 @@ export const refineScores = (scores: BareScoreItem[]): ScoreItem[] => {
     }
     score.signature = {
       fill_frequency: fillCounts,
+      invalid_code: board.length === 1
     }
 
     return score

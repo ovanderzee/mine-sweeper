@@ -179,5 +179,9 @@
     "normal hint": "",
     "bare hint": "don't touch a single mine",
     "sharp hint": "flag only every mine"
+  },
+  "error": {
+    "Invalid code": "Data not available",
+    "No replay": "No replay"
   }
 }

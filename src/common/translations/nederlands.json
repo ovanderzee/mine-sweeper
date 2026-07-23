@@ -179,5 +179,9 @@
     "normal hint": "",
     "bare hint": "raak geen enkele mijn",
     "sharp hint": "vlag alleen elke mijn af"
+  },
+  "error": {
+    "Invalid code": "Data niet beschikbaar",
+    "No replay": "Geen herhaling"
   }
 }

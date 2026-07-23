@@ -42,7 +42,7 @@ const Histogram = (props: HistogramProps) => {
     y: Math.max(...coordinates.map((s: Coordinate) => s.y))
   }
 
-  const lgdSpace = 80  // legenda left and bottom
+  const lgdSpace = { x: 80, y: 50 }  // legenda left and bottom
   const lgdOver = { x: 0, y: 10 }
   const pointsSpace = { x: 5, y: 10 } // graph top and right
   const graphSize = { x: 460, y: 100 }
@@ -50,8 +50,8 @@ const Histogram = (props: HistogramProps) => {
   const dataScale = { x: graphSize.x / axisMax.x, y: graphSize.y / axisMax.y }
 
   const diagramSize = {
-    x: graphSize.x + lgdSpace + pointsSpace.x + lgdOver.x,
-    y: graphSize.y + lgdSpace + pointsSpace.y + lgdOver.y
+    x: graphSize.x + lgdSpace.x + pointsSpace.x + lgdOver.x,
+    y: graphSize.y + lgdSpace.y + pointsSpace.y + lgdOver.y
   }
 
   // @ts-expect-error // error TS6133: 'd' is declared but its value is never read.
@@ -63,7 +63,7 @@ const Histogram = (props: HistogramProps) => {
     <svg
       role="document"
       className="frequency-histogram"
-      viewBox={`${lgdSpace * -1} ${pointsSpace.y * -1} ${diagramSize.x} ${diagramSize.y}`}
+      viewBox={`${lgdSpace.x * -1} ${pointsSpace.y * -1} ${diagramSize.x} ${diagramSize.y}`}
       xmlns="http://www.w3.org/2000/svg"
     >
       <g className="data-points">
@@ -85,12 +85,12 @@ const Histogram = (props: HistogramProps) => {
       </g>
       <g className="legenda">
         <line x1="0" y1={graphSize.y} x2={graphSize.x} y2={graphSize.y} />
-        <text x="-33" y={graphSize.y} dy={lgdSpace * .56} textAnchor="start" data-testid="x-parameter"
+        <text x="-33" y={graphSize.y} dy={lgdSpace.y} textAnchor="start" data-testid="x-parameter"
           >{text.VAR.surrounding} &rarr;</text>
         <line x1="0" y1="0" x2="0" y2={graphSize.y} />
         <text x="2" y="-60" transform="rotate(-90)" textAnchor="end" data-testid="y-parameter"
           >{text.VAR.occurrences} &rarr;</text>
-        <text x={graphSize.x} y={graphSize.y} dy={lgdSpace * .56} textAnchor="end">
+        <text x={graphSize.x} y={graphSize.y} dy={lgdSpace.y} textAnchor="end">
           &nbsp; <tspan fill={fillColors[0]}>&#x2588;</tspan> {text.VAR.blanks}
           &nbsp; <tspan fill={fillColors[1]}>&#x2588;</tspan> {text.VAR.pointers}
           &nbsp; <tspan fill={fillColors[2]}>&#x2588;</tspan> {text.VAR.mines}

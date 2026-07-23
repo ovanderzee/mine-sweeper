@@ -82,6 +82,7 @@ export interface PlayScore {
 
 export interface Signature {
   fill_frequency: number[],
+  invalid_code: boolean,
 }
 
 export interface ScoreCalc {
