@@ -13,7 +13,8 @@
     "test": "vitest --run",
     "cov": "vitest --coverage --run",
     "aat": "vitest --run --project=aat",
-    "unit": "vitest --run --project=unit"
+    "unit": "vitest --run --project=unit",
+    "sort": "./lib/sort.sh"
   },
   "dependencies": {
     "lz-string": "^1.5.0",
