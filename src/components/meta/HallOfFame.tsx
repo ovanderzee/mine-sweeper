@@ -178,7 +178,7 @@ const HallOfFame = () => {
 
   const scoreDiagram = <Diagram scores={scores} xParam={sortLabel} yParam={valueLabel} markData={markData} />
 
-  const [popScore, setPopScore] = useState<ScoreItem | null>(null)
+  const [popScore, setPopScore] = useState<number>(NaN)
 
   const fameContent = (
     <article
@@ -203,7 +203,7 @@ const HallOfFame = () => {
             className={`${log.rank <= 10 ? 'super' : ''}`}
             aria-label={`${log.date === latest.date ? 'latest' : ''}`}
             key={`${log.date}_${log.score.points}`}
-            onClick={() => setPopScore(log)}
+            onClick={() => setPopScore(index)}
             title={text.fame['Number %n in %s sort'].replace('%n', String(index+1)).replace('%s', text.VAR[sortLabel])}
           >
             <header>
@@ -304,7 +304,7 @@ const HallOfFame = () => {
       {fameContent}
       {fameNavigation}
       <section id="score-popover" popover="auto" role="status" aria-label={text.fame['detail-label']}>
-        <ScorePopover score={popScore} delete={deleteOneScore} replay={replayStoredGame} />
+        <ScorePopover scores={scores} index={popScore} delete={deleteOneScore} replay={replayStoredGame} />
       </section>
     </>
   )

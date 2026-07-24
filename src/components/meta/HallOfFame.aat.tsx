@@ -100,6 +100,20 @@ describe('The hall-of-fame-page scores', () => {
 
     expect(popover).not.toBeInTheDocument()
   })
+
+  it('should have a one-shorter list when one score is removed through popup', async () => {
+    const buttons = screen.getByRole('list').getByRole('button')
+    const popover = screen.getByRole('status')
+    const initialListLength = buttons.length
+
+    const firstButton = buttons.first()
+    await firstButton.click()
+
+    const removeButton = popover.getByRole('button', {name: 'Delete'})
+    await removeButton.click()
+
+    expect(buttons.length).toBe(initialListLength - 1)
+  })
 })
 
 describe('The hall-of-fame-page list sorting', () => {
@@ -261,7 +275,7 @@ describe('The hall-of-fame-page popover buttons', () => {
     const deleteButton = popover.getByRole('button').getByText('Delete')
     await deleteButton.click()
 
-    expect(popover).not.toBeInTheDocument()
+    expect(popover).toBeInTheDocument()
     expect(storage.scores.length).toBe(scoresCount - 1)
   })
 

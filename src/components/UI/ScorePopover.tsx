@@ -10,7 +10,8 @@ import Histogram from './Histogram'
 import './ScorePopover.css'
 
 interface ScorePopoverProps {
-  score: ScoreItem | null
+  scores: ScoreItem[]
+  index: number
   delete: (time: number) => void
   replay: (code: string) => void
 }
@@ -18,7 +19,7 @@ interface ScorePopoverProps {
 const ScorePopover = (props: ScorePopoverProps) => {
   const pageCtx = useContext(PageContext)
   const text = pageCtx.text
-  const log = props.score
+  const log = props.scores[props.index]
 
   if (!log) return
 
