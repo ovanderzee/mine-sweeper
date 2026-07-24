@@ -28,15 +28,15 @@
 
 ### Added
 - Histogram with fill distribution on Score popover
+- Browse scores in Score popover
+- Shell and Node scripts for updating scorelist
 
 ### Changed
 - Boardsize parameter on configuration screen
 - Ease the transit from Intro to Game
 - More pace in pause animation
-
-### Fixed
-- Typing of scores
-
+- Refined score typing
+- Structured updater
 
 ## [4.0.0] - 2026-07-15
 

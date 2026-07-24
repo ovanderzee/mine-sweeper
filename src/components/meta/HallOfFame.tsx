@@ -287,12 +287,16 @@ const HallOfFame = () => {
     setScores(methodsByKind[sortLabel]())
   }
 
+  const onBrowse = (focusIndex: number): void => {
+    setPopScore(focusIndex)
+  }
+
   return (
     <>
       {fameContent}
       {fameNavigation}
       <section id="score-popover" popover="auto" role="status" aria-label={text.fame['detail-label']}>
-        <ScorePopover scores={scores} index={popScore} onDeletion={onDeletion} />
+        <ScorePopover scores={scores} index={popScore} onDeletion={onDeletion} onBrowse={onBrowse} />
       </section>
     </>
   )

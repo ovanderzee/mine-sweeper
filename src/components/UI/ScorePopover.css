@@ -75,6 +75,20 @@
   text-align: right;
 }
 
+#score-popover figure header .buttons {
+  margin-block-start: 1ex;
+  text-align: right;
+}
+
+#score-popover figure header button {
+  color: inherit;
+  padding: 1ex;
+  text-shadow: 1.5px 1px 0 var(--medium-touched);
+  transform: scaleY(1.667);
+  box-shadow: none;
+  background: none;
+}
+
 #score-popover figure article.functional-grid {
   display: grid;
 }

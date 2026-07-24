@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import PageContext from '../../store/page-context'
 import storage from '../../common/storage'
 import { PlayMode } from '../../common/app.d'
@@ -15,6 +15,7 @@ interface ScorePopoverProps {
   scores: ScoreItem[]
   index: number
   onDeletion: (score: ScoreItem) => void
+  onBrowse: (browseIndex: number) => void
 }
 
 const ScorePopover = (props: ScorePopoverProps) => {
@@ -33,6 +34,13 @@ const ScorePopover = (props: ScorePopoverProps) => {
     }
     storage.game = gameState
     pageCtx.navigate(<Game />)
+  }
+
+  const disableDescend = props.index === 0
+  const disableAscend = props.index === props.scores.length - 1
+
+  const browsePopScore = (change: number): void => {
+    props.onBrowse(props.index + change)
   }
 
   const loggedDate = new Date(log.date)
@@ -55,6 +63,19 @@ const ScorePopover = (props: ScorePopoverProps) => {
         <h4 className="date" data-date={log.date}>
           {loggedDate.toLocaleDateString()}<br/>
           {loggedDate.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
+          <div className="buttons">
+            <button type="button"
+              disabled={disableDescend}
+              title={text.common.back}
+              onClick={() => browsePopScore(-1)}
+            ><span>&lt;</span></button>
+            &nbsp;
+            <button type="button"
+              disabled={disableAscend}
+              title={text.common.forth}
+              onClick={() => browsePopScore(1)}
+            ><span>&gt;</span></button>
+          </div>
         </h4>
       </header>
       <article className="functional-grid">

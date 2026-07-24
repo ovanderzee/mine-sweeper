@@ -2,6 +2,8 @@
   "common": {
     "appName": "MineSweep",
     "Mines": "Mines",
+    "back": "back",
+    "forth": "forth",
     "confirm": "OK",
     "cancel": "Cancel",
     "delete": "Delete"

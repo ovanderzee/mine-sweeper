@@ -81,11 +81,8 @@ describe('The hall-of-fame-page scores', () => {
     expect(popover).toContainHTML(firstIdentifier)
 
     // overwrite popover contents
-    // cannot click while list buttons are covered by popover; tab past popover buttons
-    await userEvent.tab() // popover button 1
-    await userEvent.tab() // popover button 2
-    await userEvent.tab() // second list-item
-    await userEvent.keyboard('{Enter}')
+    const browseForthButton = popover.getByTitle('forth')
+    await browseForthButton.click()
 
     expect(popover).toBeInTheDocument() // same popover container
 
@@ -94,6 +91,13 @@ describe('The hall-of-fame-page scores', () => {
 
     expect(popover).not.toContainHTML(firstIdentifier)
     expect(popover).toContainHTML(secondIdentifier)
+
+    // overwrite popover contents with inital data
+    const browseBackButton = popover.getByTitle('back')
+    await browseBackButton.click()
+
+    expect(popover).not.toContainHTML(secondIdentifier)
+    expect(popover).toContainHTML(firstIdentifier)
 
     // dismiss popover
     await userEvent.keyboard('{Escape}')
