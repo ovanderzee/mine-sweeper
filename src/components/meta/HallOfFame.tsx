@@ -10,7 +10,7 @@ import Diagram from '../UI/Diagram'
 import { PlayMode } from '../../common/app.d'
 import { ScoreItem, ScoreParam, MarkScoreData } from '../../common/game.d'
 import storage from '../../common/storage'
-import { precise, refineScores } from '../../common/scoring'
+import { precise } from '../../common/scoring'
 import { SHOW_SORT_THRESHOLD, SHOW_DIAGRAM_THRESHOLD, SHOW_MARKING_THRESHOLD } from '../../common/constants'
 import { preventReloadByEnter } from '../../common/functions'
 import ScorePopover from '../UI/ScorePopover'
@@ -275,15 +275,16 @@ const HallOfFame = () => {
     </NavOptionsBar>
   )
 
-  const deleteOneScore = (time: number): void => {
-    const removeIndex = rootScores.findIndex(score => score.date === time)
-
-    if (removeIndex > -1) {
-      rootScores.splice(removeIndex, 1)
-      storage.scores = rootScores
-      setScores(refineScores(rootScores))
-      setScores(methodsByKind[sortLabel]())
+  const onDeletion = (deletable: ScoreItem): void => {
+    const removeIndex = rootScores.findIndex(s => s.code === deletable.code && s.date === deletable.date)
+    if (removeIndex < 0) {
+      console.error('Score to delete not found')
+      return
     }
+    rootScores.splice(removeIndex, 1)
+    storage.scores = rootScores
+    setScores(storage.scores)
+    setScores(methodsByKind[sortLabel]())
   }
 
   return (
@@ -291,7 +292,7 @@ const HallOfFame = () => {
       {fameContent}
       {fameNavigation}
       <section id="score-popover" popover="auto" role="status" aria-label={text.fame['detail-label']}>
-        <ScorePopover scores={scores} index={popScore} delete={deleteOneScore} />
+        <ScorePopover scores={scores} index={popScore} onDeletion={onDeletion} />
       </section>
     </>
   )
