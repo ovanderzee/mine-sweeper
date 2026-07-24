@@ -1,11 +1,13 @@
 import { useContext } from 'react'
 import PageContext from '../../store/page-context'
-
+import storage from '../../common/storage'
 import { PlayMode } from '../../common/app.d'
 import { ScoreItem } from '../../common/game.d'
 import { ShieldByRank } from './Shield'
 import ElasticBrace from './ElasticBrace'
-import { precise } from '../../common/scoring'
+import { precise, rebuildGameData } from '../../common/scoring'
+import { initialGameState } from '../game/common'
+import Game from '../game/Game'
 import Histogram from './Histogram'
 import './ScorePopover.css'
 
@@ -13,7 +15,6 @@ interface ScorePopoverProps {
   scores: ScoreItem[]
   index: number
   delete: (time: number) => void
-  replay: (code: string) => void
 }
 
 const ScorePopover = (props: ScorePopoverProps) => {
@@ -22,6 +23,17 @@ const ScorePopover = (props: ScorePopoverProps) => {
   const log = props.scores[props.index]
 
   if (!log) return
+
+  const replayStoredGame = (code: string): void => {
+    const buildData = rebuildGameData(code)
+    pageCtx.configure(buildData.config)
+    const gameState = {
+      ...initialGameState,
+      board: buildData.board,
+    }
+    storage.game = gameState
+    pageCtx.navigate(<Game />)
+  }
 
   const loggedDate = new Date(log.date)
 
@@ -146,7 +158,7 @@ const ScorePopover = (props: ScorePopoverProps) => {
             <span>{text.error['No replay']}</span> :
             <button type="button" className="replay"
               popoverTarget="score-popover" popoverTargetAction="hide"
-              onClick={() => props.replay(log.code)}
+              onClick={() => replayStoredGame(log.code)}
             >{text.nav.Replay}</button>
           }
         </div>

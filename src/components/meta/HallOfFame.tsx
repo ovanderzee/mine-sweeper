@@ -10,12 +10,10 @@ import Diagram from '../UI/Diagram'
 import { PlayMode } from '../../common/app.d'
 import { ScoreItem, ScoreParam, MarkScoreData } from '../../common/game.d'
 import storage from '../../common/storage'
-import { precise, refineScores, rebuildGameData } from '../../common/scoring'
+import { precise, refineScores } from '../../common/scoring'
 import { SHOW_SORT_THRESHOLD, SHOW_DIAGRAM_THRESHOLD, SHOW_MARKING_THRESHOLD } from '../../common/constants'
 import { preventReloadByEnter } from '../../common/functions'
 import ScorePopover from '../UI/ScorePopover'
-import Game from '../game/Game'
-import { initialGameState } from '../game/common'
 import './Meta.css'
 import './HallOfFame.css'
 
@@ -288,23 +286,12 @@ const HallOfFame = () => {
     }
   }
 
-  const replayStoredGame = (code: string): void => {
-    const buildData = rebuildGameData(code)
-    pageCtx.configure(buildData.config)
-    const gameState = {
-      ...initialGameState,
-      board: buildData.board,
-    }
-    storage.game = gameState
-    pageCtx.navigate(<Game />)
-  }
-
   return (
     <>
       {fameContent}
       {fameNavigation}
       <section id="score-popover" popover="auto" role="status" aria-label={text.fame['detail-label']}>
-        <ScorePopover scores={scores} index={popScore} delete={deleteOneScore} replay={replayStoredGame} />
+        <ScorePopover scores={scores} index={popScore} delete={deleteOneScore} />
       </section>
     </>
   )
