@@ -5,6 +5,7 @@ interface DiagramProps {
   scores: ScoreItem[],
   xParam: ScoreParam,
   yParam: ScoreParam,
+  view: () => void,
   markData: MarkScoreData | null,
 }
 
@@ -30,7 +31,10 @@ const Diagram = (props: DiagramProps) => {
     const yType = typeof flatScores[0][props.yParam]
 
     if (xType === 'number' && yType === 'number') {
-      return (<LineDiagram data={flatScores} xParam={props.xParam} yParam={props.yParam} markData={props.markData} />)
+      return (<LineDiagram data={flatScores}
+        xParam={props.xParam} yParam={props.yParam}
+        view={(e,i) => {console.log('diagram', i);props.view(e,i)}}
+        markData={props.markData} />)
     }
   }
   return svgDiagram()

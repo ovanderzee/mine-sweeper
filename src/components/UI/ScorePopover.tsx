@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react'
+import { useContext } from 'react'
 import PageContext from '../../store/page-context'
 import storage from '../../common/storage'
 import { PlayMode } from '../../common/app.d'
@@ -39,8 +39,8 @@ const ScorePopover = (props: ScorePopoverProps) => {
   const disableDescend = props.index === 0
   const disableAscend = props.index === props.scores.length - 1
 
-  const browsePopScore = (change: number): void => {
-    props.onBrowse(props.index + change)
+  const browsePopScore = (event: React.MouseEventHandler, change: number): void => {
+    props.onBrowse(event, props.index + change)
   }
 
   const loggedDate = new Date(log.date)
@@ -67,13 +67,13 @@ const ScorePopover = (props: ScorePopoverProps) => {
             <button type="button"
               disabled={disableDescend}
               title={text.common.back}
-              onClick={() => browsePopScore(-1)}
+              onClick={(e) => browsePopScore(e, -1)}
             ><span>&lt;</span></button>
             &nbsp;
             <button type="button"
               disabled={disableAscend}
               title={text.common.forth}
-              onClick={() => browsePopScore(1)}
+              onClick={(e) => browsePopScore(e, 1)}
             ><span>&gt;</span></button>
           </div>
         </h4>

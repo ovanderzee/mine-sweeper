@@ -14,6 +14,7 @@ interface LineDiagramProps {
   data: FlatScore[],
   xParam: ScoreParam,
   yParam: ScoreParam,
+  view: () => void,
   markData: MarkScoreData | null,
 }
 
@@ -137,11 +138,28 @@ const LineDiagram = (props: LineDiagramProps) => {
             transform={`translate(${d.x * dataScale.x}, ${(axisMax.y - d.y) * dataScale.y})`}
           >
             <path d={`M ${-crossLegSize}, 0 ${crossLegSize}, 0 M 0,${-crossLegSize} 0, ${crossLegSize}`} key={`lnd_path_${i}`} />
-            <circle  cx="0" cy="0" r="3" key={`lnd_circle_${i}`} aria-labelledby={`lnd_title_${i}`}>
+            <circle  cx="0" cy="0" r="3" key={`lnd_circle_${i}`} aria-labelledby={`lnd_title_${i}`}
+              onClick={(e) => props.view(e,i)}
+            >
               <title id={`lnd_title_${i}`} key={`lnd_title_${i}`}>
                 {`${text.VAR[props.xParam]}: ${d.x}, ${text.VAR[props.yParam]}: ${d.y}`}
               </title>
             </circle>
+            <foreignObject x="50" y="50" width="100" height="50">
+            <button type="button" key={`lnd_btn_${i}`}
+              popoverTarget="score-popover" popoverTargetAction="show"
+              style={{ 'posi-tion':'relative','le-ft':'1em','t-op':'1em','wid-th':'1em','hei-ght':'1em','padding':'1em' }}
+              onClick={(e) => props.view(e,i)}>
+
+              <circle  cx="0" cy="0" r="3" key={`btn_circle_${i}`} aria-labelledby={`btn_title_${i}`}>
+                <title id={`btn_title_${i}`} key={`btn_title_${i}`}>
+                  {`${text.VAR[props.xParam]}: ${d.x}, ${text.VAR[props.yParam]}: ${d.y}`}
+                </title>
+              </circle>
+
+              </button>
+
+            </foreignObject>
           </g>)}
       </g>
 

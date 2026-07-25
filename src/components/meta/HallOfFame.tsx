@@ -174,7 +174,23 @@ const HallOfFame = () => {
     </form>
   )
 
-  const scoreDiagram = <Diagram scores={scores} xParam={sortLabel} yParam={valueLabel} markData={markData} />
+  const onDeletion = (deletable: ScoreItem): void => {
+    const removeIndex = rootScores.findIndex(s => s.code === deletable.code && s.date === deletable.date)
+    if (removeIndex < 0) {
+      console.error('Score to delete not found')
+      return
+    }
+    rootScores.splice(removeIndex, 1)
+    storage.scores = rootScores
+    setScores(storage.scores)
+    setScores(methodsByKind[sortLabel]())
+  }
+
+  const onBrowse = (focusIndex: number): void => {
+    setPopScore(focusIndex)
+  }
+
+  const scoreDiagram = <Diagram scores={scores} xParam={sortLabel} yParam={valueLabel} view={onBrowse} markData={markData} />
 
   const [popScore, setPopScore] = useState<number>(NaN)
 
@@ -274,22 +290,6 @@ const HallOfFame = () => {
       <GoBack />
     </NavOptionsBar>
   )
-
-  const onDeletion = (deletable: ScoreItem): void => {
-    const removeIndex = rootScores.findIndex(s => s.code === deletable.code && s.date === deletable.date)
-    if (removeIndex < 0) {
-      console.error('Score to delete not found')
-      return
-    }
-    rootScores.splice(removeIndex, 1)
-    storage.scores = rootScores
-    setScores(storage.scores)
-    setScores(methodsByKind[sortLabel]())
-  }
-
-  const onBrowse = (focusIndex: number): void => {
-    setPopScore(focusIndex)
-  }
 
   return (
     <>
