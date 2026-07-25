@@ -144,7 +144,8 @@ export const rebuildGameData = (boardCode: string): {board: CellState[][], confi
   }
 
   if (invalidCode || wrongSize || wrongMineCount || wrongPlayMode) {
-    console.error(`Invalid ${wrongSize ? 'size' : wrongMineCount ? 'mine count' : wrongPlayMode ? 'playmode' : 'code'}`)
+    const report = `Invalid ${wrongSize ? 'size' : wrongMineCount ? 'mine count' : wrongPlayMode ? 'playmode' : 'code'}`
+    console.error(`${report} ${boardCode}`)
     return {board: [[]], config: checkConfig}
   }
 
