@@ -35,7 +35,7 @@ const deleteSampleScores = (): void => {
 export default {
   getAllScores,
   setAllScores,
-  getScoresByUser ,
+  getScoresByUser,
   deleteScoresByUser,
   addSampleScores,
   deleteSampleScores,
