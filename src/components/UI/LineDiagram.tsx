@@ -1,6 +1,7 @@
 import { useContext } from 'react'
 import PageContext from '../../store/page-context'
 import { ScoreParam, FlatScore, MarkScoreData } from '../../common/game.d'
+import { canNotDealWithForeignObjects } from '../../common/functions'
 import { precise } from '../../common/scoring'
 import './LineDiagram.css'
 
@@ -138,27 +139,21 @@ const LineDiagram = (props: LineDiagramProps) => {
             transform={`translate(${d.x * dataScale.x}, ${(axisMax.y - d.y) * dataScale.y})`}
           >
             <path d={`M ${-crossLegSize}, 0 ${crossLegSize}, 0 M 0,${-crossLegSize} 0, ${crossLegSize}`} key={`lnd_path_${i}`} />
-            <circle  cx="0" cy="0" r="3" key={`lnd_circle_${i}`} aria-labelledby={`lnd_title_${i}`}
-              onClick={(e) => props.view(e,i)}
-            >
-              <title id={`lnd_title_${i}`} key={`lnd_title_${i}`}>
-                {`${text.VAR[props.xParam]}: ${d.x}, ${text.VAR[props.yParam]}: ${d.y}`}
-              </title>
-            </circle>
-            <foreignObject x="50" y="50" width="100" height="50">
-            <button type="button" key={`lnd_btn_${i}`}
-              popoverTarget="score-popover" popoverTargetAction="show"
-              style={{ 'posi-tion':'relative','le-ft':'1em','t-op':'1em','wid-th':'1em','hei-ght':'1em','padding':'1em' }}
-              onClick={(e) => props.view(e,i)}>
-
-              <circle  cx="0" cy="0" r="3" key={`btn_circle_${i}`} aria-labelledby={`btn_title_${i}`}>
-                <title id={`btn_title_${i}`} key={`btn_title_${i}`}>
-                  {`${text.VAR[props.xParam]}: ${d.x}, ${text.VAR[props.yParam]}: ${d.y}`}
-                </title>
-              </circle>
-
-              </button>
-
+            <foreignObject x="-5" y="-5" width="10" height="10">
+              {canNotDealWithForeignObjects() ?
+              <div xmlns="http://www.w3.org/1999/xhtml">
+                <button type="button" key={`lnd_btn_${i}`}
+                  popoverTarget="score-popover" popoverTargetAction="show"
+                  onClick={(e) => props.view(e,i)}
+                  title={`${text.VAR[props.xParam]}: ${d.x}, ${text.VAR[props.yParam]}: ${d.y}`}
+                ></button>
+              </div> :
+                <button type="button" key={`lnd_btn_${i}`}
+                  popoverTarget="score-popover" popoverTargetAction="show"
+                  onClick={(e) => props.view(e,i)}
+                  title={`${text.VAR[props.xParam]}: ${d.x}, ${text.VAR[props.yParam]}: ${d.y}`}
+                ></button>
+              }
             </foreignObject>
           </g>)}
       </g>

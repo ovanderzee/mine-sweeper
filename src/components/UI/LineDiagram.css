@@ -6,13 +6,33 @@ svg.line-diagram {
   width: 100%;
 }
 
-.line-diagram circle {
+.line-diagram .data-point button {
+  display:block;
+  background: var(--state-red);
   fill: var(--state-red);
+  border: none;
+  border-radius: 50%;
   stroke: none;
+  box-shadow: none;
+  padding: 0;
+  margin: 0;
+  width: 50%;
+  height: 50%;
+  line-height: 0;
 }
 
-.line-diagram .mark circle {
-  fill: var(--fire-orange);
+/* fix for safari */
+.line-diagram .data-point div[xmlns] > button {
+  position: fixed;
+}
+
+/* fix clickability */
+.line-diagram .data-point:not(:has(div[xmlns])) button {
+  transform: translate(50%, 25%) scale(1.5);
+}
+
+.line-diagram .mark button {
+  background: var(--fire-orange);
 }
 
 .line-diagram line {

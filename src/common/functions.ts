@@ -100,3 +100,8 @@ export const focusFirstNavButton = () => {
     el?.focus()
   }, 800)
 }
+
+export const canNotDealWithForeignObjects = () => {
+  const aV = window.navigator.appVersion
+  return aV.includes('Macintosh') && aV.includes('Safari') && !aV.includes('Chrome')
+}
