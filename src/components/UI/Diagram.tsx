@@ -5,7 +5,7 @@ interface DiagramProps {
   scores: ScoreItem[],
   xParam: ScoreParam,
   yParam: ScoreParam,
-  view: () => void,
+  onBrowse: (index: number) => void,
   markData: MarkScoreData | null,
 }
 
@@ -33,7 +33,7 @@ const Diagram = (props: DiagramProps) => {
     if (xType === 'number' && yType === 'number') {
       return (<LineDiagram data={flatScores}
         xParam={props.xParam} yParam={props.yParam}
-        view={(e,i) => {console.log('diagram', i);props.view(e,i)}}
+        onBrowse={index => props.onBrowse(index)}
         markData={props.markData} />)
     }
   }

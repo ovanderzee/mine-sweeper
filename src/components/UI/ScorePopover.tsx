@@ -39,10 +39,6 @@ const ScorePopover = (props: ScorePopoverProps) => {
   const disableDescend = props.index === 0
   const disableAscend = props.index === props.scores.length - 1
 
-  const browsePopScore = (event: React.MouseEventHandler, change: number): void => {
-    props.onBrowse(event, props.index + change)
-  }
-
   const loggedDate = new Date(log.date)
 
   return (
@@ -67,13 +63,13 @@ const ScorePopover = (props: ScorePopoverProps) => {
             <button type="button"
               disabled={disableDescend}
               title={text.common.back}
-              onClick={(e) => browsePopScore(e, -1)}
+              onClick={() => props.onBrowse(props.index - 1)}
             ><span>&lt;</span></button>
             &nbsp;
             <button type="button"
               disabled={disableAscend}
               title={text.common.forth}
-              onClick={(e) => browsePopScore(e, 1)}
+              onClick={() => props.onBrowse(props.index + 1)}
             ><span>&gt;</span></button>
           </div>
         </h4>

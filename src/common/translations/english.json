@@ -75,6 +75,7 @@
     "average": "average",
     "least": "least",
     "most": "most",
+    "compare-props": "Compare score properties",
     "detail-label": "Details of chosen score",
     "configuration": "configuration",
     "characteristics": "characteristics",

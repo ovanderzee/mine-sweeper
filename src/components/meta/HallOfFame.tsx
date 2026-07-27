@@ -186,13 +186,9 @@ const HallOfFame = () => {
     setScores(methodsByKind[sortLabel]())
   }
 
-  const onBrowse = (focusIndex: number): void => {
-    setPopScore(focusIndex)
-  }
-
-  const scoreDiagram = <Diagram scores={scores} xParam={sortLabel} yParam={valueLabel} view={onBrowse} markData={markData} />
-
   const [popScore, setPopScore] = useState<number>(NaN)
+
+  const scoreDiagram = <Diagram scores={scores} xParam={sortLabel} yParam={valueLabel} onBrowse={setPopScore} markData={markData} />
 
   const fameContent = (
     <article
@@ -296,7 +292,7 @@ const HallOfFame = () => {
       {fameContent}
       {fameNavigation}
       <section id="score-popover" popover="auto" role="status" aria-label={text.fame['detail-label']}>
-        <ScorePopover scores={scores} index={popScore} onDeletion={onDeletion} onBrowse={onBrowse} />
+        <ScorePopover scores={scores} index={popScore} onDeletion={onDeletion} onBrowse={setPopScore} />
       </section>
     </>
   )
