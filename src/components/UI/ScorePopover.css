@@ -76,17 +76,29 @@
 }
 
 #score-popover figure header .buttons {
-  margin-block-start: 1ex;
+  padding-block-end: .5em;
+}
+
+#score-popover figure .buttons {
+  margin-inline-start: auto;
+  margin-block: .167em;
   text-align: right;
 }
 
-#score-popover figure header button {
+#score-popover figure button.glyph {
   color: inherit;
   padding: 1ex;
   text-shadow: 1.5px 1px 0 var(--medium-touched);
-  transform: scaleY(1.667);
   box-shadow: none;
   background: none;
+}
+
+#score-popover figure button.glyph.y-stretch {
+  transform: scaleY(1.667);
+}
+
+#score-popover figure button.glyph.scale {
+  transform: scale(1.667);
 }
 
 #score-popover figure article.functional-grid {

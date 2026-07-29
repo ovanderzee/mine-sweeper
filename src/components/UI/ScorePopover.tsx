@@ -23,7 +23,17 @@ const ScorePopover = (props: ScorePopoverProps) => {
   const text = pageCtx.text
   const log = props.scores[props.index]
 
-  if (!log) return
+  const closeButton = (
+    <button type="button" className="glyph scale"
+      title={text.common.close}
+      onClick={() => props.onBrowse(-1)}
+    ><span>&times;</span></button>
+  )
+
+  if (!log) return (
+    // safari requires to close a hint-popover programmatically
+    <figure><header><div className="buttons">{closeButton}</div></header></figure>
+  )
 
   const replayStoredGame = (code: string): void => {
     const buildData = rebuildGameData(code)
@@ -57,21 +67,23 @@ const ScorePopover = (props: ScorePopoverProps) => {
           }
         </div>
         <h4 className="date" data-date={log.date}>
-          {loggedDate.toLocaleDateString()}<br/>
-          {loggedDate.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
           <div className="buttons">
-            <button type="button"
+            <button type="button" className="glyph y-stretch"
               disabled={disableDescend}
               title={text.common.back}
               onClick={() => props.onBrowse(props.index - 1)}
             ><span>&lt;</span></button>
             &nbsp;
-            <button type="button"
+            <button type="button" className="glyph y-stretch"
               disabled={disableAscend}
               title={text.common.forth}
               onClick={() => props.onBrowse(props.index + 1)}
             ><span>&gt;</span></button>
+            &nbsp;
+            {closeButton}
           </div>
+          {loggedDate.toLocaleDateString()}<br/>
+          {loggedDate.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
         </h4>
       </header>
       <article className="functional-grid">

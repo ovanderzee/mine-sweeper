@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useRef, useState } from 'react'
 import PageContext from '../../store/page-context'
 import NavOptionsBar from '../nav/NavOptionsBar'
 import EraseScores from '../nav/EraseScores'
@@ -174,6 +174,9 @@ const HallOfFame = () => {
     </form>
   )
 
+  const popoverRef = useRef<HTMLElement | null>(null)
+  const [popScore, setPopScore] = useState<number>(NaN)
+
   const onDeletion = (deletable: ScoreItem): void => {
     const removeIndex = rootScores.findIndex(s => s.code === deletable.code && s.date === deletable.date)
     if (removeIndex < 0) {
@@ -183,12 +186,26 @@ const HallOfFame = () => {
     rootScores.splice(removeIndex, 1)
     storage.scores = rootScores
     setScores(storage.scores)
-    setScores(methodsByKind[sortLabel]())
+
+    if (rootScores.length) {
+      setScores(methodsByKind[sortLabel]())
+      if (removeIndex === rootScores.length) {
+        setPopScore(removeIndex - 1);
+      }
+    } else {
+      popoverRef.current?.hidePopover()
+    }
   }
 
-  const [popScore, setPopScore] = useState<number>(NaN)
+  const onBrowse = (popIndex: number): void => {
+    if (scores[popIndex]) {
+      setPopScore(popIndex)
+    } else {
+      popoverRef.current?.hidePopover()
+    }
+  }
 
-  const scoreDiagram = <Diagram scores={scores} xParam={sortLabel} yParam={valueLabel} onBrowse={setPopScore} markData={markData} />
+  const scoreDiagram = <Diagram scores={scores} xParam={sortLabel} yParam={valueLabel} onBrowse={onBrowse} markData={markData} />
 
   const fameContent = (
     <article
@@ -291,8 +308,15 @@ const HallOfFame = () => {
     <>
       {fameContent}
       {fameNavigation}
-      <section id="score-popover" popover="auto" role="status" aria-label={text.fame['detail-label']}>
-        <ScorePopover scores={scores} index={popScore} onDeletion={onDeletion} onBrowse={setPopScore} />
+      <section id="score-popover"
+        popover="hint"
+        role="status"
+        ref={popoverRef}
+        aria-label={text.fame['detail-label']}
+      >
+        <ScorePopover scores={scores} index={popScore}
+          onDeletion={onDeletion} onBrowse={onBrowse}
+        />
       </section>
     </>
   )
