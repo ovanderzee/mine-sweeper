@@ -21,7 +21,8 @@
 - Calculate efficiency in sharp mode according to lower minimal number of moves
 - Similar Game button with score details, Soortgelijk Spel
 - Rename user with score details
-- Next/Previous button in ScorePopover
+- Count blanks and calculate blanks/pointers/mines ratio
+- Consent for deleting scores
 
 
 ## [4.1.0] - 2026
@@ -31,6 +32,9 @@
 - Browse scores in Score popover
 - Development tool for updating scorelist
 - Popover can be opened from diagram
+- Console warnings for invalid score codes
+- Next/Previous button in ScorePopover
+- Close button for scores-popover
 
 ### Changed
 - Boardsize parameter on configuration screen
@@ -38,6 +42,10 @@
 - More pace in pause animation
 - Refined score typing
 - Structured updater
+- Move delete and replay logic to popover 
+- Invalid codes logged with score.code
+- Removed scores with invalid codes
+
 
 ## [4.0.0] - 2026-07-15
 

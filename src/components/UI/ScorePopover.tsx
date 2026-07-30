@@ -180,13 +180,11 @@ const ScorePopover = (props: ScorePopoverProps) => {
         }
         <div className="buttons">
           <button type="button" className="delete"
-            popoverTarget="score-popover" popoverTargetAction="hide"
             onClick={() => props.onDeletion(log)}
           >{text.common.delete}</button>
           {log.signature.invalid_code ?
             <span>{text.error['No replay']}</span> :
             <button type="button" className="replay"
-              popoverTarget="score-popover" popoverTargetAction="hide"
               onClick={() => replayStoredGame(log.code)}
             >{text.nav.Replay}</button>
           }
