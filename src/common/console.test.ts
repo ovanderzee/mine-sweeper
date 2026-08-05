@@ -1,8 +1,8 @@
-import storage from './common/storage'
-import * as scoring from './common/scoring'
+import storage from './storage'
+import * as scoring from './scoring'
 import mv from './console'
-import { liveScores } from './__mocks__/scores'
-import { ScoreItem } from './common/game.d'
+import { liveScores } from '../__mocks__/scores'
+import { ScoreItem } from './game.d'
 
 const testScore = () => { return {
   code: "7780AwkRlTLDVr7EY0Q", date: 1514179800000, user: "Annestiene", rank: 0,
@@ -100,6 +100,19 @@ describe('Console methods mixing mocks and stored scores', () => {
     expect(storage.scores[0].date).toBe(originalScore.date)
 
     expect(storage.scores.length).toBe(1)
+  })
+})
+
+describe('Console methods otherwise', () => {
+
+   it('should remove one record', () => {
+    storage.scores = liveScores as ScoreItem[]
+    const userScoresLength = 1
+    const originalLength = storage.scores.length
+
+    mv.deleteScore('6660AwiM3EynJ-5A', 1769180645932)
+
+    expect(storage.scores.length).toBe(originalLength - userScoresLength)
   })
 
 })

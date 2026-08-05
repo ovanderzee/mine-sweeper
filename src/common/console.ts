@@ -1,6 +1,6 @@
-import storage from './common/storage'
-import { liveScores } from './__mocks__/scores'
-import { ScoreItem, BareScoreItem } from './common/game.d'
+import storage from './storage'
+import { liveScores } from '../__mocks__/scores'
+import { ScoreItem, BareScoreItem } from './game.d'
 
 
 const getAllScores = function (): ScoreItem[] {
@@ -17,6 +17,11 @@ const getScoresByUser = function (user: string) {
 
 const deleteScoresByUser = function (user: string) {
   const userScores = getAllScores().filter((s: ScoreItem) => s.user !== user)
+  setAllScores(userScores)
+}
+
+const deleteScore = function (code: string, date: number) {
+  const userScores = getAllScores().filter((s: ScoreItem) => !(s.code === code && s.date === date))
   setAllScores(userScores)
 }
 
@@ -37,6 +42,7 @@ export default {
   setAllScores,
   getScoresByUser,
   deleteScoresByUser,
+  deleteScore,
   addSampleScores,
   deleteSampleScores,
 }
