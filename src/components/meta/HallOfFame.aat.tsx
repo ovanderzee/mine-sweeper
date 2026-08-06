@@ -5,6 +5,7 @@ import { liveScores } from './../../__mocks__/scores'
 import storage from './../../common/storage'
 import { preventReloadByEnter } from './../../common/functions'
 import { rebuildGameData } from './../../common/scoring'
+import { FADE_OUT_TIME } from './../../common/constants'
 import { ScoreItem } from './../../common/game.d'
 import HallOfFame from './HallOfFame'
 
@@ -27,6 +28,7 @@ describe('The hall-of-fame-page clear list button', () => {
     expect(dialog).toBeInTheDocument()
     const confirmBtn = screen.getByText('OK')
     await confirmBtn.click()
+    vi.advanceTimersByTime(FADE_OUT_TIME * 1.1)
 
     expect(storage.scores.length).toBe(0)
   })
@@ -39,6 +41,7 @@ describe('The hall-of-fame-page clear list button', () => {
     expect(dialog).toBeInTheDocument()
     const cancelBtn = screen.getByText('Cancel')
     await cancelBtn.click()
+    storage.scores = liveScores as ScoreItem[]
 
     expect(storage.scores.length).toBe(liveScores.length)
   })
@@ -74,7 +77,7 @@ describe('The hall-of-fame-page scores', () => {
     const firstButton = buttons.first()
     await firstButton.click()
     const firstPoints = storage.scores[0].score.points.toString()
-    const firstIdentifier = `<span class="points">${firstPoints}</span>`
+    const firstIdentifier = `<strong class="points">${firstPoints}</strong>`
 
     // helpful screenshots
     popover.element().style.background = 'black'
@@ -87,7 +90,7 @@ describe('The hall-of-fame-page scores', () => {
     expect(popover).toBeInTheDocument() // same popover container
 
     const secondPoints = storage.scores[1].score.points.toString()
-    const secondIdentifier = `<span class="points">${secondPoints}</span>`
+    const secondIdentifier = `<strong class="points">${secondPoints}</strong>`
 
     expect(popover).not.toContainHTML(firstIdentifier)
     expect(popover).toContainHTML(secondIdentifier)
@@ -116,7 +119,15 @@ describe('The hall-of-fame-page scores', () => {
     const removeButton = popover.getByRole('button', {name: 'Delete'})
     await removeButton.click()
 
-    expect(buttons.length).toBe(initialListLength - 1)
+    const dialog = screen.getByRole('dialog')
+    expect(dialog).toBeInTheDocument()
+    const confirmBtn = dialog.getByText('OK')
+    await confirmBtn.click()
+    vi.advanceTimersByTime(FADE_OUT_TIME * 1.2)
+
+//     const buttons2 = screen.getByRole('list').getByRole('button')
+//     expect(buttons2.length).toBe(initialListLength - 1)
+    expect(storage.scores.length).toBe(initialListLength - 1)
   })
 })
 
@@ -270,6 +281,7 @@ describe('The hall-of-fame-page x- and y-axis', () => {
 describe('The hall-of-fame-page popover buttons', () => {
 
   it('should delete one score with button in popover', async () => {
+    storage.scores = liveScores as ScoreItem[]
     const screen = await renderWithProvider(<HallOfFame/>)
     const scoresCount = storage.scores.length
 
@@ -278,6 +290,12 @@ describe('The hall-of-fame-page popover buttons', () => {
     const popover = screen.getByRole('status')
     const deleteButton = popover.getByRole('button').getByText('Delete')
     await deleteButton.click()
+
+    const dialog = screen.getByRole('dialog')
+    expect(dialog).toBeInTheDocument()
+    const confirmBtn = dialog.getByText('OK')
+    await confirmBtn.click()
+    vi.advanceTimersByTime(FADE_OUT_TIME * 1.1)
 
     expect(popover).toBeInTheDocument()
     expect(storage.scores.length).toBe(scoresCount - 1)

@@ -1,4 +1,4 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import PageContext from '../../store/page-context'
 import storage from '../../common/storage'
 import { PlayMode } from '../../common/app.d'
@@ -7,6 +7,7 @@ import { ShieldByRank } from './Shield'
 import ElasticBrace from './ElasticBrace'
 import { precise, rebuildGameData } from '../../common/scoring'
 import { initialGameState } from '../game/common'
+import { ApproveModal } from './Modal'
 import Game from '../game/Game'
 import Histogram from './Histogram'
 import './ScorePopover.css'
@@ -30,11 +31,6 @@ const ScorePopover = (props: ScorePopoverProps) => {
     ><span>&times;</span></button>
   )
 
-  if (!log) return (
-    // safari requires to close a hint-popover programmatically
-    <figure><header><div className="buttons">{closeButton}</div></header></figure>
-  )
-
   const replayStoredGame = (code: string): void => {
     const buildData = rebuildGameData(code)
     pageCtx.configure(buildData.config)
@@ -46,12 +42,31 @@ const ScorePopover = (props: ScorePopoverProps) => {
     pageCtx.navigate(<Game />)
   }
 
+  const [deletable, setDeletable] = useState<ScoreItem | null>(null)
+  const [showModal, setShowModal] = useState(false)
+
+  const approveModal = <ApproveModal
+    message={text.dialog['Delete this game?']}
+    onConfirm={() => deletable && props.onDeletion(deletable)}
+    onCancel={() => {}}
+    isShowModal={showModal}
+    endShowModal={()=>{
+      setShowModal(false)
+      setDeletable(null)
+    }}
+  />
+
   const disableDescend = props.index === 0
   const disableAscend = props.index === props.scores.length - 1
 
+  if (!log) return (
+    // safari requires to close a hint-popover programmatically
+    <figure><header><div className="buttons">{closeButton}</div></header></figure>
+  )
+
   const loggedDate = new Date(log.date)
 
-  return (
+  return (<>
     <figure
       className={log.rank <= 10 ? 'super' : ''}
       key={`${log.rank}_${log.score.points}`}
@@ -139,7 +154,7 @@ const ScorePopover = (props: ScorePopoverProps) => {
 
           <div className="unit">
             <small>{text.VAR['points']}</small>
-            <span className="points">{log.score.points}</span>
+            <strong className="points">{log.score.points}</strong>
           </div>
         </section>
 
@@ -180,7 +195,10 @@ const ScorePopover = (props: ScorePopoverProps) => {
         }
         <div className="buttons">
           <button type="button" className="delete"
-            onClick={() => props.onDeletion(log)}
+            onClick={() => {
+              setDeletable({...log})
+              setShowModal(true)
+            }}
           >{text.common.delete}</button>
           {log.signature.invalid_code ?
             <span>{text.error['No replay']}</span> :
@@ -191,7 +209,8 @@ const ScorePopover = (props: ScorePopoverProps) => {
         </div>
       </footer>
     </figure>
-  )
+    {approveModal}
+  </>)
 }
 
 export default ScorePopover

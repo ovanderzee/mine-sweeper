@@ -135,7 +135,7 @@ describe('Modal Dialog', () => {
     })
 
     it('when it\'s content is clicked', async () => {
-      const dialogContent = modalDialog.element().children[0] as HTMLElement
+      const dialogContent = modalDialog.getByText(/Hallo/i)
       await dialogContent.click()
       vi.advanceTimersByTime(FADE_OUT_TIME * 1.1)
 
@@ -144,12 +144,11 @@ describe('Modal Dialog', () => {
       expect(endFn).toHaveBeenCalledTimes(0)
     })
 
-
     it('but disappearing when the backdrop is clicked', async () => {
       await modalDialog.click()
       vi.advanceTimersByTime(FADE_OUT_TIME * 1.1)
 
-      expect(cancelFn).toHaveBeenCalledTimes(0)
+      expect(cancelFn).toHaveBeenCalledTimes(1)
       expect(confirmFn).toHaveBeenCalledTimes(0)
       expect(endFn).toHaveBeenCalledTimes(1)
     })
@@ -192,7 +191,7 @@ describe('Shield as Modal Dialog', () => {
     await rankText.click()
     vi.advanceTimersByTime(FADE_OUT_TIME * 1.1)
 
-    expect(confirmFn).toHaveBeenCalledTimes(0)
+    expect(confirmFn).toHaveBeenCalledTimes(1)
     expect(endFn).toHaveBeenCalledTimes(1)
     expect(rankText).not.toBeVisible()
   })

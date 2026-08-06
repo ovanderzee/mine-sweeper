@@ -144,13 +144,13 @@ const LineDiagram = (props: LineDiagramProps) => {
               {canNotDealWithForeignObjects() ?
               // @ts-expect-error // error TS2322: Type '{ children: Element; xmlns: string; }' is not assignable to type 'DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>'.
               <div xmlns="http://www.w3.org/1999/xhtml">
-                <button type="button" key={`lnd_btn_${i}`}
+                <button type="button" tabIndex={-1} key={`lnd_btn_${i}`}
                   popoverTarget="score-popover" popoverTargetAction="show"
                   onClick={() => props.onBrowse(i)}
                   title={`${text.VAR[props.xParam]}: ${d.x}, ${text.VAR[props.yParam]}: ${d.y}`}
                 ></button>
               </div> :
-                <button type="button" key={`lnd_btn_${i}`}
+                <button type="button" tabIndex={-1} key={`lnd_btn_${i}`}
                   popoverTarget="score-popover" popoverTargetAction="show"
                   onClick={() => props.onBrowse(i)}
                   title={`${text.VAR[props.xParam]}: ${d.x}, ${text.VAR[props.yParam]}: ${d.y}`}

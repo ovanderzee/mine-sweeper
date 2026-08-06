@@ -24,23 +24,29 @@ const AbstractModal = (props: AbstractProps): React.ReactNode => {
 
   const dialogRef = useRef<HTMLDialogElement | null>(null)
   const [endState, setEndState] = useState('')
+  const timerId = useRef(NaN);
 
-  const timedCloseModal = () => {
+  const timedCloseModal = (event: React.UIEvent, fn = () => {}) => {
+    event.stopPropagation()
     const eventSubject = event?.target as Element
     const validTargets = ['DIALOG', 'BUTTON', 'USE', 'TEXT']
     const targetedByPurpose = validTargets.includes(eventSubject?.tagName.toUpperCase())
     if (event?.type === 'click' && !targetedByPurpose) return;
 
     setEndState('ending')
-    setTimeout(() => {
+    timerId.current = setTimeout(
+      () => {
         if (dialogRef.current) {
           dialogRef.current.close()
         }
+        fn && fn()
         props.endShowModal()
         setEndState('')
       },
       FADE_OUT_TIME
     )
+
+    return () => clearTimeout(timerId.current)
   }
 
   const keystrokeHandler = (event: React.KeyboardEvent, handler: (event: React.KeyboardEvent)=>void) => {
@@ -49,14 +55,12 @@ const AbstractModal = (props: AbstractProps): React.ReactNode => {
 
   const confirmHandler = (event: React.UIEvent) => {
     event.stopPropagation()
-    props.onConfirm && props.onConfirm()
-    timedCloseModal()
+    timedCloseModal(event, props.onConfirm)
   }
 
   const cancelHandler = (event: React.UIEvent) => {
     event.stopPropagation()
-    props?.onCancel && props.onCancel()
-    timedCloseModal()
+    timedCloseModal(event, props.onCancel)
   }
 
   const confirmButton = <button type="button" className="confirm"
@@ -91,7 +95,7 @@ const AbstractModal = (props: AbstractProps): React.ReactNode => {
       aria-label={props.label}
       className={`${props.kind}-modal ${endState}`}
       ref={dialogRef}
-      onClick={timedCloseModal}
+      onClick={(e) => timedCloseModal(e, props.onCancel)}
       onKeyDown={keystrokeShortcut}
       style={{'fontSize': minorMagnification(session.MAGNIFICATION) * config.FONT_SIZE + 'px'} as React.CSSProperties}
     >
