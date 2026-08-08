@@ -19,7 +19,7 @@ export const MAX_DETONATIONS = 13
 
 /* RANGES */
 
-const newReadOnly = (value: number | InputRange): PropertyDescriptor => {
+const newReadOnly = (value: number | string | InputRange): PropertyDescriptor => {
   return { enumerable: true, value }
 }
 
@@ -39,22 +39,17 @@ export { RANGES }
 
 export const SCORE_RADIX = 24
 
-/* ADMIN */
+/* MAINTENANCE */
 
-export const getAppVersion = () => {
-  // vite exposes env vars via import.meta.env.
-  try {
-    return __APP_VERSION__
-  }
-  catch {
-    // ReferenceError: __APP_VERSION__ is not defined
-    return '0.0.0'
-  }
-}
+// names may not be repeated
+const SCORE_LIST_NAMES = [] as string[]
+Object.defineProperties(SCORE_LIST_NAMES, {
+  0: newReadOnly('scores'),
+  1: newReadOnly('victory'),
+  2: newReadOnly('victories'),
+  3: newReadOnly('won-games'),
+})
 
-export const getCommitHash = () => {
-  try { return __COMMIT_HASH__ }
-  catch { return 'abcdefg' }
-}
+const SCORE_LIST_NAME = SCORE_LIST_NAMES[SCORE_LIST_NAMES.length - 1]
 
-export const VERSION_INFO = [getAppVersion(), getCommitHash()]
+export { SCORE_LIST_NAMES, SCORE_LIST_NAME }

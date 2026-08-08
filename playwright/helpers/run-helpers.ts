@@ -3,6 +3,7 @@ import { dataPath } from '../_project'
 import { AppConfig } from '../../src/common/app.d'
 import { GameState } from '../../src/common/game.d'
 import { DEFAULTS } from '../../src/common/defaults'
+import { SCORE_LIST_NAME } from '../../src/common/constants'
 
 export const testUrl = 'http://localhost:4173'
 
@@ -23,7 +24,7 @@ export const writeStorageState = async (page: Page): Promise<void> => {
 
 export const storeScoreData = async (page: Page, data: any): Promise<void> => {
   await page.evaluate(data => {
-    localStorage.setItem('mv-won-games', JSON.stringify(data))
+    localStorage.setItem(`mv-${SCORE_LIST_NAME}`, JSON.stringify(data))
   }, data)
 }
 

@@ -22,7 +22,6 @@
 - Similar Game button with score details, Soortgelijk Spel
 - Rename user with score details
 - Count blanks and calculate blanks/pointers/mines ratio
-- Consent for deleting scores
 
 
 ## [4.1.0] - 2026
@@ -35,6 +34,7 @@
 - Console warnings for invalid score codes
 - Next/Previous button in ScorePopover
 - Close button for scores-popover
+- Consent for deleting scores
 
 ### Changed
 - Boardsize parameter on configuration screen
@@ -45,6 +45,7 @@
 - Move delete and replay logic to popover 
 - Invalid codes logged with score.code
 - Removed scores with invalid codes
+- Keep list of scorelist-names to prevent reuse of names
 
 
 ## [4.0.0] - 2026-07-15

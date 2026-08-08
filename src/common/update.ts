@@ -1,12 +1,12 @@
 import { ScoreItem } from './game.d'
 import { DEFAULTS } from './defaults'
-import { SCORE_RADIX } from './constants'
+import { SCORE_RADIX, SCORE_LIST_NAMES } from './constants'
 import { capitalise } from './functions'
 import { AppConfig, PlayMode } from './app.d'
 import { sanitisedParse } from './functions'
 
 export const doubleGameLevel = () => {
-  const victoryStorage = localStorage.getItem('mv-victory')
+  const victoryStorage = localStorage.getItem(`mv-${SCORE_LIST_NAMES[1]}`)
   if (victoryStorage) {
     try {
       const scores: ScoreItem[] = sanitisedParse(victoryStorage)
@@ -17,8 +17,8 @@ export const doubleGameLevel = () => {
         return s
       })
 
-      localStorage.setItem('mv-victories', JSON.stringify(converted))
-      localStorage.removeItem('mv-victory')
+      localStorage.setItem(`mv-${SCORE_LIST_NAMES[2]}`, JSON.stringify(converted))
+      localStorage.removeItem(`mv-${SCORE_LIST_NAMES[1]}`)
       console.log('Scorelist updated to use intermediate levels.')
     }
     catch(e) {
@@ -45,7 +45,7 @@ export const removeMaxScores = () => {
 }
 
 export const changePlayModeValues = () => {
-  const victoriesStorage = localStorage.getItem('mv-victories')
+  const victoriesStorage = localStorage.getItem(`mv-${SCORE_LIST_NAMES[2]}`)
   if (victoriesStorage) {
     const playModeNames = Object.values(PlayMode)
 
@@ -90,8 +90,8 @@ export const changePlayModeValues = () => {
         return s
       })
 
-      localStorage.setItem('mv-won-games', JSON.stringify(converted))
-      localStorage.removeItem('mv-victories')
+      localStorage.setItem(`mv-${SCORE_LIST_NAMES[3]}`, JSON.stringify(converted))
+      localStorage.removeItem(`mv-${SCORE_LIST_NAMES[2]}`)
       console.log('Scorelist updated to replay with right playmode.')
     }
     catch(e) {

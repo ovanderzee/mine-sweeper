@@ -4,9 +4,28 @@ import NavOptionsBar from '../nav/NavOptionsBar'
 import HiScores from '../nav/HiScores'
 import Settings from '../nav/Settings'
 import GoBack from '../nav/GoBack'
-import { VERSION_INFO } from '../../common/constants'
 import './Meta.css'
 import './About.css'
+
+/* ADMIN */
+
+const getAppVersion = () => {
+  // vite exposes env vars via import.meta.env.
+  try {
+    return __APP_VERSION__
+  }
+  catch {
+    // ReferenceError: __APP_VERSION__ is not defined
+    return '0.0.0'
+  }
+}
+
+const getCommitHash = () => {
+  try { return __COMMIT_HASH__ }
+  catch { return 'abcdefg' }
+}
+
+const VERSION_INFO = [getAppVersion(), getCommitHash()]
 
 const About = () => {
   const pageCtx = useContext(PageContext)

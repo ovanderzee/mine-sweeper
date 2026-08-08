@@ -3,6 +3,8 @@ import { AppConfig, AppSubConfig, AppSession, AppSubSession } from './app.d'
 import { GameState, BareScoreItem, ScoreItem } from './game.d'
 import { refineScores, stripScores } from './scoring'
 import { sanitisedParse } from './functions'
+import { SCORE_LIST_NAME } from './constants'
+
 
 /*
   Interface for data storage.
@@ -76,10 +78,10 @@ const storage = {
   },
 
   eraseScores: () => {
-    localStorage.removeItem('mv-won-games')
+    localStorage.removeItem(`mv-${SCORE_LIST_NAME}`)
   },
   get scores(): ScoreItem[] {
-    const stored = localStorage.getItem('mv-won-games')
+    const stored = localStorage.getItem(`mv-${SCORE_LIST_NAME}`)
     let data: ScoreItem[]
     try {
       const bareData: BareScoreItem[] = stored ? sanitisedParse(stored) : []
@@ -94,7 +96,7 @@ const storage = {
     if (data?.length) {
       const bareData: BareScoreItem[] = stripScores(data)
       const storeable = JSON.stringify(bareData)
-      localStorage.setItem('mv-won-games', storeable)
+      localStorage.setItem(`mv-${SCORE_LIST_NAME}`, storeable)
     } else {
       this.eraseScores()
     }

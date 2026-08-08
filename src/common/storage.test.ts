@@ -4,6 +4,7 @@ import { GameState, ScoreItem } from './game.d'
 import { newGameState, wonGameState } from '../__mocks__/game-states'
 import { liveScores } from '../__mocks__/scores'
 import { microConfig } from '../__mocks__/configs'
+import { SCORE_LIST_NAME } from './constants'
 
 describe('Configuration storage', () => {
   beforeEach(() => {
@@ -90,7 +91,7 @@ describe('Configuration storage', () => {
   })
 })
 
-// SET MINECOUNT WHEN STORING AND READING  OR RREMOVE OR MAKE IT A CLASS WITH A SETTER
+// SET MINECOUNT WHEN STORING AND READING  OR REMOVE OR MAKE IT A CLASS WITH A SETTER
 
 describe('Game storage', () => {
   beforeEach(() => {
@@ -132,7 +133,7 @@ describe('Game storage', () => {
 
     storage.eraseGame()
 
-    const read = localStorage.getItem('mv-won-games') as string
+    const read = localStorage.getItem(`mv-${SCORE_LIST_NAME}`) as string
     expect(read).toBe(null)
 
     const parse = JSON.parse(read)
@@ -170,13 +171,13 @@ describe('Scores storage', () => {
   it('should set data', () => {
     storage.scores = liveScores as ScoreItem[]
 
-    const read = JSON.parse(localStorage.getItem('mv-won-games') as string)
+    const read = JSON.parse(localStorage.getItem(`mv-${SCORE_LIST_NAME}`) as string)
     expect(read[10].code).toStrictEqual(liveScores[10].code)
     expect(read[10].date).toStrictEqual(liveScores[10].date)
   })
 
   it('should get data', () => {
-    localStorage.setItem('mv-won-games', JSON.stringify(liveScores))
+    localStorage.setItem(`mv-${SCORE_LIST_NAME}`, JSON.stringify(liveScores))
 
     const scores = storage.scores
     expect(scores[10].code).toStrictEqual(liveScores[10].code)
@@ -186,22 +187,22 @@ describe('Scores storage', () => {
   it('should set and overwrite', () => {
     storage.scores = liveScores as ScoreItem[]
 
-    const read1 = JSON.parse(localStorage.getItem('mv-won-games') as string)
+    const read1 = JSON.parse(localStorage.getItem(`mv-${SCORE_LIST_NAME}`) as string)
     expect(read1.length).toBe(liveScores.length)
 
     const someScores = liveScores.slice(0,9)
     storage.scores = someScores as ScoreItem[]
 
-    const read2 = JSON.parse(localStorage.getItem('mv-won-games') as string)
+    const read2 = JSON.parse(localStorage.getItem(`mv-${SCORE_LIST_NAME}`) as string)
     expect(read2.length).toBe(someScores.length)
   })
 
   it('should be removable by method', () => {
-    localStorage.setItem('mv-won-games', JSON.stringify(liveScores))
+    localStorage.setItem(`mv-${SCORE_LIST_NAME}`, JSON.stringify(liveScores))
 
     storage.eraseScores()
 
-    const read = localStorage.getItem('mv-won-games') as string
+    const read = localStorage.getItem(`mv-${SCORE_LIST_NAME}`) as string
     expect(read).toBe(null)
 
     const parse = JSON.parse(read)
@@ -210,7 +211,7 @@ describe('Scores storage', () => {
   })
 
   it('should be removable by garbage', () => {
-    localStorage.setItem('mv-won-games', JSON.stringify(liveScores))
+    localStorage.setItem(`mv-${SCORE_LIST_NAME}`, JSON.stringify(liveScores))
     const eraseScoresSpy = vi.spyOn(storage, 'eraseScores')
 
     storage.scores = []
@@ -222,7 +223,7 @@ describe('Scores storage', () => {
   it('should catch a JSON.parse error and return an empty array', () => {
     window.console.error = vi.fn()
     const stringified = '[{"code":"331Aw3CMxA","date":1755'
-    localStorage.setItem('mv-won-games', stringified)
+    localStorage.setItem(`mv-${SCORE_LIST_NAME}`, stringified)
     const scores = storage.scores
 
     expect(scores).toStrictEqual([])
