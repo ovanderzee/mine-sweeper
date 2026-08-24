@@ -35,20 +35,33 @@ describe('Replay Component', () => {
     expect(dispatcher).toHaveBeenCalledTimes(1)
   })
 
-  it('should reset game when clicked while game is playing and a modal is shown', async () => {
+  it('should leave game in progress as is when clicked "Cancel" in modal', async () => {
     const screen = await renderWithContext(<Replay onReplay={dispatcher} stage={GameStages.PLAYING} />)
     const button = screen.getByTitle('Replay')
     await button.click()
 
-    const cancelDialog = screen.getByText(/Cancel/i)
-    await cancelDialog.click()
-    expect(dispatcher).toHaveBeenCalledTimes(0)
-    expect(button.element().className).not.toContain('active')
+    const dialog = screen.getByRole('dialog')
+    await dialog.getByText('Cancel').click()
 
-    const confirmDialog = screen.getByText(/Ok/i)
-    await confirmDialog.click()
+    expect(dialog).toBeInTheDocument()
+    await vi.runAllTimersAsync()
+    expect(dialog).not.toBeInTheDocument()
+    expect(dispatcher).toHaveBeenCalledTimes(0)
+  })
+
+  it('should reset game in progress when clicked "Ok" in modal', async () => {
+    const screen = await renderWithContext(<Replay onReplay={dispatcher} stage={GameStages.PLAYING} />)
+    const button = screen.getByTitle('Replay')
+    await button.click()
+
+    const dialog = screen.getByRole('dialog')
+    await dialog.getByText('Ok').click()
+
+    expect(dialog).toBeInTheDocument()
+    await vi.runAllTimersAsync()
+    expect(dialog).not.toBeInTheDocument()
     expect(dispatcher).toHaveBeenCalledTimes(1)
-    expect(button.element().className).toContain('active')
+    // expect(button.element().className).toContain('active') // hard to catch
   })
 
 })

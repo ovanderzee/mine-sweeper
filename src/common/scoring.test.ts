@@ -150,33 +150,33 @@ describe('Sanity checking on boardCode', () => {
   it('should find undecodeable code', () => {
     const wrongCode = '97g06708089'
     rebuildGameData(wrongCode)
-    expect(console.error).toHaveBeenLastCalledWith('Invalid code')
+    expect(console.error).toHaveBeenLastCalledWith(`Invalid code ${wrongCode}`)
   })
 
   it('should find unexpected code', () => {
     const wrongCode = '4480IwBhrSv'
     rebuildGameData(wrongCode)
-    expect(console.error).toHaveBeenLastCalledWith('Invalid code')
+    expect(console.error).toHaveBeenLastCalledWith(`Invalid code ${wrongCode}`)
   })
 
   it('should find wrong board size', () => {
     const wrongCode = '5380IwBhrSvI'
     rebuildGameData(wrongCode)
-    expect(console.error).toHaveBeenLastCalledWith('Invalid size')
+    expect(console.error).toHaveBeenLastCalledWith(`Invalid size ${wrongCode}`)
   })
 
   it('should find wrong mine count', () => {
     // size 4 en lvl 6,8,10 geven 2,3,3 mijnen
     const wrongCode = '4460IwBhrSvI'
     rebuildGameData(wrongCode)
-    expect(console.error).toHaveBeenLastCalledWith('Invalid mine count')
+    expect(console.error).toHaveBeenLastCalledWith(`Invalid mine count ${wrongCode}`)
   })
 
   it('should find wrong playmode', () => {
     // size 4 en lvl 6,8,10 geven 2,3,3 mijnen
     const wrongCode = '4489IwBhrSvI'
     rebuildGameData(wrongCode)
-    expect(console.error).toHaveBeenLastCalledWith('Invalid playmode')
+    expect(console.error).toHaveBeenLastCalledWith(`Invalid playmode ${wrongCode}`)
   })
 
   it('should not go wrong', () => {

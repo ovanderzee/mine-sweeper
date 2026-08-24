@@ -5,6 +5,7 @@ import { liveScores } from './../../__mocks__/scores'
 import storage from './../../common/storage'
 import { preventReloadByEnter } from './../../common/functions'
 import { rebuildGameData } from './../../common/scoring'
+import { FADE_OUT_TIME } from './../../common/constants'
 import { ScoreItem } from './../../common/game.d'
 import HallOfFame from './HallOfFame'
 
@@ -27,6 +28,7 @@ describe('The hall-of-fame-page clear list button', () => {
     expect(dialog).toBeInTheDocument()
     const confirmBtn = screen.getByText('OK')
     await confirmBtn.click()
+    vi.advanceTimersByTime(FADE_OUT_TIME * 1.1)
 
     expect(storage.scores.length).toBe(0)
   })
@@ -39,6 +41,7 @@ describe('The hall-of-fame-page clear list button', () => {
     expect(dialog).toBeInTheDocument()
     const cancelBtn = screen.getByText('Cancel')
     await cancelBtn.click()
+    storage.scores = liveScores as ScoreItem[]
 
     expect(storage.scores.length).toBe(liveScores.length)
   })
@@ -74,31 +77,57 @@ describe('The hall-of-fame-page scores', () => {
     const firstButton = buttons.first()
     await firstButton.click()
     const firstPoints = storage.scores[0].score.points.toString()
-    const firstIdentifier = `<span class="points">${firstPoints}</span>`
+    const firstIdentifier = `<strong class="points">${firstPoints}</strong>`
 
     // helpful screenshots
     popover.element().style.background = 'black'
     expect(popover).toContainHTML(firstIdentifier)
 
     // overwrite popover contents
-    // cannot click while list buttons are covered by popover; tab past popover buttons
-    await userEvent.tab() // popover button 1
-    await userEvent.tab() // popover button 2
-    await userEvent.tab() // second list-item
-    await userEvent.keyboard('{Enter}')
+    const browseForthButton = popover.getByTitle('forth')
+    await browseForthButton.click()
 
     expect(popover).toBeInTheDocument() // same popover container
 
     const secondPoints = storage.scores[1].score.points.toString()
-    const secondIdentifier = `<span class="points">${secondPoints}</span>`
+    const secondIdentifier = `<strong class="points">${secondPoints}</strong>`
 
     expect(popover).not.toContainHTML(firstIdentifier)
     expect(popover).toContainHTML(secondIdentifier)
+
+    // overwrite popover contents with inital data
+    const browseBackButton = popover.getByTitle('back')
+    await browseBackButton.click()
+
+    expect(popover).not.toContainHTML(secondIdentifier)
+    expect(popover).toContainHTML(firstIdentifier)
 
     // dismiss popover
     await userEvent.keyboard('{Escape}')
 
     expect(popover).not.toBeInTheDocument()
+  })
+
+  it('should have a one-shorter list when one score is removed through popup', async () => {
+    const buttons = screen.getByRole('list').getByRole('button')
+    const popover = screen.getByRole('status')
+    const initialListLength = buttons.length
+
+    const firstButton = buttons.first()
+    await firstButton.click()
+
+    const removeButton = popover.getByRole('button', {name: 'Delete'})
+    await removeButton.click()
+
+    const dialog = screen.getByRole('dialog')
+    expect(dialog).toBeInTheDocument()
+    const confirmBtn = dialog.getByText('OK')
+    await confirmBtn.click()
+    vi.advanceTimersByTime(FADE_OUT_TIME * 1.2)
+
+//     const buttons2 = screen.getByRole('list').getByRole('button')
+//     expect(buttons2.length).toBe(initialListLength - 1)
+    expect(storage.scores.length).toBe(initialListLength - 1)
   })
 })
 
@@ -252,6 +281,7 @@ describe('The hall-of-fame-page x- and y-axis', () => {
 describe('The hall-of-fame-page popover buttons', () => {
 
   it('should delete one score with button in popover', async () => {
+    storage.scores = liveScores as ScoreItem[]
     const screen = await renderWithProvider(<HallOfFame/>)
     const scoresCount = storage.scores.length
 
@@ -261,7 +291,13 @@ describe('The hall-of-fame-page popover buttons', () => {
     const deleteButton = popover.getByRole('button').getByText('Delete')
     await deleteButton.click()
 
-    expect(popover).not.toBeInTheDocument()
+    const dialog = screen.getByRole('dialog')
+    expect(dialog).toBeInTheDocument()
+    const confirmBtn = dialog.getByText('OK')
+    await confirmBtn.click()
+    vi.advanceTimersByTime(FADE_OUT_TIME * 1.1)
+
+    expect(popover).toBeInTheDocument()
     expect(storage.scores.length).toBe(scoresCount - 1)
   })
 

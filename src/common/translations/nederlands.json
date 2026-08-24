@@ -2,6 +2,9 @@
   "common": {
     "appName": "MineSweep",
     "Mines": "Mijnen",
+    "back": "terug",
+    "forth": "verder",
+    "close": "Sluit",
     "confirm": "Oké",
     "cancel": "Annuleer",
     "delete": "Verwijder"
@@ -73,6 +76,7 @@
     "average": "gemiddeld",
     "least": "minste",
     "most": "meeste",
+    "compare-props": "Vergelijk score kenmerken",
     "detail-label": "Details gekozen score",
     "configuration": "configuratie",
     "characteristics": "kenmerken",
@@ -165,7 +169,8 @@
     "Erase Scores?": "Wil je de scorelijst wissen?",
     "Quit and new game?": "Wil je een nieuw spel beginnen?",
     "Quit and restart game?": "Wil je dit spel opnieuw beginnen?",
-    "Quit Game?": "Aanpassing van een bepalende spel variabele. Wil je het spel beëindigen?"
+    "Quit Game?": "Aanpassing van een bepalende spel variabele. Wil je het spel beëindigen?",
+    "Delete this game?": "Wil je dit spel uit de lijst verwijderen?"
   },
   "tips": {
     "Todo counter": "Aantal te vinden mijnen",
@@ -179,5 +184,9 @@
     "normal hint": "",
     "bare hint": "raak geen enkele mijn",
     "sharp hint": "vlag alleen elke mijn af"
+  },
+  "error": {
+    "Invalid code": "Data niet beschikbaar",
+    "No replay": "Geen herhaling"
   }
 }

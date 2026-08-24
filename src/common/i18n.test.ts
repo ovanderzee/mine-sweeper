@@ -9,6 +9,10 @@ describe('infer language from navigator.languages array', () => {
     vi.spyOn(window.navigator, 'language', 'get').mockReturnValue('')
   })
 
+  afterEach(() => {
+    vi.clearAllMocks()
+  })
+
   it('infer a minority language if possible', () => {
     languageGetter.mockReturnValue(['fr-FR', 'en-GB', 'nl-BE'])
 
@@ -37,6 +41,10 @@ describe('infer language from navigator.language string', () => {
   beforeEach(() => {
     vi.spyOn(window.navigator, 'languages', 'get').mockReturnValue([])
     languageGetter = vi.spyOn(window.navigator, 'language', 'get')
+  })
+
+  afterEach(() => {
+    vi.clearAllMocks()
   })
 
   it('use supplied language if possible', () => {

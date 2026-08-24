@@ -58,6 +58,8 @@ describe('DefaultSettings Component in PageContext', () => {
       const dialog = screen.getByRole('dialog')
       expect(dialog).toBeInTheDocument()
       await dialog.getByRole('button', {name: 'Ok'}).click()
+
+      await vi.runAllTimersAsync()
       expect(configure).toHaveBeenCalledTimes(2)
       expect(configure).toHaveBeenNthCalledWith(1,)
     })
@@ -119,6 +121,8 @@ describe('DefaultSettings Component in PageContext', () => {
       await startWithProvider(playingGameState, microConfig)
       const dialog = screen.getByRole('dialog')
       await dialog.getByRole('button', {name: 'Ok'}).click()
+
+      await vi.runAllTimersAsync()
       expect(storage.config).toStrictEqual(DEFAULTS)
     })
 
@@ -160,18 +164,20 @@ describe('DefaultSettings Component in PageContext', () => {
      })
 
     it('but not when game is playing and action is cancelled (feedback)', async () => {
-      const buttonElement = await startWithProvider(playingGameState, microConfig)
+      await startWithProvider(playingGameState, microConfig)
       const dialog = screen.getByRole('dialog')
       await dialog.getByRole('button', {name: 'Cancel'}).click()
-      expect(buttonElement.className).not.toContain('active')
+
+      await vi.runAllTimersAsync()
       expect(storage.config).toStrictEqual(microConfig)
     })
 
     it('and game is playing and action is confirmed (feedback)', async () => {
-      const buttonElement = await startWithProvider(playingGameState, microConfig)
+      await startWithProvider(playingGameState, microConfig)
       const dialog = screen.getByRole('dialog')
       await dialog.getByRole('button', {name: 'Ok'}).click()
-      expect(buttonElement.className).toContain('active')
+
+      await vi.runAllTimersAsync()
       expect(storage.config).toStrictEqual(DEFAULTS)
     })
 

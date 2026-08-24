@@ -2,6 +2,9 @@
   "common": {
     "appName": "MineSweep",
     "Mines": "Mines",
+    "back": "Back",
+    "forth": "Forth",
+    "close": "Close",
     "confirm": "OK",
     "cancel": "Cancel",
     "delete": "Delete"
@@ -73,6 +76,7 @@
     "average": "average",
     "least": "least",
     "most": "most",
+    "compare-props": "Compare score properties",
     "detail-label": "Details of chosen score",
     "configuration": "configuration",
     "characteristics": "characteristics",
@@ -165,7 +169,8 @@
     "Erase Scores?": "Do you want to clear the score list?",
     "Quit and new game?": "Do you want to start a new game?",
     "Quit and restart game?": "Do you want to restart the game?",
-    "Quit Game?": "Change of a determining game variable. Do you want to end the game?"
+    "Quit Game?": "Change of a determining game variable. Do you want to end the game?",
+    "Delete this game?": "Do you want to remove this game from the list?"
   },
   "tips": {
     "Todo counter": "Number of mines to find",
@@ -179,5 +184,9 @@
     "normal hint": "",
     "bare hint": "don't touch a single mine",
     "sharp hint": "flag only every mine"
+  },
+  "error": {
+    "Invalid code": "Data not available",
+    "No replay": "No replay"
   }
 }

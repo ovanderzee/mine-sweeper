@@ -2,6 +2,8 @@ import update from './update'
 import { DEFAULTS } from './defaults'
 import { ScoreItem } from './game.d'
 import { AppConfig } from './app.d'
+import { SCORE_LIST_NAMES } from './constants'
+
 
 const victoryScores = [
   {"code":"663AwiMIyPMpqRA","date":1783260975866,"user":"Gekweld","game":{"cells":36,"mines":4,"playMode":"Jakkes","effort":{"least":7,"most":22}},"play":{"moves":7,"duration":10.634},"score":{"efficiency":1,"speed":0.6583,"points":658}},
@@ -38,12 +40,12 @@ describe('LocalStorage updater', () => {
   })
 
   it('should update game-level in score code to doubled value with radix 18 ', () => {
-    localStorage.setItem('mv-victory', JSON.stringify(victoryScores))
+    localStorage.setItem(`mv-${SCORE_LIST_NAMES[1]}`, JSON.stringify(victoryScores))
     const consoleLogSpy = vi.spyOn(console, 'log').mockImplementation(() => {})
 
     update.doubleGameLevel()
 
-    const victoriesStorage = localStorage.getItem('mv-victories')
+    const victoriesStorage = localStorage.getItem(`mv-${SCORE_LIST_NAMES[2]}`)
     const bareScores: ScoreItem[] = victoriesStorage ? JSON.parse(victoriesStorage) : []
     // refineScores not considered
     expect(bareScores instanceof Array).toBe(true)
@@ -66,12 +68,12 @@ describe('LocalStorage updater', () => {
   })
 
   it('should show gamelevel and rename playMode to mode in game section of score', () => {
-    localStorage.setItem('mv-victories', JSON.stringify(victoriesScores))
+    localStorage.setItem(`mv-${SCORE_LIST_NAMES[2]}`, JSON.stringify(victoriesScores))
     const consoleLogSpy = vi.spyOn(console, 'log').mockImplementation(() => {})
 
     update.changePlayModeValues()
 
-    const wonGamesStorage = localStorage.getItem('mv-won-games')
+    const wonGamesStorage = localStorage.getItem(`mv-${SCORE_LIST_NAMES[3]}`)
     const bareScores: ScoreItem[] = wonGamesStorage ? JSON.parse(wonGamesStorage) : []
     // refineScores not considered
     expect(bareScores instanceof Array).toBe(true)

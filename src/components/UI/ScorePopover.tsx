@@ -1,30 +1,72 @@
-import { useContext } from 'react'
+import { useContext, useState } from 'react'
 import PageContext from '../../store/page-context'
-
+import storage from '../../common/storage'
 import { PlayMode } from '../../common/app.d'
 import { ScoreItem } from '../../common/game.d'
 import { ShieldByRank } from './Shield'
 import ElasticBrace from './ElasticBrace'
-import { precise } from '../../common/scoring'
+import { precise, rebuildGameData } from '../../common/scoring'
+import { initialGameState } from '../game/common'
+import { ApproveModal } from './Modal'
+import Game from '../game/Game'
 import Histogram from './Histogram'
 import './ScorePopover.css'
 
 interface ScorePopoverProps {
-  score: ScoreItem | null
-  delete: (time: number) => void
-  replay: (code: string) => void
+  scores: ScoreItem[]
+  index: number
+  onDeletion: (score: ScoreItem) => void
+  onBrowse: (browseIndex: number) => void
 }
 
 const ScorePopover = (props: ScorePopoverProps) => {
   const pageCtx = useContext(PageContext)
   const text = pageCtx.text
-  const log = props.score
+  const log = props.scores[props.index]
 
-  if (!log) return
+  const closeButton = (
+    <button type="button" className="glyph scale"
+      title={text.common.close}
+      onClick={() => props.onBrowse(-1)}
+    ><span>&times;</span></button>
+  )
+
+  const replayStoredGame = (code: string): void => {
+    const buildData = rebuildGameData(code)
+    pageCtx.configure(buildData.config)
+    const gameState = {
+      ...initialGameState,
+      board: buildData.board,
+    }
+    storage.game = gameState
+    pageCtx.navigate(<Game />)
+  }
+
+  const [deletable, setDeletable] = useState<ScoreItem | null>(null)
+  const [showModal, setShowModal] = useState(false)
+
+  const approveModal = <ApproveModal
+    message={text.dialog['Delete this game?']}
+    onConfirm={() => deletable && props.onDeletion(deletable)}
+    onCancel={() => {}}
+    isShowModal={showModal}
+    endShowModal={()=>{
+      setShowModal(false)
+      setDeletable(null)
+    }}
+  />
+
+  const disableDescend = props.index === 0
+  const disableAscend = props.index === props.scores.length - 1
+
+  if (!log) return (
+    // safari requires to close a hint-popover programmatically
+    <figure><header><div className="buttons">{closeButton}</div></header></figure>
+  )
 
   const loggedDate = new Date(log.date)
 
-  return (
+  return (<>
     <figure
       className={log.rank <= 10 ? 'super' : ''}
       key={`${log.rank}_${log.score.points}`}
@@ -40,6 +82,21 @@ const ScorePopover = (props: ScorePopoverProps) => {
           }
         </div>
         <h4 className="date" data-date={log.date}>
+          <div className="buttons">
+            <button type="button" className="glyph y-stretch"
+              disabled={disableDescend}
+              title={text.common.back}
+              onClick={() => props.onBrowse(props.index - 1)}
+            ><span>&lt;</span></button>
+            &nbsp;
+            <button type="button" className="glyph y-stretch"
+              disabled={disableAscend}
+              title={text.common.forth}
+              onClick={() => props.onBrowse(props.index + 1)}
+            ><span>&gt;</span></button>
+            &nbsp;
+            {closeButton}
+          </div>
           {loggedDate.toLocaleDateString()}<br/>
           {loggedDate.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })}
         </h4>
@@ -97,7 +154,7 @@ const ScorePopover = (props: ScorePopoverProps) => {
 
           <div className="unit">
             <small>{text.VAR['points']}</small>
-            <span className="points">{log.score.points}</span>
+            <strong className="points">{log.score.points}</strong>
           </div>
         </section>
 
@@ -132,20 +189,28 @@ const ScorePopover = (props: ScorePopoverProps) => {
         </section>
       </article>
       <footer>
-        <Histogram data={log.signature.fill_frequency} />
+        {log.signature.invalid_code ?
+          <div className="frequency-histogram"><span>{text.error['Invalid code']}</span></div> :
+          <Histogram data={log.signature.fill_frequency} />
+        }
         <div className="buttons">
           <button type="button" className="delete"
-            popoverTarget="score-popover" popoverTargetAction="hide"
-            onClick={() => props.delete(log.date)}
+            onClick={() => {
+              setDeletable({...log})
+              setShowModal(true)
+            }}
           >{text.common.delete}</button>
-          <button type="button" className="replay"
-            popoverTarget="score-popover" popoverTargetAction="hide"
-            onClick={() => props.replay(log.code)}
-          >{text.nav.Replay}</button>
+          {log.signature.invalid_code ?
+            <span>{text.error['No replay']}</span> :
+            <button type="button" className="replay"
+              onClick={() => replayStoredGame(log.code)}
+            >{text.nav.Replay}</button>
+          }
         </div>
       </footer>
     </figure>
-  )
+    {approveModal}
+  </>)
 }
 
 export default ScorePopover

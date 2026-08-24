@@ -1,6 +1,7 @@
 import { useContext } from 'react'
 import PageContext from '../../store/page-context'
 import { ScoreParam, FlatScore, MarkScoreData } from '../../common/game.d'
+import { canNotDealWithForeignObjects } from '../../common/functions'
 import { precise } from '../../common/scoring'
 import './LineDiagram.css'
 
@@ -14,6 +15,7 @@ interface LineDiagramProps {
   data: FlatScore[],
   xParam: ScoreParam,
   yParam: ScoreParam,
+  onBrowse: (index: number) => void,
   markData: MarkScoreData | null,
 }
 
@@ -88,6 +90,7 @@ const LineDiagram = (props: LineDiagramProps) => {
   return (
     <svg
       role="document"
+      aria-label={text.fame['compare props']}
       className="line-diagram"
       viewBox={`${lgdSpace * -1} ${pointsSpace * -1} ${diagramSize.x} ${diagramSize.y}`}
       xmlns="http://www.w3.org/2000/svg"
@@ -137,11 +140,23 @@ const LineDiagram = (props: LineDiagramProps) => {
             transform={`translate(${d.x * dataScale.x}, ${(axisMax.y - d.y) * dataScale.y})`}
           >
             <path d={`M ${-crossLegSize}, 0 ${crossLegSize}, 0 M 0,${-crossLegSize} 0, ${crossLegSize}`} key={`lnd_path_${i}`} />
-            <circle  cx="0" cy="0" r="3" key={`lnd_circle_${i}`} aria-labelledby={`lnd_title_${i}`}>
-              <title id={`lnd_title_${i}`} key={`lnd_title_${i}`}>
-                {`${text.VAR[props.xParam]}: ${d.x}, ${text.VAR[props.yParam]}: ${d.y}`}
-              </title>
-            </circle>
+            <foreignObject x="-5" y="-5" width="10" height="10">
+              {canNotDealWithForeignObjects() ?
+              // @ts-expect-error // error TS2322: Type '{ children: Element; xmlns: string; }' is not assignable to type 'DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>'.
+              <div xmlns="http://www.w3.org/1999/xhtml">
+                <button type="button" tabIndex={-1} key={`lnd_btn_${i}`}
+                  popoverTarget="score-popover" popoverTargetAction="show"
+                  onClick={() => props.onBrowse(i)}
+                  title={`${text.VAR[props.xParam]}: ${d.x}, ${text.VAR[props.yParam]}: ${d.y}`}
+                ></button>
+              </div> :
+                <button type="button" tabIndex={-1} key={`lnd_btn_${i}`}
+                  popoverTarget="score-popover" popoverTargetAction="show"
+                  onClick={() => props.onBrowse(i)}
+                  title={`${text.VAR[props.xParam]}: ${d.x}, ${text.VAR[props.yParam]}: ${d.y}`}
+                ></button>
+              }
+            </foreignObject>
           </g>)}
       </g>
 

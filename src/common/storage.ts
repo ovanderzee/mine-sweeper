@@ -2,6 +2,9 @@ import { DEFAULTS, NORMAL } from  './defaults'
 import { AppConfig, AppSubConfig, AppSession, AppSubSession } from './app.d'
 import { GameState, BareScoreItem, ScoreItem } from './game.d'
 import { refineScores, stripScores } from './scoring'
+import { sanitisedParse } from './functions'
+import { SCORE_LIST_NAME } from './constants'
+
 
 /*
   Interface for data storage.
@@ -15,10 +18,10 @@ const storage = {
     const stored = localStorage.getItem('mv-config')
     let data: AppConfig
     try {
-      const updatable: AppSubConfig = stored ? JSON.parse(stored) : {}
+      const updatable: AppSubConfig = stored ? sanitisedParse(stored) : {}
       data = { ...DEFAULTS, ...updatable }
     } catch {
-      console.error('Invalid configuration found, replace by defaults...')
+      console.error('Invalid configuration found, use defaults...')
       data = DEFAULTS
     }
     return data
@@ -35,10 +38,10 @@ const storage = {
     const stored = sessionStorage.getItem('mv-session')
     let data: AppSession
     try {
-      const updatable: AppSubSession = stored ? JSON.parse(stored) : {}
+      const updatable: AppSubSession = stored ? sanitisedParse(stored) : {}
       data = { ...NORMAL, ...updatable }
     } catch {
-      console.error('Invalid session found, setting to normal values...')
+      console.error('Invalid session found, use normal view values...')
       data = NORMAL
     }
     return data
@@ -58,9 +61,9 @@ const storage = {
     const stored = localStorage.getItem('mv-game')
     let data: GameState | null
     try {
-      data = stored ? JSON.parse(stored) : null
+      data = stored ? sanitisedParse(stored) : null
     } catch {
-      console.error('Invalid game found, start new game...')
+      console.error('Invalid game found, use a new game...')
       data = null
     }
     return data
@@ -75,16 +78,16 @@ const storage = {
   },
 
   eraseScores: () => {
-    localStorage.removeItem('mv-won-games')
+    localStorage.removeItem(`mv-${SCORE_LIST_NAME}`)
   },
   get scores(): ScoreItem[] {
-    const stored = localStorage.getItem('mv-won-games')
+    const stored = localStorage.getItem(`mv-${SCORE_LIST_NAME}`)
     let data: ScoreItem[]
     try {
-      const bareData: BareScoreItem[] = stored ? JSON.parse(stored) : []
+      const bareData: BareScoreItem[] = stored ? sanitisedParse(stored) : []
       data = refineScores(bareData)
     } catch {
-      console.error('Invalid scorelist found, start with new list...')
+      console.error('Invalid scorelist found, use a new list...')
       data = []
     }
     return data
@@ -93,7 +96,7 @@ const storage = {
     if (data?.length) {
       const bareData: BareScoreItem[] = stripScores(data)
       const storeable = JSON.stringify(bareData)
-      localStorage.setItem('mv-won-games', storeable)
+      localStorage.setItem(`mv-${SCORE_LIST_NAME}`, storeable)
     } else {
       this.eraseScores()
     }

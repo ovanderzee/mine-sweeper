@@ -1,4 +1,4 @@
-import { RANGES, SCORE_RADIX } from './constants'
+import { RANGES, SCORE_RADIX, SCORE_LIST_NAMES } from './constants'
 
 it('The RANGES members can not be changed', () => {
     const updateSizeMin = () => {RANGES.SIZE.min = 0}
@@ -23,4 +23,9 @@ describe('SCORE_RADIX must be well chosen', () => {
   it('SCORE_RADIX may not be less than maximum BOARD_SIZE', () => {
     expect(SCORE_RADIX).toBeGreaterThanOrEqual(RANGES.SIZE.max)
   })
+})
+
+it('The SCORE_LIST_NAMES members must be unique', () => {
+  const scoreListNameSet = new Set(SCORE_LIST_NAMES)
+  expect(SCORE_LIST_NAMES.length).toBe(scoreListNameSet.size)
 })

@@ -1,38 +1,51 @@
 import { ScoreItem } from './game.d'
 import { DEFAULTS } from './defaults'
-import { SCORE_RADIX } from './constants'
+import { SCORE_RADIX, SCORE_LIST_NAMES } from './constants'
 import { capitalise } from './functions'
 import { AppConfig, PlayMode } from './app.d'
+import { sanitisedParse } from './functions'
 
 export const doubleGameLevel = () => {
-  const victoryStorage = localStorage.getItem('mv-victory')
+  const victoryStorage = localStorage.getItem(`mv-${SCORE_LIST_NAMES[1]}`)
   if (victoryStorage) {
-    const scores: ScoreItem[] = JSON.parse(victoryStorage)
-    const converted = scores.map((s: ScoreItem) => {
-      const gameLevel = Number(s.code.charAt(2)) * 2
-      const newCode = s.code.substring(0,2) + gameLevel.toString(SCORE_RADIX) + s.code.substring(3)
-      s.code = newCode
-      return s
-    })
+    try {
+      const scores: ScoreItem[] = sanitisedParse(victoryStorage)
+      const converted = scores.map((s: ScoreItem) => {
+        const gameLevel = Number(s.code.charAt(2)) * 2
+        const newCode = s.code.substring(0,2) + gameLevel.toString(SCORE_RADIX) + s.code.substring(3)
+        s.code = newCode
+        return s
+      })
 
-    localStorage.setItem('mv-victories', JSON.stringify(converted))
-    localStorage.removeItem('mv-victory')
-    console.log('Scorelist updated to use intermediate levels.')
+      localStorage.setItem(`mv-${SCORE_LIST_NAMES[2]}`, JSON.stringify(converted))
+      localStorage.removeItem(`mv-${SCORE_LIST_NAMES[1]}`)
+      console.log('Scorelist updated to use intermediate levels.')
+    }
+    catch(e) {
+      console.error(e)
+      console.log('New scorelist pending. Existing data were kept.')
+    }
   }
 }
 
 export const removeMaxScores = () => {
   const cfgMaxScoresStorage = localStorage.getItem('mv-config') || '{}'
-  const cfgMaxScoresObject = JSON.parse(cfgMaxScoresStorage)
-  if (Object.hasOwn(cfgMaxScoresObject, 'MAX_SCORES')) {
-    delete cfgMaxScoresObject.MAX_SCORES
-    localStorage.setItem('mv-config', JSON.stringify(cfgMaxScoresObject))
-    console.log('Configuration cleaned up.')
+  if (cfgMaxScoresStorage.indexOf('MAX_SCORES') > 0) {
+    try {
+      const cfgMaxScoresObject = sanitisedParse(cfgMaxScoresStorage)
+      delete cfgMaxScoresObject.MAX_SCORES
+      localStorage.setItem('mv-config', JSON.stringify(cfgMaxScoresObject))
+      console.log('Configuration cleaned up.')
+    }
+    catch(e) {
+      console.error(e)
+      console.log('Configuration cleanup failed. Not problematic.')
+    }
   }
 }
 
 export const changePlayModeValues = () => {
-  const victoriesStorage = localStorage.getItem('mv-victories')
+  const victoriesStorage = localStorage.getItem(`mv-${SCORE_LIST_NAMES[2]}`)
   if (victoriesStorage) {
     const playModeNames = Object.values(PlayMode)
 
@@ -40,39 +53,51 @@ export const changePlayModeValues = () => {
 
     const configStorage = localStorage.getItem('mv-config')
     if (configStorage) {
-      const config: AppConfig = { ...JSON.parse(configStorage), ...DEFAULTS }
+      try {
+        const config: AppConfig = { ...sanitisedParse(configStorage), ...DEFAULTS }
 
-      const updPlayMode = capitalise(config.PLAY_MODE)
-      config.PLAY_MODE = PlayMode[updPlayMode as keyof typeof PlayMode] || PlayMode.NORMAL
+        const updPlayMode = capitalise(config.PLAY_MODE)
+        config.PLAY_MODE = PlayMode[updPlayMode as keyof typeof PlayMode] || PlayMode.NORMAL
 
-      localStorage.setItem('mv-config', JSON.stringify(config))
-      console.log('Configuration updated.')
+        localStorage.setItem('mv-config', JSON.stringify(config))
+        console.log('Configuration updated.')
+      }
+      catch(e) {
+        console.error(e)
+        console.log('Configuration update failed. Visit the configuration page change the playmode setting.')
+      }
     }
 
     /* SCORE-LIST */
 
-    const scores: ScoreItem[] = JSON.parse(victoriesStorage)
-    const converted = scores.map((s: ScoreItem) => {
-      // one-bit values in code property
-      // @ts-ignore // error TS2339: Property 'playMode' does not exist on type 'GameScore'.
-      const playModeString = capitalise(s.game?.playMode) || '--'
-      const playModeNumber = playModeNames.indexOf(playModeString as unknown as PlayMode)
-      const boundModeNumber = Math.max(playModeNumber, 0)
-      const newCode = s.code.substring(0,3) + boundModeNumber + s.code.substring(3)
-      s.code = newCode
-      // format score items
-      if (playModeNumber > 0) {
-        s.game.mode = playModeString
-      }
-      // @ts-ignore // error TS2339: Property 'playMode' does not exist on type 'GameScore'.
-      delete s.game?.playMode
-      s.game.level = parseInt(s.code.charAt(2), SCORE_RADIX)
-      return s
-    })
+    try {
+      const scores: ScoreItem[] = sanitisedParse(victoriesStorage)
+      const converted = scores.map((s: ScoreItem) => {
+        // one-bit values in code property
+        // @ts-ignore // error TS2339: Property 'playMode' does not exist on type 'GameScore'.
+        const playModeString = capitalise(s.game?.playMode) || '--'
+        const playModeNumber = playModeNames.indexOf(playModeString as unknown as PlayMode)
+        const boundModeNumber = Math.max(playModeNumber, 0)
+        const newCode = s.code.substring(0,3) + boundModeNumber + s.code.substring(3)
+        s.code = newCode
+        // format score items
+        if (playModeNumber > 0) {
+          s.game.mode = playModeString
+        }
+        // @ts-ignore // error TS2339: Property 'playMode' does not exist on type 'GameScore'.
+        delete s.game?.playMode
+        s.game.level = parseInt(s.code.charAt(2), SCORE_RADIX)
+        return s
+      })
 
-    localStorage.setItem('mv-won-games', JSON.stringify(converted))
-    localStorage.removeItem('mv-victories')
-    console.log('Scorelist updated to replay with right playmode.')
+      localStorage.setItem(`mv-${SCORE_LIST_NAMES[3]}`, JSON.stringify(converted))
+      localStorage.removeItem(`mv-${SCORE_LIST_NAMES[2]}`)
+      console.log('Scorelist updated to replay with right playmode.')
+    }
+    catch(e) {
+      console.error(e)
+      console.log('New scorelist pending. Existing data were kept.')
+    }
   }
 }
 

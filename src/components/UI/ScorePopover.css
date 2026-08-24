@@ -22,6 +22,9 @@
   background: linear-gradient(105deg, var(--lighter-blue),  var(--medium-blue), var(--dark-blue));
   margin: 0 auto;
   padding: calc(var(--radius) / 2) var(--radius);
+  max-height: calc(100vh - 2em);
+  overscroll-behavior: contain;
+  overflow: auto;
 }
 
 #score-popover figure header {
@@ -70,6 +73,32 @@
   font-size: 86%;
   flex: 0 0 auto;
   text-align: right;
+}
+
+#score-popover figure header .buttons {
+  padding-block-end: .5em;
+}
+
+#score-popover figure .buttons {
+  margin-inline-start: auto;
+  margin-block: .167em;
+  text-align: right;
+}
+
+#score-popover figure button.glyph {
+  color: inherit;
+  padding: 1ex;
+  text-shadow: 1.5px 1px 0 var(--medium-touched);
+  box-shadow: none;
+  background: none;
+}
+
+#score-popover figure button.glyph.y-stretch {
+  transform: scaleY(1.667);
+}
+
+#score-popover figure button.glyph.scale {
+  transform: scale(1.667);
 }
 
 #score-popover figure article.functional-grid {

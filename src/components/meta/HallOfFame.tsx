@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react'
+import React, { useContext, useRef, useState } from 'react'
 import PageContext from '../../store/page-context'
 import NavOptionsBar from '../nav/NavOptionsBar'
 import EraseScores from '../nav/EraseScores'
@@ -10,12 +10,10 @@ import Diagram from '../UI/Diagram'
 import { PlayMode } from '../../common/app.d'
 import { ScoreItem, ScoreParam, MarkScoreData } from '../../common/game.d'
 import storage from '../../common/storage'
-import { precise, refineScores, rebuildGameData } from '../../common/scoring'
+import { precise } from '../../common/scoring'
 import { SHOW_SORT_THRESHOLD, SHOW_DIAGRAM_THRESHOLD, SHOW_MARKING_THRESHOLD } from '../../common/constants'
 import { preventReloadByEnter } from '../../common/functions'
 import ScorePopover from '../UI/ScorePopover'
-import Game from '../game/Game'
-import { initialGameState } from '../game/common'
 import './Meta.css'
 import './HallOfFame.css'
 
@@ -176,9 +174,38 @@ const HallOfFame = () => {
     </form>
   )
 
-  const scoreDiagram = <Diagram scores={scores} xParam={sortLabel} yParam={valueLabel} markData={markData} />
+  const popoverRef = useRef<HTMLElement | null>(null)
+  const [popScore, setPopScore] = useState<number>(NaN)
 
-  const [popScore, setPopScore] = useState<ScoreItem | null>(null)
+  const onDeletion = (deletable: ScoreItem): void => {
+    const removeIndex = rootScores.findIndex(s => s.code === deletable.code && s.date === deletable.date)
+    if (removeIndex < 0) {
+      console.error('Score to delete not found')
+      return
+    }
+    rootScores.splice(removeIndex, 1)
+    storage.scores = rootScores
+    setScores(storage.scores)
+
+    if (rootScores.length) {
+      setScores(methodsByKind[sortLabel]())
+      if (removeIndex === rootScores.length) {
+        setPopScore(removeIndex - 1);
+      }
+    } else {
+      popoverRef.current?.hidePopover()
+    }
+  }
+
+  const onBrowse = (popIndex: number): void => {
+    if (scores[popIndex]) {
+      setPopScore(popIndex)
+    } else {
+      popoverRef.current?.hidePopover()
+    }
+  }
+
+  const scoreDiagram = <Diagram scores={scores} xParam={sortLabel} yParam={valueLabel} onBrowse={onBrowse} markData={markData} />
 
   const fameContent = (
     <article
@@ -203,7 +230,7 @@ const HallOfFame = () => {
             className={`${log.rank <= 10 ? 'super' : ''}`}
             aria-label={`${log.date === latest.date ? 'latest' : ''}`}
             key={`${log.date}_${log.score.points}`}
-            onClick={() => setPopScore(log)}
+            onClick={() => setPopScore(index)}
             title={text.fame['Number %n in %s sort'].replace('%n', String(index+1)).replace('%s', text.VAR[sortLabel])}
           >
             <header>
@@ -277,34 +304,19 @@ const HallOfFame = () => {
     </NavOptionsBar>
   )
 
-  const deleteOneScore = (time: number): void => {
-    const removeIndex = rootScores.findIndex(score => score.date === time)
-
-    if (removeIndex > -1) {
-      rootScores.splice(removeIndex, 1)
-      storage.scores = rootScores
-      setScores(refineScores(rootScores))
-      setScores(methodsByKind[sortLabel]())
-    }
-  }
-
-  const replayStoredGame = (code: string): void => {
-    const buildData = rebuildGameData(code)
-    pageCtx.configure(buildData.config)
-    const gameState = {
-      ...initialGameState,
-      board: buildData.board,
-    }
-    storage.game = gameState
-    pageCtx.navigate(<Game />)
-  }
-
   return (
     <>
       {fameContent}
       {fameNavigation}
-      <section id="score-popover" popover="auto" role="status" aria-label={text.fame['detail-label']}>
-        <ScorePopover score={popScore} delete={deleteOneScore} replay={replayStoredGame} />
+      <section id="score-popover"
+        popover="hint"
+        role="status"
+        ref={popoverRef}
+        aria-label={text.fame['detail-label']}
+      >
+        <ScorePopover scores={scores} index={popScore}
+          onDeletion={onDeletion} onBrowse={onBrowse}
+        />
       </section>
     </>
   )

@@ -4,6 +4,8 @@ export const capitalise = (word: string): string => {
   return word ? word.substring(0,1).toUpperCase() + word.substring(1).toLowerCase() : ''
 }
 
+export const sanitisedParse = (stored: string) => JSON.parse(stored.replace(/\s+/g, ' '))
+
 export const minorMagnification = (factor: number): number => ((factor - 1) * .333) + 1
 
 export const preventReloadByEnter = (event: React.KeyboardEvent): boolean => {
@@ -97,4 +99,9 @@ export const focusFirstNavButton = () => {
     const el = document.querySelector('nav button') as HTMLElement
     el?.focus()
   }, 800)
+}
+
+export const canNotDealWithForeignObjects = () => {
+  const aV = window.navigator.appVersion
+  return aV.includes('Macintosh') && aV.includes('Safari') && !aV.includes('Chrome')
 }

@@ -3,6 +3,7 @@ import { renderWithApp } from './../../__mocks__/aat-helpers'
 import { playingGameState } from './../../__mocks__/game-states'
 import { microConfig } from './../../__mocks__/configs'
 import { getFillDistribution } from './../../common/scoring'
+import { FADE_OUT_TIME } from '../../common/constants'
 import storage from './../../common/storage'
 
 describe('The game page sidebar', () => {
@@ -42,16 +43,15 @@ describe('The game start button', () => {
   let
     screen: RenderResult
 
-  beforeEach(() => {
+  beforeEach(async () => {
     storage.config = microConfig
+    storage.game = playingGameState
+    screen = await renderWithApp()
   })
 
   it('should start a new game when game ended', async () => {
-    storage.game = playingGameState
-    screen = await renderWithApp()
-
-    const mineIndex = storage.game.board.flat().findIndex(c => c.fill > 8 && !c.stage)
-    await screen.getByRole('gridcell').nth(mineIndex).click()
+    const mineIndex = storage.game?.board.flat().findIndex(c => c.fill > 8 && !c.stage)
+    await screen.getByRole('gridcell').nth(mineIndex || 0).click()
 
     await expect.element(screen.getByRole('main')).toHaveClass('game-lost')
 
@@ -60,40 +60,40 @@ describe('The game start button', () => {
     await expect.element(screen.getByRole('main')).toHaveClass('game-new')
   })
 
-  it("should start a new game depending permission when a game is in progress", async () => {
-    storage.game = playingGameState
-    screen = await renderWithApp()
-
-    expect(storage.game.stage).toBe('game-playing')
-
+  it('should continue game in progress when "Cancel" is clicked', async () => {
     await screen.getByRole('navigation').getByTitle('New Game').click()
     const dialog = screen.getByRole('dialog')
-    expect(dialog).toBeInTheDocument()
-
     await dialog.getByText('Cancel').click()
-    expect(storage.game.stage).toBe('game-playing')
 
+    expect(dialog).toBeInTheDocument()
+    vi.advanceTimersByTime(FADE_OUT_TIME * 1.1)
+    // await vi.runAllTimersAsync() // Error: Test timed out in 15000ms.
+    expect(dialog).not.toBeInTheDocument()
+    expect(storage.game?.stage).toBe('game-playing')
+  })
+
+  it('should replace game in progress by new game when "Ok" is clicked', async () => {
+    await screen.getByRole('navigation').getByTitle('New Game').click()
+    const dialog = screen.getByRole('dialog')
     await dialog.getByText('Ok').click()
-    expect(storage.game.stage).toBe('game-new')
+
+    expect(dialog).toBeInTheDocument()
+    await vi.runAllTimersAsync()
+    expect(dialog).not.toBeInTheDocument()
+    expect(storage.game?.stage).toBe('game-new')
   })
 
 })
 
 describe('The replay button', () => {
-  let
-    screen: RenderResult
-
-  beforeEach(() => {
-    storage.config = microConfig
-  })
-
   it("should restart a lost game", async () => {
+    storage.config = microConfig
     storage.game = playingGameState
-    screen = await renderWithApp()
-    const initialFilling = getFillDistribution(storage.game?.board)
+    const screen = await renderWithApp()
+    const initialFilling = getFillDistribution(storage.game.board)
 
     const mineIndex = storage.game.board.flat().findIndex(c => c.fill > 8 && !c.stage)
-    await screen.getByRole('gridcell').nth(mineIndex).click()
+    await screen.getByRole('gridcell').nth(mineIndex || 0).click()
 
     await expect.element(screen.getByRole('main')).toHaveClass('game-lost')
 
@@ -101,27 +101,42 @@ describe('The replay button', () => {
 
     await expect.element(screen.getByRole('main')).toHaveClass('game-new')
 
-    const latterFilling = getFillDistribution(storage.game?.board)
+    const latterFilling = getFillDistribution(storage.game.board)
     expect(initialFilling).toStrictEqual(latterFilling)
   })
 
-  it("should replay a game depending permission when a game is in progress", async () => {
+  it('should restart a game in progress when clicking "Cancel"', async () => {
+    storage.config = microConfig
     storage.game = playingGameState
-    screen = await renderWithApp()
-    const initialFilling = getFillDistribution(storage.game?.board)
-
-    await expect.element(screen.getByRole('main')).toHaveClass('game-playing')
+    const screen = await renderWithApp()
+    const initialFilling = getFillDistribution(storage.game.board)
 
     await screen.getByRole('navigation').getByTitle('Replay').click()
     const dialog = screen.getByRole('dialog')
-    expect(dialog).toBeInTheDocument()
-
     await dialog.getByText('Cancel').click()
-    expect(storage.game.stage).toBe('game-playing')
-    expect(getFillDistribution(storage.game?.board)).toStrictEqual(initialFilling)
 
+    expect(dialog).toBeInTheDocument()
+    vi.advanceTimersByTime(FADE_OUT_TIME * 1.1)
+    // await vi.runAllTimersAsync() // Error: Test timed out in 15000ms.
+    expect(dialog).not.toBeInTheDocument()
+    expect(storage.game.stage).toBe('game-playing')
+    expect(initialFilling).toStrictEqual(getFillDistribution(storage.game.board))
+  })
+
+  it('should continue game in process when clicking "Ok"', async () => {
+    storage.config = microConfig
+    storage.game = playingGameState
+    const screen = await renderWithApp()
+    const initialFilling = getFillDistribution(storage.game.board)
+
+    await screen.getByRole('navigation').getByTitle('Replay').click()
+    const dialog = screen.getByRole('dialog')
     await dialog.getByText('Ok').click()
+
+    expect(dialog).toBeInTheDocument()
+    await vi.runAllTimersAsync()
+    expect(dialog).not.toBeInTheDocument()
     expect(storage.game.stage).toBe('game-new')
-    expect(getFillDistribution(storage.game?.board)).toStrictEqual(initialFilling)
+    expect(initialFilling).toStrictEqual(getFillDistribution(storage.game.board))
   })
 })
