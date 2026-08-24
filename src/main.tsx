@@ -1,7 +1,7 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import { FADE_OUT_TIME } from './common/constants'
-import mv from './console'
+import mv from './common/console'
 import App from './App.tsx'
 import './index.css'
 

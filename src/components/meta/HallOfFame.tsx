@@ -10,7 +10,7 @@ import Diagram from '../UI/Diagram'
 import { PlayMode } from '../../common/app.d'
 import { ScoreItem, ScoreParam, MarkScoreData } from '../../common/game.d'
 import storage from '../../common/storage'
-import { precise, refineScores, sequenceFillData } from '../../common/scoring'
+import { precise, refineScores, rebuildGameData } from '../../common/scoring'
 import { SHOW_SORT_THRESHOLD, SHOW_DIAGRAM_THRESHOLD, SHOW_MARKING_THRESHOLD } from '../../common/constants'
 import { preventReloadByEnter } from '../../common/functions'
 import ScorePopover from '../UI/ScorePopover'
@@ -289,11 +289,11 @@ const HallOfFame = () => {
   }
 
   const replayStoredGame = (code: string): void => {
-    const [newBoard, checkConfig] = sequenceFillData(code)
-    pageCtx.configure(checkConfig)
+    const buildData = rebuildGameData(code)
+    pageCtx.configure(buildData.config)
     const gameState = {
       ...initialGameState,
-      board: newBoard,
+      board: buildData.board,
     }
     storage.game = gameState
     pageCtx.navigate(<Game />)

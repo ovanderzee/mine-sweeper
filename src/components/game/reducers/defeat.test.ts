@@ -2,7 +2,7 @@ import { defeatReducer } from './defeat'
 import { CellStateStage, CellState } from '../../../common/game.d'
 import { playingGameState, lostGameState } from '../../../__mocks__/game-states'
 import storage from '../../../common/storage'
-import { sequenceFillData } from '../../../common/scoring'
+import { rebuildGameData } from '../../../common/scoring'
 
 describe('defeatReducer is called in repetition', () => {
   it('should return declining number of untouched mines', () => {
@@ -34,13 +34,13 @@ describe('defeatReducer is called in repetition', () => {
       times = 0,
       releasedMines: number,
       gameState = { ...playingGameState }
-    const [board, config] = sequenceFillData('kk80Aw2iMaS1styvRK7kgiz32pmqWi+BK+GhySxaZp9ljNV1j5tTDdJ2rnf1HB36F0eLpyFggA')
-    storage.config = { ...storage.config, ...config }
+    const buildData = rebuildGameData('kk80Aw2iMaS1styvRK7kgiz32pmqWi+BK+GhySxaZp9ljNV1j5tTDdJ2rnf1HB36F0eLpyFggA')
+    storage.config = { ...storage.config, ...buildData.config }
     const findReleasedMines = () => gameState.board
       .flat()
       .filter(cell => cell.stage === CellStateStage.RELEASED && cell.fill > 8)
       .length
-    gameState.board = board
+    gameState.board = buildData.board
     gameState.board.forEach(
       (r: CellState[]) => r.forEach(
         (c: CellState) => c.stage = CellStateStage.RELEASED
