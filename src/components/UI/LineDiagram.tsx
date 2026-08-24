@@ -142,6 +142,7 @@ const LineDiagram = (props: LineDiagramProps) => {
             <path d={`M ${-crossLegSize}, 0 ${crossLegSize}, 0 M 0,${-crossLegSize} 0, ${crossLegSize}`} key={`lnd_path_${i}`} />
             <foreignObject x="-5" y="-5" width="10" height="10">
               {canNotDealWithForeignObjects() ?
+              /* fix for safari version < 26 */
               // @ts-expect-error // error TS2322: Type '{ children: Element; xmlns: string; }' is not assignable to type 'DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>'.
               <div xmlns="http://www.w3.org/1999/xhtml">
                 <button type="button" tabIndex={-1} key={`lnd_btn_${i}`}
