@@ -188,11 +188,13 @@ const ScorePopover = (props: ScorePopoverProps) => {
           </div>
         </section>
       </article>
-      <footer>
+      <article>
         {log.signature.invalid_code ?
           <div className="frequency-histogram"><span>{text.error['Invalid code']}</span></div> :
           <Histogram data={log.signature.fill_frequency} />
         }
+      </article>
+      <footer>
         <div className="buttons">
           <button type="button" className="delete"
             onClick={() => {
