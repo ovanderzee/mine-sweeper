@@ -323,13 +323,17 @@ describe('The hall-of-fame-page popover buttons', () => {
 })
 
 describe('Marking data', () => {
+  let screen: RenderResult,
+    inputField: HTMLElement | SVGElement | Locator | null
+
+  beforeEach(async () => {
+    storage.scores = liveScores as ScoreItem[]
+    screen = await renderWithProvider(<HallOfFame/>)
+    inputField = screen.getByTitle('Mark value').query()
+    await inputField?.focus()
+  })
 
   it('should accept numbers broken with dot as input', async () => {
-    const screen = await renderWithProvider(<HallOfFame/>)
-    const inputField = screen.getByTitle('Mark value').query()
-    await inputField?.focus()
-
-//     await userEvent.clear(inputField), werkt niet
     await userEvent.keyboard('12')
     await expect.element(inputField).toHaveDisplayValue('12')
 
@@ -341,10 +345,6 @@ describe('Marking data', () => {
   })
 
   it('should accept numbers broken with comma as input', async () => {
-    const screen = await renderWithProvider(<HallOfFame/>)
-    const inputField = screen.getByTitle('Mark value').query()
-    await inputField?.focus()
-
     await userEvent.keyboard('12')
     await expect.element(inputField).toHaveDisplayValue('12')
 
@@ -356,13 +356,9 @@ describe('Marking data', () => {
   })
 
   it('should call function to prevent submitting by text-inputs', async () => {
-    const screen = await renderWithProvider(<HallOfFame/>)
-    const formField = screen.getByTitle('Mark value').query()
-
-    await formField?.focus()
     await userEvent.keyboard('{Enter}')
 
-    expect(formField).toBeInTheDocument()
+    expect(inputField).toBeInTheDocument()
     expect(preventReloadByEnter).toHaveBeenCalled()
     expect(preventReloadByEnter).toHaveReturnedWith(true)
   })
