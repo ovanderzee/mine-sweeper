@@ -186,5 +186,11 @@ export const countMoves = (state: GameState): number =>
     .filter(cell => cell.stage === CellStateStage.TESTED)
     .length
 
+export const countByFillType = (state: GameState, checkFillType: (fill: number) => boolean): number =>
+  state.board
+    .flat()
+    .filter(cell => checkFillType(cell.fill))
+    .length
+
 export const getFillDistribution = (board: CellState[][]): number[][] =>
   board.map((row: CellState[]) => row.map((cell: CellState) => cell.fill))

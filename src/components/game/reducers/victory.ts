@@ -17,6 +17,7 @@ export const victoryReducer = (state: GameState, config: AppConfig): GameState =
 
   const gameVars: GameScore = {
     cells: Math.pow(BOARD_SIZE, 2),
+//     blanks: countByFillType(state, (f) => f===0),
     mines: MINE_COUNT,
     level: GAME_LEVEL,
     mode: PLAY_MODE,

@@ -22,6 +22,7 @@
 - Similar Game button with score details, Soortgelijk Spel
 - Rename user with score details
 - Count blanks and calculate blanks/pointers/mines ratio
+- Get rid of MINE_COUNT, it is derived, and there are functions to count or calculate it
 
 
 ## [4.1.0] - 2026

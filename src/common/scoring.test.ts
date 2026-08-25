@@ -3,7 +3,7 @@ import {
   leastClicksToWin, mostClicksToWin,
   unmarkCells,
   makeBoardCode, rebuildGameData,
-  precise, refineScores, getFillDistribution
+  precise, refineScores, getFillDistribution, countByFillType
 } from './scoring'
 import { newGameState, blank18pct, blank26pct, blank31pct, blank41pct } from '../__mocks__/game-states'
 import { ScoreItem } from './game.d'
@@ -237,3 +237,24 @@ it('getFillDistribution should offer a comparable board', ()=>{
   const ngFills = getFillDistribution(newGameState.board)
   expect(ngFills).toStrictEqual(newGameFillDistribution)
 })
+
+describe('Count filltypes', () => {
+  const mineCount = 49
+
+  it('should count blanks, pointers and mines', () => {
+    const game = blank18pct
+    const blanks = countByFillType(game, (f) => f===0)
+    const pointers = countByFillType(game, (f) => f>0 && f<9)
+    const mines = countByFillType(game, (f) => f>8)
+    expect(mines + pointers + blanks).toBe(mineCount)
+  })
+
+  it('should add fillTypes to find total cells', () => {
+    const game = blank41pct
+    const blanks = countByFillType(game, (f) => f===0)
+    const pointers = countByFillType(game, (f) => f>0 && f<9)
+    const mines = countByFillType(game, (f) => f>8)
+    expect(mines + pointers + blanks).toBe(mineCount)
+  })
+})
+

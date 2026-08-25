@@ -1,9 +1,9 @@
 import { ScoreItem } from './game.d'
 import { DEFAULTS } from './defaults'
 import { SCORE_RADIX, SCORE_LIST_NAMES } from './constants'
-import { capitalise } from './functions'
+import { capitalise, sanitisedParse } from './functions'
 import { AppConfig, PlayMode } from './app.d'
-import { sanitisedParse } from './functions'
+import { rebuildGameData } from './scoring'
 
 export const doubleGameLevel = () => {
   const victoryStorage = localStorage.getItem(`mv-${SCORE_LIST_NAMES[1]}`)
@@ -101,6 +101,39 @@ export const changePlayModeValues = () => {
   }
 }
 
+export const addBlankFillCount = () => {
+  const wonGamesStorage = localStorage.getItem(`mv-${SCORE_LIST_NAMES[3]}`)
+  if (wonGamesStorage) {
+
+    try {
+      const scores: ScoreItem[] = sanitisedParse(wonGamesStorage)
+      const converted = scores.map((s: ScoreItem) => {
+        const rgData = rebuildGameData(s.code)
+        const flatBoard = rgData.board.flat()
+        const countBlanks = flatBoard.filter(c => c.fill === 0).length
+        const countPointers = flatBoard.filter(c => c.fill > 0 && c.fill < 9).length
+
+        const calcTotal = countBlanks + countPointers + s.game.mines
+        const cfgTotal = Math.pow( rgData.config['BOARD_SIZE'], 2 )
+        if (calcTotal !== cfgTotal) {
+          throw new Error(`FillType counts do not add up to board-size^2 for score ${s.code}. `)
+        }
+
+        s.game.blanks = countBlanks
+        return s
+      })
+
+      localStorage.setItem(`mv-${SCORE_LIST_NAMES[4]}`, JSON.stringify(converted))
+//       localStorage.removeItem(`mv-${SCORE_LIST_NAMES[3]}`)
+      console.log('Scorelist updated to keep more characteristic game data.')
+    }
+    catch(e) {
+      console.error(e)
+      console.log('New scorelist pending. Existing data were kept.')
+    }
+  }
+}
+
 /**
  Add updates at the end
  */
@@ -108,4 +141,5 @@ export default {
   doubleGameLevel,
   removeMaxScores,
   changePlayModeValues,
+  addBlankFillCount,
 }
