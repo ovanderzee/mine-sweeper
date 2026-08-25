@@ -4,7 +4,7 @@ import storage from '../../../common/storage'
 import { GameState,
   GameScore, PlayScore, ScoreItem } from '../../../common/game.d'
 import { precise, refineScores, leastClicksToWin, mostClicksToWin,
-  makeBoardCode, countMoves, calculateScore } from '../../../common/scoring'
+  makeBoardCode, countMoves, calculateScore, countByFillType } from '../../../common/scoring'
 
 export const victoryReducer = (state: GameState, config: AppConfig): GameState => {
   const { BOARD_SIZE, GAME_LEVEL, MINE_COUNT, PLAYER_NAME, PLAY_MODE } = config
@@ -17,7 +17,7 @@ export const victoryReducer = (state: GameState, config: AppConfig): GameState =
 
   const gameVars: GameScore = {
     cells: Math.pow(BOARD_SIZE, 2),
-//     blanks: countByFillType(state, (f) => f===0),
+    blanks: countByFillType(state, (fill: number) => fill===0),
     mines: MINE_COUNT,
     level: GAME_LEVEL,
     mode: PLAY_MODE,

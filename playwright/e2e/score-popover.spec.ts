@@ -66,7 +66,7 @@ test.describe('ScorePopover main buttons', () => {
 
   const highLevelScore = {
     "code":"9980Aw0RlSuDrn4JGWLG0h5Ig","date":1758554592365,"user":"FareSee",
-    "game":{"cells":81,"mines":11,"effort":{"least":10,"most":43},"level":8},
+    "game":{"cells":81,"blanks":29,"mines":11,"level":8,"effort":{"least":10,"most":43}},
     "play":{"moves":12,"duration":47.773},
     "score":{"efficiency":0.8333,"speed":0.2512,"points":209}
   }

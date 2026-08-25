@@ -124,7 +124,7 @@ export const addBlankFillCount = () => {
       })
 
       localStorage.setItem(`mv-${SCORE_LIST_NAMES[4]}`, JSON.stringify(converted))
-//       localStorage.removeItem(`mv-${SCORE_LIST_NAMES[3]}`)
+      localStorage.removeItem(`mv-${SCORE_LIST_NAMES[3]}`)
       console.log('Scorelist updated to keep more characteristic game data.')
     }
     catch(e) {
