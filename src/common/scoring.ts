@@ -25,6 +25,7 @@ export const refineScores = (scores: BareScoreItem[]): ScoreItem[] => {
     const countByFill = (fill: number) => flatBoard.filter(c => c.fill === fill).length
 
     score.signature = {
+      board,
       // @ts-ignore // error TS6133: 'v' is declared but its value is never read.
       fill_frequency: Array(18).fill(0).map((v,i) => countByFill(i)),
       invalid_code: board.length === 1

@@ -10,6 +10,7 @@ import { initialGameState } from '../game/common'
 import { ApproveModal } from './Modal'
 import Game from '../game/Game'
 import Histogram from './Histogram'
+import BoardImage from './BoardImage'
 import './ScorePopover.css'
 
 interface ScorePopoverProps {
@@ -207,8 +208,11 @@ const ScorePopover = (props: ScorePopoverProps) => {
       </article>
       <article>
         {log.signature.invalid_code ?
-          <div className="frequency-histogram"><span>{text.error['Invalid code']}</span></div> :
-          <Histogram data={log.signature.fill_frequency} />
+          <div className="error"><span>{text.error['Invalid code']}</span></div> :
+          <>
+            <Histogram data={log.signature.fill_frequency} />
+            <BoardImage board={log.signature.board} />
+          </>
         }
       </article>
       <footer>

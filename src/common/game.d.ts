@@ -83,14 +83,15 @@ export interface PlayScore {
 }
 
 export interface Signature {
+  board: CellState[][],
   fill_frequency: number[],
   invalid_code: boolean,
 }
 
-export type Relative = {
-  "blanks": number,
-  "pointers": number,
-  "mines": number,
+export interface Relative {
+  blanks: number,
+  pointers: number,
+  mines: number,
 }
 
 export interface ScoreCalc {

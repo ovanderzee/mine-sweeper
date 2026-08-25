@@ -1,0 +1,14 @@
+svg.board-image {
+  display: inline-block;
+  width: 6em;
+  height: 6em;
+  opacity: 0.4;
+}
+
+svg.board-image rect.mine {
+  fill: black;
+}
+
+svg.board-image rect.safe {
+  fill: white;
+}
