@@ -67,6 +67,7 @@ export interface GameState {
 export interface GameScore {
   cells: number,
   blanks: number,
+  pointers?: number,
   mines: number,
   level: number,
   mode?: PlayMode,
@@ -84,6 +85,12 @@ export interface PlayScore {
 export interface Signature {
   fill_frequency: number[],
   invalid_code: boolean,
+}
+
+export type Relative = {
+  "blanks": number,
+  "pointers": number,
+  "mines": number,
 }
 
 export interface ScoreCalc {
@@ -105,6 +112,7 @@ export interface BareScoreItem {
 export interface ScoreItem extends BareScoreItem {
   rank: number,
   signature: Signature,
+  relative: Relative,
 }
 
 export type ScoreParam = keyof ScoreItem | keyof ScoreItem["game"] | keyof ScoreItem["play"] | keyof ScoreItem["score"]

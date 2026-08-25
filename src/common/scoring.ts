@@ -15,6 +15,7 @@ export const refineScores = (scores: BareScoreItem[]): ScoreItem[] => {
   return scores.map(s => {
     const score = s as ScoreItem
     score.rank = points.findIndex(points => points === score.score.points) + 1
+    score.game.pointers = score.game.cells - score.game.blanks - score.game.mines
     if (score.game && !score.game.mode) {
       score.game.mode = PlayMode.NORMAL
     }
@@ -22,13 +23,17 @@ export const refineScores = (scores: BareScoreItem[]): ScoreItem[] => {
     const board = rebuildGameData(score.code).board
     const flatBoard = board.flat()
     const countByFill = (fill: number) => flatBoard.filter(c => c.fill === fill).length
-    const fillCounts: number[] = []
-    for(let i = 0; i < 18; i++) {
-      fillCounts.push(countByFill(i))
-    }
+
     score.signature = {
-      fill_frequency: fillCounts,
+      // @ts-ignore // error TS6133: 'v' is declared but its value is never read.
+      fill_frequency: Array(18).fill(0).map((v,i) => countByFill(i)),
       invalid_code: board.length === 1
+    }
+
+    score.relative = {
+      blanks: score.game.blanks / score.game.cells,
+      pointers: score.game.pointers / score.game.cells,
+      mines: score.game.mines / score.game.cells
     }
 
     return score

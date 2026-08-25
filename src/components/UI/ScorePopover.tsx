@@ -166,6 +166,23 @@ const ScorePopover = (props: ScorePopoverProps) => {
             <small>{text.VAR['effort']}</small>
             <span>{log.game.effort.least} - {log.game.effort.most}</span>
           </div>
+          <code className="s">[</code>
+          <div className="unit">
+            <small>{text.VAR['blanks']}</small>
+            <span>{log.game.blanks}</span>
+          </div>
+          <code className="s">:</code>
+          <div className="unit">
+            <small>{text.VAR['pointers']}</small>
+            <span>{log.game.cells - log.game.blanks - log.game.mines}</span>
+          </div>
+          <code className="s">:</code>
+          <div className="unit">
+            <small>{text.VAR['mines']}</small>
+            <span>{log.game.mines}</span>
+          </div>
+          <code className="s">]</code>
+
         </section>
 
         <section className="group">

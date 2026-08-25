@@ -10,7 +10,7 @@ const testScore = () => { return {
   signature: {fill_frequency: [18,17,6,4,2,0,0,0,0], invalid_code: false},
   play: {moves: 15, duration: 41.599},
   score: {efficiency: 0.8, speed: 0.3606, points: 288}
-}}
+} as ScoreItem}
 
 describe('Basic Console methods', () => {
   it('should operate on all scores', () => {
