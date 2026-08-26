@@ -34,8 +34,8 @@ const HallOfFame = () => {
 
   const parameters = [
     'rank', 'user', 'date',
-    'level', 'mines', 'cells',
-    'moves', 'duration',
+    'blanks', 'pointers', 'mines', 'cells',
+    'level', 'moves', 'duration',
     'efficiency', 'speed', 'points',
   ] as ScoreParam[]
   const mathParameters = parameters.filter(p => !(p === 'user' || p === 'date'))
@@ -80,8 +80,16 @@ const HallOfFame = () => {
       const byLevel = (a: ScoreItem, b: ScoreItem) => (b.game?.level || 0) - (a.game?.level || 0)
       return rootScores.sort(byLevel)
     },
+    'blanks': () => {
+      const byBlanks = (a:ScoreItem, b:ScoreItem) => a.relative.blanks - b.relative.blanks
+      return rootScores.sort(byBlanks)
+    },
+    'pointers': () => {
+      const byPointers = (a:ScoreItem, b:ScoreItem) => a.relative.pointers - b.relative.pointers
+      return rootScores.sort(byPointers)
+    },
     'mines': () => {
-      const byMines = (a:ScoreItem, b:ScoreItem) => a.game.mines - b.game.mines
+      const byMines = (a:ScoreItem, b:ScoreItem) => a.relative.mines - b.relative.mines
       return rootScores.sort(byMines)
     },
     'cells': () => {
@@ -251,13 +259,17 @@ const HallOfFame = () => {
                 }
               </div>
               <section className="group game">
-                <div className="unit level">
-                  <span>{text.VAR['level']}</span>
-                  <span>{log.game.level}</span>
+                <div className="unit blanks">
+                  <span>{text.VAR['blanks']}</span>
+                  <span>{represent(log.relative.blanks * 100, 3)}%</span>
+                </div>
+                <div className="unit pointers">
+                  <span>{text.VAR['pointers']}</span>
+                  <span>{represent(log.relative.pointers * 100, 3)}%</span>
                 </div>
                 <div className="unit mines">
                   <span>{text.VAR['mines']}</span>
-                  <span>{log.game.mines}</span>
+                  <span>{represent(log.relative.mines * 100, 3)}%</span>
                 </div>
                 <div className="unit cells">
                   <span>{text.VAR['cells']}</span>
@@ -265,6 +277,10 @@ const HallOfFame = () => {
                 </div>
               </section>
               <section className="group play">
+                <div className="unit level">
+                  <span>{text.VAR['level']}</span>
+                  <span>{log.game.level}</span>
+                </div>
                 <div className="unit effort">
                   <span>{text.VAR['effort']}</span>
                   <span>{log.game.effort.least}</span>

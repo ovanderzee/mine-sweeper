@@ -212,13 +212,31 @@ describe('The hall-of-fame-page list sorting', () => {
     expect(Number(best)).toBeGreaterThan(Number(worst))
   })
 
+  it('should sort on blanks ascending', async () => {
+    await userEvent.selectOptions(selectX, 'blanks')
+
+    const best = firstEntry('.blanks :last-child')
+    const worst = lastEntry('.blanks :last-child')
+
+    expect(parseFloat(best || '0')).toBeLessThan(parseFloat(worst || '0'))
+  })
+
+  it('should sort on pointers ascending', async () => {
+    await userEvent.selectOptions(selectX, 'pointers')
+
+    const best = firstEntry('.pointers :last-child')
+    const worst = lastEntry('.pointers :last-child')
+
+    expect(parseFloat(best || '0')).toBeLessThan(parseFloat(worst || '0'))
+  })
+
   it('should sort on mines ascending', async () => {
     await userEvent.selectOptions(selectX, 'mines')
 
     const best = firstEntry('.mines :last-child')
     const worst = lastEntry('.mines :last-child')
 
-    expect(Number(best)).toBeLessThan(Number(worst))
+    expect(parseFloat(best || '0')).toBeLessThan(parseFloat(worst || '0'))
   })
 
   it('should sort on fields ascending', async () => {

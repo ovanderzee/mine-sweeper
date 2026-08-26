@@ -105,7 +105,7 @@
     "occurrences": "Voorkomens",
     "surrounding": "Aantal omliggende mijnen",
     "blanks": "blanco's",
-    "pointers": "indicators"
+    "pointers": "indices"
   },
   "settings": {
     "On begin Play": "De Uitdaging...",

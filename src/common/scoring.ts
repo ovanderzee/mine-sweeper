@@ -40,9 +40,9 @@ export const refineScores = (scores: BareScoreItem[]): ScoreItem[] => {
     }
 
     score.relative = {
-      blanks: score.game.blanks / score.game.cells,
-      pointers: score.game.pointers / score.game.cells,
-      mines: score.game.mines / score.game.cells
+      blanks: significant(score.game.blanks / score.game.cells, 3),
+      pointers: significant(score.game.pointers / score.game.cells, 3),
+      mines: significant(score.game.mines / score.game.cells, 3),
     }
 
     return score
