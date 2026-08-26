@@ -5,7 +5,7 @@ import { PlayMode } from '../../common/app.d'
 import { ScoreItem } from '../../common/game.d'
 import { ShieldByRank } from './Shield'
 import ElasticBrace from './ElasticBrace'
-import { precise, rebuildGameData } from '../../common/scoring'
+import { represent, rebuildGameData } from '../../common/scoring'
 import { initialGameState } from '../game/common'
 import { ApproveModal } from './Modal'
 import Game from '../game/Game'
@@ -124,7 +124,7 @@ const ScorePopover = (props: ScorePopoverProps) => {
             <code className="xl">&rArr;</code>
             <div className="unit">
               <small>{text.VAR['efficiency']}</small>
-              <span className="efficiency">{precise(log.score.efficiency, 3)}</span>
+              <span className="efficiency">{represent(log.score.efficiency, 3)}</span>
             </div>
           </div>
         </section>
@@ -140,13 +140,13 @@ const ScorePopover = (props: ScorePopoverProps) => {
             <code className="s">/</code>
             <div className="unit">
               <small>{text.VAR['duration']}</small>
-              <span className="duration">{precise(log.play.duration, 3)}s</span>
+              <span className="duration">{represent(log.play.duration, 3)}s</span>
             </div>
             <code>)</code>
             <code className="xl">&rArr;</code>
             <div className="unit">
               <small>{text.VAR['speed']}</small>
-              <span className="speed">{precise(log.score.speed, 3)}/s</span>
+              <span className="speed">{represent(log.score.speed, 3)}/s</span>
             </div>
           </div>
         </section>

@@ -10,7 +10,7 @@ import Diagram from '../UI/Diagram'
 import { PlayMode } from '../../common/app.d'
 import { ScoreItem, ScoreParam, MarkScoreData } from '../../common/game.d'
 import storage from '../../common/storage'
-import { precise } from '../../common/scoring'
+import { represent } from '../../common/scoring'
 import { SHOW_SORT_THRESHOLD, SHOW_DIAGRAM_THRESHOLD, SHOW_MARKING_THRESHOLD } from '../../common/constants'
 import { preventReloadByEnter } from '../../common/functions'
 import ScorePopover from '../UI/ScorePopover'
@@ -275,17 +275,17 @@ const HallOfFame = () => {
                 </div>
                 <div className="unit duration">
                   <span>{text.VAR['duration']}</span>
-                  <span>{precise(log.play.duration, 3)}s</span>
+                  <span>{represent(log.play.duration, 3)}s</span>
                 </div>
               </section>
               <section className="group score">
                 <div className="unit efficiency">
                   <span>{text.VAR['efficiency']}</span>
-                  <span>{precise(log.score.efficiency, 2)}</span>
+                  <span>{represent(log.score.efficiency, 2)}</span>
                 </div>
                 <div className="unit speed">
                   <span>{text.VAR['speed']}</span>
-                  <span>{precise(log.score.speed, 2)}</span>
+                  <span>{represent(log.score.speed, 2)}</span>
                 </div>
               </section>
             </article>

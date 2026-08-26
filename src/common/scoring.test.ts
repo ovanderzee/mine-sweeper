@@ -3,7 +3,7 @@ import {
   leastClicksToWin, mostClicksToWin,
   unmarkCells,
   makeBoardCode, rebuildGameData,
-  precise, refineScores, getFillDistribution, countByFillType
+  represent, significant, refineScores, getFillDistribution, countByFillType
 } from './scoring'
 import { initialScore } from '../components/game/common'
 import { newGameState, blank18pct, blank26pct, blank31pct, blank41pct } from '../__mocks__/game-states'
@@ -187,22 +187,66 @@ describe('Sanity checking on boardCode', () => {
   })
 })
 
-describe('Precision as long as we need it', () => {
+describe('Representation as we need it', () => {
+  it('should return a string', () => {
+    const figure = 23.456
+    const result = represent(figure, 3)
+    expect(typeof result).toBe('string')
+  })
+
+  it('should round to precision', () => {
+    const figure = 23.456
+    const result = represent(figure, 3)
+    expect(result).toBe('23.5')
+  })
+
+  it('should round to precision nearing zero without leading zero', () => {
+    const figure = 0.23456
+    const result = represent(figure, 3)
+    expect(result).toBe('.235')
+  })
+
+  it('should round to precision at great heights', () => {
+    const figure = 23456
+    const result = represent(figure, 3)
+    expect(result).toBe('2.35e+4')
+  })
+
+  it('should not add trailing zeroes after the decimal point', () => {
+    const figure = 8.001
+    const result = represent(figure, 3)
+    expect(result).toBe('8.00')
+  })
+})
+
+describe('Significant as we need it', () => {
   it('should return a number', () => {
     const figure = 23.456
-    const result = precise(figure, 3)
+    const result = significant(figure, 3)
     expect(typeof result).toBe('number')
   })
 
   it('should round to significance', () => {
     const figure = 23.456
-    const result = precise(figure, 3)
+    const result = significant(figure, 3)
     expect(result).toBe(23.5)
   })
 
+  it('should round to significance nearing zero', () => {
+    const figure = 0.23456
+    const result = significant(figure, 3)
+    expect(result).toBe(0.235)
+  })
+
+  it('should round to significance at great heights', () => {
+    const figure = 23456
+    const result = significant(figure, 3)
+    expect(result).toBe(23500)
+  })
+
   it('should not add trailing zeroes after the decimal point', () => {
-    const figure = 8
-    const result = precise(figure, 3)
+    const figure = 8.001
+    const result = significant(figure, 3)
     expect(result).toBe(8)
   })
 })

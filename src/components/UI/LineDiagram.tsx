@@ -2,7 +2,7 @@ import { useContext } from 'react'
 import PageContext from '../../store/page-context'
 import { ScoreParam, FlatScore, MarkScoreData } from '../../common/game.d'
 import { canNotDealWithForeignObjects } from '../../common/functions'
-import { precise } from '../../common/scoring'
+import { significant } from '../../common/scoring'
 import './LineDiagram.css'
 
 interface Coordinate {
@@ -21,7 +21,7 @@ interface LineDiagramProps {
 
 const findAverage = (sequence: number[]): number => {
   const sum = sequence.reduce((acc, curr) => acc + curr)
-  return precise(sum / sequence.length, 4)
+  return significant(sum / sequence.length, 4)
 }
 
 const findMedian = (sequence: number[]): number => {
@@ -30,14 +30,14 @@ const findMedian = (sequence: number[]): number => {
   } else {
     const a = sequence[(sequence.length / 2) - 1]
     const b = sequence[sequence.length / 2]
-    return precise((a + b) / 2, 4)
+    return significant((a + b) / 2, 4)
   }
 }
 
 const calcBoundingAxis = (highest: number) => {
   const exponent = Math.floor(Math.log10(highest)) - 1
   const dataScale = Math.pow(10, exponent)
-  return precise(Math.ceil(highest / dataScale) * dataScale, 4)
+  return significant(Math.ceil(highest / dataScale) * dataScale, 4)
 }
 
 const LineDiagram = (props: LineDiagramProps) => {

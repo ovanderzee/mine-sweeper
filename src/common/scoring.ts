@@ -7,7 +7,15 @@ import { calculateMineCount } from './defaults'
 import { SCORE_RADIX } from './constants'
 import { ScoreItem, BareScoreItem } from './game.d'
 
-export const precise = (figure: number, precision: number) => Number(figure.toPrecision(precision))
+// for numbers to see on screen
+export const represent = (figure: number, precision: number): string => {
+  return Math.abs(figure) >= 1 ? figure.toPrecision(precision) : figure.toPrecision(precision).substring(1)
+}
+
+// for numbers to calculate with or to store
+export const significant = (figure: number, precision: number): number => {
+  return Number(represent(figure, precision))
+}
 
 export const refineScores = (scores: BareScoreItem[]): ScoreItem[] => {
   scores.sort((a, b) => b.score.points - a.score.points)
@@ -180,8 +188,8 @@ export const rebuildGameData = (boardCode: string): {board: CellState[][], confi
 }
 
 export const calculateScore = (game: GameScore, play: PlayScore): ScoreCalc => {
-  const efficiency = precise(game.effort.least / play.moves, 4)
-  const speed = precise(play.moves / play.duration, 4)
+  const efficiency = significant(game.effort.least / play.moves, 4)
+  const speed = significant(play.moves / play.duration, 4)
   const points = Math.round(efficiency * speed * 1000)
   return {efficiency, speed, points}
 }

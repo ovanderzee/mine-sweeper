@@ -1,7 +1,7 @@
 import { useContext, CSSProperties } from 'react'
 import PageContext from '../../store/page-context'
 import { Relative } from '../../common/game.d'
-import { precise } from '../../common/scoring'
+import { significant } from '../../common/scoring'
 import './PieDiagram.css'
 
 interface PieProps {
@@ -12,9 +12,9 @@ const PieDiagram = (props: PieProps) => {
   const pageCtx = useContext(PageContext)
   const text = pageCtx.text
 
-  const blankLevel = precise(props.rel.blanks * 100, 3)
-  const pointerLevel = precise(props.rel.pointers * 100, 3)
-  const mineLevel = precise(props.rel.mines * 100, 3)
+  const blankLevel = significant(props.rel.blanks * 100, 3)
+  const pointerLevel = significant(props.rel.pointers * 100, 3)
+  const mineLevel = significant(props.rel.mines * 100, 3)
 
   return (
     <svg

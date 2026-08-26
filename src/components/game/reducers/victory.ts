@@ -3,7 +3,7 @@ import { AppConfig } from '../../../common/app.d'
 import storage from '../../../common/storage'
 import { GameState,
   GameScore, PlayScore, ScoreItem } from '../../../common/game.d'
-import { precise, refineScores, leastClicksToWin, mostClicksToWin,
+import { significant, refineScores, leastClicksToWin, mostClicksToWin,
   makeBoardCode, countMoves, calculateScore, countByFillType } from '../../../common/scoring'
 
 export const victoryReducer = (state: GameState, config: AppConfig): GameState => {
@@ -30,7 +30,7 @@ export const victoryReducer = (state: GameState, config: AppConfig): GameState =
   // time in seconds
   const playVars: PlayScore = {
     moves: countMoves(state),
-    duration: precise(Math.max(state.tShift - state.tZero, MIN_DURATION) / 1000, 5)
+    duration: significant(Math.max(state.tShift - state.tZero, MIN_DURATION) / 1000, 5)
   }
 
   const victory: ScoreItem = refineScores([{
