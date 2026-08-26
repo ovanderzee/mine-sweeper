@@ -183,6 +183,13 @@ code.l {font-size: 112%;}
 code.xl {font-size: 124%;}
 code.xxl {font-size: 136%;}
 
+#score-popover figure article.graphs {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: end;
+  gap: 1em 2.5em;
+}
+
 #score-popover figure footer {
   display: flex;
   gap: 0;
@@ -194,7 +201,7 @@ code.xxl {font-size: 136%;}
 @media screen and (orientation: portrait) {
   #score-popover {
     min-width: unset;
-    width: calc(var(--app-width) - 10vw);
+    width: calc(var(--app-width) + 1ex);
   }
   .group h5 {
     display: none;
