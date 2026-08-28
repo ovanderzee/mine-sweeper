@@ -34,9 +34,11 @@ const HallOfFame = () => {
 
   const parameters = [
     'rank', 'user', 'date',
-    'blanks', 'pointers', 'mines', 'cells',
-    'level', 'moves', 'duration',
+    'blanks', 'pointers', 'mines', 'cells', 'least',
+    'level', 'remaining', 'moves', 'duration',
     'efficiency', 'speed', 'points',
+    'blank_pointer_ratio', 'blank_mine_ratio', 'pointer_mine_ratio',
+    'pointer_mark', 'pointer_avg', 'mine_mark', 'mine_avg'
   ] as ScoreParam[]
   const mathParameters = parameters.filter(p => !(p === 'user' || p === 'date'))
 
@@ -103,7 +105,40 @@ const HallOfFame = () => {
     'duration': () => {
       const byDuration = (a:ScoreItem, b:ScoreItem) => a.play.duration - b.play.duration
       return rootScores.sort(byDuration)
-    }
+    },
+    'least': () => {
+      const byLeast = (a:ScoreItem, b:ScoreItem) => b.game.effort.least - a.game.effort.least
+      return rootScores.sort(byLeast)
+    },
+    'blank_pointer_ratio': () => {
+      const byRatio = (a:ScoreItem, b:ScoreItem) => b.signature.blank_pointer_ratio - a.signature.blank_pointer_ratio
+      return rootScores.sort(byRatio)
+    },
+    'blank_mine_ratio': () => {
+      const byRatio = (a:ScoreItem, b:ScoreItem) => b.signature.blank_mine_ratio - a.signature.blank_mine_ratio
+      return rootScores.sort(byRatio)
+    },
+    'pointer_mine_ratio': () => {
+      const byRatio = (a:ScoreItem, b:ScoreItem) => b.signature.pointer_mine_ratio - a.signature.pointer_mine_ratio
+      return rootScores.sort(byRatio)
+    },
+    'pointer_mark': () => {
+      const byDifficulty = (a:ScoreItem, b:ScoreItem) => b.signature.pointer_mark - a.signature.pointer_mark
+      return rootScores.sort(byDifficulty)
+    },
+    'pointer_avg': () => {
+      const byDifficulty = (a:ScoreItem, b:ScoreItem) => b.signature.pointer_avg - a.signature.pointer_avg
+      return rootScores.sort(byDifficulty)
+    },
+    'mine_mark': () => {
+      const byDifficulty = (a:ScoreItem, b:ScoreItem) => b.signature.mine_mark - a.signature.mine_mark
+      console.log('mine-mark sorting function')
+      return rootScores.sort(byDifficulty)
+    },
+    'mine_avg': () => {
+      const byDifficulty = (a:ScoreItem, b:ScoreItem) => b.signature.mine_avg - a.signature.mine_avg
+      return rootScores.sort(byDifficulty)
+    },
   }
 
   const sortByKind = function (event: React.ChangeEvent): void {
@@ -281,8 +316,8 @@ const HallOfFame = () => {
                   <span>{text.VAR['level']}</span>
                   <span>{log.game.level}</span>
                 </div>
-                <div className="unit effort">
-                  <span>{text.VAR['effort']}</span>
+                <div className="unit least">
+                  <span>{text.VAR['least']}</span>
                   <span>{log.game.effort.least}</span>
                 </div>
                 <div className="unit moves">

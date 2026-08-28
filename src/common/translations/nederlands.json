@@ -99,13 +99,21 @@
     "level": "nivo",
     "cells": "velden",
     "mines": "mijnen",
-    "effort": "min. zetten",
+    "least": "min. zetten",
     "moves": "zetten",
+    "remaining": "rest niet-mijn",
     "duration": "duur",
     "occurrences": "Voorkomens",
     "surrounding": "Aantal omliggende mijnen",
     "blanks": "blanco's",
-    "pointers": "indices"
+    "pointers": "indices",
+    "blank_pointer_ratio": "blanco/indice",
+    "blank_mine_ratio": "blanco/mijn",
+    "pointer_mine_ratio": "indice/mijn",
+    "pointer_mark": "hoge indice",
+    "pointer_avg": "gemid.indice",
+    "mine_mark": "hoge mijn",
+    "mine_avg": "gemid.mijn"
   },
   "settings": {
     "On begin Play": "De Uitdaging...",

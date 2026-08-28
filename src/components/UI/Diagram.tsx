@@ -13,7 +13,7 @@ const Diagram = (props: DiagramProps) => {
 
   // flatten scores
   const flatScores: FlatScore[] = props.scores.map((score: ScoreItem) => {
-    const flattened: unknown = { ...score, ...score.game, ...score.play, ...score.score, ...score.signature, ...score.relative }
+    const flattened: unknown = { ...score, ...score.game, ...score.game.effort, ...score.play, ...score.score, ...score.signature, ...score.relative }
     return flattened as FlatScore
   })
 

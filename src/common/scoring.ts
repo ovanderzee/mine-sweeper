@@ -31,18 +31,34 @@ export const refineScores = (scores: BareScoreItem[]): ScoreItem[] => {
     const board = rebuildGameData(score.code).board
     const flatBoard = board.flat()
     const countByFill = (fill: number) => flatBoard.filter(c => c.fill === fill).length
+    const pointerValues = flatBoard.filter(c => c.fill > 0 && c.fill < 9).map(p => p.fill).sort()
+    const mineValues = flatBoard.filter(c => c.fill > 8).map(p => p.fill - 9).sort()
+    const fraction = .92
 
     score.signature = {
       board,
       // @ts-ignore // error TS6133: 'v' is declared but its value is never read.
       fill_frequency: Array(18).fill(0).map((v,i) => countByFill(i)),
-      invalid_code: board.length === 1
+      invalid_code: board.length === 1,
+      blank_pointer_ratio: significant(score.game.blanks / score.game.pointers, 3),
+      blank_mine_ratio: significant(score.game.blanks / score.game.mines, 3),
+      pointer_mine_ratio: significant(score.game.pointers / score.game.mines, 3),
+      pointer_mark: pointerValues[Math.round((pointerValues.length -1) * fraction)],
+      pointer_avg: significant(pointerValues.reduce((acc, curr) => acc + curr, 0) / pointerValues.length, 3),
+      mine_mark: mineValues[Math.round((mineValues.length -1) * fraction)],
+      mine_avg: significant(mineValues.reduce((acc, curr) => acc + curr, 0) / mineValues.length, 3),
     }
 
     score.relative = {
       blanks: significant(score.game.blanks / score.game.cells, 3),
       pointers: significant(score.game.pointers / score.game.cells, 3),
       mines: significant(score.game.mines / score.game.cells, 3),
+      least: significant(score.game.effort.least / score.game.cells, 3),
+      moves: significant(score.play.moves / score.game.cells, 3),
+    }
+
+    if (typeof score.play?.remaining === 'number') {
+      score.relative.remaining = significant(score.play.remaining / score.game.cells, 3)
     }
 
     return score

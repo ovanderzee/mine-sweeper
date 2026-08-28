@@ -39,9 +39,13 @@ export const initialBoard = (BOARD_SIZE: number) =>
 export const initialScore: ScoreItem = {
   code: '', date: 0, user: '', rank: 0,
   game: {cells: 0, blanks: 0, mines: 0, level: 0, mode: '', effort: {least: 0, most: 0}},
-  signature: {board: [[]], fill_frequency: [0,0,0,0,0,0,0,0,0], invalid_code: false},
-  relative: {blanks: 0, pointers: 0, mines: 0},
-  play: {moves: 0, duration: 0},
+  signature: {
+    board: [[]], fill_frequency: [0,0,0,0,0,0,0,0,0], invalid_code: false,
+    blank_pointer_ratio: 0, blank_mine_ratio: 0, pointer_mine_ratio: 0,
+    pointer_mark: 0, pointer_avg: 0, mine_mark: 0, mine_avg: 0
+  },
+  relative: {blanks: 0, pointers: 0, mines: 0, least: 0, moves: 0, remaining: 0},
+  play: {remaining: 0, moves: 0, duration: 0},
   score: {efficiency: 0, speed: 0, points: 0}
 }
 
