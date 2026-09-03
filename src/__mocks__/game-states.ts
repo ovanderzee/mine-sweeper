@@ -160,7 +160,7 @@ export const wonGameState: GameState = {
     },
     // todo: settle
     relative: initialScore.relative,
-    play: {moves: 4, duration: 45.244},
+    play: {flags: 0, moves: 4, duration: 45.244},
     score: {efficiency: 0.5, speed: 0.08841, points: 44}
   },
 }

@@ -45,7 +45,7 @@ export const initialScore: ScoreItem = {
     pointer_mark: 0, pointer_avg: 0, mine_mark: 0, mine_avg: 0
   },
   relative: {blanks: 0, pointers: 0, mines: 0, least: 0, moves: 0, remaining: 0},
-  play: {remaining: 0, moves: 0, duration: 0},
+  play: {flags: 0, remaining: 0, moves: 0, duration: 0},
   score: {efficiency: 0, speed: 0, points: 0}
 }
 

@@ -29,6 +29,7 @@ export const victoryReducer = (state: GameState, config: AppConfig): GameState =
 
   // time in seconds
   const playVars: PlayScore = {
+    flags: state.board.flat().filter(c => c.locked).length,
     moves: countMoves(state),
     duration: significant(Math.max(state.tShift - state.tZero, MIN_DURATION) / 1000, 5)
   }

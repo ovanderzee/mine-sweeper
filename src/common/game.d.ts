@@ -78,6 +78,7 @@ export interface GameScore {
 }
 
 export interface PlayScore {
+  flags: number,
   remaining?: number,
   moves: number,
   duration: number,
@@ -108,7 +109,10 @@ export interface Relative {
 export interface ScoreCalc {
   efficiency: number,
   speed: number,
-  points: number
+  points: number,
+  pointsLessEffort?: number,
+  pointsMoreSpeed?: number,
+  pointsBoth?: number,
 }
 
 export interface BareScoreItem {

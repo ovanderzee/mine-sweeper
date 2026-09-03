@@ -11,7 +11,7 @@ const testScore = () => { return {
   signature: {board: [[]], fill_frequency: [18,17,6,4,2,0,0,0,0], invalid_code: false},
   // todo: settle
   relative: initialScore.relative,
-  play: {moves: 15, duration: 41.599},
+  play: {flags: 0, moves: 15, duration: 41.599},
   score: {efficiency: 0.8, speed: 0.3606, points: 288}
 } as unknown as ScoreItem}
 

@@ -54,6 +54,7 @@ export const refineScores = (scores: BareScoreItem[]): ScoreItem[] => {
       pointers: significant(score.game.pointers / score.game.cells, 3),
       mines: significant(score.game.mines / score.game.cells, 3),
       least: significant(score.game.effort.least / score.game.cells, 3),
+      flags: significant(score.play.flags / score.game.cells, 3),
       moves: significant(score.play.moves / score.game.cells, 3),
     }
 
@@ -204,10 +205,16 @@ export const rebuildGameData = (boardCode: string): {board: CellState[][], confi
 }
 
 export const calculateScore = (game: GameScore, play: PlayScore): ScoreCalc => {
+  const checks = game?.mode === 'Sharp' ? play.moves + play.flags : play.moves;
   const efficiency = significant(game.effort.least / play.moves, 4)
+  const effic2  = significant(game.effort.least / checks, 4)
   const speed = significant(play.moves / play.duration, 4)
+  const speed2  = significant(checks / play.duration, 4)
   const points = Math.round(efficiency * speed * 1000)
-  return {efficiency, speed, points}
+  const pointsLessEffort = Math.round(effic2 * speed * 1000)
+  const pointsMoreSpeed = Math.round(efficiency * speed2 * 1000)
+  const pointsBoth = Math.round(effic2 * speed2 * 1000)
+  return {efficiency, speed, points, pointsLessEffort, pointsMoreSpeed, pointsBoth}
 }
 
 export const countMoves = (state: GameState): number =>
