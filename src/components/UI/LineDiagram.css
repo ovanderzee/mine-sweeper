@@ -6,6 +6,15 @@ svg.line-diagram {
   width: 100%;
 }
 
+foreignObject {
+  overflow: visible;
+}
+
+.line-diagram .data-point foreignObject div[xmlns] {
+  position: relative;
+  top: -2.5px;
+}
+
 .line-diagram .data-point button {
   display:block;
   background: var(--state-red);
@@ -16,15 +25,12 @@ svg.line-diagram {
   box-shadow: none;
   padding: 0;
   margin: 0;
-  width: 50%;
-  height: 50%;
+  width: 100%;
+  height: 100%;
   line-height: 0;
 
   /* fix for safari version < 26 */
   position: fixed;
-
-  /* fix clickable surface */
-  transform: scale(1.333);
 }
 
 .line-diagram .mark button {
