@@ -48,6 +48,9 @@
 - Keep list of scorelist-names to prevent reuse of names
 - larger small nav-options bar for readability (board covering playground)
 
+### Removed
+- removed disabled style, not helpful usability-wise
+
 
 ## [4.0.0] - 2026-07-15
 
