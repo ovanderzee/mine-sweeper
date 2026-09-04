@@ -46,6 +46,7 @@
 - Invalid codes logged with score.code
 - Removed scores with invalid codes
 - Keep list of scorelist-names to prevent reuse of names
+- larger small nav-options bar for readability (board covering playground)
 
 
 ## [4.0.0] - 2026-07-15
