@@ -54,8 +54,9 @@ export const refineScores = (scores: BareScoreItem[]): ScoreItem[] => {
       pointers: significant(score.game.pointers / score.game.cells, 3),
       mines: significant(score.game.mines / score.game.cells, 3),
       least: significant(score.game.effort.least / score.game.cells, 3),
-      flags: significant(score.play.flags / score.game.cells, 3),
       moves: significant(score.play.moves / score.game.cells, 3),
+      flags: significant((score.play.flags || 0) / score.game.cells, 3),
+      remaining: significant((score.play.remaining || 0) / score.game.cells, 3),
     }
 
     if (typeof score.play?.remaining === 'number') {
@@ -205,7 +206,7 @@ export const rebuildGameData = (boardCode: string): {board: CellState[][], confi
 }
 
 export const calculateScore = (game: GameScore, play: PlayScore): ScoreCalc => {
-  const checks = game?.mode === 'Sharp' ? play.moves + play.flags : play.moves;
+  const checks = game?.mode === 'Sharp' ? play.moves + (play.flags || game.mines) : play.moves;
   const efficiency = significant(game.effort.least / play.moves, 4)
   const effic2  = significant(game.effort.least / checks, 4)
   const speed = significant(play.moves / play.duration, 4)

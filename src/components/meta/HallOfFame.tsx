@@ -33,10 +33,9 @@ const HallOfFame = () => {
   }
 
   const parameters = [
-    'rank', 'user', 'date',
-    'blanks', 'pointers', 'mines', 'cells', 'least',
-    'level', 'flags', 'remaining', 'moves', 'duration',
-    'efficiency', 'speed', 'points',
+    'rank', 'user', 'date', 'efficiency', 'speed', 'points',
+    'blanks', 'pointers', 'mines', 'cells', 'level', 'least',
+    'moves', 'duration', 'flags', 'remaining',
     'blank_pointer_ratio', 'blank_mine_ratio', 'pointer_mine_ratio',
     'pointer_mark', 'pointer_avg', 'mine_mark', 'mine_avg'
   ] as ScoreParam[]
@@ -99,7 +98,7 @@ const HallOfFame = () => {
       return rootScores.sort(byCells)
     },
     'flags': () => {
-      const byFlags = (a:ScoreItem, b:ScoreItem) => b.play.flags - a.play.flags
+      const byFlags = (a:ScoreItem, b:ScoreItem) => (b.play?.flags || 0) - (a.play?.flags || 0)
       return rootScores.sort(byFlags)
     },
     'moves': () => {

@@ -253,11 +253,11 @@ describe('Significant as we need it', () => {
 
 describe('Sort and Rank scores', () => {
   const oldScores = [
-    {code: "7780abc123", rank: 14, game: initialScore.game, score: {points: 30}},
-    {code: "7780def456", rank: 2, game: initialScore.game, score: {points: 100}},
-    {code: "7780ghi789", rank: 9, game: initialScore.game, score: {points: 67}},
+    {code: "7780abc123", rank: 14, game: initialScore.game, play: initialScore.play, score: {points: 30}},
+    {code: "7780def456", rank: 2, game: initialScore.game, play: initialScore.play, score: {points: 100}},
+    {code: "7780ghi789", rank: 9, game: initialScore.game, play: initialScore.play, score: {points: 67}},
   ] as ScoreItem[]
-  const newScore = {code: "7780xyz789", rank: 0, game: initialScore.game, score: {points: 67}} as ScoreItem
+  const newScore = {code: "7780xyz789", rank: 0, game: initialScore.game, play: initialScore.play, score: {points: 67}} as ScoreItem
 
 
   it('should sort by points and rank, oldest score first', () => {

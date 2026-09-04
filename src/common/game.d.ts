@@ -78,10 +78,10 @@ export interface GameScore {
 }
 
 export interface PlayScore {
-  flags: number,
-  remaining?: number,
   moves: number,
   duration: number,
+  flags?: number,
+  remaining?: number,
 }
 
 export interface Signature {
@@ -103,6 +103,7 @@ export interface Relative {
   mines: number,
   least: number,
   moves: number,
+  flags?: number,
   remaining?: number,
 }
 

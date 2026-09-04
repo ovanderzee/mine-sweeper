@@ -23,6 +23,11 @@
 - Rename user with score details
 - Count blanks and calculate blanks/pointers/mines ratio
 - Get rid of MINE_COUNT, it is derived, and there are functions to count or calculate it
+- Replace data-point title by popover-list of score parameters (hovering the data-points)
+- Seperate list-sort component
+- Revise list-sort component, mark with two criteria
+- Store list-sort settings in session storage
+- Rethink efficiency for sharp-mode scores
 
 
 ## [4.1.0] - 2026
@@ -36,6 +41,9 @@
 - Next/Previous button in ScorePopover
 - Close button for scores-popover
 - Consent for deleting scores
+- Add counts for blanks, flags and pristines to scores
+- Calculate and visualise signature and relative properties
+- Functions for representing and storing figures
 
 ### Changed
 - Boardsize parameter on configuration screen
