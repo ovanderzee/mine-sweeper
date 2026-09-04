@@ -46,6 +46,11 @@
 - Invalid codes logged with score.code
 - Removed scores with invalid codes
 - Keep list of scorelist-names to prevent reuse of names
+- Larger small nav-options bar for readability (board covering playground)
+- Align legenda without overlap
+
+### Removed
+- Removed styles for disabled buttons, were not usable
 
 
 ## [4.0.0] - 2026-07-15

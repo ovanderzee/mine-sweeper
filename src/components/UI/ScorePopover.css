@@ -21,8 +21,8 @@
   border-radius: var(--radius);
   background: linear-gradient(105deg, var(--lighter-blue),  var(--medium-blue), var(--dark-blue));
   margin: 0 auto;
-  padding: calc(var(--radius) / 2) var(--radius);
-  max-height: calc(100vh - 2em);
+  padding: var(--radius);
+  max-height: calc(100vh - 6em);
   overscroll-behavior: contain;
   overflow: auto;
 }
@@ -30,6 +30,7 @@
 #score-popover figure header {
   display: flex;
   align-items: start;
+  margin-block-start: -.5ex;
 }
 
 #score-popover figure header *,

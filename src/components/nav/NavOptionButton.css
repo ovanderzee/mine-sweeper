@@ -14,11 +14,6 @@ button.nav-option.active {
   transition: color 0s
 }
 
-button.nav-option[disabled] {
-  cursor: not-allowed;
-  opacity: .5;
-}
-
 button.nav-option span {
   display: inline-block;
 }

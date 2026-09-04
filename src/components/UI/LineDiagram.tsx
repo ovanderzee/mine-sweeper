@@ -97,10 +97,10 @@ const LineDiagram = (props: LineDiagramProps) => {
     >
       <g className="legenda">
         <line x1="0" y1={graphSize.y} x2={graphSize.x} y2={graphSize.y} />
-        <text x="0" y={graphSize.y} dx="20" dy={lgdSpace * .9} textAnchor="middle" data-testid="x-parameter"
+        <text x="0" y={graphSize.y} dx="-32" dy={lgdSpace * .9} data-testid="x-parameter"
           >{text.VAR[props.xParam]} &rarr;</text>
         <line x1="0" y1="0" x2="0" y2={graphSize.y} />
-        <text x={-graphSize.y} y="0" dx="20" dy={lgdSpace * -.8} transform="rotate(-90)" textAnchor="middle" data-testid="y-parameter"
+        <text x={-graphSize.y} y="0" dx="-32" dy={lgdSpace * -.8} transform="rotate(-90)" data-testid="y-parameter"
           >{text.VAR[props.yParam]} &rarr;</text>
 
         <text x={graphSize.x} y={graphSize.y} dy="120" textAnchor="end" style={{fontSize: '133%'}}>
@@ -140,8 +140,9 @@ const LineDiagram = (props: LineDiagramProps) => {
             transform={`translate(${d.x * dataScale.x}, ${(axisMax.y - d.y) * dataScale.y})`}
           >
             <path d={`M ${-crossLegSize}, 0 ${crossLegSize}, 0 M 0,${-crossLegSize} 0, ${crossLegSize}`} key={`lnd_path_${i}`} />
-            <foreignObject x="-5" y="-5" width="10" height="10">
+            <foreignObject x="-2.5" y="-2.5" width="5" height="5">
               {canNotDealWithForeignObjects() ?
+              /* fix for safari version < 26 */
               // @ts-expect-error // error TS2322: Type '{ children: Element; xmlns: string; }' is not assignable to type 'DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>'.
               <div xmlns="http://www.w3.org/1999/xhtml">
                 <button type="button" tabIndex={-1} key={`lnd_btn_${i}`}
