@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from 'react'
+import { useContext, useRef, useState } from 'react'
 import PageContext from '../../store/page-context'
 import NavOptionsBar from '../nav/NavOptionsBar'
 import EraseScores from '../nav/EraseScores'
@@ -6,16 +6,12 @@ import Help from '../nav/Help'
 import Settings from '../nav/Settings'
 import GoBack from '../nav/GoBack'
 import { ShieldByRank } from '../UI/Shield'
-import Diagram from '../UI/Diagram'
 import { PlayMode } from '../../common/app.d'
-import { ScoreItem, ScoreParam, MarkScoreData } from '../../common/game.d'
+import { ScoreItem, ScoreParam } from '../../common/game.d'
 import storage from '../../common/storage'
 import { represent } from '../../common/scoring'
-import { SHOW_SORT_THRESHOLD, SHOW_DIAGRAM_THRESHOLD, SHOW_MARKING_THRESHOLD } from '../../common/constants'
-import { preventReloadByEnter } from '../../common/functions'
 import ScorePopover from '../UI/ScorePopover'
-import SortScores from './SortScores'
-import { parameters } from './scoreParams'
+import VisualiseProps from './VisualiseProps'
 import '../meta/Meta.css'
 import './HallOfFame.css'
 
@@ -33,77 +29,6 @@ const HallOfFame = () => {
   const eraseScores = () => {
     setScores([])
   }
-
-  const mathParameters = parameters.filter(p => !(p === 'user' || p === 'date'))
-
-  const operators = ['<','≤','=','≥','>']
-  const initialMarkData = {param: sortLabel, operate: operators[0], quant: 0}
-  const [markData, setMarkData] = useState<MarkScoreData>(initialMarkData)
-
-  const changeValue = (event: React.ChangeEvent) => {
-    const ctrl = event.target as HTMLSelectElement
-    setValueLabel(ctrl.value as ScoreParam)
-  }
-
-  const changeMarkParameter = (event: React.ChangeEvent) => {
-    const ctrl = event.target as HTMLSelectElement
-    const param = ctrl.value as ScoreParam
-    setMarkData({...markData, param})
-  }
-
-  const changeMarkOperator = (event: React.ChangeEvent) => {
-    const ctrl = event.target as HTMLSelectElement
-    const operate = ctrl.value as string
-    setMarkData({...markData, operate})
-  }
-
-  const changeMarkQuantifier = (event: React.ChangeEvent) => {
-    const ctrl = event.target as HTMLInputElement
-    let quant = parseFloat(ctrl.value)
-    const nativeEvent = event.nativeEvent as InputEvent
-    if (nativeEvent.data === ',') ctrl.value = ctrl.value.replace(',','.')
-    if (!quant) quant = 0
-    if (!ctrl.value.endsWith('.')) ctrl.value = quant.toString()
-    setMarkData({...markData, quant})
-  }
-
-  const scoreSorting = (
-    <form className={`legend ${sortLabel}`}
-      onKeyDown={(event) => preventReloadByEnter(event)}
-    >
-      <div className="controls">
-        <SortScores sortLabel={sortLabel} setSortLabel={setSortLabel}
-          rootScores={rootScores} setScores={setScores} />
-
-        <label htmlFor="y-axis">{text.fame['versus']}</label>
-        <select id="y-axis" value={valueLabel} onChange={changeValue}>
-          {mathParameters
-            .map((param) => <option key={param} value={param}>{text.VAR[param]}</option>
-          )}
-        </select>
-
-      {scores.length > SHOW_MARKING_THRESHOLD && (<>
-        <label className="label">{text.fame['mark']}</label>
-        <div className="mark">
-          <select id="mark-param" value={markData.param} onChange={changeMarkParameter}
-            title={text.fame['mark-parameter']}>
-            {mathParameters
-              .map((param) => <option key={param} value={param}>{text.VAR[param]}</option>
-            )}
-          </select>
-          <select id="mark-operator" value={markData.operate} onChange={changeMarkOperator}
-            title={text.fame['mark-relation']}>
-            {operators
-              .map((operate) => <option key={operate} value={operate}>{operate}</option>
-            )}
-          </select>
-        </div>
-        <input id="mark-quant" className="mark" defaultValue="0" onChange={changeMarkQuantifier}
-          title={text.fame['mark-value']} />
-      </>)}
-      </div>
-    </form>
-  )
 
   const popoverRef = useRef<HTMLElement | null>(null)
   const [popScore, setPopScore] = useState<number>(NaN)
@@ -138,8 +63,6 @@ const HallOfFame = () => {
     }
   }
 
-  const scoreDiagram = <Diagram scores={scores} xParam={sortLabel} yParam={valueLabel} onBrowse={onBrowse} markData={markData} />
-
   const fameContent = (
     <article
       role="main"
@@ -147,8 +70,13 @@ const HallOfFame = () => {
     >
       <h1 className="h2" id="page-heading">{text.nav['Hall of Fame']}</h1>
 
-      {scores.length > SHOW_SORT_THRESHOLD && scoreSorting}
-      {scores.length > SHOW_DIAGRAM_THRESHOLD && scoreDiagram}
+      <VisualiseProps
+        sortLabel={sortLabel} setSortLabel={setSortLabel}
+        rootScores={rootScores}
+        scores={scores} setScores={setScores}
+        valueLabel={valueLabel} setValueLabel={setValueLabel}
+        onBrowse={onBrowse}
+      />
 
       <ol>
         {!scores.length && (
