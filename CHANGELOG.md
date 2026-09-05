@@ -30,7 +30,7 @@
 - Rethink efficiency for sharp-mode scores
 
 
-## [4.1.0] - 2026
+## [4.1.0] - 2026-09-05
 
 ### Added
 - Histogram with fill distribution on Score popover
