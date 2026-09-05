@@ -14,6 +14,8 @@ import { represent } from '../../common/scoring'
 import { SHOW_SORT_THRESHOLD, SHOW_DIAGRAM_THRESHOLD, SHOW_MARKING_THRESHOLD } from '../../common/constants'
 import { preventReloadByEnter } from '../../common/functions'
 import ScorePopover from '../UI/ScorePopover'
+import SortScores from './SortScores'
+import { parameters } from './scoreParams'
 import '../meta/Meta.css'
 import './HallOfFame.css'
 
@@ -32,124 +34,11 @@ const HallOfFame = () => {
     setScores([])
   }
 
-  const parameters = [
-    'rank', 'user', 'date', 'efficiency', 'speed', 'points',
-    'blanks', 'pointers', 'mines', 'cells', 'level', 'least',
-    'moves', 'duration', 'flags', 'remaining',
-    'blank_pointer_ratio', 'blank_mine_ratio', 'pointer_mine_ratio',
-    'pointer_mark', 'pointer_avg', 'mine_mark', 'mine_avg'
-  ] as ScoreParam[]
   const mathParameters = parameters.filter(p => !(p === 'user' || p === 'date'))
 
   const operators = ['<','≤','=','≥','>']
   const initialMarkData = {param: sortLabel, operate: operators[0], quant: 0}
   const [markData, setMarkData] = useState<MarkScoreData>(initialMarkData)
-
-  // @ts-expect-error // error TS2739: Type ... is missing the following properties from type 'Record<ScoreParam, () => ScoreItem[]>': play, game, effort, code, score
-  const methodsByKind: Record<ScoreParam, () => ScoreItem[]> = {
-    'rank': () => {
-      const byRank = (a:ScoreItem, b:ScoreItem) => a.rank - b.rank
-      return rootScores.sort(byRank)
-    },
-    'user': () => {
-      const byRank = (a: ScoreItem, b: ScoreItem) => a.rank - b.rank
-      rootScores.sort(byRank)
-      const rankedUsers = [...new Set(rootScores.map((rs) => rs.user))]
-      const userSort: ScoreItem[] = []
-      rankedUsers.forEach((user) => {
-        userSort.push(...rootScores.filter((rs) => rs.user === user))
-      })
-      return userSort
-    },
-    'date': () => {
-      const byDate = (a: ScoreItem, b: ScoreItem) => b.date - a.date
-      return rootScores.sort(byDate)
-    },
-    'points': () => {
-      const byPoints = (a:ScoreItem, b:ScoreItem) => b.score.points - a.score.points
-      return rootScores.sort(byPoints)
-    },
-    'efficiency': () => {
-      const byEfficiency = (a:ScoreItem, b:ScoreItem) => b.score.efficiency - a.score.efficiency
-      return rootScores.sort(byEfficiency)
-    },
-    'speed': () => {
-      const bySpeed = (a:ScoreItem, b:ScoreItem) => b.score.speed - a.score.speed
-      return rootScores.sort(bySpeed)
-    },
-    'level': () => {
-      const byLevel = (a: ScoreItem, b: ScoreItem) => (b.game?.level || 0) - (a.game?.level || 0)
-      return rootScores.sort(byLevel)
-    },
-    'blanks': () => {
-      const byBlanks = (a:ScoreItem, b:ScoreItem) => a.relative.blanks - b.relative.blanks
-      return rootScores.sort(byBlanks)
-    },
-    'pointers': () => {
-      const byPointers = (a:ScoreItem, b:ScoreItem) => a.relative.pointers - b.relative.pointers
-      return rootScores.sort(byPointers)
-    },
-    'mines': () => {
-      const byMines = (a:ScoreItem, b:ScoreItem) => a.relative.mines - b.relative.mines
-      return rootScores.sort(byMines)
-    },
-    'cells': () => {
-      const byCells = (a:ScoreItem, b:ScoreItem) => a.game.cells - b.game.cells
-      return rootScores.sort(byCells)
-    },
-    'flags': () => {
-      const byFlags = (a:ScoreItem, b:ScoreItem) => (b.play?.flags || 0) - (a.play?.flags || 0)
-      return rootScores.sort(byFlags)
-    },
-    'moves': () => {
-      const byMoves = (a:ScoreItem, b:ScoreItem) => a.play.moves - b.play.moves
-      return rootScores.sort(byMoves)
-    },
-    'duration': () => {
-      const byDuration = (a:ScoreItem, b:ScoreItem) => a.play.duration - b.play.duration
-      return rootScores.sort(byDuration)
-    },
-    'least': () => {
-      const byLeast = (a:ScoreItem, b:ScoreItem) => b.game.effort.least - a.game.effort.least
-      return rootScores.sort(byLeast)
-    },
-    'blank_pointer_ratio': () => {
-      const byRatio = (a:ScoreItem, b:ScoreItem) => b.signature.blank_pointer_ratio - a.signature.blank_pointer_ratio
-      return rootScores.sort(byRatio)
-    },
-    'blank_mine_ratio': () => {
-      const byRatio = (a:ScoreItem, b:ScoreItem) => b.signature.blank_mine_ratio - a.signature.blank_mine_ratio
-      return rootScores.sort(byRatio)
-    },
-    'pointer_mine_ratio': () => {
-      const byRatio = (a:ScoreItem, b:ScoreItem) => b.signature.pointer_mine_ratio - a.signature.pointer_mine_ratio
-      return rootScores.sort(byRatio)
-    },
-    'pointer_mark': () => {
-      const byDifficulty = (a:ScoreItem, b:ScoreItem) => b.signature.pointer_mark - a.signature.pointer_mark
-      return rootScores.sort(byDifficulty)
-    },
-    'pointer_avg': () => {
-      const byDifficulty = (a:ScoreItem, b:ScoreItem) => b.signature.pointer_avg - a.signature.pointer_avg
-      return rootScores.sort(byDifficulty)
-    },
-    'mine_mark': () => {
-      const byDifficulty = (a:ScoreItem, b:ScoreItem) => b.signature.mine_mark - a.signature.mine_mark
-      console.log('mine-mark sorting function')
-      return rootScores.sort(byDifficulty)
-    },
-    'mine_avg': () => {
-      const byDifficulty = (a:ScoreItem, b:ScoreItem) => b.signature.mine_avg - a.signature.mine_avg
-      return rootScores.sort(byDifficulty)
-    },
-  }
-
-  const sortByKind = function (event: React.ChangeEvent): void {
-    const ctrl = event.target as HTMLSelectElement
-    setSortLabel(ctrl.value as ScoreParam)
-    setScores(methodsByKind[ctrl.value as ScoreParam]())
-    window.scrollTo({top: 0, left: 0})
-  }
 
   const changeValue = (event: React.ChangeEvent) => {
     const ctrl = event.target as HTMLSelectElement
@@ -183,12 +72,8 @@ const HallOfFame = () => {
       onKeyDown={(event) => preventReloadByEnter(event)}
     >
       <div className="controls">
-        <label htmlFor="x-axis">{text.fame['sort']}</label>
-        <select id="x-axis" value={sortLabel} onChange={sortByKind}>
-          {parameters
-            .map((param) => <option key={param} value={param}>{text.VAR[param]}</option>
-          )}
-        </select>
+        <SortScores sortLabel={sortLabel} setSortLabel={setSortLabel}
+          rootScores={rootScores} setScores={setScores} />
 
         <label htmlFor="y-axis">{text.fame['versus']}</label>
         <select id="y-axis" value={valueLabel} onChange={changeValue}>
@@ -234,7 +119,8 @@ const HallOfFame = () => {
     setScores(storage.scores)
 
     if (rootScores.length) {
-      setScores(methodsByKind[sortLabel]())
+// TODO instead of sorting again, manage rankings higher than the rank at removeIndex
+//      setScores(methodsByKind[sortLabel]())
       if (removeIndex === rootScores.length) {
         setPopScore(removeIndex - 1);
       }
