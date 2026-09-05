@@ -109,19 +109,20 @@ const HallOfFame = () => {
   const [popScore, setPopScore] = useState<number>(NaN)
 
   const onDeletion = (deletable: ScoreItem): void => {
-    const removeIndex = rootScores.findIndex(s => s.code === deletable.code && s.date === deletable.date)
+    const removeIndex = scores.findIndex(s => s.code === deletable.code && s.date === deletable.date)
     if (removeIndex < 0) {
       console.error('Score to delete not found')
       return
     }
-    rootScores.splice(removeIndex, 1)
-    storage.scores = rootScores
-    setScores(storage.scores)
+    const rankToBeRemoved = scores[removeIndex].rank
+    const modifiedScores = scores.toSpliced(removeIndex, 1)
+    storage.scores = modifiedScores
+    setScores(modifiedScores
+      .map(s => {if (s.rank > rankToBeRemoved) s.rank--; return s})
+    )
 
-    if (rootScores.length) {
-// TODO instead of sorting again, manage rankings higher than the rank at removeIndex
-//      setScores(methodsByKind[sortLabel]())
-      if (removeIndex === rootScores.length) {
+    if (modifiedScores.length) {
+      if (removeIndex === modifiedScores.length) {
         setPopScore(removeIndex - 1);
       }
     } else {
