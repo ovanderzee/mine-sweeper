@@ -24,7 +24,7 @@
 - Count blanks and calculate blanks/pointers/mines ratio
 - Get rid of MINE_COUNT, it is derived, and there are functions to count or calculate it
 - Replace data-point title by popover-list of score parameters (hovering the data-points)
-- Seperate list-sort component
+- Separate list-sort component
 - Revise list-sort component, mark with two criteria
 - Store list-sort settings in session storage
 - Rethink efficiency for sharp-mode scores

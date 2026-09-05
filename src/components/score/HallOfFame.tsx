@@ -14,7 +14,7 @@ import { represent } from '../../common/scoring'
 import { SHOW_SORT_THRESHOLD, SHOW_DIAGRAM_THRESHOLD, SHOW_MARKING_THRESHOLD } from '../../common/constants'
 import { preventReloadByEnter } from '../../common/functions'
 import ScorePopover from '../UI/ScorePopover'
-import './Meta.css'
+import '../meta/Meta.css'
 import './HallOfFame.css'
 
 const HallOfFame = () => {
