@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 import PageContext from '../../store/page-context'
-import HallOfFame from '../meta/HallOfFame'
+import HallOfFame from '../score/HallOfFame'
 import { PageProps } from '../../common/game.d'
 
 const HiScores = (props: PageProps) => {

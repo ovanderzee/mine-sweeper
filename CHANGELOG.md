@@ -21,13 +21,18 @@
 - Calculate efficiency in sharp mode according to lower minimal number of moves
 - Similar Game button with score details, Soortgelijk Spel
 - Rename user with score details
-- Count blanks and calculate blanks/pointers/mines ratio
 - Get rid of MINE_COUNT, it is derived, and there are functions to count or calculate it
 - Replace data-point title by popover-list of score parameters (hovering the data-points)
-- Seperate list-sort component
 - Revise list-sort component, mark with two criteria
 - Store list-sort settings in session storage
 - Rethink efficiency for sharp-mode scores
+
+
+## [4.1.1] - 2026-09
+
+### Changes
+- Separate list-sort and property-selection components out of HallOfFame
+- Move score-related visualisation to functional folder
 
 
 ## [4.1.0] - 2026-09-05
