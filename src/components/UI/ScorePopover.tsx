@@ -5,11 +5,13 @@ import { PlayMode } from '../../common/app.d'
 import { ScoreItem } from '../../common/game.d'
 import { ShieldByRank } from './Shield'
 import ElasticBrace from './ElasticBrace'
-import { precise, rebuildGameData } from '../../common/scoring'
+import { represent, rebuildGameData } from '../../common/scoring'
 import { initialGameState } from '../game/common'
 import { ApproveModal } from './Modal'
 import Game from '../game/Game'
 import Histogram from './Histogram'
+import BoardImage from './BoardImage'
+import PieDiagram from './PieDiagram'
 import './ScorePopover.css'
 
 interface ScorePopoverProps {
@@ -122,7 +124,7 @@ const ScorePopover = (props: ScorePopoverProps) => {
             <code className="xl">&rArr;</code>
             <div className="unit">
               <small>{text.VAR['efficiency']}</small>
-              <span className="efficiency">{precise(log.score.efficiency, 3)}</span>
+              <span className="efficiency">{represent(log.score.efficiency, 3)}</span>
             </div>
           </div>
         </section>
@@ -138,13 +140,13 @@ const ScorePopover = (props: ScorePopoverProps) => {
             <code className="s">/</code>
             <div className="unit">
               <small>{text.VAR['duration']}</small>
-              <span className="duration">{precise(log.play.duration, 3)}s</span>
+              <span className="duration">{represent(log.play.duration, 3)}s</span>
             </div>
             <code>)</code>
             <code className="xl">&rArr;</code>
             <div className="unit">
               <small>{text.VAR['speed']}</small>
-              <span className="speed">{precise(log.score.speed, 3)}/s</span>
+              <span className="speed">{represent(log.score.speed, 3)}/s</span>
             </div>
           </div>
         </section>
@@ -166,6 +168,23 @@ const ScorePopover = (props: ScorePopoverProps) => {
             <small>{text.VAR['effort']}</small>
             <span>{log.game.effort.least} - {log.game.effort.most}</span>
           </div>
+          <code className="s">[</code>
+          <div className="unit">
+            <small>{text.VAR['blanks']}</small>
+            <span>{log.game.blanks}</span>
+          </div>
+          <code className="s">:</code>
+          <div className="unit">
+            <small>{text.VAR['pointers']}</small>
+            <span>{log.game.cells - log.game.blanks - log.game.mines}</span>
+          </div>
+          <code className="s">:</code>
+          <div className="unit">
+            <small>{text.VAR['mines']}</small>
+            <span>{log.game.mines}</span>
+          </div>
+          <code className="s">]</code>
+
         </section>
 
         <section className="group">
@@ -188,10 +207,14 @@ const ScorePopover = (props: ScorePopoverProps) => {
           </div>
         </section>
       </article>
-      <article>
+      <article className="graphs">
         {log.signature.invalid_code ?
-          <div className="frequency-histogram"><span>{text.error['Invalid code']}</span></div> :
-          <Histogram data={log.signature.fill_frequency} />
+          <div className="error"><span>{text.error['Invalid code']}</span></div> :
+          <>
+            <Histogram data={log.signature.fill_frequency} />
+            <PieDiagram rel={log.relative} />
+            <BoardImage board={log.signature.board} />
+          </>
         }
       </article>
       <footer>

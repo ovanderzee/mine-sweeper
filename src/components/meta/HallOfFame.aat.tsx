@@ -212,13 +212,31 @@ describe('The hall-of-fame-page list sorting', () => {
     expect(Number(best)).toBeGreaterThan(Number(worst))
   })
 
+  it('should sort on blanks ascending', async () => {
+    await userEvent.selectOptions(selectX, 'blanks')
+
+    const best = firstEntry('.blanks :last-child')
+    const worst = lastEntry('.blanks :last-child')
+
+    expect(parseFloat(best || '0')).toBeLessThan(parseFloat(worst || '0'))
+  })
+
+  it('should sort on pointers ascending', async () => {
+    await userEvent.selectOptions(selectX, 'pointers')
+
+    const best = firstEntry('.pointers :last-child')
+    const worst = lastEntry('.pointers :last-child')
+
+    expect(parseFloat(best || '0')).toBeLessThan(parseFloat(worst || '0'))
+  })
+
   it('should sort on mines ascending', async () => {
     await userEvent.selectOptions(selectX, 'mines')
 
     const best = firstEntry('.mines :last-child')
     const worst = lastEntry('.mines :last-child')
 
-    expect(Number(best)).toBeLessThan(Number(worst))
+    expect(parseFloat(best || '0')).toBeLessThan(parseFloat(worst || '0'))
   })
 
   it('should sort on fields ascending', async () => {
@@ -323,13 +341,17 @@ describe('The hall-of-fame-page popover buttons', () => {
 })
 
 describe('Marking data', () => {
+  let screen: RenderResult,
+    inputField: HTMLElement | SVGElement | Locator | null
+
+  beforeEach(async () => {
+    storage.scores = liveScores as ScoreItem[]
+    screen = await renderWithProvider(<HallOfFame/>)
+    inputField = screen.getByTitle('Mark value').query()
+    await inputField?.focus()
+  })
 
   it('should accept numbers broken with dot as input', async () => {
-    const screen = await renderWithProvider(<HallOfFame/>)
-    const inputField = screen.getByTitle('Mark value').query()
-    await inputField?.focus()
-
-//     await userEvent.clear(inputField), werkt niet
     await userEvent.keyboard('12')
     await expect.element(inputField).toHaveDisplayValue('12')
 
@@ -341,10 +363,6 @@ describe('Marking data', () => {
   })
 
   it('should accept numbers broken with comma as input', async () => {
-    const screen = await renderWithProvider(<HallOfFame/>)
-    const inputField = screen.getByTitle('Mark value').query()
-    await inputField?.focus()
-
     await userEvent.keyboard('12')
     await expect.element(inputField).toHaveDisplayValue('12')
 
@@ -356,13 +374,9 @@ describe('Marking data', () => {
   })
 
   it('should call function to prevent submitting by text-inputs', async () => {
-    const screen = await renderWithProvider(<HallOfFame/>)
-    const formField = screen.getByTitle('Mark value').query()
-
-    await formField?.focus()
     await userEvent.keyboard('{Enter}')
 
-    expect(formField).toBeInTheDocument()
+    expect(inputField).toBeInTheDocument()
     expect(preventReloadByEnter).toHaveBeenCalled()
     expect(preventReloadByEnter).toHaveReturnedWith(true)
   })

@@ -1,0 +1,28 @@
+svg.pie-diagram {
+  display: inline-block;
+  width: 12em;
+  height: 6em;
+  opacity: .8;
+  overflow: visible;
+}
+
+svg.pie-diagram g {
+  font-family: inherit;
+  font-size: 175%;
+  fill: currentcolor;
+}
+
+svg.pie-diagram .cone {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+
+  background-image: conic-gradient(
+    var(--dark-blue),
+    var(--dark-blue) var(--blank-stop),
+    var(--state-green) var(--blank-stop),
+    var(--state-green) var(--pointer-stop),
+    var(--state-red) var(--pointer-stop),
+    var(--state-red)
+  );
+}

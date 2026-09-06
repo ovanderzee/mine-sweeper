@@ -10,10 +10,10 @@
     "lint": "eslint .",
     "preview": "npm run build && vite preview",
     "e2e": "playwright test",
-    "test": "vitest --run",
+    "test": "npm run build && vitest --run",
     "cov": "vitest --coverage --run",
-    "aat": "vitest --run --project=aat",
-    "unit": "vitest --run --project=unit",
+    "aat": "npm run build && vitest --run --project=aat",
+    "unit": "npm run build && vitest --run --project=unit",
     "sort": "./lib/sort.sh"
   },
   "dependencies": {

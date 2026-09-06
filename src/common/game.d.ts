@@ -66,6 +66,8 @@ export interface GameState {
 
 export interface GameScore {
   cells: number,
+  blanks: number,
+  pointers?: number,
   mines: number,
   level: number,
   mode?: PlayMode,
@@ -78,17 +80,40 @@ export interface GameScore {
 export interface PlayScore {
   moves: number,
   duration: number,
+  flags?: number,
+  remaining?: number,
 }
 
 export interface Signature {
+  board: CellState[][],
   fill_frequency: number[],
   invalid_code: boolean,
+  blank_pointer_ratio: number,
+  blank_mine_ratio: number,
+  pointer_mine_ratio: number,
+  pointer_mark: number,
+  pointer_avg: number,
+  mine_mark: number,
+  mine_avg: number,
+}
+
+export interface Relative {
+  blanks: number,
+  pointers: number,
+  mines: number,
+  least: number,
+  moves: number,
+  flags?: number,
+  remaining?: number,
 }
 
 export interface ScoreCalc {
   efficiency: number,
   speed: number,
-  points: number
+  points: number,
+  pointsLessEffort?: number,
+  pointsMoreSpeed?: number,
+  pointsBoth?: number,
 }
 
 export interface BareScoreItem {
@@ -104,9 +129,10 @@ export interface BareScoreItem {
 export interface ScoreItem extends BareScoreItem {
   rank: number,
   signature: Signature,
+  relative: Relative,
 }
 
-export type ScoreParam = keyof ScoreItem | keyof ScoreItem["game"] | keyof ScoreItem["play"] | keyof ScoreItem["score"]
+export type ScoreParam = keyof ScoreItem | keyof ScoreItem["game"] | keyof ScoreItem["game"]["effort"] | keyof ScoreItem["play"] | keyof ScoreItem["score"] | keyof ScoreItem["signature"]
 
 export type FlatScore = Record<ScoreParam, number>
 

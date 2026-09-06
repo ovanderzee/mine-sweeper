@@ -10,7 +10,7 @@ import Diagram from '../UI/Diagram'
 import { PlayMode } from '../../common/app.d'
 import { ScoreItem, ScoreParam, MarkScoreData } from '../../common/game.d'
 import storage from '../../common/storage'
-import { precise } from '../../common/scoring'
+import { represent } from '../../common/scoring'
 import { SHOW_SORT_THRESHOLD, SHOW_DIAGRAM_THRESHOLD, SHOW_MARKING_THRESHOLD } from '../../common/constants'
 import { preventReloadByEnter } from '../../common/functions'
 import ScorePopover from '../UI/ScorePopover'
@@ -33,10 +33,11 @@ const HallOfFame = () => {
   }
 
   const parameters = [
-    'rank', 'user', 'date',
-    'level', 'mines', 'cells',
-    'moves', 'duration',
-    'efficiency', 'speed', 'points',
+    'rank', 'user', 'date', 'efficiency', 'speed', 'points',
+    'blanks', 'pointers', 'mines', 'cells', 'level', 'least',
+    'moves', 'duration', 'flags', 'remaining',
+    'blank_pointer_ratio', 'blank_mine_ratio', 'pointer_mine_ratio',
+    'pointer_mark', 'pointer_avg', 'mine_mark', 'mine_avg'
   ] as ScoreParam[]
   const mathParameters = parameters.filter(p => !(p === 'user' || p === 'date'))
 
@@ -80,13 +81,25 @@ const HallOfFame = () => {
       const byLevel = (a: ScoreItem, b: ScoreItem) => (b.game?.level || 0) - (a.game?.level || 0)
       return rootScores.sort(byLevel)
     },
+    'blanks': () => {
+      const byBlanks = (a:ScoreItem, b:ScoreItem) => a.relative.blanks - b.relative.blanks
+      return rootScores.sort(byBlanks)
+    },
+    'pointers': () => {
+      const byPointers = (a:ScoreItem, b:ScoreItem) => a.relative.pointers - b.relative.pointers
+      return rootScores.sort(byPointers)
+    },
     'mines': () => {
-      const byMines = (a:ScoreItem, b:ScoreItem) => a.game.mines - b.game.mines
+      const byMines = (a:ScoreItem, b:ScoreItem) => a.relative.mines - b.relative.mines
       return rootScores.sort(byMines)
     },
     'cells': () => {
       const byCells = (a:ScoreItem, b:ScoreItem) => a.game.cells - b.game.cells
       return rootScores.sort(byCells)
+    },
+    'flags': () => {
+      const byFlags = (a:ScoreItem, b:ScoreItem) => (b.play?.flags || 0) - (a.play?.flags || 0)
+      return rootScores.sort(byFlags)
     },
     'moves': () => {
       const byMoves = (a:ScoreItem, b:ScoreItem) => a.play.moves - b.play.moves
@@ -95,7 +108,40 @@ const HallOfFame = () => {
     'duration': () => {
       const byDuration = (a:ScoreItem, b:ScoreItem) => a.play.duration - b.play.duration
       return rootScores.sort(byDuration)
-    }
+    },
+    'least': () => {
+      const byLeast = (a:ScoreItem, b:ScoreItem) => b.game.effort.least - a.game.effort.least
+      return rootScores.sort(byLeast)
+    },
+    'blank_pointer_ratio': () => {
+      const byRatio = (a:ScoreItem, b:ScoreItem) => b.signature.blank_pointer_ratio - a.signature.blank_pointer_ratio
+      return rootScores.sort(byRatio)
+    },
+    'blank_mine_ratio': () => {
+      const byRatio = (a:ScoreItem, b:ScoreItem) => b.signature.blank_mine_ratio - a.signature.blank_mine_ratio
+      return rootScores.sort(byRatio)
+    },
+    'pointer_mine_ratio': () => {
+      const byRatio = (a:ScoreItem, b:ScoreItem) => b.signature.pointer_mine_ratio - a.signature.pointer_mine_ratio
+      return rootScores.sort(byRatio)
+    },
+    'pointer_mark': () => {
+      const byDifficulty = (a:ScoreItem, b:ScoreItem) => b.signature.pointer_mark - a.signature.pointer_mark
+      return rootScores.sort(byDifficulty)
+    },
+    'pointer_avg': () => {
+      const byDifficulty = (a:ScoreItem, b:ScoreItem) => b.signature.pointer_avg - a.signature.pointer_avg
+      return rootScores.sort(byDifficulty)
+    },
+    'mine_mark': () => {
+      const byDifficulty = (a:ScoreItem, b:ScoreItem) => b.signature.mine_mark - a.signature.mine_mark
+      console.log('mine-mark sorting function')
+      return rootScores.sort(byDifficulty)
+    },
+    'mine_avg': () => {
+      const byDifficulty = (a:ScoreItem, b:ScoreItem) => b.signature.mine_avg - a.signature.mine_avg
+      return rootScores.sort(byDifficulty)
+    },
   }
 
   const sortByKind = function (event: React.ChangeEvent): void {
@@ -251,13 +297,17 @@ const HallOfFame = () => {
                 }
               </div>
               <section className="group game">
-                <div className="unit level">
-                  <span>{text.VAR['level']}</span>
-                  <span>{log.game.level}</span>
+                <div className="unit blanks">
+                  <span>{text.VAR['blanks']}</span>
+                  <span>{represent(log.relative.blanks * 100, 3)}%</span>
+                </div>
+                <div className="unit pointers">
+                  <span>{text.VAR['pointers']}</span>
+                  <span>{represent(log.relative.pointers * 100, 3)}%</span>
                 </div>
                 <div className="unit mines">
                   <span>{text.VAR['mines']}</span>
-                  <span>{log.game.mines}</span>
+                  <span>{represent(log.relative.mines * 100, 3)}%</span>
                 </div>
                 <div className="unit cells">
                   <span>{text.VAR['cells']}</span>
@@ -265,8 +315,12 @@ const HallOfFame = () => {
                 </div>
               </section>
               <section className="group play">
-                <div className="unit effort">
-                  <span>{text.VAR['effort']}</span>
+                <div className="unit level">
+                  <span>{text.VAR['level']}</span>
+                  <span>{log.game.level}</span>
+                </div>
+                <div className="unit least">
+                  <span>{text.VAR['least']}</span>
                   <span>{log.game.effort.least}</span>
                 </div>
                 <div className="unit moves">
@@ -275,17 +329,17 @@ const HallOfFame = () => {
                 </div>
                 <div className="unit duration">
                   <span>{text.VAR['duration']}</span>
-                  <span>{precise(log.play.duration, 3)}s</span>
+                  <span>{represent(log.play.duration, 3)}s</span>
                 </div>
               </section>
               <section className="group score">
                 <div className="unit efficiency">
                   <span>{text.VAR['efficiency']}</span>
-                  <span>{precise(log.score.efficiency, 2)}</span>
+                  <span>{represent(log.score.efficiency, 2)}</span>
                 </div>
                 <div className="unit speed">
                   <span>{text.VAR['speed']}</span>
-                  <span>{precise(log.score.speed, 2)}</span>
+                  <span>{represent(log.score.speed, 2)}</span>
                 </div>
               </section>
             </article>

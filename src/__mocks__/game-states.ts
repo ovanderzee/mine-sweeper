@@ -152,9 +152,15 @@ export const wonGameState: GameState = {
   "mines": [],
   "score": {
     code: '3380IwBj5Yg', date: 1745518137216, user: 'Midas', rank: 1,
-    game: {cells: 9, mines: 2, level: 8, effort: {least: 2, most: 7}},
-    signature: {fill_frequency: [18,17,6,4,2,0,0,0,0], invalid_code: false},
-    play: {moves: 4, duration: 45.244},
+    game: {cells: 9, blanks: 2, mines: 2, level: 8, effort: {least: 2, most: 7}},
+    signature: {
+      board: [[]], fill_frequency: [2,4,1,0,0,0,0,0,0], invalid_code: false,
+      blank_pointer_ratio: 0, blank_mine_ratio: 0, pointer_mine_ratio: 0,
+      pointer_mark: 0, pointer_avg: 0, mine_mark: 0, mine_avg: 0
+    },
+    // todo: settle
+    relative: initialScore.relative,
+    play: {flags: 0, moves: 4, duration: 45.244},
     score: {efficiency: 0.5, speed: 0.08841, points: 44}
   },
 }

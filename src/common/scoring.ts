@@ -7,7 +7,15 @@ import { calculateMineCount } from './defaults'
 import { SCORE_RADIX } from './constants'
 import { ScoreItem, BareScoreItem } from './game.d'
 
-export const precise = (figure: number, precision: number) => Number(figure.toPrecision(precision))
+// for numbers to see on screen
+export const represent = (figure: number, precision: number): string => {
+  return Math.abs(figure) >= 1 ? figure.toPrecision(precision) : figure.toPrecision(precision).substring(1)
+}
+
+// for numbers to calculate with or to store
+export const significant = (figure: number, precision: number): number => {
+  return Number(represent(figure, precision))
+}
 
 export const refineScores = (scores: BareScoreItem[]): ScoreItem[] => {
   scores.sort((a, b) => b.score.points - a.score.points)
@@ -15,6 +23,7 @@ export const refineScores = (scores: BareScoreItem[]): ScoreItem[] => {
   return scores.map(s => {
     const score = s as ScoreItem
     score.rank = points.findIndex(points => points === score.score.points) + 1
+    score.game.pointers = score.game.cells - score.game.blanks - score.game.mines
     if (score.game && !score.game.mode) {
       score.game.mode = PlayMode.NORMAL
     }
@@ -22,13 +31,36 @@ export const refineScores = (scores: BareScoreItem[]): ScoreItem[] => {
     const board = rebuildGameData(score.code).board
     const flatBoard = board.flat()
     const countByFill = (fill: number) => flatBoard.filter(c => c.fill === fill).length
-    const fillCounts: number[] = []
-    for(let i = 0; i < 18; i++) {
-      fillCounts.push(countByFill(i))
-    }
+    const pointerValues = flatBoard.filter(c => c.fill > 0 && c.fill < 9).map(p => p.fill).sort()
+    const mineValues = flatBoard.filter(c => c.fill > 8).map(p => p.fill - 9).sort()
+    const fraction = .92
+
     score.signature = {
-      fill_frequency: fillCounts,
-      invalid_code: board.length === 1
+      board,
+      // @ts-ignore // error TS6133: 'v' is declared but its value is never read.
+      fill_frequency: Array(18).fill(0).map((v,i) => countByFill(i)),
+      invalid_code: board.length === 1,
+      blank_pointer_ratio: significant(score.game.blanks / score.game.pointers, 3),
+      blank_mine_ratio: significant(score.game.blanks / score.game.mines, 3),
+      pointer_mine_ratio: significant(score.game.pointers / score.game.mines, 3),
+      pointer_mark: pointerValues[Math.round((pointerValues.length -1) * fraction)],
+      pointer_avg: significant(pointerValues.reduce((acc, curr) => acc + curr, 0) / pointerValues.length, 3),
+      mine_mark: mineValues[Math.round((mineValues.length -1) * fraction)],
+      mine_avg: significant(mineValues.reduce((acc, curr) => acc + curr, 0) / mineValues.length, 3),
+    }
+
+    score.relative = {
+      blanks: significant(score.game.blanks / score.game.cells, 3),
+      pointers: significant(score.game.pointers / score.game.cells, 3),
+      mines: significant(score.game.mines / score.game.cells, 3),
+      least: significant(score.game.effort.least / score.game.cells, 3),
+      moves: significant(score.play.moves / score.game.cells, 3),
+      flags: significant((score.play.flags || 0) / score.game.cells, 3),
+      remaining: significant((score.play.remaining || 0) / score.game.cells, 3),
+    }
+
+    if (typeof score.play?.remaining === 'number') {
+      score.relative.remaining = significant(score.play.remaining / score.game.cells, 3)
     }
 
     return score
@@ -174,16 +206,28 @@ export const rebuildGameData = (boardCode: string): {board: CellState[][], confi
 }
 
 export const calculateScore = (game: GameScore, play: PlayScore): ScoreCalc => {
-  const efficiency = precise(game.effort.least / play.moves, 4)
-  const speed = precise(play.moves / play.duration, 4)
+  const checks = game?.mode === 'Sharp' ? play.moves + (play.flags || game.mines) : play.moves;
+  const efficiency = significant(game.effort.least / play.moves, 4)
+  const effic2  = significant(game.effort.least / checks, 4)
+  const speed = significant(play.moves / play.duration, 4)
+  const speed2  = significant(checks / play.duration, 4)
   const points = Math.round(efficiency * speed * 1000)
-  return {efficiency, speed, points}
+  const pointsLessEffort = Math.round(effic2 * speed * 1000)
+  const pointsMoreSpeed = Math.round(efficiency * speed2 * 1000)
+  const pointsBoth = Math.round(effic2 * speed2 * 1000)
+  return {efficiency, speed, points, pointsLessEffort, pointsMoreSpeed, pointsBoth}
 }
 
 export const countMoves = (state: GameState): number =>
   state.board
     .flat()
     .filter(cell => cell.stage === CellStateStage.TESTED)
+    .length
+
+export const countByFillType = (state: GameState, checkFillType: (fill: number) => boolean): number =>
+  state.board
+    .flat()
+    .filter(cell => checkFillType(cell.fill))
     .length
 
 export const getFillDistribution = (board: CellState[][]): number[][] =>

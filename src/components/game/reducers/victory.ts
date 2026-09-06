@@ -1,10 +1,10 @@
 import { MIN_DURATION } from '../../../common/constants'
-import { AppConfig } from '../../../common/app.d'
+import { AppConfig, PlayMode } from '../../../common/app.d'
 import storage from '../../../common/storage'
-import { GameState,
+import { CellStateStage, GameState,
   GameScore, PlayScore, ScoreItem } from '../../../common/game.d'
-import { precise, refineScores, leastClicksToWin, mostClicksToWin,
-  makeBoardCode, countMoves, calculateScore } from '../../../common/scoring'
+import { significant, refineScores, leastClicksToWin, mostClicksToWin,
+  makeBoardCode, countMoves, calculateScore, countByFillType } from '../../../common/scoring'
 
 export const victoryReducer = (state: GameState, config: AppConfig): GameState => {
   const { BOARD_SIZE, GAME_LEVEL, MINE_COUNT, PLAYER_NAME, PLAY_MODE } = config
@@ -17,6 +17,7 @@ export const victoryReducer = (state: GameState, config: AppConfig): GameState =
 
   const gameVars: GameScore = {
     cells: Math.pow(BOARD_SIZE, 2),
+    blanks: countByFillType(state, (fill: number) => fill===0),
     mines: MINE_COUNT,
     level: GAME_LEVEL,
     mode: PLAY_MODE,
@@ -28,8 +29,13 @@ export const victoryReducer = (state: GameState, config: AppConfig): GameState =
 
   // time in seconds
   const playVars: PlayScore = {
+    flags: state.board.flat().filter(c => c.locked).length,
     moves: countMoves(state),
-    duration: precise(Math.max(state.tShift - state.tZero, MIN_DURATION) / 1000, 5)
+    duration: significant(Math.max(state.tShift - state.tZero, MIN_DURATION) / 1000, 5)
+  }
+
+  if (PLAY_MODE === PlayMode.SHARP) {
+    playVars.remaining = state.board.flat().filter(c => c.stage === CellStateStage.HIDDEN).length
   }
 
   const victory: ScoreItem = refineScores([{

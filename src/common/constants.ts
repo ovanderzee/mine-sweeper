@@ -48,6 +48,7 @@ Object.defineProperties(SCORE_LIST_NAMES, {
   1: newReadOnly('victory'),
   2: newReadOnly('victories'),
   3: newReadOnly('won-games'),
+  4: newReadOnly('score-list'),
 })
 
 const SCORE_LIST_NAME = SCORE_LIST_NAMES[SCORE_LIST_NAMES.length - 1]

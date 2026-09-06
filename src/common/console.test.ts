@@ -1,16 +1,19 @@
 import storage from './storage'
 import * as scoring from './scoring'
 import mv from './console'
+import { initialScore } from '../components/game/common'
 import { liveScores } from '../__mocks__/scores'
 import { ScoreItem } from './game.d'
 
 const testScore = () => { return {
   code: "7780AwkRlTLDVr7EY0Q", date: 1514179800000, user: "Annestiene", rank: 0,
-  game: {cells: 49, mines: 7, level: 10, effort: {least: 12, most: 33}},
-  signature: {fill_frequency: [18,17,6,4,2,0,0,0,0], invalid_code: false},
-  play: {moves: 15, duration: 41.599},
+  game: {cells: 49, blanks: 12, mines: 7, level: 8, effort: {least: 12, most: 33}},
+  signature: {board: [[]], fill_frequency: [18,17,6,4,2,0,0,0,0], invalid_code: false},
+  // todo: settle
+  relative: initialScore.relative,
+  play: {flags: 0, moves: 15, duration: 41.599},
   score: {efficiency: 0.8, speed: 0.3606, points: 288}
-}}
+} as unknown as ScoreItem}
 
 describe('Basic Console methods', () => {
   it('should operate on all scores', () => {

@@ -3,8 +3,9 @@ import {
   leastClicksToWin, mostClicksToWin,
   unmarkCells,
   makeBoardCode, rebuildGameData,
-  precise, refineScores, getFillDistribution
+  represent, significant, refineScores, getFillDistribution, countByFillType
 } from './scoring'
+import { initialScore } from '../components/game/common'
 import { newGameState, blank18pct, blank26pct, blank31pct, blank41pct } from '../__mocks__/game-states'
 import { ScoreItem } from './game.d'
 import { PlayMode } from './app.d'
@@ -186,33 +187,77 @@ describe('Sanity checking on boardCode', () => {
   })
 })
 
-describe('Precision as long as we need it', () => {
+describe('Representation as we need it', () => {
+  it('should return a string', () => {
+    const figure = 23.456
+    const result = represent(figure, 3)
+    expect(typeof result).toBe('string')
+  })
+
+  it('should round to precision', () => {
+    const figure = 23.456
+    const result = represent(figure, 3)
+    expect(result).toBe('23.5')
+  })
+
+  it('should round to precision nearing zero without leading zero', () => {
+    const figure = 0.23456
+    const result = represent(figure, 3)
+    expect(result).toBe('.235')
+  })
+
+  it('should round to precision at great heights', () => {
+    const figure = 23456
+    const result = represent(figure, 3)
+    expect(result).toBe('2.35e+4')
+  })
+
+  it('should not add trailing zeroes after the decimal point', () => {
+    const figure = 8.001
+    const result = represent(figure, 3)
+    expect(result).toBe('8.00')
+  })
+})
+
+describe('Significant as we need it', () => {
   it('should return a number', () => {
     const figure = 23.456
-    const result = precise(figure, 3)
+    const result = significant(figure, 3)
     expect(typeof result).toBe('number')
   })
 
   it('should round to significance', () => {
     const figure = 23.456
-    const result = precise(figure, 3)
+    const result = significant(figure, 3)
     expect(result).toBe(23.5)
   })
 
+  it('should round to significance nearing zero', () => {
+    const figure = 0.23456
+    const result = significant(figure, 3)
+    expect(result).toBe(0.235)
+  })
+
+  it('should round to significance at great heights', () => {
+    const figure = 23456
+    const result = significant(figure, 3)
+    expect(result).toBe(23500)
+  })
+
   it('should not add trailing zeroes after the decimal point', () => {
-    const figure = 8
-    const result = precise(figure, 3)
+    const figure = 8.001
+    const result = significant(figure, 3)
     expect(result).toBe(8)
   })
 })
 
 describe('Sort and Rank scores', () => {
   const oldScores = [
-    {code: "7780abc123", rank: 14, score: {points: 30}},
-    {code: "7780def456", rank: 2, score: {points: 100}},
-    {code: "7780ghi789", rank: 9, score: {points: 67}},
+    {code: "7780abc123", rank: 14, game: initialScore.game, play: initialScore.play, score: {points: 30}},
+    {code: "7780def456", rank: 2, game: initialScore.game, play: initialScore.play, score: {points: 100}},
+    {code: "7780ghi789", rank: 9, game: initialScore.game, play: initialScore.play, score: {points: 67}},
   ] as ScoreItem[]
-  const newScore = {code: "7780xyz789", rank: 0, score: {points: 67}} as ScoreItem
+  const newScore = {code: "7780xyz789", rank: 0, game: initialScore.game, play: initialScore.play, score: {points: 67}} as ScoreItem
 
 
   it('should sort by points and rank, oldest score first', () => {
@@ -237,3 +282,24 @@ it('getFillDistribution should offer a comparable board', ()=>{
   const ngFills = getFillDistribution(newGameState.board)
   expect(ngFills).toStrictEqual(newGameFillDistribution)
 })
+
+describe('Count filltypes', () => {
+  const mineCount = 49
+
+  it('should count blanks, pointers and mines', () => {
+    const game = blank18pct
+    const blanks = countByFillType(game, (f) => f===0)
+    const pointers = countByFillType(game, (f) => f>0 && f<9)
+    const mines = countByFillType(game, (f) => f>8)
+    expect(mines + pointers + blanks).toBe(mineCount)
+  })
+
+  it('should add fillTypes to find total cells', () => {
+    const game = blank41pct
+    const blanks = countByFillType(game, (f) => f===0)
+    const pointers = countByFillType(game, (f) => f>0 && f<9)
+    const mines = countByFillType(game, (f) => f>8)
+    expect(mines + pointers + blanks).toBe(mineCount)
+  })
+})
+
