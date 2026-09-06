@@ -1,6 +1,6 @@
 import React, { useContext, useState } from 'react'
 import PageContext from '../../store/page-context'
-import Diagram from '../UI/Diagram'
+import Diagram from './Diagram'
 import { ScoreItem, ScoreParam, MarkScoreData } from '../../common/game.d'
 import { SHOW_SORT_THRESHOLD, SHOW_DIAGRAM_THRESHOLD, SHOW_MARKING_THRESHOLD } from '../../common/constants'
 import { preventReloadByEnter } from '../../common/functions'
