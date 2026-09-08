@@ -35,8 +35,6 @@ Object.defineProperties(RANGES, {
   SCORES: newReadOnly(newRange(8, 1024)),
 });
 
-export { RANGES }
-
 export const SCORE_RADIX = 24
 
 /* MAINTENANCE */
@@ -53,4 +51,5 @@ Object.defineProperties(SCORE_LIST_NAMES, {
 
 const SCORE_LIST_NAME = SCORE_LIST_NAMES[SCORE_LIST_NAMES.length - 1]
 
-export { SCORE_LIST_NAMES, SCORE_LIST_NAME }
+// gather defined properties and their derivatives
+export { RANGES, SCORE_LIST_NAMES, SCORE_LIST_NAME }

@@ -36,8 +36,9 @@ export const sleep = (duration: number): Promise<void> => {
 
 export const openPlayground = async (page: Page): Promise<void> => {
   await page.goto(testUrl)
-  // close intro animation
+  // close intro animation, bridge crossfade
   await page.getByRole('button').click()
+  await sleep(600)
 }
 
 export const visitAboutScreen = async (page: Page): Promise<void> => {

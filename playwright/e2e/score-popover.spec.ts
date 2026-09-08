@@ -5,8 +5,8 @@ import { BareScoreItem } from '../../src/common/game.d'
 import { DEFAULTS } from '../../src/common/defaults'
 
 interface EachOption {
- scores?: BareScoreItem[]
- opener?: Locator
+  scores?: BareScoreItem[]
+  opener?: Locator
 }
 
 const beforeIt = async (page: Page, options: EachOption) => {
@@ -73,7 +73,7 @@ test.describe('ScorePopover main buttons', () => {
 
   test('should make changes to the app configuration', async ({ page }) => {
     const [listButton, popover] = await beforeIt(page, {scores: [highLevelScore]})
-    await page.evaluate((DEFAULTS) => localStorage.setItem('mv-config', JSON.stringify(DEFAULTS)), DEFAULTS)
+    await page.evaluate((config) => localStorage.setItem('mv-config', JSON.stringify(config)), DEFAULTS)
 
     await listButton.click()
     const replayButton = await popover.getByRole('button', {name: 'Replay'})
