@@ -23,9 +23,10 @@ export const writeStorageState = async (page: Page): Promise<void> => {
 }
 
 export const storeScoreData = async (page: Page, data: any): Promise<void> => {
-  await page.evaluate(data => {
-    localStorage.setItem(`mv-${SCORE_LIST_NAME}`, JSON.stringify(data))
-  }, data)
+  const box = {data, SCORE_LIST_NAME}
+  await page.evaluate(box => {
+    localStorage.setItem(`mv-${box.SCORE_LIST_NAME}`, JSON.stringify(box.data))
+  }, box)
 }
 
 export const sleep = (duration: number): Promise<void> => {
