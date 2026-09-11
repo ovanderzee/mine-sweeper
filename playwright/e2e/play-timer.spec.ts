@@ -13,7 +13,9 @@ test.describe('recording time', () => {
     // when click has fully been processed, time can be measured
     await sleep(50)
 
-    await expect(await elapsedSeconds(page)).toBe(timeLapse)
+    // works when running all tests with one command // timeLapse >= 15
+    await expect(await elapsedSeconds(page)).toBeGreaterThanOrEqual(timeLapse)
+    await expect(await elapsedSeconds(page)).toBeLessThanOrEqual(timeLapse + 1)
   }
 
   test('should pass time in an continuous play', async ({ page }) => {

@@ -32,6 +32,7 @@ export default defineConfig({
     trace: 'on-first-retry',
     storageState: './playwright/data/data.json',
     screenshot: 'only-on-failure',
+    headless: false,
   },
 
   /* Configure projects for major browsers */
@@ -53,6 +54,7 @@ export default defineConfig({
       use: {
         ...devices['Desktop Firefox'],
         storageState: 'playwright/data/data.json',
+        headless: false,
       },
       dependencies: ['setup'],
     },
