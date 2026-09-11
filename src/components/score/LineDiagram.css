@@ -33,6 +33,12 @@ foreignObject {
   position: fixed;
 }
 
+.line-diagram .data-point button:active,
+.line-diagram .data-point button:focus,
+.line-diagram .data-point button:hover {
+  background: white;
+}
+
 .line-diagram .mark button {
   background: var(--fire-orange);
 }
