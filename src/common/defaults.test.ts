@@ -1,4 +1,4 @@
-import { DEFAULTS, calculateMineCount } from './defaults'
+import { DEFAULTS, calculateMineCount, configFactory } from './defaults'
 import { microConfig, scoringConfig } from '../__mocks__/configs'
 
 /**
@@ -24,4 +24,30 @@ it('Some boardSize and gameLevel to mineCount scenarios' , ()=>{
 
   const zero = calculateMineCount({BOARD_SIZE: 10, GAME_LEVEL: 0})
   expect(zero).toBe(0)
+})
+
+describe('configFactory', () => {
+  test('should behave default when called with blank value', () => {
+    const config = configFactory({})
+    const {BOARD_SIZE, GAME_LEVEL, MINE_COUNT, FONT_SIZE} = config
+    expect(BOARD_SIZE).toBe(DEFAULTS.BOARD_SIZE)
+    expect(GAME_LEVEL).toBe(DEFAULTS.GAME_LEVEL)
+    expect(MINE_COUNT).toBe(DEFAULTS.MINE_COUNT)
+    expect(FONT_SIZE).toBe(DEFAULTS.FONT_SIZE)
+  })
+
+  test('should return mine-count on-demand', () => {
+    const configChange = {BOARD_SIZE: 9, GAME_LEVEL: 9}
+    const config = configFactory(configChange)
+    expect(config.MINE_COUNT).toBe(13)
+  })
+
+  test('should always adopt new properties', () => {
+    // @ts-ignore // error TS2339: Property 'NEW_PROP' does not exist on type ...
+    DEFAULTS.NEW_PROP = 'jaja'
+    const config = configFactory({BOARD_SIZE: 12, GAME_LEVEL: 6})
+    expect(config.MINE_COUNT).toBe(15)
+    // @ts-ignore // error TS2339: Property 'NEW_PROP' does not exist on type ...
+    expect(Object.getPrototypeOf(config).NEW_PROP).toBe('jaja')
+  })
 })
