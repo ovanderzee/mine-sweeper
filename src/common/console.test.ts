@@ -106,16 +106,47 @@ describe('Console methods mixing mocks and stored scores', () => {
   })
 })
 
-describe('Console methods otherwise', () => {
+describe('Delete score by properties', () => {
 
-   it('should remove one record', () => {
+  afterEach(() => {
+    vi.clearAllMocks()
+  })
+
+  it('should preview records to delete', () => {
     storage.scores = liveScores as ScoreItem[]
-    const userScoresLength = 1
+    const deletePreview = mv.getScoresByProperties({code: '6660AwiM3EynJ-5A', date: 1769180645932})
+
+    expect(deletePreview.length).toBe(1)
+  })
+
+  it('should remove one record using code and date', () => {
+    storage.scores = liveScores as ScoreItem[]
     const originalLength = storage.scores.length
 
-    mv.deleteScore('6660AwiM3EynJ-5A', 1769180645932)
+    vi.spyOn(window, 'confirm').mockReturnValue(true)
+    mv.deleteScoresByProperties({code: '6660AwiM3EynJ-5A', date: 1769180645932})
 
-    expect(storage.scores.length).toBe(originalLength - userScoresLength)
+    expect(storage.scores.length).toBe(originalLength - 1)
+  })
+
+  it('should remove one or more records when confirming', () => {
+    storage.scores = liveScores as ScoreItem[]
+    const originalLength = storage.scores.length
+
+    vi.spyOn(window, 'confirm').mockReturnValue(true)
+    mv.deleteScoresByProperties({code: '6660AwiM3EynJ-5A', date: 1769180645932})
+
+    expect(storage.scores.length).toBe(originalLength - 1)
+  })
+
+  it('should remove no records when cancelling', () => {
+    storage.scores = liveScores as ScoreItem[]
+    const originalLength = storage.scores.length
+
+    vi.spyOn(window, 'confirm').mockReturnValue(false)
+    mv.deleteScoresByProperties({code: '6660AwiM3EynJ-5A', date: 1769180645932})
+
+    expect(storage.scores.length).toBe(originalLength)
   })
 
 })

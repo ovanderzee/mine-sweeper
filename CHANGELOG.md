@@ -33,6 +33,7 @@
 ### Changes
 - Separate list-sort and property-selection components out of HallOfFame
 - Move score-related visualisation to functional folder
+- Refined criteria to delete scores
 
 
 ## [4.1.0] - 2026-09-05
