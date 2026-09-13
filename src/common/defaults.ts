@@ -25,19 +25,26 @@ export const NORMAL = {
 }
 
 export const configFactory = function (partial: AppSubConfig): AppConfig {
-  const base = Object.create({
+  return {
     ...DEFAULTS,
+    ...partial,
     get MINE_COUNT() {
-      // @ts-ignore // error TS2345: Argument of type '{}' is not assignable to parameter of type ...
       return calculateMineCount(this)
-    },
-  })
-  for (let prop in partial) {
-    base[prop] = partial[prop]
+    }
   }
-  return base
 }
+
 /*
+    const config0 = configFactory({FONT_SIZE: 11, GAME_LEVEL: 0}) // MINE_COUNT 0
+    console.log('config0', config0)
+    console.log('config0.MINE_COUNT', config0.MINE_COUNT)
+    try {
+      console.log('config0.MINE_COUNT=88', config0.MINE_COUNT=88)
+      console.log('config0.MINE_COUNT', config0.MINE_COUNT)
+    } catch (e) {
+      console.log(e)
+    }
+
     const change1 = {BOARD_SIZE: 9, GAME_LEVEL: 9} // MINE_COUNT 13
     const config1 = configFactory(change1)
     console.log('config1.FONT_SIZE', config1.FONT_SIZE)

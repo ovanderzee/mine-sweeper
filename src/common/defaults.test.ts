@@ -48,6 +48,6 @@ describe('configFactory', () => {
     const config = configFactory({BOARD_SIZE: 12, GAME_LEVEL: 6})
     expect(config.MINE_COUNT).toBe(15)
     // @ts-ignore // error TS2339: Property 'NEW_PROP' does not exist on type ...
-    expect(Object.getPrototypeOf(config).NEW_PROP).toBe('jaja')
+    expect(config.NEW_PROP).toBe('jaja')
   })
 })
