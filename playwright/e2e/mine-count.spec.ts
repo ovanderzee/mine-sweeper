@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test'
 import { openApp, exitIntroScreen, openPlayground, visitConfigurationScreen, sleep } from '../helpers/run-helpers'
-import { DEFAULTS, calculateMineCount } from  '../../src/common/defaults'
+import { DEFAULTS } from  '../../src/common/defaults'
 import { CellState } from '../../src/common/game.d'
 
 
@@ -36,7 +36,6 @@ test.describe('different ways to receive the configuration', async () => {
 
     const minesCounted = initialGame.board.flat().filter((c: CellState) => c.fill > 8).length
     expect(minesCounted).toBe(DEFAULTS.MINE_COUNT)
-    expect(minesCounted).toBe(calculateMineCount(DEFAULTS))
   })
 
   test('should show a stored value', async ({ page }) => {
@@ -60,7 +59,6 @@ test.describe('different ways to receive the configuration', async () => {
 
     const minesCounted = newGame.board.flat().filter((c: CellState) => c.fill > 8).length
     expect(minesCounted).toBe(DEFAULTS.MINE_COUNT)
-    expect(minesCounted).toBe(calculateMineCount(DEFAULTS))
   })
 
   test('should work by context', async ({ page }) => {

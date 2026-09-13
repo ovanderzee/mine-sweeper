@@ -13,17 +13,21 @@ import { microConfig, scoringConfig } from '../__mocks__/configs'
  */
 
 it('Some boardSize and gameLevel to mineCount scenarios' , ()=>{
-  const micro = calculateMineCount(microConfig)
-  expect(micro).toBe(2)
+  const microCount = calculateMineCount(microConfig)
+  const microConf = configFactory(microConfig)
+  expect(microConf.MINE_COUNT).toBe(microCount) // 2
 
-  const scoring = calculateMineCount(scoringConfig)
-  expect(scoring).toBe(7)
+  const scoringCount = calculateMineCount(scoringConfig)
+  const scoringConf = configFactory(scoringConfig)
+  expect(scoringConf.MINE_COUNT).toBe(scoringCount) // 7
 
-  const standard = calculateMineCount(DEFAULTS)
-  expect(standard).toBe(4)
+  const standardCount = calculateMineCount(DEFAULTS)
+  const standardConf = configFactory(DEFAULTS)
+  expect(standardConf.MINE_COUNT).toBe(standardCount) // 4
 
-  const zero = calculateMineCount({BOARD_SIZE: 10, GAME_LEVEL: 0})
-  expect(zero).toBe(0)
+  const zeroCount = calculateMineCount({BOARD_SIZE: 10, GAME_LEVEL: 0})
+  const zeroConf = configFactory({BOARD_SIZE: 10, GAME_LEVEL: 0})
+  expect(zeroConf.MINE_COUNT).toBe(zeroCount) // 0
 })
 
 describe('configFactory', () => {

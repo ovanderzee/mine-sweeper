@@ -31,7 +31,7 @@ export const gameReducer = function (this: AppConfig, state: GameState, action: 
 
     case GameActionType.VICTORY: return victoryReducer(state, config)
 
-    case GameActionType.DEFEAT: return defeatReducer(state)
+    case GameActionType.DEFEAT: return defeatReducer(state, config)
 
     default:
       // GameActionType.MOVE || GameActionType.FLAG

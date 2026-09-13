@@ -1,5 +1,5 @@
 import update from './update'
-import { DEFAULTS } from './defaults'
+import { configFactory } from './defaults'
 import { ScoreItem } from './game.d'
 import { AppConfig } from './app.d'
 import { SCORE_LIST_NAMES } from './constants'
@@ -54,7 +54,9 @@ describe('LocalStorage updater', () => {
   })
 
   it('should remove MAX_SCORES configuration', () => {
-    const testConfig = { ...DEFAULTS, 'MAX_SCORES': 31 } as AppConfig
+    // can encounter older props
+    // @ts-ignore // error TS2353: Object literal may only specify known properties, and ''MAX_SCORES'' does not ...
+    const testConfig = configFactory({ 'MAX_SCORES': 31 }) as AppConfig
     localStorage.setItem('mv-config', JSON.stringify(testConfig))
     const consoleLogSpy = vi.spyOn(console, 'log').mockImplementation(() => {})
 

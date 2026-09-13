@@ -1,15 +1,14 @@
 import { GameState, CellState, CellStateStage } from '../../../common/game.d'
+import { AppConfig } from '../../../common/app.d'
 import { MAX_DETONATIONS } from '../../../common/constants'
-import { calculateMineCount } from '../../../common/defaults'
-import storage from '../../../common/storage'
 import { focusFirstNavButton } from '../../../common/functions'
 
-export const defeatReducer = (state: GameState): GameState => {
+export const defeatReducer = (state: GameState, config: AppConfig): GameState => {
   const minesToDo: CellState[] = state.board
     .flat()
     .filter(cell => cell.stage === CellStateStage.RELEASED && cell.fill > 8)
 
-  const mineCount = calculateMineCount(storage.config) - 1 // one was blown onclick
+  const mineCount = config.MINE_COUNT - 1 // one was blown onclick
   const floatingSize = Math.min(mineCount / MAX_DETONATIONS, minesToDo.length)
   const batchSize = (Math.random() < floatingSize % 1 || floatingSize < 1) ? Math.ceil(floatingSize) : Math.floor(floatingSize);
   const mineBatch = Array(batchSize)

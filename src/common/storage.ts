@@ -1,4 +1,4 @@
-import { DEFAULTS, NORMAL } from  './defaults'
+import { DEFAULTS, NORMAL, configFactory } from  './defaults'
 import { AppConfig, AppSubConfig, AppSession, AppSubSession } from './app.d'
 import { GameState, BareScoreItem, ScoreItem } from './game.d'
 import { refineScores, stripScores } from './scoring'
@@ -19,7 +19,7 @@ const storage = {
     let data: AppConfig
     try {
       const updatable: AppSubConfig = stored ? sanitisedParse(stored) : {}
-      data = { ...DEFAULTS, ...updatable }
+      data = configFactory( updatable )
     } catch {
       console.error('Invalid configuration found, use defaults...')
       data = DEFAULTS

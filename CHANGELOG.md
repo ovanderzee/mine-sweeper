@@ -13,7 +13,6 @@
 
 ### Features
 - Routing on gamecode, about, config and hiscores
-- Show number of neighbouring mines in graph
 - Calculate coagulation (mine-mine borders | blank to mine ratio)
 - Open/close mark section
 - Tests on marking
@@ -21,7 +20,6 @@
 - Calculate efficiency in sharp mode according to lower minimal number of moves
 - Similar Game button with score details, Soortgelijk Spel
 - Rename user with score details
-- Get rid of MINE_COUNT, it is derived, and there are functions to count or calculate it
 - Replace data-point title by popover-list of score parameters (hovering the data-points)
 - Revise list-sort component, mark with two criteria
 - Store list-sort settings in session storage
@@ -32,7 +30,9 @@
 
 ### Changes
 - Separate list-sort and property-selection components out of HallOfFame
-- Move score-related visualisation to functional folder
+- Move score-related visualisation to one functional folder
+- Maintain playwright
+- Mine-count as a getter
 
 
 ## [4.1.0] - 2026-09-05

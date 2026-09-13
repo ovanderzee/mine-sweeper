@@ -5,7 +5,7 @@ import { renderWithProvider, renderWithContext } from './../../__mocks__/aat-hel
 import { PlayMode } from './../../common/app.d'
 import { CellState } from './../../common/game.d'
 // import { LONG_PRESS_THRESHOLD } from '../../common/constants'
-import { DEFAULTS, NORMAL } from '../../common/defaults'
+import { DEFAULTS, NORMAL, configFactory } from '../../common/defaults'
 import GameCell from './GameCell'
 
 const trim = (str: string) => str.trim().replace(/\s+/, ' ')
@@ -174,7 +174,7 @@ describe('Gamecell, a party of properties', () => {
 
   describe('should NOT respond to spacebar-keystroke when bare play-mode is in effect ', async () => {
     let cell: CellState
-    const BARE_CONFIG = { ...DEFAULTS, PLAY_MODE: PlayMode.BARE }
+    const BARE_CONFIG = configFactory({ PLAY_MODE: PlayMode.BARE })
 
     beforeEach(async () => {
       dispatchGameAction = vi.fn()

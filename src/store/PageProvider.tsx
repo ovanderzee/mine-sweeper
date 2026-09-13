@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import PageContext from './page-context'
-import { DEFAULTS, calculateMineCount, NORMAL } from '../common/defaults'
+import { DEFAULTS, configFactory, NORMAL } from '../common/defaults'
 import { texts } from '../common/i18n'
 import storage from '../common/storage'
 import { AppConfig, AppSubConfig, AppSession, AppSubSession, PageContextProps, Translation } from '../common/app.d'
@@ -36,16 +36,9 @@ const PageProvider = (props: { children: React.ReactNode }) => {
 
   const configurationHandler = (changes: AppSubConfig = DEFAULTS) => {
     setPageState(prev => {
-      const update = {
-        ...prev,
-        config: {
-          ...prev.config,
-          ...changes,
-        }
-      }
-      if (changes.BOARD_SIZE || changes.GAME_LEVEL) {
-        update.config.MINE_COUNT = calculateMineCount(update.config)
-      } else if (changes.LANGUAGE) {
+      const update = {...prev}
+      update.config = configFactory({ ...prev.config, ...changes })
+      if (changes.LANGUAGE) {
         update.text = texts[changes.LANGUAGE]
       }
       storage.config = update.config
