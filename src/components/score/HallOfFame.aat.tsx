@@ -145,7 +145,7 @@ describe('The hall-of-fame-page list sorting', () => {
   beforeEach(async () => {
     storage.scores = liveScores as ScoreItem[]
     screen = await renderWithProvider(<HallOfFame/>)
-    selectX = screen.getByLabelText('show')
+    selectX = screen.getByLabelText('sort')
     items = screen.getByRole('list').getByRole('button')
   })
 
@@ -277,7 +277,7 @@ describe('The hall-of-fame-page x- and y-axis', () => {
   beforeEach(async () => {
     storage.scores = liveScores as ScoreItem[]
     screen = await renderWithProvider(<HallOfFame/>)
-    selectX = screen.getByLabelText('show')
+    selectX = screen.getByLabelText('sort')
     selectY = screen.getByLabelText('against')
     legendX = screen.getByRole('document').getByTestId('x-parameter')
     legendY = screen.getByRole('document').getByTestId('y-parameter')

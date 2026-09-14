@@ -82,7 +82,7 @@
     "characteristics": "kenmerken",
     "game-play": "spelverloop",
     "result": "resultaat",
-    "sort": "toon",
+    "sort": "sorteer",
     "versus": "tegen",
     "mark": "merk",
     "mark-parameter": "Merk parameter",
@@ -112,13 +112,13 @@
     "effort": "min-max zetten",
     "occurrences": "Voorkomens",
     "surrounding": "Aantal omliggende mijnen",
-    "blank_pointer_ratio": "blanco/indice",
-    "blank_mine_ratio": "blanco/mijn",
-    "pointer_mine_ratio": "indice/mijn",
+    "blank_pointer_ratio": "blanco / indice",
+    "blank_mine_ratio": "blanco / mijn",
+    "pointer_mine_ratio": "indice / mijn",
     "pointer_mark": "hoge indice",
-    "pointer_avg": "gemid.indice",
+    "pointer_avg": "gemid. indice",
     "mine_mark": "hoge mijn",
-    "mine_avg": "gemid.mijn"
+    "mine_avg": "gemid. mijn"
   },
   "settings": {
     "On begin Play": "De Uitdaging...",
