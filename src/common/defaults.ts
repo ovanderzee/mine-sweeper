@@ -1,5 +1,5 @@
 import { texts, currentLanguage } from './i18n'
-import { BoardFit, PlayMode } from './app.d'
+import { AppConfig, AppSubConfig, BoardFit, PlayMode } from './app.d'
 
 export const GAME_DIVISOR = 60
 
@@ -11,7 +11,7 @@ export const calculateMineCount = ((cfg: { BOARD_SIZE: number, GAME_LEVEL: numbe
 export const DEFAULTS = {
   BOARD_SIZE: 6,
   GAME_LEVEL: 6,
-  MINE_COUNT: Math.ceil(6 * 6 * 6 / 60),
+  get MINE_COUNT() {return calculateMineCount(this)},
   LANGUAGE: currentLanguage,
   FONT_SIZE: 15,
   PLAYER_NAME: texts[currentLanguage].config['default player'],
@@ -22,4 +22,14 @@ export const DEFAULTS = {
 export const NORMAL = {
   MAGNIFICATION: 1,
   BOARD_FIT: BoardFit.NORMAL,
+}
+
+export const configFactory = function (partial: AppSubConfig): AppConfig {
+  return {
+    ...DEFAULTS,
+    ...partial,
+    get MINE_COUNT() {
+      return calculateMineCount(this)
+    }
+  }
 }

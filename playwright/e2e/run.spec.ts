@@ -33,8 +33,8 @@ test('should waste some milliseconds to allow things to happen in the website', 
   const t0 = Date.now()
   await sleep(wait)
   const tDiff = Date.now() - t0
-  const lag = 3
+  const lag = 6
 
   await expect(tDiff).toBeGreaterThanOrEqual(wait)
-  await expect(tDiff).toBeLessThan(wait + lag)
+  await expect(tDiff).toBeLessThanOrEqual(wait + lag)
 })

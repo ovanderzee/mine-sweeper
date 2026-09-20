@@ -4,7 +4,7 @@ import { render, RenderResult } from 'vitest-browser-react'
 import PageContext from './../store/page-context'
 import PageProvider from './../store/PageProvider'
 import { Languages } from '../common/app.d'
-import { DEFAULTS, NORMAL } from  './../common/defaults'
+import { DEFAULTS, NORMAL, configFactory } from  './../common/defaults'
 import { FADE_OUT_TIME } from './../common/constants'
 import storage from '../common/storage'
 import { texts } from './../common/i18n'
@@ -113,6 +113,6 @@ export const clickRangeInputValue = (element: HTMLInputElement, value: string) =
 }
 
 export const setDefaultConfig = () => {
-  const config = JSON.stringify({ ...DEFAULTS, LANGUAGE: 'nl' })
-  localStorage.setItem('mv-config', config)
+  const config = configFactory({ LANGUAGE: Languages.nl })
+  localStorage.setItem('mv-config', JSON.stringify(config))
 }

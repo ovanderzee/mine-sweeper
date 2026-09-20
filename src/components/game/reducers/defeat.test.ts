@@ -1,6 +1,7 @@
 import { defeatReducer } from './defeat'
 import { CellStateStage, CellState } from '../../../common/game.d'
 import { playingGameState, lostGameState } from '../../../__mocks__/game-states'
+import { microConfig } from '../../../__mocks__/configs'
 import storage from '../../../common/storage'
 import { rebuildGameData } from '../../../common/scoring'
 
@@ -14,8 +15,8 @@ describe('defeatReducer is called in repetition', () => {
         )
       )
 
-    const gameState2 = defeatReducer(playingGameState)
-    const gameState3 = defeatReducer(gameState2)
+    const gameState2 = defeatReducer(playingGameState, microConfig)
+    const gameState3 = defeatReducer(gameState2, microConfig)
 
     vi.runAllTimers()
     const allMines: CellState[] = gameState3.board
@@ -36,10 +37,12 @@ describe('defeatReducer is called in repetition', () => {
       gameState = { ...playingGameState }
     const buildData = rebuildGameData('kk80Aw2iMaS1styvRK7kgiz32pmqWi+BK+GhySxaZp9ljNV1j5tTDdJ2rnf1HB36F0eLpyFggA')
     storage.config = { ...storage.config, ...buildData.config }
+
     const findReleasedMines = () => gameState.board
       .flat()
       .filter(cell => cell.stage === CellStateStage.RELEASED && cell.fill > 8)
       .length
+
     gameState.board = buildData.board
     gameState.board.forEach(
       (r: CellState[]) => r.forEach(
@@ -49,7 +52,7 @@ describe('defeatReducer is called in repetition', () => {
 
     const initialReleasedMines = findReleasedMines()
     do {
-      gameState = defeatReducer(gameState)
+      gameState = defeatReducer(gameState, storage.config)
       releasedMines = findReleasedMines()
       times++
     } while (releasedMines > 0 )
@@ -71,7 +74,7 @@ describe('defeatReducer is called in repetition', () => {
   })
 
   it('should return unchanged state when no untouched mines were found', () => {
-    const gameStateOut = defeatReducer(lostGameState)
+    const gameStateOut = defeatReducer(lostGameState, microConfig)
     expect(gameStateOut.mines.length).toBe(0)
 
     expect(gameStateOut).toBe(lostGameState)

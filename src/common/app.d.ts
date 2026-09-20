@@ -20,6 +20,7 @@ export enum PlayMode {
 }
 
 export type AppSubConfig = {
+  [index]: string,
   BOARD_SIZE?: number;
   GAME_LEVEL?: number;
   MINE_COUNT?: number;
@@ -31,6 +32,7 @@ export type AppSubConfig = {
 }
 
 export interface AppCheckConfig {
+  [index]: string,
   BOARD_SIZE: number;
   GAME_LEVEL: number;
   MINE_COUNT?: number;
@@ -42,6 +44,7 @@ export interface AppCheckConfig {
 }
 
 export interface AppConfig {
+  [index]: string,
   BOARD_SIZE: number;
   GAME_LEVEL: number;
   MINE_COUNT: number;

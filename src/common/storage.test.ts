@@ -71,7 +71,7 @@ describe('Configuration storage', () => {
     const config = storage.config
     expect(config.BOARD_SIZE).toBe(3)
     expect(config.GAME_LEVEL).toBe(5)
-    expect(config.MINE_COUNT).toBe(DEFAULTS.MINE_COUNT)
+    expect(config.MINE_COUNT).toBe(1)
     expect(config.LANGUAGE).toBe(DEFAULTS.LANGUAGE)
     expect(config.FONT_SIZE).toBe(18)
     expect(config.PLAYER_NAME).toBe('Heidi')

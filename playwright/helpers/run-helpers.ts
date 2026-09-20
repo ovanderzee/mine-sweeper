@@ -14,7 +14,7 @@ export const getConfigurationData = async (page: Page): Promise<AppConfig> => {
 }
 
 export const getGameData = async (page: Page): Promise<GameState> => {
-  const localData = await page.evaluate(() => localStorage.getItem('mv-game'));
+  const localData = await page.evaluate(() => localStorage.getItem('mv-game'))
   return JSON.parse(localData || '')
 }
 
@@ -35,11 +35,20 @@ export const sleep = (duration: number): Promise<void> => {
     })
 }
 
-export const openPlayground = async (page: Page): Promise<void> => {
+export const openApp = async (page: Page): Promise<void> => {
   await page.goto(testUrl)
+  // follow up using exitIntroScreen later on
+}
+
+export const exitIntroScreen = async (page: Page): Promise<void> => {
   // close intro animation, bridge crossfade
   await page.getByRole('button').click()
   await sleep(600)
+}
+
+export const openPlayground = async (page: Page): Promise<void> => {
+  await openApp(page)
+  await exitIntroScreen(page)
 }
 
 export const visitAboutScreen = async (page: Page): Promise<void> => {
