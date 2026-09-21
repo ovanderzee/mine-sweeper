@@ -30,6 +30,10 @@
   bottom: var(--pseudo-margin);
 }
 
+#game-board button[disabled] {
+  opacity: 1;
+}
+
 #game-board button.pristine {
   background: var(--medium-pristine);
   box-shadow:

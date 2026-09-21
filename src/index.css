@@ -123,6 +123,7 @@ footer .buttons {
 
 button[disabled] {
   cursor: not-allowed;
+  opacity: .4;
 }
 
 button.confirm {
