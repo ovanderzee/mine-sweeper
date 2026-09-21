@@ -1,5 +1,5 @@
 import { MIN_DURATION } from '../../../common/constants'
-import { AppConfig, PlayMode } from '../../../common/app.d'
+import { AppConfig } from '../../../common/app.d'
 import storage from '../../../common/storage'
 import { CellStateStage, GameState,
   GameScore, PlayScore, ScoreItem } from '../../../common/game.d'
@@ -27,16 +27,15 @@ export const victoryReducer = (state: GameState, config: AppConfig): GameState =
     }
   }
 
-  // time in seconds
+  const flags = state.board.flat().filter(c => c.locked).length
+  const remaining = state.board.flat().filter(c => c.stage === CellStateStage.HIDDEN).length
   const playVars: PlayScore = {
-    flags: state.board.flat().filter(c => c.locked).length,
     moves: countMoves(state),
+    // time in seconds
     duration: significant(Math.max(state.tShift - state.tZero, MIN_DURATION) / 1000, 5)
   }
-
-  if (PLAY_MODE === PlayMode.SHARP) {
-    playVars.remaining = state.board.flat().filter(c => c.stage === CellStateStage.HIDDEN).length
-  }
+  if (flags) playVars.flags = flags
+  if (remaining) playVars.remaining = remaining
 
   const victory: ScoreItem = refineScores([{
     ...victoryVars,

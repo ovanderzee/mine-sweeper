@@ -28,7 +28,7 @@
 - Rethink efficiency for sharp-mode scores
 
 
-## [4.2.0] - 2026-09-27
+## [4.2.0] - 2026-09-28
 
 ### Changes
 - Separate list-sort and property-selection components out of HallOfFame
@@ -37,6 +37,8 @@
 - Simplified mine counter and pie diagram
 - Score analysis on game-won
 - Style and code enhancements
+- Code-split, separate the scores
+- Over 1000 sample scores
 
 ### Added
 - Mark touched mine on game-lost
