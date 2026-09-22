@@ -17,7 +17,7 @@ import './ScorePopover.css'
 interface ScorePopoverProps {
   scores: ScoreItem[]
   index: number
-  onDeletion: (score: ScoreItem) => void
+  onDeletion?: (score: ScoreItem) => void
   onBrowse: (browseIndex: number) => void
 }
 
@@ -49,7 +49,7 @@ const ScorePopover = (props: ScorePopoverProps) => {
 
   const approveModal = <ApproveModal
     message={text.dialog['Delete this game?']}
-    onConfirm={() => deletable && props.onDeletion(deletable)}
+    onConfirm={() => deletable && props.onDeletion && props.onDeletion(deletable)}
     onCancel={() => {}}
     isShowModal={showModal}
     endShowModal={()=>{
@@ -218,7 +218,7 @@ const ScorePopover = (props: ScorePopoverProps) => {
         }
       </section>
       <footer>
-        <div className="buttons">
+        {props?.onDeletion && <div className="buttons">
           <button type="button" className="delete"
             onClick={() => {
               setDeletable({...log})
@@ -231,7 +231,7 @@ const ScorePopover = (props: ScorePopoverProps) => {
               onClick={() => replayStoredGame(log.code)}
             >{text.nav.Replay}</button>
           }
-        </div>
+        </div>}
       </footer>
     </div>
     {approveModal}

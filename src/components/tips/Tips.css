@@ -65,7 +65,7 @@
 }
 
 #mine-tracker .icon,
-#score-tracker .icon,
+#score-tracker button,
 #score-tracker .pie-diagram {
   display: inline-block;
   width: 1.667em;
@@ -96,10 +96,6 @@
 #mine-tracker #diff {
   color: white;
   font-weight: bold;
-}
-
-#score-tracker .icon {
-  cursor: pointer;
 }
 
 #score-tracker .pie-diagram figcaption {

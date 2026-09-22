@@ -102,6 +102,11 @@
   transform: scale(1.667);
 }
 
+#score-popover button.glyph[disabled] + button.glyph[disabled],
+#score-popover button.glyph[disabled]:has(+ button.glyph[disabled]) {
+  display: none;
+}
+
 #score-popover article.functional-grid {
   display: grid;
 }
