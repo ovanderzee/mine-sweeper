@@ -187,6 +187,7 @@
   },
   "tips": {
     "Todo counter": "Number of mines to find",
+    "Score analysis": "Score analysis",
     "Playtime": "Playtime",
     "Contain all cells": "Have all cells visible",
     "Cover with cells": "Fill screen with cells",
