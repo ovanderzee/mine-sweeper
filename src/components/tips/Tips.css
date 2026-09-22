@@ -81,7 +81,7 @@
 }
 
 #score-tracker .pie-diagram {
-  filter: brightness(1.25) saturate(1.25);
+  filter: brightness(1.167) saturate(1.167);
 }
 
 #mine-tracker #mine {

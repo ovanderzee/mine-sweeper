@@ -10,8 +10,10 @@ const BoardImage = (props: BoardProps) => {
   const getClassName = (fill: number) => {
     if (fill > 8) {
       return 'mine'
+    } else if (fill === 0) {
+      return 'blank'
     } else {
-      return 'safe'
+      return 'pointer'
     }
   }
 

@@ -3,12 +3,37 @@ svg.board-image {
   width: 6em;
   height: 6em;
   opacity: 0.4;
+  transition: opacity 300ms;
+
+  rect {
+    transition: fill 300ms;
+  }
+
+  &:hover {
+    opacity: 0.8;
+
+    rect.mine {
+      fill: var(--state-red);
+    }
+
+    rect.pointer {
+      fill: var(--state-green);
+    }
+
+    rect.blank {
+      fill: var(--dark-blue);
+    }
+  }
 }
 
 svg.board-image rect.mine {
   fill: black;
 }
 
-svg.board-image rect.safe {
+svg.board-image rect.pointer {
+  fill: #bbb;
+}
+
+svg.board-image rect.blank {
   fill: white;
 }
