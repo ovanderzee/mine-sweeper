@@ -1,12 +1,11 @@
 import { useContext } from 'react'
 import PageContext from '../../store/page-context'
 import { TipProps } from './Tips'
-import { PlayMode } from '../../common/app.d'
 import './Tips.css'
 
 const MineTracker = (props: TipProps) => {
   const pageCtx = useContext(PageContext)
-  const { text, config } = pageCtx
+  const { text } = pageCtx
 
   const flatBoard = props.game.board!.flat()
   const mineCount = flatBoard.filter(c => c.fill > 8).length
@@ -14,9 +13,8 @@ const MineTracker = (props: TipProps) => {
 
   return (
     <div id="mine-tracker" className="tip" title={text.tips['Todo counter']}>
-      {config.PLAY_MODE === PlayMode.NORMAL && <span id="mine" className="icon"></span>}
-      {config.PLAY_MODE === PlayMode.SHARP && <span id="flag" className="icon"></span>}
-      <span id="diff">{mineCount - flagCount}</span>
+      <span id="mine" className="icon"></span>
+      <span id="diff" className="icon">{mineCount - flagCount}</span>
     </div>
   )
 }

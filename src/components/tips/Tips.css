@@ -63,34 +63,31 @@
 }
 
 #mine-tracker {
+  position: relative;
   text-align: center;
 }
 
 #mine-tracker .icon {
-  width: .8em;
+  width: 1.667em;
   aspect-ratio: 1;
 }
 
 #mine-tracker #mine {
+  position: absolute;
+  z-index: -1;
   border-radius: 50%;
-  background: radial-gradient(ellipse at 25% 25%, transparent 8%, currentcolor 33% );
-}
-
-#mine-tracker #flag::before {
-  content: '⚑';
-}
-
-#mine-tracker #none::before {
-  content: '⚑';
-}
-
-#mine-tracker #none::after {
-  content: '×';
-  font-size: 120%;
+  background: radial-gradient(
+    ellipse at 25% 25%,
+    hsl(from currentcolor h calc(s / 2) 50%) 8%,
+    currentcolor 33%
+  );
+  margin-top: 16%;
+  transform: scale(116%);
 }
 
 #mine-tracker #diff {
-  margin-inline: .333ex;
+  color: white;
+  font-weight: bold;
 }
 
 /* ACTION */
