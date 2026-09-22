@@ -69,7 +69,7 @@ const ScorePopover = (props: ScorePopoverProps) => {
   const loggedDate = new Date(log.date)
 
   return (<>
-    <figure
+    <div role="figure"
       className={log.rank <= 10 ? 'super' : ''}
       key={`${log.rank}_${log.score.points}`}
     >
@@ -207,7 +207,7 @@ const ScorePopover = (props: ScorePopoverProps) => {
           </div>
         </section>
       </article>
-      <article className="graphs">
+      <section className="graphs">
         {log.signature.invalid_code ?
           <div className="error"><span>{text.error['Invalid code']}</span></div> :
           <>
@@ -216,7 +216,7 @@ const ScorePopover = (props: ScorePopoverProps) => {
             <BoardImage board={log.signature.board} />
           </>
         }
-      </article>
+      </section>
       <footer>
         <div className="buttons">
           <button type="button" className="delete"
@@ -233,7 +233,7 @@ const ScorePopover = (props: ScorePopoverProps) => {
           }
         </div>
       </footer>
-    </figure>
+    </div>
     {approveModal}
   </>)
 }

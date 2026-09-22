@@ -17,31 +17,27 @@ const PieDiagram = (props: PieProps) => {
   const mineLevel = significant(props.rel.mines * 100, 3)
 
   return (
-    <svg
-      role="document"
+    <figure
       className="pie-diagram"
-      viewBox={`-200 -100 400 200`}
-      xmlns="http://www.w3.org/2000/svg"
       style={{
         '--blank-stop': `${blankLevel}%`,
         '--pointer-stop': `${blankLevel + pointerLevel}%`,
       } as CSSProperties}
     >
-      <clipPath id="round-clip">
-        <circle cx="0" cy="0" r="100" />
-      </clipPath>
-      <foreignObject x="-100" y="-100" width="200" height="200" clipPath="url(#round-clip)">
-        <div className="cone"></div>
-      </foreignObject>
-      <g>
-        <text x="80" y="-75">{text.VAR.blanks}</text>
-        <text x="100" y="-45">{blankLevel}%</text>
-        <text x="-100" y="65"textAnchor="end">{text.VAR.pointers}</text>
-        <text x="-80" y="95"textAnchor="end">{pointerLevel}%</text>
-        <text x="-80" y="-75"textAnchor="end">{text.VAR.mines}</text>
-        <text x="-100" y="-45"textAnchor="end">{mineLevel}%</text>
-      </g>
-    </svg>
+      <div className="cone"></div>
+      <figcaption className="blanks">
+        <span>{text.VAR.blanks}</span>
+        <b>{blankLevel}%</b>
+      </figcaption>
+      <figcaption className="pointers">
+        <span>{text.VAR.pointers}</span>
+        <b>{pointerLevel}%</b>
+      </figcaption>
+      <figcaption className="mines">
+        <span>{text.VAR.mines}</span>
+        <b>{mineLevel}%</b>
+      </figcaption>
+    </figure>
   )
 }
 

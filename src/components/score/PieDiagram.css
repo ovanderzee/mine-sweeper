@@ -1,21 +1,58 @@
-svg.pie-diagram {
+.pie-diagram {
+  --caption-anchor: 70%;
+
+  position: relative;
   display: inline-block;
+  margin: 0 ;
   width: 12em;
   height: 6em;
   opacity: .8;
-  overflow: visible;
+  background: transparent;
 }
 
-svg.pie-diagram g {
+.pie-diagram figcaption {
+  position: absolute;
   font-family: inherit;
-  font-size: 175%;
-  fill: currentcolor;
+  font-size: 80%;
+  line-height: 125%;
 }
 
-svg.pie-diagram .cone {
-  width: 100%;
+.pie-diagram figcaption * {
+  display: block;
+}
+
+.pie-diagram figcaption.blanks {
+  top: 0; left: var(--caption-anchor);
+  text-align: left;
+
+  b {
+    margin-inline-start: 1em;
+  }
+}
+
+.pie-diagram figcaption.pointers {
+  bottom: 0; right: var(--caption-anchor);
+  text-align: right;
+
+  span {
+    margin-inline-end: 1em;
+  }
+}
+
+.pie-diagram figcaption.mines {
+  top: 0; right: var(--caption-anchor);
+  text-align: right;
+
+  b {
+    margin-inline-end: 1em;
+  }
+}
+
+.pie-diagram .cone {
   height: 100%;
+  aspect-ratio: 1;
   border-radius: 50%;
+  margin: 0 auto;
 
   background-image: conic-gradient(
     var(--dark-blue),
