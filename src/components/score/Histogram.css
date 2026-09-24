@@ -19,3 +19,11 @@
 .frequency-histogram .legenda tspan {
   text-shadow: 0 0 1px white, 0 0 1px white, 0 0 1px white, 0 0 1px white;
 }
+
+@media screen and (orientation: portrait) {
+  .frequency-histogram .landscape {display: none;}
+}
+
+@media screen and (orientation: landscape) {
+  .frequency-histogram .portrait {display: none;}
+}

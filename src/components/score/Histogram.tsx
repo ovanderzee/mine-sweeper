@@ -85,7 +85,11 @@ const Histogram = (props: HistogramProps) => {
       </g>
       <g className="legenda">
         <line x1="0" y1={graphSize.y} x2={graphSize.x} y2={graphSize.y} />
-        <text x="-33" y={graphSize.y} dy={lgdSpace.y} textAnchor="start" data-testid="x-parameter"
+        <text x="-70" y={graphSize.y} dy={lgdSpace.y}
+          className="portrait" data-testid="x-parameter"
+          >{text.VAR.surrounding} &rarr;</text>
+        <text x="-33" y={graphSize.y} dy={lgdSpace.y}
+          className="landscape" data-testid="x-parameter"
           >{text.VAR.surrounding} &rarr;</text>
         <line x1="0" y1="0" x2="0" y2={graphSize.y} />
         <text x="2" y="-60" transform="rotate(-90)" textAnchor="end" data-testid="y-parameter"
