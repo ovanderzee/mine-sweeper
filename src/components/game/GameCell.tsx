@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useRef } from 'react';
 import PageContext from '../../store/page-context'
 import { LONG_PRESS_THRESHOLD } from '../../common/constants'
 import { PlayMode } from '../../common/app.d'
@@ -26,7 +26,7 @@ const GameCell = (props: GameCellProps) => {
   if (isProcessedMine) activatedClass = burst ? 'explode' : 'exploded'
   const stageLabel = text.cell[doneClass]
 
-  const [startTime, setStartTime] = useState(0)
+  const startTime = useRef(0)
 
   const id = `row${row}col${col}`
   const focusHandler = () => pageCtx.updSession({ ACTIVE_CELL_ID: id })
@@ -68,23 +68,23 @@ const GameCell = (props: GameCellProps) => {
     Save initial time
   */
   const beginHandler = () => {
-    setStartTime(Date.now())
+    startTime.current = Date.now()
   }
 
   /*
     CancelEvent: A garbled gesture is trying to cancel interaction, terminate combined events
   */
   const cancelHandler = () => {
-    setStartTime(0)
+    startTime.current = 0
   }
 
   /*
     Finalise combined event
   */
   const endHandler = () => {
-    if (!startTime) return
+    if (!startTime.current) return
 
-    const touchDuration = Date.now() - startTime
+    const touchDuration = Date.now() - startTime.current
     cancelHandler()
 
     if (touchDuration < LONG_PRESS_THRESHOLD) {
