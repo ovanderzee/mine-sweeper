@@ -30,6 +30,10 @@
   --fire-blue: hsl(224, 80%, 38%);
   --fire-black: hsl(168, 60%, 18%);
 
+  --dirty-white: hsl(0, 0%, 93%);
+  --dirty-rust: hsl(30, 29%, 47%);
+  --dirty-stain: hsl(160, 100%, 13%);
+
   --light-pristine: hsl(60 6% 75%);
   --medium-pristine: hsl(40 8% 56%);
   --dark-pristine: hsl(20 6% 37%);
