@@ -15,11 +15,12 @@ const GameCell = (props: GameCellProps) => {
   const { PLAY_MODE } = pageCtx.config
   const text = pageCtx.text
 
-  const { stage, fill, row, col, locked, burst } = props.cell
+  const { stage, fill, row, col, locked, hit, burst } = props.cell
   const doneClass = stage ? 'touched' : 'pristine'
   const lockedClass = locked ? 'flag' : ''
   const cellContent = stage && fill > 0 && fill < 9 ? fill : ' '
   const mineClass = stage && fill > 8 ? 'mijn' : ''
+  const userTouchedClass = mineClass && hit ? 'hit' : ''
   const isProcessedMine = stage === CellStateStage.TESTED && fill > 8
   let activatedClass = ''
   if (isProcessedMine) activatedClass = burst ? 'explode' : 'exploded'
@@ -41,11 +42,14 @@ const GameCell = (props: GameCellProps) => {
     if (type === GameActionType.FLAG && PLAY_MODE === PlayMode.BARE) return
 
     const entry: CellStateEntry = {}
-    if (type === GameActionType.FLAG) {
-      entry.locked = !locked
-    } else { // GameActionType.MOVE
+    if (type === GameActionType.MOVE) {
       entry.stage = CellStateStage.TESTED
-      if (fill > 8) entry.burst = true
+      if (fill > 8) {
+        entry.hit = true
+        entry.burst = true
+      }
+    } else { // GameActionType.FLAG
+      entry.locked = !locked
     }
 
     const payload = JSON.stringify({
@@ -137,7 +141,7 @@ const GameCell = (props: GameCellProps) => {
       type="button"
       role="gridcell"
       aria-label={`${text.cell.row} ${row+1} ${text.cell.col} ${col+1}, ${stageLabel}`}
-      className={`${doneClass} ${lockedClass} ${mineClass} ${activatedClass}`}
+      className={`${doneClass} ${lockedClass} ${mineClass} ${activatedClass} ${userTouchedClass}`}
       id={id}
       onFocus={focusHandler}
       onKeyDown={keystrokeHandler}
