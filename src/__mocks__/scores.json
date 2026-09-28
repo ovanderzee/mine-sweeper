@@ -1,7 +1,4 @@
-import { BareScoreItem } from '../common/game.d'
-
-// live registered scores
-export const liveScores: BareScoreItem[] = [
+[
   {"code":"6660Aw1+gjJUTZA","date":1769180239586,"user":"EasyPeacy","game":{"cells":36,"blanks":19,"mines":4,"level":6,"effort":{"least":2,"most":14}},"play":{"moves":2,"duration":1.385},"score":{"efficiency":1,"speed":1.444,"points":1444}},
   {"code":"6662Aw18gjO3RzSA","date":1783288530857,"user":"Agrenonymus","game":{"cells":36,"blanks":15,"mines":4,"level":6,"mode":"Sharp","effort":{"least":8,"most":18}},"play":{"moves":5,"duration":5.936},"score":{"efficiency":1.6,"speed":0.8423,"points":1348}},
   {"code":"6660AwkRldLDL+RA","date":1769180624067,"user":"EasyPeacy","game":{"cells":36,"blanks":25,"mines":4,"level":6,"effort":{"least":1,"most":8}},"play":{"moves":2,"duration":0.852},"score":{"efficiency":0.5,"speed":2.347,"points":1174}},
@@ -828,7 +825,3 @@ export const liveScores: BareScoreItem[] = [
   {"code":"7780Aw0RlSpDuWbmmCQ","date":1755378199069,"user":"Aija","game":{"cells":49,"blanks":20,"mines":7,"level":8,"effort":{"least":6,"most":24}},"play":{"moves":6,"duration":58.215},"score":{"efficiency":1,"speed":0.1031,"points":103}},
   {"code":"8882AwkRlTgyxqEPuZoKqA","date":1783588808838,"user":"RestSharp","game":{"cells":64,"blanks":26,"mines":9,"level":8,"mode":"Sharp","effort":{"least":9,"most":31}},"play":{"moves":7,"duration":89.544},"score":{"efficiency":1.286,"speed":0.07817,"points":101}}
 ]
-
-// Paste new records anywhere between the existing records;
-// mind the commas between the records to make a valid array
-// Use .lib/sort.sh to sort and write record to this file.

@@ -1,7 +1,7 @@
 import { RenderResult } from 'vitest-browser-react'
 import { Locator, userEvent } from 'vitest/browser'
 import { renderWithProvider, renderWithApp } from './../../__mocks__/aat-helpers'
-import { liveScores } from './../../__mocks__/scores'
+import liveScores from '../../__mocks__/scores.json' with { type: 'json' }
 import storage from './../../common/storage'
 import { preventReloadByEnter } from './../../common/functions'
 import { rebuildGameData } from './../../common/scoring'

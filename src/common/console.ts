@@ -1,7 +1,6 @@
 import storage from './storage'
-import { liveScores } from '../__mocks__/scores'
+const liveScores = (await import('../__mocks__/scores.json')).default
 import { ScoreItem, BareScoreItem } from './game.d'
-
 
 const getAllScores = function (): ScoreItem[] {
   return storage.scores

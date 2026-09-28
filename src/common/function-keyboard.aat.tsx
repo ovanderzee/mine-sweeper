@@ -1,7 +1,7 @@
 import { Locator, userEvent } from 'vitest/browser'
 import { RenderResult } from 'vitest-browser-react'
 import { renderWithApp } from './../__mocks__/aat-helpers'
-import { liveScores } from '../__mocks__/scores'
+import liveScores from '../__mocks__/scores.json' with { type: 'json' }
 import { rootKeyListener, focusFirstNavButton } from './functions'
 import storage from './storage'
 import { ScoreItem } from './game.d'

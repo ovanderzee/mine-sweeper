@@ -2,7 +2,7 @@
 import EraseScores from './EraseScores'
 import { ScoreItem } from './../../common/game.d'
 import storage from '../../common/storage'
-import { liveScores } from './../../__mocks__/scores'
+import liveScores from '../../__mocks__/scores.json' with { type: 'json' }
 import { renderWithProvider } from './../../__mocks__/aat-helpers'
 
 describe('EraseScores Component', () => {

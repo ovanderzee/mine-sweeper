@@ -2,7 +2,7 @@ import storage from './storage'
 import * as scoring from './scoring'
 import mv from './console'
 import { initialScore } from '../components/game/common'
-import { liveScores } from '../__mocks__/scores'
+const liveScores = (await import('../__mocks__/scores.json')).default
 import { ScoreItem } from './game.d'
 
 const testScore = () => { return {
