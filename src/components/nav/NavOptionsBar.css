@@ -13,7 +13,7 @@ article[role="main"] + nav .sticky-slider {
 @media only screen and (orientation: portrait) {
   .screen {
     --nav-pad-top: .3em;
-    --nav-pad-bottom: .7em;
+    --nav-pad-bottom: .2em;
   }
 
   article[role="main"] + nav {

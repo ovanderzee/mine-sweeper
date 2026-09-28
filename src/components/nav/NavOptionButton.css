@@ -44,11 +44,12 @@ nav.verbose button.nav-option::after {
     display: inline-block;
     height: var(--nav-height);
     aspect-ratio: 1;
-    margin-block: calc(-1 * var(--nav-pad-top)) calc(-1 * var(--nav-pad-bottom));
+    margin-block: -.3em -.7em;
   }
 
   nav.verbose button.nav-option::after {
-    line-height: 0;
+    line-height: 1;
+    transform: translateY(-.5em);
   }
 
   nav.verbose button.nav-option svg {
