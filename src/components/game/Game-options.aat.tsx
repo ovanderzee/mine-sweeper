@@ -72,10 +72,10 @@ describe('The game start button', () => {
     expect(storage.game?.stage).toBe('game-playing')
   })
 
-  it('should replace game in progress by new game when "Ok" is clicked', async () => {
+  it('should replace game in progress by new game when "OK" is clicked', async () => {
     await screen.getByRole('navigation').getByTitle('New Game').click()
     const dialog = screen.getByRole('dialog')
-    await dialog.getByText('Ok').click()
+    await dialog.getByText('OK').click()
 
     expect(dialog).toBeInTheDocument()
     await vi.runAllTimersAsync()
@@ -123,7 +123,7 @@ describe('The replay button', () => {
     expect(initialFilling).toStrictEqual(getFillDistribution(storage.game.board))
   })
 
-  it('should continue game in process when clicking "Ok"', async () => {
+  it('should continue game in process when clicking "OK"', async () => {
     storage.config = microConfig
     storage.game = playingGameState
     const screen = await renderWithApp()
@@ -131,7 +131,7 @@ describe('The replay button', () => {
 
     await screen.getByRole('navigation').getByTitle('Replay').click()
     const dialog = screen.getByRole('dialog')
-    await dialog.getByText('Ok').click()
+    await dialog.getByText('OK').click()
 
     expect(dialog).toBeInTheDocument()
     await vi.runAllTimersAsync()

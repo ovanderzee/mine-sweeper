@@ -39,7 +39,7 @@ describe('EraseScores Component', () => {
     await button.click()
     const dialog = screen.getByRole('dialog')
     expect(dialog).toBeInTheDocument()
-    await dialog.getByRole('button', {name: 'Ok'}).click()
+    await dialog.getByRole('button', {name: 'OK'}).click()
 
     // expect(button.element().className).toContain('active')
     await vi.runAllTimersAsync()

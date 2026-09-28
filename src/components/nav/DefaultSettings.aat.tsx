@@ -57,7 +57,7 @@ describe('DefaultSettings Component in PageContext', () => {
       await startWithContext(playingGameState, microConfig)
       const dialog = screen.getByRole('dialog')
       expect(dialog).toBeInTheDocument()
-      await dialog.getByRole('button', {name: 'Ok'}).click()
+      await dialog.getByRole('button', {name: 'OK'}).click()
 
       await vi.runAllTimersAsync()
       expect(configure).toHaveBeenCalledTimes(2)
@@ -120,7 +120,7 @@ describe('DefaultSettings Component in PageContext', () => {
     it('and game is playing and action is confirmed (storage)', async () => {
       await startWithProvider(playingGameState, microConfig)
       const dialog = screen.getByRole('dialog')
-      await dialog.getByRole('button', {name: 'Ok'}).click()
+      await dialog.getByRole('button', {name: 'OK'}).click()
 
       await vi.runAllTimersAsync()
       expect(storage.config).toStrictEqual(DEFAULTS)

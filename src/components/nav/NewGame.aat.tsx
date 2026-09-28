@@ -50,13 +50,13 @@ describe('NewGame Component', () => {
     expect(dispatcher).toHaveBeenCalledTimes(0)
   })
 
-  it('should renew game in progress when clicked "Ok" in modal', async () => {
+  it('should renew game in progress when clicked "OK" in modal', async () => {
     const screen = await renderWithContext(<NewGame onNew={dispatcher} stage={GameStages.PLAYING} />)
     const button = screen.getByTitle('New Game')
     await button.click()
 
     const dialog = screen.getByRole('dialog')
-    await dialog.getByText('Ok').click()
+    await dialog.getByText('OK').click()
 
     expect(dialog).toBeInTheDocument()
     await vi.runAllTimersAsync()
