@@ -161,7 +161,7 @@ describe('Gamecell, a party of properties', () => {
 
     it('and accept "Enter" to open a cell', async () => {
       await userEvent.keyboard('{Enter}')
-      const response = {payload: JSON.stringify({cell, entry: {stage: 'clicked', burst: true}}), type: 'MOVE'}
+      const response = {payload: JSON.stringify({cell, entry: {stage: 'clicked', hit: true, burst: true}}), type: 'MOVE'}
       expect(dispatchGameAction).toHaveBeenCalledWith(response)
     })
 

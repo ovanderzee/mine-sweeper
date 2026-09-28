@@ -9,6 +9,7 @@ export class CellStateEntry {
   locked?: boolean;
   burst?: boolean;
   disabled?: boolean;
+  hit?: boolean;
 }
 
 export class CellState extends CellStateEntry {

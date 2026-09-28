@@ -2,7 +2,7 @@ import storage from './storage'
 import { DEFAULTS } from  './defaults'
 import { GameState, ScoreItem } from './game.d'
 import { newGameState, wonGameState } from '../__mocks__/game-states'
-import { liveScores } from '../__mocks__/scores'
+import liveScores from '../__mocks__/scores.json' with { type: 'json' }
 import { microConfig } from '../__mocks__/configs'
 import { SCORE_LIST_NAME } from './constants'
 

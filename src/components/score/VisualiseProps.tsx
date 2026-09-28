@@ -8,6 +8,7 @@ import SortScores from './SortScores'
 import { parameters } from './scoreParams'
 import '../meta/Meta.css'
 import './HallOfFame.css'
+import './VisualiseProps.css'
 
 interface VisualisePropsProps {
   sortLabel: ScoreParam
@@ -61,18 +62,21 @@ const VisualiseProps = (props: VisualisePropsProps) => {
     <form className={`legend ${sortLabel}`}
       onKeyDown={(event) => preventReloadByEnter(event)}
     >
-      <div className="controls">
+      <fieldset className="controls">
         <SortScores sortLabel={sortLabel} setSortLabel={setSortLabel}
           rootScores={rootScores} setScores={setScores} />
 
-        <label htmlFor="y-axis">{text.fame['versus']}</label>
-        <select id="y-axis" value={valueLabel} onChange={changeValue}>
-          {mathParameters
-            .map((param) => <option key={param} value={param}>{text.VAR[param]}</option>
-          )}
-        </select>
+        {scores.length > SHOW_DIAGRAM_THRESHOLD && (<>
+          <label htmlFor="y-axis">{text.fame['versus']}</label>
+          <select id="y-axis" value={valueLabel} onChange={changeValue}>
+            {mathParameters
+              .map((param) => <option key={param} value={param}>{text.VAR[param]}</option>
+            )}
+          </select>
+        </>)}
+      </fieldset>
 
-      {scores.length > SHOW_MARKING_THRESHOLD && (<>
+      {scores.length > SHOW_MARKING_THRESHOLD && (<fieldset className="marking">
         <label className="label">{text.fame['mark']}</label>
         <div className="mark">
           <select id="mark-param" value={markData.param} onChange={changeMarkParameter}
@@ -88,10 +92,10 @@ const VisualiseProps = (props: VisualisePropsProps) => {
             )}
           </select>
         </div>
+        <label></label>
         <input id="mark-quant" className="mark" defaultValue="0" onChange={changeMarkQuantifier}
           title={text.fame['mark-value']} />
-      </>)}
-      </div>
+      </fieldset>)}
     </form>
   )
 

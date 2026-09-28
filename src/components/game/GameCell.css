@@ -30,6 +30,10 @@
   bottom: var(--pseudo-margin);
 }
 
+#game-board button[disabled] {
+  opacity: 1;
+}
+
 #game-board button.pristine {
   background: var(--medium-pristine);
   box-shadow:
@@ -120,6 +124,15 @@
     #000 33%
   );
   box-shadow: none;
+}
+
+.game-lost #game-board button.mijn.hit::before {
+  background: radial-gradient(
+    ellipse at 25% 25%,
+    var(--fire-red) 18%,
+    var(--state-red) 47%,
+    var(--fire-black) 92%
+  );
 }
 
 .game-lost #game-board button.mijn.explode .burst {

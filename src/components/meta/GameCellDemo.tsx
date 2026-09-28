@@ -80,6 +80,14 @@ const GameCellDemo = () => {
             id="row0col4">
           <span className="burst"></span>
         </button>
+        <button type="button" className={`touched mijn ${activatedClass} hit`} onClick={explodeHandler}
+            id="row0col5">
+          <span className="burst"></span>
+        </button>
+        <button type="button" className={`touched mijn flag ${activatedClass} hit`} onClick={explodeHandler}
+            id="row0col6">
+          <span className="burst"></span>
+        </button>
       </div><div role="row">
         <button type="button" className="touched" id="row1col0"></button>
         <button type="button" className="touched" id="row1col1">1</button>

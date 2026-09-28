@@ -1,6 +1,6 @@
 import { test, expect, Page, Locator } from '@playwright/test'
 import { openPlayground, visitHallOfFameScreen, storeScoreData } from '../helpers/run-helpers'
-import { liveScores } from '../../src/__mocks__/scores'
+import liveScores from '../../src/__mocks__/scores.json' with { type: 'json' }
 import { BareScoreItem } from '../../src/common/game.d'
 import { DEFAULTS } from '../../src/common/defaults'
 

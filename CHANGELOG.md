@@ -26,13 +26,23 @@
 - Rethink efficiency for sharp-mode scores
 
 
-## [4.1.1] - 2026-09
+## [4.2.0] - 2026-09-28
 
 ### Changes
 - Separate list-sort and property-selection components out of HallOfFame
 - Move score-related visualisation to one functional folder
 - Maintain playwright
 - Mine-count as a getter
+- Move score-related visualisation to functional folder
+- Refined criteria to delete scores
+- Simplified mine counter and pie diagram
+- Score analysis on game-won
+- Style and code enhancements
+- Code-split, separate the scores
+- Over 1000 sample scores
+
+### Added
+- Mark touched mine on game-lost
 
 
 ## [4.1.0] - 2026-09-05

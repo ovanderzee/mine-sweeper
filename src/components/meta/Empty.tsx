@@ -32,9 +32,9 @@ const Empty = () => {
             <defs>
               <radialGradient id="MineGradient" cx="0.25" cy="0.25" r="1">
                 <stop offset="0%" stopColor="hsl(0, 0%, 100%)" />
-                <stop offset="9%" stopColor="hsl(0, 0%, 93.3%)" />
-                <stop offset="27%" stopColor="hsl(30, 28.6%, 46.7%)" />
-                <stop offset="46%" stopColor="hsl(160, 100%, 10%)" />
+                <stop offset="9%" stopColor="var(--dirty-white)" />
+                <stop offset="27%" stopColor="var(--dirty-rust)" />
+                <stop offset="46%" stopColor="var(--dirty-stain)" />
               </radialGradient>
 
               <filter id="drop-shadow">

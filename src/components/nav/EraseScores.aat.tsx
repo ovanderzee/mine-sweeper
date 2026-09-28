@@ -2,7 +2,7 @@
 import EraseScores from './EraseScores'
 import { ScoreItem } from './../../common/game.d'
 import storage from '../../common/storage'
-import { liveScores } from './../../__mocks__/scores'
+import liveScores from '../../__mocks__/scores.json' with { type: 'json' }
 import { renderWithProvider } from './../../__mocks__/aat-helpers'
 
 describe('EraseScores Component', () => {
@@ -39,7 +39,7 @@ describe('EraseScores Component', () => {
     await button.click()
     const dialog = screen.getByRole('dialog')
     expect(dialog).toBeInTheDocument()
-    await dialog.getByRole('button', {name: 'Ok'}).click()
+    await dialog.getByRole('button', {name: 'OK'}).click()
 
     // expect(button.element().className).toContain('active')
     await vi.runAllTimersAsync()

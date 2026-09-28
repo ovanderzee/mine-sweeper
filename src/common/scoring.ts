@@ -59,7 +59,7 @@ export const refineScores = (scores: BareScoreItem[]): ScoreItem[] => {
       remaining: significant((score.play.remaining || 0) / score.game.cells, 3),
     }
 
-    if (typeof score.play?.remaining === 'number') {
+    if (score.play?.remaining) {
       score.relative.remaining = significant(score.play.remaining / score.game.cells, 3)
     }
 

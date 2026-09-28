@@ -169,6 +169,27 @@ describe('Polling the game', () => {
       for (let y=0; y<size; y++)
         expect(getFieldByXY(x, y)).toHaveClass('touched')
   })
+
+  it('should find the only one mine hit by the user', async () => {
+    const size = storage.config.BOARD_SIZE
+
+    const aMine = getFieldByXY(4, 4)
+    await aMine?.click()
+    vi.advanceTimersByTime(300)
+
+    // next click should be after game-lost
+    const bMine = getFieldByXY(1, 3)
+    await bMine?.click()
+    vi.advanceTimersByTime(300)
+
+    for (let x=0; x<size; x++)
+      for (let y=0; y<size; y++)
+        if (x === 4 && y === 4) {
+          await expect.element(getFieldByXY(x, y)).toHaveClass('hit')
+        } else {
+          await expect.element(getFieldByXY(x, y)).not.toHaveClass('hit')
+        }
+  })
 })
 
 describe('Loading the Game', () => {

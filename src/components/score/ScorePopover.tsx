@@ -17,7 +17,7 @@ import './ScorePopover.css'
 interface ScorePopoverProps {
   scores: ScoreItem[]
   index: number
-  onDeletion: (score: ScoreItem) => void
+  onDeletion?: (score: ScoreItem) => void
   onBrowse: (browseIndex: number) => void
 }
 
@@ -49,7 +49,7 @@ const ScorePopover = (props: ScorePopoverProps) => {
 
   const approveModal = <ApproveModal
     message={text.dialog['Delete this game?']}
-    onConfirm={() => deletable && props.onDeletion(deletable)}
+    onConfirm={() => deletable && props.onDeletion && props.onDeletion(deletable)}
     onCancel={() => {}}
     isShowModal={showModal}
     endShowModal={()=>{
@@ -69,7 +69,7 @@ const ScorePopover = (props: ScorePopoverProps) => {
   const loggedDate = new Date(log.date)
 
   return (<>
-    <figure
+    <div role="figure"
       className={log.rank <= 10 ? 'super' : ''}
       key={`${log.rank}_${log.score.points}`}
     >
@@ -207,7 +207,7 @@ const ScorePopover = (props: ScorePopoverProps) => {
           </div>
         </section>
       </article>
-      <article className="graphs">
+      <section className="graphs">
         {log.signature.invalid_code ?
           <div className="error"><span>{text.error['Invalid code']}</span></div> :
           <>
@@ -216,9 +216,9 @@ const ScorePopover = (props: ScorePopoverProps) => {
             <BoardImage board={log.signature.board} />
           </>
         }
-      </article>
+      </section>
       <footer>
-        <div className="buttons">
+        {props?.onDeletion && <div className="buttons">
           <button type="button" className="delete"
             onClick={() => {
               setDeletable({...log})
@@ -231,9 +231,9 @@ const ScorePopover = (props: ScorePopoverProps) => {
               onClick={() => replayStoredGame(log.code)}
             >{text.nav.Replay}</button>
           }
-        </div>
+        </div>}
       </footer>
-    </figure>
+    </div>
     {approveModal}
   </>)
 }

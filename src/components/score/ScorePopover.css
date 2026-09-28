@@ -16,7 +16,7 @@
   box-shadow: 0 0 1em 1px var(--light-blue);
 }
 
-#score-popover figure {
+#score-popover [role="figure"] {
   color: white;
   border-radius: var(--radius);
   background: linear-gradient(105deg, var(--lighter-blue),  var(--medium-blue), var(--dark-blue));
@@ -27,66 +27,66 @@
   overflow: auto;
 }
 
-#score-popover figure header {
+#score-popover header {
   display: flex;
   align-items: start;
   margin-block-start: -.5ex;
 }
 
-#score-popover figure header *,
-#score-popover figure article * {
+#score-popover header *,
+#score-popover article * {
   margin: 0;
   padding: 0;
   text-align: left;
 }
 
-#score-popover figure header .rank {
+#score-popover header .rank {
   --rank-size: 2.5em;
   flex: 0 0 var(--rank-size);
   text-align: center;
 }
 
-#score-popover figure header .rank:not(:has(svg)) {
+#score-popover header .rank:not(:has(svg)) {
   align-self: center;
 }
 
-#score-popover figure header .rank svg {
+#score-popover header .rank svg {
   width: var(--rank-size);
   aspect-ratio: 1;
   margin-inline-start: -.67ex;
 }
 
-#score-popover figure header .character {
+#score-popover header .character {
   flex: 1 1 90%;
   text-align: left;
   padding: 0.5rem;
 }
 
-#score-popover figure header .character > * {
+#score-popover header .character > * {
   margin: 0;
 }
 
-#score-popover figure header .character .play-mode {
+#score-popover header .character .play-mode {
   padding-block-start: 0.5rem;
 }
 
-#score-popover figure header .date {
+#score-popover header .date {
   font-size: 86%;
   flex: 0 0 auto;
   text-align: right;
 }
 
-#score-popover figure header .buttons {
+#score-popover header .buttons {
   padding-block-end: .5em;
 }
 
-#score-popover figure .buttons {
+#score-popover .buttons {
   margin-inline-start: auto;
   margin-block: .167em;
   text-align: right;
 }
 
-#score-popover figure button.glyph {
+#score-popover button.glyph {
   color: inherit;
   padding: 1ex;
   text-shadow: 1.5px 1px 0 var(--medium-touched);
@@ -94,19 +94,24 @@
   background: none;
 }
 
-#score-popover figure button.glyph.y-stretch {
+#score-popover button.glyph.y-stretch {
   transform: scaleY(1.667);
 }
 
-#score-popover figure button.glyph.scale {
+#score-popover button.glyph.scale {
   transform: scale(1.667);
 }
 
-#score-popover figure article.functional-grid {
+#score-popover button.glyph[disabled] + button.glyph[disabled],
+#score-popover button.glyph[disabled]:has(+ button.glyph[disabled]) {
+  display: none;
+}
+
+#score-popover article.functional-grid {
   display: grid;
 }
 
-#score-popover figure article.functional-grid .result {
+#score-popover article.functional-grid .result {
   grid-column: 2;
   grid-row: 1 / span 2;
 
@@ -114,59 +119,59 @@
   gap: 0 1ex;
 }
 
-#score-popover figure article.functional-grid .result .unit {
+#score-popover article.functional-grid .result .unit {
   align-self: center;
 }
 
-#score-popover figure article .group,
-#score-popover figure article .abstract {
+#score-popover article .group,
+#score-popover article .abstract {
   display: flex;
   flex-wrap: wrap;
   flex-direction: row;
   align-items: last baseline;
 }
 
-#score-popover figure article .group {
+#score-popover article .group {
   gap: 0 1ex;
   margin-block: 1ex;
 }
 
-#score-popover figure article .abstract {
+#score-popover article .abstract {
   gap: 0 .5ex;
 }
 
-#score-popover figure article .group h5 {
+#score-popover article .group h5 {
   flex: 0 0 7.5em;
   align-self: first baseline;
   line-height: 1;
   text-transform: capitalize;
 }
 
-#score-popover figure article .group:has(.abstract:empty),
-#score-popover figure article .abstract:empty {
+#score-popover article .group:has(.abstract:empty),
+#score-popover article .abstract:empty {
   line-height: 0;
   align-self: center;
   margin-block: -.67ex -2ex;
 }
 
-#score-popover figure article .abstract:empty + * {
+#score-popover article .abstract:empty + * {
   margin-block: -2em 0;
 }
 
-#score-popover figure article .group .unit {
+#score-popover article .group .unit {
   flex: 0 0 auto;
 }
 
-#score-popover figure article .unit {
+#score-popover article .unit {
   display: flex;
   flex-direction: column;
   text-align: center;
 }
-#score-popover figure article .unit small {
+#score-popover article .unit small {
   font-size: 75%;
   text-transform: capitalize;
 }
-#score-popover figure article .unit * {
+#score-popover article .unit * {
   text-align: center !important;
 }
 code {
@@ -183,14 +188,14 @@ code.l {font-size: 112%;}
 code.xl {font-size: 124%;}
 code.xxl {font-size: 136%;}
 
-#score-popover figure article.graphs {
+#score-popover .graphs {
   display: flex;
   flex-wrap: wrap;
   justify-content: end;
   gap: 1em 2.5em;
 }
 
-#score-popover figure footer {
+#score-popover footer {
   display: flex;
   gap: 0;
   margin-block: .75em 0.25em;

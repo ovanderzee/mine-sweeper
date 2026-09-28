@@ -49,13 +49,13 @@ describe('Replay Component', () => {
     expect(dispatcher).toHaveBeenCalledTimes(0)
   })
 
-  it('should reset game in progress when clicked "Ok" in modal', async () => {
+  it('should reset game in progress when clicked "OK" in modal', async () => {
     const screen = await renderWithContext(<Replay onReplay={dispatcher} stage={GameStages.PLAYING} />)
     const button = screen.getByTitle('Replay')
     await button.click()
 
     const dialog = screen.getByRole('dialog')
-    await dialog.getByText('Ok').click()
+    await dialog.getByText('OK').click()
 
     expect(dialog).toBeInTheDocument()
     await vi.runAllTimersAsync()

@@ -1,7 +1,6 @@
 import storage from './storage'
-import { liveScores } from '../__mocks__/scores'
+const liveScores = (await import('../__mocks__/scores.json')).default
 import { ScoreItem, BareScoreItem } from './game.d'
-
 
 const getAllScores = function (): ScoreItem[] {
   return storage.scores
@@ -16,13 +15,43 @@ const getScoresByUser = function (user: string) {
 }
 
 const deleteScoresByUser = function (user: string) {
-  const userScores = getAllScores().filter((s: ScoreItem) => s.user !== user)
-  setAllScores(userScores)
+  const useScores = getAllScores().filter((s: ScoreItem) => s.user !== user)
+  setAllScores(useScores)
 }
 
-const deleteScore = function (code: string, date: number) {
-  const userScores = getAllScores().filter((s: ScoreItem) => !(s.code === code && s.date === date))
-  setAllScores(userScores)
+const scoresByProperties = function (andSelection: Record<string, any>, findInclusive: boolean): [ScoreItem[], ScoreItem[]] {
+  const keys = Object.keys(andSelection)
+  if (!keys.length) return [[], []]
+  const values = Object.values(andSelection)
+  const allScores = getAllScores()
+  const useScores = allScores.filter((s: ScoreItem) => {
+    const flatScore = {...s, ...s.game, ...s.play, ...s.score} as Record<string, any>
+    let toSelect = true
+    keys.forEach((key, i) => toSelect = toSelect && flatScore[key] === values[i])
+    if (toSelect && !findInclusive) console.log('About to delete:', s)
+    return toSelect === findInclusive
+  })
+  return [useScores, allScores]
+}
+
+const getScoresByProperties = function (andSelection: Record<string, any>): ScoreItem[] {
+  const [useScores, allScores] = scoresByProperties(andSelection, true)
+  console.log(`Selected ${useScores.length} of ${allScores.length} scores`)
+  return useScores
+}
+
+const deleteScoresByProperties = function (andSelection: Record<string, any>): void {
+  const [useScores, allScores] = scoresByProperties(andSelection, false)
+  const deleteCount = allScores.length - useScores.length
+  if (deleteCount) {
+    console.log(`Press [Enter] to delete ${deleteCount} scores or [Escape] to cancel.`)
+    if (confirm(`Delete ${deleteCount} scores?`)) {
+      setAllScores(useScores)
+      console.log(`Deleted ${deleteCount} scores`)
+    }
+  } else {
+    console.log(`Nothing to delete`)
+  }
 }
 
 const addSampleScores = (): void => {
@@ -42,7 +71,8 @@ export default {
   setAllScores,
   getScoresByUser,
   deleteScoresByUser,
-  deleteScore,
+  getScoresByProperties,
+  deleteScoresByProperties,
   addSampleScores,
   deleteSampleScores,
 }

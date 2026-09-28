@@ -1,0 +1,70 @@
+
+.legend {
+  position: sticky;
+  z-index: 5;
+  top: 0;
+  display: block;
+  width: 100%;
+  background: var(--light-blue);
+  outline: 1px solid var(--medium-blue);
+  box-sizing: content-box;
+  margin-inline: calc(-1 * var(--screen-gutter));
+  padding-block: calc(.5 * var(--screen-gutter));
+  padding-inline: var(--screen-gutter);
+}
+
+.legend fieldset {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 1ex;
+  align-items: baseline;
+  width: min-content;
+  margin-inline: auto;
+}
+
+.legend label {
+  grid-column: 1;
+  text-align: right;
+  width: 4em;
+}
+
+.legend select,
+.legend .mark {
+  grid-column: 2;
+  width: 16em;
+}
+
+.legend div.mark {
+  display: flex;
+  justify-content: space-between;
+  gap: 0 1ex;
+}
+
+.legend .mark select {
+  flex: 1 0 auto;
+  width: auto;
+}
+
+.legend select + select {
+  background-image: none;
+  padding-inline: 0;
+}
+
+.legend.rank ~ ol .rank,
+.legend.user ~ ol .user,
+.legend.date ~ ol .date,
+.legend.points ~ ol .points,
+.legend.efficiency ~ ol .efficiency,
+.legend.speed ~ ol .speed,
+.legend.level ~ ol .level,
+.legend.mines ~ ol .mines,
+.legend.cells ~ ol .cells,
+.legend.moves ~ ol .moves,
+.legend.duration ~ ol .duration {
+  font-weight: bold;
+  color: var(--state-red);
+}
+
+svg.line-diagram {
+  margin-block: 1.5em .5em;
+}
