@@ -107,6 +107,10 @@
   display: none;
 }
 
+#score-popover article {
+  container: article-block / inline-size;
+}
+
 #score-popover article.functional-grid {
   display: grid;
 }
@@ -191,8 +195,15 @@ code.xxl {font-size: 136%;}
 #score-popover .graphs {
   display: flex;
   flex-wrap: wrap;
-  justify-content: end;
+  justify-content: center;
   gap: 1em 2.5em;
+}
+
+@container article-block (width < 25em) {
+  #score-popover article .group h5 {
+    flex-basis: 100%;
+    line-height: 1.75;
+  }
 }
 
 #score-popover footer {
@@ -207,8 +218,5 @@ code.xxl {font-size: 136%;}
   #score-popover {
     min-width: unset;
     width: calc(var(--app-width) + 1ex);
-  }
-  .group h5 {
-    display: none;
   }
 }
