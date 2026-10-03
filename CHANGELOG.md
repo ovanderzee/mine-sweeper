@@ -26,6 +26,14 @@
 - Rethink efficiency for sharp-mode scores
 
 
+## [4.3.0] - 2026
+
+### Changes
+- Brace in score popover is now responsive to any size change
+
+### Added
+
+
 ## [4.2.0] - 2026-09-28
 
 ### Changes
