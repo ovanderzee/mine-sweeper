@@ -19,3 +19,4 @@ Individual scores can be deleted from score-detail view in the Hall of Fame.
 Statistical needs:
 - addSampleScores()
 - deleteSampleScores()
+- challengesCompleted()

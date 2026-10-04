@@ -1,6 +1,6 @@
 import storage from './storage'
 import * as scoring from './scoring'
-import mv from './console'
+import mv, { completed } from './console'
 import { initialScore } from '../components/game/common'
 const liveScores = (await import('../__mocks__/scores.json')).default
 import { ScoreItem } from './game.d'
@@ -153,5 +153,30 @@ describe('Delete score by properties', () => {
 
     expect(storage.scores.length).toBe(originalLength)
   })
+
+})
+
+describe('Completing challenges', () => {
+
+  afterEach(() => {
+    vi.clearAllMocks()
+  })
+
+  it('should complete a 3D object', () => {
+    const [cubic, count] = completed()
+
+    expect(cubic instanceof Array).toBeTruthy()
+    expect(cubic.flat().flat().length).toBe(count)
+    expect(typeof count).toBe('number')
+    expect(count).toBeGreaterThan(100)
+  })
+
+//     var logBackup = console.log;
+//     var logMessages = [];
+//
+//     console.log = function() {
+//         logMessages.push.apply(logMessages, arguments);
+//         logBackup.apply(console, arguments);
+//     };
 
 })
