@@ -107,6 +107,11 @@ describe('Console methods mixing mocks and stored scores', () => {
 })
 
 describe('Delete score by properties', () => {
+  const realScoreId = {code: '6660Aw1+gjM3WfiA', date: 1789821636974}
+
+  beforeEach(() => {
+    console.log = vi.fn()
+  })
 
   afterEach(() => {
     vi.clearAllMocks()
@@ -114,7 +119,7 @@ describe('Delete score by properties', () => {
 
   it('should preview records to delete', () => {
     storage.scores = liveScores as ScoreItem[]
-    const deletePreview = mv.getScoresByProperties({code: '6660AwiM3EynJ-5A', date: 1769180645932})
+    const deletePreview = mv.getScoresByProperties(realScoreId)
 
     expect(deletePreview.length).toBe(1)
   })
@@ -124,7 +129,7 @@ describe('Delete score by properties', () => {
     const originalLength = storage.scores.length
 
     vi.spyOn(window, 'confirm').mockReturnValue(true)
-    mv.deleteScoresByProperties({code: '6660AwiM3EynJ-5A', date: 1769180645932})
+    mv.deleteScoresByProperties(realScoreId)
 
     expect(storage.scores.length).toBe(originalLength - 1)
   })
@@ -134,7 +139,7 @@ describe('Delete score by properties', () => {
     const originalLength = storage.scores.length
 
     vi.spyOn(window, 'confirm').mockReturnValue(true)
-    mv.deleteScoresByProperties({code: '6660AwiM3EynJ-5A', date: 1769180645932})
+    mv.deleteScoresByProperties(realScoreId)
 
     expect(storage.scores.length).toBe(originalLength - 1)
   })
@@ -144,7 +149,7 @@ describe('Delete score by properties', () => {
     const originalLength = storage.scores.length
 
     vi.spyOn(window, 'confirm').mockReturnValue(false)
-    mv.deleteScoresByProperties({code: '6660AwiM3EynJ-5A', date: 1769180645932})
+    mv.deleteScoresByProperties(realScoreId)
 
     expect(storage.scores.length).toBe(originalLength)
   })
