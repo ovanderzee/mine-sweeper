@@ -112,9 +112,6 @@ export interface ScoreCalc {
   efficiency: number,
   speed: number,
   points: number,
-  pointsLessEffort?: number,
-  pointsMoreSpeed?: number,
-  pointsBoth?: number,
 }
 
 export interface BareScoreItem {
