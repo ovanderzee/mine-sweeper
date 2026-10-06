@@ -30,6 +30,7 @@
 
 ### Changes
 - Brace in score popover is now responsive to any size change
+- Display flag-count and remaining pristine cells, replace scores lacking these properties
 
 ### Added
 
