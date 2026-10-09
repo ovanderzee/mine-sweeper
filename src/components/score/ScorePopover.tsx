@@ -164,26 +164,40 @@ const ScorePopover = (props: ScorePopoverProps) => {
       <article>
         <section className="group">
           <h5>{text.fame['characteristics']}</h5>
-          <div className="unit">
-            <small>{text.VAR['effort']}</small>
-            <span>{log.game.effort.least} - {log.game.effort.most}</span>
+          <div className="abstract">
+            <div className="unit">
+              <small>{text.VAR['effort']}</small>
+              <span>{log.game.effort.least} - {log.game.effort.most}</span>
+            </div>
           </div>
-          <code className="s">[</code>
-          <div className="unit">
-            <small>{text.VAR['blanks']}</small>
-            <span>{log.game.blanks}</span>
+          <div className="abstract">
+            <code className="s">[</code>
+            <div className="unit">
+              <small>{text.VAR['blanks']}</small>
+              <span>{log.game.blanks}</span>
+            </div>
+            <code className="s">:</code>
+            <div className="unit">
+              <small>{text.VAR['pointers']}</small>
+              <span>{log.game.cells - log.game.blanks - log.game.mines}</span>
+            </div>
+            <code className="s">:</code>
+            <div className="unit">
+              <small>{text.VAR['mines']}</small>
+              <span>{log.game.mines}</span>
+            </div>
+            <code className="s">]</code>
           </div>
-          <code className="s">:</code>
-          <div className="unit">
-            <small>{text.VAR['pointers']}</small>
-            <span>{log.game.cells - log.game.blanks - log.game.mines}</span>
+          <div className="abstract">
+            {log.game.mode !== PlayMode.SHARP && <div className="unit">
+              <small>{text.VAR['flags']}</small>
+              <span>{log.play.flags || 0}</span>
+            </div>}
+            {log.game.mode === PlayMode.SHARP && <div className="unit">
+              <small>{text.VAR['remaining']}</small>
+              <span>{log.play.remaining || 0}</span>
+            </div>}
           </div>
-          <code className="s">:</code>
-          <div className="unit">
-            <small>{text.VAR['mines']}</small>
-            <span>{log.game.mines}</span>
-          </div>
-          <code className="s">]</code>
 
         </section>
 

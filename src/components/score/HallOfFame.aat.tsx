@@ -24,9 +24,10 @@ describe('The hall-of-fame-page clear list button', () => {
     const button = screen.getByTitle('Clear List')
     await button.click()
 
-    const dialog = screen.getByText(/Do you want to clear the score list\?/i)
+//     const dialog = screen.getByText(/Do you want to clear the score list/i)
+    const dialog = screen.getByRole('dialog')
     expect(dialog).toBeInTheDocument()
-    const confirmBtn = screen.getByText('OK')
+    const confirmBtn = dialog.getByRole('button', {name: 'OK'})
     await confirmBtn.click()
     vi.advanceTimersByTime(FADE_OUT_TIME * 1.1)
 
@@ -37,9 +38,10 @@ describe('The hall-of-fame-page clear list button', () => {
     const button = screen.getByTitle('Clear List')
     await button.click()
 
-    const dialog = screen.getByText(/Do you want to clear the score list\?/i)
+//     const dialog = screen.getByText(/Do you want to clear the score list/i)
+    const dialog = screen.getByRole('dialog')
     expect(dialog).toBeInTheDocument()
-    const cancelBtn = screen.getByText('Cancel')
+    const cancelBtn = dialog.getByRole('button', {name: 'Cancel'})
     await cancelBtn.click()
     storage.scores = liveScores as ScoreItem[]
 

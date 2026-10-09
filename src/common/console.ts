@@ -1,6 +1,8 @@
 import storage from './storage'
+import { RANGES } from './constants'
 const liveScores = (await import('../__mocks__/scores.json')).default
 import { ScoreItem, BareScoreItem } from './game.d'
+import { PlayMode } from './app.d'
 
 const getAllScores = function (): ScoreItem[] {
   return storage.scores
@@ -66,6 +68,43 @@ const deleteSampleScores = (): void => {
   setAllScores(newScores)
 }
 
+const completed = (): [ScoreItem[][][], number] => {
+  const all = getAllScores()
+  const subset = (cells: number, level: number): ScoreItem[] => all.filter(s => cells === s.game.cells && level === s.game.level)
+
+  const cube = [] as ScoreItem[][][]
+  for (let size = RANGES.SIZE.min; size <= RANGES.SIZE.max; size++) {
+    const cells = Math.pow(size, 2)
+    cube[cells] = []
+    for (let level = RANGES.LEVEL.min; level <= RANGES.LEVEL.max; level++) cube[cells][level] = subset(cells, level)
+  }
+  return [cube, all.length]
+}
+
+const challengesCompleted = (): void => {
+  const [cube, count] = completed()
+  const log = (amount: number, len = 3): string => String(amount || ' ').padStart(len, ' ')
+  console.log(`Scores by cells ↓, levels → and modes 'normal', 'bare', 'sharp'`)
+
+  const rows: Record<string, Record<string, string>> = {}
+  for (let size = RANGES.SIZE.min; size <= RANGES.SIZE.max; size++) {
+    let cells = Math.pow(size, 2)
+    let value: Record<string, string> = {}
+    for (let level = RANGES.LEVEL.min; level <= RANGES.LEVEL.max; level++) {
+      value[`level ${level}`] = ` `
+      if (cube[cells][level].length) {
+        const normal = cube[cells][level].filter(s => !s.game.mode || s.game.mode === PlayMode.NORMAL).length
+        const bare = cube[cells][level].filter(s => s.game.mode === PlayMode.BARE).length
+        const sharp = cube[cells][level].filter(s => s.game.mode === PlayMode.SHARP).length
+        value[`level ${level}`] = `${log(normal)}, ${log(bare)}, ${log(sharp)}`
+      }
+    }
+    rows[log(cells, 4)] = value
+  }
+  console.table(rows)
+  console.log(`Total ${count} games played`)
+}
+
 export default {
   getAllScores,
   setAllScores,
@@ -75,4 +114,7 @@ export default {
   deleteScoresByProperties,
   addSampleScores,
   deleteSampleScores,
+  challengesCompleted,
 }
+
+export { scoresByProperties, completed }

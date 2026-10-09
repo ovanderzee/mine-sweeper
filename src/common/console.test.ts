@@ -1,6 +1,6 @@
 import storage from './storage'
 import * as scoring from './scoring'
-import mv from './console'
+import mv, { completed } from './console'
 import { initialScore } from '../components/game/common'
 const liveScores = (await import('../__mocks__/scores.json')).default
 import { ScoreItem } from './game.d'
@@ -107,6 +107,11 @@ describe('Console methods mixing mocks and stored scores', () => {
 })
 
 describe('Delete score by properties', () => {
+  const realScoreId = {code: '6660Aw1+gjM3WfiA', date: 1789821636974}
+
+  beforeEach(() => {
+    console.log = vi.fn()
+  })
 
   afterEach(() => {
     vi.clearAllMocks()
@@ -114,7 +119,7 @@ describe('Delete score by properties', () => {
 
   it('should preview records to delete', () => {
     storage.scores = liveScores as ScoreItem[]
-    const deletePreview = mv.getScoresByProperties({code: '6660AwiM3EynJ-5A', date: 1769180645932})
+    const deletePreview = mv.getScoresByProperties(realScoreId)
 
     expect(deletePreview.length).toBe(1)
   })
@@ -124,7 +129,7 @@ describe('Delete score by properties', () => {
     const originalLength = storage.scores.length
 
     vi.spyOn(window, 'confirm').mockReturnValue(true)
-    mv.deleteScoresByProperties({code: '6660AwiM3EynJ-5A', date: 1769180645932})
+    mv.deleteScoresByProperties(realScoreId)
 
     expect(storage.scores.length).toBe(originalLength - 1)
   })
@@ -134,7 +139,7 @@ describe('Delete score by properties', () => {
     const originalLength = storage.scores.length
 
     vi.spyOn(window, 'confirm').mockReturnValue(true)
-    mv.deleteScoresByProperties({code: '6660AwiM3EynJ-5A', date: 1769180645932})
+    mv.deleteScoresByProperties(realScoreId)
 
     expect(storage.scores.length).toBe(originalLength - 1)
   })
@@ -144,9 +149,34 @@ describe('Delete score by properties', () => {
     const originalLength = storage.scores.length
 
     vi.spyOn(window, 'confirm').mockReturnValue(false)
-    mv.deleteScoresByProperties({code: '6660AwiM3EynJ-5A', date: 1769180645932})
+    mv.deleteScoresByProperties(realScoreId)
 
     expect(storage.scores.length).toBe(originalLength)
   })
+
+})
+
+describe('Completing challenges', () => {
+
+  afterEach(() => {
+    vi.clearAllMocks()
+  })
+
+  it('should complete a 3D object', () => {
+    const [cubic, count] = completed()
+
+    expect(cubic instanceof Array).toBeTruthy()
+    expect(cubic.flat().flat().length).toBe(count)
+    expect(typeof count).toBe('number')
+    expect(count).toBeGreaterThan(100)
+  })
+
+//     var logBackup = console.log;
+//     var logMessages = [];
+//
+//     console.log = function() {
+//         logMessages.push.apply(logMessages, arguments);
+//         logBackup.apply(console, arguments);
+//     };
 
 })
